@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Architecture.Controls;assembly=Architecture"
+             x:Class="Architecture.ListPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- DISCOVER -->
+                <StackLayout IsVisible="{Binding IsDiscoverMoviesVisible}">
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Discover" VerticalOptions="Center" FontSize="Large" />
+                        <Button Grid.Column="1" Text="See more" />
+                    </Grid>
+                    <controls:GridView 
+                        ItemsSource="{Binding DiscoverMovies}"
+                        ItemClickCommand="{Binding ItemClickedCommand}"
+                        NumberOfColumns="3">
+                        <controls:GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Source="{Binding Poster92}" Aspect="AspectFill" />
+                                    <Grid Padding="6" VerticalOptions="End" BackgroundColor="{StaticResource PrimaryColor}">
+                                        <Label Text="{Binding Title}" LineBreakMode="TailTruncation" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:GridView.ItemTemplate>
+                    </controls:GridView>
+                </StackLayout>
+
+                <ActivityIndicator 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="40"
+                    Color="{StaticResource Accent}"
+                    IsRunning="{Binding IsDiscoverMoviesVisible, Converter={StaticResource InvertedBoolConv}}"
+                    IsVisible="{Binding IsDiscoverMoviesVisible, Converter={StaticResource InvertedBoolConv}}" />
+
+                <!-- TOP RATED -->
+                <StackLayout Grid.Row="1" IsVisible="{Binding IsTopRatedMoviesVisible}">
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Top rated" VerticalOptions="Center" FontSize="Large" />
+                        <Button Grid.Column="1" Text="See more" />
+                    </Grid>
+                    <controls:GridView 
+                        ItemsSource="{Binding TopRatedMovies}"
+                        ItemClickCommand="{Binding ItemClickedCommand}"
+                        NumberOfColumns="3">
+                        <controls:GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Source="{Binding Poster92}" Aspect="AspectFill" />
+                                    <Grid Padding="6" VerticalOptions="End" BackgroundColor="{StaticResource PrimaryColor}">
+                                        <Label Text="{Binding Title}" LineBreakMode="TailTruncation" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:GridView.ItemTemplate>
+                    </controls:GridView>
+                </StackLayout>
+
+                <ActivityIndicator 
+                    Grid.Row="1"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="40"
+                    Color="{StaticResource Accent}"
+                    IsRunning="{Binding IsTopRatedMoviesVisible, Converter={StaticResource InvertedBoolConv}}"
+                    IsVisible="{Binding IsTopRatedMoviesVisible, Converter={StaticResource InvertedBoolConv}}" />
+
+                <StackLayout Grid.Row="1" IsVisible="{Binding IsWatchlistVisible}">
+                    <Label Margin="10" Text="Watchlist" VerticalOptions="Center" FontSize="Large" />
+                    <controls:HorizontalView 
+			            ItemsSource="{Binding Watchlist}"
+			            ItemClickCommand="{Binding ItemClickCommand}">
+                        <controls:HorizontalView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Poster92}" Aspect="AspectFill" />
+                            </DataTemplate>
+                        </controls:HorizontalView.ItemTemplate>
+                    </controls:HorizontalView>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>c91cf265-66cd-44d5-a0a5-84a6f9d9f8db</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Cinematics</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Configs\ServiceConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Genre.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Movie.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\MovieDetail.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ProductionCompany.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ProductionCountry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RootObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SpokenLanguage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\MovieService.cs" />
+  </ItemGroup>
+</Project>

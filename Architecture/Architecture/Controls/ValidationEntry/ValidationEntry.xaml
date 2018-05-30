@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:local="clr-namespace:Architecture.Controls;assembly=Architecture"
+	x:Class="Architecture.Controls.ValidationEntry">
+	<Grid Padding="10, 6, 6, 6" RowSpacing="0" BackgroundColor="White" VerticalOptions="Start" HorizontalOptions="Fill">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Image 
+			x:Name="imgIcon" 
+			IsVisible="false"
+			WidthRequest="18" />
+		<local:BorderlessEntry 
+			x:Name="entryField"
+			Text="{Binding Text, Mode=TwoWay}"
+			Grid.Column="1" />
+		<Label
+			x:Name="validationLabel"
+			IsVisible="false"
+			Grid.Row="1"
+			Grid.Column="1"
+			TextColor="Red"
+			FontSize="Small" />
+	</Grid>
+</ContentView>

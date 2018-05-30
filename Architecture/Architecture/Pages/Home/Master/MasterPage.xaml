@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.MasterPage"
+             Title="Architecture">
+    <ContentPage.Content>
+        <StackLayout Padding="0,40,0,0">
+            <StackLayout Padding="0,20,0,0">
+
+            </StackLayout>
+            <ListView ItemsSource="{Binding MasterItems}" SelectedItem="{Binding SelectedMasterItem, Mode=TwoWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label VerticalOptions="Center" Margin="20,0,0,0" Text="{Binding Title}" FontSize="Large" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

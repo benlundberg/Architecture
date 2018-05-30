@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.LoginPage"
+             xmlns:controls="clr-namespace:Architecture.Controls;assembly=Architecture"
+             xmlns:local="clr-namespace:Architecture;assembly=Architecture"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout VerticalOptions="Center" Padding="40">
+                <controls:FloatingEntry 
+				    Placeholder="{local:Translate Gen_Username}"
+                    Text="{Binding Username, Mode=TwoWay}"
+				    TextColor="White"
+				    DefaultColor="White"
+				    HintColor="White" />
+                <controls:FloatingEntry 
+				    Placeholder="{local:Translate Gen_Password}"
+                    Text="{Binding Password, Mode=TwoWay}"
+				    TextColor="White"
+				    IsPassword="True"
+				    DefaultColor="White"
+				    HintColor="White" />
+                <Label Text="{local:Translate Gen_RememberMe}" TextColor="White" />
+                <Switch IsToggled="{Binding RememberMe, Mode=TwoWay}" />
+                <Button 
+				    Text="{local:Translate Gen_Login}"
+                    Command="{Binding LoginCommand}" />
+            </StackLayout>
+            <StackLayout VerticalOptions="End" Margin="40, 0, 40, 24">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                </StackLayout.GestureRecognizers>
+                <Label
+                    TextColor="White" 
+				    Text="{local:Translate Sign_Up}"
+			 	    HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

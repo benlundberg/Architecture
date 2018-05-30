@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.ItemDetailPage"
+             Title="{Binding Movie.Title}">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Image Source="{Binding Movie.Poster342}" Aspect="AspectFit" />
+                    <Grid>
+                        <BoxView BackgroundColor="{StaticResource GrayDark}" Opacity=".5" />
+                        <StackLayout Padding="16" VerticalOptions="End">
+                            <Label Text="{Binding Movie.Vote_average}" VerticalOptions="Center" FontAttributes="Bold" FontSize="Medium" TextColor="White" />
+                            <Label Text="{Binding Movie.Tagline}" VerticalOptions="Center" FontSize="Large" TextColor="White" />
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+                <StackLayout Grid.Row="1" Padding="10">
+                    <Label Text="{Binding Movie.GenresDescription}" FontSize="Small" FontAttributes="Bold" />
+                    <Label Text="{Binding Movie.Overview}" FontSize="Medium" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

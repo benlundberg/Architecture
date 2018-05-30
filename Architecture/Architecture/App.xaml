@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Architecture;assembly=Architecture"
+             x:Class="Architecture.App">
+	<Application.Resources>
+        <ResourceDictionary>
+
+            <!-- Converters-->
+            <local:InvertedBoolConverter x:Key="InvertedBoolConv" />
+            
+            <!--Colors -->
+            <Color x:Key="DarkPrimaryColor">#1976D2</Color>
+            <Color x:Key="PrimaryColor">#2196F3</Color>
+            <Color x:Key="Accent">#FF4081</Color>
+            <Color x:Key="DarkAccent">#5f5e5e</Color>
+            <Color x:Key="GrayDark">#555555</Color>
+            <Color x:Key="Gray">#8a8a8a</Color>
+            <Color x:Key="GrayLight">#afafaf</Color>
+            <Color x:Key="TextDark">#555555</Color>
+            <Color x:Key="TextMedium">#9c9c9c</Color>
+            <Color x:Key="TextLight">#ffffff</Color>
+
+            <!-- Styles -->
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
