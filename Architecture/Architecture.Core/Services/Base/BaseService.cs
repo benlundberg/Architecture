@@ -11,15 +11,10 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Architecture.Core
+namespace DataService
 {
     public class BaseService
     {
-        protected Uri GetServiceUri(string service)
-        {
-            return new Uri(ServiceConfig.WEB_SERVICE_BASE_ADDRESS + service);
-        }
-
         private string GetParameterString(Dictionary<string, string> parameters)
         {
             if (parameters == null || parameters.Count == 0)
@@ -34,7 +29,7 @@ namespace Architecture.Core
             return "?" + string.Join("&", list);
         }
 
-        protected async Task<T> GetFromService<T>(string url, ParseType parseType, Dictionary<string, string> parameters = null)
+        protected async Task<T> GetFromService<T>(string url, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7, Dictionary<string, string> parameters = null)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -45,12 +40,13 @@ namespace Architecture.Core
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+                    client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
 
                     HttpResponseMessage response = null;
 
-                    response = await client.GetAsync(url + GetParameterString(parameters));
+                    Debug.WriteLine("Service request: " + GetParameterString(parameters));
 
-                    string test = (url + GetParameterString(parameters));
+                    response = await client.GetAsync(url + GetParameterString(parameters));
 
                     ResultStatusCode = response.StatusCode;
 
@@ -96,7 +92,7 @@ namespace Architecture.Core
             }
         }
 
-        protected async Task<T> PostToService<T>(string service, object postObject)
+        protected async Task<T> PostToService<T>(string url, object postObject, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -107,31 +103,38 @@ namespace Architecture.Core
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-                    client.Timeout = TimeSpan.FromMinutes(7);
+                    client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
 
                     HttpResponseMessage response = null;
 
                     string postString = JsonConvert.SerializeObject(postObject);
 
-                    Debug.WriteLine("Service request: " + service);
+                    Debug.WriteLine("Service request: " + url);
 
-                    response = await client.PostAsync(GetServiceUri(service), new StringContent(postString, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync(url, new StringContent(postString, Encoding.UTF8, "application/json"));
 
                     ResultStatusCode = response.StatusCode;
 
-                    string data = null;
-
                     if (ResultStatusCode == HttpStatusCode.OK)
                     {
-                        data = await response.Content.ReadAsStringAsync();
-
-                        var deserializerSettings = new JsonSerializerSettings()
+                        if (parseType == ParseType.XML)
                         {
-                            DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                            DateParseHandling = DateParseHandling.DateTimeOffset,
-                        };
+                            var reader = XmlReader.Create((await response.Content.ReadAsStreamAsync()));
+                            return (T)new XmlSerializer(typeof(T)).Deserialize(reader);
+                        }
+                        else
+                        {
+                            string data = await response.Content.ReadAsStringAsync();
 
-                        return JsonConvert.DeserializeObject<T>(data, deserializerSettings);
+                            var deserializerSettings = new JsonSerializerSettings()
+                            {
+                                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                                DateParseHandling = DateParseHandling.DateTimeOffset,
+                                NullValueHandling = NullValueHandling.Ignore
+                            };
+
+                            return JsonConvert.DeserializeObject<T>(data, deserializerSettings);
+                        }
                     }
                     else if (response.StatusCode == HttpStatusCode.Unauthorized)
                     {
@@ -153,7 +156,7 @@ namespace Architecture.Core
             }
         }
 
-        protected async Task<Stream> GetStream(string service, object postObject)
+        protected async Task<Stream> GetStream(string url, object postObject, int timeOutMinutes = 7)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -164,22 +167,21 @@ namespace Architecture.Core
                 {
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-                    client.Timeout = TimeSpan.FromMinutes(7);
+                    client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
 
                     HttpResponseMessage response = null;
 
                     string postString = JsonConvert.SerializeObject(postObject);
 
-                    Debug.WriteLine("Service request: " + service);
+                    Debug.WriteLine("Service request: " + url);
 
-                    response = await client.PostAsync(GetServiceUri(service), new StringContent(postString, Encoding.UTF8, "application/json"));
+                    response = await client.PostAsync(url, new StringContent(postString, Encoding.UTF8, "application/json"));
 
                     ResultStatusCode = response.StatusCode;
 
                     if (ResultStatusCode == HttpStatusCode.OK)
                     {
-                        var stream = await response.Content.ReadAsStreamAsync();
-                        return stream;
+                        return await response.Content.ReadAsStreamAsync();
                     }
                     else if (response.StatusCode == HttpStatusCode.Unauthorized)
                     {
@@ -201,7 +203,7 @@ namespace Architecture.Core
             }
         }
 
-        public async Task<byte[]> GetFile(Uri requestUri)
+        public async Task<byte[]> GetFile(string url, int timeOutMinutes = 7)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -210,9 +212,11 @@ namespace Architecture.Core
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
+
                     HttpResponseMessage response = null;
 
-                    response = await client.GetAsync(requestUri);
+                    response = await client.GetAsync(new Uri(url));
 
                     ResultStatusCode = response.StatusCode;
 

@@ -21,16 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Helpers/**/*.*" copyToOutput="true">
-      <IncludeInPackage>true</IncludeInPackage>
-      <CopyToOutput>true</CopyToOutput>
-      <BuildAction>Content</BuildAction>
-      <copyToOutput>true</copyToOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="contentFiles/**/*.*" copyToOutput="true">
       <IncludeInPackage>true</IncludeInPackage>
       <CopyToOutput>true</CopyToOutput>
@@ -70,12 +60,6 @@
     <EmbeddedResource Update="Pages\List\ListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Login\LoginPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Register\RegisterPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
@@ -83,9 +67,5 @@
     <EmbeddedResource Update="Resources\Strings.sv.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controls\ValidationEntry\" />
   </ItemGroup>
 </Project>

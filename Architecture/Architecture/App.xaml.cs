@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Architecture
 {
@@ -11,19 +10,12 @@ namespace Architecture
 
             Initialize();
 
-            SetMainPage(isLoggedIn: false);
+            SetMainPage();
         }
 
-        public static void SetMainPage(bool isLoggedIn)
+        public static void SetMainPage()
         {
-            if (isLoggedIn)
-            {
-                Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
-            }
-            else
-            {
-                Current.MainPage = new NavigationPage(ViewContainer.Current.CreatePage<LoginViewModel>());
-            }
+            Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
         }
 
         private void Initialize()
