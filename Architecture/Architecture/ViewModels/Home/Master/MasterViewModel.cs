@@ -14,11 +14,6 @@ namespace Architecture
             {
                 new MenuViewModel()
                 {
-                    Title = Translate("Gen_Map"),
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<MapViewModel>())
-                },
-                new MenuViewModel()
-                {
                     Title = "List view",
                     Page = new NavigationPage(ViewContainer.Current.CreatePage<ListViewModel>())
                 }

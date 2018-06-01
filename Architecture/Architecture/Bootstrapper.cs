@@ -23,7 +23,6 @@ namespace Architecture
             ViewContainer.Current.Register<HomeMasterViewModel, HomeMasterPage>();
             ViewContainer.Current.Register<MasterViewModel, MasterPage>();
             ViewContainer.Current.Register<ListViewModel, ListPage>();
-            ViewContainer.Current.Register<MapViewModel, MapPage>();
             ViewContainer.Current.Register<ItemDetailViewModel, ItemDetailPage>();
         }
 

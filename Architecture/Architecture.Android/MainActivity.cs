@@ -21,7 +21,6 @@ namespace Architecture.Droid
             Bootstrapper_Droid.Initialize();
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            Xamarin.FormsGoogleMaps.Init(this, bundle);
 
             LoadApplication(new App());
         }

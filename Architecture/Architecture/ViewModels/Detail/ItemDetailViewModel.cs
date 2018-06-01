@@ -1,14 +1,9 @@
-﻿using Cinematics;
-
-namespace Architecture
+﻿namespace Architecture
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public ItemDetailViewModel(MovieDetail movieDetail)
+        public ItemDetailViewModel()
         {
-            Movie = movieDetail;
         }
-
-        public MovieDetail Movie { get; private set; }
     }
 }

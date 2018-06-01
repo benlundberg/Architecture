@@ -13,15 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Architecture", "Architectur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Architecture.Core", "Architecture\Architecture.Core\Architecture.Core.csproj", "{50669BF2-56FA-42FC-A1EB-F6C31C8E04FF}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MapSpecific", "Architecture\MapSpecific\MapSpecific.shproj", "{DBDC98B1-238F-4867-8860-5CFC0A5BF8E1}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Cinematics", "Architecture\Cinematics\Cinematics.shproj", "{C91CF265-66CD-44D5-A0A5-84A6F9D9F8DB}"
-EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Architecture\Cinematics\Cinematics.projitems*{c91cf265-66cd-44d5-a0a5-84a6f9d9f8db}*SharedItemsImports = 13
-		Architecture\MapSpecific\MapSpecific.projitems*{dbdc98b1-238f-4867-8860-5cfc0a5bf8e1}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|ARM = Ad-Hoc|ARM
