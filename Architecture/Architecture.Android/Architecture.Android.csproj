@@ -75,6 +75,7 @@
     <Compile Include="Helpers\LocalizeHelper_Droid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer_Droid.cs" />
+    <Compile Include="Renderers\ExtendedWebViewRenderer_Droid.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

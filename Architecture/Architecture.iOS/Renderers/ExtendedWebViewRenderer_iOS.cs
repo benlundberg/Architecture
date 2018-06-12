@@ -1,12 +1,12 @@
 ﻿using Architecture;
-using Architecture.iOS.Renderers;
+using Architecture.iOS;
 using Foundation;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(ExtendedWebView), typeof(ExtendedWebViewRenderer_iOS))]
-namespace Architecture.iOS.Renderers
+namespace Architecture.iOS
 {
     public class ExtendedWebViewRenderer_iOS : ViewRenderer<ExtendedWebView, UIWebView>
     {
