@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Architecture.Core
 {
-    public class StorageKey
+    public class MemoryKey
     {
 
     }
 
-    public class StorageRepository
+    public class MemoryRepository
     {
-        static Lazy<StorageRepository> implementation = new Lazy<StorageRepository>(() => CreateStorage(), isThreadSafe: true);
+        static Lazy<MemoryRepository> implementation = new Lazy<MemoryRepository>(() => CreateMemory(), isThreadSafe: true);
 
-        public static StorageRepository Current
+        public static MemoryRepository Current
         {
             get
             {
@@ -30,17 +30,17 @@ namespace Architecture.Core
             }
         }
 
-        private static StorageRepository CreateStorage()
+        private static MemoryRepository CreateMemory()
         {
             BlobCache.ApplicationName = AppConfig.AppName;
-            return new StorageRepository();
+            return new MemoryRepository();
         }
 
         public async Task SaveAsync<T>(string key, T model)
         {
             try
             {
-                await BlobCache.LocalMachine.InsertObject<T>(key, model);
+                await BlobCache.InMemory.InsertObject<T>(key, model);
             }
             catch (Exception ex)
             {
@@ -52,7 +52,7 @@ namespace Architecture.Core
         {
             try
             {
-                return await BlobCache.LocalMachine.GetObject<T>(key);
+                return await BlobCache.InMemory.GetObject<T>(key);
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@ namespace Architecture.Core
         {
             try
             {
-                await BlobCache.LocalMachine.InvalidateObject<T>(key);
+                await BlobCache.InMemory.InvalidateObject<T>(key);
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace Architecture.Core
         {
             try
             {
-                await BlobCache.LocalMachine.InvalidateAllObjects<T>();
+                await BlobCache.InMemory.InvalidateAllObjects<T>();
             }
             catch (Exception ex)
             {
@@ -90,7 +90,7 @@ namespace Architecture.Core
         {
             try
             {
-                return await BlobCache.LocalMachine.GetAllObjects<T>();
+                return await BlobCache.InMemory.GetAllObjects<T>();
             }
             catch (Exception ex)
             {

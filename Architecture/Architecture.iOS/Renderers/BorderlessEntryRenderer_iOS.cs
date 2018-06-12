@@ -5,10 +5,10 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(BorderlessEntry), typeof(BorderlessEntry_iOS))]
+[assembly: ExportRenderer(typeof(BorderlessEntry), typeof(BorderlessEntryRenderer_iOS))]
 namespace Architecture.iOS
 {
-    public class BorderlessEntry_iOS : EntryRenderer
+    public class BorderlessEntryRenderer_iOS : EntryRenderer
     {
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {

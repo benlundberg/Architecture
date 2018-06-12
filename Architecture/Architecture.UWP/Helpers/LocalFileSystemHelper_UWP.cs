@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Windows.Storage;
+using Xamarin.Forms;
 
 namespace Architecture.UWP
 {
@@ -156,6 +157,26 @@ namespace Architecture.UWP
             }
 
             return File.ReadAllText(path);
+        }
+
+        public void OpenFile(string path)
+        {
+            try
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    var file = await StorageFile.GetFileFromPathAsync(path);
+
+                    if (file != null)
+                    {
+                        await Windows.System.Launcher.LaunchFileAsync(file);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
         }
     }
 }

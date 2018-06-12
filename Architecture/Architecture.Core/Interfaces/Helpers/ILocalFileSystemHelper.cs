@@ -3,7 +3,6 @@
     public interface ILocalFileSystemHelper
     {
         string LocalStorage { get; }
-
         string GetLocalPath(params string[] paths);
         string CreateFolder(params string[] paths);
         string CreateFile(params string[] paths);
@@ -14,5 +13,6 @@
         bool Exists(params string[] paths);
         string WriteText(string text, bool append, params string[] paths);
         string ReadText(params string[] paths);
+        void OpenFile(string path);
     }
 }

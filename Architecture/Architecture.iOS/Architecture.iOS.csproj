@@ -97,7 +97,8 @@
     <Compile Include="Helpers\LocalizeHelper_iOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="Renderers\BorderlessEntry_iOS.cs" />
+    <Compile Include="Renderers\BorderlessEntryRenderer_iOS.cs" />
+    <Compile Include="Renderers\ExtendedWebViewRenderer_iOS.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">
       <SubType>Designer</SubType>

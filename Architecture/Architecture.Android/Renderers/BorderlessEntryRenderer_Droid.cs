@@ -4,12 +4,12 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Content;
 
-[assembly: ExportRenderer(typeof(BorderlessEntry), typeof(BorderlessEntry_Droid))]
+[assembly: ExportRenderer(typeof(BorderlessEntry), typeof(BorderlessEntryRenderer_Droid))]
 namespace Architecture.Droid
 {
-    public class BorderlessEntry_Droid : EntryRenderer
+    public class BorderlessEntryRenderer_Droid : EntryRenderer
     {
-        public BorderlessEntry_Droid(Context context) : base(context)
+        public BorderlessEntryRenderer_Droid(Context context) : base(context)
         {
 
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace Architecture.iOS
 {
@@ -116,7 +117,7 @@ namespace Architecture.iOS
 
             if (!Exists(path))
             {
-                path = CreateFile(paths);    
+                path = CreateFile(paths);
             }
 
             File.WriteAllBytes(path, data);
@@ -155,6 +156,33 @@ namespace Architecture.iOS
             }
 
             return File.ReadAllText(path);
+        }
+
+        public void OpenFile(string path)
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                ContentPage contentPage = new ContentPage()
+                {
+                    Content = new ExtendedWebView()
+                    {
+                        Uri = path
+                    },
+                    ToolbarItems =
+                    {
+                        new ToolbarItem()
+                        {
+                            Text = "Close",
+                            Command = new Command(() =>
+                            {
+                                Xamarin.Forms.Application.Current.MainPage.Navigation.PopModalAsync();
+                            })
+                        }
+                    }
+                };
+
+                await Xamarin.Forms.Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(contentPage));
+            });
         }
     }
 }
