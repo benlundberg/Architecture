@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Architecture;
-using Architecture.Core;
-using Unity;
+﻿using Architecture.Core;
 
 namespace Architecture.UWP
 {
@@ -23,6 +16,7 @@ namespace Architecture.UWP
         private static void RegisterTypes()
         {
             // Helpers
+            ComponentContainer.Current.Register<ILocalizeHelper, LocalizeHelper_UWP>();
             ComponentContainer.Current.Register<ILocalFileSystemHelper, LocalFileSystemHelper_UWP>(singelton: true);
         }
     }

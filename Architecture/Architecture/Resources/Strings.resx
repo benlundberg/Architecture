@@ -147,14 +147,8 @@
   <data name="Gen_Username" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="Login_Fail" xml:space="preserve">
-    <value>Could not log in</value>
-  </data>
   <data name="Login_In_Process" xml:space="preserve">
     <value>Loading</value>
-  </data>
-  <data name="Missing_Login_Input" xml:space="preserve">
-    <value>Please fill in login information</value>
   </data>
   <data name="Missing_Mail" xml:space="preserve">
     <value>Missing e-mail</value>

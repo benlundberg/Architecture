@@ -151,29 +151,11 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not log in.
-        /// </summary>
-        internal static string Login_Fail {
-            get {
-                return ResourceManager.GetString("Login_Fail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Loading.
         /// </summary>
         internal static string Login_In_Process {
             get {
                 return ResourceManager.GetString("Login_In_Process", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please fill in login information.
-        /// </summary>
-        internal static string Missing_Login_Input {
-            get {
-                return ResourceManager.GetString("Missing_Login_Input", resourceCulture);
             }
         }
         

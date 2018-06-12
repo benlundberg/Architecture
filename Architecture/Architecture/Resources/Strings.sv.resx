@@ -147,14 +147,8 @@
   <data name="Gen_Username" xml:space="preserve">
     <value>Användarnamn</value>
   </data>
-  <data name="Login_Fail" xml:space="preserve">
-    <value>Kunde inte logga in</value>
-  </data>
   <data name="Login_In_Process" xml:space="preserve">
     <value>Loggar in</value>
-  </data>
-  <data name="Missing_Login_Input" xml:space="preserve">
-    <value>Saknar inloggningsuppgifter</value>
   </data>
   <data name="Missing_Mail" xml:space="preserve">
     <value>Saknar e-mail</value>

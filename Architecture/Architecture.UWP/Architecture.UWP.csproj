@@ -94,6 +94,7 @@
     </Compile>
     <Compile Include="Bootstrapper_UWP.cs" />
     <Compile Include="Helpers\LocalFileSystemHelper_UWP.cs" />
+    <Compile Include="Helpers\LocalizeHelper_UWP.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +107,26 @@
     <None Include="Architecture.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\area.png" />
+    <Content Include="Assets\checkOff.png" />
+    <Content Include="Assets\checkOn.png" />
+    <Content Include="Assets\clock.png" />
+    <Content Include="Assets\download.png" />
+    <Content Include="Assets\forward.png" />
+    <Content Include="Assets\help.png" />
+    <Content Include="Assets\home.png" />
+    <Content Include="Assets\key.png" />
+    <Content Include="Assets\layer.png" />
+    <Content Include="Assets\mail.png" />
+    <Content Include="Assets\menu.png" />
+    <Content Include="Assets\mobile.png" />
+    <Content Include="Assets\password.png" />
+    <Content Include="Assets\phone.png" />
+    <Content Include="Assets\pin.png" />
+    <Content Include="Assets\rbOff.png" />
+    <Content Include="Assets\rbOn.png" />
+    <Content Include="Assets\ruler.png" />
+    <Content Include="Assets\user.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />
@@ -156,17 +177,11 @@
     <PackageReference Include="akavache">
       <Version>6.0.0-alpha0038</Version>
     </PackageReference>
-    <PackageReference Include="SharpZipLib.NETStandard">
-      <Version>1.0.7</Version>
-    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.166-beta</Version>
     </PackageReference>
     <PackageReference Include="Unity">
       <Version>5.8.6</Version>
-    </PackageReference>
-    <PackageReference Include="Xam.Plugins.Forms.ImageCircle">
-      <Version>2.0.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.527436" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.4" />
