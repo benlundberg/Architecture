@@ -2,6 +2,8 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
+using Plugin.Permissions;
 
 namespace Architecture.Droid
 {
@@ -22,7 +24,15 @@ namespace Architecture.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
+
             LoadApplication(new App());
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

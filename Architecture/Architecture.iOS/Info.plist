@@ -21,7 +21,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>11.2</string>
+	<string>8</string>
 	<key>CFBundleDisplayName</key>
 	<string>Architecture</string>
 	<key>CFBundleIdentifier</key>
@@ -46,6 +46,12 @@
 		<string>Icon-Small@2x</string>
 		<string>Icon-Small@3x</string>
 	</array>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Can we use your location</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We are using your location</string>
+  <key>NSCalendarsUsageDescription</key>
+  <string>Needs Calendar Permission</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
