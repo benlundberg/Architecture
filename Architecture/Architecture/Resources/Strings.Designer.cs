@@ -250,6 +250,33 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To use this function the app needs access to:.
+        /// </summary>
+        internal static string Permission_Message {
+            get {
+                return ResourceManager.GetString("Permission_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open settings?.
+        /// </summary>
+        internal static string Permission_Settings {
+            get {
+                return ResourceManager.GetString("Permission_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Access for:.
+        /// </summary>
+        internal static string Permission_Title {
+            get {
+                return ResourceManager.GetString("Permission_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Don&apos;t have an account? Just keep calm and click here to sign up for free..
         /// </summary>
         internal static string Sign_Up {
