@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GenErr_CheckYourNetworkMessage" xml:space="preserve">
+    <value>Var vänlig kontrollera din nätverksanslutning och försök igen.</value>
+  </data>
+  <data name="GenErr_NoNetworkMessage" xml:space="preserve">
+    <value>Den här funktionen kräver att du är online.</value>
+  </data>
+  <data name="GenErr_NoNetworkTitle" xml:space="preserve">
+    <value>Saknar internetuppkoppling</value>
+  </data>
+  <data name="Gen_Cancel" xml:space="preserve">
+    <value>Avbryt</value>
+  </data>
   <data name="Gen_Close" xml:space="preserve">
     <value>Stäng</value>
+  </data>
+  <data name="Gen_Loading" xml:space="preserve">
+    <value>Laddar</value>
   </data>
   <data name="Gen_Login" xml:space="preserve">
     <value>Logga in</value>
@@ -128,6 +143,9 @@
   </data>
   <data name="Gen_Map" xml:space="preserve">
     <value>Karta</value>
+  </data>
+  <data name="Gen_No" xml:space="preserve">
+    <value>Nej</value>
   </data>
   <data name="Gen_Password" xml:space="preserve">
     <value>Lösenord</value>
@@ -146,6 +164,9 @@
   </data>
   <data name="Gen_Username" xml:space="preserve">
     <value>Användarnamn</value>
+  </data>
+  <data name="Gen_Yes" xml:space="preserve">
+    <value>Ja</value>
   </data>
   <data name="Login_In_Process" xml:space="preserve">
     <value>Loggar in</value>

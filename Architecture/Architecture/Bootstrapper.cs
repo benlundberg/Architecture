@@ -11,6 +11,7 @@ namespace Architecture
 
             // Helpers
             ComponentContainer.Current.Register<ITranslateHelper, TranslateHelper>();
+            ComponentContainer.Current.Register<INetworkStatusHelper, NetworkStatusHelper>(singelton: true);
         }
         
         public static void RegisterViews()

@@ -1,5 +1,4 @@
 ﻿using Architecture.Core;
-using Unity;
 
 namespace Architecture.iOS
 {
@@ -18,6 +17,7 @@ namespace Architecture.iOS
         {
             // Helpers
             ComponentContainer.Current.Register<ILocalizeHelper, LocalizeHelper_iOS>();
+            ComponentContainer.Current.Register<IBackgroundHelper, BackgroundHelper_iOS>();
             ComponentContainer.Current.Register<ILocalFileSystemHelper, LocalFileSystemHelper_iOS>(singelton: true);
         }
     }

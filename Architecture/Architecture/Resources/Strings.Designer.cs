@@ -61,11 +61,29 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Gen_Cancel {
+            get {
+                return ResourceManager.GetString("Gen_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         internal static string Gen_Close {
             get {
                 return ResourceManager.GetString("Gen_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading.
+        /// </summary>
+        internal static string Gen_Loading {
+            get {
+                return ResourceManager.GetString("Gen_Loading", resourceCulture);
             }
         }
         
@@ -93,6 +111,15 @@ namespace Architecture.Resources {
         internal static string Gen_Map {
             get {
                 return ResourceManager.GetString("Gen_Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string Gen_No {
+            get {
+                return ResourceManager.GetString("Gen_No", resourceCulture);
             }
         }
         
@@ -147,6 +174,42 @@ namespace Architecture.Resources {
         internal static string Gen_Username {
             get {
                 return ResourceManager.GetString("Gen_Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Gen_Yes {
+            get {
+                return ResourceManager.GetString("Gen_Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please check your internet connection and try again..
+        /// </summary>
+        internal static string GenErr_CheckYourNetworkMessage {
+            get {
+                return ResourceManager.GetString("GenErr_CheckYourNetworkMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This service requires you to be online..
+        /// </summary>
+        internal static string GenErr_NoNetworkMessage {
+            get {
+                return ResourceManager.GetString("GenErr_NoNetworkMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No internet connection.
+        /// </summary>
+        internal static string GenErr_NoNetworkTitle {
+            get {
+                return ResourceManager.GetString("GenErr_NoNetworkTitle", resourceCulture);
             }
         }
         
