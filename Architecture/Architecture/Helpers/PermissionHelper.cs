@@ -9,7 +9,7 @@ namespace Architecture
 {
     public class PermissionHelper
     {
-        public async Task CheckPermissionAsync(Permission permission, bool showSettings = true)
+        public async Task<bool> CheckPermissionAsync(Permission permission, bool showSettings = true)
         {
             try
             {
@@ -44,7 +44,11 @@ namespace Architecture
                             }
                         }
                     }
+
+                    return false;
                 }
+
+                return true;
             }
             catch (Exception ex)
             {

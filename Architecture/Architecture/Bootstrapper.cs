@@ -1,4 +1,6 @@
 ﻿using Architecture.Core;
+using System;
+using System.Collections.Generic;
 
 namespace Architecture
 {
@@ -12,8 +14,11 @@ namespace Architecture
             // Helpers
             ComponentContainer.Current.Register<ITranslateHelper, TranslateHelper>();
             ComponentContainer.Current.Register<INetworkStatusHelper, NetworkStatusHelper>(singelton: true);
+
+            // Managers
+            ComponentContainer.Current.Register<INoteManager, NoteManager>();
         }
-        
+
         public static void RegisterViews()
         {
             ViewContainer.Current.Register<HomeMasterViewModel, HomeMasterPage>();
@@ -24,6 +29,10 @@ namespace Architecture
 
         public static void CreateTables()
         {
+            ComponentContainer.Current.Resolve<IDatabaseRepository>().CreateTablesAsync(new List<Type>()
+            {
+                typeof(Note)
+            });
         }
     }
 }

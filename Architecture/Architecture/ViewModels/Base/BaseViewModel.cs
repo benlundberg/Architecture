@@ -1,13 +1,13 @@
 ﻿using Acr.UserDialogs;
 using Architecture.Core;
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Architecture
 {
-    [PropertyChanged.AddINotifyPropertyChangedInterface]
-    public class BaseViewModel
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public virtual void OnInitialize()
         {
@@ -98,5 +98,7 @@ namespace Architecture
         public bool IsNavigating { get; set; }
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
