@@ -14,9 +14,6 @@ namespace Architecture
             // Helpers
             ComponentContainer.Current.Register<ITranslateHelper, TranslateHelper>();
             ComponentContainer.Current.Register<INetworkStatusHelper, NetworkStatusHelper>(singelton: true);
-
-            // Managers
-            ComponentContainer.Current.Register<INoteManager, NoteManager>();
         }
 
         public static void RegisterViews()
@@ -31,7 +28,6 @@ namespace Architecture
         {
             ComponentContainer.Current.Resolve<IDatabaseRepository>().CreateTablesAsync(new List<Type>()
             {
-                typeof(Note)
             });
         }
     }

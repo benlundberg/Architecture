@@ -27,7 +27,6 @@ namespace Architecture.iOS
             {
                 var fileStream = File.Create(path);
                 fileStream.Close();
-                fileStream.Flush();
             }
 
             return path;

@@ -9,6 +9,11 @@ namespace Architecture
 {
     public class PermissionHelper
     {
+        /// <summary>
+        /// Checking permission for device etc Camera or Location. Returns true or false depend on if permission is granted.
+        /// </summary>
+        /// <param name="permission">Type of permission to check</param>
+        /// <param name="showSettings">Boolean if prompting dialog to go into settings</param>
         public async Task<bool> CheckPermissionAsync(Permission permission, bool showSettings = true)
         {
             try

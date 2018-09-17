@@ -22,6 +22,8 @@ namespace Architecture.Droid
             UserDialogs.Init(this);
             Bootstrapper_Droid.Initialize();
 
+            Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);

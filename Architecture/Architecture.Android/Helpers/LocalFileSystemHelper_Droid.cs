@@ -30,7 +30,6 @@ namespace Architecture.Droid
                 var fileStream = File.Create(path);
 
                 fileStream.Close();
-                fileStream.Flush();
             }
 
             return path;
