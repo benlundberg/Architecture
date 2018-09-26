@@ -29,7 +29,7 @@ namespace Architecture.Core
             return "?" + string.Join("&", list);
         }
 
-        protected async Task<T> GetFromService<T>(string url, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7, Dictionary<string, string> parameters = null)
+        protected async Task<T> GetFromServiceAsync<T>(string url, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7, Dictionary<string, string> parameters = null)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -72,13 +72,13 @@ namespace Architecture.Core
                             return JsonConvert.DeserializeObject<T>(data, deserializerSettings);
                         }
                     }
-                    else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    else if (ResultStatusCode == HttpStatusCode.Unauthorized)
                     {
                         Debug.WriteLine("Unauthorized");
                     }
                     else
                     {
-                        Debug.WriteLine("Response code:" + response.StatusCode.ToString());
+                        Debug.WriteLine("Response code:" + ResultStatusCode.ToString());
                     }
 
                     return default(T);
@@ -87,12 +87,12 @@ namespace Architecture.Core
             catch (Exception ex)
             {
                 ResultException = ex;
-                Debug.WriteLine("PostToService exception: " + ex);
+                Debug.WriteLine("GetFromService exception: " + ex);
                 return default(T);
             }
         }
 
-        protected async Task<T> PostToService<T>(string url, object postObject, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7)
+        protected async Task<T> PostToServiceAsync<T>(string url, object postObject, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -136,13 +136,13 @@ namespace Architecture.Core
                             return JsonConvert.DeserializeObject<T>(data, deserializerSettings);
                         }
                     }
-                    else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    else if (ResultStatusCode == HttpStatusCode.Unauthorized)
                     {
                         Debug.WriteLine("Unauthorized");
                     }
                     else
                     {
-                        Debug.WriteLine("Response code:" + response.StatusCode.ToString());
+                        Debug.WriteLine("Response code:" + ResultStatusCode.ToString());
                     }
 
                     return default(T);
@@ -156,7 +156,7 @@ namespace Architecture.Core
             }
         }
 
-        protected async Task<Stream> GetStream(string url, object postObject, int timeOutMinutes = 7)
+        protected async Task<Stream> GetStreamAsync(string url, object postObject, int timeOutMinutes = 7)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -183,13 +183,13 @@ namespace Architecture.Core
                     {
                         return await response.Content.ReadAsStreamAsync();
                     }
-                    else if (response.StatusCode == HttpStatusCode.Unauthorized)
+                    else if (ResultStatusCode == HttpStatusCode.Unauthorized)
                     {
                         Debug.WriteLine("Unauthorized");
                     }
                     else
                     {
-                        Debug.WriteLine("Response code:" + response.StatusCode.ToString());
+                        Debug.WriteLine("Response code:" + ResultStatusCode.ToString());
                     }
 
                     return null;
@@ -198,12 +198,12 @@ namespace Architecture.Core
             catch (Exception ex)
             {
                 ResultException = ex;
-                Debug.WriteLine("PostToService exception: " + ex);
+                Debug.WriteLine("GetStream exception: " + ex);
                 return null;
             }
         }
 
-        public async Task<byte[]> GetFile(string url, int timeOutMinutes = 7)
+        public async Task<byte[]> GetFileAsync(string url, int timeOutMinutes = 7)
         {
             ResultException = null;
             ResultStatusCode = null;
@@ -228,7 +228,7 @@ namespace Architecture.Core
                     }
                     else
                     {
-                        Debug.WriteLine("Response code:" + response.StatusCode.ToString());
+                        Debug.WriteLine("Response code:" + ResultStatusCode.ToString());
                     }
 
                     return data;

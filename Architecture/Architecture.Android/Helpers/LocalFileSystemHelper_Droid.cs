@@ -168,23 +168,23 @@ namespace Architecture.Droid
                 string mimeType = MimeTypeMap.Singleton.GetMimeTypeFromExtension(extension.ToLower());
 
                 var filename = Path.GetFileName(path);
-                var externalPath = Android.OS.Environment.ExternalStorageDirectory.Path + "/" + filename;
+                var externalPath = global::Android.OS.Environment.ExternalStorageDirectory.Path + "/" + filename;
                 var data = ReadFile(path);
                 File.WriteAllBytes(externalPath, data);
 
-                Android.Net.Uri uri = Android.Net.Uri.FromFile(new Java.IO.File(externalPath));
+                global::Android.Net.Uri uri = global::Android.Net.Uri.FromFile(new Java.IO.File(externalPath));
 
                 Intent intent = new Intent()
                     .SetAction(Intent.ActionView)
                     .SetDataAndType(uri, mimeType)
                     .SetFlags(ActivityFlags.NewTask);
 
-                Android.App.Application.Context.StartActivity(Intent.CreateChooser(intent, ""));
+                global::Android.App.Application.Context.StartActivity(Intent.CreateChooser(intent, ""));
             }
             catch (Exception ex)
             {
                 ex.Print();
-                Toast.MakeText(Android.App.Application.Context, "", ToastLength.Long).Show();
+                Toast.MakeText(global::Android.App.Application.Context, "", ToastLength.Long).Show();
             }
         }
     }
