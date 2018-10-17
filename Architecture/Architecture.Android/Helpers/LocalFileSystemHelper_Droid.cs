@@ -11,181 +11,206 @@ namespace Architecture.Droid
 {
     public class LocalFileSystemHelper_Droid : ILocalFileSystemHelper
     {
-        public string LocalStorage => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+		public string LocalStorage => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
-        public string GetLocalPath(params string[] paths)
-        {
-            List<string> pathList = paths.ToList();
-            pathList.Insert(0, LocalStorage);
+		public string GetLocalPath(params string[] paths)
+		{
+			List<string> pathList = paths.ToList();
+			pathList.Insert(0, LocalStorage);
 
-            return Path.Combine(pathList.ToArray());
-        }
+			return Path.Combine(pathList.ToArray());
+		}
 
-        public string CreateFile(params string[] paths)
-        {
-            var path = GetLocalPath(paths);
+		public string CreateFile(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            if (!File.Exists(path))
-            {
-                var fileStream = File.Create(path);
+			if (!File.Exists(path))
+			{
+				var fileStream = File.Create(path);
 
-                fileStream.Close();
-            }
+				fileStream.Close();
+			}
 
-            return path;
-        }
+			return path;
+		}
 
-        public string CreateFolder(params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+		public string CreateFolder(params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+			if (!Directory.Exists(path))
+			{
+				Directory.CreateDirectory(path);
+			}
 
-            return path;
-        }
+			return path;
+		}
 
-        public bool Delete(params string[] paths)
-        {
-            var path = GetLocalPath(paths);
+		public FileStream GetFileStream(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            if (Directory.Exists(path))
-            {
-                Directory.Delete(path, recursive: true);
-            }
+			if (!File.Exists(path))
+			{
+				path = CreateFile(paths);
+			}
 
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
+			return File.Create(path);
+		}
 
-            return true;
-        }
+		public IEnumerable<string> GetFiles(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-        public bool Exists(params string[] paths)
-        {
-            var path = GetLocalPath(paths);
+			if (Directory.Exists(path))
+			{
+				return Directory.EnumerateFiles(path);
+			}
 
-            if (Directory.Exists(path))
-            {
-                return true;
-            }
+			return new List<string>();
+		}
 
-            if (File.Exists(path))
-            {
-                return true;
-            }
+		public bool Delete(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            return false;
-        }
+			if (Directory.Exists(path))
+			{
+				Directory.Delete(path, recursive: true);
+			}
 
-        public bool Move(string sourcePath, string destinationPath)
-        {
-            if (Directory.Exists(sourcePath))
-            {
-                Directory.Move(sourcePath, destinationPath);
-                return true;
-            }
-            else if (File.Exists(sourcePath))
-            {
-                File.Move(sourcePath, destinationPath);
-                return true;
-            }
+			if (File.Exists(path))
+			{
+				File.Delete(path);
+			}
 
-            return false;
-        }
+			return true;
+		}
 
-        public byte[] ReadFile(params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+		public bool Exists(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            try
-            {
-                return File.ReadAllBytes(path);
-            }
-            catch (Exception ex)
-            {
-                ex.Print();
-            }
+			if (Directory.Exists(path))
+			{
+				return true;
+			}
 
-            return null;
-        }
+			if (File.Exists(path))
+			{
+				return true;
+			}
 
-        public string SaveFile(byte[] data, params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+			return false;
+		}
 
-            if (!Exists(path))
-            {
-                path = CreateFile(paths);    
-            }
+		public bool Move(string sourcePath, string destinationPath)
+		{
+			if (Directory.Exists(sourcePath))
+			{
+				Directory.Move(sourcePath, destinationPath);
+				return true;
+			}
+			else if (File.Exists(sourcePath))
+			{
+				File.Move(sourcePath, destinationPath);
+				return true;
+			}
 
-            File.WriteAllBytes(path, data);
+			return false;
+		}
 
-            return path;
-        }
+		public byte[] ReadFile(params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-        public string WriteText(string text, bool append, params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+			try
+			{
+				return File.ReadAllBytes(path);
+			}
+			catch (Exception ex)
+			{
+				ex.Print();
+			}
 
-            if (!Exists(path))
-            {
-                path = CreateFile(paths);
-            }
+			return null;
+		}
 
-            if (append)
-            {
-                File.AppendAllText(path, text);
-            }
-            else
-            {
-                File.WriteAllText(path, text);
-            }
+		public string SaveFile(byte[] data, params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-            return path;
-        }
+			if (!Exists(path))
+			{
+				path = CreateFile(paths);
+			}
 
-        public string ReadText(params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+			File.WriteAllBytes(path, data);
 
-            if (!Exists(path))
-            {
-                path = CreateFile(paths);
-            }
+			return path;
+		}
 
-            return File.ReadAllText(path);
-        }
+		public string WriteText(string text, bool append, params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-        public void OpenFile(string path)
-        {
-            try
-            {
-                string extension = MimeTypeMap.GetFileExtensionFromUrl(path);
-                string mimeType = MimeTypeMap.Singleton.GetMimeTypeFromExtension(extension.ToLower());
+			if (!Exists(path))
+			{
+				path = CreateFile(paths);
+			}
 
-                var filename = Path.GetFileName(path);
-                var externalPath = global::Android.OS.Environment.ExternalStorageDirectory.Path + "/" + filename;
-                var data = ReadFile(path);
-                File.WriteAllBytes(externalPath, data);
+			if (append)
+			{
+				File.AppendAllText(path, text);
+			}
+			else
+			{
+				File.WriteAllText(path, text);
+			}
 
-                global::Android.Net.Uri uri = global::Android.Net.Uri.FromFile(new Java.IO.File(externalPath));
+			return path;
+		}
 
-                Intent intent = new Intent()
-                    .SetAction(Intent.ActionView)
-                    .SetDataAndType(uri, mimeType)
-                    .SetFlags(ActivityFlags.NewTask);
+		public string ReadText(params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-                global::Android.App.Application.Context.StartActivity(Intent.CreateChooser(intent, ""));
-            }
-            catch (Exception ex)
-            {
-                ex.Print();
-                Toast.MakeText(global::Android.App.Application.Context, "", ToastLength.Long).Show();
-            }
-        }
-    }
+			if (!Exists(path))
+			{
+				path = CreateFile(paths);
+			}
+
+			return File.ReadAllText(path);
+		}
+
+		public void OpenFile(string path)
+		{
+			try
+			{
+				string extension = MimeTypeMap.GetFileExtensionFromUrl(path);
+				string mimeType = MimeTypeMap.Singleton.GetMimeTypeFromExtension(extension.ToLower());
+
+				var filename = Path.GetFileName(path);
+				var externalPath = global::Android.OS.Environment.ExternalStorageDirectory.Path + "/" + filename;
+				var data = ReadFile(path);
+				File.WriteAllBytes(externalPath, data);
+
+				global::Android.Net.Uri uri = global::Android.Net.Uri.FromFile(new Java.IO.File(externalPath));
+
+				Intent intent = new Intent()
+					.SetAction(Intent.ActionView)
+					.SetDataAndType(uri, mimeType)
+					.SetFlags(ActivityFlags.NewTask);
+
+				global::Android.App.Application.Context.StartActivity(Intent.CreateChooser(intent, ""));
+			}
+			catch (Exception ex)
+			{
+				ex.Print();
+				Toast.MakeText(global::Android.App.Application.Context, "", ToastLength.Long).Show();
+			}
+		}
+	}
+
 }

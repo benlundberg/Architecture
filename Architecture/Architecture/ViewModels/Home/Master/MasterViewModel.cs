@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Architecture.Core;
 using Xamarin.Forms;
 
 namespace Architecture
@@ -8,7 +9,9 @@ namespace Architecture
     {
         public MasterViewModel(MasterDetailPage masterDetailPage)
         {
-            this.masterDetailPage = masterDetailPage;
+			Title = Device.RuntimePlatform == Device.iOS ? "☰" : AppConfig.AppName;
+
+			this.masterDetailPage = masterDetailPage;
 
             MasterItems = new List<MenuViewModel>()
             {
@@ -47,6 +50,8 @@ namespace Architecture
         }
 
         public List<MenuViewModel> MasterItems { get; private set; }
+
+		public string Title { get; set; }
 
         private MasterDetailPage masterDetailPage;
     }

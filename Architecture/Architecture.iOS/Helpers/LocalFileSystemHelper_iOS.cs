@@ -11,153 +11,178 @@ namespace Architecture.iOS
     {
         public string LocalStorage => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
-        public string GetLocalPath(params string[] paths)
-        {
-            List<string> pathList = paths.ToList();
-            pathList.Insert(0, LocalStorage);
+		public string GetLocalPath(params string[] paths)
+		{
+			List<string> pathList = paths.ToList();
+			pathList.Insert(0, LocalStorage);
 
-            return Path.Combine(pathList.ToArray());
-        }
+			return Path.Combine(pathList.ToArray());
+		}
 
-        public string CreateFile(params string[] paths)
-        {
-            var path = GetLocalPath(paths);
+		public string CreateFile(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            if (!File.Exists(path))
-            {
-                var fileStream = File.Create(path);
-                fileStream.Close();
-            }
+			if (!File.Exists(path))
+			{
+				var fileStream = File.Create(path);
 
-            return path;
-        }
+				fileStream.Close();
+			}
 
-        public string CreateFolder(params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+			return path;
+		}
 
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+		public string CreateFolder(params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-            return path;
-        }
+			if (!Directory.Exists(path))
+			{
+				Directory.CreateDirectory(path);
+			}
 
-        public bool Delete(params string[] paths)
-        {
-            var path = GetLocalPath(paths);
+			return path;
+		}
 
-            if (Directory.Exists(path))
-            {
-                Directory.Delete(path, recursive: true);
-            }
+		public FileStream GetFileStream(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
+			if (!File.Exists(path))
+			{
+				path = CreateFile(paths);
+			}
 
-            return true;
-        }
+			return File.Create(path);
+		}
 
-        public bool Exists(params string[] paths)
-        {
-            var path = GetLocalPath(paths);
+		public IEnumerable<string> GetFiles(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            if (Directory.Exists(path))
-            {
-                return true;
-            }
+			if (Directory.Exists(path))
+			{
+				return Directory.EnumerateFiles(path);
+			}
 
-            if (File.Exists(path))
-            {
-                return true;
-            }
+			return new List<string>();
+		}
 
-            return false;
-        }
+		public bool Delete(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-        public bool Move(string sourcePath, string destinationPath)
-        {
-            if (Directory.Exists(sourcePath))
-            {
-                Directory.Move(sourcePath, destinationPath);
-                return true;
-            }
-            else if (File.Exists(sourcePath))
-            {
-                File.Move(sourcePath, destinationPath);
-                return true;
-            }
+			if (Directory.Exists(path))
+			{
+				Directory.Delete(path, recursive: true);
+			}
 
-            return false;
-        }
+			if (File.Exists(path))
+			{
+				File.Delete(path);
+			}
 
-        public byte[] ReadFile(params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+			return true;
+		}
 
-            try
-            {
-                return File.ReadAllBytes(path);
-            }
-            catch (Exception ex)
-            {
-                ex.Print();
-            }
+		public bool Exists(params string[] paths)
+		{
+			var path = GetLocalPath(paths);
 
-            return null;
-        }
+			if (Directory.Exists(path))
+			{
+				return true;
+			}
 
-        public string SaveFile(byte[] data, params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+			if (File.Exists(path))
+			{
+				return true;
+			}
 
-            if (!Exists(path))
-            {
-                path = CreateFile(paths);
-            }
+			return false;
+		}
 
-            File.WriteAllBytes(path, data);
+		public bool Move(string sourcePath, string destinationPath)
+		{
+			if (Directory.Exists(sourcePath))
+			{
+				Directory.Move(sourcePath, destinationPath);
+				return true;
+			}
+			else if (File.Exists(sourcePath))
+			{
+				File.Move(sourcePath, destinationPath);
+				return true;
+			}
 
-            return path;
-        }
+			return false;
+		}
 
-        public string WriteText(string text, bool append, params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+		public byte[] ReadFile(params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-            if (!Exists(path))
-            {
-                path = CreateFile(paths);
-            }
+			try
+			{
+				return File.ReadAllBytes(path);
+			}
+			catch (Exception ex)
+			{
+				ex.Print();
+			}
 
-            if (append)
-            {
-                File.AppendAllText(path, text);
-            }
-            else
-            {
-                File.WriteAllText(path, text);
-            }
+			return null;
+		}
 
-            return path;
-        }
+		public string SaveFile(byte[] data, params string[] paths)
+		{
+			string path = GetLocalPath(paths);
 
-        public string ReadText(params string[] paths)
-        {
-            string path = GetLocalPath(paths);
+			if (!Exists(path))
+			{
+				path = CreateFile(paths);
+			}
 
-            if (!Exists(path))
-            {
-                path = CreateFile(paths);
-            }
+			File.WriteAllBytes(path, data);
 
-            return File.ReadAllText(path);
-        }
+			return path;
+		}
 
-        public void OpenFile(string path)
+		public string WriteText(string text, bool append, params string[] paths)
+		{
+			string path = GetLocalPath(paths);
+
+			if (!Exists(path))
+			{
+				path = CreateFile(paths);
+			}
+
+			if (append)
+			{
+				File.AppendAllText(path, text);
+			}
+			else
+			{
+				File.WriteAllText(path, text);
+			}
+
+			return path;
+		}
+
+		public string ReadText(params string[] paths)
+		{
+			string path = GetLocalPath(paths);
+
+			if (!Exists(path))
+			{
+				path = CreateFile(paths);
+			}
+
+			return File.ReadAllText(path);
+		}
+
+		public void OpenFile(string path)
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
