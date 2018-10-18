@@ -1,5 +1,5 @@
 # Architecture
-Xamarin Forms Architecture
+Xamarin Forms Architecture (VIEW IN RAW)
 
 This project is used as a template for most of my Xamarin Forms projects. To create a solution template from this project, follow the instructions below (OR just download the XFTemplate.zip file in this repo).
 
