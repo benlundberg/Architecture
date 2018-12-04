@@ -21,27 +21,38 @@ namespace Architecture.Core
 			{
 				return string.Empty;
 			}
+
 			var list = new List<string>();
-			foreach (var item in parameters)
+
+            foreach (var item in parameters)
 			{
 				list.Add(item.Key + "=" + item.Value);
 			}
-			return "?" + string.Join("&", list);
+
+            return "?" + string.Join("&", list);
 		}
 
-		protected async Task<T> GetFromService<T>(string url, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7, Dictionary<string, string> parameters = null)
+        private HttpClient GetHttpClient()
+        {
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+            httpClient.Timeout = TimeSpan.FromMinutes(TimeOut);
+
+            // Here we can put some tokens or shared secrets 
+
+            return httpClient;
+        }
+
+		protected async Task<T> GetFromServiceAsync<T>(string url, ParseType parseType = ParseType.JSON, Dictionary<string, string> parameters = null)
 		{
 			ResultException = null;
 			ResultStatusCode = null;
 
 			try
 			{
-				using (HttpClient client = new HttpClient())
+				using (HttpClient client = GetHttpClient())
 				{
-					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-					client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
-
 					HttpResponseMessage response = null;
 
 					Debug.WriteLine("Service request: " + GetParameterString(parameters));
@@ -68,7 +79,6 @@ namespace Architecture.Core
 								NullValueHandling = NullValueHandling.Ignore
 							};
 
-
 							return JsonConvert.DeserializeObject<T>(data, deserializerSettings);
 						}
 					}
@@ -92,19 +102,15 @@ namespace Architecture.Core
 			}
 		}
 
-		protected async Task<T> PostToService<T>(string url, object postObject, ParseType parseType = ParseType.JSON, int timeOutMinutes = 7)
+		protected async Task<T> PostToServiceAsync<T>(string url, object postObject, ParseType parseType = ParseType.JSON)
 		{
 			ResultException = null;
 			ResultStatusCode = null;
 
 			try
 			{
-				using (HttpClient client = new HttpClient())
+				using (HttpClient client = GetHttpClient())
 				{
-					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-					client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
-
 					HttpResponseMessage response = null;
 
 					string postString = JsonConvert.SerializeObject(postObject);
@@ -156,19 +162,15 @@ namespace Architecture.Core
 			}
 		}
 
-		protected async Task<Stream> GetStream(string url, object postObject = null, int timeOutMinutes = 7)
+		protected async Task<Stream> GetStreamAsync(string url, object postObject = null)
 		{
 			ResultException = null;
 			ResultStatusCode = null;
 
 			try
 			{
-				using (HttpClient client = new HttpClient())
+				using (HttpClient client = GetHttpClient())
 				{
-					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-					client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-					client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
-
 					HttpResponseMessage response = null;
 
 					Debug.WriteLine("Service request: " + url);
@@ -210,7 +212,7 @@ namespace Architecture.Core
 			}
 		}
 
-		public async Task<byte[]> GetFile(string url, int timeOutMinutes = 7)
+		public async Task<byte[]> GetFileAsync(string url)
 		{
 			ResultException = null;
 			ResultStatusCode = null;
@@ -219,8 +221,6 @@ namespace Architecture.Core
 			{
 				using (HttpClient client = new HttpClient())
 				{
-					client.Timeout = TimeSpan.FromMinutes(timeOutMinutes);
-
 					HttpResponseMessage response = null;
 
 					response = await client.GetAsync(new Uri(url));
@@ -249,11 +249,13 @@ namespace Architecture.Core
 			}
 		}
 
-		public HttpStatusCode? ResultStatusCode;
+        public HttpStatusCode? ResultStatusCode;
 		public Exception ResultException;
-	}
 
-	public enum ParseType
+        private const int TimeOut = 7;
+    }
+
+    public enum ParseType
 	{
 		JSON,
 		XML

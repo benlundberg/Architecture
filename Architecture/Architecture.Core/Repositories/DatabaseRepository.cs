@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Architecture.Core
@@ -37,14 +38,29 @@ namespace Architecture.Core
             return rows != 0;
         }
 
-        public async Task<IEnumerable<T>> GetAsync<T>() where T : new()
+        public async Task<IEnumerable<T>> LoadAllAsync<T>() where T : new()
         {
             return await GetConnection.Table<T>().ToListAsync();
         }
 
-        public async Task<T> GetAsync<T>(object id) where T : new()
+        public async Task<IEnumerable<T>> LoadAllAsync<T>(string query) where T : new()
+        {
+            return await GetConnection.QueryAsync<T>(query);
+        }
+
+        public async Task<IEnumerable<T>> LoadAllAsync<T>(Expression<Func<T, bool>> predExpr) where T : new()
+        {
+            return await GetConnection.Table<T>().Where(predExpr)?.ToListAsync();
+        }
+
+        public async Task<T> LoadAsync<T>(object id) where T : new()
         {
             return await GetConnection.GetAsync<T>(id);
+        }
+
+        public async Task<T> LoadAsync<T>(string query) where T : new()
+        {
+            return await GetConnection.FindAsync<T>(query);
         }
 
         public async Task<bool> InsertAsync<T>(T entity)
@@ -83,6 +99,11 @@ namespace Architecture.Core
             int rows = await GetConnection.InsertAllAsync(entities);
 
             return rows != 0;
+        }
+
+        public async Task ExecuteQueryAsync(string query)
+        {
+            await GetConnection.ExecuteAsync(query);
         }
 
         private SQLiteAsyncConnection connection;

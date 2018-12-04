@@ -10,15 +10,20 @@ namespace Architecture.Controls
     {
         public CheckboxControl()
         {
+            // Set the view to horizontal and view up to the right
             this.Orientation = StackOrientation.Horizontal;
             this.HorizontalOptions = LayoutOptions.Start;
             this.VerticalOptions = LayoutOptions.Start;
         }
 
+        /// <summary>
+        /// When parent is set the view is initialized
+        /// </summary>
         protected override void OnParentSet()
         {
             base.OnParentSet();
 
+            // Check if there is an image source, otherwise we setup a default checkbox
             if (string.IsNullOrEmpty(CheckedImageSource) || string.IsNullOrEmpty(UncheckedImageSource))
             {
                 InitializeDefaultView();
@@ -29,8 +34,18 @@ namespace Architecture.Controls
             }
         }
 
+        /// <summary>
+        /// Initializes the default view
+        /// </summary>
         public void InitializeDefaultView()
         {
+            // Return if view is already initialized
+            if (ViewInitialized)
+            {
+                return;
+            }
+
+            // The grid who is in the bottom root
             Grid rootGrid = new Grid()
             {
                 HeightRequest = CheckboxHeight,
@@ -43,7 +58,7 @@ namespace Architecture.Controls
                 BackgroundColor = CheckboxForegroundColor
             };
 
-            // Add tap
+            // Add tap to set check or unchecked
             this.GestureRecognizers.Add(new TapGestureRecognizer()
             {
                 Command = new Command(() =>
@@ -52,26 +67,35 @@ namespace Architecture.Controls
 
                     if (IsChecked)
                     {
-                        rootGrid.Children.Add(new BoxView() { BackgroundColor = CheckboxForegroundColor, Margin = new Thickness(4, 4, 4, 4) });
+                        // If is checked, we add a boxview inside the root grid
+                        rootGrid.Children.Add(new BoxView()
+                        {
+                            BackgroundColor = CheckboxForegroundColor,
+                            Margin = new Thickness(4, 4, 4, 4)
+                        });
                     }
                     else
                     {
+                        // If unchecked, we remove that boxview inside the root grid
                         var toRemove = rootGrid.Children.LastOrDefault();
                         rootGrid.Children.Remove(toRemove);
                     }
 
-                    CheckCommand?.Execute(null);
+                    // If the user has a binding on command we invoke it here
+                    CheckChangedCommand?.Execute(null);
                 })
             });
 
             // Add root
             this.Children.Add(rootGrid);
 
+            // Add a title label if there is one
             if (!string.IsNullOrEmpty(Title))
             {
                 this.Children.Add(new Label()
                 {
                     Text = Title,
+                    TextColor = TextColor,
                     VerticalOptions = LayoutOptions.Center,
                     FontSize = Device.GetNamedSize(FontSize, typeof(Label))
                 });
@@ -80,14 +104,24 @@ namespace Architecture.Controls
             ViewInitialized = true;
         }
 
+        /// <summary>
+        /// Initializes the view with image source view.
+        /// </summary>
         public void InitializeWithImageSourceView()
         {
+            if (ViewInitialized)
+            {
+                return;
+            }
+
             Grid rootGrid = new Grid()
             {
                 HeightRequest = CheckboxHeight,
                 WidthRequest = CheckboxWidth
             };
 
+            // For better rendering on Android, we always have the unchecked
+            // image in the root
             Image backgroundImage = new Image()
             {
                 Source = UncheckedImageSource
@@ -98,10 +132,11 @@ namespace Architecture.Controls
                 Source = UncheckedImageSource
             };
 
+            // Add both images
             rootGrid.Children.Add(backgroundImage);
             rootGrid.Children.Add(frontImage);
 
-            // Add tap
+            // Add tap command
             this.GestureRecognizers.Add(new TapGestureRecognizer()
             {
                 Command = new Command(() =>
@@ -109,18 +144,20 @@ namespace Architecture.Controls
                     IsChecked = !IsChecked;
                     frontImage.Source = IsChecked ? CheckedImageSource : UncheckedImageSource;
 
-                    CheckCommand?.Execute(null);
+                    CheckChangedCommand?.Execute(null);
                 })
             });
 
             // Add root
             this.Children.Add(rootGrid);
 
+            // Add a title label if there is one
             if (!string.IsNullOrEmpty(Title))
             {
                 this.Children.Add(new Label()
                 {
                     Text = Title,
+                    TextColor = TextColor,
                     VerticalOptions = LayoutOptions.Center,
                     FontSize = Device.GetNamedSize(FontSize, typeof(Label))
                 });
@@ -129,41 +166,50 @@ namespace Architecture.Controls
             ViewInitialized = true;
         }
 
+        /// <summary>
+        /// Invoked when there is a change for is checked
+        /// </summary>
         private static void CheckedChanged(BindableObject bindableObject, bool? oldValue, bool? newValue)
         {
-            var checkBox = bindableObject as CheckboxControl;
-
-            if (!checkBox.ViewInitialized)
+            // Check to see that it's the correct control (it will always be correct)
+            if (!(bindableObject is CheckboxControl checkbox))
             {
-                if (string.IsNullOrEmpty(checkBox.CheckedImageSource) || string.IsNullOrEmpty(checkBox.UncheckedImageSource))
+                return;
+            }
+
+            // Fallback to really know if the view is initialized
+            if (!checkbox.ViewInitialized)
+            {
+                if (string.IsNullOrEmpty(checkbox.CheckedImageSource) || string.IsNullOrEmpty(checkbox.UncheckedImageSource))
                 {
-                    checkBox.InitializeDefaultView();
+                    checkbox.InitializeDefaultView();
                 }
                 else
                 {
-                    checkBox.InitializeWithImageSourceView();
+                    checkbox.InitializeWithImageSourceView();
                 }
             }
 
-            if (checkBox?.Children?.Any() == true)
+            // Check for children and change the view
+            if (checkbox?.Children?.Any() == true)
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(checkBox.CheckedImageSource) || string.IsNullOrEmpty(checkBox.UncheckedImageSource))
+                    if (string.IsNullOrEmpty(checkbox.CheckedImageSource) || string.IsNullOrEmpty(checkbox.UncheckedImageSource))
                     {
-                        if (newValue == true    )
+                        if (newValue == true)
                         {
-                            (checkBox.Children.First() as Grid)?.Children.Add(new BoxView() { BackgroundColor = checkBox.CheckboxForegroundColor, Margin = new Thickness(8, 8, 8, 8) });
+                            (checkbox.Children.First() as Grid)?.Children.Add(new BoxView() { BackgroundColor = checkbox.CheckboxForegroundColor, Margin = new Thickness(8, 8, 8, 8) });
                         }
                         else
                         {
-                            var toRemove = (checkBox.Children.First() as Grid)?.Children.LastOrDefault();
-                            (checkBox.Children.First() as Grid)?.Children.Remove(toRemove);
+                            var toRemove = (checkbox.Children.First() as Grid)?.Children.LastOrDefault();
+                            (checkbox.Children.First() as Grid)?.Children.Remove(toRemove);
                         }
                     }
                     else
                     {
-                        ((checkBox.Children.First() as Grid)?.Children[1] as Image).Source = newValue == true ? checkBox.CheckedImageSource : checkBox.UncheckedImageSource;
+                        ((checkbox.Children.First() as Grid)?.Children[1] as Image).Source = newValue == true ? checkbox.CheckedImageSource : checkbox.UncheckedImageSource;
                     }
                 }
                 catch (Exception ex)
@@ -188,7 +234,8 @@ namespace Architecture.Controls
             set { SetValue(IsCheckedProperty, value); }
         }
 
-        public static readonly BindableProperty TitleProperty = BindableProperty.Create(propertyName: "Title",
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(
+            propertyName: "Title",
             returnType: typeof(string),
             declaringType: typeof(CheckboxControl),
             defaultValue: default(string));
@@ -199,15 +246,16 @@ namespace Architecture.Controls
             set { SetValue(TitleProperty, value); }
         }
 
-        public static readonly BindableProperty CheckCommandProperty = BindableProperty.Create(propertyName: "CheckCommand",
+        public static readonly BindableProperty CheckChangedCommandProperty = BindableProperty.Create(
+            propertyName: "CheckChangedCommand",
             returnType: typeof(ICommand),
             declaringType: typeof(CheckboxControl),
             defaultValue: default(ICommand));
 
-        public ICommand CheckCommand
+        public ICommand CheckChangedCommand
         {
-            get { return (ICommand)GetValue(CheckCommandProperty); }
-            set { SetValue(CheckCommandProperty, value); }
+            get { return (ICommand)GetValue(CheckChangedCommandProperty); }
+            set { SetValue(CheckChangedCommandProperty, value); }
         }
 
         public bool ViewInitialized { get; set; }
@@ -217,18 +265,19 @@ namespace Architecture.Controls
 
         public Color CheckboxBackgroundColor { get; set; }
         public Color CheckboxForegroundColor { get; set; }
+        public Color TextColor { get; set; }
 
         private double checkboxHeight;
         public double CheckboxHeight
         {
-            get { return checkboxHeight == 0 ? 20 : checkboxHeight; }
+            get { return checkboxHeight == 0 ? string.IsNullOrEmpty(CheckedImageSource) ? 20 : 32 : checkboxHeight; }
             set { checkboxHeight = value; }
         }
 
         private double checkboxWidth;
         public double CheckboxWidth
         {
-            get { return checkboxWidth == 0 ? 20 : checkboxWidth; }
+            get { return checkboxWidth == 0 ? string.IsNullOrEmpty(CheckedImageSource) ? 20 : 32 : checkboxWidth; }
             set { checkboxWidth = value; }
         }
     }
