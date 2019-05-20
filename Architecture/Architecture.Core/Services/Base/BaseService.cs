@@ -13,251 +13,126 @@ using System.Xml.Serialization;
 
 namespace Architecture.Core
 {
-	public class BaseService
-	{
-		private string GetParameterString(Dictionary<string, string> parameters)
-		{
-			if (parameters == null || parameters.Count == 0)
-			{
-				return string.Empty;
-			}
-
-			var list = new List<string>();
-
-            foreach (var item in parameters)
-			{
-				list.Add(item.Key + "=" + item.Value);
-			}
-
-            return "?" + string.Join("&", list);
-		}
-
-        private HttpClient GetHttpClient()
+    public class BaseService
+    {
+        private HttpClient GetHttpClient(int timeout)
         {
             HttpClient httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-            httpClient.Timeout = TimeSpan.FromMinutes(TimeOut);
+            httpClient.Timeout = TimeSpan.FromMinutes(timeout);
 
             // Here we can put some tokens or shared secrets 
 
             return httpClient;
         }
 
-		protected async Task<T> GetFromServiceAsync<T>(string url, ParseType parseType = ParseType.JSON, Dictionary<string, string> parameters = null)
-		{
-			ResultException = null;
-			ResultStatusCode = null;
+        protected async Task<ResponseData> MakeRequestAsync(string url, HttpMethod httpMethod, object param = null, ParseType parseType = ParseType.JSON, int timeout = 7)
+        {
+            try
+            {
+                using (var client = GetHttpClient(timeout))
+                {
+                    var requestMessage = new HttpRequestMessage(httpMethod, new Uri(url));
 
-			try
-			{
-				using (HttpClient client = GetHttpClient())
-				{
-					HttpResponseMessage response = null;
+                    if (param != null)
+                    {
+                        requestMessage.Content = new StringContent(JsonConvert.SerializeObject(param), Encoding.UTF8, "application/json");
+                    }
 
-					Debug.WriteLine("Service request: " + GetParameterString(parameters));
+                    var response = await client.SendAsync(requestMessage);
 
-					response = await client.GetAsync(url + GetParameterString(parameters));
+                    if (response.StatusCode == HttpStatusCode.Moved)
+                    {
+                        requestMessage.RequestUri = response.Headers.Location;
 
-					ResultStatusCode = response.StatusCode;
+                        response = await client.SendAsync(requestMessage);
+                    }
 
-					if (ResultStatusCode == HttpStatusCode.OK)
-					{
-						if (parseType == ParseType.XML)
-						{
-							var reader = XmlReader.Create((await response.Content.ReadAsStreamAsync()));
-							return (T)new XmlSerializer(typeof(T)).Deserialize(reader);
-						}
-						else
-						{
-							string data = await response.Content.ReadAsStringAsync();
+                    var responseData =  new ResponseData()
+                    {
+                        ResultStatusCode = response.StatusCode
+                    };
 
-							var deserializerSettings = new JsonSerializerSettings()
-							{
-								DateFormatHandling = DateFormatHandling.IsoDateFormat,
-								DateParseHandling = DateParseHandling.DateTimeOffset,
-								NullValueHandling = NullValueHandling.Ignore
-							};
+                    if (parseType == ParseType.JSON || parseType == ParseType.XML)
+                    {
+                        responseData.Data = await response.Content.ReadAsStringAsync();
+                    }
+                    else if (parseType == ParseType.BYTES)
+                    {
+                        responseData.Data = await response.Content.ReadAsByteArrayAsync();
+                    }
+                    else if (parseType == ParseType.STREAM)
+                    {
+                        responseData.Data = await response.Content.ReadAsStreamAsync();
+                    }
 
-							return JsonConvert.DeserializeObject<T>(data, deserializerSettings);
-						}
-					}
-					else if (response.StatusCode == HttpStatusCode.Unauthorized)
-					{
-						Debug.WriteLine("Unauthorized");
-					}
-					else
-					{
-						Debug.WriteLine("Response code:" + response.StatusCode.ToString());
-					}
+                    return responseData;
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+                throw;
+            }
+        }
 
-					return default(T);
-				}
-			}
-			catch (Exception ex)
-			{
-				ResultException = ex;
-				Debug.WriteLine("PostToService exception: " + ex);
-				return default(T);
-			}
-		}
+        protected async Task<T> MakeRequestAsync<T>(string url, HttpMethod httpMethod, object param = null, ParseType parseType = ParseType.JSON, int timeout = 7)
+        {
+            try
+            {
+                var resultData = await MakeRequestAsync(url, httpMethod, param, parseType, timeout);
 
-		protected async Task<T> PostToServiceAsync<T>(string url, object postObject, ParseType parseType = ParseType.JSON)
-		{
-			ResultException = null;
-			ResultStatusCode = null;
+                if (resultData.ResultStatusCode == HttpStatusCode.OK)
+                {
+                    if (parseType == ParseType.JSON)
+                    {
+                        // Return object parsed from Json
+                        return JsonConvert.DeserializeObject<T>(resultData.Data?.ToString(), new JsonSerializerSettings()
+                        {
+                            DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                            DateParseHandling = DateParseHandling.DateTimeOffset,
+                            NullValueHandling = NullValueHandling.Ignore
+                        });
+                    }
+                    else if (parseType == ParseType.XML)
+                    {
+                        // Return object parsed from XML
+                        return (T)new XmlSerializer(typeof(T)).Deserialize(XmlReader.Create(resultData.Data?.ToString()));
+                    }
+                    else
+                    {
+                        return (T)resultData.Data;
+                    }
+                }
+                else if (resultData.ResultStatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new Exception("Not Authorized");
+                }
+                else
+                {
+                    throw new Exception($"Something went wrong with the request: {resultData.ResultStatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+                throw;
+            }
+        }
+    }
 
-			try
-			{
-				using (HttpClient client = GetHttpClient())
-				{
-					HttpResponseMessage response = null;
-
-					string postString = JsonConvert.SerializeObject(postObject);
-
-					Debug.WriteLine("Service request: " + url);
-
-					response = await client.PostAsync(url, new StringContent(postString, Encoding.UTF8, "application/json"));
-
-					ResultStatusCode = response.StatusCode;
-
-					if (ResultStatusCode == HttpStatusCode.OK)
-					{
-						if (parseType == ParseType.XML)
-						{
-							var reader = XmlReader.Create((await response.Content.ReadAsStreamAsync()));
-							return (T)new XmlSerializer(typeof(T)).Deserialize(reader);
-						}
-						else
-						{
-							string data = await response.Content.ReadAsStringAsync();
-
-							var deserializerSettings = new JsonSerializerSettings()
-							{
-								DateFormatHandling = DateFormatHandling.IsoDateFormat,
-								DateParseHandling = DateParseHandling.DateTimeOffset,
-								NullValueHandling = NullValueHandling.Ignore
-							};
-
-							return JsonConvert.DeserializeObject<T>(data, deserializerSettings);
-						}
-					}
-					else if (response.StatusCode == HttpStatusCode.Unauthorized)
-					{
-						Debug.WriteLine("Unauthorized");
-					}
-					else
-					{
-						Debug.WriteLine("Response code:" + response.StatusCode.ToString());
-					}
-
-					return default(T);
-				}
-			}
-			catch (Exception ex)
-			{
-				ResultException = ex;
-				Debug.WriteLine("PostToService exception: " + ex);
-				return default(T);
-			}
-		}
-
-		protected async Task<Stream> GetStreamAsync(string url, object postObject = null)
-		{
-			ResultException = null;
-			ResultStatusCode = null;
-
-			try
-			{
-				using (HttpClient client = GetHttpClient())
-				{
-					HttpResponseMessage response = null;
-
-					Debug.WriteLine("Service request: " + url);
-
-					if (postObject != null)
-					{
-						string postString = JsonConvert.SerializeObject(postObject);
-
-						response = await client.PostAsync(url, new StringContent(postString, Encoding.UTF8, "application/json"));
-					}
-					else
-					{
-						response = await client.GetAsync(url);
-					}
-
-					ResultStatusCode = response.StatusCode;
-
-					if (ResultStatusCode == HttpStatusCode.OK)
-					{
-						return await response.Content.ReadAsStreamAsync();
-					}
-					else if (response.StatusCode == HttpStatusCode.Unauthorized)
-					{
-						Debug.WriteLine("Unauthorized");
-					}
-					else
-					{
-						Debug.WriteLine("Response code:" + response.StatusCode.ToString());
-					}
-
-					return null;
-				}
-			}
-			catch (Exception ex)
-			{
-				ResultException = ex;
-				Debug.WriteLine("PostToService exception: " + ex);
-				return null;
-			}
-		}
-
-		public async Task<byte[]> GetFileAsync(string url)
-		{
-			ResultException = null;
-			ResultStatusCode = null;
-
-			try
-			{
-				using (HttpClient client = new HttpClient())
-				{
-					HttpResponseMessage response = null;
-
-					response = await client.GetAsync(new Uri(url));
-
-					ResultStatusCode = response.StatusCode;
-
-					byte[] data = default(byte[]);
-
-					if (ResultStatusCode == HttpStatusCode.OK)
-					{
-						data = await response.Content.ReadAsByteArrayAsync();
-					}
-					else
-					{
-						Debug.WriteLine("Response code:" + response.StatusCode.ToString());
-					}
-
-					return data;
-				}
-			}
-			catch (Exception ex)
-			{
-				ResultException = ex;
-				Debug.WriteLine("GetFileAsync exception: " + ex);
-				return default(byte[]);
-			}
-		}
-
-        public HttpStatusCode? ResultStatusCode;
-		public Exception ResultException;
-
-        private const int TimeOut = 7;
+    public class ResponseData
+    {
+        public object Data { get; set; }
+        public HttpStatusCode? ResultStatusCode { get; set; }
     }
 
     public enum ParseType
-	{
-		JSON,
-		XML
-	}
+    {
+        JSON,
+        XML,
+        STREAM,
+        BYTES
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using Akavache;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
@@ -62,6 +63,22 @@ namespace Architecture.Core
             return default(T);
         }
 
+        public async Task<T> LoadAsync<T>(Func<T, bool> predExpr)
+        {
+            try
+            {
+                var list = await this.GetAllAsync<T>();
+
+                return list.FirstOrDefault(predExpr);
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
+
+            return default(T);
+        }
+
         public async Task DeleteAsync<T>(string key)
         {
             try
@@ -91,6 +108,22 @@ namespace Architecture.Core
             try
             {
                 return await BlobCache.LocalMachine.GetAllObjects<T>();
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
+
+            return default(IEnumerable<T>);
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync<T>(Func<T, bool> predExpr)
+        {
+            try
+            {
+                var list = await GetAllAsync<T>();
+
+                return list?.Where(predExpr);
             }
             catch (Exception ex)
             {
