@@ -107,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
     <ITunesArtwork Include="iTunesArtwork" />
+    <BundleResource Include="Resources\FontAwesome5Solid.otf" />
+    <BundleResource Include="Resources\FontAwesome5Brands.otf" />
+    <BundleResource Include="Resources\FontAwesome5Regular.otf" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%403x.png" />
@@ -156,64 +159,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\area.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\checkOff.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\checkOn.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\clock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\download.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\forward.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\key.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\layer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ruler.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\user.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\rbOn.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\rbOff.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\pin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\phone.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mobile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mail.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\password.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-App-20x20%401x.png" />

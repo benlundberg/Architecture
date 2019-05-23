@@ -3,4 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Architecture.ListPage">
 
+    <Grid>
+        <Label 
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            FontSize="Large" 
+            Text="&#xf358;" 
+            TextColor="{StaticResource PrimaryColor}"
+            FontFamily="{StaticResource FontAwesomeRegular}" />
+    </Grid>
+
 </ContentPage>
