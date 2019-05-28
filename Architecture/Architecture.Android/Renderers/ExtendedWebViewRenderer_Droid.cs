@@ -21,7 +21,7 @@ namespace Architecture.Droid
             {
                 var webview = Element as ExtendedWebView;
                 Control.Settings.AllowUniversalAccessFromFileURLs = true;
-                Control.LoadUrl(webview.Uri);
+                Control.LoadUrl(webview.Url);
             }
         }
     }

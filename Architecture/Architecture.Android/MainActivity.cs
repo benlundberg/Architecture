@@ -26,6 +26,8 @@ namespace Architecture.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
+            Xamarin.Forms.FormsMaterial.Init(this, bundle);
+
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
 
             LoadApplication(new App());
