@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Architecture.Core;
+﻿using Architecture.Core;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -62,27 +61,20 @@ namespace Architecture
 
         protected void ShowAlert(string message, string title, string okText = "Ok")
         {
-            UserDialogs.Instance.Alert(message, title, okText);
+            Application.Current.MainPage.DisplayAlert(title, message, okText);
         }
 
-        protected Task<bool> ShowConfirm(string message, string title, string ok = null, string cancel = null)
+        protected Task<bool> ShowConfirmAsync(string message, string title, string ok = null, string cancel = null)
         {
             ok = ok ?? Translate("Gen_Yes");
             cancel = cancel ?? Translate("Gen_No");
 
-            return UserDialogs.Instance.ConfirmAsync(message, title, ok, cancel);
+            return Application.Current.MainPage.DisplayAlert(title, message, ok, cancel);
         }
 
-        protected void ShowLoading(string title = null)
+        protected Task<string> ShowActionSheetAsync(string title, string cancel, string destruction, params string[] buttons)
         {
-            title = title ?? Translate("Gen_Loading");
-
-            UserDialogs.Instance.ShowLoading(title);
-        }
-
-        protected void HideLoading()
-        {
-            UserDialogs.Instance.HideLoading();
+            return Application.Current.MainPage.DisplayActionSheet(title, cancel, destruction, buttons);
         }
 
         private ITranslateHelper translateHelper;

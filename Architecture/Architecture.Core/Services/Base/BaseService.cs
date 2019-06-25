@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -119,6 +116,11 @@ namespace Architecture.Core
                 ex.Print();
                 throw;
             }
+        }
+
+        protected static string GetUrl(string method)
+        {
+            return ServiceConfig.WEB_SERVICE_BASE_ADDRESS + method;
         }
     }
 

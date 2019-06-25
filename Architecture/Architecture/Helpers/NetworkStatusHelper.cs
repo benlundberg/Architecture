@@ -1,15 +1,15 @@
 ﻿using Architecture.Core;
-using Plugin.Connectivity;
 using System.Linq;
+using Xamarin.Essentials;
 
 namespace Architecture
 {
     public class NetworkStatusHelper : INetworkStatusHelper
     {
-        public bool IsConnected => CrossConnectivity.Current.IsConnected;
+        public bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
 
-        public bool HasWifi => CrossConnectivity.Current.ConnectionTypes?.Contains(Plugin.Connectivity.Abstractions.ConnectionType.WiFi) == true;
+        public bool HasWifi => Connectivity.ConnectionProfiles.Contains(ConnectionProfile.WiFi);
 
-        public bool HasBluetooth => CrossConnectivity.Current.ConnectionTypes?.Contains(Plugin.Connectivity.Abstractions.ConnectionType.Bluetooth) == true;
+        public bool HasBluetooth => Connectivity.ConnectionProfiles.Contains(ConnectionProfile.Bluetooth);
     }
 }

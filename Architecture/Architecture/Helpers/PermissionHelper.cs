@@ -1,9 +1,9 @@
-﻿using Acr.UserDialogs;
-using Architecture.Core;
+﻿using Architecture.Core;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Architecture
 {
@@ -31,11 +31,11 @@ namespace Architecture
                 {
                     if (showSettings)
                     {
-                        var res = await UserDialogs.Instance.ConfirmAsync(
-                             message: TranslateHelper.Translate("Permission_Message") + " " + permission.ToString() + ". " + TranslateHelper.Translate("Permission_Settings"),
+                        var res = await Application.Current.MainPage.DisplayAlert(
                              title: TranslateHelper.Translate("Permission_Title") + " " + permission.ToString(),
-                             okText: TranslateHelper.Translate("Gen_Yes"),
-                             cancelText: TranslateHelper.Translate("Gen_No"));
+                             message: TranslateHelper.Translate("Permission_Message") + " " + permission.ToString() + ". " + TranslateHelper.Translate("Permission_Settings"),
+                             accept: TranslateHelper.Translate("Gen_Yes"),
+                             cancel: TranslateHelper.Translate("Gen_No"));
 
                         if (res)
                         {

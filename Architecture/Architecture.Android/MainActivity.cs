@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
@@ -19,7 +18,6 @@ namespace Architecture.Droid
 
             base.OnCreate(bundle);
 
-            UserDialogs.Init(this);
             Bootstrapper_Droid.Initialize();
 
             Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
@@ -27,8 +25,6 @@ namespace Architecture.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             Xamarin.Forms.FormsMaterial.Init(this, bundle);
-
-            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, bundle);
 
             LoadApplication(new App());
         }
