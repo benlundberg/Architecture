@@ -45,7 +45,7 @@ This project is used as a template for most of my Xamarin Forms projects. To cre
         Architecture.iOS\MyTemplate.vstemplate
       </ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$projectname$.UWP" CopyParameters="true">
-        Architecture.iOS\MyTemplate.vstemplate
+        Architecture.UWP\MyTemplate.vstemplate
       </ProjectTemplateLink>
     </ProjectCollection>
   </TemplateContent>
