@@ -28,7 +28,7 @@ namespace Architecture.iOS
             {
                 var webview = Element as ExtendedWebView;
 
-                string filename = webview.Uri;
+                string filename = webview.Url;
 
                 Control.LoadRequest(new NSUrlRequest(new NSUrl(filename, false)));
                 Control.ScalesPageToFit = true;

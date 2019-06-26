@@ -16,7 +16,6 @@ namespace Architecture.Core
 		bool Exists(params string[] paths);
 		string WriteText(string text, bool append, params string[] paths);
 		string ReadText(params string[] paths);
-		void OpenFile(string path);
 		FileStream GetFileStream(params string[] paths);
 		IEnumerable<string> GetFiles(params string[] paths);
 	}

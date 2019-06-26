@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
              x:Class="Architecture.ListPage">
 
-    <StackLayout>
+    <StackLayout Margin="10">
         <Label 
             VerticalOptions="Center"
             HorizontalOptions="Center"
@@ -12,9 +13,26 @@
             Text="&#xf358;" 
             TextColor="{StaticResource PrimaryColor}"
             FontFamily="{StaticResource FontAwesomeRegular}" />
+        <controls:ValidationEntry 
+            FontIcon="&#xf358;"
+            PlaceholderColor="{StaticResource PrimaryColor}"
+            PlaceholderText="Please give me info"
+            ValidationText="No info is given" />
+        <controls:ValidationEntry 
+            FontIcon="&#xf358;"
+            TextAlignment="Center"
+            FontSize="Medium"
+            IsPassword="True"
+            PlaceholderColor="{StaticResource PrimaryColor}"
+            PlaceholderText="Password"
+            ValidationText="Missing password" />
+        <controls:FloatingEntry 
+            TextColor="{StaticResource PrimaryColor}"
+            PlaceholderColor="{StaticResource DarkPrimaryColor}"
+            Title="Give me info" />
         <controls:CheckboxControl 
             FontSize="Large"
-            TextColor="Blue"
+            TextColor="Green"
             IsSolid="True"
             IsChecked="True" />
         <controls:CheckboxControl 

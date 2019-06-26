@@ -49,8 +49,11 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
     <CodesignProvision />
+    <CodesignExtraArgs />
+    <CodesignResourceRules />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -93,7 +96,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper_iOS.cs" />
-    <Compile Include="Helpers\BackgroundHelper_iOS.cs" />
     <Compile Include="Helpers\LocalFileSystemHelper_iOS.cs" />
     <Compile Include="Helpers\LocalizeHelper_iOS.cs" />
     <Compile Include="Main.cs" />
@@ -157,18 +159,6 @@
       <Project>{FCDE9B5F-C155-4563-AD8C-979362062377}</Project>
       <Name>Architecture</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\checkOff.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\checkOn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\rbOn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\rbOff.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-App-20x20%401x.png" />

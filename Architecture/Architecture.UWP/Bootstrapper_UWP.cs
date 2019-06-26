@@ -1,8 +1,9 @@
 ﻿using Architecture.Core;
+using Architecture.UWP.Helpers;
 
-namespace Architecture.iOS
+namespace Architecture.UWP
 {
-    public class Bootstrapper_iOS
+    public class Bootstrapper_UWP
     {
         public static void Initialize()
         {
@@ -16,8 +17,8 @@ namespace Architecture.iOS
         private static void RegisterTypes()
         {
             // Helpers
-            ComponentContainer.Current.Register<ILocalizeHelper, LocalizeHelper_iOS>();
-            ComponentContainer.Current.Register<ILocalFileSystemHelper, LocalFileSystemHelper_iOS>(singelton: true);
+            ComponentContainer.Current.Register<ILocalizeHelper, LocalizeHelper_UWP>();
+            ComponentContainer.Current.Register<ILocalFileSystemHelper, LocalFileSystemHelper_UWP>(singelton: true);
         }
     }
 }

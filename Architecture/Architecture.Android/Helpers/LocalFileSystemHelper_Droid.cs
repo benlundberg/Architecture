@@ -183,34 +183,5 @@ namespace Architecture.Droid
 
 			return File.ReadAllText(path);
 		}
-
-		public void OpenFile(string path)
-		{
-			try
-			{
-				string extension = MimeTypeMap.GetFileExtensionFromUrl(path);
-				string mimeType = MimeTypeMap.Singleton.GetMimeTypeFromExtension(extension.ToLower());
-
-				var filename = Path.GetFileName(path);
-				var externalPath = global::Android.OS.Environment.ExternalStorageDirectory.Path + "/" + filename;
-				var data = ReadFile(path);
-				File.WriteAllBytes(externalPath, data);
-
-				global::Android.Net.Uri uri = global::Android.Net.Uri.FromFile(new Java.IO.File(externalPath));
-
-				Intent intent = new Intent()
-					.SetAction(Intent.ActionView)
-					.SetDataAndType(uri, mimeType)
-					.SetFlags(ActivityFlags.NewTask);
-
-				global::Android.App.Application.Context.StartActivity(Intent.CreateChooser(intent, ""));
-			}
-			catch (Exception ex)
-			{
-				ex.Print();
-				Toast.MakeText(global::Android.App.Application.Context, "", ToastLength.Long).Show();
-			}
-		}
 	}
-
 }

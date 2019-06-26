@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.Controls.FloatingEntry"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             x:Name="this">
+    <ContentView.Content>
+        <Grid Margin="0, 20, 0, 0">
+            <Entry
+                x:Name="EntryField"
+                Text="{Binding Text, Source={x:Reference this}}"
+                BackgroundColor="Transparent"
+                Unfocused="EntryField_Unfocused"
+                Focused="EntryField_Focused"/>
+            <Label 
+                x:Name="LabelTitle"
+                Text="{Binding Title, Source={x:Reference this}}"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

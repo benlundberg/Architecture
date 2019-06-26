@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Xamarin.Forms;
 
-namespace Architecture.iOS
+namespace Architecture.UWP.Helpers
 {
-    public class LocalFileSystemHelper_iOS : ILocalFileSystemHelper
+    class LocalFileSystemHelper_UWP : ILocalFileSystemHelper
     {
         public string LocalStorage => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 

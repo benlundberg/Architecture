@@ -74,7 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper_Droid.cs" />
-    <Compile Include="Helpers\BackgroundHelper_Droid.cs" />
     <Compile Include="Helpers\LocalFileSystemHelper_Droid.cs" />
     <Compile Include="Helpers\LocalizeHelper_Droid.cs" />
     <Compile Include="MainActivity.cs" />
@@ -118,18 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\splash.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\checkOff.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\checkOn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rbOff.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rbOn.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />

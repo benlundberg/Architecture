@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             x:Class="Architecture.Controls.ValidationEntry">
+    <ContentView.Content>
+        <Grid
+            x:Name="RootLayout"
+            RowSpacing="0"
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill">
+            <Grid.Padding>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="16, 12, 12, 12" />
+                    <On Platform="Android" Value="10, 6, 6, 6" />
+                </OnPlatform>
+            </Grid.Padding>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label 
+                x:Name="EntryIcon"
+                IsVisible="False"
+                FontSize="Medium"
+                VerticalOptions="Center"/>
+            <controls:BorderlessEntry 
+                x:Name="EntryField"
+                Grid.Column="1" />
+            <Label 
+                x:Name="EntryValidation"
+                Grid.Row="1"
+			    Grid.Column="1"
+                IsVisible="False" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>

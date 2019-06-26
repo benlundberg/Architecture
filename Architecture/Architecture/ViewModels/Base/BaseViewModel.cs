@@ -25,11 +25,6 @@ namespace Architecture
             return TranslateHelper.Translate(key);
         }
 
-        protected Task RunInBackgroundModeAsync(Func<Task> action, string backgroundTaskName = null)
-        {
-            return BackgroundHelper.RunInBackgroundModeAsync(action, backgroundTaskName);
-        }
-
         protected void ExecuteIfConnected(Action actionToExecute, bool showAlert)
         {
             if (NetStatusHelper.IsConnected)
@@ -82,9 +77,6 @@ namespace Architecture
 
         private INetworkStatusHelper netStatusHelper;
         public INetworkStatusHelper NetStatusHelper => netStatusHelper ?? (netStatusHelper = ComponentContainer.Current.Resolve<INetworkStatusHelper>());
-
-        private IBackgroundHelper backgroundHelper;
-        public IBackgroundHelper BackgroundHelper => backgroundHelper ?? (backgroundHelper = ComponentContainer.Current.Resolve<IBackgroundHelper>());
 
         public INavigation Navigation { get; set; }
         public bool IsNavigating { get; set; }

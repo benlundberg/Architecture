@@ -23,7 +23,7 @@ namespace Architecture.Droid
             }
         }
 
-        public System.Globalization.CultureInfo GetCurrentCultureInfo()
+        public CultureInfo GetCurrentCultureInfo()
         {
             var androidLocale = Java.Util.Locale.Default;
 
