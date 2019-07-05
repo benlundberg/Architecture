@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.Controls.CollapsingScrollView"
+             x:Name="this">
+
+    <ScrollView 
+        x:Name="ScrollRoot"
+        Scrolled="ScrollRoot_Scrolled">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Header -->
+            <ContentView x:Name="HeaderView" Content="{Binding HeaderContent, Source={x:Reference this}}" />
+            
+            <!-- Content -->
+            <ContentView x:Name="MainView" Grid.Row="1" Content="{Binding MainContent, Source={x:Reference this}}" />
+        </Grid>
+    </ScrollView>
+
+</ContentView>

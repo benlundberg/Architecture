@@ -2,10 +2,9 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Architecture.Controls.FloatingEntry"
-             xmlns:controls="clr-namespace:Architecture.Controls"
              x:Name="this">
     <ContentView.Content>
-        <Grid Margin="0, 20, 0, 0">
+        <Grid Margin="0, 24, 0, 0">
             <Entry
                 x:Name="EntryField"
                 Text="{Binding Text, Source={x:Reference this}}"

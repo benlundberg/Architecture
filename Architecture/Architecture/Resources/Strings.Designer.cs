@@ -133,11 +133,11 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password again.
+        ///   Looks up a localized string similar to Confirm password.
         /// </summary>
-        internal static string Gen_Password_Again {
+        internal static string Gen_Password_Confirm {
             get {
-                return ResourceManager.GetString("Gen_Password_Again", resourceCulture);
+                return ResourceManager.GetString("Gen_Password_Confirm", resourceCulture);
             }
         }
         

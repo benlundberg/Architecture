@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Architecture.Demos;
+using Xamarin.Forms;
 
 namespace Architecture
 {
@@ -22,6 +23,9 @@ namespace Architecture
         {
             Bootstrapper.CreateTables();
             Bootstrapper.RegisterViews();
+
+            // TODO: Remove when using template
+            Bootstrapper_Demo.Init();
         }
 
         protected override void OnStart()

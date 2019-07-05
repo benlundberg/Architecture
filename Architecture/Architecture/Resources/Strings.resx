@@ -150,8 +150,8 @@
   <data name="Gen_Password" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="Gen_Password_Again" xml:space="preserve">
-    <value>Password again</value>
+  <data name="Gen_Password_Confirm" xml:space="preserve">
+    <value>Confirm password</value>
   </data>
   <data name="Gen_RememberMe" xml:space="preserve">
     <value>Remember me</value>

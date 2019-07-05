@@ -13,12 +13,22 @@ namespace Architecture
 
 			this.masterDetailPage = masterDetailPage;
 
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                masterDetailPage.MasterBehavior = MasterBehavior.Popover;
+            }
+
             MasterItems = new List<MenuViewModel>()
             {
                 new MenuViewModel()
                 {
-                    Title = "List view",
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<ListViewModel>())
+                    Title = Translate("Gen_Login"),
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Login.LoginViewModel>())
+                },
+                new MenuViewModel()
+                {
+                    Title = Translate("Gen_Sign_Up"),
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Register.RegisterViewModel>())
                 }
             };
 

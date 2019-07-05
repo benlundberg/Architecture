@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.Demos.UI.Login.LoginPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Title="{local:Translate Gen_Login}"
+             Visual="Material">
+    <Grid Padding="{StaticResource DevicePadding}">
+        <Grid>
+            <StackLayout 
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+                VerticalOptions="Center">
+                <controls:FloatingEntry 
+                    Title="{local:Translate Gen_Username}"
+                    Text="{Binding Username, Mode=TwoWay}" />
+                <controls:FloatingEntry 
+                    Title="{local:Translate Gen_Password}"
+                    Text="{Binding Password, Mode=TwoWay}"
+                    IsPassword="True" />
+                <controls:CheckboxControl 
+                    Margin="0, 24, 0, 0"
+                    CheckSize="Medium"
+                    IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                    Title="{local:Translate Gen_RememberMe}" />
+                <Button 
+                    Padding="10"
+                    Text="&#xf00c;"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="White"
+                    FontFamily="{StaticResource FontAwesomeSolid}"
+                    Command="{Binding LoginCommand}" />
+                <Button 
+                    Command="{Binding RegisterCommand}"
+                    Margin="0, 20, 0, 0"
+                    Text="{local:Translate Sign_Up}"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource PrimaryColor}"
+                    HorizontalOptions="Center" />
+            </StackLayout>
+            <ActivityIndicator 
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Color="{StaticResource PrimaryColor}" />
+        </Grid>
+    </Grid>
+</ContentPage>

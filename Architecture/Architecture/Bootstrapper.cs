@@ -20,8 +20,6 @@ namespace Architecture
         {
             ViewContainer.Current.Register<HomeMasterViewModel, HomeMasterPage>();
             ViewContainer.Current.Register<MasterViewModel, MasterPage>();
-            ViewContainer.Current.Register<ListViewModel, ListPage>();
-            ViewContainer.Current.Register<ItemDetailViewModel, ItemDetailPage>();
         }
 
         public static void CreateTables()

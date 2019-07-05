@@ -24,6 +24,7 @@ namespace Architecture.Controls
             if (!string.IsNullOrEmpty(FontIcon))
             {
                 EntryIcon.Text = FontIcon;
+                EntryIcon.TextColor = FontIconColor;
                 EntryIcon.FontFamily = FontIconSolid ? (OnPlatform<string>)Application.Current.Resources["FontAwesomeSolid"] : (OnPlatform<string>)Application.Current.Resources["FontAwesomeRegular"];
                 EntryIcon.IsVisible = true;
             }
@@ -86,6 +87,7 @@ namespace Architecture.Controls
         }
 
         // Colors
+        public Color FontIconColor { get; set; } = Color.Black;
         public Color PlaceholderColor { get; set; } = Color.Black;
         public Color TextColor { get; set; } = Color.Black;
         public Color ValidationTextColor { get; set; } = Color.IndianRed;

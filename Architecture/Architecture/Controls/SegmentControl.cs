@@ -40,13 +40,13 @@ namespace Architecture.Controls
                                 VerticalOptions = LayoutOptions.Center,
                                 HorizontalOptions = LayoutOptions.Center,
                                 FontSize = Device.GetNamedSize(segmentControl.FontSize, typeof(Label)),
-                                TextColor =  segmentControl.TextColor,
+                                TextColor =  segmentControl.SegmentTextColor,
                                 Margin = new Thickness(8, 8, 8, 8),
                                 InputTransparent = true
                             }
                         },
                         Padding = new Thickness(1, 1, 1, 1),
-                        BackgroundColor = segmentControl.SelectedSegmentBackgroundColor
+                        BackgroundColor = segmentControl.SelectedBackgroundColor
                     };
 
                     segmentItemControl.GestureRecognizers.Add(new TapGestureRecognizer()
@@ -68,13 +68,13 @@ namespace Architecture.Controls
             if (Children[oldValue] is Grid oldSelected)
             {
                 oldSelected.Children[0].BackgroundColor = SegmentBackgroundColor;
-                (oldSelected.Children[1] as Label).TextColor = TextColor;
+                (oldSelected.Children[1] as Label).TextColor = SegmentTextColor;
             }
 
             // Mark new value
             if (Children[newValue] is Grid newSelected)
             {
-                newSelected.Children[0].BackgroundColor = SelectedSegmentBackgroundColor;
+                newSelected.Children[0].BackgroundColor = SelectedBackgroundColor;
                 (newSelected.Children[1] as Label).TextColor = SelectedTextColor;
             }
         }
@@ -116,38 +116,15 @@ namespace Architecture.Controls
 
             SelectedSegment = (int)param;
 
-            ValueChangedCommand?.Execute(param);
+            ValueChangedCommand?.Execute(SegmentControlSource[SelectedSegment]?.Tag);
         }));
 
         public int SelectedSegment { get; private set; }
 
-        private Color textColor;
-        public Color TextColor
-        {
-            get { return textColor; }
-            set { textColor = value; }
-        }
-
-        private Color selectedTextColor;
-        public Color SelectedTextColor
-        {
-            get { return selectedTextColor; }
-            set { selectedTextColor = value; }
-        }
-
-        private Color selectedSegmentBackgroundColor;
-        public Color SelectedSegmentBackgroundColor
-        {
-            get { return selectedSegmentBackgroundColor; }
-            set { selectedSegmentBackgroundColor = value; }
-        }
-
-        private Color segmentBackgroundColor;
-        public Color SegmentBackgroundColor
-        {
-            get { return segmentBackgroundColor; }
-            set { segmentBackgroundColor = value; }
-        }
+        public Color SegmentTextColor { get; set; }
+        public Color SegmentBackgroundColor { get; set; }
+        public Color SelectedTextColor { get; set; }
+        public Color SelectedBackgroundColor { get; set; }
 
         public NamedSize FontSize { get; set; }
     }

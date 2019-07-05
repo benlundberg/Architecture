@@ -42,7 +42,7 @@ namespace Architecture.Controls
                 {
                     new Label()
                     {
-                        FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
+                        FontSize = Device.GetNamedSize(CheckSize, typeof(Label)),
                         TextColor = this.TextColor,
                         FontFamily = this.FontRegularFamily,
                         VerticalOptions = LayoutOptions.Center,
@@ -63,7 +63,7 @@ namespace Architecture.Controls
                         // If is checked, we add a check font
                         rootGrid.Children.Add(new Label()
                         {
-                            FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
+                            FontSize = Device.GetNamedSize(CheckSize, typeof(Label)),
                             TextColor = this.TextColor,
                             FontFamily = this.FontFamily,
                             VerticalOptions = LayoutOptions.Center,
@@ -136,7 +136,7 @@ namespace Architecture.Controls
                     {
                         (checkbox.Children.First() as Grid)?.Children.Add(new Label()
                         {
-                            FontSize = Device.GetNamedSize(checkbox.FontSize, typeof(Label)),
+                            FontSize = Device.GetNamedSize(checkbox.CheckSize, typeof(Label)),
                             TextColor = checkbox.TextColor,
                             FontFamily = checkbox.FontFamily,
                             VerticalOptions = LayoutOptions.Center,
@@ -197,6 +197,7 @@ namespace Architecture.Controls
 
         public bool ViewInitialized { get; set; }
         public NamedSize FontSize { get; set; }
+        public NamedSize CheckSize { get; set; }
         public Color CheckboxColor { get; set; }
         public Color TextColor { get; set; }
         public bool IsCircle { get; set; }
