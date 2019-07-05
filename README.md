@@ -11,6 +11,7 @@ This project is used as a template for most of my Xamarin Forms projects. To cre
   /Architecture/...
   /Architecture.Android/...
   /Architecture.iOS/...
+  /Architecture.UWP/...
   /Architecture.Core/...
 
 4. Create an xml file with extenstion .vstemplate with the following content.
@@ -43,11 +44,14 @@ This project is used as a template for most of my Xamarin Forms projects. To cre
       <ProjectTemplateLink ProjectName="$projectname$.iOS" CopyParameters="true">
         Architecture.iOS\MyTemplate.vstemplate
       </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="$projectname$.UWP" CopyParameters="true">
+        Architecture.UWP\MyTemplate.vstemplate
+      </ProjectTemplateLink>
     </ProjectCollection>
   </TemplateContent>
 </VSTemplate>
 
-5. Zip all the subfolders (step 4) and the .vstemplate file. If you want an icon you can zip that together as well. 
+5. Zip all the subfolders (that was unzipped in step 4) and the .vstemplate file. If you want an icon you can zip that together as well and set the icon tag in the xml. 
 Zipped file content
   Root.vstemplate
   Solution_icon.png
@@ -60,4 +64,5 @@ Zipped file content
 
 7. The template will appear when you choose to create a new project.
 
-8. When the solution is created you may wanna do a search and replace all words with Architecture
+IMPORTANT!
+8. When the solution is created you may wanna do a search and replace all words with Architecture and fix the references
