@@ -22,9 +22,16 @@ namespace Architecture.Controls
             EntryField.MaxLength = MaxTextLength == 0 ? 255 : MaxTextLength;
             EntryField.Keyboard = Keyboard;
 
-			BoxViewLine.Color = PlaceholderColor;
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                BoxViewLine.IsVisible = false;
+            }
+            else
+            {
+                BoxViewLine.Color = PlaceholderColor;
+            }
 
-			LabelTitle.TextColor = PlaceholderColor;
+            LabelTitle.TextColor = PlaceholderColor;
             LabelTitle.TranslationX = 10;
             LabelTitle.FontSize = placeholderFontSize;
         }

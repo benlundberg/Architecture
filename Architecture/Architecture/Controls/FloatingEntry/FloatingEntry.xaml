@@ -13,11 +13,19 @@
                     <On Platform="UWP" Value="0, 24, 0, 0" />
                 </OnPlatform>
         	</Grid.Margin>
+            <Label 
+                x:Name="LabelTitle"
+                Text="{Binding Title, Source={x:Reference this}}"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Label.GestureRecognizers>
+            </Label>
             <StackLayout Spacing="1">
 				<controls:BorderlessEntry
 	                x:Name="EntryField"
 	                Text="{Binding Text, Source={x:Reference this}}"
-	                BackgroundColor="Transparent"
+                    BackgroundColor="Transparent"
 	                Unfocused="EntryField_Unfocused"
 	                Focused="EntryField_Focused"/>
 				<BoxView 
@@ -33,14 +41,6 @@
 					</BoxView.Margin>
 				</BoxView>
 			</StackLayout>
-            <Label 
-                x:Name="LabelTitle"
-                Text="{Binding Title, Source={x:Reference this}}"
-                VerticalOptions="Center">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                </Label.GestureRecognizers>
-            </Label>
         </Grid>
     </ContentView.Content>
 </ContentView>

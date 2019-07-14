@@ -8,7 +8,6 @@
 			 BackgroundColor="{StaticResource PrimaryColor}"
              Visual="Material">
    
-	<ScrollView>
 		<Grid Padding="{StaticResource DevicePadding}">
 			<StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
 				<Label 
@@ -110,5 +109,4 @@
 				TextColor="White"
 				Text="{local:Translate Gen_Loading}" />
 	    </Grid>
-	</ScrollView>
 </ContentPage>
