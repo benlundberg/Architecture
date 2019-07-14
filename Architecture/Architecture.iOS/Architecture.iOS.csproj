@@ -112,6 +112,7 @@
     <BundleResource Include="Resources\FontAwesome5Solid.otf" />
     <BundleResource Include="Resources\FontAwesome5Brands.otf" />
     <BundleResource Include="Resources\FontAwesome5Regular.otf" />
+    <Compile Include="Helpers\ToastHelper_iOS.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%403x.png" />

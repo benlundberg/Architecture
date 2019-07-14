@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture
@@ -72,7 +73,13 @@ namespace Architecture
             return Application.Current.MainPage.DisplayActionSheet(title, cancel, destruction, buttons);
         }
 
-        private ITranslateHelper translateHelper;
+		private ICommand popModalCommand;
+		public ICommand PopModalCommand => popModalCommand ?? (popModalCommand = new Command(async () =>
+		{
+			await Navigation.PopModalAsync();
+		}));
+
+		private ITranslateHelper translateHelper;
         public ITranslateHelper TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateHelper>());
 
         private INetworkStatusHelper netStatusHelper;
@@ -84,5 +91,5 @@ namespace Architecture
         public bool IsNotBusy => !IsBusy;
 
         public event PropertyChangedEventHandler PropertyChanged;
-    }
+	}
 }

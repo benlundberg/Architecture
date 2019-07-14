@@ -1,17 +1,21 @@
 ﻿using Architecture.Core;
-using Architecture.Demos.UI.Register;
+using Architecture.Demos.UI.ForgotPassword;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture.Demos.UI.Login
 {
-    public class LoginViewModel : BaseViewModel
+	public class LoginViewModel : BaseViewModel
     {
-        private ICommand loginCommand;
+		private ICommand forgotPasswordCommand;
+		public ICommand ForgotPasswordCommand => forgotPasswordCommand ?? (forgotPasswordCommand = new Command(async () =>
+		{
+			await Navigation.PushModalAsync(new NavigationPage(ViewContainer.Current.CreatePage<ForgotPasswordViewModel>()));
+		}));
+
+		private ICommand loginCommand;
         public ICommand LoginCommand => loginCommand ?? (loginCommand = new Command(async () =>
         {
             if (IsBusy)
@@ -48,7 +52,7 @@ namespace Architecture.Demos.UI.Login
         }));
 
         private ICommand registerCommand;
-        public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
+		public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
         {
             if (IsBusy)
             {
@@ -59,7 +63,7 @@ namespace Architecture.Demos.UI.Login
             {
                 IsBusy = true;
 
-                await Navigation.PushAsync(ViewContainer.Current.CreatePage<RegisterViewModel>());
+				await Navigation.PushAsync(ViewContainer.Current.CreatePage<Register.RegisterViewModel>());
             }
             catch (Exception ex)
             {
@@ -74,5 +78,5 @@ namespace Architecture.Demos.UI.Login
         public string Username { get; set; }
         public string Password { get; set; }
         public bool RememberMe { get; set; }
-    }
+	}
 }

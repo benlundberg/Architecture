@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns ="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Architecture.Demos.UI.GridView.GridPage"
+	xmlns:local="clr-namespace:Architecture"
+ 	xmlns:controls="clr-namespace:Architecture.Controls">
+	
+	<ScrollView>
+		<Grid>
+			<controls:GridViewControl
+				Margin="8"
+				ItemsSource="{Binding Items}"
+				ItemClickCommand="{Binding SelectItemCommand}"
+				NumberOfColumns="3">
+				<controls:GridViewControl.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<BoxView 
+								BackgroundColor="Teal"
+								HeightRequest="50"
+							 	HorizontalOptions="Fill" />
+						</Grid>
+					</DataTemplate>
+				</controls:GridViewControl.ItemTemplate>
+			</controls:GridViewControl>
+			<controls:LoadingView 
+	            IsRunning="{Binding IsBusy}"
+	            HorizontalOptions="Center"
+	            VerticalOptions="Center"
+	            Color="{StaticResource PrimaryColor}"
+				TextColor="{StaticResource PrimaryColor}"
+				Text="{local:Translate Gen_Loading}"/>
+		</Grid>
+	</ScrollView>
+</ContentPage>

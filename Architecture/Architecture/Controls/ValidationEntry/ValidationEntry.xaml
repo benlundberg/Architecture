@@ -9,13 +9,13 @@
             RowSpacing="0"
             VerticalOptions="Fill"
             HorizontalOptions="Fill">
-            <!--<Grid.Padding>
+			<Grid.Padding>
                 <OnPlatform x:TypeArguments="Thickness">
                     <On Platform="iOS" Value="16, 12, 12, 12" />
                     <On Platform="Android" Value="10, 6, 6, 6" />
                     <On Platform="UWP" Value="16, 12, 12, 12" />
                 </OnPlatform>
-            </Grid.Padding>-->
+        	</Grid.Padding>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />

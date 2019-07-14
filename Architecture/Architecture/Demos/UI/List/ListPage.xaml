@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns ="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Architecture.Demos.UI.List.ListPage"
+	xmlns:controls="clr-namespace:Architecture.Controls"
+	xmlns:local="clr-namespace:Architecture">
+	
+	<Grid>
+		<ListView 
+			CachingStrategy="RecycleElement"
+			ItemsSource="{Binding Items}"
+			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			RefreshCommand="{Binding RefreshListCommand}"
+			IsPullToRefreshEnabled="true"
+			IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+			RefreshControlColor="{StaticResource PrimaryColor}"
+			HasUnevenRows="true"
+			SeparatorVisibility="None">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ImageCell
+						Text="{Binding}"
+						Detail="This is a very cool detail text">
+						<ImageCell.ImageSource>
+							<FontImageSource 
+								Glyph="{StaticResource GeneralIcon}"
+								Color="{StaticResource PrimaryColor}"
+								FontFamily="{StaticResource FontAwesomeBrands}"/>
+						</ImageCell.ImageSource>
+					</ImageCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<controls:LoadingView 
+            IsRunning="{Binding IsBusy}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Color="{StaticResource PrimaryColor}"
+			TextColor="{StaticResource PrimaryColor}"
+			Text="{local:Translate Gen_Loading}"/>
+	</Grid>
+	
+</ContentPage>

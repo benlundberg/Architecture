@@ -22,7 +22,9 @@ namespace Architecture.Controls
             EntryField.MaxLength = MaxTextLength == 0 ? 255 : MaxTextLength;
             EntryField.Keyboard = Keyboard;
 
-            LabelTitle.TextColor = PlaceholderColor;
+			BoxViewLine.Color = PlaceholderColor;
+
+			LabelTitle.TextColor = PlaceholderColor;
             LabelTitle.TranslationX = 10;
             LabelTitle.FontSize = placeholderFontSize;
         }
@@ -39,7 +41,7 @@ namespace Architecture.Controls
                 else
                 {
                     await control.TransitionToPlaceholder(false);
-                }
+				}
             }
         }
 
@@ -102,9 +104,11 @@ namespace Architecture.Controls
                 LabelTitle.TranslationY = -30;
                 LabelTitle.FontSize = 14;
             }
-        }
 
-        private async Task TransitionToPlaceholder(bool animated)
+			BoxViewLine.Color = TextColor;
+		}
+
+		private async Task TransitionToPlaceholder(bool animated)
         {
             if (animated)
             {
@@ -118,9 +122,11 @@ namespace Architecture.Controls
                 LabelTitle.TranslationY = 0;
                 LabelTitle.FontSize = placeholderFontSize;
             }
-        }
 
-        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+			BoxViewLine.Color = PlaceholderColor;
+		}
+
+		private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
             EntryField.Focus();
         }

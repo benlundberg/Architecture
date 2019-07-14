@@ -33,7 +33,7 @@ namespace Architecture.Controls
             foreach (var item in enumerable)
             {
                 var content = view.ItemTemplate.CreateContent() as View;
-                content.BindingContext = item;
+				content.BindingContext = item;
 
                 TapGestureRecognizer tap = new TapGestureRecognizer
                 {

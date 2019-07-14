@@ -109,6 +109,6 @@ namespace Architecture.Core
         private SQLiteAsyncConnection connection;
         private SQLiteAsyncConnection GetConnection => connection ?? (connection = new SQLiteAsyncConnection(fileHelper.GetLocalPath($"{AppConfig.AppName}DB.db3")));
 
-        private ILocalFileSystemHelper fileHelper;
+        private readonly ILocalFileSystemHelper fileHelper;
     }
 }

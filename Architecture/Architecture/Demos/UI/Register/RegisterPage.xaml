@@ -1,53 +1,56 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Architecture.Demos.UI.Register.RegisterPage"
-             xmlns:controls="clr-namespace:Architecture.Controls"
-             xmlns:local="clr-namespace:Architecture"
-             Title="{local:Translate Gen_Sign_Up}"
-             Visual="Material">
-    <ScrollView>
-        <Grid Padding="{StaticResource DevicePadding}">
-            <StackLayout 
-                VerticalOptions="Center" 
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <controls:ValidationEntry 
-                    Text="{Binding Email, Mode=TwoWay}"
-                    PlaceholderText="{local:Translate Gen_Mail}"
-                    FontIconColor="{StaticResource PrimaryColor}"
-                    FontIconSolid="True"
-                    FontIcon="&#xf0e0;"
-                    ValidationText="{local:Translate Missing_Mail}"/>
-                <controls:ValidationEntry 
-                    Text="{Binding Password, Mode=TwoWay}"
-                    PlaceholderText="{local:Translate Gen_Password}"
-                    FontIconColor="{StaticResource PrimaryColor}"
-                    FontIconSolid="True"
-                    FontIcon="&#xf023;"
-                    IsPassword="True"
-                    ValidationText="{local:Translate Missing_Password}"/>
-                <controls:ValidationEntry 
-                    Text="{Binding PasswordConfirm, Mode=TwoWay}"
-                    PlaceholderText="{local:Translate Gen_Password_Confirm}"
-                    FontIconColor="{StaticResource PrimaryColor}"
-                    FontIconSolid="True"
-                    FontIcon="&#xf023;"
-                    IsPassword="True"
-                    ValidationText="{local:Translate Missing_Password}" />
-                <Button 
-                    Padding="10"
-                    Text="&#xf00c;"
-                    BackgroundColor="{StaticResource PrimaryColor}"
-                    TextColor="White"
-                    FontFamily="{StaticResource FontAwesomeSolid}"
-                    Command="{Binding RegisterCommand}" />
-            </StackLayout>
-            <ActivityIndicator 
-                IsRunning="{Binding IsBusy}"
-                IsVisible="{Binding IsBusy}"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Color="{StaticResource PrimaryColor}" />
-        </Grid>
-    </ScrollView>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns ="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="Architecture.Demos.UI.Register.RegisterPage"
+	xmlns:local="clr-namespace:Architecture"
+ 	xmlns:controls="clr-namespace:Architecture.Controls"
+ 	Title="{local:Translate Gen_Sign_Up}"
+ 	Visual="Material">
+	
+	<ScrollView>
+		<Grid Padding="{StaticResource DevicePadding}">
+			<StackLayout 
+	            VerticalOptions="Center" 
+	            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+	            <controls:ValidationEntry 
+	                Text="{Binding Email, Mode=TwoWay}"
+	                PlaceholderText="{local:Translate Gen_Mail}"
+	                FontIconColor="{StaticResource PrimaryColor}"
+	                FontIconSolid="True"
+	                FontIcon="&#xf0e0;"
+	                ValidationText="{local:Translate Missing_Mail}"/>
+	            <controls:ValidationEntry 
+	                Text="{Binding Password, Mode=TwoWay}"
+	                PlaceholderText="{local:Translate Gen_Password}"
+	                FontIconColor="{StaticResource PrimaryColor}"
+	                FontIconSolid="True"
+	                FontIcon="&#xf023;"
+	                IsPassword="True"
+	                ValidationText="{local:Translate Missing_Password}"/>
+	            <controls:ValidationEntry 
+	                Text="{Binding PasswordConfirm, Mode=TwoWay}"
+	                PlaceholderText="{local:Translate Gen_Password_Confirm}"
+	                FontIconColor="{StaticResource PrimaryColor}"
+	                FontIconSolid="True"
+	                FontIcon="&#xf023;"
+	                IsPassword="True"
+	                ValidationText="{local:Translate Missing_Password}" />
+	            <Button 
+	                Padding="10"
+	                Text="&#xf00c;"
+	                BackgroundColor="{StaticResource PrimaryColor}"
+	                TextColor="White"
+	                FontFamily="{StaticResource FontAwesomeSolid}"
+	                Command="{Binding RegisterCommand}" />
+	        </StackLayout>
+			<controls:LoadingView 
+	            IsRunning="{Binding IsBusy}"
+	            HorizontalOptions="Center"
+	            VerticalOptions="Center"
+	            Color="{StaticResource PrimaryColor}"
+				TextColor="{StaticResource PrimaryColor}"
+				Text="{local:Translate Gen_Loading}"/>
+		</Grid>
+	</ScrollView>
 </ContentPage>

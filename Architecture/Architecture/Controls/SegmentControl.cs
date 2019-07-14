@@ -11,7 +11,7 @@ namespace Architecture.Controls
         {
             this.Orientation = StackOrientation.Horizontal;
             this.HorizontalOptions = LayoutOptions.Center;
-            this.VerticalOptions = LayoutOptions.Center;
+            this.VerticalOptions = LayoutOptions.Start;
             this.Spacing = 0;
         }
 
@@ -32,7 +32,7 @@ namespace Architecture.Controls
                         {
                             new BoxView()
                             {
-                                BackgroundColor = segmentControl.SegmentBackgroundColor
+                                BackgroundColor = segmentControl.SegmentBackgroundColor,
                             },
                             new Label()
                             {
@@ -45,7 +45,7 @@ namespace Architecture.Controls
                                 InputTransparent = true
                             }
                         },
-                        Padding = new Thickness(1, 1, 1, 1),
+						Padding = new Thickness(1, 1, 1, 1),
                         BackgroundColor = segmentControl.SelectedBackgroundColor
                     };
 

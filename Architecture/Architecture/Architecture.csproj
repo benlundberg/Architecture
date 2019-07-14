@@ -47,6 +47,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Strings.sv.Designer.cs">
+      <DependentUpon>Strings.sv.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -62,9 +65,6 @@
     <EmbeddedResource Update="Demos\UI\Login\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Demos\UI\Register\RegisterPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Home\Master\HomeMasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -77,6 +77,15 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.sv.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.sv.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Demos\UI\ForgotPassword\" />
+    <Folder Include="Demos\UI\List\" />
+    <Folder Include="Demos\UI\GridView\" />
+    <Folder Include="Demos\UI\Register\" />
+    <Folder Include="Controls\LoadingView\" />
+    <Folder Include="Demos\UI\Details\" />
   </ItemGroup>
 </Project>

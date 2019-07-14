@@ -9,6 +9,9 @@
             <!-- Converters-->
             <local:InvertedBoolConverter x:Key="InvertedBoolConv" />
             
+			<!-- Glyphs -->
+			<x:String x:Key="GeneralIcon">&#xf209;</x:String>
+			
             <!--Colors -->
             <Color x:Key="DarkPrimaryColor">#1976D2</Color>
             <Color x:Key="PrimaryColor">#2196F3</Color>
@@ -45,13 +48,14 @@
                 <On Platform="iOS" Value="FontAwesome5Free-Regular" />
                 <On Platform="UWP" Value="/Assets/FontAwesome5Regular.otf#Font Awesome 5 Free" />
             </OnPlatform>
-
+            
+			<!-- Platform specifics -->
             <OnIdiom 
                 x:Key="DevicePadding" 
                 x:TypeArguments="Thickness" 
                 Tablet="40, 20, 40, 20"
                 Desktop="80, 40, 80, 40"
-                Phone="10, 10, 10, 10" />
+                Phone="16, 10, 16, 10" />
 
         </ResourceDictionary>
     </Application.Resources>

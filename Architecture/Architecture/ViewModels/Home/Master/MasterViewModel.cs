@@ -25,12 +25,22 @@ namespace Architecture
                     Title = Translate("Gen_Login"),
                     Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Login.LoginViewModel>())
                 },
-                new MenuViewModel()
-                {
-                    Title = Translate("Gen_Sign_Up"),
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Register.RegisterViewModel>())
-                }
-            };
+				new MenuViewModel()
+				{
+					Title = "List",
+					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.List.ListViewModel>())
+				},
+				new MenuViewModel()
+				{
+					Title = "Grid",
+					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.GridView.GridViewModel>())
+				},
+				new MenuViewModel()
+				{
+					Title = "Details",
+					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Details.DetailsViewModel>())
+				}
+			};
 
             ItemSelected(MasterItems.FirstOrDefault()?.Page);
         }

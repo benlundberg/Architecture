@@ -192,4 +192,10 @@
   <data name="Sign_Up" xml:space="preserve">
     <value>Har du ingen användare? Klicka här för att registrera dig.</value>
   </data>
+  <data name="Forgot_Password" xml:space="preserve">
+    <value>Glömt lösenord?</value>
+  </data>
+  <data name="Gen_Or" xml:space="preserve">
+    <value>Eller</value>
+  </data>
 </root>

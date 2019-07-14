@@ -2,15 +2,37 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Architecture.Controls.FloatingEntry"
+          	 xmlns:controls="clr-namespace:Architecture.Controls"
              x:Name="this">
     <ContentView.Content>
-        <Grid Margin="0, 24, 0, 0">
-            <Entry
-                x:Name="EntryField"
-                Text="{Binding Text, Source={x:Reference this}}"
-                BackgroundColor="Transparent"
-                Unfocused="EntryField_Unfocused"
-                Focused="EntryField_Focused"/>
+        <Grid>
+			<Grid.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="0, 32, 0, 0" />
+                    <On Platform="Android" Value="0, 24, 0, 0" />
+                    <On Platform="UWP" Value="0, 24, 0, 0" />
+                </OnPlatform>
+        	</Grid.Margin>
+            <StackLayout Spacing="1">
+				<controls:BorderlessEntry
+	                x:Name="EntryField"
+	                Text="{Binding Text, Source={x:Reference this}}"
+	                BackgroundColor="Transparent"
+	                Unfocused="EntryField_Unfocused"
+	                Focused="EntryField_Focused"/>
+				<BoxView 
+					x:Name="BoxViewLine"
+					HeightRequest="1"
+					HorizontalOptions="Fill">
+					<BoxView.Margin>
+						<OnPlatform x:TypeArguments="Thickness">
+		                    <On Platform="iOS" Value="0, 6, 0, 0" />
+		                    <On Platform="Android" Value="0" />
+		                    <On Platform="UWP" Value="0" />
+		                </OnPlatform>
+					</BoxView.Margin>
+				</BoxView>
+			</StackLayout>
             <Label 
                 x:Name="LabelTitle"
                 Text="{Binding Title, Source={x:Reference this}}"
