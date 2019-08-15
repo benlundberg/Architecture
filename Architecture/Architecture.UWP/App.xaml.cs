@@ -1,9 +1,11 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Xamarin.Forms.Platform.UWP;
 
 namespace Architecture.UWP
 {
@@ -49,6 +51,26 @@ namespace Architecture.UWP
 
                 // Ensure the current window is active
                 Window.Current.Activate();
+            }
+
+            try
+            {
+                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+                {
+                    var titleBar = Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar;
+
+                    if (titleBar != null)
+                    {
+                        titleBar.ButtonBackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["DarkPrimaryColor"]).ToWindowsColor();
+                        titleBar.BackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["DarkPrimaryColor"]).ToWindowsColor();
+                        titleBar.InactiveBackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["Accent"]).ToWindowsColor();
+                        titleBar.ButtonInactiveBackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["Accent"]).ToWindowsColor();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
 
