@@ -25,9 +25,16 @@ namespace Architecture.Controls
 
             gridView.NumberOfColumns = gridView.NumberOfColumns > 0 ? gridView.NumberOfColumns : 3;
 
-            for (int i = 0; i < (gridView.NumberOfColumns - 1); i++)
+            for (int i = 0; i < gridView.NumberOfColumns; i++)
             {
-                gridView.ColumnDefinitions.Add(new ColumnDefinition());
+                if (gridView.AutoSize)
+                {
+                    gridView.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                }
+                else
+                {
+                    gridView.ColumnDefinitions.Add(new ColumnDefinition());
+                }
             }
 
             int indexCol = 0;
@@ -75,8 +82,8 @@ namespace Architecture.Controls
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             propertyName: "ItemsSource",
             returnType: typeof(IEnumerable),
-            declaringType: typeof(GridViewControl), 
-            defaultValue: null, 
+            declaringType: typeof(GridViewControl),
+            defaultValue: null,
             propertyChanged: HandleBindingPropertyChangedDelegate);
 
         public IEnumerable ItemsSource
@@ -124,10 +131,7 @@ namespace Architecture.Controls
             }
         }
 
-        public int NumberOfColumns
-        {
-            get;
-            set;
-        }
+        public int NumberOfColumns { get; set; }
+        public bool AutoSize { get; set; }
     }
 }

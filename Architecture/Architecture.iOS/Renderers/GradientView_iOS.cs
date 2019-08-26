@@ -20,7 +20,7 @@ namespace Architecture.iOS
             {
                 layout.StartColor.ToCGColor(),
                 layout.EndColor.ToCGColor()
-        };
+            };
 
             var gradientLayer = new CAGradientLayer();
 

@@ -128,6 +128,14 @@ namespace Architecture.Core
     {
         public object Data { get; set; }
         public HttpStatusCode? ResultStatusCode { get; set; }
+
+        public void EnsureSuccess()
+        {
+            if (ResultStatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("Something went wrong with the request:" + ResultStatusCode);
+            }
+        }
     }
 
     public enum ParseType

@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Windows.Storage;
 
 namespace Architecture.UWP.Helpers
 {
     class LocalFileSystemHelper_UWP : ILocalFileSystemHelper
     {
-        public string LocalStorage => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        public string LocalStorage => ApplicationData.Current.LocalFolder.Path;
 
         public string GetLocalPath(params string[] paths)
         {
