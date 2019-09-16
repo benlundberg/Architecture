@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Architecture.Core;
+using System;
 namespace Architecture.Demos.UI.Register
 {
 	public class RegisterViewModel : BaseViewModel

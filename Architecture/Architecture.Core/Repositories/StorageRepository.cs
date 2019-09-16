@@ -7,11 +7,6 @@ using System.Threading.Tasks;
 
 namespace Architecture.Core
 {
-    public class StorageKey
-    {
-
-    }
-
     public class StorageRepository
     {
         static Lazy<StorageRepository> implementation = new Lazy<StorageRepository>(() => CreateStorage(), isThreadSafe: true);
@@ -37,11 +32,11 @@ namespace Architecture.Core
             return new StorageRepository();
         }
 
-        public async Task SaveAsync<T>(string key, T model)
+        public async Task SaveAsync<T>(string id, T model)
         {
             try
             {
-                await BlobCache.LocalMachine.InsertObject<T>(key, model);
+                await BlobCache.LocalMachine.InsertObject(id + model.GetType().ToString(), model);
             }
             catch (Exception ex)
             {
@@ -49,11 +44,11 @@ namespace Architecture.Core
             }
         }
 
-        public async Task<T> LoadAsync<T>(string key)
+        public async Task<T> LoadAsync<T>(string id)
         {
             try
             {
-                return await BlobCache.LocalMachine.GetObject<T>(key);
+                return await BlobCache.LocalMachine.GetObject<T>(id + typeof(T).GetType().ToString());
             }
             catch (Exception ex)
             {
@@ -67,7 +62,7 @@ namespace Architecture.Core
         {
             try
             {
-                var list = await this.GetAllAsync<T>();
+                var list = await GetAllAsync<T>();
 
                 return list.FirstOrDefault(predExpr);
             }
@@ -79,11 +74,11 @@ namespace Architecture.Core
             return default(T);
         }
 
-        public async Task DeleteAsync<T>(string key)
+        public async Task DeleteAsync<T>(string id)
         {
             try
             {
-                await BlobCache.LocalMachine.InvalidateObject<T>(key);
+                await BlobCache.LocalMachine.InvalidateObject<T>(id + typeof(T).GetType().ToString());
             }
             catch (Exception ex)
             {

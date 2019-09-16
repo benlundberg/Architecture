@@ -62,12 +62,14 @@ namespace Architecture.Demos.UI.GridView
 
 					await Task.Delay(TimeSpan.FromSeconds(2));
 
-					Items = new ObservableCollection<string>();
+					var items = new ObservableCollection<string>();
 
 					for (int i = 0; i < 20; i++)
 					{
-						Items.Add($"Item {i}");
+						items.Add($"Item {i}");
 					}
+
+                    Items = new ObservableCollection<string>(items);
 				}
 				catch (Exception ex)
 				{

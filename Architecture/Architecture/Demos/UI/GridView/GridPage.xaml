@@ -17,7 +17,7 @@
 					<DataTemplate>
 						<Grid>
 							<BoxView 
-								BackgroundColor="Teal"
+								BackgroundColor="{StaticResource PrimaryColor}"
 								HeightRequest="50"
 							 	HorizontalOptions="Fill" />
 						</Grid>

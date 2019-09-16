@@ -7,11 +7,6 @@ using System.Threading.Tasks;
 
 namespace Architecture.Core
 {
-    public class MemoryKey
-    {
-
-    }
-
     public class MemoryRepository
     {
         static Lazy<MemoryRepository> implementation = new Lazy<MemoryRepository>(() => CreateMemory(), isThreadSafe: true);
@@ -37,11 +32,11 @@ namespace Architecture.Core
             return new MemoryRepository();
         }
 
-        public async Task SaveAsync<T>(string key, T model)
+        public async Task SaveAsync<T>(string id, T model)
         {
             try
             {
-                await BlobCache.InMemory.InsertObject<T>(key, model);
+                await BlobCache.InMemory.InsertObject(id + model.GetType().ToString(), model);
             }
             catch (Exception ex)
             {
@@ -49,11 +44,11 @@ namespace Architecture.Core
             }
         }
 
-        public async Task<T> LoadAsync<T>(string key)
+        public async Task<T> LoadAsync<T>(string id)
         {
             try
             {
-                return await BlobCache.InMemory.GetObject<T>(key);
+                return await BlobCache.InMemory.GetObject<T>(id + typeof(T).GetType().ToString());
             }
             catch (Exception ex)
             {
@@ -67,7 +62,7 @@ namespace Architecture.Core
         {
             try
             {
-                var list = await this.GetAllAsync<T>();
+                var list = await GetAllAsync<T>();
 
                 return list.FirstOrDefault(predExpr);
             }
@@ -79,11 +74,11 @@ namespace Architecture.Core
             return default(T);
         }
 
-        public async Task DeleteAsync<T>(string key)
+        public async Task DeleteAsync<T>(string id)
         {
             try
             {
-                await BlobCache.InMemory.InvalidateObject<T>(key);
+                await BlobCache.InMemory.InvalidateObject<T>(id + typeof(T).GetType().ToString());
             }
             catch (Exception ex)
             {
@@ -121,7 +116,7 @@ namespace Architecture.Core
         {
             try
             {
-                var list = await this.GetAllAsync<T>();
+                var list = await GetAllAsync<T>();
 
                 return list?.Where(predExpr);
             }

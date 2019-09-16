@@ -15,8 +15,15 @@ namespace Architecture.Core
 
         public async Task<bool> ClearAsync<T>() where T : new()
         {
-            await GetConnection.DropTableAsync<T>();
-            await GetConnection.CreateTableAsync<T>();
+            try
+            {
+                await GetConnection.DropTableAsync<T>();
+                await GetConnection.CreateTableAsync<T>();
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
 
             return true;
         }
