@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -37,6 +38,8 @@ namespace Architecture.Core
                         requestMessage.Content = new StringContent(JsonConvert.SerializeObject(param), Encoding.UTF8, "application/json");
                     }
 
+                    Debug.WriteLine($"Calling service: {url}");
+
                     var response = await client.SendAsync(requestMessage);
 
                     if (response.StatusCode == HttpStatusCode.Moved)
@@ -67,9 +70,8 @@ namespace Architecture.Core
                     return responseData;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ex.Print();
                 throw;
             }
         }
@@ -111,9 +113,8 @@ namespace Architecture.Core
                     throw new Exception($"Something went wrong with the request: {resultData.ResultStatusCode}");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ex.Print();
                 throw;
             }
         }

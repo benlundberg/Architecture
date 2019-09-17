@@ -14,12 +14,14 @@ namespace Architecture
             // Helpers
             ComponentContainer.Current.Register<ITranslateHelper, TranslateHelper>();
             ComponentContainer.Current.Register<INetworkStatusHelper, NetworkStatusHelper>(singelton: true);
+            ComponentContainer.Current.Register<ILoggerHelper, LoggerHelper>(singelton: true);
         }
 
         public static void RegisterViews()
         {
             ViewContainer.Current.Register<HomeMasterViewModel, HomeMasterPage>();
             ViewContainer.Current.Register<MasterViewModel, MasterPage>();
+            ViewContainer.Current.Register<LoggerViewModel, LoggerPage>();
         }
 
         public static void CreateTables()

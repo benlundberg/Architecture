@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.LoggerPage"
+             xmlns:local="clr-namespace:Architecture"
+             Visual="Material"
+             x:DataType="local:LoggerViewModel"
+             Padding="{StaticResource DevicePadding}"
+             Title="Logger">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear" Command="{Binding ClearLogCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+					Glyph="{StaticResource RemoveIcon}"
+					Color="White"
+					FontFamily="{StaticResource FontAwesomeRegular}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Text="Send" Command="{Binding SendLogCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+					Glyph="{StaticResource SendIcon}"
+					Color="White"
+					FontFamily="{StaticResource FontAwesomeRegular}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView >
+            <Label Text="{Binding LogText}" />
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

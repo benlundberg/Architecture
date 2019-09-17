@@ -80,10 +80,13 @@ namespace Architecture
 		}));
 
 		private ITranslateHelper translateHelper;
-        public ITranslateHelper TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateHelper>());
+        protected ITranslateHelper TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateHelper>());
 
         private INetworkStatusHelper netStatusHelper;
-        public INetworkStatusHelper NetStatusHelper => netStatusHelper ?? (netStatusHelper = ComponentContainer.Current.Resolve<INetworkStatusHelper>());
+        protected INetworkStatusHelper NetStatusHelper => netStatusHelper ?? (netStatusHelper = ComponentContainer.Current.Resolve<INetworkStatusHelper>());
+
+        private ILoggerHelper loggerHelper;
+        protected ILoggerHelper Logger => loggerHelper ?? (loggerHelper = ComponentContainer.Current.Resolve<ILoggerHelper>());
 
         public INavigation Navigation { get; set; }
         public bool IsNavigating { get; set; }

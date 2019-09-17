@@ -38,9 +38,9 @@ namespace Architecture.Demos.UI.GridView
 				await Navigation.PushAsync(ViewContainer.Current.CreatePage<Details.DetailsViewModel>());
 			}
 			catch (Exception ex)
-			{
-				ex.Print();
-			}
+            {
+                ex.Print();
+            }
 			finally
 			{
 				IsBusy = false;

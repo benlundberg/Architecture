@@ -11,6 +11,8 @@
             
 			<!-- Glyphs -->
 			<x:String x:Key="GeneralIcon">&#xf209;</x:String>
+            <x:String x:Key="RemoveIcon">&#xf2ed;</x:String>
+            <x:String x:Key="SendIcon">&#xf1d8;</x:String>
 			
             <!--Colors -->
             <Color x:Key="DarkPrimaryColor">#1976D2</Color>

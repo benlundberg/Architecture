@@ -123,18 +123,8 @@ namespace Architecture.Droid
 
 		public byte[] ReadFile(params string[] paths)
 		{
-			string path = GetLocalPath(paths);
-
-			try
-			{
-				return File.ReadAllBytes(path);
-			}
-			catch (Exception ex)
-			{
-				ex.Print();
-			}
-
-			return null;
+			return File.ReadAllBytes(GetLocalPath(paths));
+			
 		}
 
 		public string SaveFile(byte[] data, params string[] paths)

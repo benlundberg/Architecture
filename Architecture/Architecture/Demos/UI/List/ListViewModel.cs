@@ -39,7 +39,7 @@ namespace Architecture.Demos.UI.List
 			}
 			catch (Exception ex)
 			{
-				ex.Print();
+                Logger.LogException(ex, GetType().ToString(), sendToService: false);
 			}
 			finally
 			{
