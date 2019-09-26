@@ -13,7 +13,7 @@
             <controls:GradientView 
                 StartColor="WhiteSmoke"
                 EndColor="White"
-                Direction="ToBottomRight"/>
+                Direction="ToBottomRight" />
             <Grid Padding="{StaticResource DevicePadding}">
                 <StackLayout 
 	                VerticalOptions="Center" 
@@ -42,20 +42,13 @@
 	                    IsPassword="True"
 	                    ValidationText="{local:Translate Missing_Password}" />
                     <Button 
-	                    Padding="10"
-	                    Text="&#xf00c;"
-	                    BackgroundColor="{StaticResource PrimaryColor}"
-	                    TextColor="White"
+	                    Text="{StaticResource CheckIcon}"
 	                    FontFamily="{StaticResource FontAwesomeSolid}"
 	                    Command="{Binding RegisterCommand}" />
                 </StackLayout>
                 <controls:LoadingView 
 	                IsRunning="{Binding IsBusy}"
-	                HorizontalOptions="Center"
-	                VerticalOptions="Center"
-	                Color="{StaticResource PrimaryColor}"
-				    TextColor="{StaticResource PrimaryColor}"
-				    Text="{local:Translate Gen_Loading}"/>
+				    Text="{local:Translate Gen_Loading}" />
             </Grid>
         </Grid>
     </ScrollView>

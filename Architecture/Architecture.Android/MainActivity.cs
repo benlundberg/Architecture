@@ -18,13 +18,13 @@ namespace Architecture.Droid
 
             base.OnCreate(bundle);
 
-            Bootstrapper_Droid.Initialize();
-
-            Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental");
+            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental");
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            Xamarin.Forms.FormsMaterial.Init(this, bundle);
+            global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
+
+            Bootstrapper_Droid.Initialize();
 
             LoadApplication(new App());
         }

@@ -49,8 +49,12 @@ namespace Architecture.Controls
             view.Content = stack;
         }
 
-        public static readonly BindableProperty ItemsSourceProperty =
-            BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(HorizontalView), null, propertyChanged: HandleBindingPropertyChangedDelegate);
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
+            "ItemsSource", 
+            typeof(IEnumerable), 
+            typeof(HorizontalView), 
+            null, 
+            propertyChanged: HandleBindingPropertyChangedDelegate);
 
         public IEnumerable ItemsSource
         {
@@ -58,8 +62,11 @@ namespace Architecture.Controls
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public static readonly BindableProperty ItemClickCommandProperty =
-            BindableProperty.Create("ItemClickCommand", typeof(ICommand), typeof(HorizontalView), null);
+        public static readonly BindableProperty ItemClickCommandProperty = BindableProperty.Create(
+            "ItemClickCommand", 
+            typeof(ICommand), 
+            typeof(HorizontalView), 
+            null);
 
         public ICommand ItemClickCommand
         {
@@ -67,8 +74,11 @@ namespace Architecture.Controls
             set { SetValue(ItemClickCommandProperty, value); }
         }
 
-        public static readonly BindableProperty ItemTemplateProperty =
-            BindableProperty.Create("ItemTemplate", typeof(DataTemplate), typeof(HorizontalView), null);
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(
+                "ItemTemplate", 
+                typeof(DataTemplate), 
+                typeof(HorizontalView), 
+                null);
 
         public DataTemplate ItemTemplate
         {

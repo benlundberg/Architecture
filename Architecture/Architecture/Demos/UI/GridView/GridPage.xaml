@@ -17,7 +17,7 @@
 					<DataTemplate>
 						<Grid>
 							<BoxView 
-								BackgroundColor="{StaticResource PrimaryColor}"
+								BackgroundColor="{StaticResource Accent}"
 								HeightRequest="50"
 							 	HorizontalOptions="Fill" />
 						</Grid>
@@ -26,10 +26,6 @@
 			</controls:GridViewControl>
 			<controls:LoadingView 
 	            IsRunning="{Binding IsBusy}"
-	            HorizontalOptions="Center"
-	            VerticalOptions="Center"
-	            Color="{StaticResource PrimaryColor}"
-				TextColor="{StaticResource PrimaryColor}"
 				Text="{local:Translate Gen_Loading}"/>
 		</Grid>
 	</ScrollView>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,7 +10,7 @@ namespace Architecture.Controls
     {
         public SegmentControl()
         {
-            this.Orientation = StackOrientation.Horizontal;
+            this.ItemsSource = new ObservableCollection<SegmentControlItem>();
             this.HorizontalOptions = LayoutOptions.Center;
             this.VerticalOptions = LayoutOptions.Start;
             this.Spacing = 0;
@@ -17,79 +18,138 @@ namespace Architecture.Controls
 
         private static void SegmentSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
         {
-            if (bindableObject is SegmentControl segmentControl)
+            if (!(bindableObject is SegmentControl view))
             {
-                if (segmentControl.SegmentControlSource?.Any() != true)
+                return;
+            }
+
+            if (!(newValue is ObservableCollection<SegmentControlItem> newItems))
+            {
+                return;
+            }
+
+            if (oldValue is ObservableCollection<SegmentControlItem> oldItems)
+            {
+                // Unsubscribe
+                oldItems.CollectionChanged -= view.NewItems_CollectionChanged;
+            }
+
+            newItems.CollectionChanged += view.NewItems_CollectionChanged;
+
+            view.Children.Clear();
+
+            if (newItems.Any() != true)
+            {
+                return;
+            }
+
+            foreach (var item in newItems)
+            {
+                var segmentItemControl = view.GetView(item);
+
+                view.Children.Add(segmentItemControl);
+            }
+
+            view.UpdateSelectedSegmentLayout(view.ItemsSource?.FirstOrDefault());
+        }
+
+        private View GetView(SegmentControlItem item)
+        {
+            Grid segmentItemControl = new Grid()
+            {
+                Children =
                 {
-                    return;
-                }
-
-                for (int i = 0; i < segmentControl.SegmentControlSource.Count; i++)
-                {
-                    Grid segmentItemControl = new Grid()
+                    new BoxView()
                     {
-                        Children =
-                        {
-                            new BoxView()
-                            {
-                                BackgroundColor = segmentControl.SegmentBackgroundColor,
-                            },
-                            new Label()
-                            {
-                                Text = segmentControl.SegmentControlSource[i].Text,
-                                VerticalOptions = LayoutOptions.Center,
-                                HorizontalOptions = LayoutOptions.Center,
-                                FontSize = Device.GetNamedSize(segmentControl.FontSize, typeof(Label)),
-                                TextColor =  segmentControl.SegmentTextColor,
-                                Margin = new Thickness(8, 8, 8, 8),
-                                InputTransparent = true
-                            }
-                        },
-						Padding = new Thickness(1, 1, 1, 1),
-                        BackgroundColor = segmentControl.SelectedBackgroundColor
-                    };
-
-                    segmentItemControl.GestureRecognizers.Add(new TapGestureRecognizer()
+                        BackgroundColor = item.Tag == StartTag ? SelectedBackgroundColor : SegmentBackgroundColor
+                    },
+                    new Label()
                     {
-                        Command = segmentControl.TapGestureCommand,
-                        CommandParameter = i
-                    });
+                        Text = item.Text,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = TextHorizontalOption,
+                        HorizontalTextAlignment = TextAlignment,
+                        FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
+                        TextColor = item.Tag == StartTag ? SelectedTextColor :  SegmentTextColor,
+                        Margin = new Thickness(8, 8, 8, 8),
+                        InputTransparent = true
+                    }
+                },
+                Padding = new Thickness(1, 1, 1, 1),
+                BackgroundColor = SelectedBackgroundColor,
 
-                    segmentControl.Children.Add(segmentItemControl);
-                }
+            };
 
-                segmentControl.UpdateSelectedSegmentLayout(0, 0);
+            segmentItemControl.GestureRecognizers.Add(new TapGestureRecognizer()
+            {
+                Command = TapGestureCommand,
+                CommandParameter = item
+            });
+
+            return segmentItemControl;
+        }
+
+        private void NewItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    int index = e.NewStartingIndex;
+
+                    foreach (var item in e.NewItems)
+                    {
+                        Children.Insert(index++, GetView(ItemsSource.ElementAt(e.NewStartingIndex)));
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    {
+                        Children.RemoveAt(e.OldStartingIndex);
+                    }
+                    break;
             }
         }
 
-        private void UpdateSelectedSegmentLayout(int oldValue, int newValue)
+        private void UpdateSelectedSegmentLayout(SegmentControlItem item)
         {
             // Unmark old value
-            if (Children[oldValue] is Grid oldSelected)
+            var oldItem = ItemsSource.FirstOrDefault(x => x.IsSelected);
+
+            if (oldItem != null)
             {
-                oldSelected.Children[0].BackgroundColor = SegmentBackgroundColor;
-                (oldSelected.Children[1] as Label).TextColor = SegmentTextColor;
+                oldItem.IsSelected = false;
+
+                Grid oldSelectedView = (Grid)Children.FirstOrDefault(x => (x as Grid)?.Children?.Any(c => (c as Label)?.Text == oldItem.Text) == true);
+
+                if (oldSelectedView != null)
+                {
+                    oldSelectedView.Children[0].BackgroundColor = SegmentBackgroundColor;
+                    (oldSelectedView.Children[1] as Label).TextColor = SegmentTextColor;
+                }
             }
 
             // Mark new value
-            if (Children[newValue] is Grid newSelected)
+            item.IsSelected = true;
+
+            Grid newSelectedView = (Grid)Children.FirstOrDefault(x => (x as Grid)?.Children?.Any(c => (c as Label)?.Text == item.Text) == true);
+
+            if (newSelectedView != null)
             {
-                newSelected.Children[0].BackgroundColor = SelectedBackgroundColor;
-                (newSelected.Children[1] as Label).TextColor = SelectedTextColor;
+                newSelectedView.Children[0].BackgroundColor = SelectedBackgroundColor;
+                (newSelectedView.Children[1] as Label).TextColor = SelectedTextColor;
             }
         }
 
-        public static readonly BindableProperty SegmentControlSourceProperty = BindableProperty.Create(
-            propertyName: "SegmentControlSource",
-            returnType: typeof(ObservableCollection<SegmentedControlOption>),
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
+            propertyName: "ItemsSource",
+            returnType: typeof(ObservableCollection<SegmentControlItem>),
             declaringType: typeof(SegmentControl),
-            defaultValue: default(ObservableCollection<SegmentedControlOption>),
+            defaultValue: default(ObservableCollection<SegmentControlItem>),
             propertyChanged: SegmentSourceChanged);
 
-        public ObservableCollection<SegmentedControlOption> SegmentControlSource
+        public ObservableCollection<SegmentControlItem> ItemsSource
         {
-            get { return (ObservableCollection<SegmentedControlOption>)GetValue(SegmentControlSourceProperty); }
-            set { SetValue(SegmentControlSourceProperty, value); }
+            get { return (ObservableCollection<SegmentControlItem>)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
         }
 
         public static readonly BindableProperty ValueChangedCommandProperty = BindableProperty.Create(
@@ -107,42 +167,49 @@ namespace Architecture.Controls
         private ICommand tapGestureCommand;
         public ICommand TapGestureCommand => tapGestureCommand ?? (tapGestureCommand = new Command<object>((param) =>
         {
-            if (SelectedSegment == (int)param)
+            if (!(param is SegmentControlItem segmentControlItem))
             {
                 return;
             }
 
-            UpdateSelectedSegmentLayout(SelectedSegment, (int)param);
+            if (SelectedSegment?.Tag == segmentControlItem.Tag)
+            {
+                return;
+            }
 
-            SelectedSegment = (int)param;
+            UpdateSelectedSegmentLayout(segmentControlItem);
 
-            ValueChangedCommand?.Execute(SegmentControlSource[SelectedSegment]?.Tag);
+            SelectedSegment = segmentControlItem;
+
+            ValueChangedCommand?.Execute(SelectedSegment.Tag);
         }));
 
-        public int SelectedSegment { get; private set; }
+        public static readonly BindableProperty StartTagProperty = BindableProperty.Create(
+            propertyName: "StartTag",
+            returnType: typeof(object),
+            declaringType: typeof(SegmentControl),
+            defaultValue: default(object));
 
-        public Color SegmentTextColor { get; set; }
-        public Color SegmentBackgroundColor { get; set; }
-        public Color SelectedTextColor { get; set; }
-        public Color SelectedBackgroundColor { get; set; }
-
-        public NamedSize FontSize { get; set; }
-    }
-
-    public class SegmentedControlOption : View
-    {
-        public static BindableProperty TextProperty = BindableProperty.Create(
-            propertyName: "Text",
-            returnType: typeof(string),
-            declaringType: typeof(SegmentedControlOption),
-            defaultValue: default(string));
-
-        public string Text
+        public object StartTag
         {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get { return GetValue(StartTagProperty); }
+            set { SetValue(StartTagProperty, value); }
         }
 
+        public SegmentControlItem SelectedSegment { get; private set; }
+        public Color SegmentTextColor { get; set; } = Application.Current.PrimaryColor();
+        public Color SegmentBackgroundColor { get; set; } = Color.White;
+        public Color SelectedTextColor { get; set; } = Color.White;
+        public Color SelectedBackgroundColor { get; set; } = Application.Current.PrimaryColor();
+        public NamedSize FontSize { get; set; }
+        public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
+        public LayoutOptions TextHorizontalOption { get; set; } = LayoutOptions.Center;
+    }
+
+    public class SegmentControlItem
+    {
+        public string Text { get; set; }
+        public bool IsSelected { get; set; }
         public object Tag { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace Architecture.Controls
 
     public class GradientView : StackLayout
     {
-        public Color StartColor { get; set; }
-        public Color EndColor { get; set; }
+        public Color StartColor { get; set; } = Application.Current.PrimaryColor();
+        public Color EndColor { get; set; } = Application.Current.DarkPrimaryColor();
         public GradientDirection Direction { get; set; }
     }
 }

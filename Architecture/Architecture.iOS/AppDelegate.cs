@@ -18,7 +18,9 @@ namespace Architecture.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental");
+
+            Xamarin.Forms.Forms.Init();
 
             Bootstrapper_iOS.Initialize();
 

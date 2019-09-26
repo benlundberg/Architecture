@@ -39,8 +39,6 @@ namespace Architecture.Demos.UI.Login
             {
                 IsBusy = true;
 
-                throw new NotImplementedException();
-
                 await Task.Delay(TimeSpan.FromSeconds(2));
             }
             catch (Exception ex)
@@ -66,7 +64,7 @@ namespace Architecture.Demos.UI.Login
             {
                 IsBusy = true;
 
-				await Navigation.PushAsync(ViewContainer.Current.CreatePage<LoggerViewModel>());
+				await Navigation.PushAsync(ViewContainer.Current.CreatePage<Register.RegisterViewModel>());
             }
             catch (Exception ex)
             {

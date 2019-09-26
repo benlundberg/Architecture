@@ -13,7 +13,9 @@
 			<x:String x:Key="GeneralIcon">&#xf209;</x:String>
             <x:String x:Key="RemoveIcon">&#xf2ed;</x:String>
             <x:String x:Key="SendIcon">&#xf1d8;</x:String>
-			
+            <x:String x:Key="CloseIcon">&#xf00d;</x:String>
+            <x:String x:Key="CheckIcon">&#xf00c;</x:String>
+            
             <!--Colors -->
             <Color x:Key="DarkPrimaryColor">#1976D2</Color>
             <Color x:Key="PrimaryColor">#2196F3</Color>
@@ -63,6 +65,17 @@
             </Style>
 
             <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="BackgroundColor" Value="{StaticResource DarkPrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style TargetType="Entry">
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
             </Style>
 

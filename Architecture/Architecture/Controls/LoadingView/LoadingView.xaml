@@ -4,6 +4,8 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="Architecture.Controls.LoadingView"
 	IsVisible="{Binding IsRunning, Source={x:Reference this}}"
+    VerticalOptions="Center"
+    HorizontalOptions="Center"
 	x:Name="this">
 	
 	<StackLayout VerticalOptions="Center" HorizontalOptions="Center">

@@ -39,8 +39,13 @@ namespace Architecture
 				{
 					Title = "Details",
 					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Details.DetailsViewModel>())
-				}
-			};
+				},
+                //new MenuViewModel()
+                //{
+                //    Title = "Collection",
+                //    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.CollectionView.CollectionViewModel>())
+                //}
+            };
 
             ItemSelected(MasterItems.FirstOrDefault()?.Page);
         }

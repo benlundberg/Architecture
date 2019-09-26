@@ -200,8 +200,8 @@ namespace Architecture.Controls
         public NamedSize CheckSize { get; set; }
         public Color CheckboxColor { get; set; }
         public Color TextColor { get; set; }
-        public bool IsCircle { get; set; }
-        public bool IsSolid { get; set; }
+        public bool IsCircle { get; set; } = true;
+        public bool IsSolid { get; set; } = true;
         public bool FlowRightToLeft { get; set; }
 
         private string CheckedFont => IsCircle ? "\uf058" : "\uf14a";

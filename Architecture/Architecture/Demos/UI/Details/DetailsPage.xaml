@@ -14,10 +14,9 @@
 					BackgroundColor="{StaticResource PrimaryColor}"
 					Padding="10">
 					<Label 
-						x:Name="LabelIcon"
 						HorizontalOptions="Center"
 						FontSize="52"
-		                Text="&#xf209;"
+		                Text="{StaticResource GeneralIcon}"
 		                TextColor="White"
 		                FontFamily="{StaticResource FontAwesomeBrands}" />
 					<Label
@@ -39,7 +38,7 @@
 						<StackLayout Orientation="Horizontal">
 							<Label 
 								FontSize="Small"
-				                Text="&#xf209;"
+				                Text="{StaticResource GeneralIcon}"
 				                TextColor="White"
 				                FontFamily="{StaticResource FontAwesomeBrands}" />
 							<Label 
@@ -50,7 +49,7 @@
 						<StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
 							<Label 
 								FontSize="Small"
-				                Text="&#xf209;"
+				                Text="{StaticResource GeneralIcon}"
 				                TextColor="White"
 				                FontFamily="{StaticResource FontAwesomeBrands}" />
 							<Label 
@@ -61,7 +60,7 @@
 						<StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End">
 							<Label 
 								FontSize="Small"
-				                Text="&#xf209;"
+				                Text="{StaticResource GeneralIcon}"
 								TextColor="White"
 				                FontFamily="{StaticResource FontAwesomeBrands}" />
 							<Label 
@@ -84,7 +83,7 @@
 						    <controls:HorizontalView.ItemTemplate>
 							    <DataTemplate>
 								    <BoxView 
-									    BackgroundColor="Teal"
+									    BackgroundColor="{StaticResource Accent}"
 									    HeightRequest="50"
 								 	    WidthRequest="50" />
 							    </DataTemplate>
@@ -95,7 +94,7 @@
 						    <controls:GridViewControl.ItemTemplate>
 							    <DataTemplate>
 								    <BoxView 
-									    BackgroundColor="Teal"
+									    BackgroundColor="{StaticResource Accent}"
 									    HeightRequest="50"
 								 	    WidthRequest="50" />
 							    </DataTemplate>

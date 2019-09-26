@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="akavache" Version="6.5.9" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="akavache" Version="6.8.1" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
 
   <ItemGroup>

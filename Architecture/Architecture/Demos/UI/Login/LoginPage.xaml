@@ -8,10 +8,7 @@
              Visual="Material">
 
     <Grid>
-        <controls:GradientView
-            StartColor="{StaticResource PrimaryColor}"
-            EndColor="{StaticResource DarkPrimaryColor}"
-            Direction="ToBottomRight" />
+        <controls:GradientView />
         <Grid Padding="{StaticResource DevicePadding}">
             <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
                 <Label 
@@ -37,7 +34,6 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <controls:CheckboxControl 
-						IsSolid="true"
 		                CheckSize="Medium"
 						TextColor="White"
 						CheckboxColor="White"
@@ -54,10 +50,7 @@
                     </Label>
                 </Grid>
                 <Button 
-	                Padding="10"
-	                Text="&#xf00c;"
-	                BackgroundColor="{StaticResource DarkPrimaryColor}"
-	                TextColor="White"
+	                Text="{StaticResource CheckIcon}"
 	                FontFamily="{StaticResource FontAwesomeSolid}"
 	                Command="{Binding LoginCommand}" />
                 <Grid Margin="0, 10, 0, 0">
@@ -107,10 +100,6 @@
             </Label>
             <controls:LoadingView 
 	            IsRunning="{Binding IsBusy}"
-	            HorizontalOptions="Center"
-	            VerticalOptions="Center"
-	            Color="White"
-				TextColor="White"
 				Text="{local:Translate Gen_Loading}" />
         </Grid>
     </Grid>

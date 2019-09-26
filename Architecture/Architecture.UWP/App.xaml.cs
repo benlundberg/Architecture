@@ -21,6 +21,8 @@ namespace Architecture.UWP
         {
             Bootstrapper_UWP.Initialize();
 
+            Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental");
+
             Xamarin.Forms.Forms.Init(e);
 
             if (!(Window.Current.Content is Frame rootFrame))

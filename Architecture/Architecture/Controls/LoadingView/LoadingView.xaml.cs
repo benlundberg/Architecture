@@ -37,7 +37,7 @@ namespace Architecture.Controls
 			set => SetValue(TextProperty, value);
 		}
 
-		public Color TextColor { get; set; }
-		public Color Color { get; set; }
-	}
+        public Color TextColor { get; set; } = Application.Current.AccentColor();
+		public Color Color { get; set; } = Application.Current.AccentColor();
+    }
 }
