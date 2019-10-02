@@ -17,10 +17,10 @@
             <x:String x:Key="CheckIcon">&#xf00c;</x:String>
             
             <!--Colors -->
-            <Color x:Key="DarkPrimaryColor">#1976D2</Color>
-            <Color x:Key="PrimaryColor">#2196F3</Color>
-            <Color x:Key="Accent">#FF4081</Color>
-            <Color x:Key="DarkAccent">#5f5e5e</Color>
+            <Color x:Key="DarkPrimaryColor">#00796B</Color>
+            <Color x:Key="PrimaryColor">#009688</Color>
+            <Color x:Key="Accent">#795548</Color>
+            <Color x:Key="DarkAccent">#4E2415</Color>
             <Color x:Key="GrayDark">#555555</Color>
             <Color x:Key="Gray">#8a8a8a</Color>
             <Color x:Key="GrayLight">#afafaf</Color>

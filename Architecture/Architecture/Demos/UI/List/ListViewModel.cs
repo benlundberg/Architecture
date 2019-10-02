@@ -9,19 +9,17 @@ namespace Architecture.Demos.UI.List
 {
 	public class ListViewModel : BaseViewModel
 	{
-		public override void Appearing()
-		{
-			if (NetStatusHelper.IsConnected)
-			{
-				LoadItems();
-			}
-			else
-			{
-				ShowNoNetworkError();
-			}
-
-			base.Appearing();
-		}
+        public ListViewModel()
+        {
+            if (NetStatusHelper.IsConnected)
+            {
+                LoadItems();
+            }
+            else
+            {
+                ShowNoNetworkError();
+            }
+        }
 
 		private ICommand refreshListCommand;
 		public ICommand RefreshListCommand => refreshListCommand ?? (refreshListCommand = new Command(async () =>

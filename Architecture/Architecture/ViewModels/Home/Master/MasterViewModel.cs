@@ -25,26 +25,31 @@ namespace Architecture
                     Title = Translate("Gen_Login"),
                     Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Login.LoginViewModel>())
                 },
-				new MenuViewModel()
-				{
-					Title = "List",
-					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.List.ListViewModel>())
+                new MenuViewModel()
+                {
+                    Title = "List imagecell",
+                    Page = new NavigationPage(new Demos.UI.List.ListImageCellPage() { BindingContext = new Demos.UI.List.ListViewModel() })
 				},
-				new MenuViewModel()
+                new MenuViewModel()
+                {
+                    Title = "List textcell",
+                    Page = new NavigationPage(new Demos.UI.List.ListTextCellPage() { BindingContext = new Demos.UI.List.ListViewModel() })
+                },
+                new MenuViewModel()
 				{
-					Title = "Grid",
-					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.GridView.GridViewModel>())
-				},
-				new MenuViewModel()
+					Title = "Grid view",
+                    Page = new NavigationPage(new Demos.UI.List.GridViewPage() { BindingContext = new Demos.UI.List.ListViewModel() })
+                },
+                new MenuViewModel()
+                {
+                    Title = "List card view",
+                    Page = new NavigationPage(new Demos.UI.List.ListCardViewPage() { BindingContext = new Demos.UI.List.ListViewModel() })
+                },
+                new MenuViewModel()
 				{
 					Title = "Details",
 					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Details.DetailsViewModel>())
-				},
-                //new MenuViewModel()
-                //{
-                //    Title = "Collection",
-                //    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.CollectionView.CollectionViewModel>())
-                //}
+				}
             };
 
             ItemSelected(MasterItems.FirstOrDefault()?.Page);

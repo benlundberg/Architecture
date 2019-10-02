@@ -1,5 +1,4 @@
-﻿using Architecture.Core;
-using Architecture.Demos.UI.ForgotPassword;
+﻿using Architecture.Demos.UI.ForgotPassword;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -7,7 +6,7 @@ using Xamarin.Forms;
 
 namespace Architecture.Demos.UI.Login
 {
-	public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
 		private ICommand forgotPasswordCommand;
 		public ICommand ForgotPasswordCommand => forgotPasswordCommand ?? (forgotPasswordCommand = new Command(async () =>
@@ -55,25 +54,7 @@ namespace Architecture.Demos.UI.Login
         private ICommand registerCommand;
 		public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
         {
-            if (IsBusy)
-            {
-                return;
-            }
-
-            try
-            {
-                IsBusy = true;
-
-				await Navigation.PushAsync(ViewContainer.Current.CreatePage<Register.RegisterViewModel>());
-            }
-            catch (Exception ex)
-            {
-                ex.Print();
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            await Navigation.PushAsync(ViewContainer.Current.CreatePage<Register.RegisterViewModel>());
         }));
 
         public string Username { get; set; }

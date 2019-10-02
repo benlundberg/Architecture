@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture.Demos.UI.GridView
+namespace Architecture.Demos.UI.List
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class GridPage : ContentPage
+	public partial class ListCardViewPage : ContentPage
 	{
-		public GridPage()
+		public ListCardViewPage()
 		{
 			InitializeComponent();
 		}

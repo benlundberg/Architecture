@@ -126,6 +126,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderers\BorderlessEntryRenderer_UWP.cs" />
     <Compile Include="Renderers\GradientView_UWP.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -77,8 +77,9 @@ namespace Architecture.Controls
                 },
                 Padding = new Thickness(1, 1, 1, 1),
                 BackgroundColor = SelectedBackgroundColor,
-
             };
+
+            item.IsSelected = item.Tag == StartTag;
 
             segmentItemControl.GestureRecognizers.Add(new TapGestureRecognizer()
             {
@@ -188,7 +189,7 @@ namespace Architecture.Controls
             propertyName: "StartTag",
             returnType: typeof(object),
             declaringType: typeof(SegmentControl),
-            defaultValue: default(object));
+            defaultValue: default);
 
         public object StartTag
         {

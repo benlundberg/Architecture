@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="akavache" Version="6.8.1" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
-    <PackageReference Include="PropertyChanged.Fody" Version="2.5.10">
+    <PackageReference Include="PropertyChanged.Fody" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -36,6 +36,15 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Demos\UI\List\CardView\ListCardViewPage.xaml.cs">
+      <DependentUpon>ListCardViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Demos\UI\List\GridView\GridViewPage.xaml.cs">
+      <DependentUpon>GridViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Demos\UI\List\ImageCell\ListImageCellPage.xaml.cs">
+      <DependentUpon>ListImageCellPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Helpers\TranslateHelper.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -62,7 +71,7 @@
     <EmbeddedResource Update="Controls\ValidationEntry\ValidationEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Demos\UI\CollectionView\CollectionViewPage.xaml">
+    <EmbeddedResource Update="Demos\UI\List\TextCell\ListTextCellPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Demos\UI\Login\LoginPage.xaml">
@@ -88,8 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Demos\UI\ForgotPassword\" />
-    <Folder Include="Demos\UI\List\" />
-    <Folder Include="Demos\UI\GridView\" />
+    <Folder Include="Demos\UI\List\CollectionView\" />
     <Folder Include="Demos\UI\Register\" />
     <Folder Include="Controls\LoadingView\" />
     <Folder Include="Demos\UI\Details\" />

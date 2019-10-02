@@ -10,10 +10,7 @@
 	
 	<ScrollView>
         <Grid>
-            <controls:GradientView 
-                StartColor="WhiteSmoke"
-                EndColor="White"
-                Direction="ToBottomRight" />
+            <controls:GradientView />
             <Grid Padding="{StaticResource DevicePadding}">
                 <StackLayout 
 	                VerticalOptions="Center" 
