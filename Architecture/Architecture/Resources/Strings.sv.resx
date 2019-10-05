@@ -190,7 +190,7 @@
     <value>Behörighet för:</value>
   </data>
   <data name="Sign_Up" xml:space="preserve">
-    <value>Har du ingen användare? Klicka här för att registrera dig.</value>
+    <value>Har du ingen användare? Registrera dig här!</value>
   </data>
   <data name="Forgot_Password" xml:space="preserve">
     <value>Glömt lösenord?</value>

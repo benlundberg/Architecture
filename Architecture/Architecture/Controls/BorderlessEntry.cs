@@ -6,7 +6,6 @@ namespace Architecture.Controls
     {
         public BorderlessEntry()
         {
-
         }
     }
 }

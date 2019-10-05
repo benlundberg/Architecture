@@ -2,51 +2,62 @@
 <ContentPage 
 	xmlns ="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
 	x:Class="Architecture.Demos.UI.Register.RegisterPage"
 	xmlns:local="clr-namespace:Architecture"
  	xmlns:controls="clr-namespace:Architecture.Controls"
- 	Title="{local:Translate Gen_Sign_Up}"
- 	Visual="Material">
-	
+ 	Visual="Material"
+    BackgroundColor="{StaticResource PrimaryColor}">
+
+    <NavigationPage.TitleView>
+        <Label 
+            Style="{StaticResource NavigationTitle}"
+            Text="{local:Translate Gen_Sign_Up}" />
+    </NavigationPage.TitleView>
+    
 	<ScrollView>
-        <Grid>
-            <controls:GradientView />
-            <Grid Padding="{StaticResource DevicePadding}">
-                <StackLayout 
-	                VerticalOptions="Center" 
-	                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                    <controls:ValidationEntry 
-	                    Text="{Binding Email, Mode=TwoWay}"
-	                    PlaceholderText="{local:Translate Gen_Mail}"
-	                    FontIconColor="{StaticResource PrimaryColor}"
-	                    FontIconSolid="True"
-	                    FontIcon="&#xf0e0;"
-	                    ValidationText="{local:Translate Missing_Mail}"/>
-                    <controls:ValidationEntry 
-	                    Text="{Binding Password, Mode=TwoWay}"
-	                    PlaceholderText="{local:Translate Gen_Password}"
-	                    FontIconColor="{StaticResource PrimaryColor}"
-	                    FontIconSolid="True"
-	                    FontIcon="&#xf023;"
-	                    IsPassword="True"
-	                    ValidationText="{local:Translate Missing_Password}"/>
-                    <controls:ValidationEntry 
-	                    Text="{Binding PasswordConfirm, Mode=TwoWay}"
-	                    PlaceholderText="{local:Translate Gen_Password_Confirm}"
-	                    FontIconColor="{StaticResource PrimaryColor}"
-	                    FontIconSolid="True"
-	                    FontIcon="&#xf023;"
-	                    IsPassword="True"
-	                    ValidationText="{local:Translate Missing_Password}" />
-                    <Button 
-	                    Text="{StaticResource CheckIcon}"
-	                    FontFamily="{StaticResource FontAwesomeSolid}"
-	                    Command="{Binding RegisterCommand}" />
-                </StackLayout>
-                <controls:LoadingView 
-	                IsRunning="{Binding IsBusy}"
-				    Text="{local:Translate Gen_Loading}" />
-            </Grid>
+        <Grid Padding="{StaticResource DevicePadding}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackLayout 
+                Grid.Column="{StaticResource ColumnCenter}"
+                Grid.ColumnSpan="{StaticResource ColumnSpanCenter}"
+                Spacing="10"
+	            VerticalOptions="Center"
+	            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                <Entry 
+	                Text="{Binding Email, Mode=TwoWay}"
+                    TextColor="{StaticResource EntryTextColor}"
+	                Placeholder="{local:Translate Gen_Mail}"
+	                PlaceholderColor="{StaticResource EntryTextColor}"
+                    Keyboard="Email" />
+                <Entry 
+	                Text="{Binding Password, Mode=TwoWay}"
+	                Placeholder="{local:Translate Gen_Password}"
+	                TextColor="{StaticResource EntryTextColor}"
+	                PlaceholderColor="{StaticResource EntryTextColor}"
+                    IsPassword="True" />
+                <Entry
+	                Text="{Binding PasswordConfirm, Mode=TwoWay}"
+	                Placeholder="{local:Translate Gen_Password_Confirm}"
+	                TextColor="{StaticResource EntryTextColor}"
+	                PlaceholderColor="{StaticResource EntryTextColor}"
+	                IsPassword="True" />
+                <Button 
+	                Text="{StaticResource CheckIcon}"
+	                FontFamily="{StaticResource FontAwesomeSolid}"
+	                Command="{Binding RegisterCommand}" />
+            </StackLayout>
+            <controls:LoadingView 
+	            Grid.Column="{StaticResource ColumnCenter}"
+                Grid.ColumnSpan="{StaticResource ColumnSpanCenter}"
+                IsRunning="{Binding IsBusy}"
+				Text="{local:Translate Gen_Loading}" />
         </Grid>
     </ScrollView>
 </ContentPage>

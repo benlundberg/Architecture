@@ -3,24 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Architecture;assembly=Architecture"
              x:Class="Architecture.App">
-	<Application.Resources>
+    <Application.Resources>
         <ResourceDictionary>
 
             <!-- Converters-->
             <local:InvertedBoolConverter x:Key="InvertedBoolConv" />
-            
-			<!-- Glyphs -->
-			<x:String x:Key="GeneralIcon">&#xf209;</x:String>
+
+            <!-- Glyphs -->
+            <x:String x:Key="GeneralIcon">&#xf209;</x:String>
             <x:String x:Key="RemoveIcon">&#xf2ed;</x:String>
             <x:String x:Key="SendIcon">&#xf1d8;</x:String>
             <x:String x:Key="CloseIcon">&#xf00d;</x:String>
             <x:String x:Key="CheckIcon">&#xf00c;</x:String>
-            
+
             <!--Colors -->
-            <Color x:Key="DarkPrimaryColor">#00796B</Color>
-            <Color x:Key="PrimaryColor">#009688</Color>
-            <Color x:Key="Accent">#795548</Color>
-            <Color x:Key="DarkAccent">#4E2415</Color>
+            <Color x:Key="DarkPrimaryColor">#000a12</Color>
+            <Color x:Key="PrimaryColor">#263238</Color>
+            <Color x:Key="LightPrimaryColor">#4f5b62</Color>
+            <Color x:Key="Accent">#E57373</Color>
+            <Color x:Key="LightAccent">#ffa4a2</Color>
+            <Color x:Key="DarkAccent">#af4448</Color>
             <Color x:Key="GrayDark">#555555</Color>
             <Color x:Key="Gray">#8a8a8a</Color>
             <Color x:Key="GrayLight">#afafaf</Color>
@@ -28,7 +30,7 @@
             <Color x:Key="TextMedium">#9c9c9c</Color>
             <Color x:Key="TextLight">#ffffff</Color>
 
-            <!-- Fonts -->
+            <!-- Fonts Start here -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeBrands">
                 <On Platform="Android" Value="FontAwesome5Brands.otf#Regular" />
                 <On Platform="iOS" Value="FontAwesome5Brands-Regular" />
@@ -52,12 +54,51 @@
                 <On Platform="UWP" Value="/Assets/Montserrat-Bold.ttf#Montserrat" />
                 <On Platform="iOS" Value="Montserrat-Bold" />
             </OnPlatform>
+
             <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
                 <On Platform="Android" Value="Montserrat-Regular.ttf#Montserrat" />
                 <On Platform="UWP" Value="/Assets/Montserrat-Regular.ttf#Montserrat" />
                 <On Platform="iOS" Value="Montserrat-Regular" />
             </OnPlatform>
+            <!-- Fonts Ends here -->
 
+            <!-- Platform specifics Starts here -->            
+            
+            <!-- Button corner radius -->
+            <OnPlatform x:TypeArguments="x:Int32" x:Key="ButtonCornerRadius">
+                <On Platform="Android" Value="30" />
+                <On Platform="UWP" Value="0" />
+                <On Platform="iOS" Value="0" />
+            </OnPlatform>
+
+            <!-- Entry placeholder and textcolor  -->
+            <OnPlatform x:TypeArguments="Color" x:Key="EntryTextColor">
+                <On Platform="Android" Value="{StaticResource TextLight}" />
+                <On Platform="UWP" Value="{StaticResource TextDark}" />
+                <On Platform="iOS" Value="{StaticResource TextDark}" />
+            </OnPlatform>
+
+            <!-- Lable size -->
+            <OnPlatform x:TypeArguments="NamedSize" x:Key="DefaultLabelFontSize">
+                <On Platform="Android" Value="Medium" />
+                <On Platform="UWP" Value="Default" />
+                <On Platform="iOS" Value="Default" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="ColumnSpanCenter" x:TypeArguments="x:Int32">
+                <On Platform="iOS" Value="3" />
+                <On Platform="Android" Value="3" />
+                <On Platform="UWP" Value="1" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="ColumnCenter" x:TypeArguments="x:Int32">
+                <On Platform="iOS" Value="0" />
+                <On Platform="Android" Value="0" />
+                <On Platform="UWP" Value="1" />
+            </OnPlatform>
+
+            <!-- Platform specifics Ends here -->
+            
             <!-- Styles -->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
@@ -66,13 +107,21 @@
 
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
+                <Setter Property="FontSize" Value="{StaticResource DefaultLabelFontSize}" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="NavigationTitle">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="Title" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <Style TargetType="Button">
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
                 <Setter Property="Padding" Value="10" />
-                <Setter Property="BackgroundColor" Value="{StaticResource DarkPrimaryColor}" />
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
             </Style>
 
             <Style TargetType="Entry">

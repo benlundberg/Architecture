@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:local="clr-namespace:Architecture"
-             x:Class="Architecture.Demos.UI.List.ListTextCellPage">
+             x:Class="Architecture.Demos.UI.List.ListTextCellPage"
+             Visual="Material">
     <Grid>
         <ListView 
 			CachingStrategy="RecycleElement"
@@ -26,6 +27,45 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <controls:FloatingMenuControl
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="20">
+            <controls:FloatingMenuControl.ButtonItems>
+                <Button 
+                    Margin="10"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    CornerRadius="40"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    FontFamily="{StaticResource FontAwesomeBrands}"
+                    Text="{StaticResource GeneralIcon}" />
+                <Button 
+                    Margin="10"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    CornerRadius="40"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    FontFamily="{StaticResource FontAwesomeBrands}"
+                    Text="{StaticResource GeneralIcon}" />
+            </controls:FloatingMenuControl.ButtonItems>
+            <controls:FloatingMenuControl.BaseButton>
+                <Button 
+                    Margin="10"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    CornerRadius="40"
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    BackgroundColor="{StaticResource Accent}"
+                    TextColor="White"
+                    FontSize="Large"
+                    FontFamily="{StaticResource FontAwesomeBrands}"
+                    Text="{StaticResource GeneralIcon}" />
+            </controls:FloatingMenuControl.BaseButton>
+        </controls:FloatingMenuControl>
         <controls:LoadingView 
             IsRunning="{Binding IsBusy}"
 			Text="{local:Translate Gen_Loading}" />
