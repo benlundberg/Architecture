@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture.Controls
@@ -13,24 +11,83 @@ namespace Architecture.Controls
     {
         public FloatingMenuControl()
         {
-            ButtonItems = new List<Button>();
+            MenuItems = new List<FloatingMenuItem>();
         }
         
         protected override void OnParentSet()
         {
             base.OnParentSet();
 
-            foreach (var item in ButtonItems)
+            foreach (var item in MenuItems)
             {
-                // Hide buttons from start
-                item.IsVisible = false;
+                Grid grid = new Grid
+                {
+                    ColumnDefinitions = new ColumnDefinitionCollection
+                    {
+                        new ColumnDefinition() { Width = GridLength.Auto },
+                        new ColumnDefinition() { Width = GridLength.Auto }
+                    },
+                    BackgroundColor = Color.Transparent,
+                    HorizontalOptions = LayoutOptions.End
+                };
+
+                Button but = new Button
+                {
+                    BackgroundColor = item.BackgroundColor,
+                    CornerRadius = 35,
+                    HeightRequest = 70,
+                    WidthRequest = 70,
+                    FontFamily = item.FontFamily,
+                    Text = item.IconSource,
+                    TextColor = item.TextColor,
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                    Command = item.Command,
+                    CommandParameter = item.CommandParameter
+                };
+
+                but.Clicked += BaseButton_Clicked;
+
+                StackLayout stack = new StackLayout
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    BackgroundColor = item.HintBackgroundColor,
+                    Children =
+                    {
+                        new Label
+                        {
+                            TextColor = item.HintTextColor,
+                            Text = item.Text
+                        }
+                    }
+                };
+
+                Grid.SetColumn(stack, 0);
+                Grid.SetColumn(but, 1);
+
+                grid.Children.Add(stack);
+                grid.Children.Add(but);
+
+                grid.IsVisible = false;
                 
-                Children.Add(item);
+                Children.Add(grid);
             }
 
-            BaseButton.Clicked += BaseButton_Clicked;
+            Button baseButton = new Button
+            {
+                HorizontalOptions = LayoutOptions.End,
+                BackgroundColor = BaseItem.BackgroundColor,
+                CornerRadius = 35,
+                HeightRequest = 70,
+                WidthRequest = 70,
+                FontFamily = BaseItem.FontFamily,
+                Text = BaseItem.IconSource,
+                TextColor = BaseItem.TextColor,
+                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
+            };
 
-            Children.Add(BaseButton);
+            baseButton.Clicked += BaseButton_Clicked;
+
+            Children.Add(baseButton);
         }
 
         private async void BaseButton_Clicked(object sender, EventArgs e)
@@ -47,9 +104,11 @@ namespace Architecture.Controls
 
         private async Task ShowAsync()
         {
-            await BaseButton.RotateTo(360, 500);
+            var button = Children.LastOrDefault();
 
-            foreach (var child in Children.Where(x => x != BaseButton))
+            await button.RotateTo(360, 350);
+
+            foreach (var child in Children.Where(x => x != button))
             {
                 child.IsVisible = !child.IsVisible;
             }
@@ -57,15 +116,51 @@ namespace Architecture.Controls
 
         private async Task HideAsync()
         {
-            await BaseButton.RotateTo(-360, 500);
+            var button = Children.LastOrDefault();
 
-            foreach (var child in Children.Where(x => x != BaseButton))
+            await button.RotateTo(-360, 350);
+
+            foreach (var child in Children.Where(x => x != button))
             {
                 child.IsVisible = !child.IsVisible;
             }
         }
 
-        public List<Button> ButtonItems { get; set; }
-        public Button BaseButton { get; set; }
+        public List<FloatingMenuItem> MenuItems { get; set; }
+        public FloatingMenuItem BaseItem { get; set; }
+    }
+
+    public class FloatingMenuItem : View
+    {
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(
+            propertyName: "Text",
+            returnType: typeof(string),
+            declaringType: typeof(FloatingMenuItem),
+            defaultValue: string.Empty);
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+            propertyName: "Command",
+            returnType: typeof(ICommand),
+            declaringType: typeof(FloatingMenuItem),
+            defaultValue: null);
+
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        public string IconSource { get; set; }
+        public string FontFamily { get; set; }
+        public Color TextColor { get; set; } = Color.White;
+        public Color HintTextColor { get; set; } = Color.Black;
+        public Color HintBackgroundColor { get; set; } = Color.White;
+        public object CommandParameter { get; set; }
     }
 }

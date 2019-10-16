@@ -27,29 +27,19 @@ namespace Architecture
                 },
                 new MenuViewModel()
                 {
-                    Title = "List imagecell",
-                    Page = new NavigationPage(new Demos.UI.List.ListImageCellPage() { BindingContext = new Demos.UI.List.ListViewModel() })
-				},
-                new MenuViewModel()
-                {
-                    Title = "List textcell",
-                    Page = new NavigationPage(new Demos.UI.List.ListTextCellPage() { BindingContext = new Demos.UI.List.ListViewModel() })
-                },
-                new MenuViewModel()
-				{
-					Title = "Grid view",
-                    Page = new NavigationPage(new Demos.UI.List.GridViewPage() { BindingContext = new Demos.UI.List.ListViewModel() })
-                },
-                new MenuViewModel()
-                {
-                    Title = "List card view",
-                    Page = new NavigationPage(new Demos.UI.List.ListCardViewPage() { BindingContext = new Demos.UI.List.ListViewModel() })
+                    Title = "List",
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.List.ListViewModel>())
                 },
                 new MenuViewModel()
 				{
 					Title = "Details",
 					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Details.DetailsViewModel>())
-				}
+				},
+                new MenuViewModel()
+                {
+                    Title = "Log",
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<LoggerViewModel>())
+                }
             };
 
             ItemSelected(MasterItems.FirstOrDefault()?.Page);

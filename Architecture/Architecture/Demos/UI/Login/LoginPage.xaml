@@ -6,9 +6,11 @@
              mc:Ignorable="d"
              x:Class="Architecture.Demos.UI.Login.LoginPage"
              xmlns:local="clr-namespace:Architecture"
+             xmlns:viewModels="clr-namespace:Architecture.Demos.UI.Login"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource PrimaryColor}"
+             x:DataType="viewModels:LoginViewModel">
     
     <NavigationPage.TitleView>
         <Label
@@ -17,25 +19,18 @@
     </NavigationPage.TitleView>
     
     <ScrollView>
-        <Grid Padding="{StaticResource DevicePadding}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <Grid Padding="{StaticResource UnionPadding}">
             <StackLayout 
                 Spacing="10"
                 VerticalOptions="Center"
-                Grid.Column="{StaticResource ColumnCenter}"
-                Grid.ColumnSpan="{StaticResource ColumnSpanCenter}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
                 <Entry
 					TextColor="{StaticResource EntryTextColor}"
 					PlaceholderColor="{StaticResource EntryTextColor}"
 	                Placeholder="{local:Translate Gen_Username}"
-	                Text="{Binding Username, Mode=TwoWay}" />
+	                Text="{Binding Username.Value, Mode=TwoWay}" />
                 <Entry 
-                    Text="{Binding Password, Mode=TwoWay}"
+                    Text="{Binding Password.Value, Mode=TwoWay}"
                     TextColor="{StaticResource EntryTextColor}" 
                     Placeholder="{local:Translate Gen_Password}"
                     PlaceholderColor="{StaticResource EntryTextColor}"
@@ -56,8 +51,6 @@
 	                Command="{Binding LoginCommand}" />
             </StackLayout>
             <Label 
-                Grid.Column="{StaticResource ColumnCenter}"
-                Grid.ColumnSpan="{StaticResource ColumnSpanCenter}"
 				TextColor="White"
 				IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
 				Text="{local:Translate Sign_Up}"
@@ -67,11 +60,7 @@
                     <TapGestureRecognizer Command="{Binding RegisterCommand}" />
                 </Label.GestureRecognizers>
             </Label>
-            <controls:LoadingView 
-                Grid.Column="{StaticResource ColumnCenter}"
-                Grid.ColumnSpan="{StaticResource ColumnSpanCenter}"
-	            IsRunning="{Binding IsBusy}"
-				Text="{local:Translate Gen_Loading}" />
+            <controls:LoadingView IsRunning="{Binding IsBusy}" />
         </Grid>
     </ScrollView>
 </ContentPage>

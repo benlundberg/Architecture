@@ -46,5 +46,15 @@ namespace Architecture
 
             return Color.Default;
         }
+
+        public static string FontAwesomeSolid(this Application application)
+        {
+            return (OnPlatform<string>)application.Resources["FontAwesomeSolid"];
+        }
+
+        public static string FontAwesomeRegular(this Application application)
+        {
+            return (OnPlatform<string>)application.Resources["FontAwesomeRegular"];
+        }
     }
 }

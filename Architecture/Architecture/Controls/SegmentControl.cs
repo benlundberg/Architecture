@@ -6,14 +6,13 @@ using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class SegmentControl : StackLayout
+    public class SegmentControl : Grid
     {
         public SegmentControl()
         {
             this.ItemsSource = new ObservableCollection<SegmentControlItem>();
-            this.HorizontalOptions = LayoutOptions.Center;
-            this.VerticalOptions = LayoutOptions.Start;
-            this.Spacing = 0;
+            this.ColumnSpacing = 0;
+            this.RowSpacing = 0;
         }
 
         private static void SegmentSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
@@ -36,21 +35,54 @@ namespace Architecture.Controls
 
             newItems.CollectionChanged += view.NewItems_CollectionChanged;
 
+            view.InitView(view, newItems);
+        }
+
+        private void InitView(SegmentControl view, ObservableCollection<SegmentControlItem> newItems)
+        {
             view.Children.Clear();
+            view.ColumnDefinitions.Clear();
+            view.RowDefinitions.Clear();
 
             if (newItems.Any() != true)
             {
                 return;
             }
 
+            if (view.Orientation == ItemsLayoutOrientation.Horizontal)
+            {
+                for (int i = 0; i < newItems.Count; i++)
+                {
+                    view.ColumnDefinitions.Add(new ColumnDefinition());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < newItems.Count; i++)
+                {
+                    view.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+                }
+            }
+
+            int indexPos = 0;
+
             foreach (var item in newItems)
             {
                 var segmentItemControl = view.GetView(item);
 
-                view.Children.Add(segmentItemControl);
-            }
+                if (view.Orientation == ItemsLayoutOrientation.Horizontal)
+                {
+                    SetColumn(segmentItemControl, indexPos);
+                }
+                else
+                {
+                    SetRow(segmentItemControl, indexPos);
+                }
 
-            view.UpdateSelectedSegmentLayout(view.ItemsSource?.FirstOrDefault());
+                view.Children.Add(segmentItemControl);
+
+                indexPos++;
+            }
         }
 
         private View GetView(SegmentControlItem item)
@@ -92,22 +124,7 @@ namespace Architecture.Controls
 
         private void NewItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    int index = e.NewStartingIndex;
-
-                    foreach (var item in e.NewItems)
-                    {
-                        Children.Insert(index++, GetView(ItemsSource.ElementAt(e.NewStartingIndex)));
-                    }
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    {
-                        Children.RemoveAt(e.OldStartingIndex);
-                    }
-                    break;
-            }
+            InitView(this, ItemsSource);
         }
 
         private void UpdateSelectedSegmentLayout(SegmentControlItem item)
@@ -205,6 +222,7 @@ namespace Architecture.Controls
         public NamedSize FontSize { get; set; }
         public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
         public LayoutOptions TextHorizontalOption { get; set; } = LayoutOptions.Center;
+        public ItemsLayoutOrientation Orientation { get; set; } = ItemsLayoutOrientation.Horizontal;
     }
 
     public class SegmentControlItem

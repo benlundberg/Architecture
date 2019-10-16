@@ -6,10 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
 	x:Class="Architecture.Demos.UI.Register.RegisterPage"
-	xmlns:local="clr-namespace:Architecture"
+	xmlns:viewModels="clr-namespace:Architecture.Demos.UI.Register"
+    xmlns:local="clr-namespace:Architecture"
  	xmlns:controls="clr-namespace:Architecture.Controls"
  	Visual="Material"
-    BackgroundColor="{StaticResource PrimaryColor}">
+    BackgroundColor="{StaticResource PrimaryColor}"
+    x:DataType="viewModels:RegisterViewModel">
 
     <NavigationPage.TitleView>
         <Label 
@@ -18,44 +20,35 @@
     </NavigationPage.TitleView>
     
 	<ScrollView>
-        <Grid Padding="{StaticResource DevicePadding}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <Grid Padding="{StaticResource UnionPadding}">
             <StackLayout 
-                Grid.Column="{StaticResource ColumnCenter}"
-                Grid.ColumnSpan="{StaticResource ColumnSpanCenter}"
                 Spacing="10"
 	            VerticalOptions="Center"
 	            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <Entry 
-	                Text="{Binding Email, Mode=TwoWay}"
+                <controls:ValidationEntry 
+                    Value="{Binding Email, Mode=TwoWay}"
+                    Keyboard="Email"
                     TextColor="{StaticResource EntryTextColor}"
-	                Placeholder="{local:Translate Gen_Mail}"
-	                PlaceholderColor="{StaticResource EntryTextColor}"
-                    Keyboard="Email" />
-                <Entry 
-	                Text="{Binding Password, Mode=TwoWay}"
+                    Placeholder="{local:Translate Gen_Mail}"
+	                PlaceholderColor="{StaticResource EntryTextColor}" />
+                <controls:ValidationEntry  
+                    Value="{Binding Password, Mode=TwoWay}"
 	                Placeholder="{local:Translate Gen_Password}"
 	                TextColor="{StaticResource EntryTextColor}"
 	                PlaceholderColor="{StaticResource EntryTextColor}"
                     IsPassword="True" />
-                <Entry
-	                Text="{Binding PasswordConfirm, Mode=TwoWay}"
+                <controls:ValidationEntry 
+                    Value="{Binding ConfirmPassword, Mode=TwoWay}"
 	                Placeholder="{local:Translate Gen_Password_Confirm}"
 	                TextColor="{StaticResource EntryTextColor}"
 	                PlaceholderColor="{StaticResource EntryTextColor}"
 	                IsPassword="True" />
                 <Button 
+                    Command="{Binding RegisterCommand}"
 	                Text="{StaticResource CheckIcon}"
-	                FontFamily="{StaticResource FontAwesomeSolid}"
-	                Command="{Binding RegisterCommand}" />
+	                FontFamily="{StaticResource FontAwesomeSolid}" />
             </StackLayout>
             <controls:LoadingView 
-	            Grid.Column="{StaticResource ColumnCenter}"
-                Grid.ColumnSpan="{StaticResource ColumnSpanCenter}"
                 IsRunning="{Binding IsBusy}"
 				Text="{local:Translate Gen_Loading}" />
         </Grid>

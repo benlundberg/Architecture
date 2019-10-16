@@ -80,7 +80,7 @@
                         StartColor="White"
                         EndColor="{StaticResource PrimaryColor}"
                         Direction="ToBottom" />
-                    <StackLayout Padding="{StaticResource DevicePadding}">
+                    <StackLayout Padding="{StaticResource UnionPadding}">
 					    <Label Text="Horizontal items" />
 					    <controls:HorizontalView ItemsSource="{Binding Items}">
 						    <controls:HorizontalView.ItemTemplate>

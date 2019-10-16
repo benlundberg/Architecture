@@ -1,5 +1,7 @@
-﻿using Architecture.Demos.UI.ForgotPassword;
+﻿using Architecture.Core;
+using Architecture.Demos.UI.ForgotPassword;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -8,13 +10,26 @@ namespace Architecture.Demos.UI.Login
 {
     public class LoginViewModel : BaseViewModel
     {
-		private ICommand forgotPasswordCommand;
-		public ICommand ForgotPasswordCommand => forgotPasswordCommand ?? (forgotPasswordCommand = new Command(async () =>
-		{
-			await Navigation.PushModalAsync(new NavigationPage(ViewContainer.Current.CreatePage<ForgotPasswordViewModel>()));
-		}));
+        public LoginViewModel()
+        {
+            Username = new ValidatableObject<string>(new List<IValidationRule<string>>
+            {
+                new IsNotNullOrEmptyRule<string>(Translate("Missing_Username"))
+            });
 
-		private ICommand loginCommand;
+            Password = new ValidatableObject<string>(new List<IValidationRule<string>>
+            {
+                new IsNotNullOrEmptyRule<string>(Translate("Missing_Password"))
+            });
+        }
+
+        private ICommand forgotPasswordCommand;
+        public ICommand ForgotPasswordCommand => forgotPasswordCommand ?? (forgotPasswordCommand = new Command(async () =>
+        {
+            await Navigation.PushModalAsync(new NavigationPage(ViewContainer.Current.CreatePage<ForgotPasswordViewModel>()));
+        }));
+
+        private ICommand loginCommand;
         public ICommand LoginCommand => loginCommand ?? (loginCommand = new Command(async () =>
         {
             if (IsBusy)
@@ -22,15 +37,15 @@ namespace Architecture.Demos.UI.Login
                 return;
             }
 
-            if (string.IsNullOrEmpty(Username))
+            if (!Username.Validate())
             {
-                ShowAlert(Translate("Missing_Username"), Translate("Gen_Login"));
+                ShowAlert(Username.Error, Translate("Gen_Login"));
                 return;
             }
 
-            if (string.IsNullOrEmpty(Password))
+            if (!Password.Validate())
             {
-                ShowAlert(Translate("Missing_Password"), Translate("Gen_Login"));
+                ShowAlert(Password.Error, Translate("Gen_Login"));
                 return;
             }
 
@@ -52,12 +67,12 @@ namespace Architecture.Demos.UI.Login
         }));
 
         private ICommand registerCommand;
-		public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
+        public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
         {
             await Navigation.PushAsync(ViewContainer.Current.CreatePage<Register.RegisterViewModel>());
         }));
 
-        public string Username { get; set; }
-        public string Password { get; set; }
-	}
+        public ValidatableObject<string> Username { get; set; }
+        public ValidatableObject<string> Password { get; set; }
+    }
 }

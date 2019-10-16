@@ -15,6 +15,8 @@
             <x:String x:Key="SendIcon">&#xf1d8;</x:String>
             <x:String x:Key="CloseIcon">&#xf00d;</x:String>
             <x:String x:Key="CheckIcon">&#xf00c;</x:String>
+            <x:String x:Key="AddIcon">&#xf067;</x:String>
+            <x:String x:Key="SearchIcon">&#xf002;</x:String>
 
             <!--Colors -->
             <Color x:Key="DarkPrimaryColor">#000a12</Color>
@@ -62,40 +64,34 @@
             </OnPlatform>
             <!-- Fonts Ends here -->
 
-            <!-- Platform specifics Starts here -->            
-            
-            <!-- Button corner radius -->
-            <OnPlatform x:TypeArguments="x:Int32" x:Key="ButtonCornerRadius">
-                <On Platform="Android" Value="30" />
-                <On Platform="UWP" Value="0" />
-                <On Platform="iOS" Value="0" />
-            </OnPlatform>
-
             <!-- Entry placeholder and textcolor  -->
-            <OnPlatform x:TypeArguments="Color" x:Key="EntryTextColor">
+
+            <OnPlatform x:Key="EntryTextColor" x:TypeArguments="Color">
                 <On Platform="Android" Value="{StaticResource TextLight}" />
                 <On Platform="UWP" Value="{StaticResource TextDark}" />
                 <On Platform="iOS" Value="{StaticResource TextDark}" />
             </OnPlatform>
 
-            <!-- Lable size -->
-            <OnPlatform x:TypeArguments="NamedSize" x:Key="DefaultLabelFontSize">
-                <On Platform="Android" Value="Medium" />
-                <On Platform="UWP" Value="Default" />
-                <On Platform="iOS" Value="Default" />
-            </OnPlatform>
+            <OnIdiom 
+                x:Key="UnionPadding" 
+                x:TypeArguments="Thickness" 
+                Tablet="40, 20, 40, 20"
+                Desktop="80, 40, 80, 40"
+                Phone="16, 10, 16, 10" />
 
-            <OnPlatform x:Key="ColumnSpanCenter" x:TypeArguments="x:Int32">
-                <On Platform="iOS" Value="3" />
-                <On Platform="Android" Value="3" />
-                <On Platform="UWP" Value="1" />
-            </OnPlatform>
+            <OnIdiom 
+                x:Key="HorizontalPadding" 
+                x:TypeArguments="Thickness" 
+                Tablet="40, 0, 40, 0"
+                Desktop="80, 0, 80, 0"
+                Phone="16, 0, 16, 0" />
 
-            <OnPlatform x:Key="ColumnCenter" x:TypeArguments="x:Int32">
-                <On Platform="iOS" Value="0" />
-                <On Platform="Android" Value="0" />
-                <On Platform="UWP" Value="1" />
-            </OnPlatform>
+            <OnIdiom 
+                x:Key="VerticalPadding" 
+                x:TypeArguments="Thickness" 
+                Tablet="40, 0, 40, 0"
+                Desktop="80, 0, 80, 0"
+                Phone="16, 0, 16, 0" />
 
             <!-- Platform specifics Ends here -->
             
@@ -107,13 +103,22 @@
 
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
-                <Setter Property="FontSize" Value="{StaticResource DefaultLabelFontSize}" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform>
+                            <On Platform="Android" Value="Medium" />
+                            <On Platform="UWP" Value="Default" />
+                            <On Platform="iOS" Value="Default" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
-            <Style TargetType="Label" x:Key="NavigationTitle">
+            <Style x:Key="NavigationTitle" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="Title" />
                 <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="MaxLines" Value="1" />
             </Style>
 
             <Style TargetType="Button">
@@ -121,20 +126,32 @@
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
                 <Setter Property="TextColor" Value="Black" />
-                <Setter Property="CornerRadius" Value="{StaticResource ButtonCornerRadius}" />
+                <Setter Property="CornerRadius">
+                    <Setter.Value>
+                        <OnPlatform>
+                            <On Platform="Android" Value="30" />
+                            <On Platform="UWP" Value="0" />
+                            <On Platform="iOS" Value="0" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="FloatingButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="35" />
+                <Setter Property="HeightRequest" Value="70" />
+                <Setter Property="WidthRequest" Value="70" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="HorizontalOptions" Value="End" />
             </Style>
 
             <Style TargetType="Entry">
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
             </Style>
-
-            <!-- Platform specifics -->
-            <OnIdiom 
-                x:Key="DevicePadding" 
-                x:TypeArguments="Thickness" 
-                Tablet="40, 20, 40, 20"
-                Desktop="80, 40, 80, 40"
-                Phone="16, 10, 16, 10" />
 
         </ResourceDictionary>
     </Application.Resources>

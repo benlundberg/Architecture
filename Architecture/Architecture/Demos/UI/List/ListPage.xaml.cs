@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace Architecture.Demos.UI.List
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ListTextCellPage : ContentPage
+    public partial class ListPage : ContentPage
     {
-        public ListTextCellPage()
+        public ListPage()
         {
             InitializeComponent();
         }

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:viewModel="clr-namespace:Architecture.Demos.UI.List"
+             x:Class="Architecture.Demos.UI.List.ListPage"
+             Visual="Material"
+             x:DataType="viewModel:ListViewModel"
+             x:Name="this">
+
+    <NavigationPage.TitleView>
+        <Grid>
+            <Label 
+                IsVisible="{Binding SearchIsVisible, Converter={StaticResource InvertedBoolConv}}"
+                Style="{StaticResource NavigationTitle}"
+                Text="List" />
+            <SearchBar 
+                IsVisible="{Binding SearchIsVisible}"
+                Text="{Binding Query, Mode=TwoWay}"
+                Visual="Default"
+                FontSize="Small"
+                Placeholder="{local:Translate Gen_Search}"
+                PlaceholderColor="White"
+                TextColor="White"
+                VerticalOptions="Center"
+                CancelButtonColor="White"
+                BackgroundColor="Transparent">
+                <SearchBar.Behaviors>
+                    <local:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchTextChangedCommand}" />
+                </SearchBar.Behaviors>
+            </SearchBar>
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Command="{Binding ShowSearchCommand}"
+            Text="{local:Translate Gen_Search}" 
+            Priority="1" 
+            Order="Primary">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    Size="18"
+					Glyph="{StaticResource SearchIcon}"
+					Color="White"
+					FontFamily="{StaticResource FontAwesomeSolid}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <controls:SegmentControl 
+            StartTag="1"
+            ValueChangedCommand="{Binding SegmentValueChangedCommand}"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+            Margin="{StaticResource UnionPadding}">
+            <controls:SegmentControl.ItemsSource>
+                <controls:SegmentControlItem Text="Text cell" Tag="1" />
+                <controls:SegmentControlItem Text="Image cell" Tag="2" />
+            </controls:SegmentControl.ItemsSource>
+        </controls:SegmentControl>
+        <Grid 
+            Grid.Row="1"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+            <ListView 
+                IsVisible="{Binding IsImageCellVisible, Converter={StaticResource InvertedBoolConv}}"
+			    CachingStrategy="RecycleElement"
+			    ItemsSource="{Binding Items}"
+			    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			    RefreshCommand="{Binding RefreshListCommand}"
+			    IsPullToRefreshEnabled="True"
+			    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+			    RefreshControlColor="{StaticResource PrimaryColor}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="viewModel:ListItemViewModel">
+                        <TextCell
+						    Text="{Binding Title}"
+						    Detail="{Binding SubTitle}">
+                            <TextCell.ContextActions>
+                                <MenuItem 
+                                    Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference this}}"
+                                    CommandParameter="{Binding .}"
+                                    Text="{local:Translate Gen_Delete}" 
+                                    IsDestructive="True" />
+                            </TextCell.ContextActions>
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView 
+                IsVisible="{Binding IsImageCellVisible}"
+			    CachingStrategy="RecycleElement"
+			    ItemsSource="{Binding Items}"
+			    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			    RefreshCommand="{Binding RefreshListCommand}"
+			    IsPullToRefreshEnabled="True"
+			    IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+			    RefreshControlColor="{StaticResource PrimaryColor}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="viewModel:ListItemViewModel">
+                        <ImageCell
+						    Text="{Binding Title}"
+						    Detail="{Binding SubTitle}">
+                            <ImageCell.ImageSource>
+                                <FontImageSource 
+								    Glyph="{StaticResource GeneralIcon}"
+								    Color="{StaticResource PrimaryColor}"
+								    FontFamily="{StaticResource FontAwesomeBrands}"/>
+                            </ImageCell.ImageSource>
+                            <ImageCell.ContextActions>
+                                <MenuItem 
+                                    Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference this}}"
+                                    CommandParameter="{Binding .}"
+                                    Text="{local:Translate Gen_Delete}" 
+                                    IsDestructive="True" />
+                            </ImageCell.ContextActions>
+                        </ImageCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Button
+            Grid.RowSpan="2"
+            Command="{Binding AddItemCommand}"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+            Margin="20"
+            Style="{StaticResource FloatingButton}"
+            FontFamily="{StaticResource FontAwesomeSolid}"
+            Text="{StaticResource AddIcon}" />
+        <controls:LoadingView 
+            Grid.RowSpan="2"
+            IsRunning="{Binding IsBusy}" />
+    </Grid>
+</ContentPage>

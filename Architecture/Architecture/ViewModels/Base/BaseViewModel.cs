@@ -1,6 +1,7 @@
 ﻿using Architecture.Core;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -71,6 +72,35 @@ namespace Architecture
         protected Task<string> ShowActionSheetAsync(string title, string cancel, string destruction, params string[] buttons)
         {
             return Application.Current.MainPage.DisplayActionSheet(title, cancel, destruction, buttons);
+        }
+
+        protected async Task ShowSnackbarAsync(string message, Controls.SnackbarDuration duration = Controls.SnackbarDuration.SHORT, string buttonText = "", ICommand command = null)
+        {
+            if (!(Navigation?.NavigationStack.LastOrDefault() is ContentPage contentPage))
+            {
+                return;
+            }
+
+            Controls.SnackbarView view = null;
+
+            if (contentPage.Content is Grid grid)
+            {
+                view = (Controls.SnackbarView)grid.Children.FirstOrDefault(x => x is Controls.SnackbarView);
+            }
+            else if (contentPage.Content is ScrollView scrollView)
+            {
+                if (scrollView.Content is Grid scrollGrid)
+                {
+                    view = (Controls.SnackbarView)scrollGrid.Children.FirstOrDefault(x => x is Controls.SnackbarView);
+                }
+            }
+
+            if (view == null)
+            {
+                return;
+            }
+
+            await view.ShowAsync(message, duration, string.IsNullOrEmpty(buttonText) ? Translate("Gen_Close") : buttonText, command);
         }
 
 		private ICommand popModalCommand;

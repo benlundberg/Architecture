@@ -36,14 +36,11 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Demos\UI\List\CardView\ListCardViewPage.xaml.cs">
+    <Compile Update="Demos\UI\CardView\ListCardViewPage.xaml.cs">
       <DependentUpon>ListCardViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Demos\UI\List\GridView\GridViewPage.xaml.cs">
-      <DependentUpon>GridViewPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Demos\UI\List\ImageCell\ListImageCellPage.xaml.cs">
-      <DependentUpon>ListImageCellPage.xaml</DependentUpon>
+    <Compile Update="Demos\UI\List\ListPage.xaml.cs">
+      <DependentUpon>ListPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Helpers\TranslateHelper.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -65,13 +62,16 @@
     <EmbeddedResource Update="Controls\CollapsingScrollView\CollapsingScrollView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\FloatingEntry\FloatingEntry.xaml">
+    <EmbeddedResource Update="Controls\SnackbarView\SnackbarView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidationEntry\ValidationEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Demos\UI\List\TextCell\ListTextCellPage.xaml">
+    <EmbeddedResource Update="Demos\UI\List\Item\ItemPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Demos\UI\List\ListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Demos\UI\Login\LoginPage.xaml">
@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Demos\UI\ForgotPassword\" />
-    <Folder Include="Demos\UI\List\CollectionView\" />
     <Folder Include="Demos\UI\Register\" />
     <Folder Include="Controls\LoadingView\" />
     <Folder Include="Demos\UI\Details\" />

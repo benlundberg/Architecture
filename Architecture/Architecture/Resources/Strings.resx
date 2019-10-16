@@ -198,4 +198,7 @@
   <data name="Gen_Or" xml:space="preserve">
     <value>Or</value>
   </data>
+  <data name="Gen_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

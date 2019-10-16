@@ -114,14 +114,25 @@ namespace Architecture.Controls
 
     public class TableItem
     {
+        public TableItem(string header)
+        {
+            Header = header;
+        }
+
         public string Header { get; set; }
         public Color HeaderColor { get; set; } = Color.White;
         public Color HeaderBackground { get; set; } = Color.Gray;
+        public TextAlignment ContentItemTextAlignment { get; set; }
         public IList<TableContentItem> ContentItems { get; set; }
     }
 
     public class TableContentItem
     {
+        public TableContentItem(string text)
+        {
+            Text = text;
+        }
+
         public string Text { get; set; }
         public Color TextColor { get; set; } = Color.Black;
         public Color Background { get; set; } = Color.White;

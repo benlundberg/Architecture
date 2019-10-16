@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:Architecture"
              Visual="Material"
              x:DataType="local:LoggerViewModel"
-             Padding="{StaticResource DevicePadding}"
+             Padding="{StaticResource UnionPadding}"
              Title="Logger">
 
     <ContentPage.ToolbarItems>
