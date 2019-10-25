@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Architecture.Core
 {
-    public interface ILocalizeHelper
+    public interface ILocalizeService
     {
         string GetCurrentCountry();
         CultureInfo GetCurrentCultureInfo();

@@ -4,9 +4,9 @@ using System.IO;
 
 namespace Architecture
 {
-    public class LoggerHelper : ILoggerHelper
+    public class LoggerService : ILoggerService
     {
-        public LoggerHelper(ILocalFileSystemHelper localFileSystem)
+        public LoggerService(ILocalFileSystemService localFileSystem)
         {
             this.localFileSystem = localFileSystem;
         }
@@ -28,6 +28,7 @@ namespace Architecture
 
             try
             {
+                // Build a log post for the text file
                 string logText = DateTime.Now.ToString() + " - " + className + "\n";
                 logText += "Message: " + ex.Message + "\n";
                 logText += "Stacktrace: " + ex.StackTrace + "\n";
@@ -48,6 +49,6 @@ namespace Architecture
 
         private string LoggerPath => Path.Combine("LogFile.txt");
 
-        private readonly ILocalFileSystemHelper localFileSystem;
+        private readonly ILocalFileSystemService localFileSystem;
     }
 }

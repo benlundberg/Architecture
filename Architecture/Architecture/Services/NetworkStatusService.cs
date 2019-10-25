@@ -4,7 +4,7 @@ using Xamarin.Essentials;
 
 namespace Architecture
 {
-    public class NetworkStatusHelper : INetworkStatusHelper
+    public class NetworkStatusService : INetworkStatusService
     {
         public bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
 

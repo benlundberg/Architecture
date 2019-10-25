@@ -11,10 +11,10 @@ namespace Architecture
             // Repositories
             ComponentContainer.Current.Register<IDatabaseRepository, DatabaseRepository>(singelton: true);
 
-            // Helpers
-            ComponentContainer.Current.Register<ITranslateHelper, TranslateHelper>();
-            ComponentContainer.Current.Register<INetworkStatusHelper, NetworkStatusHelper>(singelton: true);
-            ComponentContainer.Current.Register<ILoggerHelper, LoggerHelper>(singelton: true);
+            // Services
+            ComponentContainer.Current.Register<ITranslateService, TranslateService>();
+            ComponentContainer.Current.Register<INetworkStatusService, NetworkStatusService>(singelton: true);
+            ComponentContainer.Current.Register<ILoggerService, LoggerService>(singelton: true);
         }
 
         public static void RegisterViews()

@@ -7,19 +7,22 @@ using Xamarin.Forms;
 
 namespace Architecture
 {
-    public class PermissionHelper
+    public class PermissionService
     {
         /// <summary>
-        /// Checking permission for device etc Camera or Location. Returns true or false depend on if permission is granted.
+        /// Checking if user have permission for different services (example: Camera or Location)
         /// </summary>
         /// <param name="permission">Type of permission to check</param>
         /// <param name="showSettings">Boolean if prompting dialog to go into settings</param>
+        /// <returns>Returns true or false depend on if permission is granted</returns>
         public async Task<bool> CheckPermissionAsync(Permission permission, bool showSettings = true)
         {
             try
             {
+                // Check if permission is already done
                 var status = await CrossPermissions.Current.CheckPermissionStatusAsync(permission);
 
+                // If permission is not granted we prompt a dialog to ask for permission
                 if (status != PermissionStatus.Granted)
                 {
                     var results = await CrossPermissions.Current.RequestPermissionsAsync(permission);
@@ -27,6 +30,7 @@ namespace Architecture
                     status = results[permission];
                 }
 
+                // If permission is not granted here we could prompt a "Open settings?" dialog
                 if (status != PermissionStatus.Granted)
                 {
                     if (showSettings)
@@ -61,7 +65,7 @@ namespace Architecture
             }
         }
 
-        private ITranslateHelper translateHelper;
-        public ITranslateHelper TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateHelper>());
+        private ITranslateService translateHelper;
+        public ITranslateService TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateService>());
     }
 }

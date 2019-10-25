@@ -96,8 +96,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper_iOS.cs" />
-    <Compile Include="Helpers\LocalFileSystemHelper_iOS.cs" />
-    <Compile Include="Helpers\LocalizeHelper_iOS.cs" />
+    <Compile Include="Services\LocalFileSystemService_iOS.cs" />
+    <Compile Include="Services\LocalizeService_iOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer_iOS.cs" />
@@ -113,7 +113,6 @@
     <BundleResource Include="Resources\FontAwesome5Solid.otf" />
     <BundleResource Include="Resources\FontAwesome5Brands.otf" />
     <BundleResource Include="Resources\FontAwesome5Regular.otf" />
-    <Compile Include="Helpers\ToastHelper_iOS.cs" />
     <BundleResource Include="Resources\Montserrat-Bold.ttf" />
     <BundleResource Include="Resources\Montserrat-Regular.ttf" />
   </ItemGroup>

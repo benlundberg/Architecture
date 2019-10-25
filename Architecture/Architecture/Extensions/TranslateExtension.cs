@@ -10,7 +10,7 @@ namespace Architecture
     {
         public TranslateExtension()
         {
-            translateHelper = ComponentContainer.Current.Resolve<ITranslateHelper>();
+            translateHelper = ComponentContainer.Current.Resolve<ITranslateService>();
         }
 
         public string Text { get; set; }
@@ -25,6 +25,6 @@ namespace Architecture
             return translateHelper.Translate(Text);
         }
 
-        private ITranslateHelper translateHelper;
+        private readonly ITranslateService translateHelper;
     }
 }

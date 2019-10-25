@@ -120,8 +120,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrapper_UWP.cs" />
-    <Compile Include="Helpers\LocalFileSystemHelper_UWP.cs" />
-    <Compile Include="Helpers\LocalizeHelper_UWP.cs" />
+    <Compile Include="Services\LocalFileSystemService_UWP.cs" />
+    <Compile Include="Services\LocalizeService_UWP.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

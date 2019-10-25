@@ -6,16 +6,16 @@ using System.Resources;
 
 namespace Architecture
 {
-    public class TranslateHelper : ITranslateHelper
+    public class TranslateService : ITranslateService
     {
-        public TranslateHelper(ILocalizeHelper localizeHelper)
+        public TranslateService(ILocalizeService localizeHelper)
         {
             ci = localizeHelper.GetCurrentCultureInfo();
         }
 
         public string Translate(string key)
         {
-            ResourceManager rm = new ResourceManager("Architecture.Resources.Strings", typeof(TranslateHelper).GetTypeInfo().Assembly);
+            ResourceManager rm = new ResourceManager("Architecture.Resources.Strings", typeof(TranslateService).GetTypeInfo().Assembly);
 
             string result = rm.GetString(key, ci);
 
@@ -28,6 +28,6 @@ namespace Architecture
             return result;
         }
 
-        private CultureInfo ci;
+        private readonly CultureInfo ci;
     }
 }

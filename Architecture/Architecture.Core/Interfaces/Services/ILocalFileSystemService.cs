@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Architecture.Core
 {
-    public interface ILocalFileSystemHelper
+    public interface ILocalFileSystemService
     {
 		string LocalStorage { get; }
 		string GetLocalPath(params string[] paths);

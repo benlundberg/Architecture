@@ -1,15 +1,14 @@
 ﻿using Architecture.Core;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Xamarin.Forms;
+using Windows.Storage;
 
-namespace Architecture.iOS
+namespace Architecture.UWP.Helpers
 {
-    public class LocalFileSystemHelper_iOS : ILocalFileSystemHelper
+    public class LocalFileSystemService_UWP : ILocalFileSystemService
     {
-        public string LocalStorage => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        public string LocalStorage => ApplicationData.Current.LocalFolder.Path;
 
         public string GetLocalPath(params string[] paths)
         {

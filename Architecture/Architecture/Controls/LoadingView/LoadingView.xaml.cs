@@ -28,7 +28,7 @@ namespace Architecture.Controls
             propertyName: "Text",
             returnType: typeof(string),
             declaringType: typeof(LoadingView),
-            defaultValue: ComponentContainer.Current.Resolve<Core.ITranslateHelper>().Translate("Gen_Loading"),
+            defaultValue: ComponentContainer.Current.Resolve<Core.ITranslateService>().Translate("Gen_Loading"),
             defaultBindingMode: BindingMode.TwoWay);
 
         public string Text

@@ -6,7 +6,7 @@ using Architecture.Core;
 
 namespace Architecture.Droid
 {
-    public class LocalizeHelper_Droid : ILocalizeHelper
+    public class LocalizeService_Droid : ILocalizeService
     {
         public string GetCurrentCountry()
         {

@@ -42,7 +42,7 @@
     <Compile Update="Demos\UI\List\ListPage.xaml.cs">
       <DependentUpon>ListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Helpers\TranslateHelper.cs">
+    <Compile Update="Services\TranslateService.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Update="ViewModels\Home\Master\MenuViewModel.cs">

@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace Architecture.UWP.Helpers
 {
-    public class LocalizeHelper_UWP : ILocalizeHelper
+    public class LocalizeService_UWP : ILocalizeService
     {
         public string GetCurrentCountry()
         {

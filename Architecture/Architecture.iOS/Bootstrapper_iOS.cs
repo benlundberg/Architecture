@@ -15,10 +15,9 @@ namespace Architecture.iOS
 
         private static void RegisterTypes()
         {
-            // Helpers
-            ComponentContainer.Current.Register<ILocalizeHelper, LocalizeHelper_iOS>();
-			ComponentContainer.Current.Register<IToastHelper, ToastHelper_iOS>();
-			ComponentContainer.Current.Register<ILocalFileSystemHelper, LocalFileSystemHelper_iOS>(singelton: true);
+            // Services
+            ComponentContainer.Current.Register<ILocalizeService, LocalizeService_iOS>();
+			ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_iOS>(singelton: true);
         }
     }
 }

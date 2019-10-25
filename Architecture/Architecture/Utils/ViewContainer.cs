@@ -6,7 +6,7 @@ namespace Architecture
 {
     public class ViewContainer
     {
-        static Lazy<ViewContainer> implementation = new Lazy<ViewContainer>(() => CreateContainer(), isThreadSafe: true);
+        static readonly Lazy<ViewContainer> implementation = new Lazy<ViewContainer>(() => CreateContainer(), isThreadSafe: true);
 
         public static ViewContainer Current
         {

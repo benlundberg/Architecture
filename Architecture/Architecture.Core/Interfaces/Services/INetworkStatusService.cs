@@ -1,6 +1,6 @@
 ﻿namespace Architecture.Core
 {
-    public interface INetworkStatusHelper
+    public interface INetworkStatusService
     {
         bool IsConnected { get; }
         bool HasWifi { get; }

@@ -10,23 +10,42 @@ namespace Architecture
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Method is called when page is initialized
+        /// </summary>
         public virtual void OnInitialize()
         {
         }
 
+        /// <summary>
+        /// Method is called when page is appearing
+        /// </summary>
         public virtual void Appearing()
         {
         }
 
+        /// <summary>
+        /// Method is called when page is disappearing
+        /// </summary>
         public virtual void Disappearing()
         {
         }
 
+        /// <summary>
+        /// Translates a key in resources to correct language
+        /// </summary>
+        /// <param name="key">Key word to translate</param>
+        /// <returns>Translated word</returns>
         protected string Translate(string key)
         {
             return TranslateHelper.Translate(key);
         }
 
+        /// <summary>
+        /// Method to execute an action if device has internet connection
+        /// </summary>
+        /// <param name="actionToExecute">Action to execute</param>
+        /// <param name="showAlert">Boolean value if an alert should be prompt if device don't have internet connection</param>
         protected void ExecuteIfConnected(Action actionToExecute, bool showAlert)
         {
             if (NetStatusHelper.IsConnected)
@@ -39,6 +58,11 @@ namespace Architecture
             }
         }
 
+        /// <summary>
+        /// Displays a "No network" dialog
+        /// </summary>
+        /// <param name="message">If a different message then default should be shown</param>
+        /// <param name="title">If a different title then default should be shown</param>
         protected void ShowNoNetworkError(string message = null, string title = null)
         {
             if (string.IsNullOrWhiteSpace(title))
@@ -109,17 +133,16 @@ namespace Architecture
 			await Navigation.PopModalAsync();
 		}));
 
-		private ITranslateHelper translateHelper;
-        protected ITranslateHelper TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateHelper>());
+		private ITranslateService translateHelper;
+        protected ITranslateService TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateService>());
 
-        private INetworkStatusHelper netStatusHelper;
-        protected INetworkStatusHelper NetStatusHelper => netStatusHelper ?? (netStatusHelper = ComponentContainer.Current.Resolve<INetworkStatusHelper>());
+        private INetworkStatusService netStatusHelper;
+        protected INetworkStatusService NetStatusHelper => netStatusHelper ?? (netStatusHelper = ComponentContainer.Current.Resolve<INetworkStatusService>());
 
-        private ILoggerHelper loggerHelper;
-        protected ILoggerHelper Logger => loggerHelper ?? (loggerHelper = ComponentContainer.Current.Resolve<ILoggerHelper>());
+        private ILoggerService loggerHelper;
+        protected ILoggerService Logger => loggerHelper ?? (loggerHelper = ComponentContainer.Current.Resolve<ILoggerService>());
 
         public INavigation Navigation { get; set; }
-        public bool IsNavigating { get; set; }
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;
 

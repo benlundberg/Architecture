@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace Architecture.iOS
 {
-    public class LocalizeHelper_iOS : ILocalizeHelper
+    public class LocalizeService_iOS : ILocalizeService
     {
         public string GetCurrentCountry()
         {

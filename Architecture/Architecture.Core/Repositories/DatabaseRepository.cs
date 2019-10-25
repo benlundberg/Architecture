@@ -8,7 +8,7 @@ namespace Architecture.Core
 {
     public class DatabaseRepository : IDatabaseRepository
     {
-        public DatabaseRepository(ILocalFileSystemHelper fileHelper)
+        public DatabaseRepository(ILocalFileSystemService fileHelper)
         {
             this.fileHelper = fileHelper;
         }
@@ -109,6 +109,6 @@ namespace Architecture.Core
         private SQLiteAsyncConnection connection;
         private SQLiteAsyncConnection GetConnection => connection ?? (connection = new SQLiteAsyncConnection(fileHelper.GetLocalPath($"{AppConfig.AppName}DB.db3")));
 
-        private readonly ILocalFileSystemHelper fileHelper;
+        private readonly ILocalFileSystemService fileHelper;
     }
 }

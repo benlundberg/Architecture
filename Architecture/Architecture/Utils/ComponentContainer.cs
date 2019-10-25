@@ -5,7 +5,7 @@ namespace Architecture
 {
     public class ComponentContainer
     {
-        static Lazy<ComponentContainer> implementation = new Lazy<ComponentContainer>(() => CreateContainer(), isThreadSafe: true);
+        static readonly Lazy<ComponentContainer> implementation = new Lazy<ComponentContainer>(() => CreateContainer(), isThreadSafe: true);
 
         public static ComponentContainer Current
         {

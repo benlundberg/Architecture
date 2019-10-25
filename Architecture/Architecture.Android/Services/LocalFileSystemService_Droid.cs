@@ -1,7 +1,4 @@
-﻿using Android.Content;
-using Android.Webkit;
-using Android.Widget;
-using Architecture.Core;
+﻿using Architecture.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +6,7 @@ using System.Linq;
 
 namespace Architecture.Droid
 {
-    public class LocalFileSystemHelper_Droid : ILocalFileSystemHelper
+    public class LocalFileSystemService_Droid : ILocalFileSystemService
     {
 		public string LocalStorage => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 

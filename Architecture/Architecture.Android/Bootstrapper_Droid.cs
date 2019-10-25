@@ -16,9 +16,8 @@ namespace Architecture.Droid
         private static void RegisterTypes()
         {
             // Helpers
-            ComponentContainer.Current.Register<ILocalizeHelper, LocalizeHelper_Droid>();
-			ComponentContainer.Current.Register<IToastHelper, ToastHelper_Droid>();
-			ComponentContainer.Current.Register<ILocalFileSystemHelper, LocalFileSystemHelper_Droid>(singelton: true);
+            ComponentContainer.Current.Register<ILocalizeService, LocalizeService_Droid>();
+			ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_Droid>(singelton: true);
         }
     }
 }
