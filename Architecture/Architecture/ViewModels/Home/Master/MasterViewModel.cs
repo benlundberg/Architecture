@@ -23,17 +23,27 @@ namespace Architecture
                 new MenuViewModel()
                 {
                     Title = Translate("Gen_Login"),
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Login.LoginViewModel>())
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.LoginViewModel>())
                 },
                 new MenuViewModel()
                 {
                     Title = "List",
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.List.ListViewModel>())
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.ListViewModel>())
+                },
+                new MenuViewModel()
+                {
+                    Title = "Cards",
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.ListCardViewModel>())
+                },
+                new MenuViewModel()
+                {
+                    Title = "Controls",
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.ControlsViewModel>())
                 },
                 new MenuViewModel()
 				{
 					Title = "Details",
-					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.UI.Details.DetailsViewModel>())
+					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.DetailsViewModel>())
 				},
                 new MenuViewModel()
                 {

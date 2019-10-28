@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture.Demos
+namespace Architecture
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class HomeTabbedPage : TabbedPage
     {
-        public LoginPage()
+        public HomeTabbedPage()
         {
             InitializeComponent();
         }

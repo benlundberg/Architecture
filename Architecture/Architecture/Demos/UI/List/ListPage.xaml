@@ -6,8 +6,8 @@
              mc:Ignorable="d"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:local="clr-namespace:Architecture"
-             xmlns:viewModel="clr-namespace:Architecture.Demos.UI.List"
-             x:Class="Architecture.Demos.UI.List.ListPage"
+             xmlns:viewModel="clr-namespace:Architecture.Demos"
+             x:Class="Architecture.Demos.ListPage"
              Visual="Material"
              x:DataType="viewModel:ListViewModel"
              x:Name="this">

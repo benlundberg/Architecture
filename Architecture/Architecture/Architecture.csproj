@@ -36,6 +36,9 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\ExtendedContentPage\ExtendedContentPage.xaml.cs">
+      <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Demos\UI\CardView\ListCardViewPage.xaml.cs">
       <DependentUpon>ListCardViewPage.xaml</DependentUpon>
     </Compile>
@@ -56,16 +59,25 @@
     <Compile Update="Resources\Strings.sv.Designer.cs">
       <DependentUpon>Strings.sv.resx</DependentUpon>
     </Compile>
+    <Compile Update="Demos\UI\SignUp\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Controls\CollapsingScrollView\CollapsingScrollView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Controls\ExtendedContentPage\ExtendedContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\SnackbarView\SnackbarView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidationEntry\ValidationEntry.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Demos\UI\Controls\ControlsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Demos\UI\List\Item\ItemPage.xaml">
@@ -77,13 +89,16 @@
     <EmbeddedResource Update="Demos\UI\Login\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Home\Master\HomeMasterPage.xaml">
+    <EmbeddedResource Update="Views\Home\Master\HomeMasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Home\Master\MasterPage.xaml">
+    <EmbeddedResource Update="Views\Home\Master\MasterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Logger\LoggerPage.xaml">
+    <EmbeddedResource Update="Views\Home\Tabbed\HomeTabbedPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Logger\LoggerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.resx">
@@ -96,8 +111,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Demos\UI\ForgotPassword\" />
-    <Folder Include="Demos\UI\Register\" />
     <Folder Include="Controls\LoadingView\" />
     <Folder Include="Demos\UI\Details\" />
   </ItemGroup>

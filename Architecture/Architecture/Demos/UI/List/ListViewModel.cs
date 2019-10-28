@@ -7,7 +7,7 @@ using System.Windows.Input;
 using Architecture.Core;
 using Xamarin.Forms;
 
-namespace Architecture.Demos.UI.List
+namespace Architecture.Demos
 {
     public class ListViewModel : BaseViewModel
     {

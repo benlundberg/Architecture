@@ -116,9 +116,9 @@
 
             <Style x:Key="NavigationTitle" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontSize" Value="Title" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="MaxLines" Value="1" />
+                <Setter Property="FontSize" Value="Title" />
             </Style>
 
             <Style TargetType="Button">

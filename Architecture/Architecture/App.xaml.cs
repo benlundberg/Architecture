@@ -17,6 +17,7 @@ namespace Architecture
         public static void SetMainPage()
         {
             Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
+            //Current.MainPage = new NavigationPage(ViewContainer.Current.CreatePage<HomeTabbedViewModel>());
         }
 
         private void Initialize()

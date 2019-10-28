@@ -201,4 +201,10 @@
   <data name="Gen_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="Gen_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Gen_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
 </root>

@@ -21,6 +21,7 @@ namespace Architecture
         {
             ViewContainer.Current.Register<HomeMasterViewModel, HomeMasterPage>();
             ViewContainer.Current.Register<MasterViewModel, MasterPage>();
+            ViewContainer.Current.Register<HomeTabbedViewModel, HomeTabbedPage>();
             ViewContainer.Current.Register<LoggerViewModel, LoggerPage>();
         }
 

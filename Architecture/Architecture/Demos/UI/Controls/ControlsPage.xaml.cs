@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace Architecture.Demos
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class ControlsPage : ContentPage
     {
-        public LoginPage()
+        public ControlsPage()
         {
             InitializeComponent();
         }

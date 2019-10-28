@@ -4,22 +4,28 @@
              x:Class="Architecture.LoggerPage"
              xmlns:local="clr-namespace:Architecture"
              Visual="Material"
-             x:DataType="local:LoggerViewModel"
-             Padding="{StaticResource UnionPadding}"
-             Title="Logger">
+             x:DataType="local:LoggerViewModel">
 
+    <NavigationPage.TitleView>
+        <Label
+            Style="{StaticResource NavigationTitle}"
+            Text="Logger" />
+    </NavigationPage.TitleView>
+    
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Clear" Command="{Binding ClearLogCommand}">
+        <ToolbarItem Text="{local:Translate Gen_Clear}" Command="{Binding ClearLogCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
+                    Size="18"
 					Glyph="{StaticResource RemoveIcon}"
 					Color="White"
 					FontFamily="{StaticResource FontAwesomeRegular}"/>
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        <ToolbarItem Text="Send" Command="{Binding SendLogCommand}">
+        <ToolbarItem Text="{local:Translate Gen_Send}" Command="{Binding SendLogCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
+                    Size="18"
 					Glyph="{StaticResource SendIcon}"
 					Color="White"
 					FontFamily="{StaticResource FontAwesomeRegular}"/>
@@ -28,7 +34,7 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <ScrollView >
+        <ScrollView Padding="{StaticResource UnionPadding}">
             <Label Text="{Binding LogText}" />
         </ScrollView>
     </ContentPage.Content>

@@ -5,26 +5,32 @@
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-	x:Class="Architecture.Demos.UI.List.ListCardViewPage"
+	x:Class="Architecture.Demos.ListCardViewPage"
+    xmlns:viewModels="clr-namespace:Architecture.Demos"
 	xmlns:controls="clr-namespace:Architecture.Controls"
-	xmlns:local="clr-namespace:Architecture">
-	
-	<Grid>
+	xmlns:local="clr-namespace:Architecture"
+    x:DataType="viewModels:ListCardViewModel"
+    Visual="Material">
+
+    <NavigationPage.TitleView>
+        <Label 
+            Style="{StaticResource NavigationTitle}"
+            Text="Cards" />
+    </NavigationPage.TitleView>
+
+    <Grid Padding="{StaticResource UnionPadding}">
 		<ListView 
 			CachingStrategy="RecycleElement"
 			ItemsSource="{Binding Items}"
-			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-			RefreshCommand="{Binding RefreshListCommand}"
-			IsPullToRefreshEnabled="True"
-			IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-			RefreshControlColor="{StaticResource PrimaryColor}"
+            SelectionMode="None"
 			HasUnevenRows="True"
 			SeparatorVisibility="None">
 			<ListView.ItemTemplate>
-				<DataTemplate>
+				<DataTemplate x:DataType="viewModels:ListCardItemViewModel">
 					<ViewCell>
                         <Frame
-                            Margin="6"
+                            Margin="8"
+                            BackgroundColor="White"
                             HasShadow="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -38,10 +44,10 @@
                                 <StackLayout Grid.ColumnSpan="2">
                                     <Label 
                                         FontSize="Title"
-                                        Text="{Binding}" />
+                                        Text="{Binding Title}" />
                                     <Label 
                                         FontSize="Subtitle"
-                                        Text="{Binding}" />
+                                        Text="{Binding SubTitle}" />
                                 </StackLayout>
                                 <Button 
                                     Grid.Row="1"

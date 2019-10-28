@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture.Demos.UI.Register
+namespace Architecture.Demos
 {
-    public class RegisterViewModel : BaseViewModel
+    public class SignUpViewModel : BaseViewModel
     {
-        public RegisterViewModel()
+        public SignUpViewModel()
         {
             Email = new ValidatableObject<string>(new List<IValidationRule<string>>
             {

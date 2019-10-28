@@ -1,14 +1,16 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture.Demos
+namespace Architecture.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class ExtendedContentPage : ContentPage
     {
-        public LoginPage()
+        public ExtendedContentPage()
         {
             InitializeComponent();
         }
+
+        public View View { get; set; }
     }
 }

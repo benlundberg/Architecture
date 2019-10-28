@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Architecture.Core;
 using Xamarin.Forms;
 
-namespace Architecture.Demos.UI.Details
+namespace Architecture.Demos
 {
 	public class DetailsViewModel : BaseViewModel
 	{

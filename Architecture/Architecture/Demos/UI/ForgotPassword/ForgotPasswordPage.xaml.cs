@@ -1,10 +1,10 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture.Demos.UI.ForgotPassword
+namespace Architecture.Demos
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ForgotPasswordPage : ContentPage
+	public partial class ForgotPasswordPage : Controls.ExtendedContentPage
 	{
 		public ForgotPasswordPage()
 		{

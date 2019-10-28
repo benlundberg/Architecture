@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture.Demos.UI.Details
+namespace Architecture.Demos
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetailsPage : ContentPage

@@ -4,9 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Architecture.Demos.UI.Login.LoginPage"
+             x:Class="Architecture.Demos.LoginPage"
              xmlns:local="clr-namespace:Architecture"
-             xmlns:viewModels="clr-namespace:Architecture.Demos.UI.Login"
+             xmlns:viewModels="clr-namespace:Architecture.Demos"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
              BackgroundColor="{StaticResource PrimaryColor}"
@@ -17,50 +17,118 @@
             Style="{StaticResource NavigationTitle}"
             Text="{local:Translate Gen_Login}" />
     </NavigationPage.TitleView>
-    
-    <ScrollView>
-        <Grid Padding="{StaticResource UnionPadding}">
-            <StackLayout 
-                Spacing="10"
-                VerticalOptions="Center"
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <Entry
-					TextColor="{StaticResource EntryTextColor}"
-					PlaceholderColor="{StaticResource EntryTextColor}"
-	                Placeholder="{local:Translate Gen_Username}"
-	                Text="{Binding Username.Value, Mode=TwoWay}" />
-                <Entry 
-                    Text="{Binding Password.Value, Mode=TwoWay}"
-                    TextColor="{StaticResource EntryTextColor}" 
-                    Placeholder="{local:Translate Gen_Password}"
-                    PlaceholderColor="{StaticResource EntryTextColor}"
-                    IsPassword="True" />
-                <Label 
-					Grid.Column="1"
-					TextColor="White"
-					Text="{local:Translate Forgot_Password}"
-                    d:Text="Forgot password?"
-					HorizontalOptions="End">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Button 
-	                Text="{StaticResource CheckIcon}"
-	                FontFamily="{StaticResource FontAwesomeSolid}"
-	                Command="{Binding LoginCommand}" />
-            </StackLayout>
-            <Label 
-				TextColor="White"
-				IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
-				Text="{local:Translate Sign_Up}"
-				HorizontalTextAlignment="Center"
-				VerticalOptions="End">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding RegisterCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
-            <controls:LoadingView IsRunning="{Binding IsBusy}" />
-        </Grid>
-    </ScrollView>
+
+    <ContentPage.Content>
+        <OnIdiom x:TypeArguments="ContentView">
+            <OnIdiom.Desktop>
+                <!-- Desktop view -->
+                <ContentView>
+                    <ScrollView>
+                        <Grid Padding="{StaticResource UnionPadding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout 
+                                Grid.Column="1"
+                                Spacing="10"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                                <Entry
+					                TextColor="{StaticResource EntryTextColor}"
+					                PlaceholderColor="{StaticResource EntryTextColor}"
+	                                Placeholder="{local:Translate Gen_Username}"
+	                                Text="{Binding Username.Value, Mode=TwoWay}" />
+                                <Entry 
+                                    Text="{Binding Password.Value, Mode=TwoWay}"
+                                    TextColor="{StaticResource EntryTextColor}" 
+                                    Placeholder="{local:Translate Gen_Password}"
+                                    PlaceholderColor="{StaticResource EntryTextColor}"
+                                    IsPassword="True" />
+                                <Label 
+					                Grid.Column="1"
+					                TextColor="White"
+					                Text="{local:Translate Forgot_Password}"
+                                    d:Text="Forgot password?"
+					                HorizontalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Button 
+	                                Text="{StaticResource CheckIcon}"
+	                                FontFamily="{StaticResource FontAwesomeSolid}"
+	                                Command="{Binding LoginCommand}" />
+                            </StackLayout>
+                            <Label 
+                                Grid.ColumnSpan="3"
+				                TextColor="White"
+				                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+				                Text="{local:Translate Sign_Up}"
+				                HorizontalTextAlignment="Center"
+				                VerticalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <controls:LoadingView
+                                Grid.ColumnSpan="3" 
+                                IsRunning="{Binding IsBusy}" />
+                        </Grid>
+                    </ScrollView>
+                </ContentView>
+            </OnIdiom.Desktop>
+            <OnIdiom.Default>
+                <!-- Default view -->
+                <ContentView>
+                    <ScrollView>
+                        <Grid Padding="{StaticResource UnionPadding}">
+                            <StackLayout 
+                                Spacing="10"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                                <Entry
+					                TextColor="{StaticResource EntryTextColor}"
+					                PlaceholderColor="{StaticResource EntryTextColor}"
+	                                Placeholder="{local:Translate Gen_Username}"
+	                                Text="{Binding Username.Value, Mode=TwoWay}" />
+                                <Entry 
+                                    Text="{Binding Password.Value, Mode=TwoWay}"
+                                    TextColor="{StaticResource EntryTextColor}" 
+                                    Placeholder="{local:Translate Gen_Password}"
+                                    PlaceholderColor="{StaticResource EntryTextColor}"
+                                    IsPassword="True" />
+                                <Label 
+					                Grid.Column="1"
+					                TextColor="White"
+					                Text="{local:Translate Forgot_Password}"
+                                    d:Text="Forgot password?"
+					                HorizontalOptions="End">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <Button 
+	                                Text="{StaticResource CheckIcon}"
+	                                FontFamily="{StaticResource FontAwesomeSolid}"
+	                                Command="{Binding LoginCommand}" />
+                            </StackLayout>
+                            <Label 
+				                TextColor="White"
+				                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+				                Text="{local:Translate Sign_Up}"
+				                HorizontalTextAlignment="Center"
+				                VerticalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RegisterCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <controls:LoadingView IsRunning="{Binding IsBusy}" />
+                        </Grid>
+                    </ScrollView>
+                </ContentView>
+            </OnIdiom.Default>
+        </OnIdiom>
+    </ContentPage.Content>
 </ContentPage>

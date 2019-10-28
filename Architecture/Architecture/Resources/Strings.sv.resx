@@ -201,4 +201,10 @@
   <data name="Gen_Search" xml:space="preserve">
     <value>Sök</value>
   </data>
+  <data name="Gen_Clear" xml:space="preserve">
+    <value>Rensa</value>
+  </data>
+  <data name="Gen_Send" xml:space="preserve">
+    <value>Skicka</value>
+  </data>
 </root>

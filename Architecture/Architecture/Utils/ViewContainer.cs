@@ -45,36 +45,7 @@ namespace Architecture
 
         public Page CreatePage<TViewModel>() where TViewModel : BaseViewModel, new()
         {
-            if (map == null)
-            {
-                throw new Exception("Error! ViewFatory is not initialized.");
-            }
-
-            var viewType = map[typeof(TViewModel)];
-            var page = (Page)Activator.CreateInstance(viewType);
-            var viewModel = Activator.CreateInstance<TViewModel>();
-
-            viewModel.OnInitialize();
-
-            void Appearing(object sender, EventArgs eventArgs)
-            {
-                viewModel.Appearing();
-                page.Appearing -= Appearing;
-            }
-
-            void Disappearing(object sender, EventArgs eventArgs)
-            {
-                viewModel.Disappearing();
-                page.Disappearing -= Disappearing;
-            }
-
-            page.Appearing += Appearing;
-            page.Disappearing += Disappearing;
-
-            viewModel.Navigation = page.Navigation;
-            page.BindingContext = viewModel;
-
-            return page;
+            return CreatePage(Activator.CreateInstance<TViewModel>());
         }
 
         public Page CreatePage<TViewModel>(TViewModel viewModel) where TViewModel : BaseViewModel
@@ -88,6 +59,7 @@ namespace Architecture
             var page = (Page)Activator.CreateInstance(viewType);
 
             viewModel.OnInitialize();
+            viewModel.OnPageCreated(page);
 
             void Appearing(object sender, EventArgs eventArgs)
             {

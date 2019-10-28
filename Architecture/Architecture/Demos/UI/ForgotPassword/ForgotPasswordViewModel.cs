@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture.Demos.UI.ForgotPassword
+namespace Architecture.Demos
 {
 	public class ForgotPasswordViewModel : BaseViewModel
 	{

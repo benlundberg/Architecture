@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture.Demos.UI.List
+namespace Architecture.Demos
 {
     public class ItemViewModel : BaseViewModel
     {

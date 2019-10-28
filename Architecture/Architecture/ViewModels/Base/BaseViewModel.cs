@@ -11,6 +11,14 @@ namespace Architecture
     public class BaseViewModel : INotifyPropertyChanged
     {
         /// <summary>
+        /// Method is called when page is created and passes the created page as param
+        /// </summary>
+        public virtual void OnPageCreated(Page page)
+        {
+
+        }
+
+        /// <summary>
         /// Method is called when page is initialized
         /// </summary>
         public virtual void OnInitialize()
@@ -100,18 +108,18 @@ namespace Architecture
 
         protected async Task ShowSnackbarAsync(string message, Controls.SnackbarDuration duration = Controls.SnackbarDuration.SHORT, string buttonText = "", ICommand command = null)
         {
-            if (!(Navigation?.NavigationStack.LastOrDefault() is ContentPage contentPage))
+            if (!(Navigation?.NavigationStack.LastOrDefault() is Controls.ExtendedContentPage page))
             {
                 return;
             }
 
             Controls.SnackbarView view = null;
 
-            if (contentPage.Content is Grid grid)
+            if (page.Content is Grid grid)
             {
                 view = (Controls.SnackbarView)grid.Children.FirstOrDefault(x => x is Controls.SnackbarView);
             }
-            else if (contentPage.Content is ScrollView scrollView)
+            else if (page.Content is ScrollView scrollView)
             {
                 if (scrollView.Content is Grid scrollGrid)
                 {

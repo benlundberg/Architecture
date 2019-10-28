@@ -1,12 +1,11 @@
 ﻿using Architecture.Core;
-using Architecture.Demos.UI.ForgotPassword;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture.Demos.UI.Login
+namespace Architecture.Demos
 {
     public class LoginViewModel : BaseViewModel
     {
@@ -69,7 +68,7 @@ namespace Architecture.Demos.UI.Login
         private ICommand registerCommand;
         public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
         {
-            await Navigation.PushAsync(ViewContainer.Current.CreatePage<Register.RegisterViewModel>());
+            await Navigation.PushAsync(ViewContainer.Current.CreatePage<SignUpViewModel>());
         }));
 
         public ValidatableObject<string> Username { get; set; }

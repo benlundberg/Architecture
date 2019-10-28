@@ -79,6 +79,15 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        internal static string Gen_Clear {
+            get {
+                return ResourceManager.GetString("Gen_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         internal static string Gen_Close {
@@ -183,6 +192,15 @@ namespace Architecture.Resources {
         internal static string Gen_Search {
             get {
                 return ResourceManager.GetString("Gen_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        internal static string Gen_Send {
+            get {
+                return ResourceManager.GetString("Gen_Send", resourceCulture);
             }
         }
         
