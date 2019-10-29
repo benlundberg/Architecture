@@ -9,6 +9,11 @@ namespace Architecture.Controls
     {
         public HorizontalView()
         {
+            if (Device.RuntimePlatform != Device.UWP)
+            {
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Never;
+            }
+
             this.Orientation = ScrollOrientation.Horizontal;
             this.VerticalOptions = LayoutOptions.Start;
         }

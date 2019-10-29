@@ -58,12 +58,11 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <controls:SegmentControl 
-            StartTag="1"
             ValueChangedCommand="{Binding SegmentValueChangedCommand}"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
             Margin="{StaticResource UnionPadding}">
             <controls:SegmentControl.ItemsSource>
-                <controls:SegmentControlItem Text="Text cell" Tag="1" />
+                <controls:SegmentControlItem Text="Text cell" IsSelected="True" Tag="1" />
                 <controls:SegmentControlItem Text="Image cell" Tag="2" />
             </controls:SegmentControl.ItemsSource>
         </controls:SegmentControl>

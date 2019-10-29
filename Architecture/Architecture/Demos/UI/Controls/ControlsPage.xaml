@@ -4,7 +4,11 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Architecture.Demos.ControlsPage">
+             x:Class="Architecture.Demos.ControlsPage"
+             xmlns:viewModels="clr-namespace:Architecture.Demos"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:DataType="viewModels:ControlsViewModel">
 
     <NavigationPage.TitleView>
         <Label 
@@ -12,48 +16,63 @@
             Text="Controls" />
     </NavigationPage.TitleView>
 
-    <ScrollView Padding="{StaticResource UnionPadding}">
-        <StackLayout>
-            <CarouselView ItemsSource="{Binding Items}">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame 
-                           HasShadow="True"
-                           BorderColor="DarkGray"
-                           CornerRadius="5"
-                           Margin="20"
-                           HorizontalOptions="Center"
-                           VerticalOptions="CenterAndExpand">
-                            <StackLayout>
-                                <Label 
-                                    Text="{Binding Title}"
-                                    FontAttributes="Bold"
-                                    FontSize="Large"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center" />
-                                <Image 
-                                    Aspect="AspectFill"
-                                    HeightRequest="150"
-                                    WidthRequest="150"
-                                    HorizontalOptions="Center">
+    <ScrollView>
+        <StackLayout Padding="{StaticResource UnionPadding}">
+            <Label Text="Carousel" />
+            <controls:HorizontalView ItemsSource="{Binding Items}">
+                <controls:HorizontalView.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                        <Grid>
+                            <controls:GradientView />
+                            <StackLayout 
+                                Orientation="Horizontal"
+                                Padding="16">
+                                <Image HorizontalOptions="Center">
                                     <Image.Source>
                                         <FontImageSource 
 								            Glyph="{StaticResource GeneralIcon}"
-								            Color="{StaticResource PrimaryColor}"
+								            Color="White"
 								            FontFamily="{StaticResource FontAwesomeBrands}"/>
                                     </Image.Source>
                                 </Image>
-                                <Label 
-                                    Text="{Binding SubTitle}"
-                                    FontAttributes="Italic"
-                                    HorizontalOptions="Center"
-                                    MaxLines="5"
-                                    LineBreakMode="TailTruncation" />
+                                <StackLayout>
+                                    <Label 
+                                        Text="{Binding Title}"
+                                        FontAttributes="Bold"
+                                        FontSize="Title"
+                                        TextColor="White" />
+                                    <Label 
+                                        Text="{Binding SubTitle}"
+                                        FontSize="Subtitle"
+                                        TextColor="White" />
+                                </StackLayout>
                             </StackLayout>
-                        </Frame>
+                        </Grid>
                     </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+                </controls:HorizontalView.ItemTemplate>
+            </controls:HorizontalView>
+            <Label Text="Table" />
+            <controls:TableControl ItemsSource="{Binding TableItems}"/>
+            <Label Text="Menus" />
+            <StackLayout Orientation="Horizontal">
+                <controls:SegmentControl VerticalOptions="Start">
+                    <controls:SegmentControl.ItemsSource>
+                        <controls:SegmentControlItem Text="Menu 1" Tag="1" IsSelected="True" />
+                        <controls:SegmentControlItem Text="Menu 2" Tag="2" />
+                        <controls:SegmentControlItem Text="Menu 3" Tag="3" />
+                    </controls:SegmentControl.ItemsSource>
+                </controls:SegmentControl>
+                <controls:SegmentControl Orientation="Vertical">
+                    <controls:SegmentControl.ItemsSource>
+                        <controls:SegmentControlItem Text="Menu 1" Tag="1" IsSelected="True" />
+                        <controls:SegmentControlItem Text="Menu 2" Tag="2" />
+                        <controls:SegmentControlItem Text="Menu 3" Tag="3" />
+                    </controls:SegmentControl.ItemsSource>
+                </controls:SegmentControl>
+            </StackLayout>
+            <Label Text="Rating" />
+            <controls:RatingControl />
+            <DatePicker />
         </StackLayout>
     </ScrollView>
 

@@ -153,6 +153,12 @@
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
             </Style>
 
+            <Style TargetType="DatePicker">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

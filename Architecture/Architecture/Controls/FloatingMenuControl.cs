@@ -5,6 +5,27 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
+// <controls:FloatingMenuControl>
+//    <controls:FloatingMenuControl.BaseItem>
+//        <controls:FloatingMenuItem
+//            IconSource = "{StaticResource AddIcon}"
+//            FontFamily="{StaticResource FontAwesomeRegular}" />
+//    </controls:FloatingMenuControl.BaseItem>
+//    <controls:FloatingMenuControl.MenuItems>
+//        <controls:FloatingMenuItem
+//            IconSource = "{StaticResource RemoveIcon}"
+//            Text="Remove"
+//            FontFamily="{StaticResource FontAwesomeRegular}" />
+//        <controls:FloatingMenuItem
+//            IconSource = "{StaticResource SearchIcon}"
+//            Text="Search"
+//            FontFamily="{StaticResource FontAwesomeRegular}" />
+//        <controls:FloatingMenuItem
+//            IconSource = "{StaticResource SendIcon}"
+//            Text="Send"
+//            FontFamily="{StaticResource FontAwesomeRegular}" />
+//    </controls:FloatingMenuControl.MenuItems>
+//</controls:FloatingMenuControl>
 namespace Architecture.Controls
 {
     public class FloatingMenuControl : StackLayout

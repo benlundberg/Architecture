@@ -15,6 +15,23 @@ namespace Architecture.Controls
             this.RowSpacing = 0;
         }
 
+        private static void SelectedTagChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (!(bindable is SegmentControl view))
+            {
+                return;
+            }
+
+            if (newValue == null)
+            {
+                return;
+            }
+
+            var selectedItem = view.ItemsSource?.FirstOrDefault(x => x.Tag?.ToString() == newValue?.ToString());
+
+            view.TapGestureCommand?.Execute(selectedItem);
+        }
+
         private static void SegmentSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
         {
             if (!(bindableObject is SegmentControl view))
@@ -87,13 +104,15 @@ namespace Architecture.Controls
 
         private View GetView(SegmentControlItem item)
         {
+            bool isSelected = item.IsSelected || (SelectedTag != null && SelectedTag?.ToString() == item.Tag?.ToString());
+
             Grid segmentItemControl = new Grid()
             {
                 Children =
                 {
                     new BoxView()
                     {
-                        BackgroundColor = item.Tag == StartTag ? SelectedBackgroundColor : SegmentBackgroundColor
+                        BackgroundColor = isSelected ? SelectedBackgroundColor : SegmentBackgroundColor
                     },
                     new Label()
                     {
@@ -102,7 +121,7 @@ namespace Architecture.Controls
                         HorizontalOptions = TextHorizontalOption,
                         HorizontalTextAlignment = TextAlignment,
                         FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
-                        TextColor = item.Tag == StartTag ? SelectedTextColor :  SegmentTextColor,
+                        TextColor = isSelected ? SelectedTextColor :  SegmentTextColor,
                         Margin = new Thickness(8, 8, 8, 8),
                         InputTransparent = true
                     }
@@ -111,7 +130,7 @@ namespace Architecture.Controls
                 BackgroundColor = SelectedBackgroundColor,
             };
 
-            item.IsSelected = item.Tag == StartTag;
+            item.IsSelected = isSelected;
 
             segmentItemControl.GestureRecognizers.Add(new TapGestureRecognizer()
             {
@@ -202,16 +221,17 @@ namespace Architecture.Controls
             ValueChangedCommand?.Execute(SelectedSegment.Tag);
         }));
 
-        public static readonly BindableProperty StartTagProperty = BindableProperty.Create(
-            propertyName: "StartTag",
+        public static readonly BindableProperty SelectedTagProperty = BindableProperty.Create(
+            propertyName: "SelectedTag",
             returnType: typeof(object),
             declaringType: typeof(SegmentControl),
-            defaultValue: default);
+            defaultValue: default,
+            propertyChanged: SelectedTagChanged);
 
-        public object StartTag
+        public object SelectedTag
         {
-            get { return GetValue(StartTagProperty); }
-            set { SetValue(StartTagProperty, value); }
+            get { return GetValue(SelectedTagProperty); }
+            set { SetValue(SelectedTagProperty, value); }
         }
 
         public SegmentControlItem SelectedSegment { get; private set; }

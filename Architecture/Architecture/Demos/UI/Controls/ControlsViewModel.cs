@@ -1,5 +1,7 @@
-﻿using Architecture.Core;
+﻿using Architecture.Controls;
+using Architecture.Core;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -47,6 +49,23 @@ namespace Architecture.Demos
                         SubTitle = $"Subtitle for item {i}"
                     });
                 }
+
+                TableItems = new ObservableCollection<TableItem>();
+
+                for (int i = 0; i <= 5; i++)
+                {
+                    var tableItem = new TableItem($"Header {i}")
+                    {
+                        ContentItems = new List<TableContentItem>()
+                    };
+
+                    for (int x = 0; x <= 10; x++)
+                    {
+                        tableItem.ContentItems.Add(new TableContentItem($"Content {x}"));
+                    }
+
+                    TableItems.Add(tableItem);
+                }
             }
             catch (Exception ex)
             {
@@ -59,5 +78,6 @@ namespace Architecture.Demos
         }
 
         public ObservableCollection<ListItemViewModel> Items { get; private set; }
+        public ObservableCollection<TableItem> TableItems { get; private set; }
     }
 }

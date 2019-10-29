@@ -35,14 +35,10 @@
         Padding="{StaticResource UnionPadding}">
         <controls:ValidationEntry 
             Value="{Binding Title, Mode=TwoWay}"
-            TextColor="{StaticResource EntryTextColor}"
-            Placeholder="{local:Translate Gen_Title}"
-	        PlaceholderColor="{StaticResource EntryTextColor}" />
+            Placeholder="{local:Translate Gen_Title}" />
         <controls:ValidationEntry 
             Value="{Binding SubTitle, Mode=TwoWay}"
-            TextColor="{StaticResource EntryTextColor}"
-            Placeholder="{local:Translate Gen_SubTitle}"
-	        PlaceholderColor="{StaticResource EntryTextColor}" />
+            Placeholder="{local:Translate Gen_SubTitle}" />
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
