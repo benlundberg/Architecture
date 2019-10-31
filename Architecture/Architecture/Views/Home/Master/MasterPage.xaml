@@ -11,7 +11,8 @@
                 <StackLayout Padding="0,20,0,0">
 
                 </StackLayout>
-                <ListView 
+                <ListView
+                    BackgroundColor="Transparent"
                     ItemsSource="{Binding MasterItems}" 
                     SelectedItem="{Binding SelectedMasterItem, Mode=TwoWay}">
                     <ListView.ItemTemplate>

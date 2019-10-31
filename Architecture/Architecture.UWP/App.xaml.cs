@@ -63,10 +63,10 @@ namespace Architecture.UWP
 
                     if (titleBar != null)
                     {
-                        titleBar.ButtonBackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["DarkPrimaryColor"]).ToWindowsColor();
-                        titleBar.BackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["DarkPrimaryColor"]).ToWindowsColor();
-                        titleBar.InactiveBackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["Accent"]).ToWindowsColor();
-                        titleBar.ButtonInactiveBackgroundColor = ((Xamarin.Forms.Color)Xamarin.Forms.Application.Current.Resources["Accent"]).ToWindowsColor();
+                        titleBar.ButtonBackgroundColor = Xamarin.Forms.Application.Current.DarkPrimaryColor().ToWindowsColor();
+                        titleBar.BackgroundColor = Xamarin.Forms.Application.Current.DarkPrimaryColor().ToWindowsColor();
+                        titleBar.InactiveBackgroundColor = Xamarin.Forms.Application.Current.AccentColor().ToWindowsColor();
+                        titleBar.ButtonInactiveBackgroundColor = Xamarin.Forms.Application.Current.AccentColor().ToWindowsColor();
                     }
                 }
             }

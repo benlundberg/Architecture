@@ -12,12 +12,7 @@
     BarTextColor="White"
     android:TabbedPage.BarItemColor="#66FFFFFF"
     android:TabbedPage.BarSelectedItemColor="White"
-    Visual="Material">
-
-    <NavigationPage.TitleView>
-        <Label 
-            Style="{StaticResource NavigationTitle}"
-            Text="Architecture" />
-    </NavigationPage.TitleView>
+    Visual="Material"
+    Title="Architecture">
     
 </TabbedPage>

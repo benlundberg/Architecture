@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using Architecture.Core;
+using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -30,7 +31,15 @@ namespace Architecture
         private ICommand sendLogCommand;
         public ICommand SendLogCommand => sendLogCommand ?? (sendLogCommand = new Command(async () =>
         {
-            await Email.ComposeAsync("Log", LogText);
+            try
+            {
+                await Email.ComposeAsync("Log", LogText);
+            }
+            catch (System.Exception ex)
+            {
+                ex.Print();
+                ShowAlert(ex.Message, "Logger");
+            }
         }));
 
         public string LogText { get; private set; }

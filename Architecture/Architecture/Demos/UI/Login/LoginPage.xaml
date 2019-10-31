@@ -11,13 +11,11 @@
              Visual="Material"
              BackgroundColor="{StaticResource PrimaryColor}"
              x:DataType="viewModels:LoginViewModel">
-    
-    <NavigationPage.TitleView>
-        <Label
-            Style="{StaticResource NavigationTitle}"
-            Text="{local:Translate Gen_Login}" />
-    </NavigationPage.TitleView>
 
+    <NavigationPage.TitleView>
+        <controls:TitleLabelView Text="{local:Translate Gen_Login}" />
+    </NavigationPage.TitleView>
+    
     <ContentPage.Content>
         <OnIdiom x:TypeArguments="ContentView">
             <OnIdiom.Desktop>
@@ -119,7 +117,8 @@
 				                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
 				                Text="{local:Translate Sign_Up}"
 				                HorizontalTextAlignment="Center"
-				                VerticalOptions="End">
+				                VerticalOptions="End"
+                                Margin="0, 0, 0, 20">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding RegisterCommand}" />
                                 </Label.GestureRecognizers>

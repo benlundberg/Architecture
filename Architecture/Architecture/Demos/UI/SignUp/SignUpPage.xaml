@@ -14,11 +14,9 @@
     x:DataType="viewModels:SignUpViewModel">
 
     <NavigationPage.TitleView>
-        <Label 
-            Style="{StaticResource NavigationTitle}"
-            Text="{local:Translate Gen_Sign_Up}" />
+        <controls:TitleLabelView Text="{local:Translate Gen_Sign_Up}" />
     </NavigationPage.TitleView>
-
+    
     <ContentPage.Content>
         <OnIdiom x:TypeArguments="ContentView">
             <OnIdiom.Desktop>

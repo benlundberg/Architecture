@@ -14,9 +14,8 @@
 
     <NavigationPage.TitleView>
         <Grid>
-            <Label 
+            <controls:TitleLabelView 
                 IsVisible="{Binding SearchIsVisible, Converter={StaticResource InvertedBoolConv}}"
-                Style="{StaticResource NavigationTitle}"
                 Text="List" />
             <SearchBar 
                 IsVisible="{Binding SearchIsVisible}"

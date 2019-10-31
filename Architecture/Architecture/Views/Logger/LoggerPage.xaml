@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Architecture.LoggerPage"
              xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
              x:DataType="local:LoggerViewModel">
 
     <NavigationPage.TitleView>
-        <Label
-            Style="{StaticResource NavigationTitle}"
-            Text="Logger" />
+        <controls:TitleLabelView Text="Logger" />
     </NavigationPage.TitleView>
     
     <ContentPage.ToolbarItems>

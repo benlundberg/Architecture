@@ -100,10 +100,10 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
-
+            
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
-                <Setter Property="FontSize">
+                <!--<Setter Property="FontSize">
                     <Setter.Value>
                         <OnPlatform>
                             <On Platform="Android" Value="Medium" />
@@ -111,14 +111,7 @@
                             <On Platform="iOS" Value="Default" />
                         </OnPlatform>
                     </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style x:Key="NavigationTitle" TargetType="Label">
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="MaxLines" Value="1" />
-                <Setter Property="FontSize" Value="Title" />
+                </Setter>-->
             </Style>
 
             <Style TargetType="Button">
@@ -157,6 +150,21 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
+                <Setter Property="FontSize" Value="Medium" />
+            </Style>
+
+            <Style TargetType="Frame" x:Key="CardFrame">
+                <Setter Property="Padding" Value="8" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="HasShadow">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Boolean">
+                            <On Platform="Android" Value="True" />
+                            <On Platform="UWP" Value="False" />
+                            <On Platform="iOS" Value="False" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
         </ResourceDictionary>

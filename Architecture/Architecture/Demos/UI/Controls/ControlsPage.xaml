@@ -11,9 +11,7 @@
              x:DataType="viewModels:ControlsViewModel">
 
     <NavigationPage.TitleView>
-        <Label 
-            Style="{StaticResource NavigationTitle}"
-            Text="Controls" />
+        <controls:TitleLabelView Text="Controls" />
     </NavigationPage.TitleView>
 
     <ScrollView>

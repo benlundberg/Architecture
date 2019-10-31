@@ -13,11 +13,9 @@
     Visual="Material">
 
     <NavigationPage.TitleView>
-        <Label 
-            Style="{StaticResource NavigationTitle}"
-            Text="Cards" />
+        <controls:TitleLabelView Text="Cards" />
     </NavigationPage.TitleView>
-
+    
     <Grid Padding="{StaticResource UnionPadding}">
 		<ListView 
 			CachingStrategy="RecycleElement"
@@ -28,10 +26,9 @@
 			<ListView.ItemTemplate>
 				<DataTemplate x:DataType="viewModels:ListCardItemViewModel">
 					<ViewCell>
-                        <Frame
+                        <Frame 
                             Margin="8"
-                            BackgroundColor="White"
-                            HasShadow="True">
+                            Style="{StaticResource CardFrame}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />

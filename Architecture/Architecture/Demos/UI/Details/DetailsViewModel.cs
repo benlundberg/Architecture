@@ -34,7 +34,7 @@ namespace Architecture.Demos
 				{
 					IsBusy = true;
 
-					await Task.Delay(TimeSpan.FromSeconds(2));
+					await Task.Delay(TimeSpan.FromSeconds(1));
 
 					var items = new ObservableCollection<string>();
 

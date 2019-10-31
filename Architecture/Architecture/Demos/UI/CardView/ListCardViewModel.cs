@@ -9,8 +9,10 @@ namespace Architecture.Demos
 {
     public class ListCardViewModel : BaseViewModel
     {
-        public ListCardViewModel()
+        public override void Appearing()
         {
+            base.Appearing();
+
             if (NetStatusHelper.IsConnected)
             {
                 Device.BeginInvokeOnMainThread(async () =>

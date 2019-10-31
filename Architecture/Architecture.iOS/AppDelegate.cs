@@ -26,6 +26,11 @@ namespace Architecture.iOS
 
             LoadApplication(new App());
 
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
+            {
+                Font = UIFont.FromName("Montserrat-Regular", 20)
+            });
+
             return base.FinishedLaunching(app, options);
         }
     }

@@ -7,7 +7,7 @@
     <ScrollView 
         x:Name="ScrollRoot"
         Scrolled="ScrollRoot_Scrolled">
-        <Grid>
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />

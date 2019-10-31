@@ -10,71 +10,82 @@ namespace Architecture.Demos
 {
     public class ControlsViewModel : BaseViewModel
     {
-        public ControlsViewModel()
+        public override void Appearing()
         {
-            if (NetStatusHelper.IsConnected)
+            base.Appearing();
+
+            ExecuteIfConnected(() =>
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await LoadItemsAsync();
-                });
-            }
-            else
-            {
-                ShowNoNetworkError();
-            }
+                LoadItems();
+            }, showAlert: true);
         }
 
-        private async Task LoadItemsAsync()
+        private void LoadItems()
         {
             if (IsBusy)
             {
                 return;
             }
 
-            try
+            IsBusy = true;
+
+            Task.Run(async () =>
             {
-                IsBusy = true;
-
-                await Task.Delay(TimeSpan.FromSeconds(1.5));
-
-                Items = new ObservableCollection<ListItemViewModel>();
-
-                for (int i = 0; i < 21; i++)
+                try
                 {
-                    Items.Add(new ListItemViewModel
-                    {
-                        Id = i,
-                        Title = $"Title for item {i}",
-                        SubTitle = $"Subtitle for item {i}"
-                    });
-                }
+                    await Task.Delay(TimeSpan.FromSeconds(1));
 
-                TableItems = new ObservableCollection<TableItem>();
+                    var items = new ObservableCollection<ListItemViewModel>();
 
-                for (int i = 0; i <= 5; i++)
-                {
-                    var tableItem = new TableItem($"Header {i}")
+                    for (int i = 0; i < 21; i++)
                     {
-                        ContentItems = new List<TableContentItem>()
-                    };
-
-                    for (int x = 0; x <= 10; x++)
-                    {
-                        tableItem.ContentItems.Add(new TableContentItem($"Content {x}"));
+                        items.Add(new ListItemViewModel
+                        {
+                            Id = i,
+                            Title = $"Title for item {i}",
+                            SubTitle = $"Subtitle for item {i}"
+                        });
                     }
 
-                    TableItems.Add(tableItem);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        Items = new ObservableCollection<ListItemViewModel>(items);
+                    });
+
+                    var tableItems = new ObservableCollection<TableItem>();
+
+                    for (int i = 0; i <= 5; i++)
+                    {
+                        var tableItem = new TableItem($"Header {i}")
+                        {
+                            ContentItems = new List<TableContentItem>()
+                        };
+
+                        for (int x = 0; x <= 10; x++)
+                        {
+                            tableItem.ContentItems.Add(new TableContentItem($"Content {x}"));
+                        }
+
+                        tableItems.Add(tableItem);
+                    }
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        TableItems = new ObservableCollection<TableItem>(tableItems);
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                ex.Print();
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+                catch (Exception ex)
+                {
+                    ex.Print();
+                }
+                finally
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        IsBusy = false;
+                    });
+                }
+            });
         }
 
         public ObservableCollection<ListItemViewModel> Items { get; private set; }

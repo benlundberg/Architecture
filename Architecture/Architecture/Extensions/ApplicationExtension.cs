@@ -56,5 +56,10 @@ namespace Architecture
         {
             return (OnPlatform<string>)application.Resources["FontAwesomeRegular"];
         }
+
+        public static string NormalFont(this Application application)
+        {
+            return (OnPlatform<string>)application.Resources["NormalFont"];
+        }
     }
 }

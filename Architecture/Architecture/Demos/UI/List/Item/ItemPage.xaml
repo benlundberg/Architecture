@@ -13,11 +13,9 @@
     Visual="Material">
 
     <NavigationPage.TitleView>
-        <Label 
-            Style="{StaticResource NavigationTitle}"
-            Text="{local:Translate Gen_Item_Title}" />
+        <controls:TitleLabelView Text="{local:Translate Gen_Item_Title}" />
     </NavigationPage.TitleView>
-
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding PopModalCommand}" Text="{local:Translate Gen_Close}" Priority="1" Order="Primary">
             <ToolbarItem.IconImageSource>
