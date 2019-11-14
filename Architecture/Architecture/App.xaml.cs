@@ -1,4 +1,5 @@
-﻿using Architecture.Demos;
+﻿using Architecture.Core;
+using Architecture.Demos;
 using Xamarin.Forms;
 
 namespace Architecture
@@ -22,6 +23,10 @@ namespace Architecture
 
         private void Initialize()
         {
+            // Initialize database
+            DatabaseRepository.Current
+                .Init(ComponentContainer.Current.Resolve<ILocalFileSystemService>().GetLocalPath($"{AppConfig.AppName}DB.db3"));
+
             Bootstrapper.CreateTables();
             Bootstrapper.RegisterViews();
 

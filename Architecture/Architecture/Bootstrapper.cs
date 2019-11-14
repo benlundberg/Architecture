@@ -8,9 +8,6 @@ namespace Architecture
     {
         public static void RegisterTypes()
         {
-            // Repositories
-            ComponentContainer.Current.Register<IDatabaseRepository, DatabaseRepository>(singelton: true);
-
             // Services
             ComponentContainer.Current.Register<ITranslateService, TranslateService>();
             ComponentContainer.Current.Register<INetworkStatusService, NetworkStatusService>(singelton: true);
@@ -27,9 +24,9 @@ namespace Architecture
 
         public static void CreateTables()
         {
-            ComponentContainer.Current.Resolve<IDatabaseRepository>().CreateTablesAsync(new List<Type>()
+            DatabaseRepository.Current.CreateTablesAsync(new List<Type>()
             {
-            });
+            }).ConfigureAwait(false);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Architecture.Core
 {
     public class StorageRepository
     {
-        static Lazy<StorageRepository> implementation = new Lazy<StorageRepository>(() => CreateStorage(), isThreadSafe: true);
+        static readonly Lazy<StorageRepository> implementation = new Lazy<StorageRepository>(() => CreateStorage(), isThreadSafe: true);
 
         public static StorageRepository Current
         {
@@ -55,7 +55,7 @@ namespace Architecture.Core
                 ex.Print();
             }
 
-            return default(T);
+            return default;
         }
 
         public async Task<T> LoadAsync<T>(Func<T, bool> predExpr)
@@ -71,7 +71,7 @@ namespace Architecture.Core
                 ex.Print();
             }
 
-            return default(T);
+            return default;
         }
 
         public async Task DeleteAsync<T>(string id)
@@ -109,7 +109,7 @@ namespace Architecture.Core
                 ex.Print();
             }
 
-            return default(IEnumerable<T>);
+            return default;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>(Func<T, bool> predExpr)
@@ -125,7 +125,7 @@ namespace Architecture.Core
                 ex.Print();
             }
 
-            return default(IEnumerable<T>);
+            return default;
         }
     }
 }

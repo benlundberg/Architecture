@@ -9,7 +9,7 @@ namespace Architecture.Core
 {
     public class MemoryRepository
     {
-        static Lazy<MemoryRepository> implementation = new Lazy<MemoryRepository>(() => CreateMemory(), isThreadSafe: true);
+        static readonly Lazy<MemoryRepository> implementation = new Lazy<MemoryRepository>(() => CreateMemory(), isThreadSafe: true);
 
         public static MemoryRepository Current
         {
@@ -48,14 +48,14 @@ namespace Architecture.Core
         {
             try
             {
-                return await BlobCache.InMemory.GetObject<T>(id + typeof(T).GetType().ToString());
+                return await BlobCache.InMemory.GetObject<T>(id + typeof(T).ToString());
             }
             catch (Exception ex)
             {
                 ex.Print();
             }
 
-            return default(T);
+            return default;
         }
 
         public async Task<T> LoadAsync<T>(Func<T, bool> predExpr)
@@ -71,14 +71,14 @@ namespace Architecture.Core
                 ex.Print();
             }
 
-            return default(T);
+            return default;
         }
 
         public async Task DeleteAsync<T>(string id)
         {
             try
             {
-                await BlobCache.InMemory.InvalidateObject<T>(id + typeof(T).GetType().ToString());
+                await BlobCache.InMemory.InvalidateObject<T>(id + typeof(T).ToString());
             }
             catch (Exception ex)
             {
@@ -109,7 +109,7 @@ namespace Architecture.Core
                 ex.Print();
             }
 
-            return default(IEnumerable<T>);
+            return default;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>(Func<T, bool> predExpr)
@@ -125,7 +125,7 @@ namespace Architecture.Core
                 ex.Print();
             }
 
-            return default(IEnumerable<T>);
+            return default;
         }
     }
 }
