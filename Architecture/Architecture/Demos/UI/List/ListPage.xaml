@@ -10,7 +10,7 @@
              x:Class="Architecture.Demos.ListPage"
              Visual="Material"
              x:DataType="viewModel:ListViewModel"
-             x:Name="this">
+             x:Name="root">
 
     <NavigationPage.TitleView>
         <Grid>
@@ -84,7 +84,7 @@
 						    Detail="{Binding SubTitle}">
                             <TextCell.ContextActions>
                                 <MenuItem 
-                                    Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference this}}"
+                                    Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference root}}"
                                     CommandParameter="{Binding .}"
                                     Text="{local:Translate Gen_Delete}" 
                                     IsDestructive="True" />
@@ -115,7 +115,7 @@
                             </ImageCell.ImageSource>
                             <ImageCell.ContextActions>
                                 <MenuItem 
-                                    Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference this}}"
+                                    Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference root}}"
                                     CommandParameter="{Binding .}"
                                     Text="{local:Translate Gen_Delete}" 
                                     IsDestructive="True" />

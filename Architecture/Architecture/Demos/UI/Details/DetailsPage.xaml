@@ -15,98 +15,133 @@
 	<Grid>
 		<controls:CollapsingScrollView>
 			<controls:CollapsingScrollView.HeaderContent>
-				<StackLayout 
-					BackgroundColor="{StaticResource PrimaryColor}"
-					Padding="10">
-					<Label 
-						HorizontalOptions="Center"
-						FontSize="52"
-		                Text="{StaticResource GeneralIcon}"
-		                TextColor="White"
-		                FontFamily="{StaticResource FontAwesomeBrands}" />
-					<Label
-						HorizontalTextAlignment="Center"
-						FontSize="Medium"
-						FontAttributes="Bold"
-						TextColor="White"
-						Text="Hello World" />
-					<Label 
-						HorizontalTextAlignment="Center"
-						TextColor="White"
-						Text="This is some sort of text"/>
-					<Grid Margin="0, 10, 0, 0">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition />
-							<ColumnDefinition />
-							<ColumnDefinition />
-						</Grid.ColumnDefinitions>
-						<StackLayout Orientation="Horizontal">
-							<Label 
-								FontSize="Small"
-				                Text="{StaticResource GeneralIcon}"
-				                TextColor="White"
-				                FontFamily="{StaticResource FontAwesomeBrands}" />
-							<Label 
-								TextColor="White"
-								FontSize="Small"
-								Text="Likes" />
-						</StackLayout>
-						<StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
-							<Label 
-								FontSize="Small"
-				                Text="{StaticResource GeneralIcon}"
-				                TextColor="White"
-				                FontFamily="{StaticResource FontAwesomeBrands}" />
-							<Label 
-								TextColor="White"
-								FontSize="Small"
-								Text="Following" />
-						</StackLayout>
-						<StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End">
-							<Label 
-								FontSize="Small"
-				                Text="{StaticResource GeneralIcon}"
-								TextColor="White"
-				                FontFamily="{StaticResource FontAwesomeBrands}" />
-							<Label 
-								TextColor="White"
-								FontSize="Small"
-								Text="Followers" />
-						</StackLayout>
-					</Grid>
-				</StackLayout>
-			</controls:CollapsingScrollView.HeaderContent>
-			<controls:CollapsingScrollView.MainContent>
-                <Grid>
-                    <controls:GradientView 
-                        StartColor="White"
-                        EndColor="{StaticResource PrimaryColor}"
-                        Direction="ToBottom" />
-                    <StackLayout Padding="{StaticResource UnionPadding}">
-					    <Label Text="Horizontal items" />
-					    <controls:HorizontalView ItemsSource="{Binding Items}">
-						    <controls:HorizontalView.ItemTemplate>
-							    <DataTemplate>
-								    <BoxView 
-									    BackgroundColor="{StaticResource Accent}"
-									    HeightRequest="50"
-								 	    WidthRequest="50" />
-							    </DataTemplate>
-						    </controls:HorizontalView.ItemTemplate>
-					    </controls:HorizontalView>
-					    <Label HorizontalTextAlignment="Center" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia erat nisi non purus. Cras rhoncus tristique euismod. Donec non elementum nunc. Vestibulum ultricies vel quam aliquet lacinia. Donec quam sem, consequat interdum tincidunt id, lobortis quis nisi. Aenean placerat elit quis augue aliquet imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras bibendum quam congue sapien pellentesque euismod. Nam auctor eros semper facilisis facilisis." />
-					    <controls:GridViewControl ItemsSource="{Binding Items}">
-						    <controls:GridViewControl.ItemTemplate>
-							    <DataTemplate>
-								    <BoxView 
-									    BackgroundColor="{StaticResource Accent}"
-									    HeightRequest="50"
-								 	    WidthRequest="50" />
-							    </DataTemplate>
-						    </controls:GridViewControl.ItemTemplate>
-					    </controls:GridViewControl>
+                <controls:GradientView Direction="ToBottomRight">
+                    <StackLayout Padding="10">
+					    <Label 
+						    HorizontalOptions="Center"
+						    FontSize="52"
+		                    Text="{StaticResource GeneralIcon}"
+		                    TextColor="White"
+		                    FontFamily="{StaticResource FontAwesomeBrands}" />
+					    <Label
+						    HorizontalTextAlignment="Center"
+						    FontSize="Medium"
+						    FontAttributes="Bold"
+						    TextColor="White"
+						    Text="Hello World" />
+					    <Label 
+						    HorizontalTextAlignment="Center"
+						    TextColor="White"
+						    Text="This is some sort of text"/>
+					    <Grid Margin="0, 10, 0, 0">
+						    <Grid.ColumnDefinitions>
+							    <ColumnDefinition />
+							    <ColumnDefinition />
+							    <ColumnDefinition />
+						    </Grid.ColumnDefinitions>
+						    <StackLayout Orientation="Horizontal">
+							    <Label 
+								    FontSize="Small"
+				                    Text="{StaticResource GeneralIcon}"
+				                    TextColor="White"
+				                    FontFamily="{StaticResource FontAwesomeBrands}" />
+							    <Label 
+								    TextColor="White"
+								    FontSize="Small"
+								    Text="Likes" />
+						    </StackLayout>
+						    <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+							    <Label 
+								    FontSize="Small"
+				                    Text="{StaticResource GeneralIcon}"
+				                    TextColor="White"
+				                    FontFamily="{StaticResource FontAwesomeBrands}" />
+							    <Label 
+								    TextColor="White"
+								    FontSize="Small"
+								    Text="Following" />
+						    </StackLayout>
+						    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End">
+							    <Label 
+								    FontSize="Small"
+				                    Text="{StaticResource GeneralIcon}"
+								    TextColor="White"
+				                    FontFamily="{StaticResource FontAwesomeBrands}" />
+							    <Label 
+								    TextColor="White"
+								    FontSize="Small"
+								    Text="Followers" />
+						    </StackLayout>
+					    </Grid>
 				    </StackLayout>
-                </Grid>
+                </controls:GradientView>
+            </controls:CollapsingScrollView.HeaderContent>
+			<controls:CollapsingScrollView.MainContent>
+                <StackLayout Padding="{StaticResource UnionPadding}">
+                    <CarouselView HeightRequest="300" ItemsSource="{Binding Items}">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout SnapPointsAlignment="Center" SnapPointsType="MandatorySingle" ItemSpacing="10" Orientation="Horizontal" />
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Style="{StaticResource CardFrame}">
+                                    <StackLayout>
+                                        <Label 
+                                            Text="Hello World"
+                                            FontAttributes="Bold"
+                                            FontSize="Large"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center" />
+                                        <BoxView 
+                                            BackgroundColor="{StaticResource Accent}"
+                                            HeightRequest="150"
+                                            WidthRequest="150" />
+                                        <Label 
+                                            Text="Location"
+                                            HorizontalOptions="Center" />
+                                        <Label 
+                                            Text="Detail"
+                                            FontAttributes="Italic"
+                                            HorizontalOptions="Center"
+                                            MaxLines="5"
+                                            LineBreakMode="TailTruncation" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+					<Label HorizontalTextAlignment="Center" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia erat nisi non purus. Cras rhoncus tristique euismod. Donec non elementum nunc. Vestibulum ultricies vel quam aliquet lacinia. Donec quam sem, consequat interdum tincidunt id, lobortis quis nisi. Aenean placerat elit quis augue aliquet imperdiet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras bibendum quam congue sapien pellentesque euismod. Nam auctor eros semper facilisis facilisis." />
+                    <CollectionView HeightRequest="300" ItemSizingStrategy="MeasureFirstItem" ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout SnapPointsAlignment="Start" SnapPointsType="MandatorySingle" ItemSpacing="10" Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <BoxView 
+                                    BackgroundColor="{StaticResource DarkAccent}"
+                                    HeightRequest="200"
+                                    WidthRequest="200" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
+                    <CollectionView 
+                        BackgroundColor="Bisque"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout 
+                                Orientation="Vertical"
+                                HorizontalItemSpacing="8"
+                                VerticalItemSpacing="8"
+                                Span="4" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <BoxView HeightRequest="150" BackgroundColor="{StaticResource PrimaryColor}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+				</StackLayout>
             </controls:CollapsingScrollView.MainContent>
 		</controls:CollapsingScrollView>
 	</Grid>

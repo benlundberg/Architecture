@@ -19,12 +19,12 @@
             <x:String x:Key="SearchIcon">&#xf002;</x:String>
 
             <!--Colors -->
-            <Color x:Key="DarkPrimaryColor">#000a12</Color>
-            <Color x:Key="PrimaryColor">#263238</Color>
-            <Color x:Key="LightPrimaryColor">#4f5b62</Color>
-            <Color x:Key="Accent">#E57373</Color>
-            <Color x:Key="LightAccent">#ffa4a2</Color>
-            <Color x:Key="DarkAccent">#af4448</Color>
+            <Color x:Key="DarkPrimaryColor">#29434e</Color>
+            <Color x:Key="PrimaryColor">#546e7a</Color>
+            <Color x:Key="LightPrimaryColor">#819ca9</Color>
+            <Color x:Key="Accent">#fb8c00</Color>
+            <Color x:Key="LightAccent">#ffbd45</Color>
+            <Color x:Key="DarkAccent">#c25e00</Color>
             <Color x:Key="GrayDark">#555555</Color>
             <Color x:Key="Gray">#8a8a8a</Color>
             <Color x:Key="GrayLight">#afafaf</Color>
@@ -103,15 +103,6 @@
             
             <Style TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
-                <!--<Setter Property="FontSize">
-                    <Setter.Value>
-                        <OnPlatform>
-                            <On Platform="Android" Value="Medium" />
-                            <On Platform="UWP" Value="Default" />
-                            <On Platform="iOS" Value="Default" />
-                        </OnPlatform>
-                    </Setter.Value>
-                </Setter>-->
             </Style>
 
             <Style TargetType="Button">
@@ -132,7 +123,7 @@
 
             <Style x:Key="FloatingButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                <Setter Property="TextColor" Value="White" />
+                <Setter Property="TextColor" Value="Black" />
                 <Setter Property="CornerRadius" Value="35" />
                 <Setter Property="HeightRequest" Value="70" />
                 <Setter Property="WidthRequest" Value="70" />

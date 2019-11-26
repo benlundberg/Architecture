@@ -20,9 +20,8 @@
             <controls:HorizontalView ItemsSource="{Binding Items}">
                 <controls:HorizontalView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:ListItemViewModel">
-                        <Grid>
-                            <controls:GradientView />
-                            <StackLayout 
+                        <controls:GradientView>
+                            <StackLayout
                                 Orientation="Horizontal"
                                 Padding="16">
                                 <Image HorizontalOptions="Center">
@@ -45,7 +44,7 @@
                                         TextColor="White" />
                                 </StackLayout>
                             </StackLayout>
-                        </Grid>
+                        </controls:GradientView>
                     </DataTemplate>
                 </controls:HorizontalView.ItemTemplate>
             </controls:HorizontalView>
