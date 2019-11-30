@@ -9,7 +9,7 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Architecture.Droid
 {
-    public class GradientView_Droid : VisualElementRenderer<StackLayout>
+    public class GradientView_Droid : VisualElementRenderer<Grid>
     {
         public GradientView_Droid(Context context) : base(context)
         {
@@ -65,7 +65,7 @@ namespace Architecture.Droid
             base.DispatchDraw(canvas);
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<StackLayout> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Grid> e)
         {
             base.OnElementChanged(e);
 

@@ -274,7 +274,7 @@ namespace Architecture.Core
             return rows != 0;
         }
 
-        public async Task<bool> InsertWithChildrenAsync<T>(T entity)
+        public async Task<bool> InsertOrReplaceWithChildrenAsync<T>(T entity)
         {
             // Get properties that will be stored in there own tables
             IEnumerable<PropertyInfo> properties = GetPropertyInfos(entity.GetType(), typeof(ListAttribute), typeof(SingleAttribute));
@@ -298,7 +298,7 @@ namespace Architecture.Core
                             GetForeignKeyPropertyInfo(item.GetType(), typeof(T))?.SetValue(item, primaryKey);
 
                             // Insert child
-                            await InsertWithChildrenAsync(item);
+                            await InsertOrReplaceWithChildrenAsync(item);
                         }
                     }
                     else
@@ -307,12 +307,12 @@ namespace Architecture.Core
                         GetForeignKeyPropertyInfo(val.GetType(), typeof(T))?.SetValue(val, primaryKey);
 
                         // Insert child
-                        await InsertWithChildrenAsync(val);
+                        await InsertOrReplaceWithChildrenAsync(val);
                     }
                 }
             }
 
-            int rows = await connection.InsertAsync(entity);
+            int rows = await connection.InsertOrReplaceAsync(entity);
 
             return rows != 0;
         }

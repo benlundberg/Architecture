@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.FullLoginPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture"
+             Visual="Material"
+             x:DataType="local:LoginViewModel">
+
+    <ScrollView>
+        <controls:GradientView>
+            <Label
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                Margin="20"
+                FontSize="Large"
+                Text="{StaticResource CloseIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                TextColor="{StaticResource TextLight}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopModalCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <StackLayout 
+                Spacing="16"
+                Margin="40">
+                <StackLayout
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center"
+                    Margin="0, 0, 0, 40">
+                    <Label 
+                        FontSize="Header"
+                        HorizontalOptions="End"
+                        Text="{StaticResource GeneralIcon}"
+                        TextColor="{StaticResource TextLight}"
+                        FontFamily="{StaticResource FontAwesomeBrands}" />
+                    <Label 
+                        Grid.Column="1"
+                        HorizontalTextAlignment="Start"
+                        FontSize="Large"
+                        VerticalOptions="Center"
+                        TextColor="{StaticResource TextLight}"
+                        Text="Login to XF UIKit" />
+                </StackLayout>
+                <Entry 
+                    Placeholder="Username"
+                    Text="{Binding Username.Value, Mode=TwoWay}"
+                    PlaceholderColor="{StaticResource TextLight}"
+                    TextColor="{StaticResource TextLight}" />
+                <Entry 
+                    Placeholder="Password" 
+                    IsPassword="True" 
+                    Text="{Binding Password.Value, Mode=TwoWay}"
+                    PlaceholderColor="{StaticResource TextLight}"
+                    TextColor="{StaticResource TextLight}" />
+                <StackLayout 
+                    HorizontalOptions="Start"
+                    Orientation="Horizontal">
+                    <CheckBox 
+                        IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                        WidthRequest="35"
+                        Color="{StaticResource Accent}" />
+                    <Label 
+                        TextColor="{StaticResource TextLight}"
+                        FontSize="Medium"
+                        VerticalOptions="Center"
+                        Text="Remember me?" />
+                </StackLayout>
+                <Button 
+                    Command="{Binding LoginCommand}"
+                    FontFamily="{StaticResource BoldFont}"
+                    CornerRadius="40"
+                    Text="Login" />
+                <Label
+                    FontSize="Medium"
+                    TextColor="{StaticResource TextLight}"
+                    HorizontalOptions="End"
+                    Text="Forgot password?">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </controls:GradientView>
+    </ScrollView>
+</ContentPage>

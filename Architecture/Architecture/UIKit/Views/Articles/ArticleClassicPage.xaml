@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.ArticleClassicPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture"
+             Visual="Material"
+             x:DataType="local:ArticlesViewModel">
+
+    <ContentPage.BindingContext>
+        <local:ArticlesViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Article classic" />
+    </NavigationPage.TitleView>
+
+    <ListView 
+        ItemsSource="{Binding AnimalArticles}"
+        HasUnevenRows="True">
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="local:ArticleItemViewModel">
+                <ViewCell>
+                    <Grid Padding="20" BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+                        <Image 
+                            HeightRequest="175"
+                            Aspect="AspectFill"
+                            Source="{Binding ImageSource}" />
+                        <StackLayout Grid.Column="1">
+                            <Label
+                                FontSize="Large"
+                                TextColor="{StaticResource Accent}"
+                                FontFamily="{StaticResource BoldFont}"
+                                Text="{Binding Title}" />
+                            <Label 
+                                Text="{Binding Year}" />
+                            <Label 
+                                FontSize="Medium"
+                                MaxLines="5"
+                                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                        </StackLayout>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+</ContentPage>

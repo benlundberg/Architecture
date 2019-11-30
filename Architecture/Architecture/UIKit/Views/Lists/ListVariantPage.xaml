@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.ListVariantPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+	         xmlns:local="clr-namespace:Architecture"
+             x:DataType="local:ListViewModel"
+             Visual="Material"
+             BackgroundColor="{StaticResource GrayLight}">   
+
+    <ContentPage.BindingContext>
+        <local:ListViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Variant List" />
+    </NavigationPage.TitleView>
+
+    <Grid Padding="{StaticResource UnionPadding}">
+        <ListView 
+			CachingStrategy="RecycleElement"
+			ItemsSource="{Binding Items}"
+            SelectionMode="None"
+			HasUnevenRows="True"
+			SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:ListItemViewModel">
+                    <ViewCell>
+                        <Grid ColumnSpacing="0" Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding ImageSource}" Aspect="AspectFit" />
+                            <Frame
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                Style="{StaticResource CardFrame}">
+                                <StackLayout>
+                                    <Label 
+                                        FontSize="Title"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        FontSize="Subtitle"
+                                        MaxLines="3"
+                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <controls:LoadingView 
+            IsRunning="{Binding IsBusy}"
+			Text="{local:Translate Gen_Loading}" />
+    </Grid>
+
+
+
+</ContentPage>

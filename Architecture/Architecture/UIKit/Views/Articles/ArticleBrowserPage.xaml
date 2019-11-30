@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.ArticleBrowserPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:DataType="local:ArticlesViewModel">
+
+    <ContentPage.BindingContext>
+        <local:ArticlesViewModel />
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Article browser" />
+    </NavigationPage.TitleView>
+    
+    <ScrollView>
+        <StackLayout>
+            <CarouselView ItemsSource="{Binding NatureArticles}" HeightRequest="300">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ArticleItemViewModel">
+                        <Grid>
+                            <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                            <StackLayout Margin="20" VerticalOptions="End">
+                                <Label 
+                                    TextColor="{StaticResource TextLight}"
+                                    Text="{Binding Year}" />
+                                <Label
+                                    FontSize="Large"
+                                    TextColor="{StaticResource TextLight}"
+                                    FontFamily="{StaticResource BoldFont}"
+                                    Text="{Binding Title}" />
+                                <Label 
+                                    TextColor="{StaticResource TextLight}"
+                                    FontSize="Medium"
+                                    Text="{Binding Category}" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <CollectionView
+                ItemsSource="{Binding SportArticles}"
+                Margin="10, 10, 0, 10"
+                HeightRequest="250">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        SnapPointsAlignment="Start" 
+                        SnapPointsType="None" 
+                        HorizontalItemSpacing="10" 
+                        Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ArticleItemViewModel">
+                        <Frame
+                            Padding="0"
+                            CornerRadius="14"
+                            BackgroundColor="Gray">
+                            <Grid>
+                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                                <Grid 
+                                    BackgroundColor="White"
+                                    Padding="10" 
+                                    VerticalOptions="End">
+                                    <Label
+                                        Grid.Row="0"
+                                        FontSize="Large"
+                                        TextColor="{StaticResource Accent}"
+                                        FontFamily="{StaticResource BoldFont}"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        Grid.Row="1"
+                                        Text="{Binding Category}" />
+                                    <Label 
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Text="{Binding Year}" />
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <CollectionView
+                ItemsSource="{Binding AnimalArticles}"
+                Margin="10, 10, 0, 10"
+                HeightRequest="250">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout HorizontalItemSpacing="10" Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ArticleItemViewModel">
+                        <Frame
+                            Padding="0"
+                            CornerRadius="14"
+                            BackgroundColor="Gray">
+                            <Grid>
+                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                                <Grid 
+                                    BackgroundColor="White"
+                                    Padding="10" 
+                                    VerticalOptions="End">
+                                    <Label
+                                        Grid.Row="0"
+                                        FontSize="Large"
+                                        TextColor="{StaticResource Accent}"
+                                        FontFamily="{StaticResource BoldFont}"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        Grid.Row="1"
+                                        Text="{Binding Category}" />
+                                    <Label 
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        HorizontalOptions="End"
+                                        Text="{Binding Year}" />
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

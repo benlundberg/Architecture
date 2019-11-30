@@ -19,7 +19,7 @@ namespace Architecture.Core
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
             httpClient.Timeout = TimeSpan.FromMinutes(timeout);
-
+            
             // Here we can put some tokens or shared secrets 
 
             return httpClient;
@@ -42,9 +42,11 @@ namespace Architecture.Core
 
                     var response = await client.SendAsync(requestMessage);
 
-                    if (response.StatusCode == HttpStatusCode.Moved)
+                    if (response.StatusCode == HttpStatusCode.Moved || response.StatusCode == HttpStatusCode.Found || response.StatusCode == HttpStatusCode.Redirect)
                     {
                         requestMessage.RequestUri = response.Headers.Location;
+
+                        Debug.WriteLine($"Calling moved service: {requestMessage.RequestUri}");
 
                         response = await client.SendAsync(requestMessage);
                     }
@@ -70,9 +72,9 @@ namespace Architecture.Core
                     return responseData;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -121,7 +123,7 @@ namespace Architecture.Core
 
         protected static string GetUrl(string method)
         {
-            return ServiceConfig.WEB_SERVICE_BASE_ADDRESS + method;
+            return ServiceConfig.WebServiceBaseAddress + method;
         }
     }
 

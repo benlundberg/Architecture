@@ -20,43 +20,29 @@ namespace Architecture
 
             MasterItems = new List<MenuViewModel>()
             {
-                new MenuViewModel()
-                {
-                    Title = Translate("Gen_Login"),
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.LoginViewModel>())
-                },
-                new MenuViewModel()
-                {
-                    Title = "List",
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.ListViewModel>())
-                },
-                new MenuViewModel()
-                {
-                    Title = "Cards",
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.ListCardViewModel>())
-                },
-                new MenuViewModel()
-                {
-                    Title = "Controls",
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.ControlsViewModel>())
-                },
-                new MenuViewModel()
-				{
-					Title = "Details",
-					Page = new NavigationPage(ViewContainer.Current.CreatePage<Demos.DetailsViewModel>())
-				},
-                new MenuViewModel()
-                {
-                    Title = "Log",
-                    Page = new NavigationPage(ViewContainer.Current.CreatePage<LoggerViewModel>())
-                }
+                // TODO: Add menu pages here
             };
+
+            // TODO: If test you can add this log view
+            if (true)
+            {
+                MasterItems.Add(new MenuViewModel()
+                {
+                    Title = Translate("Gen_Log"),
+                    Page = new NavigationPage(ViewContainer.Current.CreatePage<LoggerViewModel>())
+                });
+            }
 
             ItemSelected(MasterItems.FirstOrDefault()?.Page);
         }
 
         private void ItemSelected(Page page)
         {
+            if (page == null)
+            {
+                return;
+            }
+
             masterDetailPage.Detail = page;
         }
 

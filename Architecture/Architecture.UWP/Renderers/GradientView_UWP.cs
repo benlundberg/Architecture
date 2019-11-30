@@ -10,9 +10,9 @@ using Xamarin.Forms.Platform.UWP;
 
 namespace Architecture.UWP
 {
-    public class GradientView_UWP : VisualElementRenderer<StackLayout, Panel>
+    public class GradientView_UWP : VisualElementRenderer<Xamarin.Forms.Grid, Panel>
     {
-        protected override void OnElementChanged(ElementChangedEventArgs<StackLayout> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Grid> e)
         {
             base.OnElementChanged(e);
 

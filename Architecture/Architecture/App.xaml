@@ -25,9 +25,9 @@
             <Color x:Key="Accent">#fb8c00</Color>
             <Color x:Key="LightAccent">#ffbd45</Color>
             <Color x:Key="DarkAccent">#c25e00</Color>
-            <Color x:Key="GrayDark">#555555</Color>
-            <Color x:Key="Gray">#8a8a8a</Color>
-            <Color x:Key="GrayLight">#afafaf</Color>
+            <Color x:Key="GrayDark">#c2c2c2</Color>
+            <Color x:Key="Gray">#eeeeee</Color>
+            <Color x:Key="GrayLight">#f5f5f5</Color>
             <Color x:Key="TextDark">#555555</Color>
             <Color x:Key="TextMedium">#9c9c9c</Color>
             <Color x:Key="TextLight">#ffffff</Color>
@@ -109,7 +109,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="TextColor" Value="{StaticResource TextLight}" />
                 <Setter Property="CornerRadius">
                     <Setter.Value>
                         <OnPlatform>
@@ -124,11 +124,11 @@
             <Style x:Key="FloatingButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
                 <Setter Property="TextColor" Value="Black" />
-                <Setter Property="CornerRadius" Value="35" />
-                <Setter Property="HeightRequest" Value="70" />
-                <Setter Property="WidthRequest" Value="70" />
+                <Setter Property="CornerRadius" Value="40" />
+                <Setter Property="HeightRequest" Value="80" />
+                <Setter Property="WidthRequest" Value="80" />
                 <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="20" />
                 <Setter Property="VerticalOptions" Value="End" />
                 <Setter Property="HorizontalOptions" Value="End" />
             </Style>
@@ -145,7 +145,6 @@
             </Style>
 
             <Style TargetType="Frame" x:Key="CardFrame">
-                <Setter Property="Padding" Value="8" />
                 <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="HasShadow">
                     <Setter.Value>

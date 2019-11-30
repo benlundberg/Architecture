@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.TabbedLoginPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Welcome" />
+    </NavigationPage.TitleView>
+    
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <controls:GradientView Direction="ToBottom">
+            <StackLayout
+                Orientation="Horizontal"
+                Padding="40">
+                <Label 
+                    FontSize="Header"
+                    HorizontalOptions="End"
+                    Text="{StaticResource GeneralIcon}"
+                    TextColor="{StaticResource TextLight}"
+                    FontFamily="{StaticResource FontAwesomeBrands}" />
+                <Label 
+                    Grid.Column="1"
+                    HorizontalTextAlignment="Start"
+                    FontSize="Large"
+                    VerticalOptions="Center"
+                    TextColor="{StaticResource TextLight}"
+                    Text="Login to XF UIKit" />
+            </StackLayout>
+        </controls:GradientView>
+        <controls:SegmentControl Grid.Row="1" ValueChangedCommand="{Binding ViewOptionChangedCommand}">
+            <controls:SegmentControl.ItemsSource>
+                <controls:SegmentControlItem IsSelected="True" Text="Login" Tag="1" />
+                <controls:SegmentControlItem Text="Sign up" Tag="2" />
+            </controls:SegmentControl.ItemsSource>
+        </controls:SegmentControl>
+        <ScrollView 
+            Grid.Row="2"
+            Padding="40">
+            <Grid>
+                <!-- Login -->
+                <StackLayout IsVisible="{Binding IsLoginVisible}">
+                    <controls:ValidationEntry 
+                        Placeholder="Username"
+                        IconTextSource="&#xf007;"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}"
+                        Value="{Binding Username.Value, Mode=TwoWay}" />
+                    <controls:ValidationEntry 
+                        IconTextSource="&#xf023;"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}"
+                        Placeholder="Password" 
+                        IsPassword="True" 
+                        Value="{Binding Password.Value, Mode=TwoWay}" />
+                    <StackLayout 
+                        HorizontalOptions="Start"
+                        Orientation="Horizontal">
+                        <CheckBox 
+                            IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                            WidthRequest="35"
+                            Color="{StaticResource Accent}" />
+                        <Label 
+                            TextColor="{StaticResource TextDark}"
+                            FontSize="Medium"
+                            VerticalOptions="Center"
+                            Text="Remember me?" />
+                    </StackLayout>
+                    <Button 
+                        Command="{Binding LoginCommand}"
+                        FontFamily="{StaticResource BoldFont}"
+                        CornerRadius="40"
+                        Text="Login" />
+                    <Label
+                        FontSize="Medium"
+                        TextColor="{StaticResource TextDark}"
+                        HorizontalOptions="End"
+                        Text="Forgot password?">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <!-- Sign up -->
+                <StackLayout IsVisible="{Binding IsLoginVisible, Converter={StaticResource InvertedBoolConv}}">
+                    <controls:ValidationEntry 
+                        Placeholder="Username"
+                        IconTextSource="&#xf007;"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}"
+                        Value="{Binding Username.Value, Mode=TwoWay}" />
+                    <controls:ValidationEntry 
+                        Placeholder="Email"
+                        IconTextSource="&#xf0e0;"
+                        Keyboard="Email"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}" />
+                    <controls:ValidationEntry 
+                        IconTextSource="&#xf023;"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}"
+                        Placeholder="Password" 
+                        IsPassword="True" 
+                        Value="{Binding Password.Value, Mode=TwoWay}" />
+                    <controls:ValidationEntry 
+                        IconTextSource="&#xf023;"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}"
+                        Placeholder="Confirm password" 
+                        IsPassword="True" 
+                        Value="{Binding Password.Value, Mode=TwoWay}" />
+                    <Button 
+                        FontFamily="{StaticResource BoldFont}"
+                        CornerRadius="40"
+                        Text="Sign up" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+    
+</ContentPage>

@@ -9,7 +9,7 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace Architecture.iOS
 {
-    public class GradientView_iOS : VisualElementRenderer<StackLayout>
+    public class GradientView_iOS : VisualElementRenderer<Grid>
     {
         public override void Draw(CGRect rect)
         {

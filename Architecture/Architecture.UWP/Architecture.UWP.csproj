@@ -133,7 +133,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Architecture.UWP_TemporaryKey.pfx" />
     <Content Include="Assets\FontAwesome5Brands.otf" />
     <Content Include="Assets\FontAwesome5Regular.otf" />
     <Content Include="Assets\FontAwesome5Solid.otf" />

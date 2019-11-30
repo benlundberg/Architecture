@@ -8,7 +8,7 @@
              x:DataType="local:LoggerViewModel">
 
     <NavigationPage.TitleView>
-        <controls:TitleLabelView Text="Logger" />
+        <controls:PageTitleView Text="{local:Translate Gen_Log}" />
     </NavigationPage.TitleView>
     
     <ContentPage.ToolbarItems>

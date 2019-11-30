@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+	x:Class="Architecture.ListCardPage"
+	xmlns:controls="clr-namespace:Architecture.Controls"
+	xmlns:local="clr-namespace:Architecture"
+    x:DataType="local:ListViewModel"
+    Visual="Material"
+    BackgroundColor="{StaticResource GrayLight}">
+
+    <ContentPage.BindingContext>
+        <local:ListViewModel />
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Card List" />
+    </NavigationPage.TitleView>
+    
+    <Grid Padding="{StaticResource UnionPadding}">
+		<ListView 
+			CachingStrategy="RecycleElement"
+			ItemsSource="{Binding Items}"
+            SelectionMode="None"
+			HasUnevenRows="True"
+			SeparatorVisibility="None">
+			<ListView.ItemTemplate>
+				<DataTemplate x:DataType="local:ListItemViewModel">
+					<ViewCell>
+                        <Frame 
+                            Margin="10"
+                            Style="{StaticResource CardFrame}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackLayout Grid.ColumnSpan="2">
+                                    <Label 
+                                        FontSize="Title"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        FontSize="Subtitle"
+                                        Text="{Binding SubTitle}" />
+                                </StackLayout>
+                                <Button 
+                                    Grid.Row="1"
+                                    Text="Primary"/>
+                                <Button 
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    BackgroundColor="{StaticResource Accent}"
+                                    Text="Secondary"/>
+                            </Grid>
+                        </Frame>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<controls:LoadingView 
+            IsRunning="{Binding IsBusy}"
+			Text="{local:Translate Gen_Loading}" />
+	</Grid>
+	
+</ContentPage>

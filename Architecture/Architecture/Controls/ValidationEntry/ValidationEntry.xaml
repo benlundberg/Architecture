@@ -8,22 +8,36 @@
     xmlns:controls="clr-namespace:Architecture.Controls"
     x:Class="Architecture.Controls.ValidationEntry"
     x:DataType="controls:ValidationEntry"
-    x:Name="this"
-    Visual="Material">
+    x:Name="root"
+    Visual="Default">
 
     <StackLayout>
-        <Entry
-            Placeholder="{Binding Placeholder, Source={x:Reference this}}"
-            PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference this}}"
-            Text="{Binding Value.Value, Source={x:Reference this}, Mode=TwoWay}"
-            TextColor="{Binding TextColor, Source={x:Reference this}}"
-            IsPassword="{Binding IsPassword, Source={x:Reference this}}"
-            Keyboard="{Binding Keyboard, Source={x:Reference this}}"
-            Unfocused="Entry_Unfocused" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label 
+                FontSize="Large"
+                IsVisible="{Binding HasIcon, Source={x:Reference root}}"
+                VerticalOptions="Center"
+                Text="{Binding IconTextSource, Source={x:Reference root}}"
+                TextColor="{Binding IconColor, Source={x:Reference root}}"
+                FontFamily="{Binding IconFontFamily, Source={x:Reference root}}" />
+            <Entry
+                Grid.Column="1"
+                Placeholder="{Binding Placeholder, Source={x:Reference root}}"
+                PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference root}}"
+                Text="{Binding Value.Value, Source={x:Reference root}, Mode=TwoWay}"
+                TextColor="{Binding TextColor, Source={x:Reference root}}"
+                IsPassword="{Binding IsPassword, Source={x:Reference root}}"
+                Keyboard="{Binding Keyboard, Source={x:Reference root}}"
+                Unfocused="Entry_Unfocused" />
+        </Grid>
         <Label 
-            Text="{Binding Value.Error, Source={x:Reference this}}"
+            Text="{Binding Value.Error, Source={x:Reference root}}"
             TextColor="IndianRed"
-            IsVisible="{Binding Value.IsValid, Source={x:Reference this}, Converter={StaticResource InvertedBoolConv}}"  />
+            IsVisible="{Binding Value.IsValid, Source={x:Reference root}, Converter={StaticResource InvertedBoolConv}}"  />
     </StackLayout>
     
 </ContentView>

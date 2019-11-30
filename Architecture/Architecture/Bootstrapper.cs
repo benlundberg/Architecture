@@ -10,7 +10,6 @@ namespace Architecture
         {
             // Services
             ComponentContainer.Current.Register<ITranslateService, TranslateService>();
-            ComponentContainer.Current.Register<INetworkStatusService, NetworkStatusService>(singelton: true);
             ComponentContainer.Current.Register<ILoggerService, LoggerService>(singelton: true);
         }
 

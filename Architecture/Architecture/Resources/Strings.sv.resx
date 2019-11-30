@@ -135,50 +135,11 @@
   <data name="Gen_Loading" xml:space="preserve">
     <value>Laddar</value>
   </data>
-  <data name="Gen_Login" xml:space="preserve">
-    <value>Logga in</value>
-  </data>
-  <data name="Gen_Mail" xml:space="preserve">
-    <value>E-mail</value>
-  </data>
-  <data name="Gen_Map" xml:space="preserve">
-    <value>Karta</value>
-  </data>
   <data name="Gen_No" xml:space="preserve">
     <value>Nej</value>
   </data>
-  <data name="Gen_Password" xml:space="preserve">
-    <value>Lösenord</value>
-  </data>
-  <data name="Gen_Password_Confirm" xml:space="preserve">
-    <value>Lösenord igen</value>
-  </data>
-  <data name="Gen_RememberMe" xml:space="preserve">
-    <value>Kom ihåg mig</value>
-  </data>
-  <data name="Gen_Restart" xml:space="preserve">
-    <value>Starta om</value>
-  </data>
-  <data name="Gen_Sign_Up" xml:space="preserve">
-    <value>Registrera</value>
-  </data>
-  <data name="Gen_Username" xml:space="preserve">
-    <value>Användarnamn</value>
-  </data>
   <data name="Gen_Yes" xml:space="preserve">
     <value>Ja</value>
-  </data>
-  <data name="Login_In_Process" xml:space="preserve">
-    <value>Loggar in</value>
-  </data>
-  <data name="Missing_Mail" xml:space="preserve">
-    <value>Saknar e-mail</value>
-  </data>
-  <data name="Missing_Password" xml:space="preserve">
-    <value>Saknar lösenord</value>
-  </data>
-  <data name="Missing_Username" xml:space="preserve">
-    <value>Saknar användarnamn</value>
   </data>
   <data name="Permission_Message" xml:space="preserve">
     <value>För att använda denna funktion behöver appen behörighet till:</value>
@@ -189,22 +150,19 @@
   <data name="Permission_Title" xml:space="preserve">
     <value>Behörighet för:</value>
   </data>
-  <data name="Sign_Up" xml:space="preserve">
-    <value>Har du ingen användare? Registrera dig här!</value>
+  <data name="Gen_Clear" xml:space="preserve">
+    <value>Rensa</value>
   </data>
-  <data name="Forgot_Password" xml:space="preserve">
-    <value>Glömt lösenord?</value>
+  <data name="Gen_Log" xml:space="preserve">
+    <value>Logg</value>
   </data>
-  <data name="Gen_Or" xml:space="preserve">
-    <value>Eller</value>
+  <data name="Gen_Send" xml:space="preserve">
+    <value>Skicka</value>
   </data>
   <data name="Gen_Search" xml:space="preserve">
     <value>Sök</value>
   </data>
-  <data name="Gen_Clear" xml:space="preserve">
-    <value>Rensa</value>
-  </data>
-  <data name="Gen_Send" xml:space="preserve">
-    <value>Skicka</value>
+  <data name="Gen_Delete" xml:space="preserve">
+    <value>Ta bort</value>
   </data>
 </root>

@@ -26,13 +26,17 @@ namespace Architecture.Controls
 
         private void Entry_Unfocused(object sender, FocusEventArgs e)
         {
-            Value.Validate();
+            Value?.Validate();
         }
 
         public Keyboard Keyboard { get; set; }
         public string Placeholder { get; set; }
-        public Color PlaceholderColor { get; set; }
-        public Color TextColor { get; set; }
+        public Color PlaceholderColor { get; set; } = Color.Gray;
+        public Color TextColor { get; set; } = Color.Black;
         public bool IsPassword { get; set; }
+        public string IconFontFamily { get; set; }
+        public string IconTextSource { get; set; }
+        public Color IconColor { get; set; } = Color.Black;
+        public bool HasIcon => !string.IsNullOrEmpty(IconTextSource);
     }
 }

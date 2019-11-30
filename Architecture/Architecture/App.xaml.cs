@@ -1,5 +1,4 @@
 ﻿using Architecture.Core;
-using Architecture.Demos;
 using Xamarin.Forms;
 
 namespace Architecture
@@ -17,7 +16,10 @@ namespace Architecture
 
         public static void SetMainPage()
         {
-            Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
+            // TODO: UI Kit home page
+            Current.MainPage = new NavigationPage(new UIKitHomePage());
+
+            //Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
             //Current.MainPage = new NavigationPage(ViewContainer.Current.CreatePage<HomeTabbedViewModel>());
         }
 
@@ -29,9 +31,6 @@ namespace Architecture
 
             Bootstrapper.CreateTables();
             Bootstrapper.RegisterViews();
-
-            // TODO: Remove when using template
-            Bootstrapper_Demo.Init();
         }
 
         protected override void OnStart()

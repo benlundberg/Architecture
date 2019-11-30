@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class TableControl : Grid
+    public class TableControl : ScrollView
     {
         public TableControl()
         {
-            this.ColumnSpacing = 0;
-            this.RowSpacing = 0;
         }
 
         private static void TableControlSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
@@ -24,12 +24,16 @@ namespace Architecture.Controls
                 return;
             }
 
-            view.Children.Clear();
-
             if (newItems.Any() != true)
             {
                 return;
             }
+
+            var grid = new Grid()
+            {
+                ColumnSpacing = 0,
+                RowSpacing = 0
+            };
 
             var numRows = newItems.Max(x => x.ContentItems.Count());
             var numCols = newItems.Count;
@@ -37,13 +41,13 @@ namespace Architecture.Controls
             // Create rows
             for (int i = 0; i <= numRows; i++)
             {
-                view.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+                grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
             }
 
             // Create columns
             for (int i = 0; i < numCols; i++)
             {
-                view.ColumnDefinitions.Add(new ColumnDefinition());
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
             for (int i = 0; i < newItems.Count; i++)
@@ -55,16 +59,23 @@ namespace Architecture.Controls
                     BackgroundColor = item.HeaderBackground,
                     BorderColor = view.UseBorder ? view.BorderColor : Color.Transparent,
                     CornerRadius = 0,
-                    Padding = 4,
+                    Padding = new Thickness(10, 20),
                     Content = new Label 
                     { 
                         VerticalTextAlignment = TextAlignment.Center,
                         TextColor = item.HeaderColor,
-                        Text = item.Header 
+                        Text = item.Header,
+                        FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
                     }
                 };
-                
-                SetColumn(header, i);
+
+                header.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = view.TapGestureCommand,
+                    CommandParameter = item
+                });
+
+                Grid.SetColumn(header, i);
 
                 for (int y = 0; y < item.ContentItems.Count; y++)
                 {
@@ -75,27 +86,31 @@ namespace Architecture.Controls
                         BackgroundColor = !view.UseSecondBackgroundColor ? contentItem.Background : (y % 2) == 0 ? contentItem.Background : contentItem.SecondBackground,
                         BorderColor = view.UseBorder ? view.BorderColor : Color.Transparent,
                         CornerRadius = 0,
-                        Padding = 4,
+                        Padding = new Thickness(10, 20),
                         Content = new Label 
                         {
                             VerticalTextAlignment = TextAlignment.Center,
                             TextColor = contentItem.TextColor,
-                            Text = contentItem.Text 
+                            Text = contentItem.Text,
+                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
                         }
                     };
 
-                    SetRow(content, y + 1);
-                    SetColumn(content, i);
+                    Grid.SetRow(content, y + 1);
+                    Grid.SetColumn(content, i);
 
-                    view.Children.Add(content);
+                    grid.Children.Add(content);
                 }
 
-                view.Children.Add(header);
+                grid.Children.Add(header);
             }
+
+            view.Content = grid;
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             propertyName: "ItemsSource",
+            defaultBindingMode: BindingMode.TwoWay,
             returnType: typeof(IList<TableItem>),
             declaringType: typeof(TableControl),
             defaultValue: default(IList<TableItem>),
@@ -107,12 +122,30 @@ namespace Architecture.Controls
             set { SetValue(ItemsSourceProperty, value); }
         }
 
+        private ICommand tapGestureCommand;
+        public ICommand TapGestureCommand => tapGestureCommand ?? (tapGestureCommand = new Command((param) =>
+        {
+            if (!(param is TableItem item))
+            {
+                return;
+            }
+
+            if (item.IsOrderedAscending)
+            {
+                item.ContentItems = item.ContentItems.OrderByDescending(x => x.Text)?.ToList();
+            }
+            else
+            {
+                item.ContentItems = item.ContentItems.OrderBy(x => x.Text)?.ToList();
+            }
+        }));
+
         public bool UseBorder { get; set; } = true;
         public bool UseSecondBackgroundColor { get; set; } = true;
         public Color BorderColor { get; set; } = Color.Black;
     }
 
-    public class TableItem
+    public class TableItem : INotifyPropertyChanged
     {
         public TableItem(string header)
         {
@@ -120,10 +153,13 @@ namespace Architecture.Controls
         }
 
         public string Header { get; set; }
-        public Color HeaderColor { get; set; } = Color.White;
-        public Color HeaderBackground { get; set; } = Color.Gray;
+        public bool IsOrderedAscending { get; set; }
+        public Color HeaderColor { get; set; } = Color.Black;
+        public Color HeaderBackground { get; set; } = App.Current.GrayColor();
         public TextAlignment ContentItemTextAlignment { get; set; }
         public IList<TableContentItem> ContentItems { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public class TableContentItem
@@ -136,6 +172,6 @@ namespace Architecture.Controls
         public string Text { get; set; }
         public Color TextColor { get; set; } = Color.Black;
         public Color Background { get; set; } = Color.White;
-        public Color SecondBackground { get; set; } = Color.LightGray;
+        public Color SecondBackground { get; set; } = App.Current.LightGrayColor();
     }
 }

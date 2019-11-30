@@ -61,15 +61,6 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Forgot password?.
-        /// </summary>
-        internal static string Forgot_Password {
-            get {
-                return ResourceManager.GetString("Forgot_Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Gen_Cancel {
@@ -97,6 +88,15 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string Gen_Delete {
+            get {
+                return ResourceManager.GetString("Gen_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading.
         /// </summary>
         internal static string Gen_Loading {
@@ -106,29 +106,11 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log in.
+        ///   Looks up a localized string similar to Log.
         /// </summary>
-        internal static string Gen_Login {
+        internal static string Gen_Log {
             get {
-                return ResourceManager.GetString("Gen_Login", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to E-mail.
-        /// </summary>
-        internal static string Gen_Mail {
-            get {
-                return ResourceManager.GetString("Gen_Mail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Map.
-        /// </summary>
-        internal static string Gen_Map {
-            get {
-                return ResourceManager.GetString("Gen_Map", resourceCulture);
+                return ResourceManager.GetString("Gen_Log", resourceCulture);
             }
         }
         
@@ -138,51 +120,6 @@ namespace Architecture.Resources {
         internal static string Gen_No {
             get {
                 return ResourceManager.GetString("Gen_No", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Or.
-        /// </summary>
-        internal static string Gen_Or {
-            get {
-                return ResourceManager.GetString("Gen_Or", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password.
-        /// </summary>
-        internal static string Gen_Password {
-            get {
-                return ResourceManager.GetString("Gen_Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Confirm password.
-        /// </summary>
-        internal static string Gen_Password_Confirm {
-            get {
-                return ResourceManager.GetString("Gen_Password_Confirm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Remember me.
-        /// </summary>
-        internal static string Gen_RememberMe {
-            get {
-                return ResourceManager.GetString("Gen_RememberMe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restart.
-        /// </summary>
-        internal static string Gen_Restart {
-            get {
-                return ResourceManager.GetString("Gen_Restart", resourceCulture);
             }
         }
         
@@ -201,24 +138,6 @@ namespace Architecture.Resources {
         internal static string Gen_Send {
             get {
                 return ResourceManager.GetString("Gen_Send", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sign up.
-        /// </summary>
-        internal static string Gen_Sign_Up {
-            get {
-                return ResourceManager.GetString("Gen_Sign_Up", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username.
-        /// </summary>
-        internal static string Gen_Username {
-            get {
-                return ResourceManager.GetString("Gen_Username", resourceCulture);
             }
         }
         
@@ -259,42 +178,6 @@ namespace Architecture.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading.
-        /// </summary>
-        internal static string Login_In_Process {
-            get {
-                return ResourceManager.GetString("Login_In_Process", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing e-mail.
-        /// </summary>
-        internal static string Missing_Mail {
-            get {
-                return ResourceManager.GetString("Missing_Mail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing password.
-        /// </summary>
-        internal static string Missing_Password {
-            get {
-                return ResourceManager.GetString("Missing_Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Missing username.
-        /// </summary>
-        internal static string Missing_Username {
-            get {
-                return ResourceManager.GetString("Missing_Username", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to To use this function the app needs access to:.
         /// </summary>
         internal static string Permission_Message {
@@ -318,15 +201,6 @@ namespace Architecture.Resources {
         internal static string Permission_Title {
             get {
                 return ResourceManager.GetString("Permission_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Don&apos;t have an account? Sign up here!.
-        /// </summary>
-        internal static string Sign_Up {
-            get {
-                return ResourceManager.GetString("Sign_Up", resourceCulture);
             }
         }
     }

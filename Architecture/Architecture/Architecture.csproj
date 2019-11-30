@@ -39,14 +39,20 @@
     <Compile Update="Controls\ExtendedContentPage\ExtendedContentPage.xaml.cs">
       <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Demos\UI\CardView\ListCardViewPage.xaml.cs">
-      <DependentUpon>ListCardViewPage.xaml</DependentUpon>
+    <Compile Update="UIKit\Views\Lists\ListCardPage.xaml.cs">
+      <DependentUpon>ListCardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Demos\UI\List\ListPage.xaml.cs">
+    <Compile Update="UIKit\Views\Lists\ListPage.xaml.cs">
       <DependentUpon>ListPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Services\TranslateService.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="UIKit\Views\Forms\RecoverPasswordPage.xaml.cs">
+      <DependentUpon>RecoverPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UIKit\Views\Home\UIKitHomePage.xaml.cs">
+      <DependentUpon>UIKitHomePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="ViewModels\Home\Master\MenuViewModel.cs">
       <SubType>Code</SubType>
@@ -58,9 +64,6 @@
     </Compile>
     <Compile Update="Resources\Strings.sv.Designer.cs">
       <DependentUpon>Strings.sv.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Demos\UI\SignUp\SignUpPage.xaml.cs">
-      <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -77,16 +80,37 @@
     <EmbeddedResource Update="Controls\ValidationEntry\ValidationEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Demos\UI\Controls\ControlsPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Articles\ArticleBrowserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Demos\UI\List\Item\ItemPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Articles\ArticleClassicPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Demos\UI\List\ListPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Articles\ArticleListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Demos\UI\Login\LoginPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Data\DataTablePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Details\DetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Forms\FullLoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Forms\FullSignUpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Forms\TabbedLoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Home\UIKitHomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Lists\ListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Lists\ListVariantPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home\Master\HomeMasterPage.xaml">
@@ -112,6 +136,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\LoadingView\" />
-    <Folder Include="Demos\UI\Details\" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Architecture
@@ -56,7 +57,7 @@ namespace Architecture
         /// <param name="showAlert">Boolean value if an alert should be prompt if device don't have internet connection</param>
         protected void ExecuteIfConnected(Action actionToExecute, bool showAlert)
         {
-            if (NetStatusHelper.IsConnected)
+            if (IsConnected)
             {
                 actionToExecute();
             }
@@ -144,15 +145,13 @@ namespace Architecture
 		private ITranslateService translateHelper;
         protected ITranslateService TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateService>());
 
-        private INetworkStatusService netStatusHelper;
-        protected INetworkStatusService NetStatusHelper => netStatusHelper ?? (netStatusHelper = ComponentContainer.Current.Resolve<INetworkStatusService>());
-
         private ILoggerService loggerHelper;
         protected ILoggerService Logger => loggerHelper ?? (loggerHelper = ComponentContainer.Current.Resolve<ILoggerService>());
 
         public INavigation Navigation { get; set; }
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;
+        public bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
 
         public event PropertyChangedEventHandler PropertyChanged;
 	}

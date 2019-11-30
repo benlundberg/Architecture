@@ -235,11 +235,11 @@ namespace Architecture.Controls
         }
 
         public SegmentControlItem SelectedSegment { get; private set; }
-        public Color SegmentTextColor { get; set; } = Application.Current.PrimaryColor();
+        public Color SegmentTextColor { get; set; } = Application.Current.AccentColor();
         public Color SegmentBackgroundColor { get; set; } = Color.White;
         public Color SelectedTextColor { get; set; } = Color.White;
-        public Color SelectedBackgroundColor { get; set; } = Application.Current.PrimaryColor();
-        public NamedSize FontSize { get; set; }
+        public Color SelectedBackgroundColor { get; set; } = Application.Current.AccentColor();
+        public NamedSize FontSize { get; set; } = NamedSize.Medium;
         public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
         public LayoutOptions TextHorizontalOption { get; set; } = LayoutOptions.Center;
         public ItemsLayoutOrientation Orientation { get; set; } = ItemsLayoutOrientation.Horizontal;

@@ -14,7 +14,7 @@ namespace Architecture.Controls
         ToBottomRight
     }
 
-    public class GradientView : StackLayout
+    public class GradientView : Grid
     {
         public GradientView()
         {
@@ -23,6 +23,6 @@ namespace Architecture.Controls
 
         public Color StartColor { get; set; } = Application.Current.PrimaryColor();
         public Color EndColor { get; set; } = Application.Current.DarkPrimaryColor();
-        public GradientDirection Direction { get; set; }
+        public GradientDirection Direction { get; set; } = GradientDirection.ToTop;
     }
 }
