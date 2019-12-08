@@ -19,25 +19,30 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <controls:GradientView Direction="ToBottom">
-            <StackLayout
-                Orientation="Horizontal"
-                Padding="40">
+        <Grid ColumnSpacing="20" Padding="{StaticResource LargeSpacing}">
+            <Grid.Effects>
+                <local:GradientEffect Direction="ToBottom" />
+            </Grid.Effects>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label 
+                Text="{StaticResource GeneralIcon}"
+                FontFamily="{StaticResource FontAwesomeBrands}"
+                FontSize="64"
+                TextColor="White" />
+            <StackLayout Grid.Column="1">
                 <Label 
-                    FontSize="Header"
-                    HorizontalOptions="End"
-                    Text="{StaticResource GeneralIcon}"
-                    TextColor="{StaticResource TextLight}"
-                    FontFamily="{StaticResource FontAwesomeBrands}" />
-                <Label 
-                    Grid.Column="1"
-                    HorizontalTextAlignment="Start"
+                    Text="Welcome to Architecture"
+                    TextColor="White"
                     FontSize="Large"
-                    VerticalOptions="Center"
-                    TextColor="{StaticResource TextLight}"
-                    Text="Login to XF UIKit" />
+                    FontAttributes="Bold"/>
+                <Label 
+                    Text="Welcome back!"
+                    TextColor="White" />
             </StackLayout>
-        </controls:GradientView>
+        </Grid>
         <controls:SegmentControl Grid.Row="1" ValueChangedCommand="{Binding ViewOptionChangedCommand}">
             <controls:SegmentControl.ItemsSource>
                 <controls:SegmentControlItem IsSelected="True" Text="Login" Tag="1" />
@@ -46,77 +51,67 @@
         </controls:SegmentControl>
         <ScrollView 
             Grid.Row="2"
-            Padding="40">
+            Padding="{StaticResource LargeSpacing}">
             <Grid>
                 <!-- Login -->
-                <StackLayout IsVisible="{Binding IsLoginVisible}">
+                <StackLayout 
+                    Spacing="{StaticResource MainSpacing}"
+                    IsVisible="{Binding IsLoginVisible}">
                     <controls:ValidationEntry 
                         Placeholder="Username"
                         IconTextSource="&#xf007;"
                         IconFontFamily="{StaticResource FontAwesomeSolid}"
-                        Value="{Binding Username.Value, Mode=TwoWay}" />
+                        Value="{Binding LoginModel.Username, Mode=TwoWay}" />
                     <controls:ValidationEntry 
                         IconTextSource="&#xf023;"
                         IconFontFamily="{StaticResource FontAwesomeSolid}"
                         Placeholder="Password" 
                         IsPassword="True" 
-                        Value="{Binding Password.Value, Mode=TwoWay}" />
+                        Value="{Binding LoginModel.Password, Mode=TwoWay}" />
                     <StackLayout 
                         HorizontalOptions="Start"
                         Orientation="Horizontal">
                         <CheckBox 
                             IsChecked="{Binding RememberMe, Mode=TwoWay}"
-                            WidthRequest="35"
+                            WidthRequest="32"
                             Color="{StaticResource Accent}" />
                         <Label 
-                            TextColor="{StaticResource TextDark}"
-                            FontSize="Medium"
                             VerticalOptions="Center"
                             Text="Remember me?" />
                     </StackLayout>
                     <Button 
-                        Command="{Binding LoginCommand}"
-                        FontFamily="{StaticResource BoldFont}"
-                        CornerRadius="40"
-                        Text="Login" />
+                        Text="{StaticResource CheckIcon}"
+                        FontFamily="{StaticResource FontAwesomeSolid}" />
                     <Label
-                        FontSize="Medium"
-                        TextColor="{StaticResource TextDark}"
                         HorizontalOptions="End"
                         Text="Forgot password?">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
-                        </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <!-- Sign up -->
-                <StackLayout IsVisible="{Binding IsLoginVisible, Converter={StaticResource InvertedBoolConv}}">
-                    <controls:ValidationEntry 
-                        Placeholder="Username"
-                        IconTextSource="&#xf007;"
-                        IconFontFamily="{StaticResource FontAwesomeSolid}"
-                        Value="{Binding Username.Value, Mode=TwoWay}" />
+                <StackLayout 
+                    Spacing="{StaticResource MainSpacing}"
+                    IsVisible="{Binding IsLoginVisible, Converter={StaticResource InvertedBoolConv}}">
                     <controls:ValidationEntry 
                         Placeholder="Email"
                         IconTextSource="&#xf0e0;"
                         Keyboard="Email"
+                        Value="{Binding SignUpModel.Email, Mode=TwoWay}"
                         IconFontFamily="{StaticResource FontAwesomeSolid}" />
                     <controls:ValidationEntry 
                         IconTextSource="&#xf023;"
                         IconFontFamily="{StaticResource FontAwesomeSolid}"
                         Placeholder="Password" 
                         IsPassword="True" 
-                        Value="{Binding Password.Value, Mode=TwoWay}" />
+                        Value="{Binding SignUpModel.Password, Mode=TwoWay}" />
                     <controls:ValidationEntry 
                         IconTextSource="&#xf023;"
                         IconFontFamily="{StaticResource FontAwesomeSolid}"
                         Placeholder="Confirm password" 
                         IsPassword="True" 
-                        Value="{Binding Password.Value, Mode=TwoWay}" />
+                        Value="{Binding SignUpModel.ConfirmPassword, Mode=TwoWay}" />
                     <Button 
-                        FontFamily="{StaticResource BoldFont}"
-                        CornerRadius="40"
-                        Text="Sign up" />
+                        Text="{StaticResource CheckIcon}"
+                        FontFamily="{StaticResource FontAwesomeSolid}"/>
                 </StackLayout>
             </Grid>
         </ScrollView>

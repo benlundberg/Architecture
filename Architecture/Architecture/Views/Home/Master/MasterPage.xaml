@@ -2,11 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture"
              x:Class="Architecture.MasterPage"
              Title="{Binding Title}">
     <ContentPage.Content>
         <Grid>
-            <controls:GradientView Direction="ToBottom" />
+            <Grid.Effects>
+                <local:GradientEffect />
+            </Grid.Effects>
             <StackLayout Padding="0,40,0,0">
                 <StackLayout Padding="0,20,0,0">
 
@@ -20,9 +23,9 @@
                             <ViewCell>
                                 <Label 
                                     VerticalOptions="Center" 
-                                    Margin="20,0,0,0" 
+                                    Margin="{StaticResource HorizontalPadding}" 
                                     Text="{Binding Title}" 
-                                    TextColor="White" 
+                                    TextColor="{StaticResource SecondaryTextColor}" 
                                     FontSize="Large" />
                             </ViewCell>
                         </DataTemplate>

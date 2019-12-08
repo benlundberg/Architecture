@@ -23,6 +23,8 @@ namespace Architecture.UWP
 
             Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental", "CarouselView_Experimental");
 
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+
             Xamarin.Forms.Forms.Init(e);
 
             if (!(Window.Current.Content is Frame rootFrame))

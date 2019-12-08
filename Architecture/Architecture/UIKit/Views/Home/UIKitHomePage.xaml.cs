@@ -98,7 +98,7 @@ namespace Architecture
             }
         }));
         
-        // Handles details pages
+        // Handles data pages
         private ICommand dataCommand;
         public ICommand DataCommand => dataCommand ?? (dataCommand = new Command(async (param) =>
         {
@@ -111,6 +111,55 @@ namespace Architecture
             {
                 case 1:
                     await Navigation.PushAsync(new DataTablePage());
+                    break;
+                case 2:
+                    await Navigation.PushAsync(new TaskOverviewPage());
+                    break;
+                case 3:
+                    await Navigation.PushAsync(new TaskBrowserPage());
+                    break;
+            }
+        })); 
+        
+        // Handles dashboard pages
+        private ICommand dashboardCommand;
+        public ICommand DashboardCommand => dashboardCommand ?? (dashboardCommand = new Command(async (param) =>
+        {
+            if (!int.TryParse(param?.ToString(), out int page))
+            {
+                return;
+            }
+
+            switch (page)
+            {
+                case 1:
+                    await Navigation.PushAsync(new FlatListPage());
+                    break;
+                case 2:
+                    await Navigation.PushAsync(new DashboardImagePage());
+                    break;
+                case 3:
+                    await Navigation.PushAsync(new DashboardCardPage());
+                    break;
+            }
+        }));
+        
+        // Handles social pages
+        private ICommand socialCommand;
+        public ICommand SocialCommand => socialCommand ?? (socialCommand = new Command(async (param) =>
+        {
+            if (!int.TryParse(param?.ToString(), out int page))
+            {
+                return;
+            }
+
+            switch (page)
+            {
+                case 1:
+                    await Navigation.PushAsync(new SocialCardPage());
+                    break;
+                case 2:
+                    await Navigation.PushAsync(new ContactDetailCardPage());
                     break;
             }
         }));

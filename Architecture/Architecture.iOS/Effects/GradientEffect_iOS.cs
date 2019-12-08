@@ -1,30 +1,38 @@
-﻿using Architecture.Controls;
-using Architecture.iOS;
-using CoreAnimation;
+﻿using CoreAnimation;
 using CoreGraphics;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(GradientView), typeof(GradientView_iOS))]
-
+[assembly: ResolutionGroupName("Architecture")]
+[assembly: ExportEffect(typeof(Architecture.iOS.GradientEffect_iOS), nameof(Architecture.GradientEffect))]
 namespace Architecture.iOS
 {
-    public class GradientView_iOS : VisualElementRenderer<Grid>
+    public class GradientEffect_iOS : PlatformEffect
     {
-        public override void Draw(CGRect rect)
+        protected override void OnAttached()
         {
-            base.Draw(rect);
-            GradientView layout = (GradientView)Element;
+            var view = Control ?? Container;
+
+            var effect = Element.Effects.OfType<GradientEffect>()?.FirstOrDefault(e => e is GradientEffect);
+
+            if (effect == null)
+            {
+                return;
+            }
 
             CGColor[] colors = new CGColor[]
             {
-                layout.StartColor.ToCGColor(),
-                layout.EndColor.ToCGColor()
+                effect.StartColor.ToCGColor(),
+                effect.EndColor.ToCGColor()
             };
 
             var gradientLayer = new CAGradientLayer();
 
-            switch (layout.Direction)
+            switch (effect.Direction)
             {
                 default:
                 case GradientDirection.ToRight:
@@ -60,11 +68,24 @@ namespace Architecture.iOS
                     gradientLayer.EndPoint = new CGPoint(1, 1);
                     break;
             }
+            
+            if (view.Layer.Bounds.IsEmpty)
+            {
+                view.BackgroundColor = effect.StartColor.ToUIColor();
+            }
+            else
+            {
+                view.Layer.MasksToBounds = true;
+                
+                gradientLayer.Frame = view.Bounds;
+                gradientLayer.Colors = colors;
 
-            gradientLayer.Frame = rect;
-            gradientLayer.Colors = colors;
+                view.Layer.InsertSublayer(gradientLayer, 0);
+            }
+        }
 
-            NativeView.Layer.InsertSublayer(gradientLayer, 0);
+        protected override void OnDetached()
+        {
         }
     }
 }

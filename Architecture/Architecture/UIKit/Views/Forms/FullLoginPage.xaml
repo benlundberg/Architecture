@@ -11,72 +11,66 @@
              x:DataType="local:LoginViewModel">
 
     <ScrollView>
-        <controls:GradientView>
-            <Label
-                VerticalOptions="Start"
-                HorizontalOptions="End"
-                Margin="20"
-                FontSize="Large"
-                Text="{StaticResource CloseIcon}"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="{StaticResource TextLight}">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding PopModalCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
+        <Grid>
+            <Grid.Effects>
+                <local:GradientEffect />
+            </Grid.Effects>
             <StackLayout 
-                Spacing="16"
-                Margin="40">
-                <StackLayout
-                    Orientation="Horizontal"
-                    HorizontalOptions="Center"
-                    Margin="0, 0, 0, 40">
+                Spacing="{StaticResource MainSpacing}"
+                Margin="{StaticResource FormPadding}"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                <Grid ColumnSpacing="20" Margin="0, 0, 0, 40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <Label 
-                        FontSize="Header"
-                        HorizontalOptions="End"
                         Text="{StaticResource GeneralIcon}"
-                        TextColor="{StaticResource TextLight}"
-                        FontFamily="{StaticResource FontAwesomeBrands}" />
-                    <Label 
-                        Grid.Column="1"
-                        HorizontalTextAlignment="Start"
-                        FontSize="Large"
-                        VerticalOptions="Center"
-                        TextColor="{StaticResource TextLight}"
-                        Text="Login to XF UIKit" />
-                </StackLayout>
+                        FontFamily="{StaticResource FontAwesomeBrands}"
+                        FontSize="64"
+                        TextColor="White" />
+                    <StackLayout Grid.Column="1">
+                        <Label 
+                            Text="Welcome to Architecture"
+                            TextColor="White"
+                            FontSize="Large"
+                            FontAttributes="Bold"/>
+                        <Label 
+                            Text="Welcome back!"
+                            TextColor="White" />
+                    </StackLayout>
+                </Grid>
                 <Entry 
+                    Opacity=".8"
                     Placeholder="Username"
                     Text="{Binding Username.Value, Mode=TwoWay}"
-                    PlaceholderColor="{StaticResource TextLight}"
-                    TextColor="{StaticResource TextLight}" />
+                    PlaceholderColor="{StaticResource EntryTextColor}"
+                    TextColor="{StaticResource EntryTextColor}" />
                 <Entry 
+                    Opacity=".8"
                     Placeholder="Password" 
                     IsPassword="True" 
                     Text="{Binding Password.Value, Mode=TwoWay}"
-                    PlaceholderColor="{StaticResource TextLight}"
-                    TextColor="{StaticResource TextLight}" />
+                    PlaceholderColor="{StaticResource EntryTextColor}"
+                    TextColor="{StaticResource EntryTextColor}" />
                 <StackLayout 
                     HorizontalOptions="Start"
                     Orientation="Horizontal">
                     <CheckBox 
                         IsChecked="{Binding RememberMe, Mode=TwoWay}"
-                        WidthRequest="35"
+                        WidthRequest="32"
                         Color="{StaticResource Accent}" />
                     <Label 
-                        TextColor="{StaticResource TextLight}"
-                        FontSize="Medium"
+                        TextColor="{StaticResource SecondaryTextColor}"
                         VerticalOptions="Center"
                         Text="Remember me?" />
                 </StackLayout>
                 <Button 
-                    Command="{Binding LoginCommand}"
-                    FontFamily="{StaticResource BoldFont}"
-                    CornerRadius="40"
-                    Text="Login" />
+                    Command="{Binding LoginCommand}" 
+                    Text="{StaticResource CheckIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
                 <Label
-                    FontSize="Medium"
-                    TextColor="{StaticResource TextLight}"
+                    TextColor="{StaticResource SecondaryTextColor}"
                     HorizontalOptions="End"
                     Text="Forgot password?">
                     <Label.GestureRecognizers>
@@ -84,6 +78,20 @@
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-        </controls:GradientView>
+            <controls:LoadingView IsRunning="{Binding IsBusy}" />
+            <Label
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                Margin="{StaticResource ControlPadding}"
+                FontSize="Large"
+                Text="{StaticResource CloseIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                TextColor="{StaticResource ToolbarTextColor}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopModalCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
     </ScrollView>
 </ContentPage>

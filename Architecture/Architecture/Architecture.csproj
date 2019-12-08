@@ -13,9 +13,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
-    <PackageReference Include="Unity" Version="5.11.1" />
+    <PackageReference Include="Unity" Version="5.11.2" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991221" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,8 +38,11 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Controls\ExtendedContentPage\ExtendedContentPage.xaml.cs">
-      <DependentUpon>ExtendedContentPage.xaml</DependentUpon>
+    <Compile Update="UIKit\Views\Dashboard\DashboardImagePage.xaml.cs">
+      <DependentUpon>DashboardImagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UIKit\Views\Dashboard\DashboardCardPage.xaml.cs">
+      <DependentUpon>DashboardCardPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="UIKit\Views\Lists\ListCardPage.xaml.cs">
       <DependentUpon>ListCardPage.xaml</DependentUpon>
@@ -71,7 +76,7 @@
     <EmbeddedResource Update="Controls\CollapsingScrollView\CollapsingScrollView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\ExtendedContentPage\ExtendedContentPage.xaml">
+    <EmbeddedResource Update="Controls\PickerView\PickerView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\SnackbarView\SnackbarView.xaml">
@@ -89,7 +94,16 @@
     <EmbeddedResource Update="UIKit\Views\Articles\ArticleListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Dashboard\FlatListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Data\DataTablePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Data\TaskBrowserPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Data\TaskOverviewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Details\DetailPage.xaml">
@@ -111,6 +125,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Lists\ListVariantPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Social\ContactDetailCardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Social\SocialCardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home\Master\HomeMasterPage.xaml">

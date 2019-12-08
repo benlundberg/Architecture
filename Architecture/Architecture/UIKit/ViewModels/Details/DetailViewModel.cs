@@ -10,6 +10,12 @@ namespace Architecture
             {
                 new CommentItemViewModel(),
                 new CommentItemViewModel(),
+                new CommentItemViewModel(),
+                new CommentItemViewModel(),
+                new CommentItemViewModel(),
+                new CommentItemViewModel(),
+                new CommentItemViewModel(),
+                new CommentItemViewModel(),
                 new CommentItemViewModel()
             };
         }

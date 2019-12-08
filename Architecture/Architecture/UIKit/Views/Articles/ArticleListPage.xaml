@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="Architecture.ArticleListPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:local="clr-namespace:Architecture"
              Visual="Material"
              x:DataType="local:ArticlesViewModel">
@@ -26,13 +27,12 @@
             <DataTemplate x:DataType="local:ArticleItemViewModel">
                 <ViewCell>
                     <Grid>
-                        <Image 
+                        <ff:CachedImage 
                             HeightRequest="250"
                             Aspect="AspectFill"
                             Source="{Binding ImageSource}" />
                         <Grid 
-                            RowSpacing="10"
-                            Margin="16"
+                            Margin="{StaticResource ControlPadding}"
                             VerticalOptions="End">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -41,8 +41,8 @@
                             </Grid.RowDefinitions>
                             <Label
                                 FontSize="Large"
-                                TextColor="{StaticResource TextLight}"
-                                FontFamily="{StaticResource BoldFont}"
+                                TextColor="{StaticResource SecondaryTextColor}"
+                                FontAttributes="Bold"
                                 Text="{Binding Title}" />
                             <Grid Grid.Row="1" ColumnSpacing="10">
                                 <Grid.ColumnDefinitions>
@@ -54,11 +54,11 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Label 
-                                    TextColor="{StaticResource TextLight}"
+                                    TextColor="{StaticResource SecondaryTextColor}"
                                     Text="{Binding Category}" />
                                 <Label 
                                     Grid.Column="1"
-                                    TextColor="{StaticResource TextLight}"
+                                    TextColor="{StaticResource SecondaryTextColor}"
                                     Text="{Binding Year}" />
                                 <Label 
                                     Grid.Column="2"
@@ -69,7 +69,7 @@
                                 <Label 
                                     Grid.Column="3"
                                     VerticalOptions="Center"
-                                    FontFamily="{StaticResource BoldFont}"
+                                    FontAttributes="Bold"
                                     TextColor="{StaticResource Accent}"
                                     Text="98" />
                                 <Label 
@@ -81,7 +81,7 @@
                                 <Label 
                                     Grid.Column="5"
                                     VerticalOptions="Center"
-                                    FontFamily="{StaticResource BoldFont}"
+                                    FontAttributes="Bold"
                                     TextColor="{StaticResource Accent}"
                                     Text="65" />
                             </Grid>

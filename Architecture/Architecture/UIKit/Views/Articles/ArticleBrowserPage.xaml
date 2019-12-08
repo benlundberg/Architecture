@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Architecture.ArticleBrowserPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
@@ -24,19 +25,18 @@
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
                         <Grid>
-                            <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                            <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
                             <StackLayout Margin="20" VerticalOptions="End">
                                 <Label 
-                                    TextColor="{StaticResource TextLight}"
+                                    TextColor="{StaticResource SecondaryTextColor}"
                                     Text="{Binding Year}" />
                                 <Label
                                     FontSize="Large"
-                                    TextColor="{StaticResource TextLight}"
-                                    FontFamily="{StaticResource BoldFont}"
+                                    TextColor="{StaticResource SecondaryTextColor}"
+                                    FontAttributes="Bold"
                                     Text="{Binding Title}" />
                                 <Label 
-                                    TextColor="{StaticResource TextLight}"
-                                    FontSize="Medium"
+                                    TextColor="{StaticResource SecondaryTextColor}"
                                     Text="{Binding Category}" />
                             </StackLayout>
                         </Grid>
@@ -45,7 +45,7 @@
             </CarouselView>
             <CollectionView
                 ItemsSource="{Binding SportArticles}"
-                Margin="10, 10, 0, 10"
+                Margin="16, 10, 0, 10"
                 HeightRequest="250">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
@@ -56,21 +56,25 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Frame
-                            Padding="0"
-                            CornerRadius="14"
-                            BackgroundColor="Gray">
-                            <Grid>
-                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                        <Frame Padding="1">
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ff:CachedImage
+                                    Source="{Binding ImageSource}" 
+                                    Aspect="AspectFill" />
                                 <Grid 
+                                    Grid.Row="1"
                                     BackgroundColor="White"
                                     Padding="10" 
                                     VerticalOptions="End">
                                     <Label
                                         Grid.Row="0"
-                                        FontSize="Large"
+                                        FontSize="Medium"
                                         TextColor="{StaticResource Accent}"
-                                        FontFamily="{StaticResource BoldFont}"
+                                        FontAttributes="Bold"
                                         Text="{Binding Title}" />
                                     <Label 
                                         Grid.Row="1"
@@ -88,28 +92,35 @@
             </CollectionView>
             <CollectionView
                 ItemsSource="{Binding AnimalArticles}"
-                Margin="10, 10, 0, 10"
+                Margin="16, 10, 0, 10"
                 HeightRequest="250">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout HorizontalItemSpacing="10" Orientation="Horizontal" />
+                    <GridItemsLayout 
+                        SnapPointsAlignment="Start" 
+                        SnapPointsType="None" 
+                        HorizontalItemSpacing="10" 
+                        Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Frame
-                            Padding="0"
-                            CornerRadius="14"
-                            BackgroundColor="Gray">
-                            <Grid>
-                                <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                        <Frame Padding="1">
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ff:CachedImage 
+                                    Source="{Binding ImageSource}" 
+                                    Aspect="AspectFill" />
                                 <Grid 
-                                    BackgroundColor="White"
+                                    Grid.Row="1"
                                     Padding="10" 
                                     VerticalOptions="End">
                                     <Label
                                         Grid.Row="0"
-                                        FontSize="Large"
+                                        FontSize="Medium"
                                         TextColor="{StaticResource Accent}"
-                                        FontFamily="{StaticResource BoldFont}"
+                                        FontAttributes="Bold"
                                         Text="{Binding Title}" />
                                     <Label 
                                         Grid.Row="1"

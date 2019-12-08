@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.ContactDetailCardPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             Visual="Material">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Contact Detail Card" />
+    </NavigationPage.TitleView>
+
+    <Grid>
+        <Grid.Effects>
+            <local:GradientEffect Direction="ToBottom" EndColor="{StaticResource DarkAccent}" />
+        </Grid.Effects>
+        <Frame Margin="{StaticResource FormPadding}">
+            <StackLayout Spacing="{StaticResource MainSpacing}">
+                <ff:CachedImage Source="http://lorempixel.com/250/250/people/8/">
+                    <ff:CachedImage.Transformations>
+                        <transformation:CircleTransformation />
+                    </ff:CachedImage.Transformations>
+                </ff:CachedImage>
+                <StackLayout Spacing="10">
+                    <Label Text="Name" FontSize="Small" />
+                    <Label Text="John Doe" FontSize="Medium" FontAttributes="Bold" />
+                    <BoxView Margin="-30, 0" BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                </StackLayout>
+                <StackLayout Spacing="10">
+                    <Label Text="Address" FontSize="Small" />
+                    <Label Text="21095 Highway 20" FontSize="Medium" FontAttributes="Bold" />
+                    <BoxView Margin="-30, 0" BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                </StackLayout>
+                <StackLayout Spacing="10">
+                    <Label Text="Phonenumber" FontSize="Small" />
+                    <Label Text="+12 21412 1244" FontSize="Medium" FontAttributes="Bold" />
+                    <BoxView Margin="-30, 0" BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                </StackLayout>
+                <StackLayout Spacing="10">
+                    <Label Text="Email" FontSize="Small" />
+                    <Label Text="john.doe@architecture.com" FontSize="Medium" FontAttributes="Bold" />
+                    <BoxView Margin="-30, 0" BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                </StackLayout>
+                <StackLayout Margin="{StaticResource ControlPadding}" Spacing="{StaticResource MainSpacing}" Orientation="Horizontal" HorizontalOptions="Center">
+                    <!-- Email -->
+                    <Button
+                        Text="&#xf0e0;"
+                        HorizontalOptions="Start"
+                        FontFamily="{StaticResource FontAwesomeSolid}"
+                        Style="{StaticResource FloatingButtonSmall}" />
+                    <!-- Mobile -->
+                    <Button
+                        Text="&#xf3cd;"
+                        HorizontalOptions="Start"
+                        FontFamily="{StaticResource FontAwesomeSolid}"
+                        Style="{StaticResource FloatingButtonSmall}" />
+                    <!-- Map -->
+                    <Button
+                        Text="&#xf5a0;"
+                        HorizontalOptions="Start"
+                        FontFamily="{StaticResource FontAwesomeSolid}"
+                        Style="{StaticResource FloatingButtonSmall}" />
+                    <!-- Text -->
+                    <Button
+                        Text="&#xf27a;"
+                        HorizontalOptions="Start"
+                        FontFamily="{StaticResource FontAwesomeRegular}"
+                        Style="{StaticResource FloatingButtonSmall}" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentPage>

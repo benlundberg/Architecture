@@ -30,10 +30,10 @@
                 Visual="Default"
                 FontSize="Small"
                 Placeholder="{local:Translate Gen_Search}"
-                PlaceholderColor="White"
-                TextColor="White"
+                PlaceholderColor="{StaticResource ToolbarTextColor}"
+                TextColor="{StaticResource ToolbarTextColor}"
                 VerticalOptions="Center"
-                CancelButtonColor="White"
+                CancelButtonColor="{StaticResource ToolbarTextColor}"
                 BackgroundColor="Transparent">
                 <SearchBar.Behaviors>
                     <local:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchTextChangedCommand}" />
@@ -41,11 +41,11 @@
             </SearchBar>
             <Label 
                 Grid.Column="1"
-                FontSize="Medium"
+                FontSize="{StaticResource ToolbarItemSize}"
                 VerticalOptions="Center"
-                Margin="0, 0, 20, 0"
+                Margin="0, 0, 24, 0"
                 Text="{StaticResource SearchIcon}"
-                TextColor="White"
+                TextColor="{StaticResource ToolbarTextColor}"
                 FontFamily="{StaticResource FontAwesomeSolid}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding ShowSearchCommand}" />
@@ -70,7 +70,7 @@
         <controls:SegmentControl 
             ValueChangedCommand="{Binding SegmentValueChangedCommand}"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
-            Margin="{StaticResource UnionPadding}">
+            Margin="{StaticResource MainPadding}">
             <controls:SegmentControl.ItemsSource>
                 <controls:SegmentControlItem Text="Text Cell" IsSelected="True" Tag="1" />
                 <controls:SegmentControlItem Text="Image Cell" Tag="2" />

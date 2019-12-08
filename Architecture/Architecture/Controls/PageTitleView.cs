@@ -7,8 +7,7 @@ namespace Architecture.Controls
         public PageTitleView()
         {
             MaxLines = 1;
-            FontFamily = Application.Current.NormalFont();
-            TextColor = Color.White;
+            TextColor = Application.Current.ToolbarTextColor();
             VerticalOptions = LayoutOptions.CenterAndExpand;
 
             if (Device.RuntimePlatform == Device.iOS)

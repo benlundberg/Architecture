@@ -2,9 +2,25 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Architecture;assembly=Architecture"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Architecture.App">
     <Application.Resources>
         <ResourceDictionary>
+
+            <!--Colors -->
+            <Color x:Key="DarkPrimaryColor">#007ac1</Color>
+            <Color x:Key="PrimaryColor">#03a9f4</Color>
+            <Color x:Key="LightPrimaryColor">#67daff</Color>
+            <Color x:Key="Accent">#ffb300</Color>
+            <Color x:Key="LightAccent">#ffe54c</Color>
+            <Color x:Key="DarkAccent">#c68400</Color>
+            <Color x:Key="GrayDark">#c2c2c2</Color>
+            <Color x:Key="Gray">#eeeeee</Color>
+            <Color x:Key="GrayLight">#f5f5f5</Color>
+
+            <Color x:Key="ToolbarTextColor">#FFF</Color>
+            <Color x:Key="TextColor">#000</Color>
+            <Color x:Key="SecondaryTextColor">#FFF</Color>
 
             <!-- Converters-->
             <local:InvertedBoolConverter x:Key="InvertedBoolConv" />
@@ -17,21 +33,7 @@
             <x:String x:Key="CheckIcon">&#xf00c;</x:String>
             <x:String x:Key="AddIcon">&#xf067;</x:String>
             <x:String x:Key="SearchIcon">&#xf002;</x:String>
-
-            <!--Colors -->
-            <Color x:Key="DarkPrimaryColor">#29434e</Color>
-            <Color x:Key="PrimaryColor">#546e7a</Color>
-            <Color x:Key="LightPrimaryColor">#819ca9</Color>
-            <Color x:Key="Accent">#fb8c00</Color>
-            <Color x:Key="LightAccent">#ffbd45</Color>
-            <Color x:Key="DarkAccent">#c25e00</Color>
-            <Color x:Key="GrayDark">#c2c2c2</Color>
-            <Color x:Key="Gray">#eeeeee</Color>
-            <Color x:Key="GrayLight">#f5f5f5</Color>
-            <Color x:Key="TextDark">#555555</Color>
-            <Color x:Key="TextMedium">#9c9c9c</Color>
-            <Color x:Key="TextLight">#ffffff</Color>
-
+            
             <!-- Fonts Start here -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeBrands">
                 <On Platform="Android" Value="FontAwesome5Brands.otf#Regular" />
@@ -66,64 +68,82 @@
 
             <!-- Entry placeholder and textcolor  -->
 
+            <x:Double x:Key="GoldenRatio">1.618</x:Double>
+
+            <x:Double x:Key="ControlPadding">24</x:Double>
+
+            <x:Double x:Key="ToolbarItemSize">18</x:Double>
+
+            <x:Double x:Key="MainSpacing">20</x:Double>
+
+            <x:Double x:Key="LargeSpacing">40</x:Double>
+
+            <OnIdiom x:Key="MainPadding" x:TypeArguments="Thickness">
+                <OnIdiom.Tablet>40, 20, 40, 20</OnIdiom.Tablet>
+                <OnIdiom.Phone>16, 10, 16, 10</OnIdiom.Phone>
+                <OnIdiom.Desktop>120, 40, 80, 40</OnIdiom.Desktop>
+            </OnIdiom>
+
+            <Thickness x:Key="FormPadding">40, 100, 40, 100</Thickness>
+
+            <OnIdiom x:Key="HorizontalPadding" x:TypeArguments="Thickness">
+                <OnIdiom.Tablet>40, 0, 40, 0</OnIdiom.Tablet>
+                <OnIdiom.Phone>16, 0, 16, 0</OnIdiom.Phone>
+                <OnIdiom.Desktop>80, 0, 80, 0</OnIdiom.Desktop>
+            </OnIdiom>
+
+            <OnIdiom x:Key="VerticalPadding" x:TypeArguments="Thickness">
+                <OnIdiom.Tablet>0, 20, 0, 20</OnIdiom.Tablet>
+                <OnIdiom.Phone>0, 10, 0, 10</OnIdiom.Phone>
+                <OnIdiom.Desktop>0, 40, 0, 40</OnIdiom.Desktop>
+            </OnIdiom>
+
             <OnPlatform x:Key="EntryTextColor" x:TypeArguments="Color">
-                <On Platform="Android" Value="{StaticResource TextLight}" />
-                <On Platform="UWP" Value="{StaticResource TextDark}" />
-                <On Platform="iOS" Value="{StaticResource TextDark}" />
+                <On Platform="Android" Value="White" />
+                <On Platform="UWP" Value="Black" />
+                <On Platform="iOS" Value="Black" />
             </OnPlatform>
 
-            <OnIdiom 
-                x:Key="UnionPadding" 
-                x:TypeArguments="Thickness" 
-                Tablet="40, 20, 40, 20"
-                Desktop="80, 40, 80, 40"
-                Phone="16, 10, 16, 10" />
-
-            <OnIdiom 
-                x:Key="HorizontalPadding" 
-                x:TypeArguments="Thickness" 
-                Tablet="40, 0, 40, 0"
-                Desktop="80, 0, 80, 0"
-                Phone="16, 0, 16, 0" />
-
-            <OnIdiom 
-                x:Key="VerticalPadding" 
-                x:TypeArguments="Thickness" 
-                Tablet="40, 0, 40, 0"
-                Desktop="80, 0, 80, 0"
-                Phone="16, 0, 16, 0" />
-
             <!-- Platform specifics Ends here -->
-            
+
             <!-- Styles -->
+            <Style TargetType="ff:CachedImage">
+                <Setter Property="BitmapOptimizations" Value="True" />
+                <Setter Property="RetryCount" Value="3" />
+                <Setter Property="RetryDelay" Value="250" />
+                <Setter Property="DownsampleToViewSize" Value="True" />
+            </Style>
+            
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
-                <Setter Property="BarTextColor" Value="White" />
+                <Setter Property="BarTextColor" Value="{StaticResource ToolbarTextColor}" />
+            </Style>
+
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayLight}" />
             </Style>
             
             <Style TargetType="Label">
-                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
+                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
             </Style>
 
             <Style TargetType="Button">
-                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
-                <Setter Property="Padding" Value="10" />
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                <Setter Property="TextColor" Value="{StaticResource TextLight}" />
-                <Setter Property="CornerRadius">
-                    <Setter.Value>
-                        <OnPlatform>
-                            <On Platform="Android" Value="30" />
-                            <On Platform="UWP" Value="0" />
-                            <On Platform="iOS" Value="0" />
-                        </OnPlatform>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style TargetType="Button" x:Key="OutlineButton">
+                <Setter Property="Visual" Value="Default" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource Accent}" />
+                <Setter Property="BorderColor" Value="{StaticResource Accent}" />
+                <Setter Property="BorderWidth" Value="2" />
             </Style>
 
             <Style x:Key="FloatingButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="TextColor" Value="White" />
                 <Setter Property="CornerRadius" Value="40" />
                 <Setter Property="HeightRequest" Value="80" />
                 <Setter Property="WidthRequest" Value="80" />
@@ -131,21 +151,31 @@
                 <Setter Property="Margin" Value="20" />
                 <Setter Property="VerticalOptions" Value="End" />
                 <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="Padding" Value="0" />
             </Style>
 
-            <Style TargetType="Entry">
-                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
-            </Style>
-
-            <Style TargetType="DatePicker">
-                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Style x:Key="FloatingButtonSmall" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
+                <Setter Property="CornerRadius" Value="32" />
+                <Setter Property="HeightRequest" Value="64" />
+                <Setter Property="WidthRequest" Value="64" />
                 <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Padding" Value="0" />
             </Style>
 
-            <Style TargetType="Frame" x:Key="CardFrame">
+            <Style TargetType="Frame">
+                <Setter Property="IsClippedToBounds" Value="True" />
                 <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="BorderColor">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="Android" Value="LightGray" />
+                            <On Platform="UWP" Value="Transparent" />
+                            <On Platform="iOS" Value="Transparent" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="HasShadow">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:Boolean">
@@ -157,6 +187,7 @@
                 </Setter>
             </Style>
 
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

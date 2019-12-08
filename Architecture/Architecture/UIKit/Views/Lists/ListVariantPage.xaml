@@ -6,10 +6,10 @@
              mc:Ignorable="d"
              x:Class="Architecture.ListVariantPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 	         xmlns:local="clr-namespace:Architecture"
              x:DataType="local:ListViewModel"
-             Visual="Material"
-             BackgroundColor="{StaticResource GrayLight}">   
+             Visual="Material">   
 
     <ContentPage.BindingContext>
         <local:ListViewModel />
@@ -19,7 +19,7 @@
         <controls:PageTitleView Text="Variant List" />
     </NavigationPage.TitleView>
 
-    <Grid Padding="{StaticResource UnionPadding}">
+    <Grid Padding="{StaticResource MainPadding}">
         <ListView 
 			CachingStrategy="RecycleElement"
 			ItemsSource="{Binding Items}"
@@ -34,11 +34,10 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Source="{Binding ImageSource}" Aspect="AspectFit" />
+                            <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFit" />
                             <Frame
                                 Grid.Column="1"
-                                VerticalOptions="Center"
-                                Style="{StaticResource CardFrame}">
+                                VerticalOptions="Center">
                                 <StackLayout>
                                     <Label 
                                         FontSize="Title"
@@ -54,11 +53,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <controls:LoadingView 
-            IsRunning="{Binding IsBusy}"
-			Text="{local:Translate Gen_Loading}" />
+        <controls:LoadingView IsRunning="{Binding IsBusy}" />
     </Grid>
-
-
-
 </ContentPage>

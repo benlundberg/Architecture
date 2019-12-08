@@ -35,6 +35,7 @@
     <AndroidSupportedAbis />
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+    <AndroidHttpClientHandlerType>System.Net.Http.HttpClientHandler</AndroidHttpClientHandlerType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,29 +65,35 @@
       <Version>1.7.302-beta</Version>
     </PackageReference>
     <PackageReference Include="Unity">
-      <Version>5.11.1</Version>
+      <Version>5.11.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.3.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991211" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.991221" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.3.0.991211</Version>
+      <Version>4.3.0.991221</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper_Droid.cs" />
+    <Compile Include="Effects\GradientEffect_Droid.cs" />
     <Compile Include="Services\LocalFileSystemService_Droid.cs" />
     <Compile Include="Services\LocalizeService_Droid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer_Droid.cs" />
     <Compile Include="Renderers\ExtendedWebViewRenderer_Droid.cs" />
-    <Compile Include="Renderers\GradientView_Droid.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

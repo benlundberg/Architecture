@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.DashboardCardPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             x:DataType="local:DashboardViewModel">
+
+    <ContentPage.BindingContext>
+        <local:DashboardViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Dashboard Card" />
+    </NavigationPage.TitleView>
+
+    <ScrollView Padding="{StaticResource MainPadding}">
+        <controls:GridViewControl 
+            NumberOfColumns="2"
+            ItemsSource="{Binding DashboardItems}">
+            <controls:GridViewControl.ItemTemplate>
+                <DataTemplate x:DataType="local:DashboardItemViewModel">
+                    <Frame Padding="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ff:CachedImage 
+                                Grid.RowSpan="2"
+                                Aspect="AspectFill"
+                                Source="{Binding ImageSource}" />
+                            <StackLayout Grid.Row="1" Padding="10" BackgroundColor="{Binding BackgroundColor}">
+                                <Label 
+                                    Text="{Binding Title}" 
+                                    TextColor="White"
+                                    FontSize="Title"
+                                    FontAttributes="Bold" />
+                                <Label 
+                                    Text="{Binding SubTitle}" 
+                                    TextColor="White"
+                                    FontSize="Subtitle" />
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </controls:GridViewControl.ItemTemplate>
+        </controls:GridViewControl>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.TaskOverviewPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material">
+
+    <ContentPage.BindingContext>
+        <local:TaskOverviewViewModel />
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Task Overview" />
+    </NavigationPage.TitleView>
+
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <controls:PickerView 
+            Padding="20"
+            ItemsSource="{Binding PickerValues}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            IconFontFamily="{StaticResource FontAwesomeSolid}"
+            Title="Task date"
+            Placeholder="Select date"
+            CancelText="{local:Translate Gen_Cancel}"
+            IconTextSource="&#xf073;" />
+        <Grid
+            Grid.Row="1"
+            BackgroundColor="{StaticResource Gray}"
+            Padding="{StaticResource MainPadding}">
+            <Frame>
+                <StackLayout>
+                    <Label Text="Urgent" />
+                    <Label 
+                        FontSize="Large"
+                        TextColor="{StaticResource Accent}"
+                        Text="30" />
+                </StackLayout>
+            </Frame>
+            <Frame Grid.Column="1">
+                <StackLayout>
+                    <Label Text="Maintenance" />
+                    <Label 
+                        FontSize="Large"
+                        TextColor="{StaticResource Accent}"
+                        Text="122" />
+                </StackLayout>
+            </Frame>
+            <Frame Grid.Column="2">
+                <StackLayout>
+                    <Label Text="Closed" />
+                    <Label 
+                        FontSize="Large"
+                        TextColor="{StaticResource Accent}"
+                        Text="299" />
+                </StackLayout>
+            </Frame>
+        </Grid>
+        <ListView 
+            Grid.Row="2"
+            HasUnevenRows="True"
+            SelectionMode="None">
+            <ListView.ItemsSource>
+                <x:String>Items</x:String>
+            </ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid ColumnSpacing="20" Padding="20" BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="http://lorempixel.com/100/100/people/8" Aspect="AspectFit" />
+                            <StackLayout Grid.Column="1">
+                                <Label Text="John Doe" FontAttributes="Bold" />
+                                <Label Text="SUPPORT" />
+                            </StackLayout>
+                            <Button 
+                                Grid.Column="2" 
+                                VerticalOptions="Start"
+                                HorizontalOptions="End"
+                                Text="Info"
+                                BackgroundColor="White"
+                                Style="{StaticResource OutlineButton}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+    
+</ContentPage>

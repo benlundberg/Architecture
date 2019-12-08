@@ -109,7 +109,7 @@ namespace Architecture
 
         protected async Task ShowSnackbarAsync(string message, Controls.SnackbarDuration duration = Controls.SnackbarDuration.SHORT, string buttonText = "", ICommand command = null)
         {
-            if (!(Navigation?.NavigationStack.LastOrDefault() is Controls.ExtendedContentPage page))
+            if (!(Navigation?.NavigationStack.LastOrDefault() is ContentPage page))
             {
                 return;
             }

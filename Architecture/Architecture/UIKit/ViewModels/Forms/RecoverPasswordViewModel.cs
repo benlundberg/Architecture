@@ -33,8 +33,6 @@ namespace Architecture
 
             IsBusy = false;
 
-            await ShowSnackbarAsync("Restore e-mail sent");
-
             PopModalCommand.Execute(null);
         }));
 

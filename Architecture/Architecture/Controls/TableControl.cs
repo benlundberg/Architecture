@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class TableControl : ScrollView
+    public class TableControl : HorizontalView
     {
         public TableControl()
         {
@@ -47,7 +47,7 @@ namespace Architecture.Controls
             // Create columns
             for (int i = 0; i < numCols; i++)
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
+                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
             }
 
             for (int i = 0; i < newItems.Count; i++)
@@ -59,13 +59,14 @@ namespace Architecture.Controls
                     BackgroundColor = item.HeaderBackground,
                     BorderColor = view.UseBorder ? view.BorderColor : Color.Transparent,
                     CornerRadius = 0,
-                    Padding = new Thickness(10, 20),
+                    Padding = item.Padding,
                     Content = new Label 
                     { 
                         VerticalTextAlignment = TextAlignment.Center,
+                        HorizontalTextAlignment = item.TextAlignment,
                         TextColor = item.HeaderColor,
                         Text = item.Header,
-                        FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
+                        FontSize = Device.GetNamedSize(item.FontSize, typeof(Label))
                     }
                 };
 
@@ -86,13 +87,14 @@ namespace Architecture.Controls
                         BackgroundColor = !view.UseSecondBackgroundColor ? contentItem.Background : (y % 2) == 0 ? contentItem.Background : contentItem.SecondBackground,
                         BorderColor = view.UseBorder ? view.BorderColor : Color.Transparent,
                         CornerRadius = 0,
-                        Padding = new Thickness(10, 20),
+                        Padding = item.Padding,
                         Content = new Label 
                         {
                             VerticalTextAlignment = TextAlignment.Center,
+                            HorizontalTextAlignment = contentItem.TextAlignment,
                             TextColor = contentItem.TextColor,
                             Text = contentItem.Text,
-                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
+                            FontSize = Device.GetNamedSize(contentItem.FontSize, typeof(Label))
                         }
                     };
 
@@ -108,18 +110,18 @@ namespace Architecture.Controls
             view.Content = grid;
         }
 
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-            propertyName: "ItemsSource",
+        public static readonly BindableProperty TableSourceProperty = BindableProperty.Create(
+            propertyName: "TableSource",
             defaultBindingMode: BindingMode.TwoWay,
             returnType: typeof(IList<TableItem>),
             declaringType: typeof(TableControl),
             defaultValue: default(IList<TableItem>),
             propertyChanged: TableControlSourceChanged);
 
-        public IList<TableItem> ItemsSource
+        public IList<TableItem> TableSource
         {
-            get { return (IList<TableItem>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            get { return (IList<TableItem>)GetValue(TableSourceProperty); }
+            set { SetValue(TableSourceProperty, value); }
         }
 
         private ICommand tapGestureCommand;
@@ -145,7 +147,7 @@ namespace Architecture.Controls
         public Color BorderColor { get; set; } = Color.Black;
     }
 
-    public class TableItem : INotifyPropertyChanged
+    public class TableItem
     {
         public TableItem(string header)
         {
@@ -154,12 +156,12 @@ namespace Architecture.Controls
 
         public string Header { get; set; }
         public bool IsOrderedAscending { get; set; }
+        public NamedSize FontSize { get; set; }
         public Color HeaderColor { get; set; } = Color.Black;
         public Color HeaderBackground { get; set; } = App.Current.GrayColor();
-        public TextAlignment ContentItemTextAlignment { get; set; }
+        public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
+        public Thickness Padding { get; set; } = new Thickness(6, 14);
         public IList<TableContentItem> ContentItems { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public class TableContentItem
@@ -170,6 +172,9 @@ namespace Architecture.Controls
         }
 
         public string Text { get; set; }
+        public Thickness Padding { get; set; } = new Thickness(6, 14);
+        public NamedSize FontSize { get; set; }
+        public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
         public Color TextColor { get; set; } = Color.Black;
         public Color Background { get; set; } = Color.White;
         public Color SecondBackground { get; set; } = App.Current.LightGrayColor();

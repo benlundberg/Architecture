@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.DashboardImagePage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             x:DataType="local:DashboardViewModel">
+
+    <ContentPage.BindingContext>
+        <local:DashboardViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Dashboard Card" />
+    </NavigationPage.TitleView>
+
+    <controls:GridViewControl 
+        NumberOfColumns="3"
+        ColumnSpacing="0"
+        RowSpacing="0"
+        ItemsSource="{Binding DashboardItems}">
+        <controls:GridViewControl.ItemTemplate>
+            <DataTemplate x:DataType="local:DashboardItemViewModel">
+                <Grid>
+                    <ff:CachedImage 
+                        Aspect="AspectFill"
+                        Source="{Binding ImageSource}" />
+                    <Grid BackgroundColor="Black" Opacity=".3" />
+                    <Label Text="{Binding Title}" TextColor="White" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                </Grid>
+            </DataTemplate>
+        </controls:GridViewControl.ItemTemplate>
+    </controls:GridViewControl>
+    
+</ContentPage>

@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="Architecture.DetailPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:local="clr-namespace:Architecture"
              Visual="Material">
 
@@ -20,21 +21,21 @@
     <controls:CollapsingScrollView>
         <controls:CollapsingScrollView.HeaderContent>
             <Grid>
-                <Image 
+                <ff:CachedImage 
                     HeightRequest="300"
                     Source="http://lorempixel.com/400/200/nature/5/" 
                     Aspect="AspectFill" />
                 <StackLayout 
-                    Padding="20"
+                    Padding="{StaticResource ControlPadding}"
                     VerticalOptions="End">
                     <Label 
                         Text="Fresh water"
-                        FontFamily="{StaticResource BoldFont}"
-                        TextColor="{StaticResource TextLight}"
+                        TextColor="{StaticResource SecondaryTextColor}"
+                        FontAttributes="Bold"
                         FontSize="Large" />
                     <Label 
                         Text="Friendship in the water"
-                        TextColor="{StaticResource TextLight}"
+                        TextColor="{StaticResource SecondaryTextColor}"
                         FontSize="Medium" />
                     <BoxView 
                         HeightRequest="3"
@@ -49,7 +50,7 @@
                 <Grid 
                     Grid.Row="1" 
                     ColumnSpacing="10"
-                    Padding="20"
+                    Padding="{StaticResource ControlPadding}"
                     BackgroundColor="{StaticResource Gray}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -64,7 +65,6 @@
                         FontSize="Medium" />
                     <Label 
                         Grid.Column="1"
-                        FontSize="Medium"
                         Text="2019" />
                     <Label 
                         Grid.Column="2"
@@ -76,31 +76,28 @@
                     <Label 
                         Grid.Column="3"
                         VerticalOptions="Center"
-                        FontFamily="{StaticResource BoldFont}"
-                        FontSize="Medium"
+                        FontAttributes="Bold"
                         TextColor="{StaticResource Accent}"
                         Text="98" />
                     <Label 
                         Grid.Column="4"
                         VerticalOptions="Center"
-                        FontSize="Medium"
                         FontFamily="{StaticResource FontAwesomeSolid}"
                         TextColor="{StaticResource Accent}"
                         Text="&#xf004;" />
                     <Label 
                         Grid.Column="5"
                         VerticalOptions="Center"
-                        FontSize="Medium"
-                        FontFamily="{StaticResource BoldFont}"
+                        FontAttributes="Bold"
                         TextColor="{StaticResource Accent}"
                         Text="65" />
                 </Grid>
                 <Label 
-                    Padding="{StaticResource UnionPadding}"
+                    Padding="{StaticResource MainPadding}"
                     FontSize="Medium"
                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                 <Label 
-                    Padding="{StaticResource UnionPadding}"
+                    Padding="{StaticResource MainPadding}"
                     FontSize="Medium"
                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                 <Label 
@@ -111,17 +108,15 @@
                 <controls:ItemsControl ItemsSource="{Binding CommentItems}">
                     <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="20">
+                            <Grid Margin="{StaticResource ControlPadding}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Frame
+                                <ff:CachedImage 
                                     VerticalOptions="Start"
-                                    Padding="0" 
-                                    CornerRadius="12">
-                                    <Image Source="http://lorempixel.com/100/100/people/" Aspect="AspectFit" />
-                                </Frame>
+                                    Source="http://lorempixel.com/100/100/people/4" 
+                                    Aspect="AspectFit" />
                                 <StackLayout Grid.Column="1">
                                     <Label 
                                         Text="John Doe"
@@ -129,7 +124,6 @@
                                     <Label 
                                         Text="MAR 3, 2019" />
                                     <Label 
-                                        FontSize="Medium"
                                         MaxLines="3"
                                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                                 </StackLayout>
@@ -138,7 +132,7 @@
                     </controls:ItemsControl.ItemTemplate>
                 </controls:ItemsControl>
                 <Button
-                    Margin="{StaticResource UnionPadding}"
+                    Margin="{StaticResource MainPadding}"
                     Text="Add comment" />
             </StackLayout>
         </controls:CollapsingScrollView.MainContent>

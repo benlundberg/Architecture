@@ -11,6 +11,9 @@ namespace Architecture
             IsLoginVisible = param?.ToString() == "1";
         }));
 
+        public LoginViewModel LoginModel { get; set; } = new LoginViewModel();
+        public SignUpViewModel SignUpModel { get; set; } = new SignUpViewModel();
+
         public bool IsLoginVisible { get; set; } = true;
     }
 }

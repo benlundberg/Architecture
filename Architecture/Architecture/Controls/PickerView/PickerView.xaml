@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.Controls.PickerView"
+             x:Name="root">
+
+    <StackLayout>
+        <Grid ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label 
+                FontSize="Large"
+                IsVisible="{Binding HasIcon, Source={x:Reference root}}"
+                VerticalOptions="Center"
+                Text="{Binding IconTextSource, Source={x:Reference root}}"
+                TextColor="{Binding IconColor, Source={x:Reference root}}"
+                FontFamily="{Binding IconFontFamily, Source={x:Reference root}}" />
+            <Label
+                Grid.Column="1"
+                FontSize="Medium"
+                Text="{Binding Title, Source={x:Reference root}}"
+                TextColor="{Binding TitleTextColor, Source={x:Reference root}}" />
+            <Label 
+                Grid.Column="2"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                TextColor="{StaticResource Accent}"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Text="{Binding PickerText, Source={x:Reference root}}">
+            </Label>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SelectCommand, Source={x:Reference root}}" />
+            </Grid.GestureRecognizers>
+        </Grid>
+    </StackLayout>
+
+</ContentView>

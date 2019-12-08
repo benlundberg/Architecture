@@ -18,7 +18,7 @@
     </NavigationPage.TitleView>
 
     <ScrollView>
-        <controls:TableControl UseBorder="False" ItemsSource="{Binding TableItems}" />
+        <controls:TableControl UseBorder="False" TableSource="{Binding TableItems}" />
     </ScrollView>
     
 </ContentPage>

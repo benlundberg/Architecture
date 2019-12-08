@@ -67,6 +67,16 @@ namespace Architecture
             return Color.Default;
         }
 
+        public static Color ToolbarTextColor(this Application application)
+        {
+            if (application.Resources["ToolbarTextColor"] is Color color)
+            {
+                return color;
+            }
+
+            return Color.Default;
+        }
+
         public static string FontAwesomeSolid(this Application application)
         {
             return (OnPlatform<string>)application.Resources["FontAwesomeSolid"];
@@ -77,14 +87,14 @@ namespace Architecture
             return (OnPlatform<string>)application.Resources["FontAwesomeRegular"];
         }
 
-        public static string NormalFont(this Application application)
-        {
-            return (OnPlatform<string>)application.Resources["NormalFont"];
-        }
+        //public static string NormalFont(this Application application)
+        //{
+        //    return (OnPlatform<string>)application.Resources["NormalFont"];
+        //}
         
-        public static string BoldFont(this Application application)
-        {
-            return (OnPlatform<string>)application.Resources["BoldFont"];
-        }
+        //public static string BoldFont(this Application application)
+        //{
+        //    return (OnPlatform<string>)application.Resources["BoldFont"];
+        //}
     }
 }

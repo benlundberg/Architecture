@@ -17,7 +17,7 @@ namespace Architecture
         private ICommand clearLogCommand;
         public ICommand ClearLogCommand => clearLogCommand ?? (clearLogCommand = new Command(async () =>
         {
-            var res = await ShowConfirmAsync("Clear log?", "Sure?");
+            var res = await ShowConfirmAsync($"{Translate("Gen_Clear")} {Translate("Gen_Log")}?", "");
 
             if (res == false)
             {
@@ -33,12 +33,12 @@ namespace Architecture
         {
             try
             {
-                await Email.ComposeAsync("Log", LogText);
+                await Email.ComposeAsync(Translate("Gen_Log"), LogText);
             }
             catch (System.Exception ex)
             {
                 ex.Print();
-                ShowAlert(ex.Message, "Logger");
+                ShowAlert(ex.Message, Translate("Gen_Log"));
             }
         }));
 

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Architecture.Controls
+namespace Architecture
 {
     public enum GradientDirection
     {
@@ -13,12 +13,13 @@ namespace Architecture.Controls
         ToBottomLeft,
         ToBottomRight
     }
-
-    public class GradientView : Grid
+    
+    public class GradientEffect : RoutingEffect
     {
-        public GradientView()
+        
+
+        public GradientEffect() : base("Architecture.GradientEffect")
         {
-            IsClippedToBounds = true;
         }
 
         public Color StartColor { get; set; } = Application.Current.PrimaryColor();
@@ -26,3 +27,4 @@ namespace Architecture.Controls
         public GradientDirection Direction { get; set; } = GradientDirection.ToTop;
     }
 }
+

@@ -15,25 +15,25 @@
         <ToolbarItem Text="{local:Translate Gen_Clear}" Command="{Binding ClearLogCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    Size="18"
+                    Size="{StaticResource ToolbarItemSize}"
 					Glyph="{StaticResource RemoveIcon}"
-					Color="White"
-					FontFamily="{StaticResource FontAwesomeRegular}"/>
+					Color="{StaticResource ToolbarTextColor}"
+					FontFamily="{StaticResource FontAwesomeRegular}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem Text="{local:Translate Gen_Send}" Command="{Binding SendLogCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
-                    Size="18"
+                    Size="{StaticResource ToolbarItemSize}"
 					Glyph="{StaticResource SendIcon}"
-					Color="White"
-					FontFamily="{StaticResource FontAwesomeRegular}"/>
+					Color="{StaticResource ToolbarTextColor}"
+					FontFamily="{StaticResource FontAwesomeRegular}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <ScrollView Padding="{StaticResource UnionPadding}">
+        <ScrollView Padding="{StaticResource MainPadding}">
             <Label Text="{Binding LogText}" />
         </ScrollView>
     </ContentPage.Content>

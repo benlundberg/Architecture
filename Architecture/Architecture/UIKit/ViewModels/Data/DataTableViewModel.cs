@@ -1,6 +1,7 @@
 ﻿using Architecture.Controls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Xamarin.Forms;
 
 namespace Architecture
 {
@@ -17,13 +18,14 @@ namespace Architecture
             {
                 new TableItem("Order ID")
                 {
+                    TextAlignment = TextAlignment.Start,
                     ContentItems = new List<TableContentItem>
                     {
-                        new TableContentItem("#12314"),
-                        new TableContentItem("#12314"),
-                        new TableContentItem("#12314"),
-                        new TableContentItem("#12314"),
-                        new TableContentItem("#12314")
+                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start }
                     }
                 },
                 new TableItem("City")
@@ -61,13 +63,14 @@ namespace Architecture
                 },
                 new TableItem("Price")
                 {
+                    TextAlignment = TextAlignment.End,
                     ContentItems = new List<TableContentItem>
                     {
-                        new TableContentItem("$ 162.00"),
-                        new TableContentItem("$ 12.00"),
-                        new TableContentItem("$ 250.00"),
-                        new TableContentItem("$ 124.00"),
-                        new TableContentItem("$ 112.50")
+                        new TableContentItem("$ 162.00") { TextAlignment = TextAlignment.End },
+                        new TableContentItem("$ 12.00") { TextAlignment = TextAlignment.End },
+                        new TableContentItem("$ 250.00") { TextAlignment = TextAlignment.End },
+                        new TableContentItem("$ 124.00") { TextAlignment = TextAlignment.End },
+                        new TableContentItem("$ 112.50") { TextAlignment = TextAlignment.End }
                     }
                 }
             };

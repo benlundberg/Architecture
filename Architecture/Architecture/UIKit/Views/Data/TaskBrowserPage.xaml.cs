@@ -1,16 +1,14 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture.Controls
+namespace Architecture
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExtendedContentPage : ContentPage
+    public partial class TaskBrowserPage : ContentPage
     {
-        public ExtendedContentPage()
+        public TaskBrowserPage()
         {
             InitializeComponent();
         }
-
-        public View View { get; set; }
     }
 }

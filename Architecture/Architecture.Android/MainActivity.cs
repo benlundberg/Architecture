@@ -20,6 +20,8 @@ namespace Architecture.Droid
 
             global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental", "CarouselView_Experimental");
 
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
