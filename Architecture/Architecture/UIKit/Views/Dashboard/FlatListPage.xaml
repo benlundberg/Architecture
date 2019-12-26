@@ -48,7 +48,7 @@
                         <Label
                             TextColor="White"
                             FontSize="Subtitle"
-                            Text="{Binding SubTitle}" />
+                            Text="{Binding Subtitle}" />
                     </StackLayout>
                 </Grid>
             </DataTemplate>

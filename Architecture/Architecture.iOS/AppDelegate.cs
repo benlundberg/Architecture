@@ -20,7 +20,11 @@ namespace Architecture.iOS
         {
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
-            Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental", "CarouselView_Experimental");
+            Xamarin.Forms.Forms.SetFlags(
+                "FastRenderers_Experimental",
+                "CollectionView_Experimental",
+                "CarouselView_Experimental",
+                "IndicatorView_Experimental");
 
             Xamarin.Forms.Forms.Init();
 

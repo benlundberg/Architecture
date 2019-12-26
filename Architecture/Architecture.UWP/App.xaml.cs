@@ -21,7 +21,11 @@ namespace Architecture.UWP
         {
             Bootstrapper_UWP.Initialize();
 
-            Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental", "CarouselView_Experimental");
+            Xamarin.Forms.Forms.SetFlags(
+                "FastRenderers_Experimental",
+                "CollectionView_Experimental",
+                "CarouselView_Experimental",
+                "IndicatorView_Experimental");
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 

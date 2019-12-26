@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.CardDetailPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:Architecture"
+             Visual="Material">
+
+    <ContentPage.BindingContext>
+        <local:DetailViewModel />
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Card Details" />
+    </NavigationPage.TitleView>
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ff:CachedImage 
+                Grid.RowSpan="2"
+                VerticalOptions="Start"
+                HeightRequest="300"
+                Source="http://lorempixel.com/400/200/nature/5/" 
+                Aspect="AspectFill" />
+            <StackLayout Grid.Row="1">
+                <Frame Margin="{StaticResource MainPadding}">
+                    <StackLayout>
+                        <Label 
+                            FontSize="Micro"
+                            Text="Mar 3, 2019" />
+                        <Label 
+                            FontAttributes="Bold"
+                            Text="Awesome times in the sun"
+                            FontSize="Large" />
+                        <Grid>
+                            <Label
+                                Grid.Column="0"
+                                Text="TRAVELS"
+                                TextColor="{StaticResource Accent}" />
+                            <Label
+                                Grid.Column="1"
+                                HorizontalTextAlignment="End"
+                                TextColor="{StaticResource Accent}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="2K" />
+                                        <Span Text=" " />
+                                        <Span Text="{StaticResource GeneralIcon}" FontFamily="{StaticResource FontAwesomeBrands}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label
+                                Grid.Column="2"
+                                HorizontalTextAlignment="End"
+                                TextColor="{StaticResource Accent}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="15" />
+                                        <Span Text=" " />
+                                        <Span Text="&#xf27a;" FontFamily="{StaticResource FontAwesomeRegular}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                        <BoxView 
+                            Margin="0, 8"
+                            HeightRequest="1"
+                            Color="LightGray" />
+                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

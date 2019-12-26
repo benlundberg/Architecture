@@ -20,10 +20,11 @@
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <controls:PickerView 
+            BackgroundColor="White"
             Padding="20"
             ItemsSource="{Binding PickerValues}"
             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
@@ -32,35 +33,73 @@
             Placeholder="Select date"
             CancelText="{local:Translate Gen_Cancel}"
             IconTextSource="&#xf073;" />
-        <Grid
-            Grid.Row="1"
-            BackgroundColor="{StaticResource Gray}"
-            Padding="{StaticResource MainPadding}">
-            <Frame>
+        <Grid 
+            Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Frame
+                Grid.ColumnSpan="2"
+                Margin="20, 20, 20, 0">
                 <StackLayout>
-                    <Label Text="Urgent" />
-                    <Label 
-                        FontSize="Large"
+                    <Label
+                        Text="In progress"
                         TextColor="{StaticResource Accent}"
-                        Text="30" />
+                        FontAttributes="Bold"
+                        FontSize="Large" />
+                    <Label
+                        Text="32"
+                        FontAttributes="Bold"
+                        FontSize="Medium" />
+                    <ProgressBar 
+                        Progress=".3"
+                        ProgressColor="{StaticResource DarkAccent}" />
                 </StackLayout>
             </Frame>
-            <Frame Grid.Column="1">
+            <Frame
+                Grid.Row="1"
+                Margin="20, 0, 0, 20">
                 <StackLayout>
-                    <Label Text="Maintenance" />
-                    <Label 
-                        FontSize="Large"
-                        TextColor="{StaticResource Accent}"
-                        Text="122" />
+                    <Label
+                        Text="Waiting"
+                        TextColor="{StaticResource PrimaryColor}"
+                        FontAttributes="Bold"
+                        FontSize="Medium" />
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="12" />
+                                <Span Text=" " />
+                                <Span TextColor="Orange" FontAttributes="Bold" Text="&#xf061;" FontFamily="{StaticResource FontAwesomeSolid}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
             </Frame>
-            <Frame Grid.Column="2">
+            <Frame
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0, 0, 20, 20">
                 <StackLayout>
-                    <Label Text="Closed" />
-                    <Label 
-                        FontSize="Large"
-                        TextColor="{StaticResource Accent}"
-                        Text="299" />
+                    <Label
+                        Text="Completed"
+                        TextColor="Green"
+                        FontAttributes="Bold"
+                        FontSize="Medium" />
+                    <Label FontAttributes="Bold">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="22" />
+                                <Span Text=" " />
+                                <Span TextColor="Green" FontAttributes="Bold" Text="&#xf062;" FontFamily="{StaticResource FontAwesomeSolid}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
             </Frame>
         </Grid>
@@ -74,13 +113,19 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid ColumnSpacing="20" Padding="20" BackgroundColor="White">
+                        <Grid 
+                            Padding="10" 
+                            BackgroundColor="White">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Image Source="http://lorempixel.com/100/100/people/8" Aspect="AspectFit" />
+                            <Image 
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                Source="http://lorempixel.com/100/100/people/8" 
+                                Aspect="AspectFit" />
                             <StackLayout Grid.Column="1">
                                 <Label Text="John Doe" FontAttributes="Bold" />
                                 <Label Text="SUPPORT" />
@@ -89,8 +134,8 @@
                                 Grid.Column="2" 
                                 VerticalOptions="Start"
                                 HorizontalOptions="End"
-                                Text="Info"
                                 BackgroundColor="White"
+                                Text="Info"
                                 Style="{StaticResource OutlineButton}" />
                         </Grid>
                     </ViewCell>

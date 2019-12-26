@@ -18,7 +18,11 @@ namespace Architecture.Droid
 
             base.OnCreate(bundle);
 
-            global::Xamarin.Forms.Forms.SetFlags("FastRenderers_Experimental", "CollectionView_Experimental", "CarouselView_Experimental");
+            global::Xamarin.Forms.Forms.SetFlags(
+                "FastRenderers_Experimental", 
+                "CollectionView_Experimental", 
+                "CarouselView_Experimental", 
+                "IndicatorView_Experimental");
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
 

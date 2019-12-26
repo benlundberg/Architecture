@@ -19,7 +19,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid ColumnSpacing="20" Padding="{StaticResource LargeSpacing}">
+        <Grid 
+            Padding="24" 
+            ColumnSpacing="20">
             <Grid.Effects>
                 <local:GradientEffect Direction="ToBottom" />
             </Grid.Effects>
@@ -51,11 +53,11 @@
         </controls:SegmentControl>
         <ScrollView 
             Grid.Row="2"
-            Padding="{StaticResource LargeSpacing}">
+            Padding="{StaticResource FormPadding}">
             <Grid>
                 <!-- Login -->
                 <StackLayout 
-                    Spacing="{StaticResource MainSpacing}"
+                    Spacing="10"
                     IsVisible="{Binding IsLoginVisible}">
                     <controls:ValidationEntry 
                         Placeholder="Username"
@@ -74,6 +76,7 @@
                         <CheckBox 
                             IsChecked="{Binding RememberMe, Mode=TwoWay}"
                             WidthRequest="32"
+                            HeightRequest="32"
                             Color="{StaticResource Accent}" />
                         <Label 
                             VerticalOptions="Center"
@@ -89,7 +92,7 @@
                 </StackLayout>
                 <!-- Sign up -->
                 <StackLayout 
-                    Spacing="{StaticResource MainSpacing}"
+                    Spacing="10"
                     IsVisible="{Binding IsLoginVisible, Converter={StaticResource InvertedBoolConv}}">
                     <controls:ValidationEntry 
                         Placeholder="Email"
@@ -116,5 +119,4 @@
             </Grid>
         </ScrollView>
     </Grid>
-    
 </ContentPage>

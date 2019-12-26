@@ -9,10 +9,10 @@ namespace Architecture
     {
         public DataTableViewModel()
         {
-            LoadTableItems();
+            LoadData();
         }
 
-        private void LoadTableItems()
+        private void LoadData()
         {
             TableItems = new ObservableCollection<TableItem>
             {

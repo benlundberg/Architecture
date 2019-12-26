@@ -11,15 +11,14 @@
              x:DataType="local:LoginViewModel">
 
     <ScrollView>
-        <Grid>
+        <Grid Padding="{StaticResource FormPadding}">
             <Grid.Effects>
                 <local:GradientEffect />
             </Grid.Effects>
-            <StackLayout 
-                Spacing="{StaticResource MainSpacing}"
-                Margin="{StaticResource FormPadding}"
+            <StackLayout
+                Spacing="10"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <Grid ColumnSpacing="20" Margin="0, 0, 0, 40">
+                <Grid Margin="0, 60, 0, 30" ColumnSpacing="20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -83,7 +82,6 @@
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
-                Margin="{StaticResource ControlPadding}"
                 FontSize="Large"
                 Text="{StaticResource CloseIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}"

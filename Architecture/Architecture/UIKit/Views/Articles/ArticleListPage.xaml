@@ -16,10 +16,11 @@
     </ContentPage.BindingContext>
     
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Article list" />
+        <controls:PageTitleView Text="Article List" />
     </NavigationPage.TitleView>
 
     <ListView
+        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
         ItemsSource="{Binding NatureArticles}"
         SeparatorVisibility="None"
         HasUnevenRows="True">
@@ -31,8 +32,9 @@
                             HeightRequest="250"
                             Aspect="AspectFill"
                             Source="{Binding ImageSource}" />
+                        <Grid BackgroundColor="Black" Opacity=".2" />
                         <Grid 
-                            Margin="{StaticResource ControlPadding}"
+                            Margin="16, 10"
                             VerticalOptions="End">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -41,8 +43,8 @@
                             </Grid.RowDefinitions>
                             <Label
                                 FontSize="Large"
-                                TextColor="{StaticResource SecondaryTextColor}"
                                 FontAttributes="Bold"
+                                TextColor="{StaticResource SecondaryTextColor}"
                                 Text="{Binding Title}" />
                             <Grid Grid.Row="1" ColumnSpacing="10">
                                 <Grid.ColumnDefinitions>
@@ -97,5 +99,4 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
-
 </ContentPage>

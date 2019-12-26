@@ -136,6 +136,9 @@
             Command="{Binding AddItemCommand}"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
             Style="{StaticResource FloatingButton}"
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="24"
             FontFamily="{StaticResource FontAwesomeSolid}"
             Text="{StaticResource AddIcon}" />
         <controls:LoadingView 

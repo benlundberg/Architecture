@@ -16,19 +16,23 @@
     </ContentPage.BindingContext>
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Article classic" />
+        <controls:PageTitleView Text="Article Classic" />
     </NavigationPage.TitleView>
 
     <ListView 
-        ItemsSource="{Binding AnimalArticles}"
+        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+        ItemsSource="{Binding NatureArticles}"
         HasUnevenRows="True">
         <ListView.ItemTemplate>
             <DataTemplate x:DataType="local:ArticleItemViewModel">
                 <ViewCell>
-                    <Grid ColumnSpacing="{StaticResource MainSpacing}" Padding="{StaticResource MainSpacing}" BackgroundColor="White">
+                    <Grid 
+                        Padding="10"
+                        ColumnSpacing="10"
+                        BackgroundColor="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
                         <ff:CachedImage 
                             Aspect="AspectFill"
@@ -36,8 +40,8 @@
                         <StackLayout Grid.Column="1">
                             <Label
                                 FontSize="Large"
-                                TextColor="{StaticResource Accent}"
                                 FontAttributes="Bold"
+                                TextColor="{StaticResource Accent}"
                                 Text="{Binding Title}" />
                             <Label Text="{Binding Year}" />
                             <Label 

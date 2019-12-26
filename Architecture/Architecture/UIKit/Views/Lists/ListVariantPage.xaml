@@ -29,24 +29,33 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:ListItemViewModel">
                     <ViewCell>
-                        <Grid ColumnSpacing="0" Margin="10">
+                        <Grid ColumnSpacing="0" Margin="0, 6">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
-                            <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFit" />
                             <Frame
                                 Grid.Column="1"
+                                Margin="-4, 20, 10, 20"
+                                Padding="16, 8"
                                 VerticalOptions="Center">
                                 <StackLayout>
                                     <Label 
-                                        FontSize="Title"
+                                        FontAttributes="Bold"
                                         Text="{Binding Title}" />
                                     <Label 
-                                        FontSize="Subtitle"
                                         MaxLines="3"
                                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                                 </StackLayout>
+                            </Frame>
+                            <Frame
+                                HasShadow="False"
+                                BorderColor="Transparent"
+                                CornerRadius="10" 
+                                Padding="0">
+                                <ff:CachedImage
+                                    Source="{Binding ImageSource}" 
+                                    Aspect="AspectFill" />
                             </Frame>
                         </Grid>
                     </ViewCell>

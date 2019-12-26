@@ -16,25 +16,29 @@
     </ContentPage.BindingContext>
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Dashboard Card" />
+        <controls:PageTitleView Text="Dashboard Image" />
     </NavigationPage.TitleView>
 
-    <controls:GridViewControl 
-        NumberOfColumns="3"
-        ColumnSpacing="0"
-        RowSpacing="0"
-        ItemsSource="{Binding DashboardItems}">
-        <controls:GridViewControl.ItemTemplate>
-            <DataTemplate x:DataType="local:DashboardItemViewModel">
-                <Grid>
-                    <ff:CachedImage 
-                        Aspect="AspectFill"
-                        Source="{Binding ImageSource}" />
-                    <Grid BackgroundColor="Black" Opacity=".3" />
-                    <Label Text="{Binding Title}" TextColor="White" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
-                </Grid>
-            </DataTemplate>
-        </controls:GridViewControl.ItemTemplate>
-    </controls:GridViewControl>
-    
+    <ScrollView Padding="{StaticResource MainPadding}">
+        <controls:GridViewControl 
+            NumberOfColumns="2"
+            ColumnSpacing="20"
+            RowSpacing="20"
+            ItemsSource="{Binding DashboardItems}">
+            <controls:GridViewControl.ItemTemplate>
+                <DataTemplate x:DataType="local:DashboardItemViewModel">
+                    <StackLayout>
+                        <ff:CachedImage 
+                            Aspect="AspectFill"
+                            Source="{Binding ImageSource}" />
+                        <Label 
+                            Text="{Binding Title}" 
+                            FontAttributes="Bold" 
+                            HorizontalOptions="Center" />
+                    </StackLayout>
+                </DataTemplate>
+            </controls:GridViewControl.ItemTemplate>
+        </controls:GridViewControl>
+    </ScrollView>
+
 </ContentPage>

@@ -7,7 +7,8 @@
              x:Class="Architecture.TaskBrowserPage"
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             Visual="Material">
+             Visual="Material"
+             BackgroundColor="{StaticResource Gray}">
 
     <ContentPage.BindingContext>
         <local:TaskOverviewViewModel />
@@ -26,14 +27,11 @@
             <Grid.Effects>
                 <local:GradientEffect Direction="ToBottom" />
             </Grid.Effects>
-            <StackLayout Padding="40">
-                <Label 
-                    TextColor="{StaticResource SecondaryTextColor}"
-                    Text="Mar 3, 2019" />
+            <StackLayout Padding="{StaticResource FormPadding}">
                 <Label 
                     TextColor="{StaticResource SecondaryTextColor}"
                     FontSize="Large"
-                    Text="The progress of the team" />
+                    Text="Your agenda for the week" />
                 <controls:SegmentControl 
                     HorizontalOptions="Start"
                     Margin="{StaticResource VerticalPadding}">
@@ -53,7 +51,7 @@
             Grid.RowSpan="2"
             Margin="20, 0, 0, 20"
             VerticalOptions="End" 
-            HeightRequest="400">
+            HeightRequest="350">
             <CollectionView.ItemsSource>
                 <x:String>Items</x:String>
             </CollectionView.ItemsSource>
@@ -66,26 +64,31 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame CornerRadius="16">
+                    <Frame>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackLayout>
-                                <Label Text="59" FontSize="Large" />
-                                <Label Text="Completed tasks" FontSize="Medium" />
+                                <Label
+                                    Text="24" 
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource Accent}" 
+                                    FontSize="Large" />
+                                <Label 
+                                    Text="Completed tasks" 
+                                    FontSize="Medium" />
                             </StackLayout>
-                            <StackLayout Spacing="12" Grid.Row="1" VerticalOptions="End">
-                                <Label Text="Progress" FontSize="Large" />
-                                <Label Text="59 remaining tasks" FontSize="Medium" />
+                            <StackLayout Grid.Row="1" VerticalOptions="End">
+                                <Label Text="Develop space" FontSize="Large" />
+                                <Label Text="12 remaining tasks" />
                                 <BoxView HeightRequest="1" Color="{StaticResource GrayDark}" />
-                                <Button 
-                                    Visual="Default"
-                                    BackgroundColor="Transparent"
-                                    TextColor="{StaticResource Accent}"
-                                    Text="Details"
-                                    FontAttributes="Bold" />
+                                <Button
+                                    BorderColor="White"
+                                    Style="{StaticResource OutlineButton}"
+                                    BackgroundColor="White"
+                                    Text="Details" />
                             </StackLayout>
                         </Grid>
                     </Frame>

@@ -8,6 +8,7 @@
 	x:Class="Architecture.ListCardPage"
 	xmlns:controls="clr-namespace:Architecture.Controls"
 	xmlns:local="clr-namespace:Architecture"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     x:DataType="local:ListViewModel"
     Visual="Material">
 
@@ -28,37 +29,48 @@
 			SeparatorVisibility="None">
 			<ListView.ItemTemplate>
 				<DataTemplate x:DataType="local:ListItemViewModel">
-					<ViewCell>
-                        <Frame Margin="0, 10">
-                            <Grid RowSpacing="{StaticResource MainSpacing}" ColumnSpacing="{StaticResource MainSpacing}">
+                    <ViewCell>
+                        <Frame 
+                            Padding="0"
+                            Margin="0, 8">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
                                 </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackLayout Grid.ColumnSpan="2">
+                                <ff:CachedImage
+                                    WidthRequest="100"
+                                    Source="http://lorempixel.com/400/400/food/2" 
+                                    Aspect="AspectFill" />
+                                <StackLayout
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Padding="10">
                                     <Label 
-                                        FontSize="Title"
+                                        FontAttributes="Bold"
                                         Text="{Binding Title}" />
                                     <Label 
-                                        FontSize="Subtitle"
-                                        Text="{Binding SubTitle}" />
+                                        MaxLines="3"
+                                        LineBreakMode="TailTruncation"
+                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span 
+                                                    FontSize="Medium"
+                                                    TextColor="{StaticResource Accent}" 
+                                                    Text="&#xf005;" 
+                                                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                                                <Span Text=" " />
+                                                <Span Text="4.5" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                 </StackLayout>
-                                <Button 
-                                    Grid.Row="1"
-                                    Text="Primary" />
-                                <Button 
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Style="{StaticResource OutlineButton}"
-                                    Text="Secondary"/>
                             </Grid>
                         </Frame>
                     </ViewCell>
-				</DataTemplate>
+                </DataTemplate>
 			</ListView.ItemTemplate>
 		</ListView>
 		<controls:LoadingView IsRunning="{Binding IsBusy}" />

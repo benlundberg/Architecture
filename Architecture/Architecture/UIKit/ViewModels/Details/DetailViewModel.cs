@@ -6,25 +6,20 @@ namespace Architecture
     {
         public DetailViewModel()
         {
-            CommentItems = new ObservableCollection<CommentItemViewModel>
-            {
-                new CommentItemViewModel(),
-                new CommentItemViewModel(),
-                new CommentItemViewModel(),
-                new CommentItemViewModel(),
-                new CommentItemViewModel(),
-                new CommentItemViewModel(),
-                new CommentItemViewModel(),
-                new CommentItemViewModel(),
-                new CommentItemViewModel()
-            };
+
         }
 
-        public ObservableCollection<CommentItemViewModel> CommentItems { get; set; }
-    }
-
-    public class CommentItemViewModel
-    {
-
+        public ObservableCollection<object> Items => new ObservableCollection<object>()
+        {
+            new object (),
+            new object (),
+            new object (),
+            new object (),
+            new object (),
+            new object (),
+            new object (),
+            new object (),
+            new object ()
+        };
     }
 }

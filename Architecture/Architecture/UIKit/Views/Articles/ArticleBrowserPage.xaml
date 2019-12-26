@@ -9,42 +9,64 @@
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
-             x:DataType="local:ArticlesViewModel">
+             x:DataType="local:ArticlesViewModel"
+             x:Name="articleBrowserRoot">
 
     <ContentPage.BindingContext>
         <local:ArticlesViewModel />
     </ContentPage.BindingContext>
     
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Article browser" />
+        <controls:PageTitleView Text="Article Browser" />
     </NavigationPage.TitleView>
     
     <ScrollView>
         <StackLayout>
-            <CarouselView ItemsSource="{Binding NatureArticles}" HeightRequest="300">
+            <CarouselView
+                x:Name="NatureCarouselView"
+                ItemsSource="{Binding NatureArticles}" 
+                HeightRequest="275">
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
                         <Grid>
-                            <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
-                            <StackLayout Margin="20" VerticalOptions="End">
-                                <Label 
-                                    TextColor="{StaticResource SecondaryTextColor}"
-                                    Text="{Binding Year}" />
-                                <Label
-                                    FontSize="Large"
-                                    TextColor="{StaticResource SecondaryTextColor}"
-                                    FontAttributes="Bold"
-                                    Text="{Binding Title}" />
-                                <Label 
-                                    TextColor="{StaticResource SecondaryTextColor}"
-                                    Text="{Binding Category}" />
-                            </StackLayout>
+                            <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                            <Grid 
+                                RowSpacing="0"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start">
+                                <Grid BackgroundColor="{StaticResource Accent}" Opacity="0.7" />
+                                <StackLayout 
+                                    Spacing="0"
+                                    Padding="40, 16"
+                                    VerticalOptions="Center">
+                                    <Label
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource SecondaryTextColor}"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        TextColor="{StaticResource SecondaryTextColor}"
+                                        Text="{Binding Category}" />
+                                </StackLayout>
+                            </Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference articleBrowserRoot}}" CommandParameter="{Binding}" />
+                            </Grid.GestureRecognizers>
                         </Grid>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
+            <IndicatorView
+                IndicatorsShape="Square"
+                IndicatorColor="LightGray"
+                SelectedIndicatorColor="{StaticResource Accent}"
+                HorizontalOptions="Center"
+                IndicatorSize="8"
+                IndicatorView.ItemsSourceBy="NatureCarouselView" />
             <CollectionView
                 ItemsSource="{Binding SportArticles}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                SelectionMode="Single"
                 Margin="16, 10, 0, 10"
                 HeightRequest="250">
                 <CollectionView.ItemsLayout>
@@ -57,33 +79,31 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
                         <Frame Padding="1">
-                            <Grid RowSpacing="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
+                            <Grid>
                                 <ff:CachedImage
                                     Source="{Binding ImageSource}" 
+                                    WidthRequest="250"
                                     Aspect="AspectFill" />
-                                <Grid 
-                                    Grid.Row="1"
-                                    BackgroundColor="White"
-                                    Padding="10" 
-                                    VerticalOptions="End">
-                                    <Label
-                                        Grid.Row="0"
-                                        FontSize="Medium"
-                                        TextColor="{StaticResource Accent}"
-                                        FontAttributes="Bold"
-                                        Text="{Binding Title}" />
-                                    <Label 
-                                        Grid.Row="1"
-                                        Text="{Binding Category}" />
-                                    <Label 
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        HorizontalOptions="End"
-                                        Text="{Binding Year}" />
+                                <Grid VerticalOptions="End">
+                                    <Grid BackgroundColor="{StaticResource Accent}" Opacity=".7" />
+                                    <StackLayout Padding="16, 10">
+                                        <Label
+                                            FontSize="Medium"
+                                            FontAttributes="Bold"
+                                            TextColor="{StaticResource SecondaryTextColor}"
+                                            Text="{Binding Title}" />
+                                        <Label TextColor="{StaticResource SecondaryTextColor}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <FormattedString.Spans>
+                                                        <Span Text="{Binding Category}" />
+                                                        <Span Text=" | " />
+                                                        <Span Text="{Binding Year}" />
+                                                    </FormattedString.Spans>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
                                 </Grid>
                             </Grid>
                         </Frame>
@@ -92,10 +112,12 @@
             </CollectionView>
             <CollectionView
                 ItemsSource="{Binding AnimalArticles}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                SelectionMode="Single"
                 Margin="16, 10, 0, 10"
                 HeightRequest="250">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout 
+                    <GridItemsLayout
                         SnapPointsAlignment="Start" 
                         SnapPointsType="None" 
                         HorizontalItemSpacing="10" 
@@ -104,32 +126,31 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
                         <Frame Padding="1">
-                            <Grid RowSpacing="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <ff:CachedImage 
+                            <Grid>
+                                <ff:CachedImage
                                     Source="{Binding ImageSource}" 
+                                    WidthRequest="250"
                                     Aspect="AspectFill" />
-                                <Grid 
-                                    Grid.Row="1"
-                                    Padding="10" 
-                                    VerticalOptions="End">
-                                    <Label
-                                        Grid.Row="0"
-                                        FontSize="Medium"
-                                        TextColor="{StaticResource Accent}"
-                                        FontAttributes="Bold"
-                                        Text="{Binding Title}" />
-                                    <Label 
-                                        Grid.Row="1"
-                                        Text="{Binding Category}" />
-                                    <Label 
-                                        Grid.Row="1"
-                                        Grid.Column="1"
-                                        HorizontalOptions="End"
-                                        Text="{Binding Year}" />
+                                <Grid VerticalOptions="End">
+                                    <Grid BackgroundColor="{StaticResource Accent}" Opacity=".7" />
+                                    <StackLayout Padding="16, 10">
+                                        <Label
+                                            FontSize="Medium"
+                                            FontAttributes="Bold"
+                                            TextColor="{StaticResource SecondaryTextColor}"
+                                            Text="{Binding Title}" />
+                                        <Label TextColor="{StaticResource SecondaryTextColor}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <FormattedString.Spans>
+                                                        <Span Text="{Binding Category}" />
+                                                        <Span Text=" | " />
+                                                        <Span Text="{Binding Year}" />
+                                                    </FormattedString.Spans>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
                                 </Grid>
                             </Grid>
                         </Frame>

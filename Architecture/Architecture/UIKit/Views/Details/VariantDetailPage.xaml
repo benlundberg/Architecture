@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Architecture.DetailPage"
+             x:Class="Architecture.VariantDetailPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:local="clr-namespace:Architecture"
@@ -13,21 +13,29 @@
     <ContentPage.BindingContext>
         <local:DetailViewModel />
     </ContentPage.BindingContext>
-    
+
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Details" />
+        <controls:PageTitleView Text="Variant Details" />
     </NavigationPage.TitleView>
 
-    <controls:CollapsingScrollView>
-        <controls:CollapsingScrollView.HeaderContent>
-            <Grid>
+    <controls:NotifyScrollView>
+        <controls:NotifyScrollView.HeaderContent>
+            <Grid BackgroundColor="{StaticResource PrimaryColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
                 <ff:CachedImage 
-                    HeightRequest="300"
+                    Margin="10"
+                    HeightRequest="100"
+                    WidthRequest="100"
+                    VerticalOptions="Start"
                     Source="http://lorempixel.com/400/200/nature/5/" 
                     Aspect="AspectFill" />
                 <StackLayout 
+                    Grid.Column="1"
                     Padding="{StaticResource ControlPadding}"
-                    VerticalOptions="End">
+                    VerticalOptions="Start">
                     <Label 
                         Text="Fresh water"
                         TextColor="{StaticResource SecondaryTextColor}"
@@ -44,9 +52,28 @@
                         Color="{StaticResource Accent}"/>
                 </StackLayout>
             </Grid>
-        </controls:CollapsingScrollView.HeaderContent>
-        <controls:CollapsingScrollView.MainContent>
+        </controls:NotifyScrollView.HeaderContent>
+        <controls:NotifyScrollView.MainContent>
             <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ff:CachedImage 
+                        Margin="10"
+                        HeightRequest="45"
+                        WidthRequest="45"
+                        VerticalOptions="Start"
+                        Source="http://lorempixel.com/400/200/nature/5/" 
+                        Aspect="AspectFill" />
+                    <Label 
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        Text="Fresh water"
+                        FontAttributes="Bold"
+                        FontSize="Large" />
+                </Grid>
                 <Grid 
                     Grid.Row="1" 
                     ColumnSpacing="10"
@@ -131,6 +158,6 @@
                     Margin="{StaticResource MainPadding}"
                     Text="Add comment" />
             </StackLayout>
-        </controls:CollapsingScrollView.MainContent>
-    </controls:CollapsingScrollView>
+        </controls:NotifyScrollView.MainContent>
+    </controls:NotifyScrollView>
 </ContentPage>

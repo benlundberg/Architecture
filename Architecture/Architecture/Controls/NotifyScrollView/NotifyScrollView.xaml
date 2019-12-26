@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.Controls.NotifyScrollView"
+             x:Name="this">
+
+    <Grid>
+        <ScrollView x:Name="ScrollRoot" Scrolled="ScrollRoot_Scrolled">
+            <!-- Content -->
+            <ContentView x:Name="MainView" Content="{Binding MainContent, Source={x:Reference this}}" />
+        </ScrollView>
+        <!-- Header -->
+        <ContentView x:Name="HeaderView" IsClippedToBounds="True" VerticalOptions="Start" Content="{Binding HeaderContent, Source={x:Reference this}}" />
+    </Grid>
+</ContentView>

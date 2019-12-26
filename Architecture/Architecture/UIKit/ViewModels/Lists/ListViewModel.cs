@@ -244,7 +244,7 @@ namespace Architecture
         public int Id { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
-        public string ImageSource => "http://lorempixel.com/300/400/technics/";
+        public string ImageSource => "http://lorempixel.com/400/400/nature/" + Id;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

@@ -95,6 +95,12 @@ namespace Architecture
                 case 1:
                     await Navigation.PushAsync(new DetailPage());
                     break;
+                case 2:
+                    await Navigation.PushAsync(new CardDetailPage());
+                    break;
+                case 3:
+                    await Navigation.PushAsync(new VariantDetailPage());
+                    break;
             }
         }));
         
