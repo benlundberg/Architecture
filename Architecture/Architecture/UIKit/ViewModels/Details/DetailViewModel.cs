@@ -17,9 +17,6 @@ namespace Architecture
             new object (),
             new object (),
             new object (),
-            new object (),
-            new object (),
-            new object ()
         };
     }
 }

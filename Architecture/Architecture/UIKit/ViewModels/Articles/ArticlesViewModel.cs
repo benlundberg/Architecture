@@ -12,17 +12,6 @@ namespace Architecture
             LoadData();
         }
 
-        private ICommand itemClickedCommand;
-        public ICommand ItemClickedCommand => itemClickedCommand ?? (itemClickedCommand = new Command((param) =>
-        {
-            if (!(param is ArticleItemViewModel item))
-            {
-                return;
-            }
-
-            ItemSelected(item.Title);
-        }));
-
         private void LoadData()
         {
             NatureArticles = new ObservableCollection<ArticleItemViewModel>
@@ -156,6 +145,17 @@ namespace Architecture
                 },
             };
         }
+
+        private ICommand itemClickedCommand;
+        public ICommand ItemClickedCommand => itemClickedCommand ?? (itemClickedCommand = new Command((param) =>
+        {
+            if (!(param is ArticleItemViewModel item))
+            {
+                return;
+            }
+
+            ItemSelected(item.Title);
+        }));
 
         private void ItemSelected(string title)
         {

@@ -21,13 +21,13 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="200" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ff:CachedImage 
                 Grid.RowSpan="2"
                 VerticalOptions="Start"
-                HeightRequest="300"
+                HeightRequest="200"
                 Source="http://lorempixel.com/400/200/nature/5/" 
                 Aspect="AspectFill" />
             <StackLayout Grid.Row="1">

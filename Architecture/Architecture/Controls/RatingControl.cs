@@ -26,7 +26,7 @@ namespace Architecture.Controls
                 {
                     Text = Text,
                     FontFamily = FontFamily,
-                    FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)),
+                    FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
                     TextColor = i <= Rating ? SolidColor : Color
                 };
 
@@ -45,6 +45,11 @@ namespace Architecture.Controls
                 }
 
                 Children.Add(label);
+            }
+
+            if (Rating > 0)
+            {
+                Command?.Execute(Rating - 1);
             }
         }
 
@@ -83,6 +88,11 @@ namespace Architecture.Controls
         public ICommand Command => command ?? (command = new Command((param) =>
         {
             if (!int.TryParse(param?.ToString(), out int rating))
+            {
+                return;
+            }
+
+            if (Children?.Any() != true)
             {
                 return;
             }
@@ -127,6 +137,7 @@ namespace Architecture.Controls
 
         public int RateMaximum { get; set; } = 5;
         public string Text { get; set; } = "\uf005";
+        public NamedSize FontSize { get; set; } = NamedSize.Medium;
         public string FontFamily { get; set; } = App.Current.FontAwesomeSolid();
         public Color SolidColor { get; set; } = App.Current.AccentColor();
         public Color Color { get; set; } = Color.LightGray;

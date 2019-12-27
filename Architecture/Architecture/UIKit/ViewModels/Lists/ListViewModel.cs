@@ -13,7 +13,7 @@ namespace Architecture
     {
         public ListViewModel()
         {
-            // We load items on appearing, if we have connection
+            // We load items on appearing
             ExecuteIfConnected(() =>
             {
                 LoadItems();

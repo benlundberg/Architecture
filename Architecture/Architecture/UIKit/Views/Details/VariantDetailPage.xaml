@@ -62,17 +62,22 @@
                     </Grid.ColumnDefinitions>
                     <ff:CachedImage 
                         Margin="10"
-                        HeightRequest="45"
-                        WidthRequest="45"
+                        HeightRequest="75"
+                        WidthRequest="75"
                         VerticalOptions="Start"
                         Source="http://lorempixel.com/400/200/nature/5/" 
                         Aspect="AspectFill" />
-                    <Label 
-                        Grid.Column="1"
-                        VerticalOptions="Center"
-                        Text="Fresh water"
-                        FontAttributes="Bold"
-                        FontSize="Large" />
+                    <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                        <Label 
+                            Text="Fresh water"
+                            FontAttributes="Bold"
+                            FontSize="Medium" />
+                        <Label 
+                            Text="Friendship in the water" />
+                        <controls:RatingControl 
+                            IsLocked="True" 
+                            Rating="3" />
+                    </StackLayout>
                 </Grid>
                 <Grid 
                     Grid.Row="1" 

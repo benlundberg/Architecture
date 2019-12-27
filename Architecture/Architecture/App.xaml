@@ -10,13 +10,12 @@
             <!--Colors -->
             <Color x:Key="DarkPrimaryColor">#000051</Color>
             <Color x:Key="PrimaryColor">#1a237e</Color>
-            <Color x:Key="LightPrimaryColor">#534bae</Color>
             <Color x:Key="Accent">#d81b60</Color>
-            <Color x:Key="LightAccent">#ff5c8d</Color>
             <Color x:Key="DarkAccent">#a00037</Color>
-            <Color x:Key="GrayDark">#c2c2c2</Color>
-            <Color x:Key="Gray">#eeeeee</Color>
-            <Color x:Key="GrayLight">#f5f5f5</Color>
+            <Color x:Key="GrayDark">#AAB2BD</Color>
+            <Color x:Key="GrayMedium">#CCD1D9</Color>
+            <Color x:Key="Gray">#E6E9ED</Color>
+            <Color x:Key="GrayLight">#F5F7FA</Color>
 
             <Color x:Key="ToolbarTextColor">#FFF</Color>
             <Color x:Key="TextColor">#000</Color>
