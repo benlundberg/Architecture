@@ -7,29 +7,35 @@ using System.Threading.Tasks;
 
 namespace Architecture.Core
 {
-    public class StorageRepository
+    public class StorageRepository : IRepository
     {
-        static readonly Lazy<StorageRepository> implementation = new Lazy<StorageRepository>(() => CreateStorage(), isThreadSafe: true);
+        static Lazy<IRepository> implementation;
 
-        public static StorageRepository Current
+        public static IRepository Current
         {
             get
             {
-                var ret = implementation.Value;
+                var ret = implementation?.Value;
 
                 if (ret == null)
                 {
-                    throw new NotImplementedException();
+                    implementation = new Lazy<IRepository>(() => Create(), isThreadSafe: true);
+                    ret = implementation.Value;
                 }
 
                 return ret;
             }
         }
 
-        private static StorageRepository CreateStorage()
+        private static IRepository Create()
         {
             BlobCache.ApplicationName = AppConfig.AppName;
             return new StorageRepository();
+        }
+
+        public void Init(IRepository repository)
+        {
+            implementation = new Lazy<IRepository>(() => repository, isThreadSafe: true);
         }
 
         public async Task SaveAsync<T>(string id, T model)
