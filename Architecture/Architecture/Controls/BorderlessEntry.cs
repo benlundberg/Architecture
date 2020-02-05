@@ -2,7 +2,7 @@
 
 namespace Architecture.Controls
 {
-    public class BorderlessEntry : Entry
+    public class BorderlessEntry : ChartEntry
     {
         public BorderlessEntry()
         {

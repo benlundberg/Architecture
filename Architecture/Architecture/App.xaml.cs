@@ -17,7 +17,7 @@ namespace Architecture
         public static void SetMainPage()
         {
             // TODO: UI Kit home page
-            Current.MainPage = new NavigationPage(new UIKitHomePage());
+            Current.MainPage = new NavigationPage(new ChartsPage()); //UIKitHomePage());
 
             // Master
             //Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
