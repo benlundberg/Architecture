@@ -7,10 +7,11 @@
              x:Class="Architecture.DataTablePage"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:local="clr-namespace:Architecture"
-             Visual="Material">
+             Visual="Material"
+             x:DataType="local:TaskOverviewViewModel">
 
     <ContentPage.BindingContext>
-        <local:DataTableViewModel />
+        <local:TaskOverviewViewModel />
     </ContentPage.BindingContext>
     
     <NavigationPage.TitleView>
@@ -18,7 +19,24 @@
     </NavigationPage.TitleView>
 
     <ScrollView>
-        <controls:TableControl UseBorder="False" TableSource="{Binding TableItems}" />
+        <StackLayout Spacing="0">
+            <Frame 
+                CornerRadius="25"
+                Padding="0"
+                Margin="10">
+                <controls:PickerView
+                    Padding="20"
+                    BackgroundColor="{StaticResource Gray}"
+                    ItemsSource="{Binding PickerValues}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    IconFontFamily="{StaticResource FontAwesomeSolid}"
+                    Title="Task status"
+                    Placeholder="Select status"
+                    CancelText="{local:Translate Gen_Cancel}"
+                    IconTextSource="&#xf0eb;" />
+            </Frame>
+            <controls:TableControl UseBorder="False" TableSource="{Binding TableItems}" />
+        </StackLayout>
     </ScrollView>
     
 </ContentPage>

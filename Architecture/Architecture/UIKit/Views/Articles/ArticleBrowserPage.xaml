@@ -12,35 +12,76 @@
              x:DataType="local:ArticlesViewModel"
              x:Name="articleBrowserRoot">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="arcticleItem" x:DataType="local:ArticleItemViewModel">
+                <Frame Padding="1">
+                    <Grid>
+                        <ff:CachedImage
+                            Source="{Binding ImageSource}" 
+                            WidthRequest="200"
+                            Aspect="AspectFill" />
+                        <Grid VerticalOptions="End">
+                            <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
+                            <StackLayout
+                                Spacing="0"
+                                Padding="16, 8">
+                                <Label
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource SecondaryTextColor}"
+                                    Text="{Binding Title}" />
+                                <Label 
+                                    FontSize="Micro"
+                                    TextColor="{StaticResource SecondaryTextColor}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="{Binding Category}" />
+                                                <Span Text=" | " />
+                                                <Span Text="{Binding Year}" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.BindingContext>
         <local:ArticlesViewModel />
     </ContentPage.BindingContext>
-    
+
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Article Browser" />
     </NavigationPage.TitleView>
-    
+
     <ScrollView>
         <StackLayout>
             <CarouselView
                 x:Name="NatureCarouselView"
                 ItemsSource="{Binding NatureArticles}" 
-                HeightRequest="275">
+                HeightRequest="200">
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
                         <Grid>
-                            <Image Source="{Binding ImageSource}" Aspect="AspectFill" />
+                            <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
                             <Grid 
                                 RowSpacing="0"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Start">
-                                <Grid BackgroundColor="{StaticResource Accent}" Opacity="0.7" />
+                                <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity="0.7" />
                                 <StackLayout 
                                     Spacing="0"
                                     Padding="40, 16"
                                     VerticalOptions="Center">
                                     <Label
-                                        FontSize="Large"
+                                        FontSize="Medium"
                                         FontAttributes="Bold"
                                         TextColor="{StaticResource SecondaryTextColor}"
                                         Text="{Binding Title}" />
@@ -57,18 +98,19 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <IndicatorView
-                IndicatorsShape="Square"
+                IndicatorsShape="Circle"
                 IndicatorColor="LightGray"
-                SelectedIndicatorColor="{StaticResource Accent}"
+                SelectedIndicatorColor="{StaticResource PrimaryColor}"
                 HorizontalOptions="Center"
                 IndicatorSize="8"
                 IndicatorView.ItemsSourceBy="NatureCarouselView" />
             <CollectionView
                 ItemsSource="{Binding SportArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"
                 Margin="16, 10, 0, 10"
-                HeightRequest="250">
+                HeightRequest="200">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         SnapPointsAlignment="Start" 
@@ -76,46 +118,14 @@
                         HorizontalItemSpacing="10" 
                         Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Frame Padding="1">
-                            <Grid>
-                                <ff:CachedImage
-                                    Source="{Binding ImageSource}" 
-                                    WidthRequest="250"
-                                    Aspect="AspectFill" />
-                                <Grid VerticalOptions="End">
-                                    <Grid BackgroundColor="{StaticResource Accent}" Opacity=".7" />
-                                    <StackLayout Padding="16, 10">
-                                        <Label
-                                            FontSize="Medium"
-                                            FontAttributes="Bold"
-                                            TextColor="{StaticResource SecondaryTextColor}"
-                                            Text="{Binding Title}" />
-                                        <Label TextColor="{StaticResource SecondaryTextColor}">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <FormattedString.Spans>
-                                                        <Span Text="{Binding Category}" />
-                                                        <Span Text=" | " />
-                                                        <Span Text="{Binding Year}" />
-                                                    </FormattedString.Spans>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </StackLayout>
-                                </Grid>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
             </CollectionView>
             <CollectionView
                 ItemsSource="{Binding AnimalArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"
                 Margin="16, 10, 0, 10"
-                HeightRequest="250">
+                HeightRequest="200">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         SnapPointsAlignment="Start" 
@@ -123,39 +133,6 @@
                         HorizontalItemSpacing="10" 
                         Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Frame Padding="1">
-                            <Grid>
-                                <ff:CachedImage
-                                    Source="{Binding ImageSource}" 
-                                    WidthRequest="250"
-                                    Aspect="AspectFill" />
-                                <Grid VerticalOptions="End">
-                                    <Grid BackgroundColor="{StaticResource Accent}" Opacity=".7" />
-                                    <StackLayout Padding="16, 10">
-                                        <Label
-                                            FontSize="Medium"
-                                            FontAttributes="Bold"
-                                            TextColor="{StaticResource SecondaryTextColor}"
-                                            Text="{Binding Title}" />
-                                        <Label TextColor="{StaticResource SecondaryTextColor}">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <FormattedString.Spans>
-                                                        <Span Text="{Binding Category}" />
-                                                        <Span Text=" | " />
-                                                        <Span Text="{Binding Year}" />
-                                                    </FormattedString.Spans>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </StackLayout>
-                                </Grid>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
     </ScrollView>

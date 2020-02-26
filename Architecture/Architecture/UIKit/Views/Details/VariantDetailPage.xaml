@@ -30,7 +30,7 @@
                     HeightRequest="100"
                     WidthRequest="100"
                     VerticalOptions="Start"
-                    Source="http://lorempixel.com/400/200/nature/5/" 
+                    Source="http://clarityapplication.com/dev/images/5.jpg" 
                     Aspect="AspectFill" />
                 <StackLayout 
                     Grid.Column="1"
@@ -65,7 +65,7 @@
                         HeightRequest="75"
                         WidthRequest="75"
                         VerticalOptions="Start"
-                        Source="http://lorempixel.com/400/200/nature/5/" 
+                        Source="http://clarityapplication.com/dev/images/5.jpg" 
                         Aspect="AspectFill" />
                     <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
                         <Label 

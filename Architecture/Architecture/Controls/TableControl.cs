@@ -112,7 +112,6 @@ namespace Architecture.Controls
 
         public static readonly BindableProperty TableSourceProperty = BindableProperty.Create(
             propertyName: "TableSource",
-            defaultBindingMode: BindingMode.TwoWay,
             returnType: typeof(IList<TableItem>),
             declaringType: typeof(TableControl),
             defaultValue: default(IList<TableItem>),

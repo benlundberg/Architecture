@@ -7,8 +7,8 @@
              x:Class="Architecture.TaskBrowserPage"
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             Visual="Material"
-             BackgroundColor="{StaticResource Gray}">
+             xmlns:chart="clr-namespace:Architecture.Controls.Charts"
+             Visual="Material">
 
     <ContentPage.BindingContext>
         <local:TaskOverviewViewModel />
@@ -19,81 +19,44 @@
     </NavigationPage.TitleView>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid>
-            <Grid.Effects>
-                <local:GradientEffect Direction="ToBottom" />
-            </Grid.Effects>
-            <StackLayout Padding="{StaticResource FormPadding}">
-                <Label 
-                    TextColor="{StaticResource SecondaryTextColor}"
-                    FontSize="Large"
-                    Text="Your agenda for the week" />
-                <controls:SegmentControl 
-                    HorizontalOptions="Start"
-                    Margin="{StaticResource VerticalPadding}">
-                    <controls:SegmentControl.ItemsSource>
-                        <controls:SegmentControlItem 
-                            Tag="1"
-                            IsSelected="True" 
-                            Text="Work" />
-                        <controls:SegmentControlItem 
-                            Tag="2"
-                            Text="Project" />
-                    </controls:SegmentControl.ItemsSource>
-                </controls:SegmentControl>
-            </StackLayout>
-        </Grid>
-        <CollectionView 
-            Grid.RowSpan="2"
-            Margin="20, 0, 0, 20"
-            VerticalOptions="End" 
-            HeightRequest="350">
-            <CollectionView.ItemsSource>
-                <x:String>Items</x:String>
-            </CollectionView.ItemsSource>
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout
-                    SnapPointsAlignment="Start" 
-                    SnapPointsType="MandatorySingle" 
-                    HorizontalItemSpacing="10" 
-                    Orientation="Horizontal" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackLayout>
-                                <Label
-                                    Text="24" 
-                                    FontAttributes="Bold"
-                                    TextColor="{StaticResource Accent}" 
-                                    FontSize="Large" />
-                                <Label 
-                                    Text="Completed tasks" 
-                                    FontSize="Medium" />
-                            </StackLayout>
-                            <StackLayout Grid.Row="1" VerticalOptions="End">
-                                <Label Text="Develop space" FontSize="Large" />
-                                <Label Text="12 remaining tasks" />
-                                <BoxView HeightRequest="1" Color="{StaticResource GrayDark}" />
-                                <Button
-                                    BorderColor="White"
-                                    Style="{StaticResource OutlineButton}"
-                                    BackgroundColor="White"
-                                    Text="Details" />
-                            </StackLayout>
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Grid.Effects>
+            <local:GradientEffect Direction="ToBottom" />
+        </Grid.Effects>
+        <controls:SegmentView
+            UserBorder="False"
+            TextAlignment="Start"
+            SelectedBackgroundColor="White"
+            SelectedTextColor="White"
+            SegmentTextColor="White"
+            SegmentBackgroundColor="Transparent">
+            <controls:SegmentView.ItemsSource>
+                <controls:SegmentControlItem IsSelected="True" Text="Progress" Tag="1">
+                    <controls:SegmentControlItem.Content>
+                        <Frame 
+                            Grid.Row="1" 
+                            CornerRadius="40" 
+                            Margin="0, 40, 0, -40">
+                            <chart:LineChart
+                                VerticalOptions="Start"
+                                HideHorizontalLabels="False"
+                                LineMode="Spline"
+                                SliderDetailOrientation="Vertical"
+                                ChartEntries="{Binding ChartEntries}"
+                                HeightRequest="300" />
+                        </Frame>
+                    </controls:SegmentControlItem.Content>
+                </controls:SegmentControlItem>
+                <controls:SegmentControlItem Text="Done" Tag="2">
+                    <controls:SegmentControlItem.Content>
+                        <Frame 
+                            Grid.Row="1" 
+                            CornerRadius="40" 
+                            Margin="0, 40, 0, -40">
+
+                        </Frame>
+                    </controls:SegmentControlItem.Content>
+                </controls:SegmentControlItem>
+            </controls:SegmentView.ItemsSource>
+        </controls:SegmentView>
     </Grid>
 </ContentPage>

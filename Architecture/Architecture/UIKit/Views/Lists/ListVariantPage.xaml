@@ -9,7 +9,7 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 	         xmlns:local="clr-namespace:Architecture"
              x:DataType="local:ListViewModel"
-             Visual="Material">   
+             Visual="Material">
 
     <ContentPage.BindingContext>
         <local:ListViewModel />
@@ -23,8 +23,12 @@
         <ListView 
 			CachingStrategy="RecycleElement"
 			ItemsSource="{Binding Items}"
-            SelectionMode="None"
-			HasUnevenRows="True"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			RefreshCommand="{Binding RefreshListCommand}"
+			IsPullToRefreshEnabled="True"
+			IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+			RefreshControlColor="{StaticResource PrimaryColor}"
+            HasUnevenRows="True"
 			SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:ListItemViewModel">

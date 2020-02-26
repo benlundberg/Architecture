@@ -28,7 +28,7 @@
                 Grid.RowSpan="2"
                 VerticalOptions="Start"
                 HeightRequest="200"
-                Source="http://lorempixel.com/400/200/nature/5/" 
+                Source="http://clarityapplication.com/dev/images/7.jpg" 
                 Aspect="AspectFill" />
             <StackLayout Grid.Row="1">
                 <Frame Margin="{StaticResource MainPadding}">

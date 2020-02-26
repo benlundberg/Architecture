@@ -55,6 +55,9 @@ namespace Architecture
                 case 3:
                     await Navigation.PushAsync(new TabbedLoginPage() { BindingContext = new TabbedLoginViewModel { Navigation = this.Navigation } });
                     break;
+                case 4:
+                    await Navigation.PushModalAsync(new ImageLoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
+                    break;
             }
         }));
 
@@ -168,6 +171,6 @@ namespace Architecture
                     await Navigation.PushAsync(new ContactDetailCardPage());
                     break;
             }
-        }));
+        }));   
     }
 }

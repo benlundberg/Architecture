@@ -49,24 +49,13 @@ namespace Architecture
                 IsRefreshing = false;
             }
         }));
-
-        private ICommand segmentValueChangedCommand;
-        public ICommand SegmentValueChangedCommand => segmentValueChangedCommand ?? (segmentValueChangedCommand = new Command((param) =>
-        {
-            if (!int.TryParse(param?.ToString(), out int tag))
-            {
-                return;
-            }
-
-            IsImageCellVisible = tag == 2;
-        }));
-
+        
         private ICommand addItemCommand;
         public ICommand AddItemCommand => addItemCommand ?? (addItemCommand = new Command(async () =>
         {
             try
             {
-                await EditItemAsync(new ListItemViewModel { Id = Items.Count });
+                //await EditItemAsync(new ListItemViewModel { Id = Items.Count });
             }
             catch (Exception ex)
             {
@@ -134,8 +123,6 @@ namespace Architecture
                     IsBusy = true;
 
                     var item = Items.FirstOrDefault(x => x.Id == id);
-
-                    await EditItemAsync(item);
                 }
                 catch (Exception ex)
                 {
@@ -146,22 +133,6 @@ namespace Architecture
                     IsBusy = false;
                 }
             });
-        }
-
-        private async Task EditItemAsync(ListItemViewModel listItem)
-        {
-            //await Navigation.PushModalAsync(new NavigationPage(ViewContainer.Current.CreatePage(new ItemViewModel(listItem, (returnItem, addItem) =>
-            //{
-            //    if (addItem)
-            //    {
-            //        Items.Add(returnItem);
-            //    }
-            //    else
-            //    {
-            //        var itemToRemove = Items.FirstOrDefault(x => x.Id == returnItem.Id);
-            //        Items.Remove(itemToRemove);
-            //    }
-            //}))));
         }
 
         private void LoadItems()
@@ -188,7 +159,8 @@ namespace Architecture
                         {
                             Id = i,
                             Title = $"Title for item {i}",
-                            SubTitle = $"Subtitle for item {i}"
+                            SubTitle = $"Subtitle for item {i}",
+                            ImageSource = ImageService.GetRandomImage()
                         });
                     }
 
@@ -244,7 +216,7 @@ namespace Architecture
         public int Id { get; set; }
         public string Title { get; set; }
         public string SubTitle { get; set; }
-        public string ImageSource => "http://lorempixel.com/400/400/nature/" + Id;
+        public string ImageSource { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

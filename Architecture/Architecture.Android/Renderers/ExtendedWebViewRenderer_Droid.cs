@@ -1,5 +1,5 @@
 ﻿using Android.Content;
-using Architecture;
+using Architecture.Controls;
 using Architecture.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;

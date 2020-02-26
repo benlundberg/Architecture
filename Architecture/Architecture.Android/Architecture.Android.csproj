@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Bootstrapper_Droid.cs" />
     <Compile Include="Effects\GradientEffect_Droid.cs" />
+    <Compile Include="Renderers\ExtendedDatePickerRenderer_Droid.cs" />
     <Compile Include="Services\LocalFileSystemService_Droid.cs" />
     <Compile Include="Services\LocalizeService_Droid.cs" />
     <Compile Include="MainActivity.cs" />
@@ -184,6 +185,9 @@
     <Reference Include="System.Threading.Tasks.Extensions">
       <HintPath>$(UserProfile)\.nuget\packages\system.threading.tasks.extensions\4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

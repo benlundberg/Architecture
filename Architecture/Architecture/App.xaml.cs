@@ -17,11 +17,11 @@ namespace Architecture
         public static void SetMainPage()
         {
             // TODO: UI Kit home page
-            Current.MainPage = new NavigationPage(new ChartsPage()); //UIKitHomePage());
+            Current.MainPage = new NavigationPage(new UIKitHomePage());
 
             // Master
             //Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
-            
+
             // Tabbed
             //Current.MainPage = new NavigationPage(ViewContainer.Current.CreatePage<HomeTabbedViewModel>());
         }

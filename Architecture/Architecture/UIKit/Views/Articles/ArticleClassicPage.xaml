@@ -41,7 +41,7 @@
                             <Label
                                 FontSize="Large"
                                 FontAttributes="Bold"
-                                TextColor="{StaticResource Accent}"
+                                TextColor="{StaticResource PrimaryColor}"
                                 Text="{Binding Title}" />
                             <Label Text="{Binding Year}" />
                             <Label 
@@ -53,5 +53,4 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
-    
 </ContentPage>

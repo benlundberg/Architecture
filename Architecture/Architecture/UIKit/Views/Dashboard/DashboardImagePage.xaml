@@ -29,6 +29,7 @@
                 <DataTemplate x:DataType="local:DashboardItemViewModel">
                     <StackLayout>
                         <ff:CachedImage 
+                            HeightRequest="200"
                             Aspect="AspectFill"
                             Source="{Binding ImageSource}" />
                         <Label 

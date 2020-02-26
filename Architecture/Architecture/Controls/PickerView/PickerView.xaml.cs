@@ -17,7 +17,7 @@ namespace Architecture.Controls
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             propertyName: "ItemsSource",
             returnType: typeof(IList<string>),
-            declaringType: typeof(SegmentControl),
+            declaringType: typeof(PickerView),
             defaultValue: default(IList<string>));
 
         public IList<string> ItemsSource

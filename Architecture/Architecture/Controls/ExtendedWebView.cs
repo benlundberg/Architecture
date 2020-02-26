@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.Controls
 {
     public class ExtendedWebView : WebView
     {

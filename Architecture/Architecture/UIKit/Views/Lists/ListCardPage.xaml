@@ -24,14 +24,18 @@
 		<ListView 
 			CachingStrategy="RecycleElement"
 			ItemsSource="{Binding Items}"
-            SelectionMode="None"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			RefreshCommand="{Binding RefreshListCommand}"
+			IsPullToRefreshEnabled="True"
+			IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+			RefreshControlColor="{StaticResource PrimaryColor}"
 			HasUnevenRows="True"
 			SeparatorVisibility="None">
 			<ListView.ItemTemplate>
 				<DataTemplate x:DataType="local:ListItemViewModel">
                     <ViewCell>
                         <Frame 
-                            Padding="0"
+                            Padding="1"
                             Margin="0, 8">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -40,7 +44,7 @@
                                 </Grid.ColumnDefinitions>
                                 <ff:CachedImage
                                     WidthRequest="100"
-                                    Source="http://lorempixel.com/400/400/food/2" 
+                                    Source="{Binding ImageSource}" 
                                     Aspect="AspectFill" />
                                 <StackLayout
                                     Grid.Column="1"

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.Controls.SlideDownMenu"
+             x:Name="rootSlideDownMenu">
+    
+    <StackLayout Spacing="0">
+        <ContentView x:Name="HeaderView" Content="{Binding HeaderContent, Source={x:Reference rootSlideDownMenu}}">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TappedCommand, Source={x:Reference rootSlideDownMenu}}" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+        <ContentView x:Name="HiddenView" IsClippedToBounds="True" VerticalOptions="Start" Content="{Binding HiddenContent, Source={x:Reference rootSlideDownMenu}}" />
+    </StackLayout>
+</ContentView>

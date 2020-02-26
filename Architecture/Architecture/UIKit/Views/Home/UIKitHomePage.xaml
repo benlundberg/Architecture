@@ -25,6 +25,7 @@
             <Button Text="Full Login" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="1" />
             <Button Text="Full Sign up" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="2" />
             <Button Text="Tabbed Login" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="3" />
+            <Button Text="Image Login" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="4" />
             <!-- Lists -->
             <Label Text="Lists" FontSize="Large" />
             <Button Text="Simple List" Command="{Binding ListCommand, Source={x:Reference root}}" CommandParameter="1" />

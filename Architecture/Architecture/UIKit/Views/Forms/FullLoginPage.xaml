@@ -11,56 +11,49 @@
              x:DataType="local:LoginViewModel">
 
     <ScrollView>
-        <Grid Padding="{StaticResource FormPadding}">
-            <Grid.Effects>
-                <local:GradientEffect />
-            </Grid.Effects>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.Effects>
+                    <local:GradientEffect />
+                </Grid.Effects>
+                <Label
+                    VerticalOptions="Center"
+                    FontSize="72"
+                    TextColor="White"
+                    Margin="{StaticResource FormPadding}"
+                    Text="{StaticResource GeneralIcon}"
+                    FontFamily="{StaticResource FontAwesomeBrands}" />
+            </Grid>
             <StackLayout
+                Grid.Row="1"
                 Spacing="10"
+                Padding="{StaticResource FormPadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <Grid Margin="0, 60, 0, 30" ColumnSpacing="20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Label 
-                        Text="{StaticResource GeneralIcon}"
-                        FontFamily="{StaticResource FontAwesomeBrands}"
-                        FontSize="64"
-                        TextColor="White" />
-                    <StackLayout Grid.Column="1">
-                        <Label 
-                            Text="Welcome to Architecture"
-                            TextColor="White"
-                            FontSize="Large"
-                            FontAttributes="Bold"/>
-                        <Label 
-                            Text="Welcome back!"
-                            TextColor="White" />
-                    </StackLayout>
-                </Grid>
                 <Entry 
-                    Opacity=".8"
                     Placeholder="Username"
                     Text="{Binding Username.Value, Mode=TwoWay}"
-                    PlaceholderColor="{StaticResource EntryTextColor}"
-                    TextColor="{StaticResource EntryTextColor}" />
+                    BackgroundColor="Transparent"
+                    PlaceholderColor="{StaticResource DarkPrimaryColor}"
+                    TextColor="{StaticResource DarkPrimaryColor}" />
                 <Entry 
-                    Opacity=".8"
                     Placeholder="Password" 
                     IsPassword="True" 
                     Text="{Binding Password.Value, Mode=TwoWay}"
-                    PlaceholderColor="{StaticResource EntryTextColor}"
-                    TextColor="{StaticResource EntryTextColor}" />
+                    BackgroundColor="Transparent"
+                    PlaceholderColor="{StaticResource DarkPrimaryColor}"
+                    TextColor="{StaticResource DarkPrimaryColor}" />
                 <StackLayout 
                     HorizontalOptions="Start"
                     Orientation="Horizontal">
                     <CheckBox 
                         IsChecked="{Binding RememberMe, Mode=TwoWay}"
                         WidthRequest="32"
-                        Color="{StaticResource Accent}" />
+                        Color="{StaticResource DarkPrimaryColor}" />
                     <Label 
-                        TextColor="{StaticResource SecondaryTextColor}"
                         VerticalOptions="Center"
                         Text="Remember me?" />
                 </StackLayout>
@@ -69,7 +62,7 @@
                     Text="{StaticResource CheckIcon}"
                     FontFamily="{StaticResource FontAwesomeSolid}" />
                 <Label
-                    TextColor="{StaticResource SecondaryTextColor}"
+                    TextColor="{StaticResource DarkPrimaryColor}"
                     HorizontalOptions="End"
                     Text="Forgot password?">
                     <Label.GestureRecognizers>
@@ -77,8 +70,11 @@
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-            <controls:LoadingView IsRunning="{Binding IsBusy}" />
+            <controls:LoadingView 
+                Grid.RowSpan="2"
+                IsRunning="{Binding IsBusy}" />
             <Label
+                Margin="{StaticResource FormPadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"

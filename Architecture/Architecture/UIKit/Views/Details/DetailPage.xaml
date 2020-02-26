@@ -23,7 +23,7 @@
             <Grid>
                 <ff:CachedImage 
                     HeightRequest="300"
-                    Source="http://lorempixel.com/400/200/nature/5/" 
+                    Source="http://clarityapplication.com/dev/images/13.jpg" 
                     Aspect="AspectFill" />
                 <StackLayout 
                     Padding="{StaticResource ControlPadding}"

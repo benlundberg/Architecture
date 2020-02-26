@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.ImageLoginPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture"
+             Visual="Material"
+             x:DataType="local:LoginViewModel">
+
+    <Grid>
+        <ff:CachedImage
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
+            Aspect="Fill"
+            Source="http://clarityapplication.com/dev/images/11.jpg" />
+        <Grid 
+            BackgroundColor="Black"
+            Opacity=".4" />
+
+        <StackLayout
+            VerticalOptions="Center"
+            Spacing="10"
+            Padding="{StaticResource FormPadding}"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+            <Entry 
+                Placeholder="Username"
+                Text="{Binding Username.Value, Mode=TwoWay}"
+                PlaceholderColor="White"
+                TextColor="White" />
+            <Entry 
+                Placeholder="Password" 
+                IsPassword="True" 
+                Text="{Binding Password.Value, Mode=TwoWay}"
+                PlaceholderColor="White"
+                TextColor="White" />
+            <StackLayout 
+                    HorizontalOptions="Start"
+                    Orientation="Horizontal">
+                <CheckBox 
+                    IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                    WidthRequest="32"
+                    Color="{StaticResource Accent}" />
+                <Label 
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    Text="Remember me?" />
+            </StackLayout>
+            <Button 
+                Command="{Binding LoginCommand}" 
+                Text="{StaticResource CheckIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}" />
+            <Label
+                TextColor="White"
+                HorizontalOptions="End"
+                Text="Forgot password?">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+        <Label
+            Margin="{StaticResource FormPadding}"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            FontSize="Large"
+            Text="{StaticResource CloseIcon}"
+            FontFamily="{StaticResource FontAwesomeSolid}"
+            TextColor="{StaticResource ToolbarTextColor}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding PopModalCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+    </Grid>
+    
+</ContentPage>

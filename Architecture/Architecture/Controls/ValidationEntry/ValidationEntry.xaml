@@ -8,7 +8,7 @@
     xmlns:controls="clr-namespace:Architecture.Controls"
     x:Class="Architecture.Controls.ValidationEntry"
     x:DataType="controls:ValidationEntry"
-    x:Name="root"
+    x:Name="rootValidationEntry"
     Visual="Default">
 
     <StackLayout>
@@ -20,19 +20,20 @@
             <Label 
                 Margin="0, 0, 4, 0"
                 FontSize="Large"
-                IsVisible="{Binding HasIcon, Source={x:Reference root}}"
+                IsVisible="{Binding HasIcon, Source={x:Reference rootValidationEntry}}"
                 VerticalOptions="Center"
-                Text="{Binding IconTextSource, Source={x:Reference root}}"
-                TextColor="{Binding IconColor, Source={x:Reference root}}"
-                FontFamily="{Binding IconFontFamily, Source={x:Reference root}}" />
+                Text="{Binding IconTextSource, Source={x:Reference rootValidationEntry}}"
+                TextColor="{Binding IconColor, Source={x:Reference rootValidationEntry}}"
+                FontFamily="{Binding IconFontFamily, Source={x:Reference rootValidationEntry}}" />
             <Entry
                 Grid.Column="1"
-                Placeholder="{Binding Placeholder, Source={x:Reference root}}"
-                PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference root}}"
-                Text="{Binding Value.Value, Source={x:Reference root}, Mode=TwoWay}"
-                TextColor="{Binding TextColor, Source={x:Reference root}}"
-                IsPassword="{Binding IsPassword, Source={x:Reference root}}"
-                Keyboard="{Binding Keyboard, Source={x:Reference root}}"
+                BackgroundColor="{Binding BackgroundColor, Source={x:Reference rootValidationEntry}}"
+                Placeholder="{Binding Placeholder, Source={x:Reference rootValidationEntry}}"
+                PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference rootValidationEntry}}"
+                Text="{Binding Text.Value, Source={x:Reference rootValidationEntry}, Mode=TwoWay}"
+                TextColor="{Binding TextColor, Source={x:Reference rootValidationEntry}}"
+                IsPassword="{Binding IsPassword, Source={x:Reference rootValidationEntry}}"
+                Keyboard="{Binding Keyboard, Source={x:Reference rootValidationEntry}}"
                 Unfocused="Entry_Unfocused" />
         </Grid>
         <Frame 
@@ -42,13 +43,13 @@
             BorderColor="#B00020"
             HorizontalOptions="Start"
             CornerRadius="10"
-            IsVisible="{Binding Value.IsValid, Source={x:Reference root}, Converter={StaticResource InvertedBoolConv}}">
+            IsVisible="{Binding Text.IsValid, Source={x:Reference rootValidationEntry}, Converter={StaticResource InvertedBoolConv}}">
             <Label 
-                Text="{Binding Value.Error, Source={x:Reference root}}"
+                Text="{Binding Text.Error, Source={x:Reference rootValidationEntry}}"
                 FontSize="Small"
                 TextColor="White"
                 Padding="8"
-                IsVisible="{Binding Value.IsValid, Source={x:Reference root}, Converter={StaticResource InvertedBoolConv}}" />
+                IsVisible="{Binding Text.IsValid, Source={x:Reference rootValidationEntry}, Converter={StaticResource InvertedBoolConv}}" />
         </Frame>
     </StackLayout>
 </ContentView>

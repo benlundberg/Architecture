@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             mc:Ignorable="d"
+             x:Class="Architecture.Controls.FrameEntry"
+             x:DataType="controls:FrameEntry"
+             x:Name="rootFrameEntry">
+    <StackLayout>
+        <Grid>
+            <Frame
+                Margin="0, 10, 0, 0"
+                BorderColor="{Binding BorderColor, Source={x:Reference rootFrameEntry}}"
+                HasShadow="False"
+                Padding="2"
+                BackgroundColor="Transparent">
+                <Grid ColumnSpacing="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        Margin="10, 14"
+                        FontSize="Medium"
+                        IsVisible="{Binding HasIcon, Source={x:Reference rootFrameEntry}}"
+                        VerticalOptions="Center"
+                        Text="{Binding IconTextSource, Source={x:Reference rootFrameEntry}}"
+                        TextColor="{Binding IconColor, Source={x:Reference rootFrameEntry}}"
+                        FontFamily="{Binding IconFontFamily, Source={x:Reference rootFrameEntry}}" />
+                    <controls:BorderlessEntry 
+                        Grid.Column="1"
+                        Placeholder="{Binding Placeholder, Source={x:Reference rootFrameEntry}}"
+                        PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference rootFrameEntry}}"
+                        Text="{Binding Text.Value, Source={x:Reference rootFrameEntry}, Mode=TwoWay}"
+                        TextColor="{Binding TextColor, Source={x:Reference rootFrameEntry}}"
+                        IsPassword="{Binding IsPassword, Source={x:Reference rootFrameEntry}}"
+                        Keyboard="{Binding Keyboard, Source={x:Reference rootFrameEntry}}"
+                        Unfocused="Entry_Unfocused"
+                        Visual="Default"/>
+                </Grid>
+            </Frame>
+            <Label
+                TextColor="{Binding HeaderColor, Source={x:Reference rootFrameEntry}}"
+                BackgroundColor="{Binding HeaderBackgroundColor, Source={x:Reference rootFrameEntry}}" 
+                Text="{Binding Header, Source={x:Reference rootFrameEntry}}"
+                Margin="10, 0, 0, 0"
+                Padding="4, 0, 2, 0"
+                VerticalOptions="Start" 
+                HorizontalOptions="Start" />
+        </Grid>
+        <Frame 
+            Padding="4, 0"
+            HasShadow="False"
+            BackgroundColor="#B00020"
+            BorderColor="#B00020"
+            HorizontalOptions="Start"
+            CornerRadius="10"
+            IsVisible="{Binding Text.IsValid, Source={x:Reference rootFrameEntry}, Converter={StaticResource InvertedBoolConv}}">
+            <Label 
+                Text="{Binding Text.Error, Source={x:Reference rootFrameEntry}}"
+                FontSize="Small"
+                TextColor="White"
+                Padding="8"
+                IsVisible="{Binding Text.IsValid, Source={x:Reference rootFrameEntry}, Converter={StaticResource InvertedBoolConv}}" />
+        </Frame>
+    </StackLayout>
+</ContentView>
