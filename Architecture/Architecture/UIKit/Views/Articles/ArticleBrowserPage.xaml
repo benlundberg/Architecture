@@ -66,6 +66,7 @@
             <CarouselView
                 x:Name="NatureCarouselView"
                 ItemsSource="{Binding NatureArticles}" 
+                IndicatorView="indicatorView"
                 HeightRequest="200">
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
@@ -98,12 +99,12 @@
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <IndicatorView
+                x:Name="indicatorView"
                 IndicatorsShape="Circle"
                 IndicatorColor="LightGray"
                 SelectedIndicatorColor="{StaticResource PrimaryColor}"
                 HorizontalOptions="Center"
-                IndicatorSize="8"
-                IndicatorView.ItemsSourceBy="NatureCarouselView" />
+                IndicatorSize="8" />
             <CollectionView
                 ItemsSource="{Binding SportArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
