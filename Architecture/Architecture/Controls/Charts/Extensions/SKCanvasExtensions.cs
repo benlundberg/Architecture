@@ -47,7 +47,7 @@ namespace Architecture.Controls.Charts
             }
         }
 
-        public static void DrawSliderValue(this SKCanvas canvas, string text, float x, float y, float textSize, SKColor textColor, SKColor backgroundColor, int padding, string maxText, int count, int index, StackOrientation orientation, SKRect frame, bool useDashedEffect)
+        public static void DrawSliderValue(this SKCanvas canvas, string text, float x, float y, float textSize, SKColor textColor, SKColor backgroundColor, int padding, int margin, string maxText, int count, int index, StackOrientation orientation, SKRect frame, bool useDashedEffect)
         {
             using (var textPaint = new SKPaint())
             {
@@ -81,23 +81,23 @@ namespace Architecture.Controls.Charts
                         xPosition = x - (width / 2);
                     }
 
-                    yPosition = y + (height * index);
+                    yPosition = y + (height * index) + (index * margin);
                 }
                 else
                 {
-                    var totalWidth = width * count;
+                    var totalWidth = (width * count) + (count * margin);
 
                     if (totalWidth / 2 >= x - frame.Left)
                     {
-                        xPosition = x + (index * width);
+                        xPosition = x + (index * width) + (index * margin);
                     }
                     else if (totalWidth / 2 >= frame.Right - x)
                     {
-                        xPosition = x - totalWidth + (index * width);
+                        xPosition = x - totalWidth + (index * width) + (index * margin) + margin;
                     }
                     else
                     {
-                        xPosition = x - ((totalWidth / 2) - (index * width));
+                        xPosition = x - ((totalWidth / 2) - (index * width) - (index * margin));
                     }
 
                     yPosition = y;
@@ -116,11 +116,23 @@ namespace Architecture.Controls.Charts
                         backgroundPaint.IsStroke = true;
 
                         textPaint.Color = backgroundColor;
+
+                        xPosition += (useDashedEffect ? backgroundPaint.StrokeWidth / 2 : 0);
+                        width -= (useDashedEffect ? backgroundPaint.StrokeWidth : 0);
+
+                        if (orientation == StackOrientation.Horizontal)
+                        {
+                            height -= backgroundPaint.StrokeWidth / 2;
+                        }
+                        else
+                        {
+                            yPosition += backgroundPaint.StrokeWidth / 2;
+                        }
                     }
                     else
                     {
                         backgroundPaint.Style = SKPaintStyle.StrokeAndFill;
-                        backgroundPaint.StrokeWidth = 3f;
+                        backgroundPaint.StrokeWidth = 2f;
                     }
 
                     SKRect background = new SKRect(xPosition, yPosition, xPosition + width, yPosition + height);

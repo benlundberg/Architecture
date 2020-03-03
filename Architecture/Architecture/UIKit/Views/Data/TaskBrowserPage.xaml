@@ -45,6 +45,7 @@
                                 DisplayHorizontalValuesBySlider="True"
                                 SliderDetailOrientation="Horizontal"
                                 UseExactValue="False"
+                                SliderDetailMargin="10"
                                 ChartEntries="{Binding ChartEntries}"
                                 HeightRequest="300"
                                 VerticalUnit="m/2"

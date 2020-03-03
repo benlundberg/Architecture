@@ -88,45 +88,67 @@ namespace Architecture.Controls.Charts
                 {
                     using (var paint = new SKPaint())
                     {
-                        paint.IsAntialias = true;
-                        paint.StrokeCap = SKStrokeCap.Butt;
-                        paint.Style = SKPaintStyle.Fill;
-
-                        if (IsSliderVisible && selectedValueItems?.Select(x => x.ChartValueItem.Tag)?.Contains(valueItem.Tag) == true)
+                        using (var path = new SKPath())
                         {
-                            if (item.UseDashedEffect)
+                            paint.StrokeCap = SKStrokeCap.Square;
+                            paint.Style = SKPaintStyle.Stroke;
+                            paint.IsStroke = true;
+                            paint.IsAntialias = true;
+
+                            if (IsSliderVisible && selectedValueItems?.Select(x => x.ChartValueItem.Tag)?.Contains(valueItem.Tag) == true)
                             {
-                                paint.PathEffect = SKPathEffect.CreateDash(new float[] { 0, selectedBarWidth * 2 }, 20);
-                                paint.Style = SKPaintStyle.Stroke;
-                                paint.IsStroke = true;
+                                // Selected item //
+
+                                if (item.UseDashedEffect)
+                                {
+                                    paint.PathEffect = SKPathEffect.CreateDash(new float[] { 0, (float)((selectedBarWidth / 2) * Math.PI) }, 0);
+                                }
+
+                                paint.Color = item.Color;
                                 paint.StrokeWidth = selectedBarWidth;
+
+                                var selectedMiddle = totalSelectedBarWidth / 2;
+
+                                path.MoveTo(valueItem.Point.X - (selectedMiddle - (index * selectedBarWidth)), frame.Bottom - (paint.StrokeWidth / 2));
+                                path.LineTo(valueItem.Point.X - (selectedMiddle - (index * selectedBarWidth)), valueItem.Point.Y + (paint.StrokeWidth / 2));
+
+                                canvas.DrawPath(path, paint);
+
+                                string text = Math.Round(double.Parse(valueItem.Value.ToString()), 0, MidpointRounding.AwayFromZero).ToString() + " " + this.VerticalUnit;
+
+                                canvas.DrawSliderValue(
+                                    text, 
+                                    frame.GetInsideXValue(valueItem.Point.X), 
+                                    frame.Top, 
+                                    SliderDetailTextSize, 
+                                    SKColors.White,
+                                    item.Color,
+                                    SliderDetailPadding, 
+                                    SliderDetailMargin, 
+                                    MaxValue + " " + this.VerticalUnit, 
+                                    selectedValueItems.Count, 
+                                    index, 
+                                    SliderDetailOrientation, 
+                                    frame, 
+                                    item.UseDashedEffect);
                             }
-
-                            paint.Color = item.Color;
-
-                            var selectedMiddle = totalSelectedBarWidth / 2;
-
-                            canvas.DrawRect(valueItem.Point.X - (selectedMiddle - (index * selectedBarWidth)), valueItem.Point.Y, item.UseDashedEffect ? 0 : selectedBarWidth, (frame.Bottom - valueItem.Point.Y), paint);
-
-                            string text = Math.Round(double.Parse(valueItem.Value.ToString()), 0, MidpointRounding.AwayFromZero).ToString() + " " + this.VerticalUnit;
-
-                            canvas.DrawSliderValue(text, frame.GetInsideXValue(valueItem.Point.X), frame.Top, HorizontalLabelTextSize, SKColors.White, item.Color, 30, MaxValue + " " + this.VerticalUnit, selectedValueItems.Count, index, SliderDetailOrientation, frame, item.UseDashedEffect);
-                        }
-                        else
-                        {
-                            if (item.UseDashedEffect)
+                            else
                             {
-                                paint.PathEffect = SKPathEffect.CreateDash(new float[] { barWidth, barWidth }, 20);
-                                paint.Style = SKPaintStyle.Stroke;
-                                paint.IsStroke = true;
+                                if (item.UseDashedEffect)
+                                {
+                                    paint.PathEffect = SKPathEffect.CreateDash(new float[] { 0, (float)((barWidth / 2) * Math.PI) }, 10);
+                                }
+
+                                paint.Color = IsSliderVisible ? item.Color.AsTransparency() : item.Color;
                                 paint.StrokeWidth = barWidth;
+
+                                var middle = totalBarWidth / 2;
+
+                                path.MoveTo(valueItem.Point.X - (middle - (index * barWidth)), frame.Bottom - (paint.StrokeWidth / 2));
+                                path.LineTo(valueItem.Point.X - (middle - (index * barWidth)), valueItem.Point.Y + (paint.StrokeWidth / 2));
+
+                                canvas.DrawPath(path, paint);
                             }
-
-                            paint.Color = IsSliderVisible ? item.Color.AsTransparency() : item.Color;
-
-                            var middle = totalBarWidth / 2;
-
-                            canvas.DrawRect(valueItem.Point.X - (middle - (index * barWidth)), valueItem.Point.Y, item.UseDashedEffect ? 0 : barWidth, (frame.Bottom - valueItem.Point.Y), paint);
                         }
                     }
                 }

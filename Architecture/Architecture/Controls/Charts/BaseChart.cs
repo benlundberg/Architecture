@@ -320,7 +320,21 @@ namespace Architecture.Controls.Charts
 
                 string text = currentVal.ToString() + " " + this.VerticalUnit;
 
-                canvas.DrawSliderValue(text, frame.GetInsideXValue(TouchedPoint.X), frame.Top, HorizontalLabelTextSize, SKColors.White, item.Color, 30, MaxValue + " " + VerticalUnit, valueItems.Count, index, SliderDetailOrientation, frame, item.Parent?.UseDashedEffect == true);
+                canvas.DrawSliderValue(
+                    text, 
+                    frame.GetInsideXValue(TouchedPoint.X), 
+                    frame.Top, 
+                    SliderDetailTextSize,
+                    SKColors.White, 
+                    item.Color, 
+                    SliderDetailPadding, 
+                    SliderDetailMargin,
+                    MaxValue + " " + VerticalUnit, 
+                    valueItems.Count, 
+                    index, 
+                    SliderDetailOrientation, 
+                    frame, 
+                    item.Parent?.UseDashedEffect == true);
 
                 index++;
             }
@@ -348,7 +362,21 @@ namespace Architecture.Controls.Charts
 
                 string text = Math.Round(double.Parse(item.ChartValueItem.Value.ToString()), 0, MidpointRounding.AwayFromZero).ToString() + " " + this.VerticalUnit;
 
-                canvas.DrawSliderValue(text, frame.GetInsideXValue(TouchedPoint.X), frame.Top, HorizontalLabelTextSize, SKColors.White, item.Color, 30, MaxValue + " " + this.VerticalUnit, valueItems.Count, index, SliderDetailOrientation, frame, item.Parent?.UseDashedEffect == true);
+                canvas.DrawSliderValue(
+                    text, 
+                    frame.GetInsideXValue(TouchedPoint.X), 
+                    frame.Top, 
+                    SliderDetailTextSize, 
+                    SKColors.White, 
+                    item.Color, 
+                    SliderDetailPadding, 
+                    SliderDetailMargin, 
+                    MaxValue + " " + this.VerticalUnit, 
+                    valueItems.Count, 
+                    index, 
+                    SliderDetailOrientation,
+                    frame,
+                    item.Parent?.UseDashedEffect == true);
 
                 index++;
             }
@@ -595,6 +623,9 @@ namespace Architecture.Controls.Charts
         public SKColor HorizontalLabelColor { get; set; } = SKColors.Black;
         public float HorizontalLabelTextSize { get; set; } = 42;
         public float VerticalLabelTextSize { get; set; } = 42;
+        public float SliderDetailTextSize { get; set; } = 36;
+        public int SliderDetailPadding { get; set; } = 24;
+        public int SliderDetailMargin { get; set; } = 4;
 
         public float MinValue
         {

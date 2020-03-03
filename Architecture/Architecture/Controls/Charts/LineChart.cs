@@ -88,6 +88,7 @@ namespace Architecture.Controls.Charts
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeCap = SKStrokeCap.Round,
+                IsStroke = true,
                 Color = chartItem.Color,
                 StrokeWidth = chartItem.LineWidth,
                 IsAntialias = true
