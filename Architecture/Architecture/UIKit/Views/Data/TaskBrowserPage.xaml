@@ -38,11 +38,17 @@
                             Margin="0, 40, 0, -40">
                             <chart:LineChart
                                 VerticalOptions="Start"
-                                HideHorizontalLabels="False"
-                                LineMode="Spline"
-                                SliderDetailOrientation="Vertical"
+                                VerticalLabelMode="All"
+                                HorizontalLabelMode="All"
+                                UseSliderHint="True"
+                                IsSliderVisible="True"
+                                DisplayHorizontalValuesBySlider="True"
+                                SliderDetailOrientation="Horizontal"
+                                UseExactValue="False"
                                 ChartEntries="{Binding ChartEntries}"
-                                HeightRequest="300" />
+                                HeightRequest="300"
+                                VerticalUnit="m/2"
+                                HorizontalUnit="months" />
                         </Frame>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
@@ -52,7 +58,17 @@
                             Grid.Row="1" 
                             CornerRadius="40" 
                             Margin="0, 40, 0, -40">
-
+                            <chart:BarChart
+                                VerticalOptions="Start"
+                                VerticalLabelMode="All"
+                                HorizontalLabelMode="StartEnd"
+                                DisplayHorizontalValuesBySlider="True"
+                                IsSliderVisible="True"
+                                UseSliderHint="True"
+                                ChartEntries="{Binding ChartEntries}"
+                                HeightRequest="300"
+                                VerticalUnit="m/2"
+                                HorizontalUnit="months" />
                         </Frame>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>

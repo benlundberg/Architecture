@@ -93,8 +93,10 @@ namespace Architecture
 
             DateTime dateTime = new DateTime(year: 2019, month: 1, day: 1);
 
-            var items1 = new List<ChartEntryItem>();
-            var items2 = new List<ChartEntryItem>();
+            var items1 = new List<ChartValueItem>();
+            var items2 = new List<ChartValueItem>();
+            var items3 = new List<ChartValueItem>();
+            var items4 = new List<ChartValueItem>();
 
             for (int i = 0; i < 12; i++)
             {
@@ -102,7 +104,7 @@ namespace Architecture
 
                 var value = random.Next(20, 100);
 
-                items1.Add(new ChartEntryItem
+                items1.Add(new ChartValueItem
                 {
                     Label = date.Month.ToString(),
                     Value = value,
@@ -111,7 +113,25 @@ namespace Architecture
 
                 value = random.Next(20, 200);
 
-                items2.Add(new ChartEntryItem
+                items2.Add(new ChartValueItem
+                {
+                    Label = date.Month.ToString(),
+                    Value = value,
+                    Tag = date.ToString()
+                });
+
+                value = random.Next(20, 300);
+
+                items3.Add(new ChartValueItem
+                {
+                    Label = date.Month.ToString(),
+                    Value = value,
+                    Tag = date.ToString()
+                });
+
+                value = random.Next(20, 200);
+
+                items4.Add(new ChartValueItem
                 {
                     Label = date.Month.ToString(),
                     Value = value,
@@ -119,21 +139,36 @@ namespace Architecture
                 });
             }
 
-            ChartEntries = new ObservableCollection<ChartEntry>()
+            ChartEntries = new ObservableCollection<ChartItem>()
             {
-                new ChartEntry
+                new ChartItem
                 {
                     Id = 0,
                     Items = items1,
                     Color = SKColors.Orange,
                     PointColor = SKColors.Orange,
                 },
-                new ChartEntry
+                new ChartItem
                 {
                     Id = 1,
                     Items = items2,
                     Color = SKColors.CornflowerBlue,
                     PointColor = SKColors.CornflowerBlue
+                },
+                new ChartItem
+                {
+                    Id = 2,
+                    Items = items3,
+                    Color = SKColors.Violet,
+                    PointColor = SKColors.Violet
+                },
+                new ChartItem
+                {
+                    Id = 2,
+                    Items = items4,
+                    Color = SKColors.Violet,
+                    UseDashedEffect = true,
+                    PointColor = SKColors.Violet
                 }
             };
         }
@@ -141,7 +176,7 @@ namespace Architecture
         public string SelectedItem { get; set; }
         public List<string> PickerValues { get; private set; }
         public ObservableCollection<TableItem> TableItems { get; private set; }
-        public ObservableCollection<ChartEntry> ChartEntries { get; private set; }
+        public ObservableCollection<ChartItem> ChartEntries { get; private set; }
 
         public DateTime SelectedDate { get; set; } = DateTime.Today;
         public bool HasYear { get; set; } = true;
