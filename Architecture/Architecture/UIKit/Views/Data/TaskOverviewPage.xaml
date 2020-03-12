@@ -7,6 +7,7 @@
              x:Class="Architecture.TaskOverviewPage"
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Visual="Material">
 
     <ContentPage.BindingContext>
@@ -23,14 +24,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!-- Date picker -->
-        <controls:ExtendedDatePicker
-            BackgroundColor="{StaticResource Gray}"
-            SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
-            HasYear="{Binding HasYear}"
-            HasMonth="{Binding HasMonth}"
-            HasDay="{Binding HasDay}" />
-        <Grid Grid.Row="1">
+        <Grid Padding="{StaticResource MainPadding}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -41,19 +35,17 @@
             </Grid.ColumnDefinitions>
             <controls:ToggleView 
                 Grid.ColumnSpan="2"
-                Margin="20, 10, 20, 0"
                 IsChecked="{Binding HasYear, Mode=TwoWay}">
                 <controls:ToggleView.CheckedView>
-                    <Frame BackgroundColor="{StaticResource Accent}">
+                    <Frame BackgroundColor="{StaticResource PrimaryColor}">
                         <StackLayout>
                             <Label
                                 Text="Year progress"
                                 TextColor="White"
-                                FontAttributes="Bold" />
+                                FontSize="Medium" />
                             <Label
                                 Text="32"
                                 TextColor="White"
-                                FontAttributes="Bold"
                                 FontSize="Medium" />
                             <ProgressBar 
                                 Progress=".3"
@@ -67,11 +59,10 @@
                             <Label
                                 Text="Year progress"
                                 TextColor="Black"
-                                FontAttributes="Bold" />
+                                FontSize="Medium" />
                             <Label
                                 Text="32"
                                 TextColor="Black"
-                                FontAttributes="Bold"
                                 FontSize="Medium" />
                             <ProgressBar 
                                 Progress=".3"
@@ -82,20 +73,18 @@
             </controls:ToggleView>
             <controls:ToggleView 
                 Grid.Row="1"
-                Margin="20, 10, 5, 10"
                 IsChecked="{Binding HasMonth, Mode=TwoWay}">
                 <controls:ToggleView.CheckedView>
-                    <Frame BackgroundColor="{StaticResource Accent}">
+                    <Frame BackgroundColor="{StaticResource PrimaryColor}">
                         <StackLayout>
                             <Label
                                 Text="Month progress"
                                 TextColor="White"
-                                FontAttributes="Bold" />
+                                FontSize="Default" />
                             <Label
                                 Text="32"
                                 TextColor="White"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
+                                FontSize="Default" />
                             <ProgressBar 
                                 Progress=".3"
                                 ProgressColor="White" />
@@ -108,12 +97,11 @@
                             <Label
                                 Text="Month progress"
                                 TextColor="Black"
-                                FontAttributes="Bold" />
+                                FontSize="Default" />
                             <Label
                                 Text="32"
                                 TextColor="Black"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
+                                FontSize="Default" />
                             <ProgressBar 
                                 Progress=".3"
                                 ProgressColor="Gray" />
@@ -124,20 +112,18 @@
             <controls:ToggleView 
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="5, 10, 20, 10"
                 IsChecked="{Binding HasDay, Mode=TwoWay}">
                 <controls:ToggleView.CheckedView>
-                    <Frame BackgroundColor="{StaticResource Accent}">
+                    <Frame BackgroundColor="{StaticResource PrimaryColor}">
                         <StackLayout>
                             <Label
                                 Text="Day progress"
                                 TextColor="White"
-                                FontAttributes="Bold" />
+                                FontSize="Default" />
                             <Label
                                 Text="32"
                                 TextColor="White"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
+                                FontSize="Default" />
                             <ProgressBar 
                                 Progress=".3"
                                 ProgressColor="White" />
@@ -150,12 +136,11 @@
                             <Label
                                 Text="Day progress"
                                 TextColor="Black"
-                                FontAttributes="Bold" />
+                                FontSize="Default" />
                             <Label
                                 Text="32"
                                 TextColor="Black"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
+                                FontSize="Default" />
                             <ProgressBar 
                                 Progress=".3"
                                 ProgressColor="Gray" />
@@ -163,6 +148,39 @@
                     </Frame>
                 </controls:ToggleView.UncheckedView>
             </controls:ToggleView>
+        </Grid>
+        <Grid Grid.Row="1" ColumnSpacing="{StaticResource LargeSpacing}" Padding="{StaticResource MainPadding}" BackgroundColor="{StaticResource Gray}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label 
+                FontSize="Large"
+                Text="&#xf073;"
+                VerticalOptions="Center"
+                FontFamily="{StaticResource FontAwesomeSolid}" />
+            <Label 
+                Grid.Column="1"
+                VerticalOptions="Center"
+                FontSize="Medium"
+                Text="Date" />
+            <Label 
+                Grid.Column="2"
+                VerticalOptions="Center"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                TextColor="{StaticResource PrimaryColor}"
+                Text="{Binding SelectedDate.Date, StringFormat='{0:yyyy-MM-dd}'}" />
+            <controls:ExtendedDatePicker
+                Grid.ColumnSpan="3"
+                Title="Select date"
+                ShowLabel="False"
+                BackgroundColor="Transparent"
+                SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                HasYear="{Binding HasYear}"
+                HasMonth="{Binding HasMonth}"
+                HasDay="{Binding HasDay}" />
         </Grid>
         <ListView 
             Grid.Row="2"
@@ -182,21 +200,26 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Image 
-                                HeightRequest="50"
-                                WidthRequest="50"
-                                Source="http://clarityapplication.com/dev/images/13.jpg"
-                                Aspect="AspectFit" />
+                            <Frame
+                                Padding="0"
+                                BorderColor="Transparent"
+                                CornerRadius="10">
+                                <ff:CachedImage 
+                                    HeightRequest="50"
+                                    WidthRequest="50"
+                                    Source="http://clarityapplication.com/dev/images/13.jpg"
+                                    Aspect="AspectFill" />
+                            </Frame>
                             <StackLayout Grid.Column="1">
-                                <Label Text="Joan Doe" FontAttributes="Bold" />
-                                <Label Text="SUPPORT" />
+                                <Label Text="Joan Doe" FontSize="Default" />
+                                <Label Text="SUPPORT" FontSize="Small" />
                             </StackLayout>
                             <Button 
                                 Grid.Column="2" 
-                                VerticalOptions="Start"
                                 HorizontalOptions="End"
                                 BackgroundColor="White"
                                 Text="Info"
+                                VerticalOptions="Start"
                                 Style="{StaticResource OutlineButton}" />
                         </Grid>
                     </ViewCell>

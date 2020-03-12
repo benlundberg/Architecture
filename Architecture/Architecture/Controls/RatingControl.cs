@@ -139,7 +139,7 @@ namespace Architecture.Controls
         public string Text { get; set; } = "\uf005";
         public NamedSize FontSize { get; set; } = NamedSize.Medium;
         public string FontFamily { get; set; } = App.Current.FontAwesomeSolid();
-        public Color SolidColor { get; set; } = App.Current.AccentColor();
+        public Color SolidColor { get; set; } = App.Current.PrimaryColor();
         public Color Color { get; set; } = Color.LightGray;
         public bool IsLocked { get; set; }
     }

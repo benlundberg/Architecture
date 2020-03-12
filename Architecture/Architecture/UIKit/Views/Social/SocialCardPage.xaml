@@ -36,10 +36,10 @@
                             <Label 
                                 FontSize="Large" 
                                 Text="John Doe" 
-                                FontAttributes="Bold" 
                                 HorizontalTextAlignment="Center" />
                             <Label 
                                 Text="San Francisco" 
+                                FontSize="Medium"
                                 HorizontalTextAlignment="Center" />
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -48,16 +48,16 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout>
-                                    <Label HorizontalTextAlignment="Center" Text="125" TextColor="{StaticResource Accent}" />
-                                    <Label HorizontalTextAlignment="Center" Text="Photos" FontAttributes="Bold" />
+                                    <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="125" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Photos" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="1">
-                                    <Label HorizontalTextAlignment="Center" Text="225" TextColor="{StaticResource Accent}" />
-                                    <Label HorizontalTextAlignment="Center" Text="Followers" FontAttributes="Bold" />
+                                    <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="225" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Followers" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="2">
-                                    <Label HorizontalTextAlignment="Center" Text="325" TextColor="{StaticResource Accent}" />
-                                    <Label HorizontalTextAlignment="Center" Text="Following" FontAttributes="Bold" />
+                                    <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="325" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Following" />
                                 </StackLayout>
                             </Grid>
                         </StackLayout>
@@ -76,11 +76,14 @@
                 <Label 
                     Padding="20, 0"
                     Text="Biography"
+                    FontSize="Default"
                     FontAttributes="Bold" />
                 <Label 
+                    FontSize="Body"
                     Padding="{StaticResource MainPadding}"
                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                 <Label 
+                    FontSize="Body"
                     Padding="{StaticResource MainPadding}"
                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                 <controls:HorizontalView 
@@ -94,7 +97,7 @@
                                         <transformation:CircleTransformation />
                                     </ff:CachedImage.Transformations>
                                 </ff:CachedImage>
-                                <Label Text="Joan Doe" HorizontalTextAlignment="Center" />
+                                <Label FontSize="Small" Text="Joan Doe" HorizontalTextAlignment="Center" />
                             </StackLayout>
                         </DataTemplate>
                     </controls:HorizontalView.ItemTemplate>

@@ -135,6 +135,7 @@
             VerticalOptions="End"
             HorizontalOptions="End"
             Margin="24"
+            BackgroundColor="{StaticResource PrimaryColor}"
             FontFamily="{StaticResource FontAwesomeSolid}"
             Text="{StaticResource AddIcon}" />
         <controls:LoadingView 

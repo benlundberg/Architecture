@@ -52,6 +52,7 @@ namespace Architecture.Controls.Charts
             var chart = CreateChart(frame);
 
             DrawFrame(canvas, frame);
+            DrawVerticalLabels(canvas, frame, chart);
 
             if (ChartEntries.Any(x =>  x.IsVisible))
             {
@@ -63,17 +64,16 @@ namespace Architecture.Controls.Charts
                 }
             }
             
-            DrawVerticalLabels(canvas, frame, chart);
             DrawHorizontalLabels(canvas, frame, chart);
-            DrawSlider(canvas, frame);
+            DrawSlider(canvas, chart);
 
             if (UseExactValue)
             {
-                ShowExactSliderValuesPosition(canvas, frame);
+                ShowExactSliderValuesPosition(canvas, chart);
             }
             else
             {
-                ShowSliderValuesPosition(canvas, frame);
+                ShowSliderValuesPosition(canvas, chart);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Architecture.Controls.Charts
                 Style = SKPaintStyle.Stroke,
                 StrokeCap = SKStrokeCap.Round,
                 IsStroke = true,
-                Color = chartItem.Color,
+                Color = chartItem.Color.ToSKColor(),
                 StrokeWidth = chartItem.LineWidth,
                 IsAntialias = true
             })
@@ -127,5 +127,7 @@ namespace Architecture.Controls.Charts
                 canvas.DrawPath(path, paint);
             }
         }
+
+        public LineMode LineMode { get; set; } = LineMode.Straight;
     }
 }

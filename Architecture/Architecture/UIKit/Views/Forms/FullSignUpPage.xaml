@@ -12,67 +12,53 @@
 
     <ScrollView>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid>
-                <Grid.Effects>
-                    <local:GradientEffect />
-                </Grid.Effects>
-                <Label
-                    VerticalOptions="Center"
-                    FontSize="72"
-                    TextColor="White"
-                    Margin="{StaticResource FormPadding}"
-                    Text="{StaticResource GeneralIcon}"
-                    FontFamily="{StaticResource FontAwesomeBrands}" />
-            </Grid>
             <StackLayout 
-                Grid.Row="1"
-                Spacing="10"
+                Spacing="{StaticResource MainSpacing}"
                 Padding="{StaticResource FormPadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                <Label
+                    Margin="0, 40"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center"
+                    FontSize="42"
+                    Text="Sign up" />
                 <controls:ValidationEntry 
                     Visual="Material"
                     Placeholder="Email"
+                    Keyboard="Email"
                     Text="{Binding Email, Mode=TwoWay}"
-                    BackgroundColor="Transparent"
-                    PlaceholderColor="{StaticResource DarkPrimaryColor}"
-                    TextColor="{StaticResource DarkPrimaryColor}"
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource PrimaryColor}"
                     HasValidation="True" />
                 <controls:ValidationEntry 
                     Visual="Material"
                     Text="{Binding Password, Mode=TwoWay}"
                     Placeholder="Password" 
                     IsPassword="True" 
-                    BackgroundColor="Transparent"
-                    PlaceholderColor="{StaticResource DarkPrimaryColor}"
-                    TextColor="{StaticResource DarkPrimaryColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource PrimaryColor}" 
                     HasValidation="True" />
                 <controls:ValidationEntry 
-                    Opacity=".8"
                     Visual="Material"
                     Text="{Binding ConfirmPassword, Mode=TwoWay}"
                     Placeholder="Confirm password" 
                     IsPassword="True" 
-                    BackgroundColor="Transparent"
-                    PlaceholderColor="{StaticResource DarkPrimaryColor}"
-                    TextColor="{StaticResource DarkPrimaryColor}" 
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource PrimaryColor}" 
                     HasValidation="True" />
                 <Button 
                     Text="{StaticResource CheckIcon}"
                     FontFamily="{StaticResource FontAwesomeSolid}" />
             </StackLayout>
             <Label
-                Margin="{StaticResource FormPadding}"
+                Margin="0, 40, 40, 0"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
                 FontSize="Large"
                 Text="{StaticResource CloseIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="{StaticResource ToolbarTextColor}">
+                TextColor="Black">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PopModalCommand}" />
                 </Label.GestureRecognizers>

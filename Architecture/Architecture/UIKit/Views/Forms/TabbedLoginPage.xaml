@@ -13,31 +13,15 @@
         <controls:PageTitleView Text="Welcome" />
     </NavigationPage.TitleView>
 
-    <Grid RowSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid>
-            <Grid.Effects>
-                <local:GradientEffect Direction="ToBottom" />
-            </Grid.Effects>
-            <Label
-                VerticalOptions="Center"
-                FontSize="72"
-                TextColor="White"
-                Margin="{StaticResource FormPadding}"
-                Text="{StaticResource GeneralIcon}"
-                FontFamily="{StaticResource FontAwesomeBrands}" />
-        </Grid>
-        <controls:SegmentView Grid.Row="1">
+    <Grid>
+        <controls:SegmentView IsVisible="{Binding LoginModel.IsBusy, Converter={StaticResource InvertedBoolConv}}">
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem IsSelected="True" Text="Login" Tag="1">
                     <controls:SegmentControlItem.Content>
                         <ScrollView>
                             <!-- Login -->
                             <StackLayout 
-                                Spacing="10"
+                                Spacing="{StaticResource MainSpacing}"
                                 Padding="{StaticResource FormPadding}">
                                 <controls:FrameEntry
                                     Header="Username"
@@ -56,19 +40,23 @@
                                     HorizontalOptions="Start"
                                     Orientation="Horizontal">
                                     <CheckBox 
-                                        IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                                        IsChecked="{Binding LoginModel.RememberMe, Mode=TwoWay}"
                                         WidthRequest="32"
                                         HeightRequest="32"
                                         Color="{StaticResource DarkPrimaryColor}" />
                                     <Label 
+                                        FontSize="Default"
                                         VerticalOptions="Center"
                                         Text="Remember me?" />
                                 </StackLayout>
                                 <Button 
+                                    Command="{Binding LoginModel.LoginCommand}"
                                     Text="{StaticResource CheckIcon}"
                                     FontFamily="{StaticResource FontAwesomeSolid}" />
                                 <Label
-                                    TextColor="{StaticResource DarkPrimaryColor}"
+                                    FontSize="Default"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource PrimaryColor}"
                                     HorizontalOptions="End"
                                     Text="Forgot password?">
                                 </Label>
@@ -80,7 +68,7 @@
                     <controls:SegmentControlItem.Content>
                         <ScrollView>
                             <StackLayout 
-                                Spacing="10"
+                                Spacing="{StaticResource MainSpacing}"
                                 Padding="{StaticResource FormPadding}">
                                 <controls:FrameEntry 
                                     Header="Email"
@@ -115,5 +103,6 @@
                 </controls:SegmentControlItem>
             </controls:SegmentView.ItemsSource>
         </controls:SegmentView>
+        <controls:LoadingView IsVisible="{Binding LoginModel.IsBusy}" />
     </Grid>
 </ContentPage>

@@ -65,11 +65,6 @@ namespace Architecture
             }
         }));
 
-        private ICommand registerCommand;
-        public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
-        {
-        }));
-
         public ValidatableObject<string> Username { get; set; }
         public ValidatableObject<string> Password { get; set; }
         public bool RememberMe { get; set; }

@@ -18,15 +18,12 @@
         <controls:PageTitleView Text="Data Table" />
     </NavigationPage.TitleView>
 
-    <ScrollView>
-        <StackLayout Spacing="0">
-            <Frame 
-                CornerRadius="25"
-                Padding="0"
-                Margin="10">
+    <Grid>
+        <ScrollView>
+            <StackLayout Spacing="0">
                 <controls:PickerView
                     Padding="20"
-                    BackgroundColor="{StaticResource Gray}"
+                    BackgroundColor="{StaticResource GrayLight}"
                     ItemsSource="{Binding PickerValues}"
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                     IconFontFamily="{StaticResource FontAwesomeSolid}"
@@ -34,9 +31,36 @@
                     Placeholder="Select status"
                     CancelText="{local:Translate Gen_Cancel}"
                     IconTextSource="&#xf0eb;" />
-            </Frame>
-            <controls:TableControl UseBorder="False" TableSource="{Binding TableItems}" />
-        </StackLayout>
-    </ScrollView>
-    
+                <controls:TableControl UseBorder="False" TableSource="{Binding TableItems}" />
+            </StackLayout>
+        </ScrollView>
+        <controls:FloatingMenuControl
+            Margin="24"
+            VerticalOptions="End"
+            HorizontalOptions="End">
+            <controls:FloatingMenuControl.BaseItem>
+                <controls:FloatingMenuItem
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    IconSource="{StaticResource AddIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+            </controls:FloatingMenuControl.BaseItem>
+            <controls:FloatingMenuControl.MenuItems>
+                <controls:FloatingMenuItem
+                    BackgroundColor="{StaticResource PrimaryColor}"  
+                    IconSource="{StaticResource RemoveIcon}"
+                    Text="Remove"
+                    FontFamily="{StaticResource FontAwesomeRegular}" />
+                <controls:FloatingMenuItem
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    IconSource="{StaticResource SearchIcon}"
+                    Text="Search"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                <controls:FloatingMenuItem
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    IconSource="{StaticResource SendIcon}"
+                    Text="Send"
+                    FontFamily="{StaticResource FontAwesomeRegular}" />
+            </controls:FloatingMenuControl.MenuItems>
+        </controls:FloatingMenuControl>
+    </Grid>
 </ContentPage>

@@ -27,28 +27,30 @@
             <ff:CachedImage 
                 Grid.RowSpan="2"
                 VerticalOptions="Start"
-                HeightRequest="200"
+                HeightRequest="300"
                 Source="http://clarityapplication.com/dev/images/7.jpg" 
                 Aspect="AspectFill" />
             <StackLayout Grid.Row="1">
                 <Frame Margin="{StaticResource MainPadding}">
-                    <StackLayout>
+                    <StackLayout Spacing="{StaticResource MainSpacing}">
                         <Label 
-                            FontSize="Micro"
+                            FontSize="Small"
                             Text="Mar 3, 2019" />
                         <Label 
-                            FontAttributes="Bold"
-                            Text="Awesome times in the sun"
-                            FontSize="Large" />
+                            FontSize="Large"
+                            Text="Awesome times in the sun" />
                         <Grid>
                             <Label
                                 Grid.Column="0"
                                 Text="TRAVELS"
-                                TextColor="{StaticResource Accent}" />
+                                FontSize="Default"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource PrimaryColor}" />
                             <Label
                                 Grid.Column="1"
                                 HorizontalTextAlignment="End"
-                                TextColor="{StaticResource Accent}">
+                                FontSize="Small"
+                                TextColor="{StaticResource PrimaryColor}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="2K" />
@@ -60,7 +62,8 @@
                             <Label
                                 Grid.Column="2"
                                 HorizontalTextAlignment="End"
-                                TextColor="{StaticResource Accent}">
+                                FontSize="Small"
+                                TextColor="{StaticResource PrimaryColor}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="15" />
@@ -70,13 +73,10 @@
                                 </Label.FormattedText>
                             </Label>
                         </Grid>
-                        <BoxView 
-                            Margin="0, 8"
-                            HeightRequest="1"
-                            Color="LightGray" />
-                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                        <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                        <BoxView HeightRequest="1" Color="{StaticResource Gray}" />
+                        <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                        <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                        <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                     </StackLayout>
                 </Frame>
             </StackLayout>

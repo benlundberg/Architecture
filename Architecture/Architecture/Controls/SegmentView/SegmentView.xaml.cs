@@ -20,7 +20,7 @@ namespace Architecture.Controls
         {
             if (UserBorder)
             {
-                segmentControlFrame.Margin = 20;
+                segmentControlFrame.Margin = new Thickness(20);
                 segmentControlFrame.CornerRadius = 10;
             }
             else
@@ -41,13 +41,13 @@ namespace Architecture.Controls
 
             for (int i = 0; i < ItemsSource.Count; i++)
             {
-                if (UserBorder)
+                if (UseAutoSize)
                 {
-                    segmentControlItems.ColumnDefinitions.Add(new ColumnDefinition());
+                    segmentControlItems.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
                 }
                 else
                 {
-                    segmentControlItems.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    segmentControlItems.ColumnDefinitions.Add(new ColumnDefinition());
                 }
 
                 var item = ItemsSource[i];
@@ -87,7 +87,7 @@ namespace Architecture.Controls
                 HorizontalOptions = TextAlignment,
                 FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
                 TextColor = isSelected ? SelectedTextColor : SegmentTextColor,
-                Margin = new Thickness(8, 8, 8, 8),
+                Margin = TextMargin,
                 InputTransparent = true
             };
 
@@ -288,13 +288,15 @@ namespace Architecture.Controls
 
         public View MainContent { get; set; }
         public SegmentControlItem SelectedSegment { get; private set; }
-        public Color SegmentTextColor { get; set; } = Application.Current.AccentColor();
+        public Color SegmentTextColor { get; set; } = Application.Current.PrimaryColor();
         public Color SegmentBackgroundColor { get; set; } = Color.White;
         public Color SelectedTextColor { get; set; } = Color.White;
-        public Color SelectedBackgroundColor { get; set; } = Application.Current.AccentColor();
+        public Color SelectedBackgroundColor { get; set; } = Application.Current.PrimaryColor();
         public NamedSize FontSize { get; set; } = NamedSize.Medium;
         public LayoutOptions TextAlignment { get; set; } = LayoutOptions.Center;
+        public Thickness TextMargin { get; set; } = new Thickness(8, 8, 8, 8);
         public bool UserBorder { get; set; } = true;
+        public bool UseAutoSize { get; set; }
     }
 
     public class SegmentControlItem

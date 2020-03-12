@@ -102,7 +102,7 @@ namespace Architecture
             {
                 var date = dateTime.AddMonths(i);
 
-                var value = random.Next(20, 100);
+                var value = random.Next(20, 90);
 
                 items1.Add(new ChartValueItem
                 {
@@ -111,7 +111,7 @@ namespace Architecture
                     Tag = date.ToString()
                 });
 
-                value = random.Next(20, 200);
+                value = random.Next(20, 90);
 
                 items2.Add(new ChartValueItem
                 {
@@ -120,7 +120,7 @@ namespace Architecture
                     Tag = date.ToString()
                 });
 
-                value = random.Next(20, 300);
+                value = random.Next(20, 90);
 
                 items3.Add(new ChartValueItem
                 {
@@ -129,7 +129,7 @@ namespace Architecture
                     Tag = date.ToString()
                 });
 
-                value = random.Next(20, 200);
+                value = random.Next(20, 90);
 
                 items4.Add(new ChartValueItem
                 {
@@ -145,30 +145,30 @@ namespace Architecture
                 {
                     Id = 0,
                     Items = items1,
-                    Color = SKColors.Orange,
-                    PointColor = SKColors.Orange,
+                    Color = App.Current.DarkPrimaryColor(),
+                    PointColor = App.Current.DarkPrimaryColor(),
                 },
-                new ChartItem
-                {
-                    Id = 1,
-                    Items = items2,
-                    Color = SKColors.CornflowerBlue,
-                    PointColor = SKColors.CornflowerBlue
-                },
-                new ChartItem
-                {
-                    Id = 2,
-                    Items = items3,
-                    Color = SKColors.Violet,
-                    PointColor = SKColors.Violet
-                },
+                //new ChartItem
+                //{
+                //    Id = 1,
+                //    Items = items2,
+                //    Color = SKColors.CornflowerBlue,
+                //    PointColor = SKColors.CornflowerBlue
+                //},
+                //new ChartItem
+                //{
+                //    Id = 2,
+                //    Items = items3,
+                //    Color = SKColors.Violet,
+                //    PointColor = SKColors.Violet
+                //},
                 new ChartItem
                 {
                     Id = 2,
                     Items = items4,
-                    Color = SKColors.Violet,
+                    Color = App.Current.AccentColor(),
                     UseDashedEffect = true,
-                    PointColor = SKColors.Violet
+                    PointColor = App.Current.AccentColor(),
                 }
             };
         }

@@ -30,7 +30,7 @@
                 Grid.Column="2"
                 FontSize="Medium"
                 FontAttributes="Bold"
-                TextColor="{StaticResource Accent}"
+                TextColor="{StaticResource PrimaryColor}"
                 HorizontalOptions="End"
                 VerticalOptions="Center"
                 Text="{Binding PickerText, Source={x:Reference root}}">

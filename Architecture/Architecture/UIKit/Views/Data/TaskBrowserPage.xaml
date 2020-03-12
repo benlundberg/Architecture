@@ -25,30 +25,39 @@
         <controls:SegmentView
             UserBorder="False"
             TextAlignment="Start"
+            UseAutoSize="True"
             SelectedBackgroundColor="White"
             SelectedTextColor="White"
             SegmentTextColor="White"
             SegmentBackgroundColor="Transparent">
             <controls:SegmentView.ItemsSource>
-                <controls:SegmentControlItem IsSelected="True" Text="Progress" Tag="1">
+                <controls:SegmentControlItem  Text="Progress" IsSelected="True" Tag="1">
                     <controls:SegmentControlItem.Content>
                         <Frame 
                             Grid.Row="1" 
                             CornerRadius="40" 
-                            Margin="0, 40, 0, -40">
+                            Margin="0, 40, 0, -40"
+                            Padding="0">
                             <chart:LineChart
+                                Margin="0, 40, 0, 0"
+                                ChartMargin="40, 100, 40, 0"
+                                ChartPadding="20, 0, 20, 0"
+                                HideFrame="True"
+                                DashedFrame="True"
                                 VerticalOptions="Start"
-                                VerticalLabelMode="All"
+                                VerticalUnit="m2"
+                                SliderColor="{StaticResource PrimaryColor}"
+                                VerticalLabelMode="StartCenterEnd"
+                                VerticalLabelAlignment="End"
                                 HorizontalLabelMode="All"
-                                UseSliderHint="True"
+                                UseSliderHint="False"
                                 IsSliderVisible="True"
                                 DisplayHorizontalValuesBySlider="True"
                                 SliderDetailOrientation="Horizontal"
-                                UseExactValue="False"
+                                UseExactValue="True"
                                 SliderDetailMargin="10"
                                 ChartEntries="{Binding ChartEntries}"
                                 HeightRequest="300"
-                                VerticalUnit="m/2"
                                 HorizontalUnit="months" />
                         </Frame>
                     </controls:SegmentControlItem.Content>
@@ -58,14 +67,24 @@
                         <Frame 
                             Grid.Row="1" 
                             CornerRadius="40" 
-                            Margin="0, 40, 0, -40">
+                            Margin="0, 40, 0, -40"
+                            Padding="0">
                             <chart:BarChart
+                                Margin="0, 40, 0, 0"
+                                HideFrame="True"
+                                DashedFrame="True"
+                                ChartPadding="100, 100, 100, 0"
+                                ChartMargin="20, 100, 20, 0"
                                 VerticalOptions="Start"
-                                VerticalLabelMode="All"
+                                VerticalLabelAlignment="End"
+                                VerticalLabelMode="StartCenterEnd"
                                 HorizontalLabelMode="StartEnd"
+                                SliderDetailOrientation="Horizontal"
                                 DisplayHorizontalValuesBySlider="True"
                                 IsSliderVisible="True"
-                                UseSliderHint="True"
+                                UseSliderHint="False"
+                                SliderDetailMargin="5"
+                                BarMargin="2"
                                 ChartEntries="{Binding ChartEntries}"
                                 HeightRequest="300"
                                 VerticalUnit="m/2"

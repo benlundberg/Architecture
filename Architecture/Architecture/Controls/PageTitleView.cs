@@ -17,7 +17,7 @@ namespace Architecture.Controls
             }
             else
             {
-                FontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
+                FontSize = 20;
             }
         }
     }

@@ -8,10 +8,10 @@
         <ResourceDictionary>
 
             <!--Colors -->
-            <Color x:Key="DarkPrimaryColor">#102027</Color>
-            <Color x:Key="PrimaryColor">#37474f</Color>
-            <Color x:Key="Accent">#d32f2f</Color>
-            <Color x:Key="DarkAccent">#9a0007</Color>
+            <Color x:Key="PrimaryColor">#F34B4B</Color>
+            <Color x:Key="DarkPrimaryColor">#DD4242</Color>
+            <Color x:Key="Accent">#0094FF</Color>
+            <Color x:Key="DarkAccent">#0069B4</Color>
             <Color x:Key="GrayDark">#AAB2BD</Color>
             <Color x:Key="GrayMedium">#CCD1D9</Color>
             <Color x:Key="Gray">#E6E9ED</Color>
@@ -79,7 +79,7 @@
 
             <x:Double x:Key="LargeSpacing">20</x:Double>
 
-            <Thickness x:Key="FormPadding">30, 20</Thickness>
+            <Thickness x:Key="FormPadding">30, 20, 30, 20</Thickness>
 
             <OnIdiom x:Key="MainPadding" x:TypeArguments="Thickness">
                 <OnIdiom.Tablet>40, 20, 40, 20</OnIdiom.Tablet>
@@ -99,6 +99,11 @@
                 <OnIdiom.Desktop>0, 40, 0, 40</OnIdiom.Desktop>
             </OnIdiom>
 
+            <OnPlatform x:Key="SafeMainPadding" x:TypeArguments="Thickness">
+                <On Platform="Android" Value="16, 10, 16, 10" />
+                <On Platform="iOS" Value="16, 40, 16, 10" />
+            </OnPlatform>
+
             <OnPlatform x:Key="EntryTextColor" x:TypeArguments="Color">
                 <On Platform="Android" Value="White" />
                 <On Platform="UWP" Value="Black" />
@@ -113,25 +118,25 @@
                 <Setter Property="DownsampleToViewSize" Value="True" />
             </Style>
             
-            <Style TargetType="NavigationPage">
+            <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="BarTextColor" Value="{StaticResource ToolbarTextColor}" />
             </Style>
 
-            <Style TargetType="ContentPage">
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="{StaticResource GrayLight}" />
             </Style>
-            
+
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource TextColor}" />
             </Style>
 
             <Style TargetType="Entry" ApplyToDerivedTypes="True">
-                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontSize" Value="Default" />
             </Style>
 
-            <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+            <Style TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="Padding" Value="10" />
             </Style>
@@ -139,9 +144,21 @@
             <Style TargetType="Button" x:Key="OutlineButton">
                 <Setter Property="Visual" Value="Default" />
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="TextColor" Value="{StaticResource Accent}" />
-                <Setter Property="BorderColor" Value="{StaticResource Accent}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="BorderColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="BorderWidth" Value="2" />
+            </Style>
+
+            <Style x:Key="RoundedButton" TargetType="Button">
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="Padding">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="Android" Value="0" />
+                            <On Platform="iOS" Value="20" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <Style x:Key="FloatingButton" TargetType="Button">
@@ -167,15 +184,7 @@
             <Style TargetType="Frame">
                 <Setter Property="IsClippedToBounds" Value="True" />
                 <Setter Property="BackgroundColor" Value="White" />
-                <Setter Property="BorderColor">
-                    <Setter.Value>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="Android" Value="LightGray" />
-                            <On Platform="UWP" Value="Transparent" />
-                            <On Platform="iOS" Value="Transparent" />
-                        </OnPlatform>
-                    </Setter.Value>
-                </Setter>
+                <Setter Property="BorderColor" Value="LightGray" />
                 <Setter Property="HasShadow">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:Boolean">

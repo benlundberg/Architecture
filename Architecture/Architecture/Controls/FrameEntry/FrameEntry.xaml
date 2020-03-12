@@ -60,7 +60,7 @@
             IsVisible="{Binding Text.IsValid, Source={x:Reference rootFrameEntry}, Converter={StaticResource InvertedBoolConv}}">
             <Label 
                 Text="{Binding Text.Error, Source={x:Reference rootFrameEntry}}"
-                FontSize="Small"
+                FontSize="Micro"
                 TextColor="White"
                 Padding="8"
                 IsVisible="{Binding Text.IsValid, Source={x:Reference rootFrameEntry}, Converter={StaticResource InvertedBoolConv}}" />

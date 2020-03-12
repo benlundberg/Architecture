@@ -12,57 +12,47 @@
 
     <ScrollView>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid>
-                <Grid.Effects>
-                    <local:GradientEffect />
-                </Grid.Effects>
-                <Label
-                    VerticalOptions="Center"
-                    FontSize="72"
-                    TextColor="White"
-                    Margin="{StaticResource FormPadding}"
-                    Text="{StaticResource GeneralIcon}"
-                    FontFamily="{StaticResource FontAwesomeBrands}" />
-            </Grid>
             <StackLayout
-                Grid.Row="1"
-                Spacing="10"
+                Spacing="{StaticResource MainSpacing}"
                 Padding="{StaticResource FormPadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                <Label
+                    Margin="0, 40"
+                    TextColor="{StaticResource PrimaryColor}"
+                    VerticalOptions="Center"
+                    FontSize="42"
+                    Text="Login" />
                 <Entry 
                     Placeholder="Username"
                     Text="{Binding Username.Value, Mode=TwoWay}"
-                    BackgroundColor="Transparent"
-                    PlaceholderColor="{StaticResource DarkPrimaryColor}"
-                    TextColor="{StaticResource DarkPrimaryColor}" />
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource PrimaryColor}" />
                 <Entry 
                     Placeholder="Password" 
-                    IsPassword="True" 
+                    IsPassword="True"
                     Text="{Binding Password.Value, Mode=TwoWay}"
-                    BackgroundColor="Transparent"
-                    PlaceholderColor="{StaticResource DarkPrimaryColor}"
-                    TextColor="{StaticResource DarkPrimaryColor}" />
+                    PlaceholderColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource PrimaryColor}" />
                 <StackLayout 
                     HorizontalOptions="Start"
                     Orientation="Horizontal">
                     <CheckBox 
                         IsChecked="{Binding RememberMe, Mode=TwoWay}"
                         WidthRequest="32"
-                        Color="{StaticResource DarkPrimaryColor}" />
+                        Color="{StaticResource PrimaryColor}" />
                     <Label 
+                        FontSize="Default"
                         VerticalOptions="Center"
-                        Text="Remember me?" />
+                        Text="Remember me" />
                 </StackLayout>
                 <Button 
                     Command="{Binding LoginCommand}" 
                     Text="{StaticResource CheckIcon}"
                     FontFamily="{StaticResource FontAwesomeSolid}" />
                 <Label
-                    TextColor="{StaticResource DarkPrimaryColor}"
+                    FontSize="Default"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource PrimaryColor}"
                     HorizontalOptions="End"
                     Text="Forgot password?">
                     <Label.GestureRecognizers>
@@ -70,18 +60,16 @@
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-            <controls:LoadingView 
-                Grid.RowSpan="2"
-                IsRunning="{Binding IsBusy}" />
+            <controls:LoadingView IsRunning="{Binding IsBusy}" />
             <Label
-                Margin="{StaticResource FormPadding}"
+                Margin="0, 40, 40, 0"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
                 FontSize="Large"
                 Text="{StaticResource CloseIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="{StaticResource ToolbarTextColor}">
+                TextColor="Black">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PopModalCommand}" />
                 </Label.GestureRecognizers>

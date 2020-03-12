@@ -1,4 +1,5 @@
 ﻿using Architecture;
+using Architecture.Controls;
 using Architecture.iOS;
 using Foundation;
 using UIKit;

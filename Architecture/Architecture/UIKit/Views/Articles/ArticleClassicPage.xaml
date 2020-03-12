@@ -36,15 +36,20 @@
                         </Grid.ColumnDefinitions>
                         <ff:CachedImage 
                             Aspect="AspectFill"
+                            HeightRequest="150"
+                            WidthRequest="150"
                             Source="{Binding ImageSource}" />
                         <StackLayout Grid.Column="1">
                             <Label
                                 FontSize="Large"
-                                FontAttributes="Bold"
                                 TextColor="{StaticResource PrimaryColor}"
                                 Text="{Binding Title}" />
-                            <Label Text="{Binding Year}" />
+                            <Label
+                                FontSize="Default"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="{Binding Year}" />
                             <Label 
+                                FontSize="Default"
                                 MaxLines="5"
                                 Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                         </StackLayout>

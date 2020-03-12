@@ -55,14 +55,15 @@ namespace Architecture.Controls
                 Button but = new Button
                 {
                     BackgroundColor = item.BackgroundColor,
-                    CornerRadius = 35,
-                    HeightRequest = 70,
-                    WidthRequest = 70,
+                    CornerRadius = FloatingButtonRadius,
+                    HeightRequest = FloatingButtonHeight,
+                    WidthRequest = FloatingButtonWidth,
                     FontFamily = item.FontFamily,
                     Text = item.IconSource,
                     TextColor = item.TextColor,
                     FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
                     Command = item.Command,
+                    Padding = new Thickness(0),
                     CommandParameter = item.CommandParameter
                 };
 
@@ -97,12 +98,13 @@ namespace Architecture.Controls
             {
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = BaseItem.BackgroundColor,
-                CornerRadius = 35,
-                HeightRequest = 70,
-                WidthRequest = 70,
+                CornerRadius = FloatingButtonRadius,
+                HeightRequest = FloatingButtonHeight,
+                WidthRequest = FloatingButtonWidth,
                 FontFamily = BaseItem.FontFamily,
                 Text = BaseItem.IconSource,
                 TextColor = BaseItem.TextColor,
+                Padding = new Thickness(0),
                 FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
             };
 
@@ -149,6 +151,9 @@ namespace Architecture.Controls
 
         public List<FloatingMenuItem> MenuItems { get; set; }
         public FloatingMenuItem BaseItem { get; set; }
+        public int FloatingButtonWidth { get; set; } = 64;
+        public int FloatingButtonHeight { get; set; } = 64;
+        public int FloatingButtonRadius { get; set; } = 32;
     }
 
     public class FloatingMenuItem : View

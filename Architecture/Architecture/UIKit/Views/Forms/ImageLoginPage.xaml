@@ -63,7 +63,7 @@
             </Label>
         </StackLayout>
         <Label
-            Margin="{StaticResource FormPadding}"
+            Margin="0, 40, 40, 0"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
             VerticalOptions="Start"
             HorizontalOptions="End"

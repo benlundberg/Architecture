@@ -32,9 +32,10 @@
                             HeightRequest="250"
                             Aspect="AspectFill"
                             Source="{Binding ImageSource}" />
-                        <Grid BackgroundColor="Black" Opacity=".2" />
+                        <Grid BackgroundColor="Black" Opacity=".4" />
                         <Grid 
                             Margin="16, 10"
+                            RowSpacing="6"
                             VerticalOptions="End">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -43,7 +44,6 @@
                             </Grid.RowDefinitions>
                             <Label
                                 FontSize="Large"
-                                FontAttributes="Bold"
                                 TextColor="{StaticResource SecondaryTextColor}"
                                 Text="{Binding Title}" />
                             <Grid Grid.Row="1" ColumnSpacing="10">
@@ -56,35 +56,42 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <Label 
+                                    FontSize="Default"
                                     TextColor="{StaticResource SecondaryTextColor}"
                                     Text="{Binding Category}" />
                                 <Label 
                                     Grid.Column="1"
-                                    TextColor="{StaticResource SecondaryTextColor}"
+                                    FontSize="Small"
+                                    FontAttributes="Bold"
+                                    TextColor="{StaticResource PrimaryColor}"
                                     Text="{Binding Year}" />
                                 <Label 
                                     Grid.Column="2"
                                     VerticalOptions="Center"
+                                    FontSize="Small"
                                     FontFamily="{StaticResource FontAwesomeSolid}"
-                                    TextColor="{StaticResource Accent}"
+                                    TextColor="{StaticResource PrimaryColor}"
                                     Text="&#xf0c0;" />
                                 <Label 
                                     Grid.Column="3"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold"
-                                    TextColor="{StaticResource Accent}"
+                                    FontSize="Small"
+                                    TextColor="{StaticResource PrimaryColor}"
                                     Text="98" />
                                 <Label 
                                     Grid.Column="4"
                                     VerticalOptions="Center"
+                                    FontSize="Small"
                                     FontFamily="{StaticResource FontAwesomeSolid}"
-                                    TextColor="{StaticResource Accent}"
+                                    TextColor="{StaticResource PrimaryColor}"
                                     Text="&#xf004;" />
                                 <Label 
                                     Grid.Column="5"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold"
-                                    TextColor="{StaticResource Accent}"
+                                    FontSize="Small"
+                                    TextColor="{StaticResource PrimaryColor}"
                                     Text="65" />
                             </Grid>
                             <BoxView 
@@ -92,7 +99,7 @@
                                 HeightRequest="3"
                                 WidthRequest="50"
                                 HorizontalOptions="Start"
-                                Color="{StaticResource Accent}"/>
+                                Color="{StaticResource PrimaryColor}"/>
                         </Grid>
                     </Grid>
                 </ViewCell>

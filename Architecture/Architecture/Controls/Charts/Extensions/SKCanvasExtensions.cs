@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using System;
 using Xamarin.Forms;
 
 namespace Architecture.Controls.Charts
@@ -49,6 +50,8 @@ namespace Architecture.Controls.Charts
 
         public static void DrawSliderValue(this SKCanvas canvas, string text, float x, float y, float textSize, SKColor textColor, SKColor backgroundColor, int padding, int margin, string maxText, int count, int index, StackOrientation orientation, SKRect frame, bool useDashedEffect)
         {
+            y = 0;
+
             using (var textPaint = new SKPaint())
             {
                 textPaint.TextSize = textSize;
@@ -142,6 +145,34 @@ namespace Architecture.Controls.Charts
                     textPaint.MeasureText(text, ref finalTextBounds);
 
                     canvas.DrawText(text, background.MidX - (finalTextBounds.Width / 2), background.MidY + (finalTextBounds.Height / 2), textPaint);
+                }
+            }
+        }
+
+        public static void DrawBar(this SKCanvas canvas, float x, float yStart, float yEnd, float width, int margin, int count, int index, SKColor color, bool useDashedEffect)
+        {
+            using (var paint = new SKPaint())
+            {
+                using (var path = new SKPath())
+                {
+                    paint.Style = SKPaintStyle.Stroke;
+                    paint.StrokeCap = SKStrokeCap.Butt;
+                    paint.IsStroke = true;
+                    paint.IsAntialias = true;
+                    paint.Color = color;
+                    paint.StrokeWidth = width;
+
+                    if (useDashedEffect)
+                    {
+                        paint.PathEffect = SKPathEffect.CreateDash(new float[] { width, width }, width);
+                    }
+
+                    var middle = ((width * (count - 1)) + (margin * count)) / 2;
+
+                    path.MoveTo(x - (middle - (index * width)) + (margin * index), yStart);
+                    path.LineTo(x - (middle - (index * width)) + (margin * index), yEnd);
+
+                    canvas.DrawPath(path, paint);
                 }
             }
         }

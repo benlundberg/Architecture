@@ -20,7 +20,8 @@
                     <Grid>
                         <ff:CachedImage
                             Source="{Binding ImageSource}" 
-                            WidthRequest="200"
+                            WidthRequest="150"
+                            HeightRequest="175"
                             Aspect="AspectFill" />
                         <Grid VerticalOptions="End">
                             <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
@@ -29,6 +30,7 @@
                                 Padding="16, 8">
                                 <Label
                                     FontAttributes="Bold"
+                                    FontSize="Small"
                                     TextColor="{StaticResource SecondaryTextColor}"
                                     Text="{Binding Title}" />
                                 <Label 
@@ -88,6 +90,7 @@
                                         Text="{Binding Title}" />
                                     <Label 
                                         TextColor="{StaticResource SecondaryTextColor}"
+                                        FontSize="Default"
                                         Text="{Binding Category}" />
                                 </StackLayout>
                             </Grid>
@@ -109,8 +112,8 @@
                 ItemsSource="{Binding SportArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
+                Margin="{StaticResource MainPadding}"
                 SelectionMode="Single"
-                Margin="16, 10, 0, 10"
                 HeightRequest="200">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
@@ -124,8 +127,8 @@
                 ItemsSource="{Binding AnimalArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
+                Margin="{StaticResource MainPadding}"
                 SelectionMode="Single"
-                Margin="16, 10, 0, 10"
                 HeightRequest="200">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout

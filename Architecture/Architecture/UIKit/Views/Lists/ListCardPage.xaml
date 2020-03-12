@@ -44,6 +44,7 @@
                                 </Grid.ColumnDefinitions>
                                 <ff:CachedImage
                                     WidthRequest="100"
+                                    HeightRequest="125"
                                     Source="{Binding ImageSource}" 
                                     Aspect="AspectFill" />
                                 <StackLayout
@@ -51,9 +52,10 @@
                                     VerticalOptions="Center"
                                     Padding="10">
                                     <Label 
-                                        FontAttributes="Bold"
+                                        FontSize="Medium"
                                         Text="{Binding Title}" />
                                     <Label 
+                                        FontSize="Default"
                                         MaxLines="3"
                                         LineBreakMode="TailTruncation"
                                         Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
@@ -61,8 +63,8 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span 
-                                                    FontSize="Medium"
-                                                    TextColor="{StaticResource Accent}" 
+                                                    FontSize="Default"
+                                                    TextColor="{StaticResource PrimaryColor}" 
                                                     Text="&#xf005;" 
                                                     FontFamily="{StaticResource FontAwesomeSolid}" />
                                                 <Span Text=" " />
