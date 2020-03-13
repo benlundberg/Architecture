@@ -24,8 +24,14 @@ namespace Architecture.Controls
 
             IList enumerable = view.ItemsSource as IList ?? view.ItemsSource.Cast<object>().ToArray();
 
-            if (view == null || enumerable?.Count <= 0)
+            if (view == null)
             {
+                return;
+            }
+
+            if (enumerable?.Count <= 0 && view.Content is StackLayout content)
+            {
+                content.Children.Clear();
                 return;
             }
 

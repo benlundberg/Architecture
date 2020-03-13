@@ -16,12 +16,18 @@ namespace Architecture.Controls
 
             IList enumerable = gridView.ItemsSource as IList ?? gridView.ItemsSource.Cast<object>().ToArray();
 
-            if (gridView == null || enumerable?.Count <= 0)
+            if (gridView == null)
             {
                 return;
             }
-
+            
             gridView.Children.Clear();
+            gridView.ColumnDefinitions.Clear();
+
+            if (enumerable?.Count <= 0)
+            {
+                return;
+            }
 
             gridView.NumberOfColumns = gridView.NumberOfColumns > 0 ? gridView.NumberOfColumns : 3;
 
