@@ -29,9 +29,9 @@ namespace Architecture.Controls
                 return;
             }
 
-            if (enumerable?.Count <= 0 && view.Content is StackLayout content)
+            if (enumerable?.Count <= 0 && view.Content is StackLayout stacken)
             {
-                content.Children.Clear();
+                stacken.Children.Clear();
                 return;
             }
 
