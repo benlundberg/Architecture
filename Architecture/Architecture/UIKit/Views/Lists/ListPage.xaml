@@ -24,21 +24,19 @@
             <controls:PageTitleView 
                 IsVisible="{Binding SearchIsVisible, Converter={StaticResource InvertedBoolConv}}"
                 Text="Simple List" />
-            <SearchBar 
+            <controls:SearchEntry 
+                Padding="0"
+                VerticalOptions="Center"
+                EntryBackground="Transparent"
+                BorderColor="Transparent"
                 IsVisible="{Binding SearchIsVisible}"
                 Text="{Binding Query, Mode=TwoWay}"
-                Visual="Default"
-                FontSize="Small"
                 Placeholder="{local:Translate Gen_Search}"
                 PlaceholderColor="{StaticResource ToolbarTextColor}"
                 TextColor="{StaticResource ToolbarTextColor}"
-                VerticalOptions="Center"
-                CancelButtonColor="{StaticResource ToolbarTextColor}"
-                BackgroundColor="Transparent">
-                <SearchBar.Behaviors>
-                    <local:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchTextChangedCommand}" />
-                </SearchBar.Behaviors>
-            </SearchBar>
+                TextChangedCommand="{Binding SearchTextChangedCommand}"
+                SearchIconColor="{StaticResource ToolbarTextColor}"
+                ClearIconColor="{StaticResource ToolbarTextColor}"/>
             <Label 
                 Grid.Column="1"
                 FontSize="{StaticResource ToolbarItemSize}"

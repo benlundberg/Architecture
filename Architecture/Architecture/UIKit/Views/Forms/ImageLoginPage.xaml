@@ -43,7 +43,7 @@
                 <CheckBox 
                     IsChecked="{Binding RememberMe, Mode=TwoWay}"
                     WidthRequest="32"
-                    Color="{StaticResource Accent}" />
+                    Color="{StaticResource PrimaryColor}" />
                 <Label 
                     TextColor="White"
                     VerticalOptions="Center"

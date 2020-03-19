@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.Controls.SearchEntry"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:Name="searchRoot">
+
+    <Frame
+        HasShadow="False"
+        BorderColor="{Binding BorderColor, Source={x:Reference searchRoot}}"
+        BackgroundColor="{Binding EntryBackground, Source={x:Reference searchRoot}}"
+        Padding="{Binding EntryPadding, Source={x:Reference searchRoot}}">
+        <Grid ColumnSpacing="{StaticResource MainSpacing}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label
+                VerticalOptions="Center"
+                Text="{StaticResource SearchIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                TextColor="{Binding SearchIconColor, Source={x:Reference searchRoot}}" />
+            <controls:BorderlessEntry
+                Grid.Column="1"
+                TextChanged="BorderlessEntry_TextChanged"
+                BackgroundColor="{Binding EntryBackground, Source={x:Reference searchRoot}}"
+                TextColor="{Binding TextColor, Source={x:Reference searchRoot}}"
+                PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference searchRoot}}"
+                Placeholder="{Binding Placeholder, Source={x:Reference searchRoot}}"
+                Text="{Binding Text, Source={x:Reference searchRoot}, Mode=TwoWay}"
+                ReturnCommand="{Binding InternalSearchCommand, Source={x:Reference searchRoot}}"/>
+            <Label
+                Grid.Column="2"
+                VerticalOptions="Center"
+                IsVisible="{Binding IsClearVisible, Source={x:Reference searchRoot}}"
+                TextColor="{Binding ClearIconColor, Source={x:Reference searchRoot}}"
+                Text="{StaticResource CloseIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClearCommand, Source={x:Reference searchRoot}}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </Frame>
+</ContentView>

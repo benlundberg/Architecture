@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.SettingsPage"
+             xmlns:controls="clr-namespace:Architecture.Controls">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Settings" />
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <TableView>
+                <TableRoot>
+                    <TableSection>
+                        <ViewCell>
+                            <StackLayout Padding="20, 10" BackgroundColor="{StaticResource Gray}">
+                                <Label VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span FontSize="Medium" Text="&#xf013;" FontFamily="{StaticResource FontAwesomeSolid}" />
+                                            <Span Text="    " />
+                                            <Span TextColor="{StaticResource PrimaryColor}" FontSize="Medium" Text="General" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                        <SwitchCell Text="Keep me alive" />
+                        <SwitchCell Text="Cache images" />
+                    </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <StackLayout Padding="20, 10" BackgroundColor="{StaticResource Gray}">
+                                <Label VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span FontSize="Medium" Text="&#xf0f3;" FontFamily="{StaticResource FontAwesomeSolid}" />
+                                            <Span Text="    " />
+                                            <Span TextColor="{StaticResource PrimaryColor}" FontSize="Medium" Text="Notifications" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                        <SwitchCell Text="Local notifications" />
+                        <SwitchCell Text="Global notifications" On="True" />
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

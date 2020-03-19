@@ -81,6 +81,12 @@ namespace Architecture
                 case 3:
                     await Navigation.PushAsync(new ListVariantPage());
                     break;
+                case 4:
+                    await Navigation.PushAsync(new TimelinePage());
+                    break;
+                case 5:
+                    await Navigation.PushAsync(new SearchPage());
+                    break;
             }
         }));
 
@@ -150,6 +156,9 @@ namespace Architecture
                 case 3:
                     await Navigation.PushAsync(new DashboardCardPage());
                     break;
+                case 4:
+                    await Navigation.PushAsync(new DashboardMenuPage());
+                    break;
             }
         }));
         
@@ -169,6 +178,32 @@ namespace Architecture
                     break;
                 case 2:
                     await Navigation.PushAsync(new ContactDetailCardPage());
+                    break;
+                case 3:
+                    await Navigation.PushAsync(new ContactPage());
+                    break;
+                case 4:
+                    await Navigation.PushAsync(new EditContactPage());
+                    break;
+            }
+        }));   
+        
+        // Handles settings pages
+        private ICommand settingsCommand;
+        public ICommand SettingsCommand => settingsCommand ?? (settingsCommand = new Command(async (param) =>
+        {
+            if (!int.TryParse(param?.ToString(), out int page))
+            {
+                return;
+            }
+
+            switch (page)
+            {
+                case 1:
+                    await Navigation.PushAsync(new SettingsPage());
+                    break;
+                case 2:
+                    await Navigation.PushAsync(new AboutPage());
                     break;
             }
         }));   

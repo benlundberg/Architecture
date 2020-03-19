@@ -11,7 +11,7 @@ namespace Architecture.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
-            base.SetTheme(Resource.Style.MainTheme);
+            base.SetTheme(Resource.Style.AppTheme);
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;

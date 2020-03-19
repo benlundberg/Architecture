@@ -1,29 +1,83 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <style name="MainTheme" parent="MainTheme.Base">
-  </style>
-
-  <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
     <item name="windowActionModeOverlay">true</item>
+
+    <item name="colorAccent">@color/AccentColor</item>
+    
+    <item name="android:colorPrimary">@color/PrimaryColor</item>
+    <!--   darker variant for the status bar and contextual app bars 
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>-->
+    <!--   theme UI controls like checkboxes and text fields -->
+    <item name="android:colorAccent">@color/AccentColor</item>
+    
     <item name="android:statusBarColor">@color/DarkPrimaryColor</item>
-    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:dialogTheme">@style/AppTheme.Dialog</item>
+    <item name="android:timePickerDialogTheme">@style/AppTheme.Dialog</item>
+    <item name="android:datePickerDialogTheme">@style/AppTheme.Dialog</item>
+    <item name="alertDialogTheme">@style/AppTheme.AlertDialog</item>
+
+    <item name="android:datePickerDialogTheme">@style/AppTheme.Dialog</item>
+
+    <!-- Used on ListView selected items -->
+    <item name="android:colorPressedHighlight">@color/ListViewSelectedItemBackgroundColor</item>
+    <item name="android:colorLongPressedHighlight">@color/ListViewSelectedItemBackgroundColor</item>
+    <item name="android:colorFocusedHighlight">@color/ListViewSelectedItemBackgroundColor</item>
+    <item name="android:colorActivatedHighlight">@color/ListViewSelectedItemBackgroundColor</item>
+    <item name="android:activatedBackgroundIndicator">@color/ListViewSelectedItemBackgroundColor</item>
+    
   </style>
 
-  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+  <!-- DatePicker style -->
+  <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">@color/AccentColor</item>
+    <item name="android:textColorPrimary">@color/AccentColor</item>
     <item name="android:datePickerStyle">@style/CustomDatePicker</item>
   </style>
 
+  <style name="AppTheme.DialogTitleTextStyle">
+    <item name="android:textColor">@color/AccentColor</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+  </style>
+
+  <style name="AppTheme.AlertDialog" parent="android:Theme.Material.Light.Dialog.Alert">
+    <item name="android:colorAccent">@color/AccentColor</item>
+    <item name="android:windowTitleStyle">@style/AppTheme.DialogTitleTextStyle</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
+  <style name="Widget.AppTheme.Button.Borderless" parent="@style/Widget.AppCompat.Button.Borderless">
+    <item name="android:textColor">#FF00FF</item>
+    <item name="android:textAppearance">@style/TextAppearance.AppTheme.DialogButton</item>
+  </style>
+
+  <style name="Widget.AppTheme.TabLayout" parent="@style/Widget.Design.TabLayout">
+    <item name="tabSelectedTextColor">@color/AccentColor</item>
+    <item name="tabTextColor">@color/BaseTextColor</item>
+  </style>
+
+  <style name="Widget.AppTheme.Picker" parent="@style/Theme.AppCompat.Light.Dialog">
+    <item name="android:colorPrimary">@color/AccentColor</item>
+    <item name="android:colorPrimaryDark">@color/AccentColor</item>
+    <item name="android:colorAccent">@color/AccentColor</item>
+    <item name="android:textColor">@color/AccentColor</item>
+  </style>
+
+  <style name="TextAppearance.AppTheme.DialogButton" parent="@style/TextAppearance.AppCompat.Title">
+  </style>
+
   <style name="CustomDatePicker" parent="@android:style/Widget.Material.DatePicker">
-    <item name="android:textColorPrimary">@color/AccentColor</item>
+    <item name="android:textColorPrimary">@color/PrimaryColor</item>
     <item name="android:calendarViewShown">false</item>
     <item name="android:spinnersShown">true</item>
     <item name="android:datePickerMode">spinner</item>
   </style>
 
   <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:statusBarColor">@color/SplashBackgroundColor</item>
     <item name="android:windowBackground">@drawable/splash</item>
     <item name="android:windowNoTitle">true</item>
   </style>

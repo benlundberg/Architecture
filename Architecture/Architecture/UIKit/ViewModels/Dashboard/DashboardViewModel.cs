@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using Architecture.Controls;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -8,6 +10,7 @@ namespace Architecture
     {
         public DashboardViewModel()
         {
+            LoadDashboardMenuItems();
             LoadData();
         }
 
@@ -21,6 +24,78 @@ namespace Architecture
 
             ItemSelected(item.Title);
         }));
+
+        private void LoadDashboardMenuItems()
+        {
+            DashboardMenuItems = new ObservableCollection<DashboardItem>
+            {
+                new DashboardItem
+                {
+                    Tag = 1,
+                    Title = "Social",
+                    ImageBackground = "http://clarityapplication.com/dev/images/9.jpg",
+                },
+                new DashboardItem
+                {
+                    Tag = 2,
+                    Background = App.Current.PrimaryColor(),
+                    Title = "Contacts",
+                    NotificationText = "2",
+                    IconSource = "\uf0c0"
+                },
+                new DashboardItem
+                {
+                    Tag = 3,
+                    Background = App.Current.DarkPrimaryColor(),
+                    Title = "Photos",
+                    IconSource = "\uf030"
+                },
+                new DashboardItem
+                {
+                    Tag = 4,
+                    Background = App.Current.PrimaryColor(),
+                    Title = "World news",
+                    IconSource = "\uf7a2",
+                    NotificationText = "8"
+                },
+                new DashboardItem
+                {
+                    Tag = 5,
+                    Background = App.Current.PrimaryColor(),
+                    Title = "Calendar",
+                    IconSource = "\uf073",
+                },
+                new DashboardItem
+                {
+                    Tag = 6,
+                    ImageBackground = "http://clarityapplication.com/dev/images/12.jpg",
+                    Title = "Food",
+                    InfoText = new List<string>
+                    {
+                        "Joan - ''The food was pretty good and the service was amazing''",
+                        "John - ''Who has ketchup on pizza?!''"
+                    },
+                },
+                new DashboardItem
+                {
+                    Tag = 7,
+                    ImageBackground = "http://clarityapplication.com/dev/images/10.jpg",
+                    Title = "Travels",
+                    InfoText = new List<string>
+                    {
+                        "Joan - ''San Francisco was so awesome!''",
+                    },
+                },
+                new DashboardItem
+                {
+                    Tag = 8,
+                    Background = App.Current.PrimaryColor(),
+                    IconSource = "\uf11b",
+                    Title = "Games",
+                    NotificationText = "2"
+                }
+            };
+        }
 
         private void LoadData()
         {
@@ -114,6 +189,7 @@ namespace Architecture
             }
         }
 
+        public ObservableCollection<DashboardItem> DashboardMenuItems { get; set; }
         public ObservableCollection<DashboardItemViewModel> DashboardItems { get; private set; }
     }
 
