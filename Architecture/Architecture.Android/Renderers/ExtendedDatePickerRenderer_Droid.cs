@@ -21,7 +21,7 @@ namespace Architecture.Droid
             if (Control != null)
             {
                 GradientDrawable gradientDrawable = new GradientDrawable();
-                gradientDrawable.SetStroke(0, Android.Graphics.Color.LightGray);
+                gradientDrawable.SetStroke(0, global::Android.Graphics.Color.LightGray);
                 Control.SetBackground(gradientDrawable);
             }
         }
@@ -50,11 +50,11 @@ namespace Architecture.Droid
 
                 if (daySpinnerId != 0)
                 {
-                    Android.Views.View daySpinner = datePickerDialog.DatePicker.FindViewById(daySpinnerId);
+                    global::Android.Views.View daySpinner = datePickerDialog.DatePicker.FindViewById(daySpinnerId);
 
                     if (daySpinner != null)
                     {
-                        daySpinner.Visibility = customPicker.HasDay ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
+                        daySpinner.Visibility = customPicker.HasDay ? global::Android.Views.ViewStates.Visible : global::Android.Views.ViewStates.Gone;
                     }
                 }
 
@@ -66,7 +66,7 @@ namespace Architecture.Droid
 
                     if (monthSpinner != null)
                     {
-                        monthSpinner.Visibility = customPicker.HasMonth ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
+                        monthSpinner.Visibility = customPicker.HasMonth ? global::Android.Views.ViewStates.Visible : global::Android.Views.ViewStates.Gone;
                     }
                 }
 
@@ -78,7 +78,7 @@ namespace Architecture.Droid
 
                     if (yearSpinner != null)
                     {
-                        yearSpinner.Visibility = customPicker.HasYear ? Android.Views.ViewStates.Visible : Android.Views.ViewStates.Gone;
+                        yearSpinner.Visibility = customPicker.HasYear ? global::Android.Views.ViewStates.Visible : global::Android.Views.ViewStates.Gone;
                     }
                 }
             }

@@ -110,6 +110,9 @@ namespace Architecture
                 case 3:
                     await Navigation.PushAsync(new VariantDetailPage());
                     break;
+                case 4:
+                    await Navigation.PushAsync(new InfoDetailPage());
+                    break;
             }
         }));
         

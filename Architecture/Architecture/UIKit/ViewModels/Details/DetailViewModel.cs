@@ -9,6 +9,12 @@ namespace Architecture
 
         }
 
+        public ObservableCollection<object> TwoItems => new ObservableCollection<object>()
+        {
+            new object (),
+            new object (),
+        };
+
         public ObservableCollection<object> Items => new ObservableCollection<object>()
         {
             new object (),

@@ -38,6 +38,7 @@
             <Button Text="Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="1" />
             <Button Text="Card Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="2" />
             <Button Text="Variant Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="3" />
+            <Button Text="Info Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="4" />
             <!-- Data -->
             <Label Text="Data" FontSize="Large" />
             <Button Text="Data Table" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="1" />

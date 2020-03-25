@@ -32,6 +32,7 @@
             <x:String x:Key="CheckIcon">&#xf00c;</x:String>
             <x:String x:Key="AddIcon">&#xf067;</x:String>
             <x:String x:Key="SearchIcon">&#xf002;</x:String>
+            <x:String x:Key="EditPenIcon">&#xf304;</x:String>
             
             <!-- Fonts Start here -->
             <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeBrands">

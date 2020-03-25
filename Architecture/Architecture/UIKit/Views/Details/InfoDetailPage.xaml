@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.InfoDetailPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             x:DataType="local:DetailViewModel">
+
+    <ContentPage.BindingContext>
+        <local:DetailViewModel />
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Joan Doe" />
+    </NavigationPage.TitleView>
+
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid  
+                Padding="40, 20, 40, 40"
+                BackgroundColor="{StaticResource PrimaryColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackLayout>
+                    <Label Text="Phone" FontSize="Micro" TextColor="{StaticResource SecondaryTextColor}" />
+                    <Label Text="+01 234 56" FontSize="Default" TextColor="{StaticResource SecondaryTextColor}" />
+                    <Label Text="Address" FontSize="Micro" TextColor="{StaticResource SecondaryTextColor}" />
+                    <Label Text="123 The Street, Street town" FontSize="Default" TextColor="{StaticResource SecondaryTextColor}" />
+                    <Label Text="E-mail" FontSize="Micro" TextColor="{StaticResource SecondaryTextColor}" />
+                    <Label Text="joan.doe@example.com" FontSize="Default" TextColor="{StaticResource SecondaryTextColor}" />
+                </StackLayout>
+                <Frame
+                    Grid.Column="1"
+                    Padding="0"
+                    HeightRequest="100"
+                    WidthRequest="100"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    CornerRadius="10">
+                    <ff:CachedImage
+                        Aspect="AspectFill"
+                        Source="http://clarityapplication.com/dev/images/13.jpg" />
+                </Frame>
+            </Grid>
+            <Button 
+                Margin="0, 0, 40, -26"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                Text="{StaticResource EditPenIcon}"
+                Style="{StaticResource FloatingButtonSmall}"/>
+            <StackLayout 
+                Grid.Row="1"
+                Padding="{StaticResource MainPadding}">
+                <Frame>
+                    <StackLayout>
+                        <Label
+                            Text="Savings"
+                            FontSize="Small" 
+                            TextColor="{StaticResource GrayDark}" />
+                        <controls:ItemsControl ItemsSource="{Binding TwoItems}">
+                            <controls:ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label 
+                                            VerticalOptions="Center"
+                                            FontSize="Large" 
+                                            Text="&#xf53d;" 
+                                            FontFamily="{StaticResource FontAwesomeSolid}" />
+                                        <StackLayout Grid.Column="1">
+                                            <Label 
+                                                FontSize="Large" 
+                                                Text="Retirement account" />
+                                            <Label 
+                                                FontSize="Micro" 
+                                                TextColor="{StaticResource GrayDark}" 
+                                                Text="DSA-123131-213" />
+                                        </StackLayout>
+                                        <Label 
+                                            Grid.Column="2" 
+                                            VerticalOptions="Center"
+                                            Text="$60,122" 
+                                            FontSize="Medium" 
+                                            FontAttributes="Bold" 
+                                            TextColor="{StaticResource PrimaryColor}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </controls:ItemsControl.ItemTemplate>
+                        </controls:ItemsControl>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>
