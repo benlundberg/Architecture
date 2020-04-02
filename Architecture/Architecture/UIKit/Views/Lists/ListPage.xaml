@@ -62,6 +62,8 @@
 
     <Grid>
         <controls:SegmentView 
+            SegmentTextColor="{StaticResource GrayDark}"
+            SelectedTextColor="Black"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
             Margin="{StaticResource MainPadding}">
             <controls:SegmentView.ItemsSource>
@@ -78,7 +80,6 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="local:ListItemViewModel">
                                     <TextCell
-                                        TextColor="{StaticResource PrimaryColor}"
 						                Text="{Binding Title}"
 						                Detail="{Binding SubTitle}">    
                                         <TextCell.ContextActions>
@@ -98,16 +99,15 @@
                     <controls:SegmentControlItem.Content>
                         <ListView 
 			                CachingStrategy="RecycleElement"
+			                IsPullToRefreshEnabled="True"
 			                ItemsSource="{Binding Items}"
 			                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
 			                RefreshCommand="{Binding RefreshListCommand}"
-			                IsPullToRefreshEnabled="True"
 			                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
 			                RefreshControlColor="{StaticResource PrimaryColor}">
                             <ListView.ItemTemplate>
                                 <DataTemplate x:DataType="local:ListItemViewModel">
                                     <ImageCell
-                                        TextColor="{StaticResource PrimaryColor}"
 						                Text="{Binding Title}"
 						                Detail="{Binding SubTitle}"
                                         ImageSource="{Binding ImageSource}">

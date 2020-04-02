@@ -169,5 +169,10 @@ namespace Architecture.iOS
 
             return File.ReadAllText(path);
         }
+
+        public Stream GetStreamFromAssets(string path)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

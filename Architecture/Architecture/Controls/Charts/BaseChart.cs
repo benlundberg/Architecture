@@ -4,6 +4,7 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture.Controls.Charts
@@ -31,31 +32,16 @@ namespace Architecture.Controls.Charts
 
         protected SKRect CreateFrame(SKImageInfo info)
         {
-            float leftPadding = 0;
-            float bottomPadding = 0;
-            float rightPadding = 0;
+            float leftPadding = CalculateLeftWidth(MeasureVerticalLabels());
+            float rightPadding = CalculateRightWidth(MeasureHorizontalLabels());
+            float bottomPadding = CalculateFooterHeight();
+            float topPadding = CalculateHeaderHeight();
 
-            if (VerticalLabelMode != LabelMode.None)
-            {
-                leftPadding = CalculateLeftWidth(MeasureVerticalLabels());
-            }
-
-            if (HorizontalLabelMode != LabelMode.None)
-            {
-                bottomPadding = CalculateFooterHeight();
-                rightPadding = CalculateRightWidth(MeasureHorizontalLabels());
-            }
-
-            return new SKRect(leftPadding, ChartRectMargin.Top, info.Width - rightPadding, info.Height - bottomPadding);
+            return new SKRect(leftPadding, topPadding, info.Width - rightPadding, info.Height - bottomPadding);
         }
 
         protected void DrawFrame(SKCanvas canvas, SKRect frame)
         {
-            if (HideFrame)
-            {
-                return;
-            }
-
             using (var paint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
@@ -69,146 +55,184 @@ namespace Architecture.Controls.Charts
                     paint.PathEffect = SKPathEffect.CreateDash(new float[] { 12, 12 }, 0);
                 }
 
-                // Left to bottom
-                canvas.DrawLine(frame.Left, frame.Top, frame.Left, frame.Bottom, paint);
+                if (!HideFrame)
+                {
+                    // Left to bottom
+                    canvas.DrawLine(frame.Left, frame.Top, frame.Left, frame.Bottom, paint);
 
-                // Left to right
-                canvas.DrawLine(frame.Left, frame.Bottom - (paint.StrokeWidth / 2), frame.Right, frame.Bottom - (paint.StrokeWidth / 2), paint);
+                    // Left to right bottom
+                    canvas.DrawLine(frame.Left, frame.Bottom - (paint.StrokeWidth / 2), frame.Right, frame.Bottom - (paint.StrokeWidth / 2), paint);
+                }
+
+                // Draws vertical label lines //
+
+                if (InsideFrame == LabelMode.StartCenterEnd || InsideFrame == LabelMode.All)
+                {
+                    if (HideFrame)
+                    {
+                        canvas.DrawLine(frame.Left, frame.Top, frame.Right, frame.Top, paint);
+                        canvas.DrawLine(frame.Left, frame.Bottom - (paint.StrokeWidth / 2), frame.Right, frame.Bottom - (paint.StrokeWidth / 2), paint);
+                    }
+
+                    canvas.DrawLine(frame.Left, frame.MidY, frame.Right, frame.MidY, paint);
+                }
+
+                if (InsideFrame == LabelMode.All)
+                {
+                    canvas.DrawLine(frame.Left, (frame.Height * .75f) + frame.Top, frame.Right, (frame.Height * .75f) + frame.Top, paint);
+                    canvas.DrawLine(frame.Left, (frame.Height * .25f) + frame.Top, frame.Right, (frame.Height * .25f) + frame.Top, paint);
+                }
             }
         }
 
         protected void DrawVerticalLabels(SKCanvas canvas, SKRect frame, SKRect chart)
         {
-            using (var paint = new SKPaint
+            if (VerticalLabelMode == LabelMode.None)
             {
-                TextSize = VerticalLabelTextSize,
-                Color = this.VerticalLabelColor.ToSKColor(),
-                IsAntialias = true
+                return;
+            }
+
+            // Calculates maximum value depending on chart height
+            var maximumValue = chart.Height * (MaxValue / chart.Height);
+
+            // Calculates where left is for all vertical labels
+            var left = VerticalLabelAlignment == TextAlignment.Start ? frame.Left - ChartRectMargin.Left : ChartRectMargin.Left;
+
+            using (var textPaint = new SKPaint
+            {
+                IsAntialias = true,
+                TextSize = VerticalTextSize,
+                Color = VerticalTextColor.ToSKColor(),
+                Typeface = FontTypeService.GetFontFamily(),
+                TextAlign = VerticalLabelAlignment == TextAlignment.Start ? SKTextAlign.Right : SKTextAlign.Left
             })
             {
-                // Calculates maximum value depending on chart height
-                var maximumValue = chart.Height * (MaxValue / chart.Height);
-
-                if (VerticalLabelMode != LabelMode.None)
+                if (!string.IsNullOrEmpty(VerticalUnit))
                 {
-                    // Draw vertical unit
-                    if (!string.IsNullOrEmpty(VerticalUnit))
-                    {
-                        // Draws maximum value
-                        canvas.DrawText(this.VerticalUnit, ChartRectMargin.Left, frame.Top + VerticalLabelTextSize, paint);
-                        canvas.DrawText(maximumValue.ToString(), ChartRectMargin.Left, frame.Top + (VerticalLabelTextSize * 2), paint);
-                    }
-                    else
-                    {
-                        // Draws maximum value
-                        canvas.DrawText(maximumValue.ToString(), ChartRectMargin.Left, frame.Top + VerticalLabelTextSize, paint);
-                    }
-
-                    canvas.DrawText("0", ChartRectMargin.Left, frame.Bottom, paint);
+                    // Draws vertical unit and maximum value
+                    canvas.DrawText(VerticalUnit, new SKPoint(left, frame.Top.GetVerticalAlignment(textPaint.TextSize, TextAlignment.End)), textPaint);
+                    canvas.DrawText(maximumValue.ToString(), new SKPoint(left, (frame.Top + VerticalTextSize).GetVerticalAlignment(VerticalTextSize, TextAlignment.End)), textPaint);
+                }
+                else
+                {
+                    // Draws maximum value
+                    canvas.DrawText(maximumValue.ToString(), new SKPoint(left, frame.Top.GetVerticalAlignment(VerticalTextSize, TextAlignment.End)), textPaint);
                 }
 
-                if (VerticalLabelMode == LabelMode.StartCenterEnd || VerticalLabelMode == LabelMode.All)
+                // Draws bottom value
+                canvas.DrawText("0", new SKPoint(left, frame.Bottom), textPaint);
+
+                if (VerticalLabelMode == LabelMode.StartEnd)
                 {
-                    using (var framePaint = new SKPaint
-                    {
-                        Style = SKPaintStyle.Stroke,
-                        Color = FrameColor.ToSKColor(),
-                        StrokeWidth = FrameWidth / 2,
-                    })
-                    {
-                        if (DashedFrame)
-                        {
-                            framePaint.PathEffect = SKPathEffect.CreateDash(new float[] { 12, 12 }, 0);
-                        }
-
-                        if (HideFrame)
-                        {
-                            canvas.DrawLine(frame.Left, string.IsNullOrEmpty(VerticalUnit) ? frame.Top + (VerticalLabelTextSize / 2) : frame.Top + VerticalLabelTextSize, frame.Right, string.IsNullOrEmpty(VerticalUnit) ? frame.Top + (VerticalLabelTextSize / 2) : frame.Top + VerticalLabelTextSize, framePaint);
-                            canvas.DrawLine(frame.Left, frame.Bottom - (VerticalLabelTextSize / 4), frame.Right, frame.Bottom - (VerticalLabelTextSize / 4), framePaint);
-                        }
-
-                        canvas.DrawText((maximumValue / 2).ToString(), ChartRectMargin.Left, frame.MidY + (VerticalLabelTextSize / 4), paint);
-
-                        canvas.DrawLine(frame.Left, frame.MidY, frame.Right, frame.MidY, framePaint);
-
-                        if (VerticalLabelMode == LabelMode.All)
-                        {
-                            canvas.DrawText((maximumValue * .25).ToString(), ChartRectMargin.Left, (frame.Height * .75f) + (VerticalLabelTextSize / 4), paint);
-                            canvas.DrawText((maximumValue * .75).ToString(), ChartRectMargin.Left, (frame.Height * .25f) + (VerticalLabelTextSize / 4), paint);
-
-                            canvas.DrawLine(frame.Left, frame.Height * .75f, frame.Right, frame.Height * .75f, framePaint);
-                            canvas.DrawLine(frame.Left, frame.Height * .25f, frame.Right, frame.Height * .25f, framePaint);
-                        }
-                    }
+                    return;
                 }
+
+                // Draws middle value
+                canvas.DrawText((maximumValue / 2).ToString(), new SKPoint(left, frame.MidY.GetVerticalAlignment(VerticalTextSize, TextAlignment.Center)), textPaint);
+
+                if (VerticalLabelMode == LabelMode.StartCenterEnd)
+                {
+                    return;
+                }
+
+                // Draws rest of values
+                canvas.DrawText((maximumValue * .25).ToString(), new SKPoint(left, ((frame.Height * .75f) + frame.Top).GetVerticalAlignment(VerticalTextSize, TextAlignment.Center)), textPaint);
+                canvas.DrawText((maximumValue * .75).ToString(), new SKPoint(left, ((frame.Height * .25f) + frame.Top).GetVerticalAlignment(VerticalTextSize, TextAlignment.Center)), textPaint);
             }
         }
 
         protected void DrawHorizontalLabels(SKCanvas canvas, SKRect frame, SKRect chart)
         {
-            if (HorizontalLabelMode != LabelMode.None)
+            if (HorizontalLabelMode == LabelMode.None)
             {
-                if (!string.IsNullOrEmpty(MinLabel) && !string.IsNullOrEmpty(MaxLabel))
-                {
-                    canvas.DrawHorizontalText(MinLabel, chart.Left, frame.Bottom + HorizontalLabelTextSize, HorizontalLabelTextSize, HorizontalLabelColor.ToSKColor(), SKTextAlign.Center, isBold: true);
-                    canvas.DrawHorizontalText(MaxLabel, chart.Right, frame.Bottom + HorizontalLabelTextSize, HorizontalLabelTextSize, HorizontalLabelColor.ToSKColor(), SKTextAlign.Center, isBold: true);
-                }
+                return;
             }
 
-            if (!string.IsNullOrEmpty(HorizontalUnit))
+            // Set y position where labels should be
+            var y = frame.Bottom + HorizontalTextSize + ChartRectMargin.Bottom;
+
+            using (var paint = new SKPaint
             {
-                canvas.DrawHorizontalText(HorizontalUnit, chart.Right, frame.Bottom + (HorizontalLabelTextSize * 2), HorizontalLabelTextSize, HorizontalLabelColor.ToSKColor(), SKTextAlign.Left);
-            }
-
-            if (DisplayHorizontalValuesBySlider && IsSliderVisible)
+                IsAntialias = true,
+                TextSize = HorizontalTextSize,
+                Color = HorizontalTextColor.ToSKColor(),
+                Typeface = FontTypeService.GetFontFamily(),
+                TextAlign = SKTextAlign.Center
+            })
             {
-                var x = ChartType == ChartType.Linear ? TouchedPoint.X : chart.GetInsideXValue(TouchedPoint.X);
-
-                var valueItems = ChartEntries.GetChartValueItemFromX(x, frame, MaxItems, ChartType == ChartType.Linear);
-
-                var entry = valueItems?.FirstOrDefault()?.ChartValueItem;
-
-                if (string.IsNullOrEmpty(entry?.Label))
+                // Draw min value
+                if (!string.IsNullOrEmpty(MinLabel))
                 {
-                    return;
+                    canvas.DrawText(MinLabel, chart.Left, y, paint);
                 }
 
-                x = ChartType == ChartType.Linear ? chart.GetInsideXValue(TouchedPoint.X) : entry.Point.X;
-
-                canvas.DrawHorizontalText(entry.Label, x, frame.Bottom + HorizontalLabelTextSize, HorizontalLabelTextSize, SliderColor.ToSKColor(), SKTextAlign.Center, isBold: true);
-            }
-            else if (HorizontalLabelMode == LabelMode.All)
-            {
-                var items = ChartValuesDistinct;
-
-                if (items?.Any() != true)
+                // Draw max value
+                if (!string.IsNullOrEmpty(MaxLabel))
                 {
-                    return;
+                    canvas.DrawText(MaxLabel, chart.Right, y, paint);
                 }
 
-                var points = ChartEntries.FirstOrDefault().Items.Select(x => x.Point).ToArray();
-
-                for (int i = 0; i < items.Count(); i++)
+                if (HorizontalLabelMode == LabelMode.All)
                 {
-                    var entry = items.ElementAt(i);
-                    var point = points[i];
+                    // Draw all labels
+                    var items = ChartValuesDistinct;
 
-                    if (string.IsNullOrEmpty(entry?.Label) || entry?.Label == MinLabel || entry?.Label == MaxLabel)
+                    if (items?.Any() != true)
                     {
-                        continue;
+                        return;
                     }
 
-                    canvas.DrawHorizontalText(entry.Label, point.X, frame.Bottom + HorizontalLabelTextSize, HorizontalLabelTextSize, HorizontalLabelColor.ToSKColor(), SKTextAlign.Center);
+                    var points = ChartEntries.FirstOrDefault().Items.Select(x => x.Point).ToArray();
+
+                    for (int i = 0; i < items.Count(); i++)
+                    {
+                        var entry = items.ElementAt(i);
+                        var point = points[i];
+
+                        if (string.IsNullOrEmpty(entry?.Label) || entry?.Label == MinLabel || entry?.Label == MaxLabel)
+                        {
+                            continue;
+                        }
+
+                        canvas.DrawText(entry.Label, point.X, y, paint);
+                    }
+                }
+
+                // Draw horizontal unit
+                if (!string.IsNullOrEmpty(HorizontalUnit))
+                {
+                    paint.TextAlign = SKTextAlign.Right;
+                    canvas.DrawText(HorizontalUnit, chart.Right, DisplayHorizontalValuesBySlider ? y + HorizontalTextSize + ChartRectMargin.Bottom : y + HorizontalTextSize, paint);
                 }
             }
+
+            //if (DisplayHorizontalValuesBySlider && IsSliderVisible)
+            //{
+            //    var x = ChartType == ChartType.Linear ? TouchedPoint.X : chart.GetInsideXValue(TouchedPoint.X);
+
+            //    var valueItems = ChartEntries.GetChartValueItemFromX(x, frame, MaxItems, ChartType == ChartType.Linear);
+
+            //    var entry = valueItems?.FirstOrDefault()?.ChartValueItem;
+
+            //    if (string.IsNullOrEmpty(entry?.Label))
+            //    {
+            //        return;
+            //    }
+
+            //    x = ChartType == ChartType.Linear ? chart.GetInsideXValue(TouchedPoint.X) : entry.Point.X;
+
+            //    canvas.DrawHorizontalText(entry.Label, x, frame.Bottom + HorizontalTextSize, HorizontalTextSize, SliderColor.ToSKColor(), SKTextAlign.Center, isBold: true);
+            //}
         }
 
-        protected void DrawSlider(SKCanvas canvas, SKRect chart)
+        protected void DrawSlider(SKCanvas canvas, SKRect frame, SKRect chart)
         {
             if (!IsSliderVisible)
             {
                 return;
             }
+
+            float x = chart.GetInsideXValue(TouchedPoint.X);
 
             using (var paint = new SKPaint
             {
@@ -218,12 +242,91 @@ namespace Architecture.Controls.Charts
                 StrokeWidth = this.SliderWidth
             })
             {
-                float x = chart.GetInsideXValue(TouchedPoint.X);
-
                 // Straight slider line
-                canvas.DrawLine(x, chart.Top, x, chart.Bottom - FrameWidth, paint);
+                canvas.DrawLine(x, chart.Top, x, DisplayHorizontalValuesBySlider ? frame.Bottom + ChartRectMargin.Bottom : chart.Bottom - FrameWidth, paint);
 
                 DrawDragHintGraphic(canvas, x, chart.GetInsideYValue(TouchedPoint.Y), 0, chart);
+            }
+
+            // Get items on x axis
+            var valueItems = ChartEntries.GetChartValueItemFromX(x, frame, frame.GetItemWidth(MaxItems), UseExactValue);
+
+            // Send selected items with command
+            SelectedValuesCommand?.Execute(new SelectedChartValueItemArgs
+            {
+                ChartValueItems = valueItems,
+                TouchedPoint = new SKPoint(x, TouchedPoint.Y)
+            });
+
+            if (valueItems?.Any() != true)
+            {
+                return;
+            }
+
+            // Draws circle on y axis //
+
+            using (var paint = new SKPaint
+            {
+                Style = SKPaintStyle.Stroke,
+                StrokeWidth = SliderPointSize
+            })
+            {
+                foreach (var item in valueItems)
+                {
+                    paint.Color = item.BackgroundColor.ToSKColor();
+
+                    if (UseExactValue)
+                    {
+                        canvas.DrawCircle(x, ChartCalculator.CalculateYPosition(item.ChartValueItem, item.NextChartValueItem, x), SliderPointSize, paint);
+                    }
+                    else
+                    {
+                        canvas.DrawCircle(item.ChartValueItem.Point.X, item.ChartValueItem.Point.Y, SliderPointSize, paint);
+                    }
+                }
+            }
+
+            if (!DisplayHorizontalValuesBySlider)
+            {
+                return;
+            }
+
+            // Draws the horizontal value the slider is on //
+
+            var entry = valueItems?.FirstOrDefault()?.ChartValueItem;
+
+            if (string.IsNullOrEmpty(entry?.Label))
+            {
+                return;
+            }
+
+            // Draws background
+            using (var paint = new SKPaint
+            {
+                Color = SliderColor.ToSKColor(),
+                StrokeCap = SKStrokeCap.Round,
+                Style = SKPaintStyle.StrokeAndFill,
+                StrokeWidth = 2f
+            })
+            {
+                paint.PathEffect = SKPathEffect.CreateCorner(40);
+
+                var bounds = paint.GetBounds(MaxLabel, x, frame.Bottom + HorizontalTextSize + ChartRectMargin.Bottom, padding: new SKRect(10, 8, 10, 5));
+                canvas.DrawRect(bounds, paint);
+            }
+
+            // Draws text
+            using (var paint = new SKPaint
+            {
+                IsAntialias = true,
+                TextSize = HorizontalTextSize,
+                Color = SliderDetailTextColor.ToSKColor(),
+                Typeface = FontTypeService.GetFontFamily(),
+                TextAlign = SKTextAlign.Center,
+                FakeBoldText = true
+            })
+            {
+                canvas.DrawText(entry.Label, x, frame.Bottom + HorizontalTextSize + ChartRectMargin.Bottom, paint);
             }
         }
 
@@ -259,149 +362,6 @@ namespace Architecture.Controls.Charts
                     canvas.DrawLine(right + 40, y, right + 20, y - 20, paint);
                     canvas.DrawLine(right + 40, y, right + 20, y + 20, paint);
                 }
-            }
-        }
-
-        protected void ShowExactSliderValuesPosition(SKCanvas canvas, SKRect frame)
-        {
-            if (!IsSliderVisible)
-            {
-                return;
-            }
-
-            var valueItems = ChartEntries.GetChartValueItemFromX(TouchedPoint.X, frame, MaxItems);
-
-            if (valueItems?.Any() != true)
-            {
-                return;
-            }
-
-            int index = 0;
-
-            foreach (var item in valueItems)
-            {
-                var chartEntry = item.ChartValueItem;
-
-                var nextChartEntry = item.NextChartValueItem;
-
-                float y, points;
-
-                if (nextChartEntry != null)
-                {
-                    // Difference in value
-                    var diffVal = nextChartEntry.Value - chartEntry.Value;
-
-                    // Difference in Y position
-                    var diffY = nextChartEntry.Point.Y - chartEntry.Point.Y;
-
-                    // Difference in X position
-                    var diffX = nextChartEntry.Point.X - chartEntry.Point.X;
-
-                    var yValue = diffVal / diffY;
-                    var xValue = diffVal / diffX;
-
-                    // Current X position over first item
-                    var x = TouchedPoint.X - chartEntry.Point.X;
-                    points = x * xValue;
-
-                    y = (points / yValue) + chartEntry.Point.Y;
-                }
-                else
-                {
-                    y = chartEntry.Point.Y;
-                    points = chartEntry.Value;
-                }
-
-                canvas.DrawSliderCircle(frame.GetInsideXValue(TouchedPoint.X), y, item.Color, SliderPointSize);
-
-                float currentVal = 0;
-
-                if (nextChartEntry != null)
-                {
-                    try
-                    {
-                        currentVal = chartEntry.Value + (int)Math.Round(decimal.Parse(points.ToString()), 0, MidpointRounding.AwayFromZero);
-                    }
-                    catch (Exception ex)
-                    {
-                        ex.Print();
-                    }
-
-                    if (TouchedPoint.X == chartEntry.Point.X)
-                    {
-                        currentVal = chartEntry.Value;
-                    }
-                    else if (TouchedPoint.X == nextChartEntry?.Point.X)
-                    {
-                        currentVal = nextChartEntry.Value;
-                    }
-                }
-                else
-                {
-                    currentVal = chartEntry.Value;
-                }
-
-                string text = currentVal.ToString() + " " + this.VerticalUnit;
-
-                canvas.DrawSliderValue(
-                    text,
-                    frame.GetInsideXValue(TouchedPoint.X),
-                    frame.Top,
-                    SliderDetailTextSize,
-                    SKColors.White,
-                    item.Color,
-                    SliderDetailPadding,
-                    SliderDetailMargin,
-                    MaxValue + " " + VerticalUnit,
-                    valueItems.Count,
-                    index,
-                    SliderDetailOrientation,
-                    frame,
-                    item.Parent?.UseDashedEffect == true);
-
-                index++;
-            }
-        }
-
-        protected void ShowSliderValuesPosition(SKCanvas canvas, SKRect frame)
-        {
-            if (!IsSliderVisible)
-            {
-                return;
-            }
-
-            var valueItems = ChartEntries.GetChartValueItemFromX(TouchedPoint.X, frame, MaxItems);
-
-            if (valueItems?.Any() != true)
-            {
-                return;
-            }
-
-            int index = 0;
-
-            foreach (var item in valueItems)
-            {
-                canvas.DrawSliderCircle(item.ChartValueItem.Point.X, item.ChartValueItem.Point.Y, item.Color, this.SliderPointSize);
-
-                string text = Math.Round(double.Parse(item.ChartValueItem.Value.ToString()), 0, MidpointRounding.AwayFromZero).ToString() + " " + this.VerticalUnit;
-
-                canvas.DrawSliderValue(
-                    text,
-                    frame.GetInsideXValue(TouchedPoint.X),
-                    frame.Top,
-                    SliderDetailTextSize,
-                    SKColors.White,
-                    item.Color,
-                    SliderDetailPadding,
-                    SliderDetailMargin,
-                    MaxValue + " " + this.VerticalUnit,
-                    valueItems.Count,
-                    index,
-                    SliderDetailOrientation,
-                    frame,
-                    item.Parent?.UseDashedEffect == true);
-
-                index++;
             }
         }
 
@@ -476,23 +436,32 @@ namespace Architecture.Controls.Charts
             return result.ToArray();
         }
 
+        private float CalculateHeaderHeight()
+        {
+            return this.ChartRectMargin.Top;
+        }
+
         private float CalculateFooterHeight()
         {
-            var result = this.ChartRectMargin.Bottom;
+            var result = this.ChartRectMargin.Bottom + HorizontalTextSize;
 
             if (this.ChartEntries.SelectMany(x => x.Items).Any(e => !string.IsNullOrEmpty(e.Label)))
             {
-                result += HorizontalLabelTextSize + this.ChartRectMargin.Bottom;
+                result += HorizontalTextSize;
 
                 if (!string.IsNullOrEmpty(HorizontalUnit))
                 {
-                    result += HorizontalLabelTextSize + this.ChartRectMargin.Bottom;
+                    result += HorizontalTextSize + this.ChartRectMargin.Bottom;
+                }
+                else
+                {
+                    result += this.ChartRectMargin.Bottom;
                 }
             }
 
             return result;
         }
-
+        
         private float CalculateLeftWidth(SKRect[] valueLabelSizes)
         {
             var result = this.ChartRectMargin.Left;
@@ -519,7 +488,7 @@ namespace Architecture.Controls.Charts
         {
             var result = this.ChartRectMargin.Right;
 
-            if (VerticalLabelAlignment != TextAlignment.Start)
+            if (HorizontalLabelMode == LabelMode.None)
             {
                 return result;
             }
@@ -541,7 +510,7 @@ namespace Architecture.Controls.Charts
         {
             using (var paint = new SKPaint())
             {
-                paint.TextSize = VerticalLabelTextSize;
+                paint.TextSize = VerticalTextSize;
                 return this.ChartEntries.Select(e =>
                 {
                     if (string.IsNullOrEmpty(MaxValue.ToString()))
@@ -570,7 +539,7 @@ namespace Architecture.Controls.Charts
         {
             using (var paint = new SKPaint())
             {
-                paint.TextSize = HorizontalLabelTextSize;
+                paint.TextSize = HorizontalTextSize;
                 return this.ChartEntries.SelectMany(x => x.Items).Select(e =>
                 {
                     if (string.IsNullOrEmpty(e.Label))
@@ -582,15 +551,8 @@ namespace Architecture.Controls.Charts
                     var text = e.Label;
                     paint.MeasureText(text, ref bounds);
 
-                    var unitBounds = new SKRect();
-
-                    if (!string.IsNullOrEmpty(HorizontalUnit))
-                    {
-                        paint.MeasureText(HorizontalUnit, ref unitBounds);
-                    }
-
                     // Returns the biggest width of value or vertical unit bounds
-                    return bounds.Width > unitBounds.Width ? bounds : unitBounds;
+                    return bounds;
                 }).ToArray();
             }
         }
@@ -619,9 +581,23 @@ namespace Architecture.Controls.Charts
             set { SetValue(ChartEntriesProperty, value); }
         }
 
+        public static readonly BindableProperty SelectedValuesCommandProperty =
+            BindableProperty.Create(
+                "SelectedValuesCommand",
+                typeof(ICommand),
+                typeof(BaseChart),
+                default(ICommand));
+
+        public ICommand SelectedValuesCommand
+        {
+            get { return (ICommand)GetValue(SelectedValuesCommandProperty); }
+            set { SetValue(SelectedValuesCommandProperty, value); }
+        }
+
         protected ChartType ChartType { get; set; }
         public Color FrameColor { get; set; } = Color.Gray;
         public float FrameWidth { get; set; } = 3f;
+        public LabelMode InsideFrame { get; set; } = LabelMode.All;
 
         public TextAlignment VerticalLabelAlignment { get; set; } = TextAlignment.Start;
         public LabelMode VerticalLabelMode { get; set; } = LabelMode.All;
@@ -633,8 +609,9 @@ namespace Architecture.Controls.Charts
         public bool DashedFrame { get; set; }
 
         public bool IsSliderVisible { get; set; }
-        public Color SliderColor { get; set; } = Color.Gray;
-        public Color HintSliderColor { get; set; } = Color.Gray;
+        public Color SliderColor { get; set; } = Color.Black;
+        public Color SliderDetailTextColor { get; set; } = Color.White;
+        public Color HintSliderColor { get; set; } = Color.Black;
         public float SliderWidth { get; set; } = 4f;
         public float SliderPointSize { get; set; } = 8f;
         public StackOrientation SliderDetailOrientation { get; set; }
@@ -647,10 +624,11 @@ namespace Architecture.Controls.Charts
 
         public string VerticalUnit { get; set; }
         public string HorizontalUnit { get; set; }
-        public Color VerticalLabelColor { get; set; } = Color.Black;
-        public Color HorizontalLabelColor { get; set; } = Color.Black;
-        public float HorizontalLabelTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 42 : 32;
-        public float VerticalLabelTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 42 : 32;
+        public Color VerticalTextColor { get; set; } = Color.Black;
+        public Color HorizontalTextColor { get; set; } = Color.Black;
+        public float HorizontalTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 42 : 32;
+        public float VerticalTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 42 : 32;
+
         public float SliderDetailTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 36 : 26;
         public int SliderDetailPadding { get; set; } = 24;
         public int SliderDetailMargin { get; set; } = 4;

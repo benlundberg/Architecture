@@ -15,7 +15,7 @@
                     FontSize="Large"
                     Text="About us" />
                 <Label 
-                    Padding="{StaticResource FormPadding}"
+                    Padding="{StaticResource LargePadding}"
                     HorizontalTextAlignment="Center"
                     FontSize="Default"
                     Text="This is an app that shows how you and your team can create a nice looking UI togheter with Xamarin Forms" />
@@ -26,7 +26,7 @@
                     FontSize="Large"                    
                     Text="Usage" />
                 <Label 
-                    Padding="{StaticResource FormPadding}"
+                    Padding="{StaticResource LargePadding}"
                     HorizontalTextAlignment="Center"
                     FontSize="Default"
                     Text="This is FREE to use or take inspiration from" />
@@ -37,7 +37,7 @@
                     FontSize="Large"
                     Text="Our team" />
                 <Label 
-                    Padding="{StaticResource FormPadding}"
+                    Padding="{StaticResource LargePadding}"
                     HorizontalTextAlignment="Center"
                     FontSize="Default"
                     Text="Only one passionate mobile developer who wants to show that you can create nice looking apps with Xamarin Forms" />
@@ -47,7 +47,7 @@
                     HorizontalTextAlignment="Center"
                     FontSize="Large"
                     Text="3rd parties" />
-                <StackLayout Padding="{StaticResource FormPadding}">
+                <StackLayout Padding="{StaticResource LargePadding}">
                     <Label 
                         FontSize="Default"
                         Text="- SkiaSharp" />

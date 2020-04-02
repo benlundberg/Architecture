@@ -14,32 +14,26 @@
         <Grid>
             <StackLayout
                 Spacing="{StaticResource MainSpacing}"
-                Padding="{StaticResource FormPadding}"
+                Padding="{StaticResource XLargePadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
                 <Label
                     Margin="0, 40"
-                    TextColor="{StaticResource PrimaryColor}"
                     VerticalOptions="Center"
                     FontSize="42"
                     Text="Login" />
                 <Entry 
                     Placeholder="Username"
-                    Text="{Binding Username.Value, Mode=TwoWay}"
-                    PlaceholderColor="{StaticResource PrimaryColor}"
-                    TextColor="{StaticResource PrimaryColor}" />
+                    Text="{Binding Username.Value, Mode=TwoWay}" />
                 <Entry 
                     Placeholder="Password" 
                     IsPassword="True"
-                    Text="{Binding Password.Value, Mode=TwoWay}"
-                    PlaceholderColor="{StaticResource PrimaryColor}"
-                    TextColor="{StaticResource PrimaryColor}" />
+                    Text="{Binding Password.Value, Mode=TwoWay}" />
                 <StackLayout 
                     HorizontalOptions="Start"
                     Orientation="Horizontal">
                     <CheckBox 
                         IsChecked="{Binding RememberMe, Mode=TwoWay}"
-                        WidthRequest="32"
-                        Color="{StaticResource PrimaryColor}" />
+                        WidthRequest="32" />
                     <Label 
                         FontSize="Default"
                         VerticalOptions="Center"
@@ -50,9 +44,8 @@
                     Text="{StaticResource CheckIcon}"
                     FontFamily="{StaticResource FontAwesomeSolid}" />
                 <Label
+                    Style="{StaticResource BoldLabel}"
                     FontSize="Default"
-                    FontAttributes="Bold"
-                    TextColor="{StaticResource PrimaryColor}"
                     HorizontalOptions="End"
                     Text="Forgot password?">
                     <Label.GestureRecognizers>

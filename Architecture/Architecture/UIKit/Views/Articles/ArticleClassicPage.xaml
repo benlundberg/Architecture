@@ -42,11 +42,9 @@
                         <StackLayout Grid.Column="1">
                             <Label
                                 FontSize="Large"
-                                TextColor="{StaticResource PrimaryColor}"
                                 Text="{Binding Title}" />
                             <Label
                                 FontSize="Default"
-                                TextColor="{StaticResource PrimaryColor}"
                                 Text="{Binding Year}" />
                             <Label 
                                 FontSize="Default"

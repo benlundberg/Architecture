@@ -14,7 +14,7 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Spacing="{StaticResource MainSpacing}" Padding="{StaticResource FormPadding}">
+            <StackLayout Spacing="{StaticResource MainSpacing}" Padding="{StaticResource LargePadding}">
                 <Grid>
                     <Entry
                         Grid.Column="0"

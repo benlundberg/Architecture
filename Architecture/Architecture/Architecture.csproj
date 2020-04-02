@@ -1,10 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="akavache" Version="6.10.4" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
@@ -20,11 +23,9 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.396" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Architecture.Core\Architecture.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="contentFiles/**/*.*" copyToOutput="true">
       <IncludeInPackage>true</IncludeInPackage>
@@ -34,13 +35,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\NotifyScrollView\NotifyScrollView.xaml.cs">
       <DependentUpon>NotifyScrollView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UIKit\Views\Articles\ArticleVariantListPage.xaml.cs">
+      <DependentUpon>ArticleVariantListPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="UIKit\Views\Dashboard\DashboardImagePage.xaml.cs">
       <DependentUpon>DashboardImagePage.xaml</DependentUpon>
@@ -78,7 +81,6 @@
       <DependentUpon>Strings.sv.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Controls\CollapsingScrollView\CollapsingScrollView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

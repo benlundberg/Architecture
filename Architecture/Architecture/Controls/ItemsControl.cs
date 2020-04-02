@@ -31,7 +31,8 @@ namespace Architecture.Controls
 
             StackLayout stack = new StackLayout()
             {
-                VerticalOptions = LayoutOptions.Start
+                VerticalOptions = LayoutOptions.Start,
+                Orientation = view.StackOrientation
             };
 
             foreach (var item in enumerable)
@@ -104,5 +105,7 @@ namespace Architecture.Controls
                 }));
             }
         }
+
+        public StackOrientation StackOrientation { get; set; }
     }
 }

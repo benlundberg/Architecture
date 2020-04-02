@@ -24,7 +24,7 @@
         <StackLayout
             VerticalOptions="Center"
             Spacing="10"
-            Padding="{StaticResource FormPadding}"
+            Padding="{StaticResource LargePadding}"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
             <Entry 
                 Placeholder="Username"
@@ -54,6 +54,7 @@
                 Text="{StaticResource CheckIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}" />
             <Label
+                Style="{StaticResource BoldLabel}"
                 TextColor="White"
                 HorizontalOptions="End"
                 Text="Forgot password?">
@@ -70,7 +71,7 @@
             FontSize="Large"
             Text="{StaticResource CloseIcon}"
             FontFamily="{StaticResource FontAwesomeSolid}"
-            TextColor="{StaticResource ToolbarTextColor}">
+            TextColor="{StaticResource SecondaryTextColor}">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding PopModalCommand}" />
             </Label.GestureRecognizers>

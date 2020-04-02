@@ -14,7 +14,13 @@
     </NavigationPage.TitleView>
 
     <Grid>
-        <controls:SegmentView IsVisible="{Binding LoginModel.IsBusy, Converter={StaticResource InvertedBoolConv}}">
+        <controls:SegmentView 
+            UserBorder="False"
+            SegmentTextColor="Black"
+            SelectedTextColor="Black"
+            SelectedBackgroundColor="Black"
+            UseAutoSize="True"
+            IsVisible="{Binding LoginModel.IsBusy, Converter={StaticResource InvertedBoolConv}}">
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem IsSelected="True" Text="Login" Tag="1">
                     <controls:SegmentControlItem.Content>
@@ -22,18 +28,18 @@
                             <!-- Login -->
                             <StackLayout 
                                 Spacing="{StaticResource MainSpacing}"
-                                Padding="{StaticResource FormPadding}">
+                                Padding="{StaticResource XLargePadding}">
                                 <controls:FrameEntry
                                     Header="Username"
                                     IconTextSource="&#xf007;"
-                                    HeaderBackgroundColor="{StaticResource GrayLight}"
+                                    HeaderBackgroundColor="White"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
                                     Text="{Binding LoginModel.Username, Mode=TwoWay}" />
                                 <controls:FrameEntry 
                                     Header="Password"
                                     IconTextSource="&#xf023;"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
-                                    HeaderBackgroundColor="{StaticResource GrayLight}"
+                                    HeaderBackgroundColor="White"
                                     IsPassword="True" 
                                     Text="{Binding LoginModel.Password, Mode=TwoWay}" />
                                 <StackLayout 
@@ -50,14 +56,20 @@
                                         Text="Remember me?" />
                                 </StackLayout>
                                 <Button 
+                                    Margin="{StaticResource LargePadding}"
                                     Command="{Binding LoginModel.LoginCommand}"
                                     Text="{StaticResource CheckIcon}"
-                                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                    BackgroundColor="{StaticResource Accent}"
+                                    HorizontalOptions="Center"
+                                    TextColor="White"
+                                    HeightRequest="80"
+                                    WidthRequest="80"
+                                    CornerRadius="40" />
                                 <Label
+                                    Style="{StaticResource BoldLabel}"
                                     FontSize="Default"
-                                    FontAttributes="Bold"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    HorizontalOptions="End"
+                                    HorizontalOptions="Center"
                                     Text="Forgot password?">
                                 </Label>
                             </StackLayout>
@@ -69,10 +81,10 @@
                         <ScrollView>
                             <StackLayout 
                                 Spacing="{StaticResource MainSpacing}"
-                                Padding="{StaticResource FormPadding}">
+                                Padding="{StaticResource LargePadding}">
                                 <controls:FrameEntry 
                                     Header="Email"
-                                    HeaderBackgroundColor="{StaticResource GrayLight}"
+                                    HeaderBackgroundColor="White"
                                     HasValidation="True"
                                     IconTextSource="&#xf0e0;"
                                     Keyboard="Email"
@@ -82,7 +94,7 @@
                                     IconTextSource="&#xf023;"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
                                     Header="Password"
-                                    HeaderBackgroundColor="{StaticResource GrayLight}"
+                                    HeaderBackgroundColor="White"
                                     HasValidation="True"
                                     IsPassword="True" 
                                     Text="{Binding SignUpModel.Password, Mode=TwoWay}" />
@@ -90,13 +102,20 @@
                                     IconTextSource="&#xf023;"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
                                     Header="Confirm password" 
-                                    HeaderBackgroundColor="{StaticResource GrayLight}"
+                                    HeaderBackgroundColor="White"
                                     HasValidation="True"
                                     IsPassword="True" 
                                     Text="{Binding SignUpModel.ConfirmPassword, Mode=TwoWay}" />
                                 <Button 
+                                    Margin="{StaticResource LargePadding}"
                                     Text="{StaticResource CheckIcon}"
-                                    FontFamily="{StaticResource FontAwesomeSolid}"/>
+                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                    BackgroundColor="{StaticResource Accent}"
+                                    HorizontalOptions="Center"
+                                    TextColor="White"
+                                    HeightRequest="80"
+                                    WidthRequest="80"
+                                    CornerRadius="40" />
                             </StackLayout>
                         </ScrollView>
                     </controls:SegmentControlItem.Content>

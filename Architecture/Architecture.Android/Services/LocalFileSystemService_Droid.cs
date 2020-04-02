@@ -1,4 +1,5 @@
-﻿using Architecture.Core;
+﻿using Android.Content;
+using Architecture.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -169,6 +170,13 @@ namespace Architecture.Droid
 			}
 
 			return File.ReadAllText(path);
+		}
+
+		public Stream GetStreamFromAssets(string path)
+		{
+			var assets = Android.App.Application.Context.Assets;
+
+			return assets.Open(path);
 		}
 	}
 }

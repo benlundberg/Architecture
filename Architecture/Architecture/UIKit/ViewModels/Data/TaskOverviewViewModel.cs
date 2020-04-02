@@ -4,6 +4,9 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture
@@ -173,14 +176,71 @@ namespace Architecture
             };
         }
 
+        private ICommand selectedChartEntriesChangedCommand;
+        public ICommand SelectedChartEntriesChangedCommand => selectedChartEntriesChangedCommand ?? (selectedChartEntriesChangedCommand = new Command((param) =>
+        {
+            if (!(param is SelectedChartValueItemArgs args))
+            {
+                return;
+            }
+
+            if (args.ChartValueItems?.Any() != true)
+            {
+                SelectedChartEntries = new ObservableCollection<ChartEntryViewModel>();
+            }
+            else if (SelectedChartEntries?.Any() == true)
+            {
+                foreach (var item in args.ChartValueItems)
+                {
+                    var val = SelectedChartEntries.FirstOrDefault(x => x.Id == item.Parent.Id);
+
+                    if (val != null)
+                    {
+                        val.Value = item.ChartValueItem.Value.ToString() + " tasks"; //ChartCalculator.CalculateExactValue(item.ChartValueItem, item.NextChartValueItem, args.TouchedPoint.X).ToString() + " tasks";
+                    }
+                    else
+                    {
+                        SelectedChartEntries.Add(new ChartEntryViewModel
+                        {
+                            BackgroundColor = item.BackgroundColor,
+                            Id = item.Parent.Id,
+                            TextColor = item.TextColor,
+                            Value = item.ChartValueItem.Value.ToString() + " tasks"//ChartCalculator.CalculateExactValue(item.ChartValueItem, item.NextChartValueItem, args.TouchedPoint.X).ToString() + " tasks"
+                });
+                    }
+                }
+            }
+            else
+            {
+                SelectedChartEntries = args.ChartValueItems == null ? new ObservableCollection<ChartEntryViewModel>() : new ObservableCollection<ChartEntryViewModel>(args.ChartValueItems.Select(x => new ChartEntryViewModel
+                {
+                    Id = x.Parent.Id,
+                    BackgroundColor = x.BackgroundColor,
+                    TextColor = x.TextColor,
+                    Value = x.ChartValueItem.Value.ToString() + " tasks"//ChartCalculator.CalculateExactValue(x.ChartValueItem, x.NextChartValueItem, args.TouchedPoint.X).ToString() + " tasks"
+                }));
+            }
+        }));
+
         public string SelectedItem { get; set; }
         public List<string> PickerValues { get; private set; }
         public ObservableCollection<TableItem> TableItems { get; private set; }
         public ObservableCollection<ChartItem> ChartEntries { get; private set; }
+        public ObservableCollection<ChartEntryViewModel> SelectedChartEntries { get; private set; }
 
         public DateTime SelectedDate { get; set; } = DateTime.Today;
         public bool HasYear { get; set; } = true;
         public bool HasMonth { get; set; } = true;
         public bool HasDay { get; set; } = true;
+    }
+
+    public class ChartEntryViewModel : INotifyPropertyChanged
+    {
+        public int Id { get; set; }
+        public string Value { get; set; }
+        public Color BackgroundColor { get; set; }
+        public Color TextColor { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

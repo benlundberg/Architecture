@@ -18,5 +18,6 @@ namespace Architecture.Core
 		string ReadText(params string[] paths);
 		FileStream GetFileStream(params string[] paths);
 		IEnumerable<string> GetFiles(params string[] paths);
+		Stream GetStreamFromAssets(string path);
 	}
 }

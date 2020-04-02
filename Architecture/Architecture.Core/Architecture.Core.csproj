@@ -1,19 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Models\**" />
     <EmbeddedResource Remove="Models\**" />
     <None Remove="Models\**" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="akavache" Version="6.10.4" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.6" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
   </ItemGroup>
-
 </Project>

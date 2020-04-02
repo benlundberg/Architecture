@@ -73,7 +73,7 @@ namespace Architecture.Controls.Charts
             var barWidth = (itemWidth / count) - 10;
 
             // Selected bar width
-            var selectedValueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), chart, MaxItems, false);
+            var selectedValueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), chart, chart.GetItemWidth(MaxItems), false);
             var selectedTags = selectedValueItems?.Select(x => x.ChartValueItem.Tag);
 
             int index = 0;
@@ -131,23 +131,22 @@ namespace Architecture.Controls.Charts
                         item.Color.ToSKColor(),
                         item.UseDashedEffect);
 
-                    string text = Math.Round(double.Parse(valueItem.Value.ToString()), 0, MidpointRounding.AwayFromZero).ToString() + " " + this.VerticalUnit;
+                    //string text = Math.Round(double.Parse(valueItem.Value.ToString()), 0, MidpointRounding.AwayFromZero).ToString() + " " + this.VerticalUnit;
 
-                    canvas.DrawSliderValue(
-                        text,
-                        frame.GetInsideXValue(valueItem.Point.X),
-                        frame.Top,
-                        SliderDetailTextSize,
-                        SKColors.White,
-                        item.Color.ToSKColor(),
-                        SliderDetailPadding,
-                        SliderDetailMargin,
-                        MaxValue + " " + this.VerticalUnit,
-                        selectedValueItems.Count,
-                        index,
-                        SliderDetailOrientation,
-                        frame,
-                        item.UseDashedEffect);
+                    //canvas.DrawSliderValue(
+                    //    text,
+                    //    frame.GetInsideXValue(valueItem.Point.X),
+                    //    SliderDetailTextSize,
+                    //    SKColors.White,
+                    //    item.Color.ToSKColor(),
+                    //    SliderDetailPadding,
+                    //    SliderDetailMargin,
+                    //    MaxValue + " " + this.VerticalUnit,
+                    //    selectedValueItems.Count,
+                    //    index,
+                    //    SliderDetailOrientation,
+                    //    frame,
+                    //    item.UseDashedEffect);
                 }
 
                 index++;

@@ -65,16 +65,7 @@ namespace Architecture.Controls.Charts
             }
             
             DrawHorizontalLabels(canvas, frame, chart);
-            DrawSlider(canvas, chart);
-
-            if (UseExactValue)
-            {
-                ShowExactSliderValuesPosition(canvas, chart);
-            }
-            else
-            {
-                ShowSliderValuesPosition(canvas, chart);
-            }
+            DrawSlider(canvas, frame, chart);
         }
 
         private void DrawLines(ChartItem chartItem, SKCanvas canvas, SKPoint[] points)
@@ -86,12 +77,12 @@ namespace Architecture.Controls.Charts
 
             using (var paint = new SKPaint
             {
+                IsStroke = true,
+                IsAntialias = true,
                 Style = SKPaintStyle.Stroke,
                 StrokeCap = SKStrokeCap.Round,
-                IsStroke = true,
                 Color = chartItem.Color.ToSKColor(),
-                StrokeWidth = chartItem.LineWidth,
-                IsAntialias = true
+                StrokeWidth = chartItem.LineWidth
             })
             {
                 if (chartItem.UseDashedEffect)

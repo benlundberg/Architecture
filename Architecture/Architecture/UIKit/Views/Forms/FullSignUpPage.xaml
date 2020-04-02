@@ -14,11 +14,10 @@
         <Grid>
             <StackLayout 
                 Spacing="{StaticResource MainSpacing}"
-                Padding="{StaticResource FormPadding}"
+                Padding="{StaticResource XLargePadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
                 <Label
                     Margin="0, 40"
-                    TextColor="{StaticResource PrimaryColor}"
                     VerticalOptions="Center"
                     FontSize="42"
                     Text="Sign up" />
@@ -27,24 +26,18 @@
                     Placeholder="Email"
                     Keyboard="Email"
                     Text="{Binding Email, Mode=TwoWay}"
-                    PlaceholderColor="{StaticResource PrimaryColor}"
-                    TextColor="{StaticResource PrimaryColor}"
                     HasValidation="True" />
                 <controls:ValidationEntry 
                     Visual="Material"
                     Text="{Binding Password, Mode=TwoWay}"
                     Placeholder="Password" 
                     IsPassword="True" 
-                    PlaceholderColor="{StaticResource PrimaryColor}"
-                    TextColor="{StaticResource PrimaryColor}" 
                     HasValidation="True" />
                 <controls:ValidationEntry 
                     Visual="Material"
                     Text="{Binding ConfirmPassword, Mode=TwoWay}"
                     Placeholder="Confirm password" 
                     IsPassword="True" 
-                    PlaceholderColor="{StaticResource PrimaryColor}"
-                    TextColor="{StaticResource PrimaryColor}" 
                     HasValidation="True" />
                 <Button 
                     Text="{StaticResource CheckIcon}"

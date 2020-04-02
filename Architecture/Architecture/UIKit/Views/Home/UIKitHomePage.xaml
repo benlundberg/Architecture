@@ -20,6 +20,7 @@
             <Button Text="Article Browser" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="1" />
             <Button Text="Article Classic" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="2" />
             <Button Text="Article List" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="3" />
+            <Button Text="Article Variant List" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="4" />
             <!-- Forms -->
             <Label Text="Forms" FontSize="Large" />
             <Button Text="Full Login" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="1" />

@@ -1,24 +1,74 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class PageTitleView : Label
+    public class PageTitleView : Grid
     {
         public PageTitleView()
         {
-            MaxLines = 1;
-            TextColor = Application.Current.ToolbarTextColor();
-            VerticalOptions = LayoutOptions.CenterAndExpand;
+            PropertyChanged += PageTitleView_PropertyChanged;
+        }
 
-            if (Device.RuntimePlatform == Device.iOS)
+        private void PageTitleView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (Width > 0)
             {
-                Margin = new Thickness(8, 0, 0, 0);
-                FontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
+                if (!(Children.First() is View view))
+                {
+                    return;
+                }
+
+                view.TranslationX = 0;
+
+                if (!(Parent is ContentPage contentPage))
+                {
+                    return;
+                }
+
+                if (!(contentPage.Parent is NavigationPage navigationPage))
+                {
+                    return;
+                }
+
+                PropertyChanged -= PageTitleView_PropertyChanged;
+
+                view.TranslationX = (this.Width - (navigationPage.Width - 16)) / 2;
             }
-            else
+        }
+
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(
+            propertyName: "Text",
+            returnType: typeof(string),
+            declaringType: typeof(PageTitleView),
+            defaultValue: default(string),
+            propertyChanged: TextChanged);
+
+        private static void TextChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (!(bindable is PageTitleView view))
             {
-                FontSize = 20;
+                return;
             }
+
+            view.Children.Clear();
+
+            view.Children.Add(new Label
+            {
+                MaxLines = 1,
+                Text = view.Text,
+                TextColor = Application.Current.ToolbarTextColor(),
+                VerticalOptions = LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
+                FontSize = Device.RuntimePlatform == Device.iOS ? Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)) : 20,
+                Margin = Device.RuntimePlatform == Device.iOS ? new Thickness(8, 0, 0, 0) : new Thickness(0)
+            });
+        }
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
     }
 }

@@ -32,6 +32,9 @@ namespace Architecture
                 case 3:
                     await Navigation.PushAsync(new ArticleListPage());
                     break;
+                case 4:
+                    await Navigation.PushAsync(new ArticleVariantListPage());
+                    break;
             }
         }));
 

@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Architecture.Android", "Architecture\Architecture.Android\Architecture.Android.csproj", "{3D43D38D-18B5-469B-A56C-E52D364F1AB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Architecture", "Architecture\Architecture\Architecture.csproj", "{FCDE9B5F-C155-4563-AD8C-979362062377}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Architecture", "Architecture\Architecture\Architecture.csproj", "{FCDE9B5F-C155-4563-AD8C-979362062377}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Architecture.Core", "Architecture\Architecture.Core\Architecture.Core.csproj", "{50669BF2-56FA-42FC-A1EB-F6C31C8E04FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Architecture.Core", "Architecture\Architecture.Core\Architecture.Core.csproj", "{50669BF2-56FA-42FC-A1EB-F6C31C8E04FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Architecture.UWP", "Architecture\Architecture.UWP\Architecture.UWP.csproj", "{3477CADA-E27F-46C1-AC8C-C4384BE01F45}"
 EndProject
