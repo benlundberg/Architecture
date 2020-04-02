@@ -6,19 +6,6 @@ namespace Architecture.Controls.Charts
 {
     public static class SKCanvasExtensions
     {
-        public static void DrawSliderCircle(this SKCanvas canvas, float x, float y, SKColor color, float pointSize)
-        {
-            using (var paint = new SKPaint
-            {
-                Color = color,
-                Style = SKPaintStyle.Stroke,
-                StrokeWidth = pointSize
-            })
-            {
-                canvas.DrawCircle(new SKPoint(x, y), pointSize, paint);
-            }
-        }
-
         public static void DrawBar(this SKCanvas canvas, float x, float yStart, float yEnd, float width, int margin, int count, int index, SKColor color, bool useDashedEffect)
         {
             using (var paint = new SKPaint())

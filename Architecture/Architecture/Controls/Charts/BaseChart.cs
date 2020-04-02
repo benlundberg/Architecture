@@ -1,5 +1,4 @@
-﻿using Architecture.Core;
-using SkiaSharp;
+﻿using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
@@ -205,24 +204,6 @@ namespace Architecture.Controls.Charts
                     canvas.DrawText(HorizontalUnit, chart.Right, DisplayHorizontalValuesBySlider ? y + HorizontalTextSize + ChartRectMargin.Bottom : y + HorizontalTextSize, paint);
                 }
             }
-
-            //if (DisplayHorizontalValuesBySlider && IsSliderVisible)
-            //{
-            //    var x = ChartType == ChartType.Linear ? TouchedPoint.X : chart.GetInsideXValue(TouchedPoint.X);
-
-            //    var valueItems = ChartEntries.GetChartValueItemFromX(x, frame, MaxItems, ChartType == ChartType.Linear);
-
-            //    var entry = valueItems?.FirstOrDefault()?.ChartValueItem;
-
-            //    if (string.IsNullOrEmpty(entry?.Label))
-            //    {
-            //        return;
-            //    }
-
-            //    x = ChartType == ChartType.Linear ? chart.GetInsideXValue(TouchedPoint.X) : entry.Point.X;
-
-            //    canvas.DrawHorizontalText(entry.Label, x, frame.Bottom + HorizontalTextSize, HorizontalTextSize, SliderColor.ToSKColor(), SKTextAlign.Center, isBold: true);
-            //}
         }
 
         protected void DrawSlider(SKCanvas canvas, SKRect frame, SKRect chart)
