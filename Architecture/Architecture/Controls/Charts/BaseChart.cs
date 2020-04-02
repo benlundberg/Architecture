@@ -226,7 +226,7 @@ namespace Architecture.Controls.Charts
                 // Straight slider line
                 canvas.DrawLine(x, chart.Top, x, DisplayHorizontalValuesBySlider ? frame.Bottom + ChartRectMargin.Bottom : chart.Bottom - FrameWidth, paint);
 
-                DrawDragHintGraphic(canvas, x, chart.GetInsideYValue(TouchedPoint.Y), 0, chart);
+                DrawSliderHint(canvas, x, chart.GetInsideYValue(TouchedPoint.Y), 0, chart);
             }
 
             // Get items on x axis
@@ -311,7 +311,7 @@ namespace Architecture.Controls.Charts
             }
         }
 
-        protected void DrawDragHintGraphic(SKCanvas canvas, float x, float y, float width, SKRect frame)
+        protected void DrawSliderHint(SKCanvas canvas, float x, float y, float width, SKRect frame)
         {
             if (!UseSliderHint)
             {
@@ -322,7 +322,7 @@ namespace Architecture.Controls.Charts
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeCap = SKStrokeCap.Round,
-                Color = this.SliderColor.ToSKColor(),
+                Color = this.HintSliderColor.ToSKColor(),
                 StrokeWidth = Device.RuntimePlatform == Device.Android ? this.SliderWidth * 2 : this.SliderWidth
             })
             {
@@ -595,7 +595,6 @@ namespace Architecture.Controls.Charts
         public Color HintSliderColor { get; set; } = Color.Black;
         public float SliderWidth { get; set; } = 4f;
         public float SliderPointSize { get; set; } = 8f;
-        public StackOrientation SliderDetailOrientation { get; set; }
 
         protected SKRect ChartRectPadding => new SKRect((float)ChartPadding.Left, (float)ChartPadding.Top, (float)ChartPadding.Right, (float)ChartPadding.Bottom);
         protected SKRect ChartRectMargin => new SKRect((float)ChartMargin.Left, (float)ChartMargin.Top, (float)ChartMargin.Right, (float)ChartMargin.Bottom);
@@ -609,10 +608,6 @@ namespace Architecture.Controls.Charts
         public Color HorizontalTextColor { get; set; } = Color.Black;
         public float HorizontalTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 42 : 32;
         public float VerticalTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 42 : 32;
-
-        public float SliderDetailTextSize { get; set; } = Device.RuntimePlatform == Device.Android ? 36 : 26;
-        public int SliderDetailPadding { get; set; } = 24;
-        public int SliderDetailMargin { get; set; } = 4;
 
         public float MinValue
         {

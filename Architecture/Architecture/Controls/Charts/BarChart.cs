@@ -158,7 +158,7 @@ namespace Architecture.Controls.Charts
 
             if (hintX != 0 && hintY != 0)
             {
-                DrawDragHintGraphic(
+                DrawSliderHint(
                     canvas,
                     hintX,
                     hintY + ((frame.Bottom - hintY) / 2),
