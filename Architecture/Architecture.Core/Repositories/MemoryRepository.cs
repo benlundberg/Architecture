@@ -38,11 +38,18 @@ namespace Architecture.Core
             implementation = new Lazy<IRepository>(() => repository, isThreadSafe: true);
         }
 
-        public async Task SaveAsync<T>(string id, T model)
+        public async Task SaveAsync<T>(string id, T model, TimeSpan expiration = default)
         {
             try
             {
-                await BlobCache.InMemory.InsertObject(id + model.GetType().ToString(), model);
+                if (expiration == default)
+                {
+                    await BlobCache.InMemory.InsertObject(id + model.GetType().ToString(), model, expiration);
+                }
+                else
+                {
+                    await BlobCache.InMemory.InsertObject(id + model.GetType().ToString(), model);
+                }
             }
             catch (Exception ex)
             {

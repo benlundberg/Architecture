@@ -12,6 +12,12 @@ namespace Architecture.Controls
 
         private void PageTitleView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            if (!IsCentered)
+            {
+                PropertyChanged -= PageTitleView_PropertyChanged;
+                return;
+            }
+
             if (Width > 0)
             {
                 if (!(Children.First() is View view))
@@ -59,7 +65,7 @@ namespace Architecture.Controls
                 Text = view.Text,
                 TextColor = Application.Current.ToolbarTextColor(),
                 VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center,
+                HorizontalOptions = view.IsCentered ? LayoutOptions.Center : LayoutOptions.Start,
                 FontSize = Device.RuntimePlatform == Device.iOS ? Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)) : 20,
                 Margin = Device.RuntimePlatform == Device.iOS ? new Thickness(8, 0, 0, 0) : new Thickness(0)
             });
@@ -70,5 +76,7 @@ namespace Architecture.Controls
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
+
+        public bool IsCentered { get; set; }
     }
 }

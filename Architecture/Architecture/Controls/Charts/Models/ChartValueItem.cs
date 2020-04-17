@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using Xamarin.Forms;
 
 namespace Architecture.Controls.Charts
 {
@@ -7,6 +8,8 @@ namespace Architecture.Controls.Charts
         public float Value { get; set; }
         public string Label { get; set; }
         public SKPoint Point { get; set; }
-        public object Tag { get; set; }
+        public string Tag { get; set; }
+        public Color Color { get; set; }
+        public bool UseDashedEffect { get; set; }
     }
 }

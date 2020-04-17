@@ -15,12 +15,24 @@
 
     <Grid>
         <controls:SegmentView 
-            UserBorder="False"
-            SegmentTextColor="Black"
-            SelectedTextColor="Black"
-            SelectedBackgroundColor="Black"
-            UseAutoSize="True"
+            Margin="40"
+            Spacing="20"
             IsVisible="{Binding LoginModel.IsBusy, Converter={StaticResource InvertedBoolConv}}">
+            <controls:SegmentView.TitleTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label FontSize="Medium" Text="{Binding Text}" />
+                    </StackLayout>
+                </DataTemplate>
+            </controls:SegmentView.TitleTemplate>
+            <controls:SegmentView.SelectedTitleTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label FontSize="Medium" Text="{Binding Text}" Style="{StaticResource BoldLabel}" />
+                        <BoxView Color="{StaticResource PrimaryColor}" HeightRequest="3" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                </DataTemplate>
+            </controls:SegmentView.SelectedTitleTemplate>
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem IsSelected="True" Text="Login" Tag="1">
                     <controls:SegmentControlItem.Content>

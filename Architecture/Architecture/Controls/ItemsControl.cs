@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -7,51 +8,152 @@ namespace Architecture.Controls
 {
     public class ItemsControl : ScrollView
     {
-        public ItemsControl()
+        private void Init()
         {
-            this.VerticalOptions = LayoutOptions.Start;
-        }
+            this.Orientation = this.ItemsOrientation == StackOrientation.Horizontal ? ScrollOrientation.Horizontal : ScrollOrientation.Vertical;
+            
+            IList enumerable = ItemsSource as IList ?? ItemsSource?.Cast<object>()?.ToArray();
 
-        static void HandleBindingPropertyChangedDelegate(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = bindable as ItemsControl;
+            // Register for itemsource change
+            AddCollectionChanged(enumerable);
 
-            IList enumerable = view.ItemsSource as IList ?? view.ItemsSource.Cast<object>().ToArray();
-
-            if (view == null)
+            // Clear added items if no items exists anymore
+            if (!(enumerable?.Count > 0))
             {
+                if (Content is Grid grid)
+                {
+                    grid.Children.Clear();
+                }
+                else if (Content is StackLayout stack)
+                {
+                    stack.Children.Clear();
+                }
+
                 return;
             }
 
-            if (enumerable?.Count <= 0 && view.Content is StackLayout stacken)
+            View content;
+
+            if (NumberOfColumns > 0) // Grid view
             {
-                stacken.Children.Clear();
-                return;
+                content = new Grid()
+                {
+                    RowSpacing = this.RowSpacing,
+                    ColumnSpacing = this.ColumnSpacing
+                };
+
+                var grid = content as Grid;
+
+                for (int i = 0; i < NumberOfColumns; i++)
+                {
+                    if (AutoSize)
+                    {
+                        grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    }
+                    else
+                    {
+                        grid.ColumnDefinitions.Add(new ColumnDefinition());
+                    }
+                }
+            }
+            else // Plain list
+            {
+                content = new StackLayout
+                {
+                    Orientation = ItemsOrientation,
+                    Spacing = this.Spacing
+                };
             }
 
-            StackLayout stack = new StackLayout()
-            {
-                VerticalOptions = LayoutOptions.Start,
-                Orientation = view.StackOrientation
-            };
+            int indexCol = 0;
+            int indexRow = 0;
+            int index = 0;
 
             foreach (var item in enumerable)
             {
-                var content = view.ItemTemplate.CreateContent() as View;
-                content.BindingContext = item;
-
-                TapGestureRecognizer tap = new TapGestureRecognizer
+                // Create the item view from template or template selector
+                View itemContent;
+                if (ItemTemplate is DataTemplateSelector selector)
                 {
-                    Command = view.TapGestureCommand,
+                    var template = selector.SelectTemplate(item, this);
+                    itemContent = template.CreateContent() as View;
+                }
+                else
+                {
+                    itemContent = ItemTemplate.CreateContent() as View;
+                }
+
+                // Bind item view to item
+                itemContent.BindingContext = item;
+
+                // Add tap gesture
+                itemContent.GestureRecognizers.Add(new TapGestureRecognizer
+                {
+                    Command = this.TapGestureCommand,
                     CommandParameter = item
-                };
+                });
 
-                content.GestureRecognizers.Add(tap);
+                if (content is Grid grid)
+                {
+                    Grid.SetColumn(itemContent, indexCol);
+                    Grid.SetRow(itemContent, indexRow);
 
-                stack.Children.Add(content);
+                    grid.Children.Add(itemContent);
+
+                    if (index == enumerable.Count)
+                    {
+                        continue;
+                    }
+
+                    if (indexCol == (NumberOfColumns - 1))
+                    {
+                        indexCol = 0;
+                        indexRow++;
+                        grid.RowDefinitions.Add(new RowDefinition());
+                    }
+                    else
+                    {
+                        indexCol++;
+                    }
+                }
+                else if (content is StackLayout stack)
+                {
+                    if (HasStripedBackground)
+                    {
+                        itemContent.BackgroundColor = index % 2 == 0 ? ItemsBackground : ItemsBackgroundAlternative;
+                    }
+
+                    stack.Children.Add(itemContent);
+                }
+
+                index++;
             }
 
-            view.Content = stack;
+            this.Content = content;
+        }
+
+        private void AddCollectionChanged(IEnumerable list)
+        {
+            if (list is INotifyCollectionChanged collection)
+            {
+                collection.CollectionChanged -= ItemsSourceCollectionChanged;
+                collection.CollectionChanged += ItemsSourceCollectionChanged;
+            }
+        }
+
+        private void ItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Init();
+        }
+
+        private static void HandleBindingPropertyChangedDelegate(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (!(bindable is ItemsControl view))
+            {
+                return;
+            }
+
+            view.Init();
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -106,6 +208,16 @@ namespace Architecture.Controls
             }
         }
 
-        public StackOrientation StackOrientation { get; set; }
+        public double Spacing { get; set; }
+        public StackOrientation ItemsOrientation { get; set; }
+        public bool HasStripedBackground { get; set; }
+        public Color ItemsBackground { get; set; } = Color.White;
+        public Color ItemsBackgroundAlternative { get; set; } = App.Current.LightGrayColor();
+        
+        // For grid layout //
+        public int NumberOfColumns { get; set; }
+        public bool AutoSize { get; set; }
+        public double RowSpacing { get; set; }
+        public double ColumnSpacing { get; set; }
     }
 }

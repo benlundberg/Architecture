@@ -14,13 +14,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!-- Segment control items -->
-        <Frame x:Name="segmentControlFrame" Padding="0">
-            <Grid x:Name="segmentControlItems" ColumnSpacing="0">
-            </Grid>
-        </Frame>
+        
+        <!-- Segment items -->
+        <Grid x:Name="SegmentItems" />
 
         <!-- Content view -->
         <ContentView Grid.Row="1" Content="{Binding MainContent, Source={x:Reference rootSegmentView}}" />
+    
     </Grid>
 </ContentView>

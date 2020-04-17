@@ -62,8 +62,6 @@
 
     <Grid>
         <controls:SegmentView 
-            SegmentTextColor="{StaticResource GrayDark}"
-            SelectedTextColor="Black"
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
             Margin="{StaticResource MainPadding}">
             <controls:SegmentView.ItemsSource>

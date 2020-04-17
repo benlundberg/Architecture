@@ -1,5 +1,4 @@
 ﻿using SkiaSharp;
-using Xamarin.Forms;
 
 namespace Architecture.Controls.Charts
 {
@@ -40,7 +39,12 @@ namespace Architecture.Controls.Charts
 
         public static float GetItemWidth(this SKRect rect, int maxItems)
         {
-            return rect.Width / (maxItems - 1);
+            return rect.Width / (maxItems == 1 ? maxItems : (maxItems - 1));
+        }
+
+        public static float GetMaximumValueFromChart(this SKRect chart, float maxValue)
+        {
+            return chart.Height * (maxValue / chart.Height);
         }
     }
 }

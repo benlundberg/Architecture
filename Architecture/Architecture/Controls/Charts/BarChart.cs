@@ -13,11 +13,11 @@ namespace Architecture.Controls.Charts
 
             EnableTouchEvents = true;
 
-            this.PaintSurface += LineChart_PaintSurface;
-            this.Touch += LineChart_Touch;
+            this.PaintSurface += BarChart_PaintSurface;
+            this.Touch += BarChart_Touch;
         }
 
-        private void LineChart_Touch(object sender, SKTouchEventArgs e)
+        private void BarChart_Touch(object sender, SKTouchEventArgs e)
         {
             if (!(sender is SKCanvasView view))
             {
@@ -31,7 +31,7 @@ namespace Architecture.Controls.Charts
             view.InvalidateSurface();
         }
 
-        private void LineChart_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void BarChart_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             if (ChartEntries?.Any() != true)
             {
@@ -53,6 +53,8 @@ namespace Architecture.Controls.Charts
             {
                 CalculateChartValuesXPoints(chart);
 
+                DrawHorizontalLabels(canvas, frame, chart);
+
                 foreach (var entry in ChartEntries.Where(x => x.IsVisible).OrderByDescending(x => x.Items.Count()))
                 {
                     CalculatePoints(entry.Items, frame, chart);
@@ -60,113 +62,109 @@ namespace Architecture.Controls.Charts
 
                 DrawBars(canvas, frame, chart);
             }
-
-            DrawHorizontalLabels(canvas, frame, chart);
         }
 
         private void DrawBars(SKCanvas canvas, SKRect frame, SKRect chart)
         {
-            var itemWidth = (MaxItems >= 12 ? chart.GetItemWidth(MaxItems) : chart.GetItemWidth(12)) / 2;
-            var count = ChartEntries.Count(x => x.IsVisible);
-
-            // Regular bar width
-            var barWidth = (itemWidth / count) - 10;
+            var itemWidth = (chart.Width / (MaxItems < 10 ? 10 : MaxItems)) * 0.8f;
 
             // Selected bar width
-            var selectedValueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), chart, chart.GetItemWidth(MaxItems), false);
+            var selectedValueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), chart, chart.GetItemWidth(MaxItems), false, BlockStartIndex, BlockCount);
             var selectedTags = selectedValueItems?.Select(x => x.ChartValueItem.Tag);
 
-            int index = 0;
-
-            foreach (var item in ChartEntries.Where(x => x.IsVisible))
+            // Invoke command with selected items
+            SelectedValuesCommand?.Execute(new SelectedChartValueItemArgs
             {
-                foreach (var valueItem in item.Items.Where(x => selectedTags?.Contains(x.Tag) != true))
-                {
-                    // Draw not selected bars //
+                ChartValueItems = selectedValueItems,
+                TouchedPoint = new SKPoint(chart.GetInsideXValue(TouchedPoint.X), TouchedPoint.Y)
+            });
 
-                    canvas.DrawBar(
-                        valueItem.Point.X,
-                        valueItem.Point.Y,
-                        chart.Bottom,
-                        barWidth,
-                        BarMargin,
-                        count,
-                        index,
-                        IsSliderVisible ? item.Color.ToSKColor().AsTransparency() : item.Color.ToSKColor(),
-                        item.UseDashedEffect);
+            using (var paint = new SKPaint
+            {
+                IsAntialias = true,
+                Style = SKPaintStyle.StrokeAndFill,
+                StrokeCap = SKStrokeCap.Butt,
+            })
+            {
+                var groupedItems = ChartEntries.Where(x => x.IsVisible).SelectMany(x => x.Items).GroupBy(x => x.Tag.ToString()).OrderBy(x => x.Key);
+
+                if (BlockCount > 0)
+                {
+                    groupedItems = groupedItems.Skip(BlockStartIndex).Take(BlockCount).OrderBy(x => x.Key);
                 }
 
-                index++;
-            }
-
-            if (!IsSliderVisible)
-            {
-                return;
-            }
-
-            count = selectedValueItems?.Count() ?? 1;
-            barWidth = (itemWidth / selectedValueItems?.Count() ?? 1) + 10;
-
-            index = 0;
-
-            foreach (var item in ChartEntries.Where(x => x.IsVisible))
-            {
-                var valueItems = item.Items.Where(x => selectedTags?.Contains(x.Tag) == true);
-
-                if (valueItems?.Any() != true)
+                foreach (var groupedItem in groupedItems)
                 {
-                    continue;
+                    int index = 0;
+
+                    if (IsSliderVisible && selectedTags?.Contains(groupedItem.Key) == true)
+                    {
+                        var item = groupedItem.OrderByDescending(x => x.Value).First();
+
+                        paint.Color = SliderColor.ToSKColor();
+                        paint.PathEffect = SKPathEffect.CreateCorner(SliderCornerRadius);
+
+                        var bounds = new SKRect(
+                            item.Point.X - (itemWidth * .8f),
+                            item.Point.Y - (itemWidth * .8f),
+                            item.Point.X + (itemWidth * .8f),
+                            chart.Bottom + (HorizontalTextSize * 2));
+
+                        paint.StrokeWidth = 0;
+
+                        canvas.DrawRect(bounds, paint);
+                    }
+
+                    foreach (var item in groupedItem)
+                    {
+                        var parent = ChartEntries.FirstOrDefault(x => x.Items.Contains(item));
+
+                        var barWidth = itemWidth / groupedItem.Count();
+
+                        float left = frame.GetInsideXValue((item.Point.X - itemWidth) + (barWidth * index) + (itemWidth / 2));
+
+                        float right = frame.GetInsideXValue(left + barWidth);
+
+                        var bounds = new SKRect(
+                            left + BarMargin,
+                            item.Point.Y,
+                            right - BarMargin,
+                            chart.Bottom);
+
+                        paint.StrokeWidth = 0;
+                        
+                        if (parent.UseDashedEffect)
+                        {
+                            paint.Color = parent.Color.ToSKColor().AsTransparency();
+                            paint.PathEffect = SKPathEffect.CreateCorner(BarCornerRadius);
+
+                            canvas.DrawRect(bounds, paint);
+
+                            paint.Color = parent.Color.ToSKColor();
+                            paint.PathEffect = SKPathEffect.CreateDash(new float[] { StrokeDashFirst, StrokeDashSecond }, StrokeDashPhase);
+                            
+                            paint.StrokeWidth = bounds.Width;
+
+                            canvas.DrawLine(bounds.MidX, bounds.Bottom, bounds.MidX, bounds.Top, paint);
+                        }
+                        else
+                        {
+                            paint.Color = parent.Color.ToSKColor(); 
+                            paint.PathEffect = SKPathEffect.CreateCorner(BarCornerRadius);
+                            //canvas.DrawLine(bounds.MidX, bounds.Bottom, bounds.MidX, bounds.Top, paint);
+                            canvas.DrawRect(bounds, paint);
+                        }
+
+                        index++;
+                    }
                 }
-
-                foreach (var valueItem in valueItems)
-                {
-                    canvas.DrawBar(
-                        valueItem.Point.X,
-                        valueItem.Point.Y,
-                        chart.Bottom,
-                        barWidth,
-                        BarMargin,
-                        count,
-                        index,
-                        item.Color.ToSKColor(),
-                        item.UseDashedEffect);
-
-                    //string text = Math.Round(double.Parse(valueItem.Value.ToString()), 0, MidpointRounding.AwayFromZero).ToString() + " " + this.VerticalUnit;
-
-                    //canvas.DrawSliderValue(
-                    //    text,
-                    //    frame.GetInsideXValue(valueItem.Point.X),
-                    //    SliderDetailTextSize,
-                    //    SKColors.White,
-                    //    item.Color.ToSKColor(),
-                    //    SliderDetailPadding,
-                    //    SliderDetailMargin,
-                    //    MaxValue + " " + this.VerticalUnit,
-                    //    selectedValueItems.Count,
-                    //    index,
-                    //    SliderDetailOrientation,
-                    //    frame,
-                    //    item.UseDashedEffect);
-                }
-
-                index++;
             }
 
-
-            float hintX = selectedValueItems?.FirstOrDefault()?.ChartValueItem?.Point.X ?? 0;
-            float hintY = selectedValueItems?.OrderByDescending(x => x.ChartValueItem.Point.Y)?.FirstOrDefault()?.ChartValueItem?.Point.Y ?? 0;
-
-            if (hintX != 0 && hintY != 0)
-            {
-                DrawSliderHint(
-                    canvas,
-                    hintX,
-                    hintY + ((frame.Bottom - hintY) / 2),
-                    (barWidth * count),
-                    frame);
-            }
+            DrawHorizontalLabel(selectedValueItems?.FirstOrDefault()?.ChartValueItem, canvas, frame, chart);
         }
 
         public int BarMargin { get; set; }
+        public float BarCornerRadius { get; set; } = 10f;
+        public float SliderCornerRadius { get; set; } = 14f;
     }
 }

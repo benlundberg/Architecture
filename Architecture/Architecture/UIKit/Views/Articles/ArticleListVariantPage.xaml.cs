@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace Architecture
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ArticleVariantListPage : ContentPage
+    public partial class ArticleListVariantPage : ContentPage
     {
-        public ArticleVariantListPage()
+        public ArticleListVariantPage()
         {
             InitializeComponent();
         }

@@ -86,12 +86,14 @@
                     FontSize="Body"
                     Padding="{StaticResource MainPadding}"
                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                <controls:HorizontalView 
+                <controls:ItemsControl
                     Margin="20, 0"
+                    ItemsOrientation="Horizontal"
+                    Spacing="8"
                     ItemsSource="{Binding Items}">
-                    <controls:HorizontalView.ItemTemplate>
+                    <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Margin="8, 0">
+                            <StackLayout>
                                 <ff:CachedImage Source="http://clarityapplication.com/dev/images/13.jpg">
                                     <ff:CachedImage.Transformations>
                                         <transformation:CircleTransformation />
@@ -100,22 +102,22 @@
                                 <Label FontSize="Small" Text="Joan Doe" HorizontalTextAlignment="Center" />
                             </StackLayout>
                         </DataTemplate>
-                    </controls:HorizontalView.ItemTemplate>
-                </controls:HorizontalView>
-                <controls:GridViewControl 
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+                <controls:ItemsControl 
                     Margin="20"
                     NumberOfColumns="3"
                     ColumnSpacing="10"
                     RowSpacing="10"
                     ItemsSource="{Binding Items}">
-                    <controls:GridViewControl.ItemTemplate>
+                    <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <ff:CachedImage 
                                 Aspect="AspectFill"
                                 Source="http://clarityapplication.com/dev/images/5.jpg" />
                         </DataTemplate>
-                    </controls:GridViewControl.ItemTemplate>
-                </controls:GridViewControl>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
             </StackLayout>
         </Grid>
     </ScrollView>

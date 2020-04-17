@@ -23,11 +23,17 @@ namespace Architecture.Controls
         {
             var val = ReMap(e.ScrollY, 0, ScrollMaxLimit, 1, 0);
 
-            this.HeaderContent.Scale = val;
+            if (!OnlyFadeOut)
+            {
+                this.HeaderContent.Scale = val;
+            }
+
             this.HeaderContent.Opacity = val;
         }
 
         // TODO: Find an automat value for this
         private int ScrollMaxLimit = 300;
+
+        public bool OnlyFadeOut { get; set; }
     }
 }

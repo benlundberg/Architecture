@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class TableControl : HorizontalView
+    public class TableControl : ScrollView
     {
         public TableControl()
         {
+            this.Orientation = ScrollOrientation.Both;
         }
 
         private static void TableControlSourceChanged(BindableObject bindableObject, object oldValue, object newValue)

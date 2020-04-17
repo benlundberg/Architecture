@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Architecture.ArticleBrowserPage"
+             x:Class="Architecture.ArticleBrowserVariantPage"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
@@ -16,36 +16,32 @@
         <ResourceDictionary>
 
             <DataTemplate x:Key="arcticleItem" x:DataType="local:ArticleItemViewModel">
-                <Grid>
-                    <ff:CachedImage
-                        Source="{Binding ImageSource}" 
-                        WidthRequest="150"
-                        HeightRequest="200"
-                        Aspect="AspectFill" />
-                    <Grid VerticalOptions="End">
-                        <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
-                        <StackLayout Margin="{StaticResource ControlPadding}" Spacing="0">
-                            <Label
-                                FontSize="Small"
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                Style="{StaticResource BoldLabel}"
-                                Text="{Binding Title}" />
-                            <Label 
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                FontSize="Micro">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <FormattedString.Spans>
-                                            <Span Text="{Binding Category}" />
-                                            <Span Text=" | " />
-                                            <Span Text="{Binding Year}" />
-                                        </FormattedString.Spans>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
-                    </Grid>
-                </Grid>
+                <StackLayout>
+                    <Frame 
+                        Padding="0"
+                        CornerRadius="10"
+                        HasShadow="False">
+                        <ff:CachedImage
+                            Source="{Binding ImageSource}" 
+                            WidthRequest="125"
+                            HeightRequest="150"
+                            Aspect="AspectFill" />
+                    </Frame>
+                    <Label
+                        FontSize="Small"
+                        Text="{Binding Title}" />
+                    <Label FontSize="Micro">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="{Binding Category}" />
+                                    <Span Text=" | " />
+                                    <Span Text="{Binding Year}" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
             </DataTemplate>
 
         </ResourceDictionary>
@@ -56,48 +52,50 @@
     </ContentPage.BindingContext>
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Articles Browser" />
+        <controls:PageTitleView Text="Articles Browser Variant" />
     </NavigationPage.TitleView>
 
     <ScrollView>
-        <StackLayout Spacing="{StaticResource MainSpacing}">
+        <StackLayout Spacing="{StaticResource MainSpacing}" Padding="{StaticResource MainPadding}">
+            <Label
+                Text="Discover"
+                FontSize="Large" />
             <CarouselView
                 ItemsSource="{Binding NatureArticles}" 
                 IndicatorView="indicatorView"
-                HeightRequest="250">
+                HeightRequest="200">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout 
-                        SnapPointsType="MandatorySingle"
+                        SnapPointsType="Mandatory"
                         SnapPointsAlignment="Center"
-                        Orientation="Horizontal" />
+                        Orientation="Horizontal"
+                        ItemSpacing="10" />
                 </CarouselView.ItemsLayout>
                 <CarouselView.ItemTemplate>
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Grid>
+                        <Frame 
+                            Padding="0"
+                            CornerRadius="10"
+                            HasShadow="False">
                             <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
-                            <Grid VerticalOptions="Center" HorizontalOptions="Start">
-                                <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
-                                <StackLayout Margin="{StaticResource XLargePadding}" Spacing="0">
-                                    <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Title}" FontSize="Medium" />
-                                    <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Category}" FontSize="Default" />
-                                </StackLayout>
-                            </Grid>
-                            <Grid.GestureRecognizers>
+                            <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference articleBrowserRoot}}" CommandParameter="{Binding}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
+                            </Frame.GestureRecognizers>
+                        </Frame>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <IndicatorView
                 x:Name="indicatorView"
-                IndicatorsShape="Circle"
+                IndicatorsShape="Square"
                 IndicatorColor="{StaticResource Gray}"
                 SelectedIndicatorColor="{StaticResource DarkPrimaryColor}"
                 HorizontalOptions="Center"
                 IndicatorSize="8" />
+            <Label
+                Text="Top"
+                FontSize="Large" />
             <CollectionView
-                Margin="{StaticResource MainPadding}"
                 ItemsSource="{Binding SportArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
@@ -111,8 +109,10 @@
                         Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
+            <Label
+                Text="More"
+                FontSize="Large" />
             <CollectionView
-                Margin="{StaticResource MainPadding}"
                 ItemsSource="{Binding AnimalArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"

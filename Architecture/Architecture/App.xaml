@@ -8,25 +8,27 @@
         <ResourceDictionary>
 
             <!-- #region Colors -->
+
+            <Color x:Key="PrimaryColor">#F34B4B</Color>
+            <Color x:Key="DarkPrimaryColor">#DD4242</Color>
+            <Color x:Key="Accent">#0094FF</Color>
+            <Color x:Key="DarkAccent">#027ED8</Color>
             
-            <Color x:Key="PrimaryColor">#FFF</Color>
-            <Color x:Key="DarkPrimaryColor">#373737</Color>
-            <Color x:Key="Accent">#3D9DF6</Color>
-            <Color x:Key="DarkAccent">#373737</Color>
             <Color x:Key="GrayDark">#AAB2BD</Color>
             <Color x:Key="GrayMedium">#CCD1D9</Color>
             <Color x:Key="Gray">#E6E9ED</Color>
             <Color x:Key="GrayLight">#F5F7FA</Color>
 
-            <Color x:Key="ToolbarTextColor">#000</Color>
+            <Color x:Key="ToolbarTextColor">#FFF</Color>
+            
             <Color x:Key="TextColor">#000</Color>
             <Color x:Key="SecondaryTextColor">#FFF</Color>
 
-            <Color x:Key="PageBackgroundColor">#FFF</Color>
-            <Color x:Key="BarBackgroundColor">#FFF</Color>
-            <Color x:Key="ButtonBackgroundColor">#FFF</Color>
-            <Color x:Key="ButtonTextColor">#000</Color>
-            <Color x:Key="ButtonFrameColor">#000</Color>
+            <Color x:Key="PageBackgroundColor">#F5F7FA</Color>
+            <Color x:Key="BarBackgroundColor">#F34B4B</Color>
+            <Color x:Key="ButtonBackgroundColor">#F34B4B</Color>
+            <Color x:Key="ButtonTextColor">#FFF</Color>
+            <Color x:Key="ButtonFrameColor">#F34B4B</Color>
 
             <!--#endregion-->
             
@@ -69,18 +71,6 @@
                 <On Platform="UWP" Value="/Assets/FontAwesome5Regular.otf#Font Awesome 5 Free" />
             </OnPlatform>
 
-            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
-                <On Platform="Android" Value="Montserrat-Bold.ttf#Montserrat" />
-                <On Platform="UWP" Value="/Assets/Montserrat-Bold.ttf#Montserrat" />
-                <On Platform="iOS" Value="Montserrat-Bold" />
-            </OnPlatform>
-
-            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
-                <On Platform="Android" Value="Montserrat-Regular.ttf#Montserrat" />
-                <On Platform="UWP" Value="/Assets/Montserrat-Regular.ttf#Montserrat" />
-                <On Platform="iOS" Value="Montserrat-Regular" />
-            </OnPlatform>
-
             <!--#endregion-->
             
             <!--#region Margin and Padding -->
@@ -121,27 +111,19 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
             </Style>
 
-            <Style TargetType="ContentView" ApplyToDerivedTypes="True">
-                <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}" />
-            </Style>
-
             <Style TargetType="Label" ApplyToDerivedTypes="True">
                 <Setter Property="TextColor" Value="{StaticResource TextColor}" />
-                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
             </Style>
 
             <Style x:Key="BoldLabel" TargetType="Label">
-                <Setter Property="FontFamily" Value="{StaticResource BoldFont}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
             
             <Style TargetType="Entry" ApplyToDerivedTypes="True">
                 <Setter Property="FontSize" Value="Default" />
-                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
             </Style>
 
             <Style TargetType="Button" ApplyToDerivedTypes="True">
-                <Setter Property="FontFamily" Value="{StaticResource NormalFont}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
                 <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
                 <Setter Property="Padding" Value="10" />

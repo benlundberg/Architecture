@@ -22,17 +22,26 @@ namespace Architecture.Controls.Charts
             }
             else if (Device.RuntimePlatform == Device.iOS)
             {
-                path = "Montserrat-Regular";
+                path = "Montserrat-Regular.ttf";
             }
 
             if (string.IsNullOrEmpty(path))
             {
-                return SKTypeface.Default;
+                fontFamily = SKTypeface.Default;
+                return fontFamily;
             }
 
             var stream = ComponentContainer.Current.Resolve<ILocalFileSystemService>().GetStreamFromAssets(path);
 
+            if (stream == null)
+            {
+                fontFamily = SKTypeface.Default;
+                return fontFamily;
+            }
+
             fontFamily = SKTypeface.FromStream(stream);
+
+            stream.Close();
 
             return fontFamily;
         }

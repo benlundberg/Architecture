@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Architecture.ArticleVariantListPage"
+             x:Class="Architecture.ArticleListVariantPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:local="clr-namespace:Architecture"
@@ -16,7 +16,7 @@
     </ContentPage.BindingContext>
     
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Article List" />
+        <controls:PageTitleView Text="Article List Variant" />
     </NavigationPage.TitleView>
 
     <ListView
@@ -34,7 +34,7 @@
                                 HeightRequest="200"
                                 Aspect="AspectFill"
                                 Source="{Binding ImageSource}" />
-                            <Grid BackgroundColor="Black" Opacity=".4" />
+                            <Grid BackgroundColor="Black" Opacity=".5" />
                             <Grid 
                                 Margin="16, 10"
                                 RowSpacing="6"

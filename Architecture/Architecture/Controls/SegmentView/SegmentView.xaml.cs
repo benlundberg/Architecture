@@ -13,26 +13,17 @@ namespace Architecture.Controls
         public SegmentView()
         {
             InitializeComponent();
+
             ItemsSource = new ObservableCollection<SegmentControlItem>();
         }
 
-        private void InitView()
+        private void Init()
         {
-            if (UserBorder)
-            {
-                segmentControlFrame.Margin = new Thickness(20);
-                segmentControlFrame.CornerRadius = 10;
-            }
-            else
-            {
-                segmentControlFrame.BackgroundColor = Color.Transparent;
-                segmentControlFrame.BorderColor = Color.Transparent;
-                segmentControlFrame.CornerRadius = 0;
-                segmentControlFrame.HasShadow = false;
-            }
-
-            segmentControlItems.Children.Clear();
-            segmentControlItems.ColumnDefinitions.Clear();
+            SegmentItems.Children.Clear();
+            SegmentItems.RowDefinitions.Clear();
+            SegmentItems.ColumnDefinitions.Clear();
+            SegmentItems.ColumnSpacing = this.Spacing;
+            SegmentItems.RowSpacing = this.Spacing;
 
             if (ItemsSource?.Any() != true)
             {
@@ -41,137 +32,78 @@ namespace Architecture.Controls
 
             for (int i = 0; i < ItemsSource.Count; i++)
             {
-                if (UseAutoSize)
+                var item = ItemsSource[i];
+
+                // Check if selected
+                item.IsSelected = item.IsSelected || (SelectedTag != null && SelectedTag?.ToString() == item.Tag?.ToString());
+
+                var view = GetView(item, i);
+
+                // If selected we display content
+                if (item.IsSelected)
                 {
-                    segmentControlItems.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Auto });
+                    this.MainContent = item.Content;
+                }
+
+                if (TitleOrientation == StackOrientation.Horizontal)
+                {
+                    SegmentItems.ColumnDefinitions.Add(new ColumnDefinition() { Width = HorizontalTitleLayout.Alignment == LayoutAlignment.Fill ? GridLength.Star : GridLength.Auto });
                 }
                 else
                 {
-                    segmentControlItems.ColumnDefinitions.Add(new ColumnDefinition());
+                    SegmentItems.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
                 }
 
-                var item = ItemsSource[i];
-
-                var view = GetView(item);
-
-                Grid.SetColumn(view, i);
-
-                segmentControlItems.Children.Add(view);
+                SegmentItems.Children.Add(view);
             }
         }
 
-        private View GetView(SegmentControlItem item)
+        private View GetView(SegmentControlItem item, int index)
         {
-            // Check if item should be selected
-            var isSelected =
-                item.IsSelected ||
-                (SelectedTag != null && SelectedTag?.ToString() == item.Tag?.ToString());
+            // Get view
+            var view = item.IsSelected ? SelectedTitleTemplate.CreateContent() as View : TitleTemplate.CreateContent() as View;
 
-            Grid view = new Grid()
-            {
-                Padding = new Thickness(1)
-            };
+            view.BindingContext = item;
 
-            if (UserBorder)
-            {
-                view.Children.Add(new BoxView
-                {
-                    BackgroundColor = isSelected ? SelectedBackgroundColor : SegmentBackgroundColor
-                });
-            }
-
-            var label = new Label
-            {
-                Text = item.Text,
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = TextAlignment,
-                FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
-                TextColor = isSelected ? SelectedTextColor : SegmentTextColor,
-                Margin = TextMargin,
-                InputTransparent = true
-            };
-
-            if (!UserBorder)
-            {
-                view.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-                view.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-
-                BoxView boxView = new BoxView
-                {
-                    HeightRequest = 4,
-                    BackgroundColor = Color.Transparent,
-                    HorizontalOptions = LayoutOptions.Fill,
-                    Color = isSelected ? SelectedBackgroundColor : Color.Transparent
-                };
-
-                Grid.SetRow(boxView, 1);
-                Grid.SetRow(label, 0);
-
-                view.Children.Add(boxView);
-            }
-
-            view.Children.Add(label);
-
-            item.IsSelected = isSelected;
-
-            if (item.IsSelected)
-            {
-                this.MainContent = item.Content;
-            }
-
+            // Adding tap gesture
             view.GestureRecognizers.Add(new TapGestureRecognizer()
             {
                 Command = TapGestureCommand,
                 CommandParameter = item
             });
 
+            if (TitleOrientation == StackOrientation.Horizontal)
+            {
+                Grid.SetColumn(view, index);
+            }
+            else
+            {
+                Grid.SetRow(view, index);
+            }
+
             return view;
         }
 
         private void UpdateSelectedSegmentLayout(SegmentControlItem item)
         {
-            // Unmark old value
+            // Get old item
             var oldItem = ItemsSource.FirstOrDefault(x => x.IsSelected);
 
-            if (oldItem != null)
+            var selectedIndex = ItemsSource.IndexOf(item);
+            var unselectIndex = oldItem == null ? -1 : ItemsSource.IndexOf(oldItem);
+
+            if (unselectIndex != -1)
             {
                 oldItem.IsSelected = false;
 
-                Grid oldSelectedView = (Grid)segmentControlItems.Children.FirstOrDefault(x => (x as Grid)?.Children?.Any(c => (c as Label)?.Text == oldItem.Text) == true);
-
-                if (oldSelectedView != null)
-                {
-                    if (UserBorder)
-                    {
-                        oldSelectedView.Children[0].BackgroundColor = SegmentBackgroundColor;
-                        (oldSelectedView.Children[1] as Label).TextColor = SegmentTextColor;
-                    }
-                    else
-                    {
-                        (oldSelectedView.Children[0] as BoxView).Color = Color.Transparent;
-                        (oldSelectedView.Children[1] as Label).TextColor = SegmentTextColor;
-                    }
-                }
+                SegmentItems.Children.RemoveAt(unselectIndex);
+                SegmentItems.Children.Insert(unselectIndex, GetView(oldItem, unselectIndex));
             }
 
-            // Mark new value
             item.IsSelected = true;
 
-            Grid newSelectedView = (Grid)segmentControlItems.Children.FirstOrDefault(x => (x as Grid)?.Children?.Any(c => (c as Label)?.Text == item.Text) == true);
-
-            if (newSelectedView != null)
-            {
-                if (UserBorder)
-                {
-                    newSelectedView.Children[0].BackgroundColor = SelectedBackgroundColor;
-                    (newSelectedView.Children[1] as Label).TextColor = SelectedTextColor;
-                }
-                else
-                {
-                    (newSelectedView.Children[0] as BoxView).Color = SelectedBackgroundColor;
-                    (newSelectedView.Children[1] as Label).TextColor = SelectedTextColor;
-                }
-            }
+            SegmentItems.Children.RemoveAt(selectedIndex);
+            SegmentItems.Children.Insert(selectedIndex, GetView(item, selectedIndex));
 
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -203,12 +135,12 @@ namespace Architecture.Controls
 
             newItems.CollectionChanged += view.NewItems_CollectionChanged;
 
-            view.InitView();
+            view.Init();
         }
 
         private void NewItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            InitView();
+            Init();
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -288,15 +220,13 @@ namespace Architecture.Controls
 
         public View MainContent { get; set; }
         public SegmentControlItem SelectedSegment { get; private set; }
-        public Color SegmentTextColor { get; set; } = Application.Current.PrimaryColor();
-        public Color SegmentBackgroundColor { get; set; } = Color.White;
-        public Color SelectedTextColor { get; set; } = Color.White;
-        public Color SelectedBackgroundColor { get; set; } = Application.Current.PrimaryColor();
-        public NamedSize FontSize { get; set; } = NamedSize.Medium;
-        public LayoutOptions TextAlignment { get; set; } = LayoutOptions.Center;
-        public Thickness TextMargin { get; set; } = new Thickness(8, 8, 8, 8);
-        public bool UserBorder { get; set; } = true;
-        public bool UseAutoSize { get; set; }
+
+        public DataTemplate SelectedTitleTemplate { get; set; }
+        public DataTemplate TitleTemplate { get; set; }
+
+        public StackOrientation TitleOrientation { get; set; } = StackOrientation.Horizontal;
+        public LayoutOptions HorizontalTitleLayout { get; set; } = LayoutOptions.Center;
+        public double Spacing { get; set; }
     }
 
     public class SegmentControlItem

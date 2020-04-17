@@ -1,5 +1,4 @@
-﻿using Architecture.Core;
-using SkiaSharp;
+﻿using SkiaSharp;
 using System;
 using Xamarin.Forms;
 
@@ -13,7 +12,7 @@ namespace Architecture.Controls.Charts
         public static float GetVerticalAlignment(this float yPosition, float textSize, TextAlignment textAlignment = TextAlignment.Start)
         {
             float y;
-            
+
             using (var paint = new SKPaint
             {
                 TextSize = textSize
@@ -21,11 +20,11 @@ namespace Architecture.Controls.Charts
             {
                 if (textAlignment == TextAlignment.Center)
                 {
-                    y = yPosition + (textSize / 4);
+                    y = yPosition + (textSize / 2);
                 }
                 else if (textAlignment == TextAlignment.End)
                 {
-                    y = yPosition + (textSize / 2);
+                    y = yPosition + textSize;
                 }
                 else
                 {

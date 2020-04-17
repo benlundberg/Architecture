@@ -19,7 +19,7 @@
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <controls:DashboardMenu 
+        <controls:TilesMenu 
             Margin="10"
             NumberOfColumns="2"
             ItemsSource="{Binding DashboardMenuItems}"/>

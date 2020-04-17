@@ -20,12 +20,12 @@
     </NavigationPage.TitleView>
 
     <ScrollView Padding="{StaticResource MainPadding}">
-        <controls:GridViewControl 
+        <controls:ItemsControl 
             NumberOfColumns="2"
             ColumnSpacing="20"
             RowSpacing="20"
             ItemsSource="{Binding DashboardItems}">
-            <controls:GridViewControl.ItemTemplate>
+            <controls:ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="local:DashboardItemViewModel">
                     <StackLayout>
                         <ff:CachedImage 
@@ -38,8 +38,8 @@
                             HorizontalOptions="Center" />
                     </StackLayout>
                 </DataTemplate>
-            </controls:GridViewControl.ItemTemplate>
-        </controls:GridViewControl>
+            </controls:ItemsControl.ItemTemplate>
+        </controls:ItemsControl>
     </ScrollView>
 
 </ContentPage>

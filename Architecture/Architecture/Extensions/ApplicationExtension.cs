@@ -87,14 +87,14 @@ namespace Architecture
             return (OnPlatform<string>)application.Resources["FontAwesomeRegular"];
         }
 
-        //public static string NormalFont(this Application application)
-        //{
-        //    return (OnPlatform<string>)application.Resources["NormalFont"];
-        //}
-        
-        //public static string BoldFont(this Application application)
-        //{
-        //    return (OnPlatform<string>)application.Resources["BoldFont"];
-        //}
+        public static string NormalFont(this Application application)
+        {
+            return (OnPlatform<string>)application.Resources["NormalFont"];
+        }
+
+        public static string BoldFont(this Application application)
+        {
+            return (OnPlatform<string>)application.Resources["BoldFont"];
+        }
     }
 }

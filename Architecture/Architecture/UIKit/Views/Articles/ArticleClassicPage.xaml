@@ -42,10 +42,12 @@
                         <StackLayout Grid.Column="1">
                             <Label
                                 FontSize="Large"
-                                Text="{Binding Title}" />
+                                Text="{Binding Title}"
+                                TextColor="{StaticResource PrimaryColor}" />
                             <Label
                                 FontSize="Default"
-                                Text="{Binding Year}" />
+                                Text="{Binding Year}"
+                                TextColor="{StaticResource PrimaryColor}" />
                             <Label 
                                 FontSize="Default"
                                 MaxLines="5"

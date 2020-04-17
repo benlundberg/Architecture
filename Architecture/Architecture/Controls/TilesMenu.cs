@@ -6,15 +6,15 @@ using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class DashboardMenu : Grid
+    public class TilesMenu : Grid
     {
-        public DashboardMenu()
+        public TilesMenu()
         {
         }
 
         static void HandleBindingPropertyChangedDelegate(BindableObject bindable, object oldValue, object newValue)
         {
-            if (!(bindable is DashboardMenu view))
+            if (!(bindable is TilesMenu view))
             {
                 return;
             }
@@ -178,21 +178,21 @@ namespace Architecture.Controls
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             propertyName: "ItemsSource",
-            returnType: typeof(ObservableCollection<DashboardItem>),
-            declaringType: typeof(DashboardMenu),
+            returnType: typeof(ObservableCollection<TileItem>),
+            declaringType: typeof(TilesMenu),
             defaultValue: null,
             propertyChanged: HandleBindingPropertyChangedDelegate);
 
-        public ObservableCollection<DashboardItem> ItemsSource
+        public ObservableCollection<TileItem> ItemsSource
         {
-            get { return (ObservableCollection<DashboardItem>)GetValue(ItemsSourceProperty); }
+            get { return (ObservableCollection<TileItem>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
         public static readonly BindableProperty ItemClickCommandProperty = BindableProperty.Create(
             propertyName: "ItemClickCommand",
             returnType: typeof(ICommand),
-            declaringType: typeof(DashboardMenu),
+            declaringType: typeof(TilesMenu),
             defaultValue: null);
 
         public ICommand ItemClickCommand
@@ -220,7 +220,7 @@ namespace Architecture.Controls
         public bool AutoSize { get; set; }
     }
 
-    public class DashboardItem
+    public class TileItem
     {
         public object Tag { get; set; }
         public int Height { get; set; } = 150;

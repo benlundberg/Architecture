@@ -54,8 +54,8 @@
                 Text="{StaticResource CheckIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}" />
             <Label
+                TextColor="{StaticResource PrimaryColor}"
                 Style="{StaticResource BoldLabel}"
-                TextColor="White"
                 HorizontalOptions="End"
                 Text="Forgot password?">
                 <Label.GestureRecognizers>

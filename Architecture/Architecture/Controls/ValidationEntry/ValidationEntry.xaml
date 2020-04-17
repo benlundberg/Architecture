@@ -27,7 +27,6 @@
                 FontFamily="{Binding IconFontFamily, Source={x:Reference rootValidationEntry}}" />
             <Entry
                 Grid.Column="1"
-                BackgroundColor="{Binding BackgroundColor, Source={x:Reference rootValidationEntry}}"
                 Placeholder="{Binding Placeholder, Source={x:Reference rootValidationEntry}}"
                 PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference rootValidationEntry}}"
                 Text="{Binding Text.Value, Source={x:Reference rootValidationEntry}, Mode=TwoWay}"

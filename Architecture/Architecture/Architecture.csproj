@@ -9,19 +9,19 @@
     <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="akavache" Version="6.10.4" />
-    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.2.6">
+    <PackageReference Include="akavache" Version="6.10.6" />
+    <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.2.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
-    <PackageReference Include="Unity" Version="5.11.4" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
+    <PackageReference Include="Unity" Version="5.11.5" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.396" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Architecture.Core\Architecture.Core.csproj" />
@@ -42,8 +42,11 @@
     <Compile Update="Controls\NotifyScrollView\NotifyScrollView.xaml.cs">
       <DependentUpon>NotifyScrollView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Articles\ArticleVariantListPage.xaml.cs">
-      <DependentUpon>ArticleVariantListPage.xaml</DependentUpon>
+    <Compile Update="UIKit\Views\Articles\ArticleBrowserVariantPage.xaml.cs">
+      <DependentUpon>ArticleBrowserVariantPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UIKit\Views\Articles\ArticleListVariantPage.xaml.cs">
+      <DependentUpon>ArticleListVariantPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="UIKit\Views\Dashboard\DashboardImagePage.xaml.cs">
       <DependentUpon>DashboardImagePage.xaml</DependentUpon>

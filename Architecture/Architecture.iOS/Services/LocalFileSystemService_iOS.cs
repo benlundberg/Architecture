@@ -1,4 +1,5 @@
 ﻿using Architecture.Core;
+using Foundation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -172,7 +173,17 @@ namespace Architecture.iOS
 
         public Stream GetStreamFromAssets(string path)
         {
-            throw new NotImplementedException();
+            string fontFile = Path.Combine(NSBundle.MainBundle.BundlePath, path);
+
+            using (var asset = File.OpenRead(fontFile))
+            {
+                var fontStream = new MemoryStream();
+                asset.CopyTo(fontStream);
+                fontStream.Flush();
+                fontStream.Position = 0;
+
+                return fontStream;
+            }
         }
     }
 }

@@ -27,15 +27,15 @@ namespace Architecture
 
         private void LoadDashboardMenuItems()
         {
-            DashboardMenuItems = new ObservableCollection<DashboardItem>
+            DashboardMenuItems = new ObservableCollection<TileItem>
             {
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 1,
                     Title = "Social",
                     ImageBackground = "http://clarityapplication.com/dev/images/9.jpg",
                 },
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 2,
                     Background = App.Current.PrimaryColor(),
@@ -43,14 +43,14 @@ namespace Architecture
                     NotificationText = "2",
                     IconSource = "\uf0c0"
                 },
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 3,
                     Background = App.Current.DarkPrimaryColor(),
                     Title = "Photos",
                     IconSource = "\uf030"
                 },
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 4,
                     Background = App.Current.PrimaryColor(),
@@ -58,14 +58,14 @@ namespace Architecture
                     IconSource = "\uf7a2",
                     NotificationText = "8"
                 },
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 5,
                     Background = App.Current.PrimaryColor(),
                     Title = "Calendar",
                     IconSource = "\uf073",
                 },
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 6,
                     ImageBackground = "http://clarityapplication.com/dev/images/12.jpg",
@@ -76,7 +76,7 @@ namespace Architecture
                         "John - ''Who has ketchup on pizza?!''"
                     },
                 },
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 7,
                     ImageBackground = "http://clarityapplication.com/dev/images/10.jpg",
@@ -86,7 +86,7 @@ namespace Architecture
                         "Joan - ''San Francisco was so awesome!''",
                     },
                 },
-                new DashboardItem
+                new TileItem
                 {
                     Tag = 8,
                     Background = App.Current.PrimaryColor(),
@@ -189,7 +189,7 @@ namespace Architecture
             }
         }
 
-        public ObservableCollection<DashboardItem> DashboardMenuItems { get; set; }
+        public ObservableCollection<TileItem> DashboardMenuItems { get; set; }
         public ObservableCollection<DashboardItemViewModel> DashboardItems { get; private set; }
     }
 

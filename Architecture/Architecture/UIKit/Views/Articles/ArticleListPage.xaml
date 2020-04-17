@@ -32,7 +32,7 @@
                             HeightRequest="250"
                             Aspect="AspectFill"
                             Source="{Binding ImageSource}" />
-                        <Grid BackgroundColor="Black" Opacity=".4" />
+                        <Grid BackgroundColor="Black" Opacity=".5" />
                         <Grid 
                             Margin="16, 10"
                             RowSpacing="6"

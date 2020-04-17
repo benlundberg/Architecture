@@ -17,6 +17,7 @@
                 Padding="{StaticResource XLargePadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
                 <Label
+                    TextColor="{StaticResource PrimaryColor}"
                     Margin="0, 40"
                     VerticalOptions="Center"
                     FontSize="42"
@@ -25,13 +26,14 @@
                     Placeholder="Username"
                     Text="{Binding Username.Value, Mode=TwoWay}" />
                 <Entry 
-                    Placeholder="Password" 
+                    Placeholder="Password"
                     IsPassword="True"
                     Text="{Binding Password.Value, Mode=TwoWay}" />
                 <StackLayout 
                     HorizontalOptions="Start"
                     Orientation="Horizontal">
                     <CheckBox 
+                        Color="{StaticResource PrimaryColor}"
                         IsChecked="{Binding RememberMe, Mode=TwoWay}"
                         WidthRequest="32" />
                     <Label 
@@ -45,6 +47,7 @@
                     FontFamily="{StaticResource FontAwesomeSolid}" />
                 <Label
                     Style="{StaticResource BoldLabel}"
+                    TextColor="{StaticResource PrimaryColor}"
                     FontSize="Default"
                     HorizontalOptions="End"
                     Text="Forgot password?">

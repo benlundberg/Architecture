@@ -38,11 +38,18 @@ namespace Architecture.Core
             implementation = new Lazy<IRepository>(() => repository, isThreadSafe: true);
         }
 
-        public async Task SaveAsync<T>(string id, T model)
+        public async Task SaveAsync<T>(string id, T model, TimeSpan expiration = default)
         {
             try
             {
-                await BlobCache.Secure.InsertObject(id + model.GetType().ToString(), model);
+                if (expiration == default)
+                {
+                    await BlobCache.Secure.InsertObject(id + model.GetType().ToString(), model, expiration);
+                }
+                else
+                {
+                    await BlobCache.Secure.InsertObject(id + model.GetType().ToString(), model);
+                }
             }
             catch (Exception ex)
             {
@@ -55,6 +62,22 @@ namespace Architecture.Core
             try
             {
                 return await BlobCache.Secure.GetObject<T>(id + typeof(T).ToString());
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
+
+            return default;
+        }
+
+        public async Task<T> LoadAsync<T>(Func<T, bool> predExpr)
+        {
+            try
+            {
+                var list = await GetAllAsync<T>();
+
+                return list.FirstOrDefault(predExpr);
             }
             catch (Exception ex)
             {
@@ -88,22 +111,6 @@ namespace Architecture.Core
             }
         }
 
-        public async Task<T> LoadAsync<T>(Func<T, bool> predExpr)
-        {
-            try
-            {
-                var list = await BlobCache.Secure.GetAllObjects<T>();
-                
-                return list.FirstOrDefault(predExpr);
-            }
-            catch (Exception ex)
-            {
-                ex.Print();
-            }
-
-            return default;
-        }
-
         public async Task<IEnumerable<T>> GetAllAsync<T>()
         {
             try
@@ -124,7 +131,7 @@ namespace Architecture.Core
             {
                 var list = await GetAllAsync<T>();
 
-                return list.Where(predExpr);
+                return list?.Where(predExpr);
             }
             catch (Exception ex)
             {

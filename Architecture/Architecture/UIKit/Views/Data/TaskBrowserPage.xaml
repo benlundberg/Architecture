@@ -22,20 +22,13 @@
         <Grid.Effects>
             <local:GradientEffect Direction="ToBottom" />
         </Grid.Effects>
-        <controls:SegmentView
-            UserBorder="False"
-            TextAlignment="Start"
-            UseAutoSize="True"
-            SelectedBackgroundColor="Black"
-            SelectedTextColor="Black"
-            SegmentTextColor="Black"
-            SegmentBackgroundColor="Transparent">
+        <controls:SegmentView>
             <controls:SegmentView.ItemsSource>
-                <controls:SegmentControlItem  Text="Progress" IsSelected="True" Tag="1">
+                <controls:SegmentControlItem  Text="Progress" Tag="1">
                     <controls:SegmentControlItem.Content>
                         <StackLayout Spacing="0">
                             <Frame Padding="4" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
-                                <controls:ItemsControl StackOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
+                                <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
                                     <controls:ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
@@ -46,37 +39,73 @@
                                 </controls:ItemsControl>
                             </Frame>
                             <chart:LineChart
-                                ChartMargin="20"
-                                HeightRequest="300"
+                                ChartMargin="20, 0, 0, 10"
+                                VerticalOptions="FillAndExpand"
                                 VerticalUnit="tasks"
                                 IsSliderVisible="True"
-                                UseSliderHint="True"
+                                SliderWidth="4"
                                 InsideFrame="None"
                                 HorizontalLabelMode="StartEnd"
                                 UseExactValue="False"
                                 LineMode="Spline"
                                 DisplayHorizontalValuesBySlider="True"
                                 SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}"
-                                ChartEntries="{Binding ChartEntries}" />
+                                ChartEntries="{Binding ChartEntries}"
+                                StrokeDashFirst="12"
+                                StrokeDashSecond="28"
+                                StrokeDashPhase="28" />
                         </StackLayout>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
-                <controls:SegmentControlItem Text="Done" Tag="2">
+                <controls:SegmentControlItem Text="Done" Tag="2" IsSelected="True">
                     <controls:SegmentControlItem.Content>
-                        <Frame 
-                            Grid.Row="1" 
-                            CornerRadius="40" 
-                            Margin="0, 40, 0, -40"
-                            Padding="0">
+                        <Grid>
                             <chart:BarChart
-                                Margin="0, 40, 0, 0"
-                                ChartPadding="100, 100, 100, 0"
-                                ChartMargin="20, 100, 20, 0"
-                                VerticalOptions="Start"
+                                ChartMargin="20, 0, 0, 10"
+                                VerticalOptions="FillAndExpand"
+                                HorizontalLabelMode="StartEnd"
+                                VerticalUnit="tasks"
+                                ChartPadding="200, 0"
                                 BarMargin="2"
+                                InsideFrame="None"
+                                VerticalLabelAlignment="Start"
+                                IsSliderVisible="True"
+                                DisplayHorizontalValuesBySlider="True"
+                                SliderColor="{StaticResource GrayDark}"
                                 ChartEntries="{Binding ChartEntries}"
-                                HeightRequest="300" />
-                        </Frame>
+                                StrokeDashFirst="12"
+                                StrokeDashSecond="12"
+                                StrokeDashPhase="20"
+                                SliderCornerRadius="28"
+                                BlockCount="{Binding BlockCount}"
+                                BlockStartIndex="{Binding CurrentStartBlockIndex}" />
+                            <Button 
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"
+                                Margin="56, 0, 0, 0"
+                                Command="{Binding PreviousChartBlockCommand}"
+                                IsEnabled="{Binding PreviousBlockIsEnabled}"
+                                BackgroundColor="{StaticResource Accent}"
+                                Text="{StaticResource GeneralIcon}"
+                                FontFamily="{StaticResource FontAwesomeBrands}"
+                                Padding="0"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                CornerRadius="20" />
+                            <Button 
+                                VerticalOptions="Center"
+                                HorizontalOptions="End"
+                                Margin="0, 0, 36, 0"
+                                Command="{Binding NextChartBlockCommand}"
+                                IsEnabled="{Binding NextBlockIsEnabled}"
+                                BackgroundColor="{StaticResource Accent}"
+                                Text="{StaticResource GeneralIcon}"
+                                FontFamily="{StaticResource FontAwesomeBrands}"
+                                Padding="0"
+                                HeightRequest="40"
+                                WidthRequest="40"
+                                CornerRadius="20" />
+                        </Grid>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
             </controls:SegmentView.ItemsSource>

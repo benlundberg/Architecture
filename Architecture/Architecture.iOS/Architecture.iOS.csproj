@@ -134,10 +134,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="akavache">
-      <Version>6.10.4</Version>
+      <Version>6.10.6</Version>
     </PackageReference>
     <PackageReference Include="Plugin.Permissions">
-      <Version>3.0.0.12</Version>
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
       <Version>1.68.1.1</Version>
@@ -149,10 +149,10 @@
       <Version>2.0.2</Version>
     </PackageReference>
     <PackageReference Include="Unity">
-      <Version>5.11.4</Version>
+      <Version>5.11.5</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.5.1</Version>
+      <Version>1.5.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.FFImageLoading.Forms">
       <Version>2.4.11.982</Version>
@@ -160,13 +160,13 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.396" />
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.617" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0">
       <ExcludeAssets>all</ExcludeAssets>
       <IncludeAssets>none</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.5.0.396</Version>
+      <Version>4.5.0.617</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

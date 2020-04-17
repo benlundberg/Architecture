@@ -101,15 +101,15 @@ namespace Architecture
             var items3 = new List<ChartValueItem>();
             var items4 = new List<ChartValueItem>();
 
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 15; i++)
             {
-                var date = dateTime.AddMonths(i);
+                var date = dateTime.AddYears(i);
 
                 var value = random.Next(20, 90);
 
                 items1.Add(new ChartValueItem
                 {
-                    Label = date.Month.ToString(),
+                    Label = date.Year.ToString(),
                     Value = value,
                     Tag = date.ToString()
                 });
@@ -118,7 +118,7 @@ namespace Architecture
 
                 items2.Add(new ChartValueItem
                 {
-                    Label = date.Month.ToString(),
+                    Label = date.Year.ToString(),
                     Value = value,
                     Tag = date.ToString()
                 });
@@ -127,7 +127,7 @@ namespace Architecture
 
                 items3.Add(new ChartValueItem
                 {
-                    Label = date.Month.ToString(),
+                    Label = date.Year.ToString(),
                     Value = value,
                     Tag = date.ToString()
                 });
@@ -136,7 +136,7 @@ namespace Architecture
 
                 items4.Add(new ChartValueItem
                 {
-                    Label = date.Month.ToString(),
+                    Label = date.Year.ToString(),
                     Value = value,
                     Tag = date.ToString()
                 });
@@ -155,25 +155,28 @@ namespace Architecture
                 //{
                 //    Id = 1,
                 //    Items = items2,
-                //    Color = SKColors.CornflowerBlue,
-                //    PointColor = SKColors.CornflowerBlue
+                //    Color = Color.CornflowerBlue,
+                //    PointColor = Color.CornflowerBlue
                 //},
                 //new ChartItem
                 //{
                 //    Id = 2,
                 //    Items = items3,
-                //    Color = SKColors.Violet,
-                //    PointColor = SKColors.Violet
+                //    Color = Color.Violet,
+                //    PointColor = Color.Violet
                 //},
                 new ChartItem
                 {
-                    Id = 2,
+                    Id = 3,
                     Items = items4,
                     Color = App.Current.AccentColor(),
                     UseDashedEffect = true,
                     PointColor = App.Current.AccentColor(),
                 }
             };
+
+            PreviousBlockIsEnabled = CurrentStartBlockIndex > 0;
+            NextBlockIsEnabled = CurrentStartBlockIndex < ChartEntries.Max(x => x.Items.Count);
         }
 
         private ICommand selectedChartEntriesChangedCommand;
@@ -221,6 +224,33 @@ namespace Architecture
                 }));
             }
         }));
+
+        private ICommand previousChartBlockCommand;
+        public ICommand PreviousChartBlockCommand => previousChartBlockCommand ?? (previousChartBlockCommand = new Command(() =>
+        {
+            var startBlockIndex = CurrentStartBlockIndex - BlockCount;
+
+            CurrentStartBlockIndex = startBlockIndex < 0 ? 0 : startBlockIndex;
+
+            PreviousBlockIsEnabled = CurrentStartBlockIndex > 0;
+            NextBlockIsEnabled = CurrentStartBlockIndex + BlockCount < ChartEntries.Max(x => x.Items.Count);
+        }));
+
+        private ICommand nextChartBlockCommand;
+        public ICommand NextChartBlockCommand => nextChartBlockCommand ?? (nextChartBlockCommand = new Command(() =>
+        {
+            var startBlockIndex = CurrentStartBlockIndex + BlockCount;
+
+            CurrentStartBlockIndex = startBlockIndex > ChartEntries.Max(x => x.Items.Count) ? ChartEntries.Max(x => x.Items.Count) : startBlockIndex;
+
+            PreviousBlockIsEnabled = CurrentStartBlockIndex > 0;
+            NextBlockIsEnabled = CurrentStartBlockIndex + BlockCount < ChartEntries.Max(x => x.Items.Count);
+        }));
+
+        public bool NextBlockIsEnabled { get; set; }
+        public bool PreviousBlockIsEnabled { get; set; }
+        public int CurrentStartBlockIndex { get; set; }
+        public int BlockCount { get; set; } = 7;
 
         public string SelectedItem { get; set; }
         public List<string> PickerValues { get; private set; }

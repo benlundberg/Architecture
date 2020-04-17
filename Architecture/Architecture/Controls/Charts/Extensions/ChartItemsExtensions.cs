@@ -25,7 +25,7 @@ namespace Architecture.Controls.Charts
 
     public static class ChartItemsExtensions
     {
-        public static IList<ChartValueItemParam> GetChartValueItemFromX(this IList<ChartItem> chartItems, float xPosition, SKRect frame, float itemWidth, bool useExactValue)
+        public static IList<ChartValueItemParam> GetChartValueItemFromX(this IList<ChartItem> chartItems, float xPosition, SKRect frame, float itemWidth, bool useExactValue, int blockStartIndex = 0, int blockCount = 0)
         {
             var items = new List<ChartValueItemParam>();
 
@@ -36,17 +36,19 @@ namespace Architecture.Controls.Charts
 
             foreach (var chartEntry in chartItems.Where(x => x.Items?.Any() == true && x.IsVisible))
             {
+                var valueItems = blockCount > 0 ? chartEntry.Items.Skip(blockStartIndex).Take(blockCount) : chartEntry.Items;
+
                 ChartValueItem item = null;
 
                 if (useExactValue)
                 {
                     // Order list and takes the first that's lower then X value
-                    item = chartEntry.Items.OrderByDescending(c => c.Point.X).FirstOrDefault(c => c.Point.X <= xPosition);
+                    item = valueItems.OrderByDescending(c => c.Point.X).FirstOrDefault(c => c.Point.X <= xPosition);
                 }
                 else
                 {
                     // Create a bound and get item inside this bound
-                    foreach (var valueItem in chartEntry.Items)
+                    foreach (var valueItem in valueItems)
                     {
                         SKRect rect = new SKRect((xPosition - (itemWidth / 2)), 0, (xPosition + (itemWidth / 2)), frame.Bottom + 2);
 
@@ -60,7 +62,7 @@ namespace Architecture.Controls.Charts
                 // No item found so check if we touched left of the frame
                 if (item == null)
                 {
-                    item = chartEntry.Items.FirstOrDefault();
+                    item = valueItems.FirstOrDefault();
 
                     if ((xPosition <= frame.Left && item.Point.X == frame.Left))
                     {
@@ -71,10 +73,10 @@ namespace Architecture.Controls.Charts
                 }
 
                 // Get the index of the found item
-                int index = chartEntry.Items.IndexOf(item);
+                int index = valueItems.ToList().IndexOf(item);
 
                 // It's the last item in the list so add just the this entry
-                if (index + 1 >= chartEntry.Items.Count)
+                if (index + 1 >= valueItems.Count())
                 {
                     if ((xPosition >= frame.Right && item.Point.X == frame.Right) || item.Point.X >= (xPosition - (itemWidth / 2)))
                     {
@@ -85,7 +87,7 @@ namespace Architecture.Controls.Charts
                 }
 
                 // Takes the next item in the list
-                var nextItem = chartEntry.Items[index + 1];
+                var nextItem = valueItems.ToList()[index + 1];
 
                 if (item != null)
                 {
