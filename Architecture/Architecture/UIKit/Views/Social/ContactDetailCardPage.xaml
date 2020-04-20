@@ -39,8 +39,8 @@
                     <StackLayout 
                         Orientation="Horizontal" 
                         HorizontalOptions="Center"
-                        Margin="{StaticResource ControlPadding}"
-                        Spacing="{StaticResource LargeSpacing}">
+                        Margin="{StaticResource VerticalPadding}"
+                        Spacing="{StaticResource MainSpacing}">
                         <!-- Email -->
                         <Button
                             Text="&#xf0e0;"

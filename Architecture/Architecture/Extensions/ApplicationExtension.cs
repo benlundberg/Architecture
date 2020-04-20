@@ -96,5 +96,10 @@ namespace Architecture
         {
             return (OnPlatform<string>)application.Resources["BoldFont"];
         }
+
+        public static T Get<T>(this Application application, string key)
+        {
+            return (T)application.Resources[key];
+        }
     }
 }

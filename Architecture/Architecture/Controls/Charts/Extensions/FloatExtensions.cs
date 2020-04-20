@@ -34,5 +34,15 @@ namespace Architecture.Controls.Charts
 
             return y;
         }
+
+        public static string ToRoundedString(this float value)
+        {
+            return decimal.TryParse(value.ToString(), out decimal res) ? Math.Round(res, 0, MidpointRounding.AwayFromZero).ToString() : "0";
+        }
+
+        public static float ToRounded(this float value, int decimals = 0)
+        {
+            return (float)(decimal.TryParse(value.ToString(), out decimal res) ? Math.Round(res, decimals, MidpointRounding.AwayFromZero) : 0);
+        }
     }
 }

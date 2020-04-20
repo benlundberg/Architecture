@@ -59,7 +59,7 @@ namespace Architecture
                     await Navigation.PushModalAsync(new FullSignUpPage() { BindingContext = new SignUpViewModel { Navigation = this.Navigation } });
                     break;
                 case 3:
-                    await Navigation.PushAsync(new TabbedLoginPage() { BindingContext = new TabbedLoginViewModel { Navigation = this.Navigation } });
+                    await Navigation.PushModalAsync(new TabbedLoginPage() { BindingContext = new TabbedLoginViewModel { Navigation = this.Navigation } });
                     break;
                 case 4:
                     await Navigation.PushModalAsync(new ImageLoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
@@ -118,6 +118,12 @@ namespace Architecture
                     break;
                 case 4:
                     await Navigation.PushAsync(new InfoDetailPage());
+                    break;
+                case 5:
+                    await Navigation.PushAsync(new SecondDetailPage());
+                    break;
+                case 6:
+                    await Navigation.PushAsync(new ThirdDetailPagexaml());
                     break;
             }
         }));

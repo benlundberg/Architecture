@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Forms;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Architecture.Controls.Charts
@@ -225,6 +226,48 @@ namespace Architecture.Controls.Charts
                 canvas.DrawLine(right + (HintSize * 0.6f), y, right + (HintSize * 0.2f), y - (HintSize * 0.5f), paint);
                 canvas.DrawLine(right + (HintSize * 0.6f), y, right + (HintSize * 0.2f), y + (HintSize * 0.5f), paint);
                 canvas.DrawLine(right + (HintSize * 0.2f), y - (HintSize * 0.5f), right + (HintSize * 0.2f), y + (HintSize * 0.5f), paint);
+            }
+        }
+
+        private void DrawSliderPoints(IList<ChartValueItemParam> valueItems, SKCanvas canvas, SKRect chart)
+        {
+            if (valueItems?.Any() != true)
+            {
+                return;
+            }
+
+            float x = chart.GetInsideXValue(TouchedPoint.X);
+
+            // Draws circle on y axis //
+
+            using (var paint = new SKPaint
+            {
+                Style = SKPaintStyle.Stroke,
+                StrokeWidth = SliderPointSize
+            })
+            {
+                foreach (var item in valueItems)
+                {
+                    paint.Color = item.BackgroundColor.ToSKColor();
+
+                    if (UseExactValue)
+                    {
+                        if (LineMode == LineMode.Straight)
+                        {
+                            canvas.DrawCircle(x, ChartCalculator.CalculateYPositionForStraight(item.ChartValueItem, item.NextChartValueItem, x), SliderPointSize, paint);
+                        }
+                        else if (LineMode == LineMode.Spline)
+                        {
+                            var p = ChartCalculator.CalculateYPositionForSpline(item.ChartValueItem, item.NextChartValueItem, x);
+
+                            canvas.DrawCircle(p.X, p.Y, SliderPointSize, paint);
+                        }
+                    }
+                    else
+                    {
+                        canvas.DrawCircle(item.ChartValueItem.Point.X, item.ChartValueItem.Point.Y, SliderPointSize, paint);
+                    }
+                }
             }
         }
 

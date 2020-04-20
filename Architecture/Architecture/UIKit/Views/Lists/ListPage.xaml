@@ -63,7 +63,15 @@
     <Grid>
         <controls:SegmentView 
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
-            Margin="{StaticResource MainPadding}">
+            Margin="{StaticResource MainPadding}"
+            SectionHorizontalayout="Fill"
+            SectionControlColor="{StaticResource PrimaryColor}"
+            SelectedSectionBackground="{StaticResource PrimaryColor}"
+            SelectedSectionTextColor="White"
+            SectionBackground="White"
+            SectionTextColor="{StaticResource PrimaryColor}"
+            SectionControlPadding="1"
+            SectionControlCornerRadius="{OnPlatform Android=40, iOS=20}">
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem Text="Text Cell" IsSelected="True" Tag="1">
                     <controls:SegmentControlItem.Content>

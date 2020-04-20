@@ -94,7 +94,7 @@
                     <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <ff:CachedImage Source="http://clarityapplication.com/dev/images/13.jpg">
+                                <ff:CachedImage HeightRequest="75" WidthRequest="75" Source="http://clarityapplication.com/dev/images/13.jpg">
                                     <ff:CachedImage.Transformations>
                                         <transformation:CircleTransformation />
                                     </ff:CachedImage.Transformations>

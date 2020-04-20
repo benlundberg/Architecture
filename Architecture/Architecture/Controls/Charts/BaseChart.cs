@@ -203,39 +203,6 @@ namespace Architecture.Controls.Charts
             }
         }
 
-        protected void DrawSliderPoints(IList<ChartValueItemParam> valueItems, SKCanvas canvas, SKRect chart)
-        {
-            if (valueItems?.Any() != true)
-            {
-                return;
-            }
-
-            float x = chart.GetInsideXValue(TouchedPoint.X);
-
-            // Draws circle on y axis //
-
-            using (var paint = new SKPaint
-            {
-                Style = SKPaintStyle.Stroke,
-                StrokeWidth = SliderPointSize
-            })
-            {
-                foreach (var item in valueItems)
-                {
-                    paint.Color = item.BackgroundColor.ToSKColor();
-
-                    if (UseExactValue)
-                    {
-                        canvas.DrawCircle(x, ChartCalculator.CalculateYPosition(item.ChartValueItem, item.NextChartValueItem, x), SliderPointSize, paint);
-                    }
-                    else
-                    {
-                        canvas.DrawCircle(item.ChartValueItem.Point.X, item.ChartValueItem.Point.Y, SliderPointSize, paint);
-                    }
-                }
-            }
-        }
-
         protected void DrawHorizontalLabel(ChartValueItem entry, SKCanvas canvas, SKRect frame, SKRect chart)
         {
             if (!DisplayHorizontalValuesBySlider)

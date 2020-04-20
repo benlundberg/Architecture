@@ -183,6 +183,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
             
             <!--#endregion-->
             

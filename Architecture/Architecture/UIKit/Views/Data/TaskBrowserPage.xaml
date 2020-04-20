@@ -19,15 +19,16 @@
     </NavigationPage.TitleView>
 
     <Grid>
-        <Grid.Effects>
-            <local:GradientEffect Direction="ToBottom" />
-        </Grid.Effects>
-        <controls:SegmentView>
+        <controls:SegmentView
+            SectionHorizontalayout="Start"
+            Margin="{StaticResource MainPadding}"
+            SelectedSectionTextColor="{StaticResource PrimaryColor}"
+            SectionTextColor="{StaticResource PrimaryColor}">
             <controls:SegmentView.ItemsSource>
-                <controls:SegmentControlItem  Text="Progress" Tag="1">
+                <controls:SegmentControlItem Text="Progress" Tag="1" IsSelected="True">
                     <controls:SegmentControlItem.Content>
-                        <StackLayout Spacing="0">
-                            <Frame Padding="4" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
+                        <StackLayout Spacing="0" VerticalOptions="Center">
+                            <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
                                 <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
                                     <controls:ItemsControl.ItemTemplate>
                                         <DataTemplate>
@@ -40,13 +41,16 @@
                             </Frame>
                             <chart:LineChart
                                 ChartMargin="20, 0, 0, 10"
-                                VerticalOptions="FillAndExpand"
+                                HeightRequest="400"
                                 VerticalUnit="tasks"
                                 IsSliderVisible="True"
                                 SliderWidth="4"
-                                InsideFrame="None"
+                                InsideFrame="StartCenterEnd"
+                                VerticalLabelMode="StartCenterEnd"
+                                HideFrame="True"
+                                DashedFrame="True"
                                 HorizontalLabelMode="StartEnd"
-                                UseExactValue="False"
+                                UseExactValue="True"
                                 LineMode="Spline"
                                 DisplayHorizontalValuesBySlider="True"
                                 SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}"
@@ -57,55 +61,43 @@
                         </StackLayout>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
-                <controls:SegmentControlItem Text="Done" Tag="2" IsSelected="True">
+                <controls:SegmentControlItem Text="Done" Tag="2">
                     <controls:SegmentControlItem.Content>
-                        <Grid>
+                        <StackLayout Spacing="0" VerticalOptions="Center">
+                            <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
+                                <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
+                                    <controls:ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
+                                                <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
+                                            </Frame>
+                                        </DataTemplate>
+                                    </controls:ItemsControl.ItemTemplate>
+                                </controls:ItemsControl>
+                            </Frame>
                             <chart:BarChart
                                 ChartMargin="20, 0, 0, 10"
+                                HeightRequest="400"
+                                VerticalLabelMode="StartCenterEnd"
                                 VerticalOptions="FillAndExpand"
                                 HorizontalLabelMode="StartEnd"
                                 VerticalUnit="tasks"
-                                ChartPadding="200, 0"
+                                ChartPadding="60, 0"
                                 BarMargin="2"
-                                InsideFrame="None"
+                                HideFrame="True"
+                                DashedFrame="True"
+                                InsideFrame="StartCenterEnd"
                                 VerticalLabelAlignment="Start"
                                 IsSliderVisible="True"
                                 DisplayHorizontalValuesBySlider="True"
                                 SliderColor="{StaticResource GrayDark}"
                                 ChartEntries="{Binding ChartEntries}"
+                                SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}"
                                 StrokeDashFirst="12"
                                 StrokeDashSecond="12"
                                 StrokeDashPhase="20"
-                                SliderCornerRadius="28"
-                                BlockCount="{Binding BlockCount}"
-                                BlockStartIndex="{Binding CurrentStartBlockIndex}" />
-                            <Button 
-                                VerticalOptions="Center"
-                                HorizontalOptions="Start"
-                                Margin="56, 0, 0, 0"
-                                Command="{Binding PreviousChartBlockCommand}"
-                                IsEnabled="{Binding PreviousBlockIsEnabled}"
-                                BackgroundColor="{StaticResource Accent}"
-                                Text="{StaticResource GeneralIcon}"
-                                FontFamily="{StaticResource FontAwesomeBrands}"
-                                Padding="0"
-                                HeightRequest="40"
-                                WidthRequest="40"
-                                CornerRadius="20" />
-                            <Button 
-                                VerticalOptions="Center"
-                                HorizontalOptions="End"
-                                Margin="0, 0, 36, 0"
-                                Command="{Binding NextChartBlockCommand}"
-                                IsEnabled="{Binding NextBlockIsEnabled}"
-                                BackgroundColor="{StaticResource Accent}"
-                                Text="{StaticResource GeneralIcon}"
-                                FontFamily="{StaticResource FontAwesomeBrands}"
-                                Padding="0"
-                                HeightRequest="40"
-                                WidthRequest="40"
-                                CornerRadius="20" />
-                        </Grid>
+                                SliderCornerRadius="28" />
+                        </StackLayout>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
             </controls:SegmentView.ItemsSource>

@@ -22,8 +22,8 @@ namespace Architecture.Controls
             SegmentItems.Children.Clear();
             SegmentItems.RowDefinitions.Clear();
             SegmentItems.ColumnDefinitions.Clear();
-            SegmentItems.ColumnSpacing = this.Spacing;
-            SegmentItems.RowSpacing = this.Spacing;
+            SegmentItems.ColumnSpacing = this.SectionSpacing;
+            SegmentItems.RowSpacing = this.SectionSpacing;
 
             if (ItemsSource?.Any() != true)
             {
@@ -45,9 +45,9 @@ namespace Architecture.Controls
                     this.MainContent = item.Content;
                 }
 
-                if (TitleOrientation == StackOrientation.Horizontal)
+                if (SectionOrientation == StackOrientation.Horizontal)
                 {
-                    SegmentItems.ColumnDefinitions.Add(new ColumnDefinition() { Width = HorizontalTitleLayout.Alignment == LayoutAlignment.Fill ? GridLength.Star : GridLength.Auto });
+                    SegmentItems.ColumnDefinitions.Add(new ColumnDefinition() { Width = SectionHorizontalayout.Alignment == LayoutAlignment.Fill ? GridLength.Star : GridLength.Auto });
                 }
                 else
                 {
@@ -61,7 +61,57 @@ namespace Architecture.Controls
         private View GetView(SegmentControlItem item, int index)
         {
             // Get view
-            var view = item.IsSelected ? SelectedTitleTemplate.CreateContent() as View : TitleTemplate.CreateContent() as View;
+            View view;
+
+            if (SectionTemplate != null && SelectedSectionTemplate != null)
+            {
+                view = item.IsSelected ? SelectedSectionTemplate.CreateContent() as View : SectionTemplate.CreateContent() as View;
+            }
+            else
+            {
+                if (SelectedSectionBackground == Color.Transparent)
+                {
+                    view = new StackLayout
+                    {
+                        Padding = SectionPadding,
+                        Children =
+                        {
+                            new Label
+                            {
+                                FontSize = FontSize,
+                                Opacity = item.IsSelected ? 1 : 0.8,
+                                Text = item.Text,
+                                HorizontalOptions = SectionTextHorizontalLayout,
+                                TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor
+                            },
+                            new BoxView
+                            {
+                                Color = item.IsSelected ? SelectedSectionTextColor : Color.Transparent,
+                                HeightRequest = 3,
+                                HorizontalOptions = LayoutOptions.FillAndExpand,
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    view = new Grid
+                    {
+                        Padding = SectionPadding,
+                        BackgroundColor = item.IsSelected ? SelectedSectionBackground : SectionBackground,
+                        Children =
+                        {
+                            new Label
+                            {
+                                HorizontalOptions = SectionTextHorizontalLayout,
+                                FontSize = FontSize,
+                                Text = item.Text,
+                                TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor
+                            }
+                        }
+                    };
+                }
+            }
 
             view.BindingContext = item;
 
@@ -72,7 +122,7 @@ namespace Architecture.Controls
                 CommandParameter = item
             });
 
-            if (TitleOrientation == StackOrientation.Horizontal)
+            if (SectionOrientation == StackOrientation.Horizontal)
             {
                 Grid.SetColumn(view, index);
             }
@@ -221,12 +271,28 @@ namespace Architecture.Controls
         public View MainContent { get; set; }
         public SegmentControlItem SelectedSegment { get; private set; }
 
-        public DataTemplate SelectedTitleTemplate { get; set; }
-        public DataTemplate TitleTemplate { get; set; }
+        public DataTemplate SelectedSectionTemplate { get; set; }
+        public DataTemplate SectionTemplate { get; set; }
 
-        public StackOrientation TitleOrientation { get; set; } = StackOrientation.Horizontal;
-        public LayoutOptions HorizontalTitleLayout { get; set; } = LayoutOptions.Center;
-        public double Spacing { get; set; }
+        public StackOrientation SectionOrientation { get; set; } = StackOrientation.Horizontal;
+        public LayoutOptions SectionHorizontalayout { get; set; } = LayoutOptions.Center;
+        public double SectionSpacing { get; set; }
+
+        public Color SectionControlColor { get; set; } = Color.Transparent;
+        public Thickness SectionControlMargin { get; set; }
+        public Thickness SectionControlPadding { get; set; }
+        public float SectionControlCornerRadius { get; set; } = 0;
+
+        public Thickness SectionPadding { get; set; } = new Thickness(10);
+        public double FontSize { get; set; } = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
+
+        public Color SectionBackground { get; set; } = Color.Transparent;
+        public Color SectionTextColor { get; set; }
+
+        public Color SelectedSectionBackground { get; set; } = Color.Transparent;
+        public Color SelectedSectionTextColor { get; set; }
+
+        public LayoutOptions SectionTextHorizontalLayout { get; set; } = LayoutOptions.Center;
     }
 
     public class SegmentControlItem

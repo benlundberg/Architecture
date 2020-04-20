@@ -4,64 +4,55 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Architecture.AboutPage">
+             x:Class="Architecture.AboutPage"
+             xmlns:controls="clr-namespace:Architecture.Controls">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="About" />
+    </NavigationPage.TitleView>
+    
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout Margin="{StaticResource LargePadding}">
                 <Label 
-                    Padding="{StaticResource LargeControlPadding}" 
-                    BackgroundColor="{StaticResource Gray}"
-                    HorizontalTextAlignment="Center"
                     FontSize="Large"
                     Text="About us" />
                 <Label 
-                    Padding="{StaticResource LargePadding}"
-                    HorizontalTextAlignment="Center"
                     FontSize="Default"
                     Text="This is an app that shows how you and your team can create a nice looking UI togheter with Xamarin Forms" />
                 <Label 
-                    Padding="{StaticResource LargeControlPadding}" 
-                    BackgroundColor="{StaticResource Gray}"
-                    HorizontalTextAlignment="Center"
                     FontSize="Large"                    
                     Text="Usage" />
                 <Label 
-                    Padding="{StaticResource LargePadding}"
-                    HorizontalTextAlignment="Center"
                     FontSize="Default"
                     Text="This is FREE to use or take inspiration from" />
                 <Label 
-                    Padding="{StaticResource LargeControlPadding}" 
-                    BackgroundColor="{StaticResource Gray}"
-                    HorizontalTextAlignment="Center"
                     FontSize="Large"
                     Text="Our team" />
                 <Label 
-                    Padding="{StaticResource LargePadding}"
-                    HorizontalTextAlignment="Center"
                     FontSize="Default"
                     Text="Only one passionate mobile developer who wants to show that you can create nice looking apps with Xamarin Forms" />
                 <Label 
-                    Padding="{StaticResource LargeControlPadding}" 
-                    BackgroundColor="{StaticResource Gray}"
-                    HorizontalTextAlignment="Center"
                     FontSize="Large"
                     Text="3rd parties" />
-                <StackLayout Padding="{StaticResource LargePadding}">
-                    <Label 
-                        FontSize="Default"
-                        Text="- SkiaSharp" />
-                    <Label 
-                        FontSize="Default"
-                        Text="- Akavache" />
-                    <Label 
-                        FontSize="Default"
-                        Text="- PropertyChanged.Fody" />
-                    <Label 
-                        FontSize="Default"
-                        Text="- FFImageLoading" /> 
-                </StackLayout>
-                
+                <Label 
+                    FontSize="Default"
+                    Text="- SkiaSharp" />
+                <Label 
+                    FontSize="Default"
+                    Text="- Akavache" />
+                <Label 
+                    FontSize="Default"
+                    Text="- PropertyChanged.Fody" />
+                <Label 
+                    FontSize="Default"
+                    Text="- FFImageLoading" />
+                <Label 
+                    HorizontalOptions="Center"
+                    Margin="{StaticResource LargePadding}"
+                    FontSize="64"
+                    Text="{StaticResource GeneralIcon}"
+                    FontFamily="{StaticResource FontAwesomeBrands}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

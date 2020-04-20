@@ -20,7 +20,7 @@
 
     <Grid>
         <ScrollView>
-            <StackLayout Spacing="0">
+            <StackLayout>
                 <controls:PickerView
                     Padding="20"
                     BackgroundColor="{StaticResource GrayLight}"
@@ -31,7 +31,9 @@
                     Placeholder="Select status"
                     CancelText="{local:Translate Gen_Cancel}"
                     IconTextSource="&#xf0eb;" />
-                <controls:TableControl UseBorder="False" TableSource="{Binding TableItems}" />
+                <controls:TableControl 
+                    UseBorder="False" 
+                    TableSource="{Binding TableItems}" />
             </StackLayout>
         </ScrollView>
         <controls:FloatingMenuControl

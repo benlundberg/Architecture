@@ -35,15 +35,15 @@ namespace Architecture.Controls
         public Keyboard Keyboard { get; set; }
         public string Placeholder { get; set; }
         public string Header { get; set; }
-        public Color PlaceholderColor { get; set; } = App.Current.DarkPrimaryColor();
+        public Color PlaceholderColor { get; set; } = App.Current.Get<Color>("TextColor");
         public Color HeaderBackgroundColor { get; set; } = Color.White;
-        public Color HeaderColor { get; set; } = App.Current.DarkPrimaryColor();
-        public Color TextColor { get; set; } = App.Current.DarkPrimaryColor();
-        public Color BorderColor { get; set; } = App.Current.DarkPrimaryColor();
+        public Color HeaderColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public Color TextColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public Color BorderColor { get; set; } = App.Current.Get<Color>("TextColor");
         public bool IsPassword { get; set; }
         public string IconFontFamily { get; set; }
         public string IconTextSource { get; set; }
-        public Color IconColor { get; set; } = App.Current.DarkPrimaryColor();
+        public Color IconColor { get; set; } = App.Current.Get<Color>("TextColor");
         public bool HasIcon => !string.IsNullOrEmpty(IconTextSource);
         public bool HasValidation { get; set; }
     }
