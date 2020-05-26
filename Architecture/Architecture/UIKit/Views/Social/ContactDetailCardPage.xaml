@@ -41,26 +41,34 @@
                         HorizontalOptions="Center"
                         Margin="{StaticResource VerticalPadding}"
                         Spacing="{StaticResource MainSpacing}">
-                        <!-- Email -->
-                        <Button
-                            Text="&#xf0e0;"
-                            FontFamily="{StaticResource FontAwesomeSolid}"
-                            Style="{StaticResource FloatingButtonSmall}" />
-                        <!-- Mobile -->
-                        <Button
-                            Text="&#xf3cd;"
-                            FontFamily="{StaticResource FontAwesomeSolid}"
-                            Style="{StaticResource FloatingButtonSmall}" />
-                        <!-- Map -->
-                        <Button
-                            Text="&#xf5a0;"
-                            FontFamily="{StaticResource FontAwesomeSolid}"
-                            Style="{StaticResource FloatingButtonSmall}" />
-                        <!-- Text -->
-                        <Button
-                            Text="&#xf27a;"
-                            FontFamily="{StaticResource FontAwesomeRegular}"
-                            Style="{StaticResource FloatingButtonSmall}" />
+                        <ImageButton Style="{StaticResource FloatingButtonMini}">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    Glyph="&#xf0e0;"
+                                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton Style="{StaticResource FloatingButtonMini}">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    Glyph="&#xf3cd;"
+                                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton Style="{StaticResource FloatingButtonMini}">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    Glyph="&#xf5a0;"
+                                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                            </ImageButton.Source>
+                        </ImageButton>
+                        <ImageButton Style="{StaticResource FloatingButtonMini}">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    Glyph="&#xf27a;"
+                                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                            </ImageButton.Source>
+                        </ImageButton>
                     </StackLayout>
                 </StackLayout>
             </Frame>

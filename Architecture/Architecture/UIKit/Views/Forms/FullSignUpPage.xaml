@@ -14,7 +14,7 @@
         <Grid>
             <StackLayout 
                 Spacing="{StaticResource MainSpacing}"
-                Padding="{StaticResource XLargePadding}"
+                Padding="{StaticResource ExtraLargePadding}"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
                 <Label
                     TextColor="{StaticResource PrimaryColor}"

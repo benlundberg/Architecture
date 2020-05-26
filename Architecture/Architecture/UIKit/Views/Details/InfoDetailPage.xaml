@@ -54,13 +54,17 @@
                         Source="http://clarityapplication.com/dev/images/13.jpg" />
                 </Frame>
             </Grid>
-            <Button 
-                Margin="0, 0, 40, -26"
+            <ImageButton 
+                Margin="0, 0, 28, -20"
                 VerticalOptions="End"
                 HorizontalOptions="End"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                Text="{StaticResource EditPenIcon}"
-                Style="{StaticResource FloatingButtonSmall}"/>
+                Style="{StaticResource FloatingButtonMini}">
+                <ImageButton.Source>
+                    <FontImageSource
+                        FontFamily="{StaticResource FontAwesomeSolid}"
+                        Glyph="{StaticResource EditPenIcon}" />
+                </ImageButton.Source>
+            </ImageButton>
             <StackLayout 
                 Grid.Row="1"
                 Padding="{StaticResource MainPadding}">

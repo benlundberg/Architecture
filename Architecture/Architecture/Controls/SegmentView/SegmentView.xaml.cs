@@ -78,7 +78,7 @@ namespace Architecture.Controls
                         {
                             new Label
                             {
-                                FontSize = FontSize,
+                                FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
                                 Opacity = item.IsSelected ? 1 : 0.8,
                                 Text = item.Text,
                                 HorizontalOptions = SectionTextHorizontalLayout,
@@ -95,21 +95,44 @@ namespace Architecture.Controls
                 }
                 else
                 {
-                    view = new Grid
+                    var stackLayout = new StackLayout
                     {
+                        Orientation = item.ItemOrientation,
                         Padding = SectionPadding,
-                        BackgroundColor = item.IsSelected ? SelectedSectionBackground : SectionBackground,
-                        Children =
-                        {
-                            new Label
-                            {
-                                HorizontalOptions = SectionTextHorizontalLayout,
-                                FontSize = FontSize,
-                                Text = item.Text,
-                                TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor
-                            }
-                        }
+                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        Spacing = item.Spacing,
+                        BackgroundColor = item.IsSelected ? SelectedSectionBackground : SectionBackground
                     };
+
+                    if (!string.IsNullOrEmpty(item.IconSource))
+                    {
+                        stackLayout.Children.Add(new Label
+                        {
+                            Text = item.IconSource,
+                            VerticalOptions = LayoutOptions.Center,
+                            FontFamily = item.IconFontFamily,
+                            TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor,
+                            FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
+                            InputTransparent = true
+                        });
+                    }
+
+                    if (!string.IsNullOrEmpty(item.Text))
+                    {
+                        stackLayout.Children.Add(new Label
+                        {
+                            VerticalOptions = LayoutOptions.Center,
+                            HorizontalOptions = SectionTextHorizontalLayout,
+                            HorizontalTextAlignment = TextAlignment.Center,
+                            FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
+                            Text = item.Text,
+                            Margin = SectionControlMargin,
+                            InputTransparent = true,
+                            TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor
+                        });
+                    }
+
+                    view = stackLayout;
                 }
             }
 
@@ -284,7 +307,7 @@ namespace Architecture.Controls
         public float SectionControlCornerRadius { get; set; } = 0;
 
         public Thickness SectionPadding { get; set; } = new Thickness(10);
-        public double FontSize { get; set; } = Device.GetNamedSize(NamedSize.Medium, typeof(Label));
+        public NamedSize FontSize { get; set; } = NamedSize.Default;
 
         public Color SectionBackground { get; set; } = Color.Transparent;
         public Color SectionTextColor { get; set; }
@@ -298,6 +321,10 @@ namespace Architecture.Controls
     public class SegmentControlItem
     {
         public string Text { get; set; }
+        public string IconSource { get; set; }
+        public string IconFontFamily { get; set; }
+        public StackOrientation ItemOrientation { get; set; } = StackOrientation.Horizontal;
+        public double Spacing { get; set; } = 7d;
         public bool IsSelected { get; set; }
         public object Tag { get; set; }
         public View Content { get; set; }

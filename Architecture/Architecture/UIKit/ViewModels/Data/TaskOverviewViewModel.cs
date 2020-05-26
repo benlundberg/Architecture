@@ -15,34 +15,43 @@ namespace Architecture
     {
         public TaskOverviewViewModel()
         {
-            LoadTableData();
-            LoadChartEntries();
-
             PickerValues = new List<string>()
             {
                 "Confirmed",
                 "Ordered",
                 "Delivered"
             };
+
+            TableFilters = new ObservableCollection<TableFilterViewModel>
+            {
+                new TableFilterViewModel { Id = 1, IsActive = true, Text = "City" },
+                new TableFilterViewModel { Id = 2, IsActive = true, Text = "Weight" }
+            };
+
+            LoadTableData();
+            LoadChartEntries();
         }
 
         private void LoadTableData()
         {
-            TableItems = new ObservableCollection<TableItem>
+            var items = new List<TableItem>();
+
+            items.Add(new TableItem("Order ID")
             {
-                new TableItem("Order ID")
+                TextAlignment = TextAlignment.Start,
+                ContentItems = new List<TableContentItem>
                 {
-                    TextAlignment = TextAlignment.Start,
-                    ContentItems = new List<TableContentItem>
-                    {
-                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                        new TableContentItem("#12314") { TextAlignment = TextAlignment.Start }
-                    }
-                },
-                new TableItem("City")
+                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
+                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start }
+                }
+            });
+
+            if (TableFilters.FirstOrDefault(x => x.Id == 1).IsActive)
+            {
+                items.Add(new TableItem("City")
                 {
                     ContentItems = new List<TableContentItem>
                     {
@@ -52,19 +61,24 @@ namespace Architecture
                         new TableContentItem("Oregon"),
                         new TableContentItem("Los Angeles")
                     }
-                },
-                new TableItem("Time")
+                });
+            }
+
+            items.Add(new TableItem("Time")
+            {
+                ContentItems = new List<TableContentItem>
                 {
-                    ContentItems = new List<TableContentItem>
-                    {
-                        new TableContentItem("5 days"),
-                        new TableContentItem("5 days"),
-                        new TableContentItem("6 days"),
-                        new TableContentItem("4 days"),
-                        new TableContentItem("3 days")
-                    }
-                },
-                new TableItem("Weight")
+                    new TableContentItem("5 days"),
+                    new TableContentItem("5 days"),
+                    new TableContentItem("6 days"),
+                    new TableContentItem("4 days"),
+                    new TableContentItem("3 days")
+                }
+            });
+
+            if (TableFilters.FirstOrDefault(x => x.Id == 2).IsActive)
+            {
+                items.Add(new TableItem("Weight")
                 {
                     ContentItems = new List<TableContentItem>
                     {
@@ -74,20 +88,23 @@ namespace Architecture
                         new TableContentItem("1 kg"),
                         new TableContentItem("7 kg")
                     }
-                },
-                new TableItem("Price")
+                });
+            }
+
+            items.Add(new TableItem("Price")
+            {
+                TextAlignment = TextAlignment.End,
+                ContentItems = new List<TableContentItem>
                 {
-                    TextAlignment = TextAlignment.End,
-                    ContentItems = new List<TableContentItem>
-                    {
-                        new TableContentItem("$ 162.00") { TextAlignment = TextAlignment.End },
-                        new TableContentItem("$ 12.00") { TextAlignment = TextAlignment.End },
-                        new TableContentItem("$ 250.00") { TextAlignment = TextAlignment.End },
-                        new TableContentItem("$ 124.00") { TextAlignment = TextAlignment.End },
-                        new TableContentItem("$ 112.50") { TextAlignment = TextAlignment.End }
-                    }
+                    new TableContentItem("$ 162.00") { TextAlignment = TextAlignment.End },
+                    new TableContentItem("$ 12.00") { TextAlignment = TextAlignment.End },
+                    new TableContentItem("$ 250.00") { TextAlignment = TextAlignment.End },
+                    new TableContentItem("$ 124.00") { TextAlignment = TextAlignment.End },
+                    new TableContentItem("$ 112.50") { TextAlignment = TextAlignment.End }
                 }
-            };
+            });
+
+            TableItems = new ObservableCollection<TableItem>(items);
         }
 
         private void LoadChartEntries()
@@ -179,6 +196,12 @@ namespace Architecture
             NextBlockIsEnabled = CurrentStartBlockIndex < ChartEntries.Max(x => x.Items.Count);
         }
 
+        private ICommand tableFilterChangedCommand;
+        public ICommand TableFilterChangedCommand => tableFilterChangedCommand ?? (tableFilterChangedCommand = new Command(() =>
+        {
+            LoadTableData();
+        }));
+
         private ICommand selectedChartEntriesChangedCommand;
         public ICommand SelectedChartEntriesChangedCommand => selectedChartEntriesChangedCommand ?? (selectedChartEntriesChangedCommand = new Command((param) =>
         {
@@ -209,7 +232,7 @@ namespace Architecture
                             Id = item.Parent.Id,
                             TextColor = item.TextColor,
                             Value = item.ChartValueItem.Value.ToString() + " tasks"//ChartCalculator.CalculateExactValue(item.ChartValueItem, item.NextChartValueItem, args.TouchedPoint.X).ToString() + " tasks"
-                });
+                        });
                     }
                 }
             }
@@ -254,7 +277,10 @@ namespace Architecture
 
         public string SelectedItem { get; set; }
         public List<string> PickerValues { get; private set; }
+
         public ObservableCollection<TableItem> TableItems { get; private set; }
+        public ObservableCollection<TableFilterViewModel> TableFilters { get; set; }
+
         public ObservableCollection<ChartItem> ChartEntries { get; private set; }
         public ObservableCollection<ChartEntryViewModel> SelectedChartEntries { get; private set; }
 
@@ -270,6 +296,15 @@ namespace Architecture
         public string Value { get; set; }
         public Color BackgroundColor { get; set; }
         public Color TextColor { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    public class TableFilterViewModel : INotifyPropertyChanged
+    {
+        public int Id { get; set; }
+        public string Text { get; set; }
+        public bool IsActive { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

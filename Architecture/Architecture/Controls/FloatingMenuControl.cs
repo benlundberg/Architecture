@@ -34,7 +34,7 @@ namespace Architecture.Controls
         {
             MenuItems = new List<FloatingMenuItem>();
         }
-        
+
         protected override void OnParentSet()
         {
             base.OnParentSet();
@@ -52,19 +52,21 @@ namespace Architecture.Controls
                     HorizontalOptions = LayoutOptions.End
                 };
 
-                Button but = new Button
+                ImageButton but = new ImageButton
                 {
                     BackgroundColor = item.BackgroundColor,
                     CornerRadius = FloatingButtonRadius,
                     HeightRequest = FloatingButtonHeight,
                     WidthRequest = FloatingButtonWidth,
-                    FontFamily = item.FontFamily,
-                    Text = item.IconSource,
-                    TextColor = item.TextColor,
-                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                    Padding = new Thickness(FloatingButtonPadding),
                     Command = item.Command,
-                    Padding = new Thickness(0),
-                    CommandParameter = item.CommandParameter
+                    CommandParameter = item.CommandParameter,
+                    Source = new FontImageSource
+                    {
+                        Color = item.TextColor,
+                        Glyph = item.IconSource,
+                        FontFamily = item.FontFamily,
+                    }
                 };
 
                 but.Clicked += BaseButton_Clicked;
@@ -73,6 +75,7 @@ namespace Architecture.Controls
                 {
                     VerticalOptions = LayoutOptions.Center,
                     BackgroundColor = item.HintBackgroundColor,
+                    Padding = new Thickness(2),
                     Children =
                     {
                         new Label
@@ -90,22 +93,24 @@ namespace Architecture.Controls
                 grid.Children.Add(but);
 
                 grid.IsVisible = false;
-                
+
                 Children.Add(grid);
             }
 
-            Button baseButton = new Button
+            ImageButton baseButton = new ImageButton
             {
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = BaseItem.BackgroundColor,
                 CornerRadius = FloatingButtonRadius,
                 HeightRequest = FloatingButtonHeight,
                 WidthRequest = FloatingButtonWidth,
-                FontFamily = BaseItem.FontFamily,
-                Text = BaseItem.IconSource,
-                TextColor = BaseItem.TextColor,
-                Padding = new Thickness(0),
-                FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
+                Padding = new Thickness(FloatingButtonPadding),
+                Source = new FontImageSource
+                {
+                    Color = BaseItem.TextColor,
+                    Glyph = BaseItem.IconSource,
+                    FontFamily = BaseItem.FontFamily,
+                }
             };
 
             baseButton.Clicked += BaseButton_Clicked;
@@ -151,9 +156,10 @@ namespace Architecture.Controls
 
         public List<FloatingMenuItem> MenuItems { get; set; }
         public FloatingMenuItem BaseItem { get; set; }
-        public int FloatingButtonWidth { get; set; } = 64;
-        public int FloatingButtonHeight { get; set; } = 64;
-        public int FloatingButtonRadius { get; set; } = 32;
+        public int FloatingButtonWidth { get; set; } = 58;
+        public int FloatingButtonHeight { get; set; } = 58;
+        public int FloatingButtonRadius { get; set; } = 28;
+        public int FloatingButtonPadding { get; set; } = 16;
     }
 
     public class FloatingMenuItem : View

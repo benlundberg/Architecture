@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using Architecture.Core;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -221,6 +222,40 @@ namespace Architecture
                     await Navigation.PushAsync(new AboutPage());
                     break;
             }
-        }));   
+        }));
+
+        // Handles files page
+        private ICommand filesCommand;
+        public ICommand FilesCommand => filesCommand ?? (filesCommand = new Command(async (param) =>
+        {
+            if (!int.TryParse(param?.ToString(), out int page))
+            {
+                return;
+            }
+
+            switch (page)
+            {
+                case 1:
+                    await Navigation.PushAsync(new FilesPage());
+                    break;
+            }
+        }));
+
+        // Handles components
+        private ICommand componentsCommand;
+        public ICommand ComponentsCommand => componentsCommand ?? (componentsCommand = new Command(async (param) =>
+        {
+            if (!int.TryParse(param?.ToString(), out int page))
+            {
+                return;
+            }
+
+            switch (page)
+            {
+                case 1:
+                    await Navigation.PushAsync(new ComponentsPage());
+                    break;
+            }
+        }));
     }
 }

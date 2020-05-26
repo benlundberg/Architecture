@@ -15,7 +15,7 @@ namespace Architecture.Controls
         private void SetView()
         {
             this.Content = IsChecked ? CheckedView : UncheckedView;
-            
+
             this.Content.GestureRecognizers.Clear();
 
             this.Content.GestureRecognizers.Add(new TapGestureRecognizer()

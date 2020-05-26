@@ -77,7 +77,7 @@
                             <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
                             <Grid VerticalOptions="Center" HorizontalOptions="Start">
                                 <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
-                                <StackLayout Margin="{StaticResource XLargePadding}" Spacing="0">
+                                <StackLayout Margin="{StaticResource ExtraLargePadding}" Spacing="0">
                                     <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Title}" FontSize="Medium" />
                                     <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Category}" FontSize="Default" />
                                 </StackLayout>

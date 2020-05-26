@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.ComponentsPage"
+             Visual="Material">
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                
+                <Label Text="Primary button" FontSize="Micro" />
+                <Button Text="Click me" />
+            
+                <Label Text="Primary outline button" FontSize="Micro" />
+                <Button Style="{StaticResource OutlineButton}" Text="Click me" />
+
+                <Label Text="Secondary button" FontSize="Micro" />
+                <Button BackgroundColor="{StaticResource Accent}" Text="Click me" />
+
+                <Label Text="Secondary outline button" FontSize="Micro" />
+                <Button BorderColor="{StaticResource Accent}" TextColor="{StaticResource Accent}" Style="{StaticResource OutlineButton}" Text="Click me" />
+
+                <Label Text="Text icon button" FontSize="Micro" />
+                <Frame 
+                    Padding="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"
+                    BorderColor="Transparent"
+                    BackgroundColor="{StaticResource PrimaryColor}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label 
+                            VerticalTextAlignment="Center"
+                            Padding="12"
+                            FontSize="16"
+                            TextColor="White"
+                            MaxLines="1"
+                            LineBreakMode="TailTruncation"
+                            Text="Click me" />
+                        <Grid
+                            Grid.Column="1"
+                            BackgroundColor="{StaticResource DarkPrimaryColor}">
+                            <Label 
+                                VerticalTextAlignment="Center"
+                                Padding="12"
+                                TextColor="White"
+                                FontSize="16"
+                                Text="{StaticResource ChevronDownIcon}"
+                                FontFamily="{StaticResource FontAwesomeSolid}"/>
+                        </Grid>
+                    </Grid>
+                </Frame>
+
+                <Label Text="Icon text button" FontSize="Micro" />
+                <Frame 
+                    Padding="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"
+                    BorderColor="Transparent"
+                    BackgroundColor="{StaticResource PrimaryColor}">
+                    <StackLayout Padding="12" Orientation="Horizontal">
+                        <Label 
+                            VerticalTextAlignment="Center"
+                            TextColor="White"
+                            FontSize="16"
+                            Text="{StaticResource GeneralIcon}"
+                            FontFamily="{StaticResource FontAwesomeBrands}"/>
+                        <Label
+                            VerticalTextAlignment="Center"
+                            FontSize="16"
+                            TextColor="White"
+                            MaxLines="1"
+                            LineBreakMode="TailTruncation"
+                            Text="Click me" />
+                    </StackLayout>
+                </Frame>
+
+                <Label Text="Floating action button" FontSize="Micro" />
+                <ImageButton 
+                    HorizontalOptions="Start"
+                    HeightRequest="56"
+                    WidthRequest="56"
+                    CornerRadius="28"
+                    Padding="16"
+                    BackgroundColor="{StaticResource Accent}">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            Glyph="{StaticResource AddIcon}"
+                            FontFamily="{StaticResource FontAwesomeSolid}"/>
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <Label Text="Floating action button mini" FontSize="Micro" />
+                <ImageButton 
+                    HorizontalOptions="Start"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    CornerRadius="20"
+                    Padding="8"
+                    BackgroundColor="{StaticResource Accent}">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            Glyph="{StaticResource AddIcon}"
+                            FontFamily="{StaticResource FontAwesomeSolid}"/>
+                    </ImageButton.Source>
+                </ImageButton>
+
+                <Label Text="Rounded primary button" FontSize="Micro" />
+                <Button CornerRadius="23" Text="Click me" />
+
+                <Label Text="Rounded primary outline button" FontSize="Micro" />
+                <Button Style="{StaticResource OutlineButton}" CornerRadius="23" Text="Click me" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

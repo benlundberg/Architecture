@@ -17,7 +17,8 @@ namespace Architecture.Droid
         {
             // Helpers
             ComponentContainer.Current.Register<ILocalizeService, LocalizeService_Droid>();
-			ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_Droid>(singelton: true);
+            ComponentContainer.Current.Register<IDialogService, DialogService_Droid>(singelton: true);
+            ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_Droid>(singelton: true);
         }
     }
 }

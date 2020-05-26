@@ -11,6 +11,7 @@
 
     <Grid>
         <controls:SegmentView 
+            FontSize="Medium"
             SectionControlMargin="40"
             SectionHorizontalayout="Start"
             IsVisible="{Binding LoginModel.IsBusy, Converter={StaticResource InvertedBoolConv}}"
@@ -23,7 +24,7 @@
                             <!-- Login -->
                             <StackLayout 
                                 Spacing="{StaticResource MainSpacing}"
-                                Padding="{StaticResource XLargePadding}">
+                                Padding="{StaticResource ExtraLargePadding}">
                                 <controls:FrameEntry
                                     Header="Username"
                                     IconTextSource="&#xf007;"
@@ -44,7 +45,7 @@
                                         IsChecked="{Binding LoginModel.RememberMe, Mode=TwoWay}"
                                         WidthRequest="32"
                                         HeightRequest="32"
-                                        Color="{StaticResource DarkPrimaryColor}" />
+                                        Color="{StaticResource PrimaryColor}" />
                                     <Label 
                                         FontSize="Default"
                                         VerticalOptions="Center"
@@ -70,7 +71,7 @@
                         <ScrollView>
                             <StackLayout 
                                 Spacing="{StaticResource MainSpacing}"
-                                Padding="{StaticResource XLargePadding}">
+                                Padding="{StaticResource ExtraLargePadding}">
                                 <controls:FrameEntry 
                                     Header="Email"
                                     HeaderBackgroundColor="{StaticResource PageBackgroundColor}"

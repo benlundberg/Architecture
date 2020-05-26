@@ -16,14 +16,14 @@ namespace Architecture.Controls.Charts
 
             string path = string.Empty;
 
-            if (Device.RuntimePlatform == Device.Android)
-            {
-                path = "Montserrat-Regular.ttf";
-            }
-            else if (Device.RuntimePlatform == Device.iOS)
-            {
-                path = "Montserrat-Regular.ttf";
-            }
+            //if (Device.RuntimePlatform == Device.Android)
+            //{
+            //    path = "Montserrat-Regular.ttf";
+            //}
+            //else if (Device.RuntimePlatform == Device.iOS)
+            //{
+            //    path = "Montserrat-Regular.ttf";
+            //}
 
             if (string.IsNullOrEmpty(path))
             {

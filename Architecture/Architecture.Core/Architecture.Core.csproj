@@ -13,8 +13,8 @@
     <None Remove="Models\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="akavache" Version="6.10.6" />
+    <PackageReference Include="akavache" Version="6.10.17" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.2.8" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
   </ItemGroup>
 </Project>

@@ -64,6 +64,12 @@
             <Label Text="Settings" FontSize="Large" />
             <Button Text="Settings" Command="{Binding SettingsCommand, Source={x:Reference root}}" CommandParameter="1" />
             <Button Text="About" Command="{Binding SettingsCommand, Source={x:Reference root}}" CommandParameter="2" />
+            <!-- Files -->
+            <Label Text="Files" FontSize="Large" />
+            <Button Text="Files" Command="{Binding FilesCommand, Source={x:Reference root}}" CommandParameter="1" />
+            <!-- Components -->
+            <Label Text="Components" FontSize="Large" />
+            <Button Text="Components" Command="{Binding ComponentsCommand, Source={x:Reference root}}" CommandParameter="1" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

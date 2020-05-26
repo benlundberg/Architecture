@@ -30,6 +30,8 @@ namespace Architecture.Droid
 
             global::Xamarin.Forms.FormsMaterial.Init(this, bundle);
 
+            global::Xamarin.Essentials.Platform.Init(this, bundle);
+
             Bootstrapper_Droid.Initialize();
 
             LoadApplication(new App());

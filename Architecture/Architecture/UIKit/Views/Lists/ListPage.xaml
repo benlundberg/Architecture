@@ -71,6 +71,8 @@
             SectionBackground="White"
             SectionTextColor="{StaticResource PrimaryColor}"
             SectionControlPadding="1"
+            SectionControlMargin="10, 2"
+            SectionTextHorizontalLayout="FillAndExpand"
             SectionControlCornerRadius="{OnPlatform Android=40, iOS=20}">
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem Text="Text Cell" IsSelected="True" Tag="1">
@@ -132,17 +134,18 @@
                 </controls:SegmentControlItem>
             </controls:SegmentView.ItemsSource>
         </controls:SegmentView>
-        <Button
-            Command="{Binding AddItemCommand}"
+        <ImageButton 
             IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
-            Style="{StaticResource FloatingButton}"
             VerticalOptions="End"
             HorizontalOptions="End"
             Margin="24"
-            BackgroundColor="{StaticResource PrimaryColor}"
-            FontFamily="{StaticResource FontAwesomeSolid}"
-            Text="{StaticResource AddIcon}" />
-        <controls:LoadingView 
-            IsRunning="{Binding IsBusy}" />
+            Style="{StaticResource FloatingButton}">
+            <ImageButton.Source>
+                <FontImageSource
+                    Glyph="{StaticResource AddIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </ImageButton.Source>
+        </ImageButton>
+        <controls:LoadingView IsRunning="{Binding IsBusy}" />
     </Grid>
 </ContentPage>

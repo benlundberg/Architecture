@@ -9,10 +9,9 @@
 
             <!-- #region Colors -->
 
-            <Color x:Key="PrimaryColor">#F34B4B</Color>
-            <Color x:Key="DarkPrimaryColor">#DD4242</Color>
-            <Color x:Key="Accent">#0094FF</Color>
-            <Color x:Key="DarkAccent">#027ED8</Color>
+            <Color x:Key="PrimaryColor">#0FBCF9</Color>
+            <Color x:Key="DarkPrimaryColor">#008CC6</Color>
+            <Color x:Key="Accent">#FFA801</Color>
             
             <Color x:Key="GrayDark">#AAB2BD</Color>
             <Color x:Key="GrayMedium">#CCD1D9</Color>
@@ -25,10 +24,10 @@
             <Color x:Key="SecondaryTextColor">#FFF</Color>
 
             <Color x:Key="PageBackgroundColor">#F5F7FA</Color>
-            <Color x:Key="BarBackgroundColor">#F34B4B</Color>
-            <Color x:Key="ButtonBackgroundColor">#F34B4B</Color>
+            <Color x:Key="BarBackgroundColor">#0FBCF9</Color>
+            <Color x:Key="ButtonBackgroundColor">#0FBCF9</Color>
             <Color x:Key="ButtonTextColor">#FFF</Color>
-            <Color x:Key="ButtonFrameColor">#F34B4B</Color>
+            <Color x:Key="ButtonFrameColor">#0FBCF9</Color>
 
             <!--#endregion-->
             
@@ -48,28 +47,28 @@
             <x:String x:Key="AddIcon">&#xf067;</x:String>
             <x:String x:Key="SearchIcon">&#xf002;</x:String>
             <x:String x:Key="EditPenIcon">&#xf304;</x:String>
-
+            <x:String x:Key="ChevronDownIcon">&#xf078;</x:String>
             <!--#endregion-->
             
             <!-- #region Fonts -->
-            
-            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeBrands">
-                <On Platform="Android" Value="FontAwesome5Brands.otf#Regular" />
-                <On Platform="iOS" Value="FontAwesome5Brands-Regular" />
-                <On Platform="UWP" Value="/Assets/FontAwesome5Brands.otf#Font Awesome 5 Brands" />
-            </OnPlatform>
 
-            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeSolid">
-                <On Platform="Android" Value="FontAwesome5Solid.otf#Regular" />
-                <On Platform="iOS" Value="FontAwesome5Free-Solid" />
-                <On Platform="UWP" Value="/Assets/FontAwesome5Solid.otf#Font Awesome 5 Free" />
-            </OnPlatform>
+            <x:String x:Key="FontAwesomeBrands">FontAwesomeBrands</x:String>
+            <x:String x:Key="FontAwesomeRegular">FontAwesomeRegular</x:String>
+            <x:String x:Key="FontAwesomeSolid">FontAwesomeSolid</x:String>
 
-            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeRegular">
-                <On Platform="Android" Value="FontAwesome5Regular.otf#Regular" />
-                <On Platform="iOS" Value="FontAwesome5Free-Regular" />
-                <On Platform="UWP" Value="/Assets/FontAwesome5Regular.otf#Font Awesome 5 Free" />
-            </OnPlatform>
+            <x:String x:Key="MontserratBold">MontserratBold</x:String>
+            <x:String x:Key="MontserratRegular">MontserratRegular</x:String>
+
+            <x:String x:Key="OpenSansBold">OpenSansBold</x:String>
+            <x:String x:Key="OpenSansBoldItalic">OpenSansBoldItalic</x:String>
+            <x:String x:Key="OpenSansExtraBold">OpenSansExtraBold</x:String>
+            <x:String x:Key="OpenSansExtraBoldItalic">OpenSansExtraBoldItalic</x:String>
+            <x:String x:Key="OpenSansItalic">OpenSansItalic</x:String>
+            <x:String x:Key="OpenSansLight">OpenSansLight</x:String>
+            <x:String x:Key="OpenSansLightItalic">OpenSansLightItalic</x:String>
+            <x:String x:Key="OpenSansRegular">OpenSansRegular</x:String>
+            <x:String x:Key="OpenSansSemiBold">OpenSansSemiBold</x:String>
+            <x:String x:Key="OpenSansSemiBoldItalic">OpenSansSemiBoldItalic</x:String>
 
             <!--#endregion-->
             
@@ -85,7 +84,7 @@
             <x:Double x:Key="MainSpacing">10</x:Double>
             <x:Double x:Key="LargeSpacing">20</x:Double>
 
-            <Thickness x:Key="XLargePadding">40, 20, 40, 20</Thickness>
+            <Thickness x:Key="ExtraLargePadding">40, 20, 40, 20</Thickness>
             <Thickness x:Key="LargePadding">30, 20, 30, 20</Thickness>
             <Thickness x:Key="MainPadding">16, 10, 16, 10</Thickness>
 
@@ -113,28 +112,31 @@
 
             <Style TargetType="Label" ApplyToDerivedTypes="True">
                 <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
             </Style>
 
             <Style x:Key="BoldLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}" />
             </Style>
             
             <Style TargetType="Entry" ApplyToDerivedTypes="True">
                 <Setter Property="FontSize" Value="Default" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
             </Style>
 
             <Style TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="HeightRequest" Value="46" />
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
                 <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
-                <Setter Property="Padding" Value="10" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
             </Style>
 
             <Style TargetType="Button" x:Key="OutlineButton">
-                <Setter Property="Visual" Value="Default" />
-                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="TextColor" Value="{StaticResource ButtonFrameColor}" />
                 <Setter Property="BorderColor" Value="{StaticResource ButtonFrameColor}" />
-                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="BorderWidth" Value="1" />
             </Style>
 
             <Style x:Key="RoundedButton" TargetType="Button">
@@ -149,24 +151,22 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="FloatingButton" TargetType="Button">
+            <Style x:Key="FloatingButton" TargetType="ImageButton">
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="32" />
-                <Setter Property="HeightRequest" Value="64" />
-                <Setter Property="WidthRequest" Value="64" />
-                <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="Padding" Value="0" />
+                <Setter Property="CornerRadius" Value="28" />
+                <Setter Property="HeightRequest" Value="56" />
+                <Setter Property="WidthRequest" Value="56" />
+                <Setter Property="Padding" Value="16" />
             </Style>
-            
-            <Style x:Key="FloatingButtonSmall" TargetType="Button">
+
+            <Style x:Key="FloatingButtonMini" TargetType="ImageButton">
                 <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="26" />
-                <Setter Property="HeightRequest" Value="52" />
-                <Setter Property="WidthRequest" Value="52" />
-                <Setter Property="FontSize" Value="Medium" />
-                <Setter Property="Padding" Value="0" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="Padding" Value="8" />
             </Style>
             
             <Style TargetType="Frame">
@@ -184,7 +184,7 @@
                 </Setter>
             </Style>
 
-            <Style TargetType="ListView">
+            <Style TargetType="ListView" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
             

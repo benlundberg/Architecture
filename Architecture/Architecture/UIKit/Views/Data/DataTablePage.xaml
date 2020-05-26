@@ -8,7 +8,8 @@
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:local="clr-namespace:Architecture"
              Visual="Material"
-             x:DataType="local:TaskOverviewViewModel">
+             x:DataType="local:TaskOverviewViewModel"
+             x:Name="dataTableRoot">
 
     <ContentPage.BindingContext>
         <local:TaskOverviewViewModel />
@@ -31,6 +32,67 @@
                     Placeholder="Select status"
                     CancelText="{local:Translate Gen_Cancel}"
                     IconTextSource="&#xf0eb;" />
+                <controls:ItemsControl 
+                    Margin="{StaticResource MainPadding}"
+                    ItemsOrientation="Horizontal"
+                    Spacing="5"
+                    ItemsSource="{Binding TableFilters}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:TableFilterViewModel">
+                            <controls:ToggleView 
+                                CheckedChangedCommand="{Binding BindingContext.TableFilterChangedCommand, Source={x:Reference dataTableRoot}}"
+                                IsChecked="{Binding IsActive, Mode=TwoWay}">
+                                <controls:ToggleView.UncheckedView>
+                                    <Frame
+                                        Padding="0" 
+                                        CornerRadius="15"
+                                        BorderColor="Transparent"
+                                        HasShadow="False"
+                                        BackgroundColor="{StaticResource PrimaryColor}">
+                                        <Label
+                                            FontSize="14" 
+                                            Margin="10, 7, 10, 7" 
+                                            VerticalOptions="Center"
+                                            Text="{Binding Text}" 
+                                            TextColor="White" />
+                                    </Frame>
+                                </controls:ToggleView.UncheckedView>
+                                <controls:ToggleView.CheckedView>
+                                    <Frame 
+                                        Padding="0" 
+                                        CornerRadius="15"
+                                        BorderColor="Transparent"
+                                        HasShadow="False"
+                                        BackgroundColor="White">
+                                        <StackLayout 
+                                            Spacing="2"
+                                            Orientation="Horizontal">
+                                            <Grid 
+                                                Padding="9, 7, 4, 7"
+                                                BackgroundColor="{StaticResource Accent}">
+                                                <Label
+                                                    FontSize="14"
+                                                    VerticalOptions="Center"
+                                                    Text="{StaticResource CheckIcon}"
+                                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                                    TextColor="White" />
+                                            </Grid>
+                                            <Grid
+                                                Padding="8, 7, 10, 7" 
+                                                BackgroundColor="{StaticResource PrimaryColor}">
+                                                <Label 
+                                                    FontSize="14" 
+                                                    VerticalOptions="Center"
+                                                    Text="{Binding Text}" 
+                                                    TextColor="White" />
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </controls:ToggleView.CheckedView>
+                            </controls:ToggleView>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
                 <controls:TableControl 
                     UseBorder="False" 
                     TableSource="{Binding TableItems}" />

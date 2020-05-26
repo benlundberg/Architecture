@@ -7,18 +7,15 @@
     <item name="windowActionModeOverlay">true</item>
 
     <item name="colorAccent">@color/AccentColor</item>
-    
     <item name="android:colorPrimary">@color/PrimaryColor</item>
-    <!--   darker variant for the status bar and contextual app bars 
-        <item name="android:colorPrimaryDark">@color/primary_dark</item>-->
-    <!--   theme UI controls like checkboxes and text fields -->
     <item name="android:colorAccent">@color/AccentColor</item>
-    
     <item name="android:statusBarColor">@color/DarkPrimaryColor</item>
+    
     <item name="android:dialogTheme">@style/AppTheme.Dialog</item>
+    <item name="alertDialogTheme">@style/AppTheme.AlertDialog</item>
+
     <item name="android:timePickerDialogTheme">@style/AppTheme.Dialog</item>
     <item name="android:datePickerDialogTheme">@style/AppTheme.Dialog</item>
-    <item name="alertDialogTheme">@style/AppTheme.AlertDialog</item>
 
     <item name="android:datePickerDialogTheme">@style/AppTheme.Dialog</item>
 
@@ -50,7 +47,7 @@
   </style>
 
   <style name="Widget.AppTheme.Button.Borderless" parent="@style/Widget.AppCompat.Button.Borderless">
-    <item name="android:textColor">#FF00FF</item>
+    <item name="android:textColor">@color/AccentColor</item>
     <item name="android:textAppearance">@style/TextAppearance.AppTheme.DialogButton</item>
   </style>
 
