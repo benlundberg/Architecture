@@ -66,7 +66,8 @@ namespace Architecture.Controls
                 TextColor = Application.Current.ToolbarTextColor(),
                 VerticalOptions = LayoutOptions.Center,
                 HorizontalOptions = view.IsCentered ? LayoutOptions.Center : LayoutOptions.Start,
-                FontSize = Device.RuntimePlatform == Device.iOS ? Device.GetNamedSize(NamedSize.Subtitle, typeof(Label)) : 20,
+                FontSize = 20,
+                FontFamily = "OpenSansSemiBold",
                 Margin = Device.RuntimePlatform == Device.iOS ? new Thickness(8, 0, 0, 0) : new Thickness(0)
             });
         }

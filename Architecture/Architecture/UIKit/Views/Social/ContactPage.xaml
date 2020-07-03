@@ -68,28 +68,28 @@
                 HorizontalOptions="Center"
                 Margin="{StaticResource ControlPadding}"
                 Spacing="{StaticResource LargeSpacing}">
-                <ImageButton Style="{StaticResource FloatingButtonMini}">
+                <ImageButton Style="{StaticResource FloatingButton}">
                     <ImageButton.Source>
                         <FontImageSource 
                             Glyph="&#xf0e0;"
                             FontFamily="{StaticResource FontAwesomeSolid}" />
                     </ImageButton.Source>
                 </ImageButton>
-                <ImageButton Style="{StaticResource FloatingButtonMini}">
+                <ImageButton Style="{StaticResource FloatingButton}">
                     <ImageButton.Source>
                         <FontImageSource 
                             Glyph="&#xf3cd;"
                             FontFamily="{StaticResource FontAwesomeSolid}" />
                     </ImageButton.Source>
                 </ImageButton>
-                <ImageButton Style="{StaticResource FloatingButtonMini}">
+                <ImageButton Style="{StaticResource FloatingButton}">
                     <ImageButton.Source>
                         <FontImageSource 
                             Glyph="&#xf5a0;"
                             FontFamily="{StaticResource FontAwesomeSolid}" />
                     </ImageButton.Source>
                 </ImageButton>
-                <ImageButton Style="{StaticResource FloatingButtonMini}">
+                <ImageButton Style="{StaticResource FloatingButton}">
                     <ImageButton.Source>
                         <FontImageSource 
                             Glyph="&#xf27a;"

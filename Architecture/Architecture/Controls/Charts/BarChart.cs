@@ -14,7 +14,7 @@ namespace Architecture.Controls.Charts
             EnableTouchEvents = true;
 
             this.PaintSurface += BarChart_PaintSurface;
-            this.Touch += BarChart_Touch;
+            //this.Touch += BarChart_Touch;
         }
 
         private void BarChart_Touch(object sender, SKTouchEventArgs e)
@@ -60,13 +60,16 @@ namespace Architecture.Controls.Charts
                     CalculatePoints(entry.Items, frame, chart);
                 }
 
-                DrawBars(canvas, frame, chart);
+                if (BarsIsVisible)
+                {
+                    DrawBars(canvas, frame, chart);
+                }
             }
         }
 
         private void DrawBars(SKCanvas canvas, SKRect frame, SKRect chart)
         {
-            var itemWidth = (chart.Width / (MaxItems < 10 ? 10 : MaxItems)) * 0.8f;
+            var itemWidth = BarWidth; //(chart.Width / (MaxItems < 10 ? 10 : MaxItems)) * 0.8f;
 
             // Selected bar width
             var selectedValueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), chart, chart.GetItemWidth(MaxItems), false, BlockStartIndex, BlockCount);
@@ -151,7 +154,6 @@ namespace Architecture.Controls.Charts
                         {
                             paint.Color = parent.Color.ToSKColor(); 
                             paint.PathEffect = SKPathEffect.CreateCorner(BarCornerRadius);
-                            //canvas.DrawLine(bounds.MidX, bounds.Bottom, bounds.MidX, bounds.Top, paint);
                             canvas.DrawRect(bounds, paint);
                         }
 
@@ -163,7 +165,9 @@ namespace Architecture.Controls.Charts
             DrawHorizontalLabel(selectedValueItems?.FirstOrDefault()?.ChartValueItem, canvas, frame, chart);
         }
 
+        public bool BarsIsVisible { get; set; } = true;
         public int BarMargin { get; set; }
+        public int BarWidth { get; set; } = 50;
         public float BarCornerRadius { get; set; } = 10f;
         public float SliderCornerRadius { get; set; } = 14f;
     }

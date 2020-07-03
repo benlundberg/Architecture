@@ -48,15 +48,15 @@
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout>
-                                    <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="125" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" Style="{StaticResource BoldLabel}" HorizontalTextAlignment="Center" Text="125" TextColor="{StaticResource PrimaryColor}" />
                                     <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Photos" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="1">
-                                    <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="225" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" Style="{StaticResource BoldLabel}" HorizontalTextAlignment="Center" Text="225" TextColor="{StaticResource PrimaryColor}" />
                                     <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Followers" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="2">
-                                    <Label FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Text="325" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" Style="{StaticResource BoldLabel}" HorizontalTextAlignment="Center" Text="325" TextColor="{StaticResource PrimaryColor}" />
                                     <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Following" />
                                 </StackLayout>
                             </Grid>
@@ -74,10 +74,10 @@
                     </ff:CachedImage>
                 </Grid>
                 <Label 
-                    Padding="20, 0"
                     Text="Biography"
+                    Padding="{StaticResource HorizontalPadding}"
                     FontSize="Default"
-                    FontAttributes="Bold" />
+                    Style="{StaticResource BoldLabel}" />
                 <Label 
                     FontSize="Body"
                     Padding="{StaticResource MainPadding}"

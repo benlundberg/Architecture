@@ -22,7 +22,9 @@ namespace Architecture.Droid
                 "FastRenderers_Experimental", 
                 "CollectionView_Experimental", 
                 "CarouselView_Experimental", 
-                "IndicatorView_Experimental");
+                "IndicatorView_Experimental",
+                "SwipeView_Experimental",
+                "Expander_Experimental");
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
 

@@ -24,18 +24,15 @@ namespace Architecture.iOS
                 "FastRenderers_Experimental",
                 "CollectionView_Experimental",
                 "CarouselView_Experimental",
-                "IndicatorView_Experimental");
+                "IndicatorView_Experimental"
+                "SwipeView_Experimental",
+                "Expander_Experimental");
 
             Xamarin.Forms.Forms.Init();
 
             Bootstrapper_iOS.Initialize();
 
             LoadApplication(new App());
-
-            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes
-            {
-                Font = UIFont.FromName("Montserrat-Regular", 20)
-            });
 
             return base.FinishedLaunching(app, options);
         }

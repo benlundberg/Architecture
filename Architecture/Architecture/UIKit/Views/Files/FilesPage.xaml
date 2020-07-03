@@ -18,7 +18,7 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="{StaticResource MainPadding}">
             <Button Text="Open PDF" Command="{Binding OpenPdfCommand}" />
             <Button Text="Open PDF (local)" Command="{Binding OpenLocalPdfCommand}" />
             <Button Text="Open Word doc" Command="{Binding OpenWordDocCommand}" />

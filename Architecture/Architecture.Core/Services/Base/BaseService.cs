@@ -115,13 +115,13 @@ namespace Architecture.Core
                     throw new Exception($"Something went wrong with the request: {resultData.ResultStatusCode}");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
-        protected static string GetUrl(string method)
+        public static string GetUrl(string method)
         {
             return ServiceConfig.WebServiceBaseAddress + method;
         }
