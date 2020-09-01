@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Architecture.Controls"
              mc:Ignorable="d"
              x:Class="Architecture.ComponentsPage"
              Visual="Material">
@@ -10,7 +11,53 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="10">
+
+                <Label Text="Frame entry" FontSize="Micro" />
+                <controls:FrameEntry
+                    Placeholder="Username"
+                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}" />
                 
+                <Label Text="Frame entry icon" FontSize="Micro" />
+                <controls:FrameEntry
+                    Placeholder="Username"
+                    SelectedBorderColor="{StaticResource PrimaryColor}"
+                    IconFontFamily="{StaticResource FontAwesomeRegular}"
+                    IconTextSource="{StaticResource UserIcon}"
+                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}" />
+
+                <Label Text="Frame entry image" FontSize="Micro" />
+                <controls:FrameEntry
+                    Placeholder="Username"
+                    ImageSource="icon"
+                    EntryBackground="{StaticResource GrayLight}"
+                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}" />
+
+                <Label Text="Rounded frame entry" FontSize="Micro" />
+                <controls:RoundedFrameEntry
+                    Placeholder="Username"
+                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}" />
+
+                <Label Text="Rounded frame entry icon" FontSize="Micro" />
+                <controls:RoundedFrameEntry
+                    Placeholder="Username"
+                    SelectedBorderColor="{StaticResource PrimaryColor}"
+                    IconFontFamily="{StaticResource FontAwesomeRegular}"
+                    IconTextSource="{StaticResource UserIcon}"
+                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}" />
+
+                <Label Text="Rounded frame entry image" FontSize="Micro" />
+                <controls:RoundedFrameEntry
+                    Placeholder="Username"
+                    ImageSource="icon"
+                    EntryBackground="{StaticResource GrayLight}"
+                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}" />
+
+                <Label Text="Search entry" FontSize="Micro" />
+                <controls:SearchEntry Placeholder="Sök"  />
+
+                <Label Text="Regular entry" FontSize="Micro" />
+                <Entry Placeholder="Username" />
+
                 <Label Text="Primary button" FontSize="Micro" />
                 <Button Text="Click me" />
             
@@ -112,11 +159,10 @@
                 </ImageButton>
 
                 <Label Text="Rounded primary button" FontSize="Micro" />
-                <Button CornerRadius="23" Text="Click me" />
+                <Button CornerRadius="22" Text="Click me" />
 
                 <Label Text="Rounded primary outline button" FontSize="Micro" />
-                <Button Style="{StaticResource OutlineButton}" CornerRadius="23" Text="Click me" />
-
+                <Button Style="{StaticResource OutlineButton}" CornerRadius="22" Text="Click me" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

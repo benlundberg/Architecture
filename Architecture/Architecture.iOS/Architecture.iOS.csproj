@@ -99,7 +99,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper_iOS.cs" />
-    <Compile Include="Effects\GradientEffect_iOS.cs" />
     <Compile Include="Renderers\ExtendedDatePickerRenderer_iOS.cs" />
     <Compile Include="Services\LocalFileSystemService_iOS.cs" />
     <Compile Include="Services\LocalizeService_iOS.cs" />
@@ -135,7 +134,7 @@
       <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.68.3</Version>
+      <Version>2.80.1</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>
@@ -155,13 +154,13 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0">
       <ExcludeAssets>all</ExcludeAssets>
       <IncludeAssets>none</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.7.0.1080</Version>
+      <Version>4.8.0.1364</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

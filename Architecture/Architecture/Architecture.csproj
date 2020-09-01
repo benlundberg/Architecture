@@ -11,17 +11,17 @@
   <ItemGroup>
     <PackageReference Include="akavache" Version="6.10.20" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.2.8">
+    <PackageReference Include="PropertyChanged.Fody" Version="3.2.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.3" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Unity" Version="5.11.7" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Architecture.Core\Architecture.Core.csproj" />
@@ -78,6 +78,9 @@
     </Compile>
     <Compile Update="Controls\NotifyScrollView\NotifyScrollView.xaml.cs">
       <DependentUpon>NotifyScrollView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\RoundedFrameEntry\RoundedFrameEntry.xaml.cs">
+      <DependentUpon>RoundedFrameEntry.xaml</DependentUpon>
     </Compile>
     <Compile Update="UIKit\Views\Articles\ArticleBrowserVariantPage.xaml.cs">
       <DependentUpon>ArticleBrowserVariantPage.xaml</DependentUpon>

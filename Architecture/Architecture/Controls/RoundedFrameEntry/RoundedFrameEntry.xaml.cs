@@ -1,5 +1,4 @@
 ﻿using Architecture.Core;
-using FFImageLoading.Transformations;
 using System;
 using System.Linq;
 using System.Windows.Input;
@@ -9,9 +8,9 @@ using Xamarin.Forms.Xaml;
 namespace Architecture.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FrameEntry : ContentView
+    public partial class RoundedFrameEntry : ContentView
     {
-        public FrameEntry()
+        public RoundedFrameEntry()
         {
             InitializeComponent();
         }
@@ -70,7 +69,7 @@ namespace Architecture.Controls
 
         private static void TextChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (!(bindable is FrameEntry view))
+            if (!(bindable is RoundedFrameEntry view))
             {
                 return;
             }
@@ -96,7 +95,7 @@ namespace Architecture.Controls
         public static readonly BindableProperty TextProperty = BindableProperty.Create(
             propertyName: "Text",
             returnType: typeof(ValidatableObject<string>),
-            declaringType: typeof(FrameEntry),
+            declaringType: typeof(RoundedFrameEntry),
             defaultValue: default(ValidatableObject<string>),
             propertyChanged: TextChanged);
 
@@ -109,7 +108,7 @@ namespace Architecture.Controls
         public static readonly BindableProperty TextChangedCommandProperty = BindableProperty.Create(
             propertyName: "TextChangedCommand",
             returnType: typeof(ICommand),
-            declaringType: typeof(FrameEntry),
+            declaringType: typeof(RoundedFrameEntry),
             defaultValue: default(ICommand));
 
         public ICommand TextChangedCommand
@@ -146,39 +145,5 @@ namespace Architecture.Controls
         public bool IsValidationVisible { get; private set; }
 
         public int MaxLength { get; set; } = 255;
-
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(
-            propertyName: "Command",
-            returnType: typeof(ICommand),
-            declaringType: typeof(FrameEntry),
-            defaultValue: default(ICommand),
-            propertyChanged: CommandPropertyChanged);
-
-        private static void CommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            if (!(bindable is FrameEntry view))
-            {
-                return;
-            }
-
-            view.IsCommandVisible = newValue != null;
-        }
-
-        public ICommand Command
-        {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
-        }
-
-        public bool IsCommandVisible { get; set; }
-        public string CommandIconFontFamily { get; set; }
-        public string CommandIconTextSource { get; set; }
-        public Color CommandIconColor { get; set; } = Color.White;
-        public Color CommandIconBackgroundColor { get; set; } = App.Current.Get<Color>("PrimaryColor");
-
-        private void ImageButton_Clicked(object sender, EventArgs e)
-        {
-            Command?.Execute(null);
-        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Android.Content;
-using Architecture.Core;
+﻿using Architecture.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;

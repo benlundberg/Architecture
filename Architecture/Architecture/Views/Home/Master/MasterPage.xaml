@@ -7,9 +7,6 @@
              Title="{Binding Title}">
     <ContentPage.Content>
         <Grid>
-            <Grid.Effects>
-                <local:GradientEffect />
-            </Grid.Effects>
             <StackLayout Padding="0,40,0,0">
                 <StackLayout Padding="0,20,0,0">
 

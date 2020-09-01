@@ -40,6 +40,7 @@
                                 </controls:ItemsControl>
                             </Frame>
                             <chart:LineChart
+                                IgnorePixelScaling="True"
                                 ChartMargin="20, 0, 0, 10"
                                 HeightRequest="400"
                                 VerticalUnit="tasks"
@@ -52,9 +53,12 @@
                                 HorizontalLabelMode="StartEnd"
                                 UseExactValue="True"
                                 LineMode="Spline"
+                                SliderDetailPadding="2"
                                 DisplayHorizontalValuesBySlider="True"
                                 SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}"
                                 ChartEntries="{Binding ChartEntries}"
+                                VerticalTextSize="20"
+                                HorizontalTextSize="20"
                                 StrokeDashFirst="12"
                                 StrokeDashSecond="28"
                                 StrokeDashPhase="28" />

@@ -22,11 +22,7 @@
 
     <ScrollView>
         <Grid>
-            <BoxView VerticalOptions="Start" HeightRequest="150">
-                <BoxView.Effects>
-                    <local:GradientEffect Direction="ToBottom" />
-                </BoxView.Effects>
-            </BoxView>
+            <BoxView VerticalOptions="Start" HeightRequest="150" />
             <StackLayout>
                 <Grid>
                     <Frame

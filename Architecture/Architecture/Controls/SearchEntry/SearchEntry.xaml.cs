@@ -69,12 +69,14 @@ namespace Architecture.Controls
 
         public string Placeholder { get; set; }
         public bool IsClearVisible { get; set; }
+        public NamedSize FontSize { get; set; } = NamedSize.Small;
+        public double InternalFontSize => Device.GetNamedSize(FontSize, typeof(Entry));
         public Color TextColor { get; set; } = Color.Black;
         public Color PlaceholderColor { get; set; } = Color.Gray;
         public Color SearchIconColor { get; set; } = Color.Gray;
         public Color ClearIconColor { get; set; } = Color.Gray;
         public Color EntryBackground { get; set; } = Color.White;
         public Color BorderColor { get; set; } = Color.Gray;
-        public Thickness EntryPadding { get; set; } = new Thickness(20, 6, 20, 6);
+        public Thickness EntryPadding { get; set; } = Device.RuntimePlatform == Device.iOS ? new Thickness(16, 10) : new Thickness(16, 2);
     }
 }

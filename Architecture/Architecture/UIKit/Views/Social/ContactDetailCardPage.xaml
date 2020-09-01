@@ -17,25 +17,31 @@
 
     <Grid>
         <BoxView VerticalOptions="Start" HeightRequest="150">
-            <BoxView.Effects>
+            <BoxView.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="{StaticResource PrimaryColor}" Offset="0.1" />
+                    <GradientStop Color="{StaticResource DarkPrimaryColor}" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+            <!--<BoxView.Effects>
                 <local:GradientEffect Direction="ToBottom" />
-            </BoxView.Effects>
+            </BoxView.Effects>-->
         </BoxView>
         <Grid Margin="40, 80" VerticalOptions="Start">
             <Frame>
                 <StackLayout Spacing="{StaticResource MainSpacing}">
-                        <Label Text="Name" FontSize="Micro" />
-                        <Label Text="John Doe" FontSize="Default" />
-                        <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
-                        <Label Text="Address" FontSize="Micro" />
-                        <Label Text="21095 Highway 20" FontSize="Default" />
-                        <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
-                        <Label Text="Phone number" FontSize="Micro" />
-                        <Label Text="+12 21412 1244" FontSize="Default" />
-                        <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
-                        <Label Text="Email" FontSize="Micro" />
-                        <Label Text="john.doe@architecture.com" FontSize="Default" />
-                        <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                    <Label Text="Name" FontSize="Micro" />
+                    <Label Text="John Doe" FontSize="Default" />
+                    <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                    <Label Text="Address" FontSize="Micro" />
+                    <Label Text="21095 Highway 20" FontSize="Default" />
+                    <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                    <Label Text="Phone number" FontSize="Micro" />
+                    <Label Text="+12 21412 1244" FontSize="Default" />
+                    <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
+                    <Label Text="Email" FontSize="Micro" />
+                    <Label Text="john.doe@architecture.com" FontSize="Default" />
+                    <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="1" />
                     <StackLayout 
                         Orientation="Horizontal" 
                         HorizontalOptions="Center"

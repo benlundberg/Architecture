@@ -120,7 +120,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Bootstrapper_UWP.cs" />
-    <Compile Include="Effects\GradientEffect_UWP.cs" />
     <Compile Include="Services\LocalFileSystemService_UWP.cs" />
     <Compile Include="Services\LocalizeService_UWP.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -170,7 +169,7 @@
       <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>1.68.3</Version>
+      <Version>2.80.1</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>
@@ -188,10 +187,10 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.7.0.1080</Version>
+      <Version>4.8.0.1364</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms.Visual.Material">
-      <Version>4.7.0.1080</Version>
+      <Version>4.8.0.1364</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

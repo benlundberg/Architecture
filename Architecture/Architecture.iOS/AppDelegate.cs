@@ -24,9 +24,11 @@ namespace Architecture.iOS
                 "FastRenderers_Experimental",
                 "CollectionView_Experimental",
                 "CarouselView_Experimental",
-                "IndicatorView_Experimental"
+                "IndicatorView_Experimental",
                 "SwipeView_Experimental",
-                "Expander_Experimental");
+                "Expander_Experimental",
+                "Brush_Experimental",
+                "Shapes_Experimental");
 
             Xamarin.Forms.Forms.Init();
 

@@ -33,6 +33,7 @@
                 PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference searchRoot}}"
                 Placeholder="{Binding Placeholder, Source={x:Reference searchRoot}}"
                 Text="{Binding Text, Source={x:Reference searchRoot}, Mode=TwoWay}"
+                FontSize="{Binding InternalFontSize, Source={x:Reference searchRoot}}"
                 ReturnCommand="{Binding InternalSearchCommand, Source={x:Reference searchRoot}}"/>
             <Label
                 Grid.Column="2"

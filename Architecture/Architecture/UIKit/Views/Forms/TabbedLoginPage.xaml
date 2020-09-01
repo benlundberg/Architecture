@@ -26,13 +26,13 @@
                                 Spacing="{StaticResource MainSpacing}"
                                 Padding="{StaticResource ExtraLargePadding}">
                                 <controls:FrameEntry
-                                    Header="Username"
+                                    Placeholder="Username"
                                     IconTextSource="&#xf007;"
                                     HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
                                     Text="{Binding LoginModel.Username, Mode=TwoWay}" />
                                 <controls:FrameEntry 
-                                    Header="Password"
+                                    Placeholder="Password"
                                     IconTextSource="&#xf023;"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
                                     HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
@@ -73,9 +73,8 @@
                                 Spacing="{StaticResource MainSpacing}"
                                 Padding="{StaticResource ExtraLargePadding}">
                                 <controls:FrameEntry 
-                                    Header="Email"
+                                    Placeholder="Email"
                                     HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                    HasValidation="True"
                                     IconTextSource="&#xf0e0;"
                                     Keyboard="Email"
                                     Text="{Binding SignUpModel.Email, Mode=TwoWay}"
@@ -83,17 +82,15 @@
                                 <controls:FrameEntry
                                     IconTextSource="&#xf023;"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
-                                    Header="Password"
+                                    Placeholder="Password"
                                     HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                    HasValidation="True"
                                     IsPassword="True" 
                                     Text="{Binding SignUpModel.Password, Mode=TwoWay}" />
                                 <controls:FrameEntry 
                                     IconTextSource="&#xf023;"
                                     IconFontFamily="{StaticResource FontAwesomeSolid}"
-                                    Header="Confirm password" 
+                                    Placeholder="Confirm password" 
                                     HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                    HasValidation="True"
                                     IsPassword="True" 
                                     Text="{Binding SignUpModel.ConfirmPassword, Mode=TwoWay}" />
                                 <Button 
