@@ -107,35 +107,6 @@ namespace Architecture
             return Application.Current.MainPage.DisplayActionSheet(title, cancel, destruction, buttons);
         }
 
-        protected async Task ShowSnackbarAsync(string message, Controls.SnackbarDuration duration = Controls.SnackbarDuration.SHORT, string buttonText = "", ICommand command = null)
-        {
-            if (!(Navigation?.NavigationStack.LastOrDefault() is ContentPage page))
-            {
-                return;
-            }
-
-            Controls.SnackbarView view = null;
-
-            if (page.Content is Grid grid)
-            {
-                view = (Controls.SnackbarView)grid.Children.FirstOrDefault(x => x is Controls.SnackbarView);
-            }
-            else if (page.Content is ScrollView scrollView)
-            {
-                if (scrollView.Content is Grid scrollGrid)
-                {
-                    view = (Controls.SnackbarView)scrollGrid.Children.FirstOrDefault(x => x is Controls.SnackbarView);
-                }
-            }
-
-            if (view == null)
-            {
-                return;
-            }
-
-            await view.ShowAsync(message, duration, string.IsNullOrEmpty(buttonText) ? Translate("Gen_Close") : buttonText, command);
-        }
-
 		private ICommand popModalCommand;
 		public ICommand PopModalCommand => popModalCommand ?? (popModalCommand = new Command(async () =>
 		{
@@ -151,7 +122,7 @@ namespace Architecture
         public INavigation Navigation { get; set; }
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;
-        public bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
+        public bool IsConnected => Connectivity.NetworkAccess != NetworkAccess.None;
 
         public event PropertyChangedEventHandler PropertyChanged;
 	}

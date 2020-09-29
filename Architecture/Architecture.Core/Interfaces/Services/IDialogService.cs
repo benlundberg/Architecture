@@ -21,5 +21,12 @@ namespace Architecture.Core
         /// <param name="checkboxTitle">Title for checkbox</param>
         /// <returns>If checked or not</returns>
         Task<bool> ShowCheckboxDialogAsync(string title, string content, string checkboxTitle, string confirm = "Ok");
+
+        /// <summary>
+        /// Shows a simple toast message on Android (On iOS nothing shows)
+        /// </summary>
+        /// <param name="text">Message in Toast</param>
+        /// <param name="shortLength">Bool = true will display short ToastLength</param>
+        void ShowToast(string text, bool shortLength = true);
     }
 }

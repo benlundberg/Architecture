@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="Architecture.Controls.SnackbarLoadingPopup"
+    x:Name="SnackView"
+    BackgroundColor="Transparent"
+    BackgroundInputTransparent="True"
+    CloseWhenBackgroundIsClicked="False">
+
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </pages:PopupPage.Animation>
+
+    <Grid 
+        ColumnDefinitions="*, Auto"
+        BackgroundColor="#323232"
+        VerticalOptions="End">
+        <Label 
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand"
+            Margin="20, 5, 5, 5"
+            FontFamily=""
+            Text="{Binding Text, Source={x:Reference SnackView}}"
+            TextColor="{Binding TextColor, Source={x:Reference SnackView}}"
+            FontSize="14"
+            LineBreakMode="WordWrap" />
+        <ActivityIndicator 
+            Grid.Column="1"
+            IsRunning="True"
+            Color="{Binding ActivityColor, Source={x:Reference SnackView}}"
+            Margin="16, 4"
+            VerticalOptions="Center" 
+            HorizontalOptions="End" />
+    </Grid>
+</pages:PopupPage>

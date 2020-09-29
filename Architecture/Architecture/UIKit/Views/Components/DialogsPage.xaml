@@ -39,6 +39,14 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+                <Button Text="Show toast" Command="{Binding ShowToastCommand}" />
+                <Button Text="Show snackbar" Command="{Binding ShowSnackbarCommand}" />
+                <Button Text="Show loading snackbar" Command="{Binding ShowLoadingSnackbarCommand}" />
+                <Button Text="Show fullsize loading" Command="{Binding ShowLoadingCommand}" />
+                <Button Text="Show notification regular" Command="{Binding ShowNotificationCommand}" CommandParameter="1" />
+                <Button Text="Show notification success" Command="{Binding ShowNotificationCommand}" CommandParameter="2" />
+                <Button Text="Show notification warning" Command="{Binding ShowNotificationCommand}" CommandParameter="3" />
+                <Button Text="Show notification error" Command="{Binding ShowNotificationCommand}" CommandParameter="4" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

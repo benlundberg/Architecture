@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    x:Class="Architecture.Controls.SnackbarPopup"
+    x:Name="SnackView"
+    BackgroundColor="Transparent"
+    BackgroundInputTransparent="True"
+    CloseWhenBackgroundIsClicked="False">
+
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </pages:PopupPage.Animation>
+
+    <Grid 
+        ColumnDefinitions="*, Auto"
+        BackgroundColor="#323232"
+        VerticalOptions="End">
+        <Label 
+            FontFamily=""
+            Text="{Binding Option.Message, Source={x:Reference SnackView}}"
+            FontSize="14"
+            TextColor="{Binding TextColor, Source={x:Reference SnackView}}"
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand"
+            Margin="20, 5, 5, 5"
+            LineBreakMode="WordWrap" />
+        <Button 
+            Grid.Column="1" 
+            Margin="2"
+            HorizontalOptions="End"
+            IsVisible="{Binding IsButtonVisible, Source={x:Reference SnackView}}"
+            Command="{Binding Option.Command, Source={x:Reference SnackView}}" 
+            VerticalOptions="Center"
+            Clicked="Button_Clicked"
+            FontSize="14"
+            FontFamily=""
+            TextColor="{Binding ButtonTextColor, Source={x:Reference SnackView}}"
+            BackgroundColor="#323232"
+            Text="{Binding Option.ButtonText, Source={x:Reference SnackView}}" />
+    </Grid>
+</pages:PopupPage>

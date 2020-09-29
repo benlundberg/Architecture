@@ -30,6 +30,8 @@ namespace Architecture.Droid
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
 
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             global::Xamarin.Forms.FormsMaterial.Init(this, bundle);

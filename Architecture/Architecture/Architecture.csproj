@@ -16,6 +16,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.5" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Unity" Version="5.11.7" />
@@ -80,6 +81,12 @@
     <Compile Update="Controls\NotifyScrollView\NotifyScrollView.xaml.cs">
       <DependentUpon>NotifyScrollView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\Popups\Snackbar\SnackbarLoadingPopup.xaml.cs">
+      <DependentUpon>SnackbarLoadingPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\Popups\Snackbar\SnackbarPopup.xaml.cs">
+      <DependentUpon>SnackbarPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\RoundedFrameEntry\RoundedFrameEntry.xaml.cs">
       <DependentUpon>RoundedFrameEntry.xaml</DependentUpon>
     </Compile>
@@ -138,6 +145,12 @@
     <EmbeddedResource Update="Controls\PickerView\PickerView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Popups\Loading\LoadingPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Popups\Notification\NotificationPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Controls\SearchEntry\SearchEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -147,7 +160,7 @@
     <EmbeddedResource Update="Controls\SlideDownMenu\SlideDownMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Controls\SnackbarView\SnackbarView.xaml">
+    <EmbeddedResource Update="Controls\Popups\Snackbar\SnackbarPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ValidationEntry\ValidationEntry.xaml">

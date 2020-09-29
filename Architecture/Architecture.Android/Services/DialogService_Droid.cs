@@ -117,5 +117,10 @@ namespace Architecture.Droid
             var res = await taskCompletionSource.Task;
             return res;
         }
+
+        public void ShowToast(string text, bool shortLength = true)
+        {
+            Toast.MakeText(Xamarin.Essentials.Platform.CurrentActivity, text, shortLength ? ToastLength.Short : ToastLength.Long).Show();
+        }
     }
 }

@@ -5,6 +5,6 @@ namespace Architecture
 {
     public class ConnectivityService : IConnectivityService
     {
-        public bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
+        public bool IsConnected => Connectivity.NetworkAccess != NetworkAccess.None;
     }
 }

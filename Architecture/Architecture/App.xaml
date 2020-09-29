@@ -30,12 +30,17 @@
             <Color x:Key="ButtonTextColor">#FFF</Color>
             <Color x:Key="ButtonFrameColor">#0FBCF9</Color>
 
+            <Color x:Key="SuccessColor">#43A047</Color>
+            <Color x:Key="WarningColor">#FFA801</Color>
+            <Color x:Key="ErrorColor">#B00020</Color>
+
             <!--#endregion-->
             
             <!-- #region Converters-->
             
             <local:InvertedBoolConverter x:Key="InvertedBoolConv" />
-
+            <local:NullOrEmptyToBoolConverter x:Key="NullOrEmptyToBoolConv" />
+            
             <!--#endregion-->
             
             <!-- #region Glyphs -->
@@ -132,7 +137,7 @@
                 <Setter Property="HeightRequest" Value="46" />
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
                 <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
-                <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSansSemiBold}" />
             </Style>
 
             <Style TargetType="Button" x:Key="OutlineButton">

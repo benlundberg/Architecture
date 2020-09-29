@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Architecture.Controls.LoadingPopup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    CloseWhenBackgroundIsClicked="False"
+    x:Name="LoadingPopupRoot">
+
+    <StackLayout 
+        Spacing="8"
+        VerticalOptions="Center" 
+        HorizontalOptions="Center">
+        <ActivityIndicator
+            Color="{Binding ActivityColor, Source={x:Reference LoadingPopupRoot}}"
+            IsRunning="True"
+            IsEnabled="True"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            HeightRequest="50"
+            WidthRequest="50" />
+        <Label 
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            TextColor="{Binding TextColor, Source={x:Reference LoadingPopupRoot}}"
+            Text="{Binding Text, Source={x:Reference LoadingPopupRoot}}"/>
+    </StackLayout>
+
+</pages:PopupPage>
