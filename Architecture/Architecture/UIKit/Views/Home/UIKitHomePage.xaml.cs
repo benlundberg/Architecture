@@ -255,6 +255,9 @@ namespace Architecture
                 case 1:
                     await Navigation.PushAsync(new ComponentsPage());
                     break;
+                case 2:
+                    await Navigation.PushAsync(new DialogsPage());
+                    break;
             }
         }));
     }

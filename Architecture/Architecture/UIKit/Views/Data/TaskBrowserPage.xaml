@@ -21,13 +21,13 @@
     <Grid>
         <controls:SegmentView
             SectionHorizontalayout="Start"
-            Margin="{StaticResource MainPadding}"
+            SectionControlPadding="{StaticResource MainPadding}"
             SelectedSectionTextColor="{StaticResource PrimaryColor}"
             SectionTextColor="{StaticResource PrimaryColor}">
             <controls:SegmentView.ItemsSource>
-                <controls:SegmentControlItem Text="Progress" Tag="1" IsSelected="True">
+                <controls:SegmentControlItem Text="Progress" Tag="1" IsSelected="False">
                     <controls:SegmentControlItem.Content>
-                        <StackLayout Spacing="0" VerticalOptions="Center">
+                        <Grid RowDefinitions="Auto, *">
                             <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
                                 <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
                                     <controls:ItemsControl.ItemTemplate>
@@ -40,34 +40,17 @@
                                 </controls:ItemsControl>
                             </Frame>
                             <chart:LineChart
-                                IgnorePixelScaling="True"
-                                ChartMargin="20, 0, 0, 10"
-                                HeightRequest="400"
+                                Grid.Row="1"
                                 VerticalUnit="tasks"
-                                IsSliderVisible="True"
-                                SliderWidth="4"
-                                InsideFrame="StartCenterEnd"
-                                VerticalLabelMode="StartCenterEnd"
-                                HideFrame="True"
-                                DashedFrame="True"
-                                HorizontalLabelMode="StartEnd"
-                                UseExactValue="True"
-                                LineMode="Spline"
-                                SliderDetailPadding="2"
-                                DisplayHorizontalValuesBySlider="True"
-                                SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}"
+                                HorizontalUnit="years"
                                 ChartEntries="{Binding ChartEntries}"
-                                VerticalTextSize="20"
-                                HorizontalTextSize="20"
-                                StrokeDashFirst="12"
-                                StrokeDashSecond="28"
-                                StrokeDashPhase="28" />
-                        </StackLayout>
+                                SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}" />
+                        </Grid>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
                 <controls:SegmentControlItem Text="Done" Tag="2">
                     <controls:SegmentControlItem.Content>
-                        <StackLayout Spacing="0" VerticalOptions="Center">
+                        <Grid RowDefinitions="Auto, *">
                             <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
                                 <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
                                     <controls:ItemsControl.ItemTemplate>
@@ -80,28 +63,113 @@
                                 </controls:ItemsControl>
                             </Frame>
                             <chart:BarChart
-                                ChartMargin="20, 0, 0, 10"
-                                HeightRequest="400"
-                                VerticalLabelMode="StartCenterEnd"
-                                VerticalOptions="FillAndExpand"
-                                HorizontalLabelMode="StartEnd"
+                                Grid.Row="1"
                                 VerticalUnit="tasks"
-                                ChartPadding="60, 0"
-                                BarMargin="2"
-                                HideFrame="True"
-                                DashedFrame="True"
-                                InsideFrame="StartCenterEnd"
-                                VerticalLabelAlignment="Start"
-                                IsSliderVisible="True"
-                                DisplayHorizontalValuesBySlider="True"
-                                SliderColor="{StaticResource GrayDark}"
+                                HorizontalUnit="years"
                                 ChartEntries="{Binding ChartEntries}"
-                                SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}"
-                                StrokeDashFirst="12"
-                                StrokeDashSecond="12"
-                                StrokeDashPhase="20"
-                                SliderCornerRadius="28" />
-                        </StackLayout>
+                                SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}" />
+                        </Grid>
+                    </controls:SegmentControlItem.Content>
+                </controls:SegmentControlItem>
+                <controls:SegmentControlItem Text="More done" Tag="3" IsSelected="True">
+                    <controls:SegmentControlItem.Content>
+                        <Grid  RowDefinitions="Auto, *">
+                            <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
+                                <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
+                                    <controls:ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
+                                                <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
+                                            </Frame>
+                                        </DataTemplate>
+                                    </controls:ItemsControl.ItemTemplate>
+                                </controls:ItemsControl>
+                            </Frame>
+                            <Grid Grid.Row="1">
+                                <chart:BarChart
+                                    VerticalUnit="tasks"
+                                    HorizontalUnit="years"
+                                    AllowScroll="True"
+                                    BarsIsVisible="False"
+                                    BarMargin="6"
+                                    GroupMargin="14"
+                                    HorizontalLabelMode="None"
+                                    ChartEntries="{Binding ChartEntries}"
+                                    SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}" />
+                            </Grid>
+                            <BoxView 
+                                x:Name="selector"
+                                Grid.Row="1"
+                                Color="Red"
+                                VerticalOptions="Fill" 
+                                HorizontalOptions="Start" />
+                            <Frame
+                                Grid.Row="1"
+                                Padding="0"
+                                HorizontalOptions="Start"
+                                Margin="180,0,0,0"
+                                MinimumWidthRequest="{Binding Width, Source={x:Reference selector}}"
+                                VerticalOptions="End">
+                                <Label Text="{Binding SelectedLabel, Source={x:Reference barCharty}}" />
+                            </Frame>
+                            <ScrollView 
+                                x:Name="scrolly"
+                                Grid.Row="1"
+                                VerticalScrollBarVisibility="Never"
+                                HorizontalScrollBarVisibility="Never"
+                                Orientation="Horizontal">
+                                <chart:BarChart
+                                    x:Name="barCharty"
+                                    ScrollComponent="{Reference scrolly}"
+                                    Selector="{Reference selector}"
+                                    SwipeNotificationLeft="{Reference leftSwipeNotification}"
+                                    SwipeNotificationRight="{Reference rightSwipeNotification}"
+                                    FrameColor="Transparent"
+                                    InnerFrameColor="Transparent"
+                                    HorizontalTextColor="Transparent"
+                                    VerticalTextColor="Transparent"
+                                    HorizontalLabelMode="None"
+                                    DisplayHorizontalValuesBySlider="False"
+                                    IsSliderVisible="False"
+                                    VerticalUnit="tasks"
+                                    HorizontalUnit="years"
+                                    AllowScroll="True"
+                                    BarMargin="10"
+                                    GroupMargin="20"
+                                    ChartEntries="{Binding ChartEntries}"
+                                    SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}" />
+                            </ScrollView>
+                            <Grid 
+                                x:Name="leftSwipeNotification"
+                                InputTransparent="True"
+                                Opacity="0"
+                                Grid.Row="1"
+                                HorizontalOptions="Start"
+                                BackgroundColor="Green">
+                                <Grid.GestureRecognizers>
+                                    <SwipeGestureRecognizer Direction="Right" Command="{Binding SwipeRightCommand, Source={x:Reference barCharty}}" />
+                                </Grid.GestureRecognizers>
+                                <Label 
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    Text="Swipe for previous"/>
+                            </Grid>
+                            <Grid 
+                                x:Name="rightSwipeNotification"
+                                InputTransparent="True"
+                                Opacity="0"
+                                Grid.Row="1"
+                                HorizontalOptions="End"
+                                BackgroundColor="Green">
+                                <Grid.GestureRecognizers>
+                                    <SwipeGestureRecognizer Direction="Left" Command="{Binding SwipeLeftCommand, Source={x:Reference barCharty}}" />
+                                </Grid.GestureRecognizers>
+                                <Label 
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    Text="Swipe for next"/>
+                            </Grid>
+                        </Grid>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
             </controls:SegmentView.ItemsSource>

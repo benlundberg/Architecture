@@ -70,6 +70,7 @@
             <!-- Components -->
             <Label Text="Components" FontSize="Large" />
             <Button Text="Components" Command="{Binding ComponentsCommand, Source={x:Reference root}}" CommandParameter="1" />
+            <Button Text="Dialogs" Command="{Binding ComponentsCommand, Source={x:Reference root}}" CommandParameter="2" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

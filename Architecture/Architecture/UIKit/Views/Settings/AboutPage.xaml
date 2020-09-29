@@ -13,7 +13,41 @@
     
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Margin="{StaticResource LargePadding}">
+            <Grid ColumnDefinitions="Auto, Auto, Auto, Auto">
+                <ListView Grid.Column="0">
+                    <ListView.Header>
+                        <Label Text="Header 1" />
+                    </ListView.Header>
+                    <ListView.ItemsSource>
+                        <x:String>1111111</x:String>
+                    </ListView.ItemsSource>
+                </ListView>
+                <ListView Grid.Column="1">
+                    <ListView.Header>
+                        <Label Text="Header 2" />
+                    </ListView.Header>
+                    <ListView.ItemsSource>
+                        <x:String>2222222</x:String>
+                    </ListView.ItemsSource>
+                </ListView>
+                <ListView Grid.Column="2">
+                    <ListView.Header>
+                        <Label Text="Header 3" />
+                    </ListView.Header>
+                    <ListView.ItemsSource>
+                        <x:String>3333333</x:String>
+                    </ListView.ItemsSource>
+                </ListView>
+                <ListView Grid.Column="3">
+                    <ListView.Header>
+                        <Label Text="Header 4" />
+                    </ListView.Header>
+                    <ListView.ItemsSource>
+                        <x:String>4444444</x:String>
+                    </ListView.ItemsSource>
+                </ListView>
+            </Grid>
+            <!--<StackLayout Margin="{StaticResource LargePadding}">
                 <Label 
                     FontSize="Large"
                     Text="About us" />
@@ -53,7 +87,7 @@
                     FontSize="64"
                     Text="{StaticResource GeneralIcon}"
                     FontFamily="{StaticResource FontAwesomeBrands}"/>
-            </StackLayout>
+            </StackLayout>-->
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

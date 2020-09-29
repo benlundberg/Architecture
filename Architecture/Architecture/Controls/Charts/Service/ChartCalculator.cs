@@ -68,6 +68,11 @@ namespace Architecture.Controls.Charts
             // Difference in Y position
             var diffY = secondItem.Point.Y - firstItem.Point.Y;
 
+            if (diffY == 0)
+            {
+                return firstItem.Point.Y;
+            }
+
             // Difference in X position
             var diffX = secondItem.Point.X - firstItem.Point.X;
 
@@ -93,7 +98,7 @@ namespace Architecture.Controls.Charts
 
             var point = firstItem.Point;
             var nextPoint = secondItem.Point;
-            var offsetPoint = new SKPoint((nextPoint.X - point.X) * .8f, 0);
+            var offsetPoint = new SKPoint((nextPoint.X - point.X) * .5f, 0);
 
             var currentPoint = point + offsetPoint;
             var next = nextPoint - offsetPoint;
@@ -102,6 +107,11 @@ namespace Architecture.Controls.Charts
 
             // Difference in Y position
             diffY = (firstItem.Point.Y > secondItem.Point.Y ? firstItem.Point.Y - secondItem.Point.Y : secondItem.Point.Y - firstItem.Point.Y).ToRounded();
+
+            if (diffY == 0)
+            {
+                return new SKPoint(xPosition, firstItem.Point.Y);
+            }
 
             var insideY = y > firstItem.Point.Y ? y - firstItem.Point.Y.ToRounded() : firstItem.Point.Y - y;
 

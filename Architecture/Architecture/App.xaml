@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Architecture;assembly=Architecture"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Architecture.Controls"
              x:Class="Architecture.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -23,7 +24,7 @@
             <Color x:Key="TextColor">#000</Color>
             <Color x:Key="SecondaryTextColor">#FFF</Color>
 
-            <Color x:Key="PageBackgroundColor">#F5F7FA</Color>
+            <Color x:Key="PageBackgroundColor">#FFF</Color>
             <Color x:Key="BarBackgroundColor">#0FBCF9</Color>
             <Color x:Key="ButtonBackgroundColor">#0FBCF9</Color>
             <Color x:Key="ButtonTextColor">#FFF</Color>
@@ -50,6 +51,7 @@
             <x:String x:Key="ChevronDownIcon">&#xf078;</x:String>
             <x:String x:Key="UserIcon">&#xf007;</x:String>
             <x:String x:Key="MailIcon">&#xf0e0;</x:String>
+            
             <!--#endregion-->
             
             <!-- #region Fonts -->
@@ -186,7 +188,7 @@
             <Style TargetType="ListView" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
-            
+
             <!--#endregion-->
             
         </ResourceDictionary>

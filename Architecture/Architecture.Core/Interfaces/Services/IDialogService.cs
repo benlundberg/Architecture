@@ -4,6 +4,22 @@ namespace Architecture.Core
 {
     public interface IDialogService
     {
-        Task<string> ShowSimpleDialog(string title, string[] items, string confirm);
+        /// <summary>
+        /// Displays a simple dialog with list item options
+        /// </summary>
+        /// <param name="title">Title of dialog</param>
+        /// <param name="items">Selectable options</param>
+        /// <param name="confirm">Confirm button text</param>
+        /// <returns>Selected item</returns>
+        Task<string> ShowSimpleDialogAsync(string title, string[] items, string close = null);
+
+        /// <summary>
+        /// Displays a dialog with checkbox
+        /// </summary>
+        /// <param name="title">Title of dialog</param>
+        /// <param name="content">Content text for dialog</param>
+        /// <param name="checkboxTitle">Title for checkbox</param>
+        /// <returns>If checked or not</returns>
+        Task<bool> ShowCheckboxDialogAsync(string title, string content, string checkboxTitle, string confirm = "Ok");
     }
 }

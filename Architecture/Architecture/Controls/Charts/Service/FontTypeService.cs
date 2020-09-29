@@ -1,5 +1,8 @@
 ﻿using Architecture.Core;
 using SkiaSharp;
+using System;
+using System.IO;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace Architecture.Controls.Charts
@@ -7,41 +10,29 @@ namespace Architecture.Controls.Charts
     public static class FontTypeService
     {
         private static SKTypeface fontFamily;
-        public static SKTypeface GetFontFamily()
+        public static SKTypeface GetFontFamily(Assembly assembly)
         {
             if (fontFamily != null)
             {
                 return fontFamily;
             }
 
-            string path = string.Empty;
-
-            //if (Device.RuntimePlatform == Device.Android)
-            //{
-            //    path = "Montserrat-Regular.ttf";
-            //}
-            //else if (Device.RuntimePlatform == Device.iOS)
-            //{
-            //    path = "Montserrat-Regular.ttf";
-            //}
-
-            if (string.IsNullOrEmpty(path))
+            try
             {
-                fontFamily = SKTypeface.Default;
-                return fontFamily;
+                string resourceID = "Architecture.Resources.Fonts.OpenSans-Regular.ttf";
+
+                using Stream stream = assembly.GetManifestResourceStream(resourceID);
+
+                fontFamily = SKTypeface.FromStream(stream);
+
+                stream.Close();
             }
-
-            var stream = ComponentContainer.Current.Resolve<ILocalFileSystemService>().GetStreamFromAssets(path);
-
-            if (stream == null)
+            catch (Exception ex)
             {
+                ex.Print();
+
                 fontFamily = SKTypeface.Default;
-                return fontFamily;
             }
-
-            fontFamily = SKTypeface.FromStream(stream);
-
-            stream.Close();
 
             return fontFamily;
         }

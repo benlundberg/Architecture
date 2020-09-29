@@ -176,32 +176,5 @@ namespace Architecture.Resources {
                 return ResourceManager.GetString("GenErr_NoNetworkTitle", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To use this function the app needs access to:.
-        /// </summary>
-        internal static string Permission_Message {
-            get {
-                return ResourceManager.GetString("Permission_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Open settings?.
-        /// </summary>
-        internal static string Permission_Settings {
-            get {
-                return ResourceManager.GetString("Permission_Settings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Access for:.
-        /// </summary>
-        internal static string Permission_Title {
-            get {
-                return ResourceManager.GetString("Permission_Title", resourceCulture);
-            }
-        }
     }
 }

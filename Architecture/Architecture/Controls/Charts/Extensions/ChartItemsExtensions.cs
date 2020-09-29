@@ -25,7 +25,7 @@ namespace Architecture.Controls.Charts
 
     public static class ChartItemsExtensions
     {
-        public static IList<ChartValueItemParam> GetChartValueItemFromX(this IList<ChartItem> chartItems, float xPosition, SKRect frame, float itemWidth, bool useExactValue, int blockStartIndex = 0, int blockCount = 0)
+        public static IList<ChartValueItemParam> GetChartValueItemFromX(this IList<ChartItem> chartItems, float xPosition, SKRect frame, float itemWidth)
         {
             var items = new List<ChartValueItemParam>();
 
@@ -36,11 +36,11 @@ namespace Architecture.Controls.Charts
 
             foreach (var chartEntry in chartItems.Where(x => x.Items?.Any() == true && x.IsVisible))
             {
-                var valueItems = blockCount > 0 ? chartEntry.Items.Skip(blockStartIndex).Take(blockCount) : chartEntry.Items;
+                var valueItems = chartEntry.Items;
 
                 ChartValueItem item = null;
 
-                if (useExactValue)
+                if (true)
                 {
                     // Order list and takes the first that's lower then X value
                     item = valueItems.OrderByDescending(c => c.Point.X).FirstOrDefault(c => c.Point.X <= xPosition);

@@ -7,18 +7,23 @@ namespace Architecture.Controls
     {
         public PageTitleView()
         {
+            IsCentered = Device.RuntimePlatform == Device.iOS;
             PropertyChanged += PageTitleView_PropertyChanged;
         }
 
         private void PageTitleView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (!IsCentered)
+            CenterTitle();
+        }
+
+        private void CenterTitle()
+        {
+            if (Width <= 0)
             {
-                PropertyChanged -= PageTitleView_PropertyChanged;
                 return;
             }
 
-            if (Width > 0)
+            if (IsCentered)
             {
                 if (!(Children.First() is View view))
                 {
@@ -37,10 +42,11 @@ namespace Architecture.Controls
                     return;
                 }
 
-                PropertyChanged -= PageTitleView_PropertyChanged;
-
+                view.HorizontalOptions = LayoutOptions.Center;
                 view.TranslationX = (this.Width - (navigationPage.Width - 16)) / 2;
             }
+
+            PropertyChanged -= PageTitleView_PropertyChanged;
         }
 
         public static readonly BindableProperty TextProperty = BindableProperty.Create(
@@ -78,6 +84,22 @@ namespace Architecture.Controls
             set { SetValue(TextProperty, value); }
         }
 
-        public bool IsCentered { get; set; }
+        private bool isCentered;
+        public bool IsCentered
+        {
+            get 
+            { 
+                return isCentered; 
+            }
+            set
+            {
+                isCentered = value;
+
+                if (isCentered)
+                {
+                    this.CenterTitle();
+                }
+            }
+        }
     }
 }

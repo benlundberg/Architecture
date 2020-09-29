@@ -30,8 +30,9 @@
 
   <!-- DatePicker style -->
   <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
-    <item name="colorAccent">@color/AccentColor</item>
-    <item name="android:textColorPrimary">@color/AccentColor</item>
+    <item name="android:windowTitleStyle">@style/AppTheme.DialogTitleTextStyle</item>
+    <item name="android:windowNoTitle">false</item>
+    <item name="android:colorAccent">@color/AccentColor</item>
     <item name="android:datePickerStyle">@style/CustomDatePicker</item>
   </style>
 

@@ -4,6 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
              x:Class="Architecture.TabbedLoginPage"
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
@@ -11,7 +13,6 @@
 
     <Grid>
         <controls:SegmentView 
-            FontSize="Medium"
             SectionControlMargin="40"
             SectionHorizontalayout="Start"
             IsVisible="{Binding LoginModel.IsBusy, Converter={StaticResource InvertedBoolConv}}"

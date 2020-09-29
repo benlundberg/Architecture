@@ -7,6 +7,10 @@
              mc:Ignorable="d"
              x:Class="Architecture.ComponentsPage"
              Visual="Material">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Components" />
+    </NavigationPage.TitleView>
     
     <ContentPage.Content>
         <ScrollView>

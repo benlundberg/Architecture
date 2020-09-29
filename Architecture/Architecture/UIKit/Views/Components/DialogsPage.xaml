@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture"
+             x:Class="Architecture.DialogsPage"
+             Visual="Material"
+             x:DataType="local:DialogsViewModel">
+
+    <ContentPage.BindingContext>
+        <local:DialogsViewModel />
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Dialogs" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+
+                <Button Text="Check dialog" Command="{Binding CheckDialogCommand}" />
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Was checked: " />
+                            <Span Text="{Binding IsChecked}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Button Text="Simple dialog" Command="{Binding SimpleDialogCommand}" />
+                <Button Text="Alert dialog" Command="{Binding AlertDialogCommand}" />
+                <Button Text="Confirm dialog" Command="{Binding ConfirmDialogCommand}" />
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Answer from confirm: " />
+                            <Span Text="{Binding ConfirmAnswer}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

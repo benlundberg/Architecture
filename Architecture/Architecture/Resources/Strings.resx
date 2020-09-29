@@ -141,15 +141,6 @@
   <data name="Gen_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="Permission_Message" xml:space="preserve">
-    <value>To use this function the app needs access to:</value>
-  </data>
-  <data name="Permission_Settings" xml:space="preserve">
-    <value>Open settings?</value>
-  </data>
-  <data name="Permission_Title" xml:space="preserve">
-    <value>Access for:</value>
-  </data>
   <data name="Gen_Clear" xml:space="preserve">
     <value>Clear</value>
   </data>

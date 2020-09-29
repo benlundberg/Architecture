@@ -20,8 +20,9 @@
     <ContentPage.Content>
         <StackLayout Padding="{StaticResource MainPadding}">
             <Button Text="Open PDF" Command="{Binding OpenPdfCommand}" />
-            <Button Text="Open PDF (local)" Command="{Binding OpenLocalPdfCommand}" />
+            <Button Text="Open PDF Launcher" Command="{Binding OpenLauncherPdfCommand}" />
             <Button Text="Open Word doc" Command="{Binding OpenWordDocCommand}" />
+            <Button Text="Open Word doc Launcher" Command="{Binding OpenLauncherWordCommand}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

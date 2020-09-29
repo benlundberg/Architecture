@@ -37,7 +37,7 @@
                         Grid.Column="1"
                         Placeholder="Zipcode" />
                 </Grid>
-                <Grid>
+                <Grid ColumnDefinitions="*, Auto">
                     <Label
                         Grid.Column="0"
                         VerticalOptions="Center"
@@ -48,7 +48,9 @@
                         VerticalOptions="Center" />
                 </Grid>
                 <Editor
-                    HeightRequest="100"
+                    Visual="Default"
+                    BackgroundColor="White"
+                    HeightRequest="150"
                     Placeholder="Notes" />
                 <Button Text="Save" />
             </StackLayout>

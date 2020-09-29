@@ -141,15 +141,6 @@
   <data name="Gen_Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
-  <data name="Permission_Message" xml:space="preserve">
-    <value>För att använda denna funktion behöver appen behörighet till:</value>
-  </data>
-  <data name="Permission_Settings" xml:space="preserve">
-    <value>Öppna inställningar?</value>
-  </data>
-  <data name="Permission_Title" xml:space="preserve">
-    <value>Behörighet för:</value>
-  </data>
   <data name="Gen_Clear" xml:space="preserve">
     <value>Rensa</value>
   </data>

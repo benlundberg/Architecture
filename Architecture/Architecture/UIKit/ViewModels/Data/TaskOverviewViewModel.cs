@@ -118,7 +118,7 @@ namespace Architecture
             var items3 = new List<ChartValueItem>();
             var items4 = new List<ChartValueItem>();
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 10; i++)
             {
                 var date = dateTime.AddYears(i);
 
@@ -191,9 +191,6 @@ namespace Architecture
                     PointColor = App.Current.AccentColor(),
                 }
             };
-
-            PreviousBlockIsEnabled = CurrentStartBlockIndex > 0;
-            NextBlockIsEnabled = CurrentStartBlockIndex < ChartEntries.Max(x => x.Items.Count);
         }
 
         private ICommand tableFilterChangedCommand;
@@ -222,7 +219,7 @@ namespace Architecture
 
                     if (val != null)
                     {
-                        val.Value = item.ChartValueItem.Value.ToString() + " tasks"; //ChartCalculator.CalculateExactValue(item.ChartValueItem, item.NextChartValueItem, args.TouchedPoint.X).ToString() + " tasks";
+                        val.Value = item.ChartValueItem.Value.ToString() + " tasks";
                     }
                     else
                     {
@@ -231,7 +228,7 @@ namespace Architecture
                             BackgroundColor = item.BackgroundColor,
                             Id = item.Parent.Id,
                             TextColor = item.TextColor,
-                            Value = item.ChartValueItem.Value.ToString() + " tasks"//ChartCalculator.CalculateExactValue(item.ChartValueItem, item.NextChartValueItem, args.TouchedPoint.X).ToString() + " tasks"
+                            Value = item.ChartValueItem.Value.ToString() + " tasks"
                         });
                     }
                 }
@@ -243,37 +240,10 @@ namespace Architecture
                     Id = x.Parent.Id,
                     BackgroundColor = x.BackgroundColor,
                     TextColor = x.TextColor,
-                    Value = x.ChartValueItem.Value.ToString() + " tasks"//ChartCalculator.CalculateExactValue(x.ChartValueItem, x.NextChartValueItem, args.TouchedPoint.X).ToString() + " tasks"
+                    Value = x.ChartValueItem.Value.ToString() + " tasks"
                 }));
             }
         }));
-
-        private ICommand previousChartBlockCommand;
-        public ICommand PreviousChartBlockCommand => previousChartBlockCommand ?? (previousChartBlockCommand = new Command(() =>
-        {
-            var startBlockIndex = CurrentStartBlockIndex - BlockCount;
-
-            CurrentStartBlockIndex = startBlockIndex < 0 ? 0 : startBlockIndex;
-
-            PreviousBlockIsEnabled = CurrentStartBlockIndex > 0;
-            NextBlockIsEnabled = CurrentStartBlockIndex + BlockCount < ChartEntries.Max(x => x.Items.Count);
-        }));
-
-        private ICommand nextChartBlockCommand;
-        public ICommand NextChartBlockCommand => nextChartBlockCommand ?? (nextChartBlockCommand = new Command(() =>
-        {
-            var startBlockIndex = CurrentStartBlockIndex + BlockCount;
-
-            CurrentStartBlockIndex = startBlockIndex > ChartEntries.Max(x => x.Items.Count) ? ChartEntries.Max(x => x.Items.Count) : startBlockIndex;
-
-            PreviousBlockIsEnabled = CurrentStartBlockIndex > 0;
-            NextBlockIsEnabled = CurrentStartBlockIndex + BlockCount < ChartEntries.Max(x => x.Items.Count);
-        }));
-
-        public bool NextBlockIsEnabled { get; set; }
-        public bool PreviousBlockIsEnabled { get; set; }
-        public int CurrentStartBlockIndex { get; set; }
-        public int BlockCount { get; set; } = 7;
 
         public string SelectedItem { get; set; }
         public List<string> PickerValues { get; private set; }

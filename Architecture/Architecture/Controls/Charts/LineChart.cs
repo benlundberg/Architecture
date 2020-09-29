@@ -1,7 +1,9 @@
 ﻿using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Architecture.Controls.Charts
 {
@@ -30,7 +32,34 @@ namespace Architecture.Controls.Charts
                 return;
             }
 
-            TouchedPoint = e.Location;
+            isTouching = true;
+
+            if (e.ActionType == SKTouchAction.Released || e.ActionType == SKTouchAction.Cancelled || e.ActionType == SKTouchAction.Exited)
+            {
+                isTouching = false;
+
+                var closest = float.MaxValue;
+
+                if (ChartEntries == null)
+                {
+                    return;
+                }
+
+                foreach (var item in ChartEntries.SelectMany(x => x.Items))
+                {
+                    var distance = SKPoint.Distance(new SKPoint(e.Location.X, 0), new SKPoint(item.Point.X, 0));
+
+                    if (distance < closest)
+                    {
+                        closest = distance;
+                        TouchedPoint = item.Point;
+                    }
+                }
+            }
+            else
+            {
+                TouchedPoint = e.Location;
+            }
 
             e.Handled = true;
 
@@ -52,24 +81,33 @@ namespace Architecture.Controls.Charts
             var frame = CreateFrame(info);
             var chart = CreateChart(frame);
 
-            DrawFrame(canvas, frame);
             DrawVerticalLabels(canvas, frame, chart);
 
             if (ChartEntries.Any(x => x.IsVisible))
             {
                 CalculateChartValuesXPoints(chart);
 
-                DrawSlider(canvas, frame, chart);
+                DrawInnerFrame(canvas, frame);
+                DrawBackground(canvas, frame);
 
-                DrawHorizontalLabels(canvas, frame, chart);
+                if (!string.IsNullOrEmpty(SelectedTag) && !isTouching)
+                {
+                    var selectedTagPosition = ChartValueItemsXPoints.FirstOrDefault(x => x.Item1.ToString() == SelectedTag)?.Item2 ?? 0f;
+
+                    TouchedPoint = new SKPoint(selectedTagPosition, 0f);
+                }
+
+                DrawSlider(canvas, frame, chart);
 
                 foreach (var entry in ChartEntries.Where(x => x.IsVisible).OrderByDescending(x => x.Items.Count()))
                 {
                     DrawLines(entry, canvas, CalculatePoints(entry.Items, frame, chart));
                 }
 
+                DrawHorizontalLabels(canvas, frame, chart);
+
                 // Get items on x axis
-                var valueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), frame, frame.GetItemWidth(MaxItems), UseExactValue);
+                var valueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), frame, frame.GetItemWidth(MaxItems));
 
                 // Send selected items with command
                 SelectedValuesCommand?.Execute(new SelectedChartValueItemArgs
@@ -80,7 +118,52 @@ namespace Architecture.Controls.Charts
 
                 DrawHorizontalLabel(valueItems?.FirstOrDefault()?.ChartValueItem, canvas, frame, chart);
 
+                DrawFrame(canvas, frame);
+            
                 DrawSliderPoints(valueItems, canvas, chart);
+            }
+            else
+            {
+                DrawInnerFrame(canvas, frame);
+                DrawFrame(canvas, frame);
+            }
+        }
+
+        private void DrawBackground(SKCanvas canvas, SKRect frame)
+        {
+            if (!HasBackground)
+            {
+                return;
+            }
+
+            using (var paint = new SKPaint
+            {
+                IsAntialias = true,
+                Color = ChartBackgroundColor.ToSKColor(),
+                Style = SKPaintStyle.Fill
+            })
+            {
+                var items = ChartValueItemsXPoints;
+
+                var width = frame.GetItemWidth(MaxItems);
+
+                for (int i = 0; i < items.Count; i++)
+                {
+                    if (i % 2 != 0)
+                    {
+                        continue;
+                    }
+
+                    var item = items[i];
+
+                    var left = item.Item2;
+
+                    // Don't draw outside frame
+                    if ((left + (width * 2)).ToRounded() <= (frame.Right + FrameWidth).ToRounded())
+                    {
+                        canvas.DrawRect(left + width, frame.Top, width, frame.Height - FrameWidth, paint);
+                    }
+                }
             }
         }
 
@@ -133,7 +216,7 @@ namespace Architecture.Controls.Charts
                 {
                     var point = points[i];
                     var nextPoint = points[i + 1];
-                    var offsetPoint = new SKPoint((nextPoint.X - point.X) * 0.8f, 0);
+                    var offsetPoint = new SKPoint((nextPoint.X - point.X) * 0.5f, 0);
 
                     var currentPoint = point + offsetPoint;
                     var next = nextPoint - offsetPoint;
@@ -167,13 +250,13 @@ namespace Architecture.Controls.Charts
             })
             {
                 // Straight slider line
-                canvas.DrawLine(x, chart.Top, x, DisplayHorizontalValuesBySlider ? frame.Bottom + ChartRectMargin.Bottom : chart.Bottom - FrameWidth, paint);
+                canvas.DrawLine(x, chart.Top, x, DisplayHorizontalValuesBySlider ? frame.Bottom + HorizontalTextSize : chart.Bottom - FrameWidth, paint);
 
                 DrawSliderHint(canvas, x);
             }
 
             // Get items on x axis
-            var valueItems = ChartEntries.GetChartValueItemFromX(x, frame, frame.GetItemWidth(MaxItems), UseExactValue);
+            var valueItems = ChartEntries.GetChartValueItemFromX(x, frame, frame.GetItemWidth(MaxItems));
 
             // Send selected items with command
             SelectedValuesCommand?.Execute(new SelectedChartValueItemArgs
@@ -185,48 +268,28 @@ namespace Architecture.Controls.Charts
 
         private void DrawSliderHint(SKCanvas canvas, float x)
         {
-            if (!UseSliderHint)
-            {
-                return;
-            }
+            //if (!UseSliderHint)
+            //{
+            //    return;
+            //}
 
-            var y = HintSize;
+            //var height = 88f * (float)Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density;
+            //var width = 42f * (float)Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density;
 
-            using (var paint = new SKPaint
-            {
-                IsAntialias = true,
-                Style = SKPaintStyle.StrokeAndFill,
-                StrokeCap = SKStrokeCap.Round,
-                Color = this.SliderColor.ToSKColor(),
+            //if (svgDrop == null)
+            //{
+            //    string resourceID = "SkekraftKundapp.Media.sliderdrop.svg";
 
-            })
-            {
-                canvas.DrawCircle(x, y, y, paint);
-            }
+            //    Assembly assembly = GetType().GetTypeInfo().Assembly;
 
-            using (var paint = new SKPaint
-            {
-                IsAntialias = true,
-                Style = SKPaintStyle.Stroke,
-                StrokeCap = SKStrokeCap.Round,
-                Color = this.SliderDetailTextColor.ToSKColor(),
-                StrokeWidth = this.SliderWidth
-            })
-            {
+            //    using Stream stream = assembly.GetManifestResourceStream(resourceID);
 
-                var left = x;
-                var right = x;
+            //    svgDrop = new SkiaSharp.Extended.Svg.SKSvg(new SKSize(width, height));
 
-                // Left hint 
-                canvas.DrawLine(left - (HintSize * 0.6f), y, left - (HintSize * 0.2f), y - (HintSize * 0.5f), paint);
-                canvas.DrawLine(left - (HintSize * 0.6f), y, left - (HintSize * 0.2f), y + (HintSize * 0.5f), paint);
-                canvas.DrawLine(left - (HintSize * 0.2f), y - (HintSize * 0.5f), left - (HintSize * 0.2f), y + (HintSize * 0.5f), paint);
+            //    svgDrop.Load(stream);
+            //}
 
-                // Right hint
-                canvas.DrawLine(right + (HintSize * 0.6f), y, right + (HintSize * 0.2f), y - (HintSize * 0.5f), paint);
-                canvas.DrawLine(right + (HintSize * 0.6f), y, right + (HintSize * 0.2f), y + (HintSize * 0.5f), paint);
-                canvas.DrawLine(right + (HintSize * 0.2f), y - (HintSize * 0.5f), right + (HintSize * 0.2f), y + (HintSize * 0.5f), paint);
-            }
+            //canvas.DrawPicture(svgDrop.Picture, x - (svgDrop.CanvasSize.Width / 2), 0);
         }
 
         private void DrawSliderPoints(IList<ChartValueItemParam> valueItems, SKCanvas canvas, SKRect chart)
@@ -242,7 +305,7 @@ namespace Architecture.Controls.Charts
 
             using (var paint = new SKPaint
             {
-                Style = SKPaintStyle.Stroke,
+                Style = SKPaintStyle.StrokeAndFill,
                 StrokeWidth = SliderPointSize
             })
             {
@@ -250,27 +313,34 @@ namespace Architecture.Controls.Charts
                 {
                     paint.Color = item.BackgroundColor.ToSKColor();
 
-                    if (UseExactValue)
+                    if (LineMode == LineMode.Straight)
                     {
-                        if (LineMode == LineMode.Straight)
-                        {
-                            canvas.DrawCircle(x, ChartCalculator.CalculateYPositionForStraight(item.ChartValueItem, item.NextChartValueItem, x), SliderPointSize, paint);
-                        }
-                        else if (LineMode == LineMode.Spline)
-                        {
-                            var p = ChartCalculator.CalculateYPositionForSpline(item.ChartValueItem, item.NextChartValueItem, x);
+                        var y = ChartCalculator.CalculateYPositionForStraight(item.ChartValueItem, item.NextChartValueItem, x);
 
-                            canvas.DrawCircle(p.X, p.Y, SliderPointSize, paint);
-                        }
+                        canvas.DrawCircle(x, y, SliderPointSize, paint);
+
+                        paint.Color = SKColors.White;
+
+                        canvas.DrawCircle(x, y, SliderPointSize / 4, paint);
                     }
-                    else
+                    else if (LineMode == LineMode.Spline)
                     {
-                        canvas.DrawCircle(item.ChartValueItem.Point.X, item.ChartValueItem.Point.Y, SliderPointSize, paint);
+                        var point = ChartCalculator.CalculateYPositionForSpline(item.ChartValueItem, item.NextChartValueItem, x);
+
+                        canvas.DrawCircle(point.X, point.Y, SliderPointSize, paint);
+
+                        paint.Color = SKColors.White;
+
+                        canvas.DrawCircle(point.X, point.Y, SliderPointSize / 4, paint);
                     }
                 }
             }
         }
 
-        public LineMode LineMode { get; set; } = LineMode.Straight;
+        public LineMode LineMode { get; set; } = LineMode.Spline;
+
+        public float SnapSensitivity { get; set; } = 15f;
+
+        private bool isTouching;
     }
 }

@@ -79,6 +79,7 @@ namespace Architecture.Controls
                             new Label
                             {
                                 FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
+                                FontFamily = App.Current.Get<string>("OpenSansSemiBold"),
                                 Opacity = item.IsSelected ? 1 : 0.8,
                                 Text = item.Text,
                                 HorizontalOptions = SectionTextHorizontalLayout,
@@ -125,6 +126,7 @@ namespace Architecture.Controls
                             HorizontalOptions = SectionTextHorizontalLayout,
                             HorizontalTextAlignment = TextAlignment.Center,
                             FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
+                            FontFamily = App.Current.Get<string>("OpenSansSemiBold"),
                             Text = item.Text,
                             Margin = SectionControlMargin,
                             InputTransparent = true,
@@ -307,7 +309,7 @@ namespace Architecture.Controls
         public float SectionControlCornerRadius { get; set; } = 0;
 
         public Thickness SectionPadding { get; set; } = new Thickness(10);
-        public NamedSize FontSize { get; set; } = NamedSize.Default;
+        public NamedSize FontSize { get; set; } = NamedSize.Medium;
 
         public Color SectionBackground { get; set; } = Color.Transparent;
         public Color SectionTextColor { get; set; }

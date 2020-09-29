@@ -20,7 +20,7 @@ namespace Architecture.Controls.Charts
             {
                 if (textAlignment == TextAlignment.Center)
                 {
-                    y = yPosition + (textSize / 2);
+                    y = yPosition + (textSize / 4);
                 }
                 else if (textAlignment == TextAlignment.End)
                 {
@@ -43,6 +43,16 @@ namespace Architecture.Controls.Charts
         public static float ToRounded(this float value, int decimals = 0)
         {
             return (float)(decimal.TryParse(value.ToString(), out decimal res) ? Math.Round(res, decimals, MidpointRounding.AwayFromZero) : 0);
+        }
+
+        public static float ToDpiAdjusted(this float value)
+        {
+            return value * (float)Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density;
+        }
+
+        public static float FromDpiAdjusted(this float value)
+        {
+            return value / (float)Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density;
         }
     }
 }

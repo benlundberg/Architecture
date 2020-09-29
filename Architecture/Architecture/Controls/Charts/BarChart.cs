@@ -1,7 +1,11 @@
-﻿using SkiaSharp;
+﻿using FFImageLoading;
+using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Architecture.Controls.Charts
 {
@@ -9,12 +13,22 @@ namespace Architecture.Controls.Charts
     {
         public BarChart()
         {
+            this.ChartPadding = new Thickness(4, 0);
+            this.HasBackground = false;
+            this.InsideFrame = LabelMode.All;
+            this.BarMargin = 2f;
+            this.GroupMargin = 4f;
+            this.MinimumBarWidth = 12f;
+            this.BarCornerRadius = 2f;
+            this.SliderCornerRadius = 2f;
+
             ChartType = ChartType.Bar;
 
             EnableTouchEvents = true;
 
             this.PaintSurface += BarChart_PaintSurface;
-            //this.Touch += BarChart_Touch;
+
+            this.Touch += BarChart_Touch;
         }
 
         private void BarChart_Touch(object sender, SKTouchEventArgs e)
@@ -27,8 +41,11 @@ namespace Architecture.Controls.Charts
             TouchedPoint = e.Location;
 
             e.Handled = true;
-
-            view.InvalidateSurface();
+            
+            if (!AllowScroll)
+            {
+                view.InvalidateSurface();
+            }
         }
 
         private void BarChart_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -46,12 +63,14 @@ namespace Architecture.Controls.Charts
             var frame = CreateFrame(info);
             var chart = CreateChart(frame);
 
-            DrawFrame(canvas, frame);
             DrawVerticalLabels(canvas, frame, chart);
 
             if (ChartEntries.Any(x => x.IsVisible))
             {
                 CalculateChartValuesXPoints(chart);
+
+                DrawInnerFrame(canvas, frame);
+                DrawBackground(canvas, frame);
 
                 DrawHorizontalLabels(canvas, frame, chart);
 
@@ -64,15 +83,28 @@ namespace Architecture.Controls.Charts
                 {
                     DrawBars(canvas, frame, chart);
                 }
+
+                DrawFrame(canvas, frame);
+            }
+            else
+            {
+                DrawInnerFrame(canvas, frame);
+                DrawFrame(canvas, frame);
+            }
+        }
+
+        private void DrawBackground(SKCanvas canvas, SKRect frame)
+        {
+            if (!HasBackground)
+            {
+                return;
             }
         }
 
         private void DrawBars(SKCanvas canvas, SKRect frame, SKRect chart)
         {
-            var itemWidth = BarWidth; //(chart.Width / (MaxItems < 10 ? 10 : MaxItems)) * 0.8f;
-
             // Selected bar width
-            var selectedValueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), chart, chart.GetItemWidth(MaxItems), false, BlockStartIndex, BlockCount);
+            var selectedValueItems = ChartEntries.GetChartValueItemFromX(chart.GetInsideXValue(TouchedPoint.X), chart, chart.GetItemWidth(MaxItems));
             var selectedTags = selectedValueItems?.Select(x => x.ChartValueItem.Tag);
 
             // Invoke command with selected items
@@ -91,16 +123,51 @@ namespace Architecture.Controls.Charts
             {
                 var groupedItems = ChartEntries.Where(x => x.IsVisible).SelectMany(x => x.Items).GroupBy(x => x.Tag.ToString()).OrderBy(x => x.Key);
 
-                if (BlockCount > 0)
+                // Calc max items in one group
+                var maxItemsInGroups = groupedItems.Max(x => x.Count());
+
+                // Calc how many groups there is
+                var groupCount = groupedItems.Count();
+
+                // Calc how many bars there will be
+                var totalBars = groupCount * maxItemsInGroups;
+
+                var internalGroupMargin = maxItemsInGroups == 1 ? BarMargin : GroupMargin;
+                var internalBarMargin = maxItemsInGroups == 1 ? 0 : BarMargin;
+                var internalBarWidth = MinimumBarWidth;
+
+                float itemWidth;
+
+                if (AllowScroll)
                 {
-                    groupedItems = groupedItems.Skip(BlockStartIndex).Take(BlockCount).OrderBy(x => x.Key);
+                    // Calc total item width
+                    itemWidth = internalBarWidth * maxItemsInGroups + ((maxItemsInGroups - 1) * barMargin);
                 }
+                else
+                {
+                    itemWidth = chart.Width / groupCount;
+
+                    itemWidth -= internalGroupMargin;
+
+                    internalBarWidth = (itemWidth / maxItemsInGroups) - ((maxItemsInGroups - 1) * barMargin);
+                }
+
+                int groupIndex = 0;
+
+                float scrollLeftPadding = 0;
+                float left = 0;
+                float groupLeft = 0;
+                float right = 0;
+
+                groupCenters = new List<GroupChartItem>();
 
                 foreach (var groupedItem in groupedItems)
                 {
-                    int index = 0;
+                    int itemIndex = 0;
 
-                    if (IsSliderVisible && selectedTags?.Contains(groupedItem.Key) == true)
+                    groupLeft = left;
+
+                    if (!AllowScroll && IsSliderVisible && selectedTags?.Contains(groupedItem.Key) == true)
                     {
                         var item = groupedItem.OrderByDescending(x => x.Value).First();
 
@@ -108,10 +175,10 @@ namespace Architecture.Controls.Charts
                         paint.PathEffect = SKPathEffect.CreateCorner(SliderCornerRadius);
 
                         var bounds = new SKRect(
-                            item.Point.X - (itemWidth * .8f),
-                            item.Point.Y - (itemWidth * .8f),
-                            item.Point.X + (itemWidth * .8f),
-                            chart.Bottom + (HorizontalTextSize * 2));
+                            item.Point.X - (itemWidth * .5f) - (groupMargin * .5f),
+                            item.Point.Y - (itemWidth * .5f),
+                            item.Point.X + (itemWidth * .5f) + (groupMargin * .5f),
+                            chart.Bottom + HorizontalTextSize);
 
                         paint.StrokeWidth = 0;
 
@@ -122,20 +189,47 @@ namespace Architecture.Controls.Charts
                     {
                         var parent = ChartEntries.FirstOrDefault(x => x.Items.Contains(item));
 
-                        var barWidth = itemWidth / groupedItem.Count();
+                        SKRect bounds = new SKRect();
 
-                        float left = frame.GetInsideXValue((item.Point.X - itemWidth) + (barWidth * index) + (itemWidth / 2));
+                        if (AllowScroll)
+                        {
+                            if (left == 0)
+                            {
+                                left = itemWidth.FromDpiAdjusted();
 
-                        float right = frame.GetInsideXValue(left + barWidth);
+                                groupLeft = left;
 
-                        var bounds = new SKRect(
-                            left + BarMargin,
-                            item.Point.Y,
-                            right - BarMargin,
-                            chart.Bottom);
+                                scrollLeftPadding = left;
+                            }
+                            else if (itemIndex != 0)
+                            {
+                                left += internalBarMargin;
+                            }
+
+                            right = left + internalBarWidth;
+
+                            bounds = new SKRect(
+                                left,
+                                item.Point.Y,
+                                right,
+                                chart.Bottom);
+
+                            left = right;
+                        }
+                        else
+                        {
+                            left = (item.Point.X - (itemWidth * .5f)) + (internalBarWidth * itemIndex) + (internalBarMargin * itemIndex);
+                            right = left + internalBarWidth;
+
+                            bounds = new SKRect(
+                                left,
+                                item.Point.Y,
+                                right,
+                                chart.Bottom);
+                        }
 
                         paint.StrokeWidth = 0;
-                        
+
                         if (parent.UseDashedEffect)
                         {
                             paint.Color = parent.Color.ToSKColor().AsTransparency();
@@ -145,19 +239,83 @@ namespace Architecture.Controls.Charts
 
                             paint.Color = parent.Color.ToSKColor();
                             paint.PathEffect = SKPathEffect.CreateDash(new float[] { StrokeDashFirst, StrokeDashSecond }, StrokeDashPhase);
-                            
+
                             paint.StrokeWidth = bounds.Width;
 
                             canvas.DrawLine(bounds.MidX, bounds.Bottom, bounds.MidX, bounds.Top, paint);
                         }
                         else
                         {
-                            paint.Color = parent.Color.ToSKColor(); 
+                            paint.Color = parent.Color.ToSKColor();
                             paint.PathEffect = SKPathEffect.CreateCorner(BarCornerRadius);
                             canvas.DrawRect(bounds, paint);
                         }
 
-                        index++;
+                        itemIndex++;
+                    }
+
+                    left += internalGroupMargin;
+
+                    groupIndex++;
+
+                    var groupCenterPosition = groupLeft + (itemWidth / 2);
+
+                    groupCenters.Add(new GroupChartItem
+                    {
+                        Label = groupedItem.FirstOrDefault().Label,
+                        Position = groupCenterPosition.FromDpiAdjusted(),
+                        Tag = groupedItem.Key
+                    });
+                }
+
+                if (AllowScroll)
+                {
+                    var requestedWidth = right.FromDpiAdjusted() + frame.Left.FromDpiAdjusted();
+
+                    if (requestedWidth != this.WidthRequest)
+                    {
+                        this.WidthRequest = requestedWidth;
+                    }
+
+                    if (ScrollComponent != null)
+                    {
+                        var deviceWidth = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Width;
+
+                        var halfDeviceWidth = ((float)(deviceWidth / 2)).FromDpiAdjusted();
+
+                        var frameLeftVal = frame.Left.FromDpiAdjusted();
+                        var rectRightMarginVal = ChartRectMargin.Right.FromDpiAdjusted();
+
+                        var leftPadding = halfDeviceWidth - frameLeftVal - scrollLeftPadding.FromDpiAdjusted();
+
+                        var rightPadding = halfDeviceWidth - frameLeftVal - rectRightMarginVal - itemWidth.FromDpiAdjusted();
+
+                        ScrollComponent.Padding = new Thickness(leftPadding, 0, rightPadding, 0);
+                        ScrollComponent.Margin = new Thickness(frame.Left.FromDpiAdjusted(), 0, ChartRectMargin.Right.FromDpiAdjusted(), 0);
+
+                        if (Selector != null)
+                        {
+                            Selector.WidthRequest = itemWidth.FromDpiAdjusted();
+                            Selector.Margin = new Thickness(halfDeviceWidth, 0, 0, this.Height - frame.Bottom.FromDpiAdjusted());
+                        }
+
+                        if (!isScrollEventActive)
+                        {
+                            ScrollComponent.Scrolled += ScrollComponent_Scrolled;
+                            isScrollEventActive = true;
+                        }
+                    }
+
+                    if (SwipeNotificationLeft != null)
+                    {
+                        SwipeNotificationLeft.Margin = new Thickness(frame.Left.FromDpiAdjusted(), 0, 0, this.Height - frame.Bottom.FromDpiAdjusted());
+                        SwipeNotificationLeft.WidthRequest = ScrollComponent.Padding.Left;
+                    }
+
+                    if (SwipeNotificationRight != null)
+                    {
+                        SwipeNotificationRight.Margin = new Thickness(0, 0, ChartRectMargin.Right.FromDpiAdjusted(), this.Height - frame.Bottom.FromDpiAdjusted());
+                        SwipeNotificationRight.WidthRequest = ScrollComponent.Padding.Left;
                     }
                 }
             }
@@ -165,10 +323,161 @@ namespace Architecture.Controls.Charts
             DrawHorizontalLabel(selectedValueItems?.FirstOrDefault()?.ChartValueItem, canvas, frame, chart);
         }
 
+        private void ScrollComponent_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            if (e.ScrollX <= ScrollComponent.Margin.Right)
+            {
+                if (SwipeNotificationLeft.Opacity == 0)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await SwipeNotificationLeft.FadeTo(1);
+                        SwipeNotificationLeft.InputTransparent = false;
+                    });
+                }
+            }
+            else if (e.ScrollX >= (groupCenters.OrderByDescending(x => x.Position).FirstOrDefault().Position - ScrollComponent.Margin.Left))
+            {
+                if (SwipeNotificationRight.Opacity == 0)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await SwipeNotificationRight.FadeTo(1);
+                        SwipeNotificationRight.InputTransparent = false;
+                    });
+                }
+            }
+            else
+            {
+                SwipeNotificationLeft.Opacity = 0;
+                SwipeNotificationRight.Opacity = 0;
+                SwipeNotificationLeft.InputTransparent = true;
+                SwipeNotificationRight.InputTransparent = true;
+            }
+
+            if (isSnapping)
+            {
+                return;
+            }
+
+            if (lastScrollPosition == e.ScrollX)
+            {
+                return;
+            }
+
+            lastScrollPosition = e.ScrollX;
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(300), () =>
+            {
+                if (lastScrollPosition == e.ScrollX)
+                {
+                    var entries = groupCenters.OrderByDescending(x => x.Position);
+
+                    var firstItemsPosition = entries.LastOrDefault().Position;
+
+                    var item = entries.FirstOrDefault(x => Math.Round((decimal)x.Position - (decimal)(firstItemsPosition / 2), 0) <= Math.Round((decimal)(lastScrollPosition + firstItemsPosition)));
+
+                    if (isSnapping)
+                    {
+                        return false;
+                    }
+
+                    if (item == null)
+                    {
+                        return false;
+                    }
+
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        isSnapping = true;
+
+                        ScrollComponent.Scrolled -= ScrollComponent_Scrolled;
+
+                        SelectedLabel = item.Label;
+
+                        lastScrollPosition = item.Position - firstItemsPosition;
+
+                        await ScrollComponent.ScrollToAsync(lastScrollPosition, 0, false);
+
+                        ScrollComponent.Scrolled += ScrollComponent_Scrolled;
+
+                        isSnapping = false;
+                    });
+                }
+
+                return false;
+            });
+        }
+
+        private ICommand swipeRightCommand;
+        public ICommand SwipeRightCommand => swipeRightCommand ?? (swipeRightCommand = new Command(() =>
+        {
+            App.Current.MainPage.DisplayAlert("Swipe right", "You swiped right", "Ok");
+        }));
+
+        private ICommand swipeLeftCommand;
+        public ICommand SwipeLeftCommand => swipeLeftCommand ?? (swipeLeftCommand = new Command(() =>
+        {
+            App.Current.MainPage.DisplayAlert("Swipe left", "You swiped left", "Ok");
+        }));
+
         public bool BarsIsVisible { get; set; } = true;
-        public int BarMargin { get; set; }
-        public int BarWidth { get; set; } = 50;
-        public float BarCornerRadius { get; set; } = 10f;
-        public float SliderCornerRadius { get; set; } = 14f;
+
+        private float barMargin;
+        public float BarMargin
+        {
+            get { return barMargin; }
+            set { barMargin = value.ToDpiAdjusted(); }
+        }
+
+        private float groupMargin;
+        public float GroupMargin
+        {
+            get { return groupMargin; }
+            set { groupMargin = value.ToDpiAdjusted(); }
+        }
+
+        private float minimumBarWidth;
+        public float MinimumBarWidth
+        {
+            get { return minimumBarWidth; }
+            set { minimumBarWidth = value.ToDpiAdjusted(); }
+        }
+
+        private float barCornerRadius;
+        public float BarCornerRadius
+        {
+            get { return barCornerRadius; }
+            set { barCornerRadius = value.ToDpiAdjusted(); }
+        }
+
+        private float sliderCornerRadius;
+        public float SliderCornerRadius
+        {
+            get { return sliderCornerRadius; }
+            set { sliderCornerRadius = value.ToDpiAdjusted(); }
+        }
+
+        public string SelectedLabel { get; set; }
+
+        public bool AllowScroll { get; set; }
+
+        private double lastScrollPosition;
+        private bool isScrollEventActive;
+        private bool isSnapping;
+
+        private List<GroupChartItem> groupCenters;
+
+        public ScrollView ScrollComponent { get; set; }
+        public BoxView Selector { get; set; }
+        public Grid SwipeNotificationLeft { get; set; }
+        public Grid SwipeNotificationRight { get; set; }
+    }
+
+    public class GroupChartItem
+    {
+        public double Position { get; set; }
+        public string Label { get; set; }
+        public string Tag { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Architecture.iOS
             // Services
             ComponentContainer.Current.Register<ILocalizeService, LocalizeService_iOS>();
 			ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_iOS>(singelton: true);
+            ComponentContainer.Current.Register<IOpenFileService, OpenFileService_iOS>(singelton: true);
         }
     }
 }
