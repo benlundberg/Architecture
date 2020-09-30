@@ -30,6 +30,8 @@ namespace Architecture.iOS
                 "Brush_Experimental",
                 "Shapes_Experimental");
 
+            Rg.Plugins.Popup.Popup.Init();
+
             Xamarin.Forms.Forms.Init();
 
             Bootstrapper_iOS.Initialize();

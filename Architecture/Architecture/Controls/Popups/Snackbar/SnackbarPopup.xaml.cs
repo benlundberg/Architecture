@@ -38,6 +38,7 @@ namespace Architecture.Controls
     {
         public SnackbarPopup(SnackbarOption option)
         {
+            option.ButtonText = option?.ButtonText?.ToUpper();
             this.Option = option;
             
             InitializeComponent();

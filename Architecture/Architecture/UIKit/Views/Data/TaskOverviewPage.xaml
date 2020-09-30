@@ -219,6 +219,7 @@
                                 HorizontalOptions="End"
                                 BackgroundColor="White"
                                 Text="Info"
+                                Padding="{OnPlatform iOS=10, Android=0}"
                                 VerticalOptions="Start"
                                 Style="{StaticResource OutlineButton}" />
                         </Grid>

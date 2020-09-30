@@ -17,14 +17,14 @@
         BackgroundColor="{Binding NotificationBackground, Source={x:Reference NotificationPopupRoot}}">
         <BoxView HeightRequest="{Binding Source={x:Reference NotificationPopupRoot}, Path=SystemPadding.Top}"/>
         <Label
-            Margin="10, 0, 0, 0"
+            Margin="10, 10, 0, 0"
             TextColor="{Binding TextColor, Source={x:Reference NotificationPopupRoot}}"
             VerticalOptions="EndAndExpand"
             FontSize="14"
             Style="{StaticResource BoldLabel}"
             Text="{Binding Option.MessageTitle, Source={x:Reference NotificationPopupRoot}}" />
         <Grid
-            Margin="10, 0, 0, 5"
+            Margin="10, 0, 0, 8"
             ColumnDefinitions="*, Auto">
             <Label
                 TextColor="{Binding TextColor, Source={x:Reference NotificationPopupRoot}}"
@@ -33,7 +33,7 @@
                 Text="{Binding Option.Message, Source={x:Reference NotificationPopupRoot}}" />
             <Button 
                 Grid.Column="1" 
-                Margin="2"
+                Margin="{OnPlatform Android=2, iOS=0 20}"
                 HorizontalOptions="End"
                 IsVisible="{Binding IsButtonVisible, Source={x:Reference NotificationPopupRoot}}"
                 Command="{Binding Option.Command, Source={x:Reference NotificationPopupRoot}}" 

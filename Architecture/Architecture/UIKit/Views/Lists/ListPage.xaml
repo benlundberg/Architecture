@@ -22,6 +22,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <controls:PageTitleView 
+                HorizontalOptions="Center"
                 IsVisible="{Binding SearchIsVisible, Converter={StaticResource InvertedBoolConv}}"
                 Text="Simple List" />
             <controls:SearchEntry 

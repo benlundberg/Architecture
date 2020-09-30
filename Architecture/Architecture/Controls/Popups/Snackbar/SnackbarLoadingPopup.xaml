@@ -35,8 +35,10 @@
         <ActivityIndicator 
             Grid.Column="1"
             IsRunning="True"
+            HeightRequest="32"
+            WidthRequest="32"
             Color="{Binding ActivityColor, Source={x:Reference SnackView}}"
-            Margin="16, 4"
+            Margin="{OnPlatform Android=8 10, iOS=10 14}"
             VerticalOptions="Center" 
             HorizontalOptions="End" />
     </Grid>

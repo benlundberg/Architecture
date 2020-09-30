@@ -23,9 +23,6 @@
                     <GradientStop Color="{StaticResource DarkPrimaryColor}" Offset="1.0" />
                 </LinearGradientBrush>
             </BoxView.Background>
-            <!--<BoxView.Effects>
-                <local:GradientEffect Direction="ToBottom" />
-            </BoxView.Effects>-->
         </BoxView>
         <Grid Margin="40, 80" VerticalOptions="Start">
             <Frame>

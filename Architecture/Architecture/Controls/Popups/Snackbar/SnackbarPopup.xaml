@@ -34,7 +34,7 @@
             LineBreakMode="WordWrap" />
         <Button 
             Grid.Column="1" 
-            Margin="2"
+            Margin="{OnPlatform Android=2, iOS=8 20}"
             HorizontalOptions="End"
             IsVisible="{Binding IsButtonVisible, Source={x:Reference SnackView}}"
             Command="{Binding Option.Command, Source={x:Reference SnackView}}" 

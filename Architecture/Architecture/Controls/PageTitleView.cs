@@ -43,7 +43,7 @@ namespace Architecture.Controls
                 }
 
                 view.HorizontalOptions = LayoutOptions.Center;
-                view.TranslationX = (this.Width - (navigationPage.Width - 16)) / 2;
+                view.TranslationX = navigationPage.Width > 0 ? (this.Width - (navigationPage.Width - 16)) / 2 : 0;
             }
 
             PropertyChanged -= PageTitleView_PropertyChanged;
@@ -71,10 +71,8 @@ namespace Architecture.Controls
                 Text = view.Text,
                 TextColor = Application.Current.ToolbarTextColor(),
                 VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = view.IsCentered ? LayoutOptions.Center : LayoutOptions.Start,
                 FontSize = 20,
-                FontFamily = "OpenSansSemiBold",
-                Margin = Device.RuntimePlatform == Device.iOS ? new Thickness(8, 0, 0, 0) : new Thickness(0)
+                FontFamily = "OpenSansSemiBold"
             });
         }
 

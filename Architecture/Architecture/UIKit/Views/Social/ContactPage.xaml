@@ -45,6 +45,7 @@
                 TextColor="White"
                 BackgroundColor="Transparent"
                 Margin="20, 10"
+                Padding="{OnPlatform iOS=10, Android=0}"
                 HorizontalOptions="End"
                 VerticalOptions="Center"/>
         </Grid>

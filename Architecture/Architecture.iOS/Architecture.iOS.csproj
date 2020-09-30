@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Bootstrapper_iOS.cs" />
     <Compile Include="Renderers\ExtendedDatePickerRenderer_iOS.cs" />
+    <Compile Include="Services\DialogService_iOS.cs" />
     <Compile Include="Services\LocalFileSystemService_iOS.cs" />
     <Compile Include="Services\LocalizeService_iOS.cs" />
     <Compile Include="Main.cs" />
