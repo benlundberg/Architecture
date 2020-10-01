@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Architecture.DataTablePage"
+             xmlns:properties="clr-namespace:Architecture.Resources"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:local="clr-namespace:Architecture"
              Visual="Material"
@@ -30,7 +31,7 @@
                     IconFontFamily="{StaticResource FontAwesomeSolid}"
                     Title="Task status"
                     Placeholder="Select status"
-                    CancelText="{local:Translate Gen_Cancel}"
+                    CancelText="{x:Static properties:Strings.Gen_Cancel}"
                     IconTextSource="&#xf0eb;" />
                 <controls:ItemsControl 
                     Margin="{StaticResource MainPadding}"

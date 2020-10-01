@@ -17,7 +17,6 @@ namespace Architecture.UWP
         private static void RegisterTypes()
         {
             // Services
-            ComponentContainer.Current.Register<ILocalizeService, LocalizeService_UWP>();
             ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_UWP>(singelton: true);
         }
     }

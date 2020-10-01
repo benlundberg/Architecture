@@ -9,7 +9,6 @@ namespace Architecture
         public static void RegisterTypes()
         {
             // Services
-            ComponentContainer.Current.Register<ITranslateService, TranslateService>();
             ComponentContainer.Current.Register<ILoggerService, LoggerService>(singelton: true);
             ComponentContainer.Current.Register<IConnectivityService, ConnectivityService>(singelton: true);
         }

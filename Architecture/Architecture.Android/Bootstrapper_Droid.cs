@@ -16,7 +16,6 @@ namespace Architecture.Droid
         private static void RegisterTypes()
         {
             // Helpers
-            ComponentContainer.Current.Register<ILocalizeService, LocalizeService_Droid>();
             ComponentContainer.Current.Register<IDialogService, DialogService_Droid>(singelton: true);
             ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_Droid>(singelton: true);
             ComponentContainer.Current.Register<IOpenFileService, OpenFileService_Droid>(singelton: true);

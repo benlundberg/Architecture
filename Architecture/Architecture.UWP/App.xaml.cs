@@ -25,10 +25,14 @@ namespace Architecture.UWP
                 "FastRenderers_Experimental",
                 "CollectionView_Experimental",
                 "CarouselView_Experimental",
-                "IndicatorView_Experimental");
+                "IndicatorView_Experimental",
+                "SwipeView_Experimental",
+                "Expander_Experimental",
+                "Brush_Experimental",
+                "Shapes_Experimental");
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
-
+            
             Xamarin.Forms.Forms.Init(e);
 
             if (!(Window.Current.Content is Frame rootFrame))

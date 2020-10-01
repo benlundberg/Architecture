@@ -13,12 +13,12 @@ namespace Architecture
         {
             Username = new ValidatableObject<string>(new List<IValidationRule<string>>
             {
-                new IsNotNullOrEmptyRule<string>(Translate("Missing_Username"))
+                new IsNotNullOrEmptyRule<string>("You need to provide a username")
             });
 
             Password = new ValidatableObject<string>(new List<IValidationRule<string>>
             {
-                new IsNotNullOrEmptyRule<string>(Translate("Missing_Password"))
+                new IsNotNullOrEmptyRule<string>("You need to provied a password")
             });
         }
 
@@ -38,13 +38,13 @@ namespace Architecture
 
             if (!Username.Validate())
             {
-                ShowAlert(Username.Error, Translate("Gen_Login"));
+                ShowAlert(Username.Error, "Login");
                 return;
             }
 
             if (!Password.Validate())
             {
-                ShowAlert(Password.Error, Translate("Gen_Login"));
+                ShowAlert(Password.Error, "Login");
                 return;
             }
 

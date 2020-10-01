@@ -106,7 +106,6 @@
     <Compile Include="Renderers\ExtendedDatePickerRenderer_Droid.cs" />
     <Compile Include="Services\DialogService_Droid.cs" />
     <Compile Include="Services\LocalFileSystemService_Droid.cs" />
-    <Compile Include="Services\LocalizeService_Droid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer_Droid.cs" />
     <Compile Include="Renderers\ExtendedWebViewRenderer_Droid.cs" />

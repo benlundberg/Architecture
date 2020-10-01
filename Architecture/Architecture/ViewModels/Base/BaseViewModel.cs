@@ -1,7 +1,6 @@
 ﻿using Architecture.Core;
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -41,16 +40,6 @@ namespace Architecture
         }
 
         /// <summary>
-        /// Translates a key in resources to correct language
-        /// </summary>
-        /// <param name="key">Key word to translate</param>
-        /// <returns>Translated word</returns>
-        protected string Translate(string key)
-        {
-            return TranslateHelper.Translate(key);
-        }
-
-        /// <summary>
         /// Method to execute an action if device has internet connection
         /// </summary>
         /// <param name="actionToExecute">Action to execute</param>
@@ -76,15 +65,15 @@ namespace Architecture
         {
             if (string.IsNullOrWhiteSpace(title))
             {
-                title = Translate("GenErr_NoNetworkTitle");
+                title = Resources.Strings.GenErr_NoNetworkMessage;
             }
 
             if (string.IsNullOrWhiteSpace(message))
             {
-                message = Translate("GenErr_NoNetworkMessage");
+                message = Resources.Strings.GenErr_NoNetworkMessage;
             }
 
-            message += " " + Translate("GenErr_CheckYourNetworkMessage");
+            message += " " + Resources.Strings.GenErr_CheckYourNetworkMessage;
 
             ShowAlert(message, title);
         }
@@ -96,8 +85,8 @@ namespace Architecture
 
         protected Task<bool> ShowConfirmAsync(string message, string title, string ok = null, string cancel = null)
         {
-            ok = ok ?? Translate("Gen_Yes");
-            cancel = cancel ?? Translate("Gen_No");
+            ok = ok ?? Resources.Strings.Gen_Yes;
+            cancel = cancel ?? Resources.Strings.Gen_No;
 
             return Application.Current.MainPage.DisplayAlert(title, message, ok, cancel);
         }
@@ -113,16 +102,25 @@ namespace Architecture
 			await Navigation.PopModalAsync();
 		}));
 
-		private ITranslateService translateHelper;
-        protected ITranslateService TranslateHelper => translateHelper ?? (translateHelper = ComponentContainer.Current.Resolve<ITranslateService>());
+        private ICommand popCommand;
+        public ICommand PopCommand => popCommand ?? (popCommand = new Command(async () =>
+        {
+            await Navigation.PopAsync();
+        }));
 
         private ILoggerService loggerHelper;
         protected ILoggerService Logger => loggerHelper ?? (loggerHelper = ComponentContainer.Current.Resolve<ILoggerService>());
 
+        private IDialogService dialogService;
+        protected IDialogService Dialog => dialogService ?? (dialogService = ComponentContainer.Current.Resolve<IDialogService>());
+
+        private IConnectivityService connectivityService;
+        protected IConnectivityService Connectivity => connectivityService ?? (connectivityService = ComponentContainer.Current.Resolve<IConnectivityService>());
+
         public INavigation Navigation { get; set; }
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;
-        public bool IsConnected => Connectivity.NetworkAccess != NetworkAccess.None;
+        public bool IsConnected => Connectivity.IsConnected;
 
         public event PropertyChangedEventHandler PropertyChanged;
 	}

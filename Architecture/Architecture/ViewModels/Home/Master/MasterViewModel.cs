@@ -28,7 +28,7 @@ namespace Architecture
             {
                 MasterItems.Add(new MenuViewModel()
                 {
-                    Title = Translate("Gen_Log"),
+                    Title = Resources.Strings.Gen_Log,
                     Page = new NavigationPage(ViewContainer.Current.CreatePage<LoggerViewModel>())
                 });
             }
@@ -69,6 +69,6 @@ namespace Architecture
 
 		public string Title { get; set; }
 
-        private MasterDetailPage masterDetailPage;
+        private readonly MasterDetailPage masterDetailPage;
     }
 }

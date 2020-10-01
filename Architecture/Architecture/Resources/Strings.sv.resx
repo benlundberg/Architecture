@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GenErr_CheckYourNetworkMessage" xml:space="preserve">
-    <value>Var vänlig kontrollera din nätverksanslutning och försök igen.</value>
+    <value>Var vänlig kontrollera din internetanslutning/mobildata och försök igen.</value>
   </data>
   <data name="GenErr_NoNetworkMessage" xml:space="preserve">
-    <value>Den här funktionen kräver att du är online.</value>
+    <value>Den här funktionen kräver att du har åtkomst till internet.</value>
   </data>
   <data name="GenErr_NoNetworkTitle" xml:space="preserve">
-    <value>Saknar internetuppkoppling</value>
+    <value>Saknar internetanslutning</value>
   </data>
   <data name="Gen_Cancel" xml:space="preserve">
     <value>Avbryt</value>

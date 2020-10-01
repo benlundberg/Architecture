@@ -15,7 +15,7 @@ namespace Architecture
         {
             var isChecked = await ComponentContainer.Current.Resolve<IDialogService>().ShowCheckboxDialogAsync("Checkbox dialog", "This is a dialog with a checkbox", "Show again");
         
-            IsChecked = isChecked ? Translate("Gen_Yes") : Translate("Gen_No");
+            IsChecked = isChecked ? Resources.Strings.Gen_Yes : Resources.Strings.Gen_No;
         }));
 
         private ICommand simpleDialogCommand;
@@ -35,7 +35,7 @@ namespace Architecture
         {
             var res = await ShowConfirmAsync("Will you confirm this dialog?", "Confirm dialog");
 
-            ConfirmAnswer = res ? Translate("Gen_Yes") : Translate("Gen_No"); 
+            ConfirmAnswer = res ? Resources.Strings.Gen_Yes : Resources.Strings.Gen_No;
         }));
 
         private ICommand showToastCommand;

@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
 	x:Class="Architecture.ListCardPage"
+    xmlns:properties="clr-namespace:Architecture.Resources"
 	xmlns:controls="clr-namespace:Architecture.Controls"
 	xmlns:local="clr-namespace:Architecture"
     xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -37,7 +38,7 @@
                         <SwipeView Margin="0, 8">
                             <SwipeView.LeftItems>
                                 <SwipeItem
-                                    Text="{local:Translate Gen_Delete}"
+                                    Text="{x:Static properties:Strings.Gen_Delete}"
                                     BackgroundColor="IndianRed"
                                     Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference ListCardRoot}}"
                                     CommandParameter="{Binding .}">

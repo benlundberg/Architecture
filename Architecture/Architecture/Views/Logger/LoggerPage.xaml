@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Architecture.LoggerPage"
+             xmlns:properties="clr-namespace:Architecture.Resources"
              xmlns:local="clr-namespace:Architecture"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
              x:DataType="local:LoggerViewModel">
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="{local:Translate Gen_Log}" />
+        <controls:PageTitleView Text="{x:Static properties:Strings.Gen_Log}" />
     </NavigationPage.TitleView>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{local:Translate Gen_Clear}" Command="{Binding ClearLogCommand}">
+        <ToolbarItem Text="{x:Static properties:Strings.Gen_Clear}" Command="{Binding ClearLogCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
                     Size="{StaticResource ToolbarItemSize}"
@@ -21,7 +22,7 @@
 					FontFamily="{StaticResource FontAwesomeRegular}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        <ToolbarItem Text="{local:Translate Gen_Send}" Command="{Binding SendLogCommand}">
+        <ToolbarItem Text="{x:Static properties:Strings.Gen_Send}" Command="{Binding SendLogCommand}">
             <ToolbarItem.IconImageSource>
                 <FontImageSource 
                     Size="{StaticResource ToolbarItemSize}"

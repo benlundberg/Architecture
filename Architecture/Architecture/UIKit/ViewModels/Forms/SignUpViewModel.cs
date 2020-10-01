@@ -13,19 +13,19 @@ namespace Architecture
         {
             Email = new ValidatableObject<string>(new List<IValidationRule<string>>
             {
-                new IsNotNullOrEmptyRule<string>(Translate("Missing_Mail")),
-                new IsValidEmailRule<string>(Translate("Invalid_Email"))
+                new IsNotNullOrEmptyRule<string>("You need to provide an e-mail"),
+                new IsValidEmailRule<string>("You need to provide a valid e-mail")
             });
 
             Password = new ValidatableObject<string>(new List<IValidationRule<string>>
             {
-                new IsNotNullOrEmptyRule<string>(Translate("Missing_Password")),
-                new IsMinimumLengthRule<string>(lengthRequired: 6, Translate("Invalid_Password_Length"))
+                new IsNotNullOrEmptyRule<string>("You need to provide a password"),
+                new IsMinimumLengthRule<string>(lengthRequired: 6, "Password needs to be at least six characters long")
             });
 
             ConfirmPassword = new ValidatableObject<string>(new List<IValidationRule<string>>
             {
-                new IsEqualToRule<string>(Password, Translate("Invalid_Confirm_Password"))
+                new IsEqualToRule<string>(Password, "Passwords needs to be the same")
             });
         }
 
@@ -34,19 +34,19 @@ namespace Architecture
         {
             if (!Email.Validate())
             {
-                ShowAlert(Email.Error, Translate("Gen_Sign_Up"));
+                ShowAlert(Email.Error, "Sing up");
                 return;
             }
 
             if (!Password.Validate())
             {
-                ShowAlert(Password.Error, Translate("Gen_Sign_Up"));
+                ShowAlert(Password.Error, "Sing up");
                 return;
             }
 
             if (!ConfirmPassword.Validate())
             {
-                ShowAlert(ConfirmPassword.Error, Translate("Gen_Sign_Up"));
+                ShowAlert(ConfirmPassword.Error, "Sing up");
                 return;
             }
 
