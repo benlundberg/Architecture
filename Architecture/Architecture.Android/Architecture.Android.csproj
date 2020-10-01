@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Architecture.Droid</RootNamespace>
     <AssemblyName>Architecture.Android</AssemblyName>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -99,6 +99,10 @@
     <PackageReference Include="Xamarin.Forms.Visual.Material">
       <Version>4.8.0.1451</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0-rc1" />
+    <PackageReference Include="Xamarin.AndroidX.Browser" Version="1.0.0-rc1" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0-rc1" />
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter" Version="1.1.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper_Droid.cs" />
