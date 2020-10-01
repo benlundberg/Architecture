@@ -24,7 +24,7 @@ namespace Architecture.Droid
             var mimetype = MimeTypeMap.Singleton.GetMimeTypeFromExtension(extension.ToLower());
         
             // Get external path
-            var externalPath = global::Android.OS.Environment.ExternalStorageDirectory.Path + "/" + Path.GetFileName(path);
+            var externalPath = Android.App.Application.Context.GetExternalFilesDir("").Path + "/" + Path.GetFileName(path);
 
             // Write file bytes to external path
             File.WriteAllBytes(externalPath, localFileSystemService.ReadFile(path));

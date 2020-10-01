@@ -20,16 +20,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-  <key>UIAppFonts</key>
-  <array>
-    <string>FontAwesome5Brands.otf</string>
-    <string>FontAwesome5Regular.otf</string>
-    <string>FontAwesome5Solid.otf</string>
-    <string>Montserrat-Bold.ttf</string>
-    <string>Montserrat-Regular.ttf</string>
-  </array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesome5Brands.otf</string>
+		<string>FontAwesome5Regular.otf</string>
+		<string>FontAwesome5Solid.otf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+	</array>
 	<key>MinimumOSVersion</key>
-	<string>8</string>
+	<string>10.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>Architecture</string>
 	<key>CFBundleIdentifier</key>
