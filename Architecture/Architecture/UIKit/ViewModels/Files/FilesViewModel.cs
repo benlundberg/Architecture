@@ -1,5 +1,4 @@
 ﻿using Architecture.Core;
-using Plugin.Permissions;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -102,11 +101,11 @@ namespace Architecture
             try
             {
                 // Ask permission to storage
-                var status = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
+                var status = await Permissions.RequestAsync<Permissions.StorageWrite>();
 
-                if (status != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+                if (status != PermissionStatus.Granted)
                 {
-                    throw new Exception("Need storage permission to store downloaded file");
+                    throw new PermissionException("Denied permission for storage");
                 }
 
                 var data = await MakeRequestAsync<byte[]>(url, HttpMethod.Get, null, ParseType.BYTES);

@@ -129,7 +129,14 @@ namespace Architecture.Controls
                 index++;
             }
 
-            this.Content = content;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await this.FadeTo(0);
+
+                this.Content = content;
+
+                await this.FadeTo(1);
+            });
         }
 
         private void AddCollectionChanged(IEnumerable list)
@@ -182,10 +189,10 @@ namespace Architecture.Controls
         }
 
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(
-                "ItemTemplate",
-                typeof(DataTemplate),
-                typeof(ItemsControl),
-                null);
+            "ItemTemplate",
+            typeof(DataTemplate),
+            typeof(ItemsControl),
+            null);
 
         public DataTemplate ItemTemplate
         {

@@ -1,5 +1,7 @@
 ﻿using Architecture.Core;
+using Microsoft.AppCenter.Crashes;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Architecture
@@ -38,7 +40,13 @@ namespace Architecture
 
                 if (sendToService)
                 {
-                    // TODO: Send to service, AppCenter?
+                    // Send to service
+                    Crashes.TrackError(ex, new Dictionary<string, string>()
+                    {
+                        { "Class name", className },
+                        { "Message", ex.Message },
+                        { "Stacktrace", ex.StackTrace }
+                    });
                 }
             }
             catch (Exception e)

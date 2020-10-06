@@ -1,4 +1,7 @@
 ﻿using Architecture.Core;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 
 [assembly: ExportFont("FontAwesome5Brands.otf", Alias = "FontAwesomeBrands")]
@@ -55,6 +58,9 @@ namespace Architecture
         protected override void OnStart()
         {
             // Handle when your app starts
+
+            // Init AppCenter
+            AppCenter.Start($"android={AppConfig.AndroidAppCenterSecret};", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

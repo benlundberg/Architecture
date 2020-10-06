@@ -16,15 +16,20 @@
     </NavigationPage.TitleView>
 
     <Grid>
-        <BoxView VerticalOptions="Start" HeightRequest="150">
-            <BoxView.Background>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0,1">
+                <GradientStop Color="{StaticResource PrimaryColor}" Offset="0.1" />
+                <GradientStop Color="{StaticResource Accent}" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <BoxView VerticalOptions="Start" HeightRequest="150" />
+        <Grid Margin="40, 80" VerticalOptions="Start">
+            <Grid.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="{StaticResource PrimaryColor}" Offset="0.1" />
-                    <GradientStop Color="{StaticResource DarkPrimaryColor}" Offset="1.0" />
+                    <GradientStop Color="{StaticResource Accent}" Offset="1.0" />
                 </LinearGradientBrush>
-            </BoxView.Background>
-        </BoxView>
-        <Grid Margin="40, 80" VerticalOptions="Start">
+            </Grid.Background>
             <Frame>
                 <StackLayout Spacing="{StaticResource MainSpacing}">
                     <Label Text="Name" FontSize="Micro" />

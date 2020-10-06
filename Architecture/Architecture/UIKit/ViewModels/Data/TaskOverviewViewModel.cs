@@ -1,6 +1,5 @@
 ﻿using Architecture.Controls;
 using Architecture.Controls.Charts;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,8 +23,10 @@ namespace Architecture
 
             TableFilters = new ObservableCollection<TableFilterViewModel>
             {
-                new TableFilterViewModel { Id = 1, IsActive = true, Text = "City" },
-                new TableFilterViewModel { Id = 2, IsActive = true, Text = "Weight" }
+                new TableFilterViewModel { Id = "City", IsVisible = true, Text = "City" },
+                new TableFilterViewModel { Id = "Time", IsVisible = true, Text = "Time" },
+                new TableFilterViewModel { Id = "Weight", IsVisible = true, Text = "Weight" },
+                new TableFilterViewModel { Id = "Price", IsVisible = true, Text = "Price" }
             };
 
             LoadTableData();
@@ -34,77 +35,51 @@ namespace Architecture
 
         private void LoadTableData()
         {
-            var items = new List<TableItem>();
-
-            items.Add(new TableItem("Order ID")
+            var items = new List<TableItemViewModel>()
             {
-                TextAlignment = TextAlignment.Start,
-                ContentItems = new List<TableContentItem>
+                new TableItemViewModel
                 {
-                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start },
-                    new TableContentItem("#12314") { TextAlignment = TextAlignment.Start }
-                }
-            });
-
-            if (TableFilters.FirstOrDefault(x => x.Id == 1).IsActive)
-            {
-                items.Add(new TableItem("City")
+                    OrderID = "#12314",
+                    City = "New York",
+                    Price = "$ 165.00",
+                    Time = "11 days",
+                    Weight = "5 kg"
+                },
+                new TableItemViewModel
                 {
-                    ContentItems = new List<TableContentItem>
-                    {
-                        new TableContentItem("New York"),
-                        new TableContentItem("Chicago"),
-                        new TableContentItem("New York"),
-                        new TableContentItem("Oregon"),
-                        new TableContentItem("Los Angeles")
-                    }
-                });
-            }
-
-            items.Add(new TableItem("Time")
-            {
-                ContentItems = new List<TableContentItem>
+                    OrderID = "#12314",
+                    City = "Los Angeles",
+                    Price = "$ 322.00",
+                    Time = "4 days",
+                    Weight = "1 kg"
+                },
+                new TableItemViewModel
                 {
-                    new TableContentItem("5 days"),
-                    new TableContentItem("5 days"),
-                    new TableContentItem("6 days"),
-                    new TableContentItem("4 days"),
-                    new TableContentItem("3 days")
-                }
-            });
-
-            if (TableFilters.FirstOrDefault(x => x.Id == 2).IsActive)
-            {
-                items.Add(new TableItem("Weight")
+                    OrderID = "#12314",
+                    City = "Chicago",
+                    Price = "$ 162.00",
+                    Time = "5 days",
+                    Weight = "2 kg"
+                },
+                new TableItemViewModel
                 {
-                    ContentItems = new List<TableContentItem>
-                    {
-                        new TableContentItem("2 kg"),
-                        new TableContentItem("3 kg"),
-                        new TableContentItem("0.5 kg"),
-                        new TableContentItem("1 kg"),
-                        new TableContentItem("7 kg")
-                    }
-                });
-            }
-
-            items.Add(new TableItem("Price")
-            {
-                TextAlignment = TextAlignment.End,
-                ContentItems = new List<TableContentItem>
+                    OrderID = "#12314",
+                    City = "Vancouver",
+                    Price = "$ 32.00",
+                    Time = "5 days",
+                    Weight = "2 kg"
+                },
+                new TableItemViewModel
                 {
-                    new TableContentItem("$ 162.00") { TextAlignment = TextAlignment.End },
-                    new TableContentItem("$ 12.00") { TextAlignment = TextAlignment.End },
-                    new TableContentItem("$ 250.00") { TextAlignment = TextAlignment.End },
-                    new TableContentItem("$ 124.00") { TextAlignment = TextAlignment.End },
-                    new TableContentItem("$ 112.50") { TextAlignment = TextAlignment.End }
-                }
-            });
+                    OrderID = "#12314",
+                    City = "Oregon",
+                    Price = "$ 1622.00",
+                    Time = "2 days",
+                    Weight = "12 kg"
+                },
+            };
 
-            TableItems = new ObservableCollection<TableItem>(items);
+            TableItems = new ObservableCollection<TableItemViewModel>(items);
         }
 
         private void LoadChartEntries()
@@ -115,8 +90,6 @@ namespace Architecture
 
             var items1 = new List<ChartValueItem>();
             var items2 = new List<ChartValueItem>();
-            var items3 = new List<ChartValueItem>();
-            var items4 = new List<ChartValueItem>();
 
             for (int i = 0; i < 10; i++)
             {
@@ -139,24 +112,6 @@ namespace Architecture
                     Value = value,
                     Tag = date.ToString()
                 });
-
-                value = random.Next(20, 90);
-
-                items3.Add(new ChartValueItem
-                {
-                    Label = date.Year.ToString(),
-                    Value = value,
-                    Tag = date.ToString()
-                });
-
-                value = random.Next(20, 90);
-
-                items4.Add(new ChartValueItem
-                {
-                    Label = date.Year.ToString(),
-                    Value = value,
-                    Tag = date.ToString()
-                });
             }
 
             ChartEntries = new ObservableCollection<ChartItem>()
@@ -168,24 +123,10 @@ namespace Architecture
                     Color = App.Current.DarkPrimaryColor(),
                     PointColor = App.Current.DarkPrimaryColor(),
                 },
-                //new ChartItem
-                //{
-                //    Id = 1,
-                //    Items = items2,
-                //    Color = Color.CornflowerBlue,
-                //    PointColor = Color.CornflowerBlue
-                //},
-                //new ChartItem
-                //{
-                //    Id = 2,
-                //    Items = items3,
-                //    Color = Color.Violet,
-                //    PointColor = Color.Violet
-                //},
                 new ChartItem
                 {
-                    Id = 3,
-                    Items = items4,
+                    Id = 1,
+                    Items = items2,
                     Color = App.Current.AccentColor(),
                     UseDashedEffect = true,
                     PointColor = App.Current.AccentColor(),
@@ -248,7 +189,7 @@ namespace Architecture
         public string SelectedItem { get; set; }
         public List<string> PickerValues { get; private set; }
 
-        public ObservableCollection<TableItem> TableItems { get; private set; }
+        public ObservableCollection<TableItemViewModel> TableItems { get; private set; }
         public ObservableCollection<TableFilterViewModel> TableFilters { get; set; }
 
         public ObservableCollection<ChartItem> ChartEntries { get; private set; }
@@ -270,12 +211,19 @@ namespace Architecture
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
-    public class TableFilterViewModel : INotifyPropertyChanged
+    public class TableFilterViewModel : TableFilterItem, INotifyPropertyChanged
     {
-        public int Id { get; set; }
         public string Text { get; set; }
-        public bool IsActive { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+    }
+
+    public class TableItemViewModel : BaseItemViewModel
+    {
+        public string OrderID { get; set; }
+        public string City { get; set; }
+        public string Time { get; set; }
+        public string Weight { get; set; }
+        public string Price { get; set; }
     }
 }

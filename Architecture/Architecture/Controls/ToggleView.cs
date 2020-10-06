@@ -14,13 +14,20 @@ namespace Architecture.Controls
 
         private void SetView()
         {
-            this.Content = IsChecked ? CheckedView : UncheckedView;
-
-            this.Content.GestureRecognizers.Clear();
-
-            this.Content.GestureRecognizers.Add(new TapGestureRecognizer()
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                Command = ViewTappedCommand
+                await this.FadeTo(0, 125);
+
+                this.Content = IsChecked ? CheckedView : UncheckedView;
+
+                await this.FadeTo(1, 125);
+
+                this.Content.GestureRecognizers.Clear();
+
+                this.Content.GestureRecognizers.Add(new TapGestureRecognizer()
+                {
+                    Command = ViewTappedCommand
+                });
             });
         }
 

@@ -22,7 +22,14 @@
 
     <ScrollView>
         <Grid>
-            <BoxView VerticalOptions="Start" HeightRequest="150" />
+            <BoxView VerticalOptions="Start" HeightRequest="150">
+                <BoxView.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="{StaticResource PrimaryColor}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource DarkPrimaryColor}" Offset="1.0" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
             <StackLayout>
                 <Grid>
                     <Frame

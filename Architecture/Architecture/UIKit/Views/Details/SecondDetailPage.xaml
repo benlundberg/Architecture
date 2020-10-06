@@ -9,7 +9,7 @@
              xmlns:controls="clr-namespace:Architecture.Controls">
     
     <NavigationPage.TitleView>
-        <controls:PageTitleView IsCentered="True" Text="Second Detail" />
+        <controls:PageTitleView Text="Second Detail" />
     </NavigationPage.TitleView>
 
     <ScrollView>
@@ -23,10 +23,11 @@
                 Source="http://clarityapplication.com/dev/images/9.jpg" 
                 Aspect="AspectFill" />
             <Frame
+                Padding="12"
                 HorizontalOptions="End"
                 VerticalOptions="End"
                 CornerRadius="30"
-                Margin="0, 0, -30, -30">
+                Margin="0, 0, -30, -22">
                 <StackLayout Padding="0, 0, 20, 0">
                     <Label FontSize="Default">
                         <Label.FormattedText>

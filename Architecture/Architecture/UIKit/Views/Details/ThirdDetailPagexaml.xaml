@@ -9,7 +9,7 @@
              xmlns:controls="clr-namespace:Architecture.Controls">
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView IsCentered="True" Text="Third Detail" />
+        <controls:PageTitleView Text="Third Detail" />
     </NavigationPage.TitleView>
 
     <ScrollView>

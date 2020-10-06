@@ -1,181 +1,244 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class TableControl : ScrollView
+    public class TableControl : ContentView
     {
         public TableControl()
         {
-            this.Orientation = ScrollOrientation.Both;
+            ItemTemplates = new ObservableCollection<TableViewItem>();
         }
 
-        private static void TableControlSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
+        private void Init()
+        {
+            IList enumerable = ItemsSource as IList ?? ItemsSource?.Cast<object>()?.ToArray();
+
+            // Register for itemsource change
+            AddCollectionChanged(enumerable);
+
+            // Clear added items if no items exists anymore
+            if (!(enumerable?.Count > 0))
+            {
+                // Clear items
+                if (this.Content is Grid grid)
+                {
+                    if (grid.Children.LastOrDefault() is ScrollView scroll)
+                    {
+                        scroll.Content = null;
+                    }
+                }
+                return;
+            }
+
+            var viewRoot = new Grid
+            {
+                ColumnSpacing = 0,
+                RowSpacing = 0
+            };
+
+            viewRoot.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            viewRoot.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Star });
+
+            var headerGrid = new Grid()
+            {
+                ColumnSpacing = 0
+            };
+
+            // Adding headers
+            foreach (var templateView in ItemTemplates)
+            {
+                if (FilterItemsSource?.Any() == true && FilterItemsSource?.Any(x => x.Id == templateView.Id && !x.IsVisible) == true)
+                {
+                    continue;
+                }
+
+                var headerView = GetView(templateView.HeaderTemplateSource);
+
+                Grid.SetColumn(headerView, headerGrid.ColumnDefinitions.Count);
+
+                headerGrid.Children.Add(headerView);
+
+                headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+            }
+
+            var itemsGrid = new Grid()
+            {
+                ColumnSpacing = 0,
+                RowSpacing = 0,
+                ColumnDefinitions = headerGrid.ColumnDefinitions
+            };
+
+            // Adding items
+            foreach (var item in enumerable)
+            {
+                var properties = item.GetType().GetProperties();
+
+                var columnPosition = 0;
+
+                foreach (var property in properties)
+                {
+                    var columnView = ItemTemplates.FirstOrDefault(x => x.Id == property.Name);
+
+                    if (FilterItemsSource?.Any() == true && FilterItemsSource?.Any(x => x.Id == columnView.Id && !x.IsVisible) == true)
+                    {
+                        continue;
+                    }
+
+                    var itempropertyView = GetView(columnView.ItemTemplateSource, item);
+
+                    itempropertyView.BindingContext = item;
+
+                    Grid.SetRow(itempropertyView, itemsGrid.RowDefinitions.Count);
+                    Grid.SetColumn(itempropertyView, columnPosition);
+
+                    itempropertyView.BackgroundColor = StripedBackground ? (itemsGrid.RowDefinitions.Count % 2 == 0 ? SecondBackground : itempropertyView.BackgroundColor) : itempropertyView.BackgroundColor;
+
+                    itemsGrid.Children.Add(itempropertyView);
+
+                    columnPosition++;
+                }
+
+                itemsGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            }
+
+            viewRoot.Children.Add(headerGrid);
+
+            var scrollview = new ScrollView
+            {
+                Content = itemsGrid
+            };
+
+            Grid.SetRow(scrollview, 1);
+
+            viewRoot.Children.Add(scrollview);
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await this.FadeTo(0);
+                
+                this.Content = viewRoot;
+
+                await this.FadeTo(1);
+            });
+        }
+
+        private View GetView(DataTemplate templateView, object item = null)
+        {
+            if (templateView == null)
+            {
+                return new Label
+                {
+                    Text = item?.ToString(),
+                    Padding = new Thickness(10),
+                    VerticalOptions = LayoutOptions.Center,
+                    FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label))
+                };
+            }
+            else if (templateView is DataTemplateSelector selector)
+            {
+                var template = selector.SelectTemplate(item, this);
+                return template.CreateContent() as View;
+            }
+            else
+            {
+                return templateView.CreateContent() as View;
+            }
+        }
+
+        private void AddCollectionChanged(IEnumerable list)
+        {
+            if (list is INotifyCollectionChanged collection)
+            {
+                collection.CollectionChanged -= ItemsSourceCollectionChanged;
+                collection.CollectionChanged += ItemsSourceCollectionChanged;
+            }
+        }
+
+        private void ItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Init();
+        }
+
+        private static void ItemsSourceChanged(BindableObject bindableObject, object oldValue, object newValue)
         {
             if (!(bindableObject is TableControl view))
             {
                 return;
             }
 
-            if (!(newValue is IList<TableItem> newItems))
-            {
-                return;
-            }
-
-            if (newItems.Any() != true)
-            {
-                return;
-            }
-
-            var grid = new Grid()
-            {
-                ColumnSpacing = 0,
-                RowSpacing = 0
-            };
-
-            var numRows = newItems.Max(x => x.ContentItems.Count());
-            var numCols = newItems.Count;
-
-            // Create rows
-            for (int i = 0; i <= numRows; i++)
-            {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            }
-
-            // Create columns
-            for (int i = 0; i < numCols; i++)
-            {
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
-            }
-
-            for (int i = 0; i < newItems.Count; i++)
-            {
-                var item = newItems[i];
-
-                var header = new Frame
-                {
-                    BackgroundColor = item.HeaderBackground,
-                    BorderColor = view.UseBorder ? view.BorderColor : Color.Transparent,
-                    CornerRadius = 0,
-                    Padding = item.Padding,
-                    Content = new Label 
-                    { 
-                        VerticalTextAlignment = TextAlignment.Center,
-                        HorizontalTextAlignment = item.TextAlignment,
-                        TextColor = item.HeaderColor,
-                        Text = item.Header,
-                        FontSize = Device.GetNamedSize(item.FontSize, typeof(Label))
-                    }
-                };
-
-                header.GestureRecognizers.Add(new TapGestureRecognizer
-                {
-                    Command = view.TapGestureCommand,
-                    CommandParameter = item
-                });
-
-                Grid.SetColumn(header, i);
-
-                for (int y = 0; y < item.ContentItems.Count; y++)
-                {
-                    var contentItem = item.ContentItems[y];
-
-                    var content = new Frame
-                    {
-                        BackgroundColor = !view.UseSecondBackgroundColor ? contentItem.Background : (y % 2) == 0 ? contentItem.Background : contentItem.SecondBackground,
-                        BorderColor = view.UseBorder ? view.BorderColor : Color.Transparent,
-                        CornerRadius = 0,
-                        Padding = item.Padding,
-                        Content = new Label 
-                        {
-                            VerticalTextAlignment = TextAlignment.Center,
-                            HorizontalTextAlignment = contentItem.TextAlignment,
-                            TextColor = contentItem.TextColor,
-                            Text = contentItem.Text,
-                            FontSize = Device.GetNamedSize(contentItem.FontSize, typeof(Label))
-                        }
-                    };
-
-                    Grid.SetRow(content, y + 1);
-                    Grid.SetColumn(content, i);
-
-                    grid.Children.Add(content);
-                }
-
-                grid.Children.Add(header);
-            }
-
-            view.Content = grid;
+            view.Init();
         }
 
-        public static readonly BindableProperty TableSourceProperty = BindableProperty.Create(
-            propertyName: "TableSource",
-            returnType: typeof(IList<TableItem>),
-            declaringType: typeof(TableControl),
-            defaultValue: default(IList<TableItem>),
-            propertyChanged: TableControlSourceChanged);
+        public static readonly BindableProperty FilterItemsSourceProperty = BindableProperty.Create(
+            "FilterItemsSource",
+            typeof(IEnumerable<TableFilterItem>),
+            typeof(TableControl),
+            null);
 
-        public IList<TableItem> TableSource
+        public IEnumerable<TableFilterItem> FilterItemsSource
         {
-            get { return (IList<TableItem>)GetValue(TableSourceProperty); }
-            set { SetValue(TableSourceProperty, value); }
+            get { return (IEnumerable<TableFilterItem>)GetValue(FilterItemsSourceProperty); }
+            set { SetValue(FilterItemsSourceProperty, value); }
         }
+
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
+            "ItemsSource",
+            typeof(IEnumerable),
+            typeof(TableControl),
+            null,
+            propertyChanged: ItemsSourceChanged);
+
+        public IEnumerable ItemsSource
+        {
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        private ICommand filterChangedCommand;
+        public ICommand FilterChangedCommand => filterChangedCommand ?? (filterChangedCommand = new Command(() =>
+        {
+            Init();
+        }));
 
         private ICommand tapGestureCommand;
         public ICommand TapGestureCommand => tapGestureCommand ?? (tapGestureCommand = new Command((param) =>
         {
-            if (!(param is TableItem item))
-            {
-                return;
-            }
+            //if (!(param is TableItem item))
+            //{
+            //    return;
+            //}
 
-            if (item.IsOrderedAscending)
-            {
-                item.ContentItems = item.ContentItems.OrderByDescending(x => x.Text)?.ToList();
-            }
-            else
-            {
-                item.ContentItems = item.ContentItems.OrderBy(x => x.Text)?.ToList();
-            }
+            //if (item.IsOrderedAscending)
+            //{
+            //    item.ContentItems = item.ContentItems.OrderByDescending(x => x.Text)?.ToList();
+            //}
+            //else
+            //{
+            //    item.ContentItems = item.ContentItems.OrderBy(x => x.Text)?.ToList();
+            //}
         }));
 
-        public bool UseBorder { get; set; } = true;
-        public bool UseSecondBackgroundColor { get; set; } = true;
-        public Color BorderColor { get; set; } = Color.Black;
-    }
-
-    public class TableItem
-    {
-        public TableItem(string header)
-        {
-            Header = header;
-        }
-
-        public string Header { get; set; }
-        public bool IsOrderedAscending { get; set; }
-        public NamedSize FontSize { get; set; }
-        public Color HeaderColor { get; set; } = Color.Black;
-        public Color HeaderBackground { get; set; } = App.Current.GrayColor();
-        public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
-        public Thickness Padding { get; set; } = new Thickness(6, 14);
-        public IList<TableContentItem> ContentItems { get; set; }
-    }
-
-    public class TableContentItem
-    {
-        public TableContentItem(string text)
-        {
-            Text = text;
-        }
-
-        public string Text { get; set; }
-        public Thickness Padding { get; set; } = new Thickness(6, 14);
-        public NamedSize FontSize { get; set; }
-        public TextAlignment TextAlignment { get; set; } = TextAlignment.Center;
-        public Color TextColor { get; set; } = Color.Black;
-        public Color Background { get; set; } = Color.White;
+        public ObservableCollection<TableViewItem> ItemTemplates { get; set; }
+        public bool StripedBackground { get; set; } = false;
         public Color SecondBackground { get; set; } = App.Current.LightGrayColor();
+    }
+
+    public class TableViewItem
+    {
+        public string Id { get; set; }
+        public DataTemplate HeaderTemplateSource { get; set; }
+        public DataTemplate ItemTemplateSource { get; set; }
+    }
+
+    public class TableFilterItem
+    {
+        public string Id { get; set; }
+        public bool IsVisible { get; set; } = true;
     }
 }
