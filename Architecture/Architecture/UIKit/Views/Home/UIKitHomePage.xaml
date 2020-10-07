@@ -71,6 +71,9 @@
             <Label Text="Components" FontSize="Large" />
             <Button Text="Components" Command="{Binding ComponentsCommand, Source={x:Reference root}}" CommandParameter="1" />
             <Button Text="Dialogs" Command="{Binding ComponentsCommand, Source={x:Reference root}}" CommandParameter="2" />
+            <!-- Media -->
+            <Label Text="Media" FontSize="Large" />
+            <Button Text="Media" Command="{Binding MediaCommand, Source={x:Reference root}}" CommandParameter="1" />
         </StackLayout>
     </ScrollView>
 </ContentPage>

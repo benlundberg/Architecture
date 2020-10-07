@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.MediaPage"
+             xmlns:local="clr-namespace:Architecture"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             x:DataType="local:MediaViewModel">
+
+    <ContentPage.BindingContext>
+        <local:MediaViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Media" />
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout Padding="{StaticResource MainPadding}">
+            <ff:CachedImage 
+                HorizontalOptions="FillAndExpand"
+                Aspect="AspectFit"
+                ErrorPlaceholder="ic_launcher"
+                Source="{Binding ImageSource}" 
+                HeightRequest="300" />
+            <Button Text="Take photo" Command="{Binding MediaCommand}" CommandParameter="1" />
+            <Button Text="Pick photo" Command="{Binding MediaCommand}" CommandParameter="2" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

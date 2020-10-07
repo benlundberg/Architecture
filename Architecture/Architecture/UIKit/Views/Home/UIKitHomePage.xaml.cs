@@ -260,5 +260,21 @@ namespace Architecture
                     break;
             }
         }));
+        
+        private ICommand mediaCommand;
+        public ICommand MediaCommand => mediaCommand ?? (mediaCommand = new Command(async (param) =>
+        {
+            if (!int.TryParse(param?.ToString(), out int page))
+            {
+                return;
+            }
+
+            switch (page)
+            {
+                case 1:
+                    await Navigation.PushAsync(new MediaPage());
+                    break;
+            }
+        }));
     }
 }
