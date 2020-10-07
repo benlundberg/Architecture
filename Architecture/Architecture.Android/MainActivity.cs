@@ -1,11 +1,19 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Architecture.Core;
 
 namespace Architecture.Droid
 {
-    [Activity(Label = "Architecture", Icon = "@drawable/ic_launcher", Theme = "@style/SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(
+        Label = "Architecture", 
+        Icon = "@drawable/ic_launcher", 
+        Theme = "@style/SplashTheme", 
+        MainLauncher = true, 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+        LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -40,6 +48,21 @@ namespace Architecture.Droid
             Bootstrapper_Droid.Initialize();
 
             LoadApplication(new App());
+
+            CreateNotificationFromIntent(Intent);
+        }
+
+        private void CreateNotificationFromIntent(Intent intent)
+        {
+            if (intent?.Extras == null)
+            {
+                return;
+            }
+
+            string title = intent.Extras.GetString(NotificationService_Droid.TitleKey);
+            string message = intent.Extras.GetString(NotificationService_Droid.MessageKey);
+
+            ComponentContainer.Current.Resolve<INotificationService>().ReceiveNotification(title, message);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

@@ -24,12 +24,12 @@ namespace Architecture.Droid
             var mimetype = MimeTypeMap.Singleton.GetMimeTypeFromExtension(extension.ToLower());
         
             // Get external path
-            var externalPath = Android.App.Application.Context.GetExternalFilesDir("").Path + "/" + Path.GetFileName(path);
+            var externalPath = global::Android.App.Application.Context.GetExternalFilesDir("").Path + "/" + Path.GetFileName(path);
 
             // Write file bytes to external path
             File.WriteAllBytes(externalPath, localFileSystemService.ReadFile(path));
 
-            var uri = FileProvider.GetUriForFile(Android.App.Application.Context, Android.App.Application.Context.ApplicationContext.PackageName + ".fileprovider", new Java.IO.File(externalPath));
+            var uri = FileProvider.GetUriForFile(global::Android.App.Application.Context, global::Android.App.Application.Context.ApplicationContext.PackageName + ".fileprovider", new Java.IO.File(externalPath));
 
             var intent = new Intent();
             intent.SetAction(Intent.ActionView);
@@ -44,7 +44,7 @@ namespace Architecture.Droid
 
             try
             {
-                Android.App.Application.Context.StartActivity(chooserIntent);
+                global::Android.App.Application.Context.StartActivity(chooserIntent);
             }
             catch (Exception ex)
             {

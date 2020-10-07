@@ -130,7 +130,21 @@ namespace Architecture
             }
         }));
 
+        private ICommand showPushNotificationCommand;
+        public ICommand ShowPushNotificationCommand => showPushNotificationCommand ?? (showPushNotificationCommand = new Command(async (param) =>
+        {
+            notificationCount++;
+            
+            string title = $"Local Notification #{notificationCount}";
+            string message = $"You have now received {notificationCount} notifications!";
+
+            ComponentContainer.Current.Resolve<INotificationService>().ScheduleNotification(title, message);
+        }));
+
+
         public string IsChecked { get; set; }
         public string ConfirmAnswer { get; set; }
+
+        private int notificationCount;
     }
 }

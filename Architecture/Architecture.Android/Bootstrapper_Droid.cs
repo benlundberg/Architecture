@@ -19,6 +19,7 @@ namespace Architecture.Droid
             ComponentContainer.Current.Register<IDialogService, DialogService_Droid>(singelton: true);
             ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_Droid>(singelton: true);
             ComponentContainer.Current.Register<IOpenFileService, OpenFileService_Droid>(singelton: true);
+            ComponentContainer.Current.Register<INotificationService, NotificationService_Droid>(singelton: true);
         }
     }
 }
