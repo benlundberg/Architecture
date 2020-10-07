@@ -129,13 +129,9 @@ namespace Architecture.Controls
                 index++;
             }
 
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread(() =>
             {
-                await this.FadeTo(0);
-
                 this.Content = content;
-
-                await this.FadeTo(1);
             });
         }
 

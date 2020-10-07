@@ -19,40 +19,39 @@
         <controls:PageTitleView Text="Dashboard Card" />
     </NavigationPage.TitleView>
 
-    <ListView 
-        HasUnevenRows="True"
-        SeparatorVisibility="None"
+    <CollectionView 
         SelectionMode="None"
         Margin="{StaticResource MainPadding}"
         ItemsSource="{Binding DashboardItems}">
-        <ListView.ItemTemplate>
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="local:DashboardItemViewModel">
-                <ViewCell>
-                    <Frame 
-                        CornerRadius="10"
-                        Margin="0, 8"
-                        Padding="0">
-                        <Grid>
-                            <ff:CachedImage 
-                                HeightRequest="100"
-                                Aspect="AspectFill"
-                                Source="{Binding ImageSource}" />
-                            <Grid BackgroundColor="Black" Opacity=".6" />
-                            <StackLayout Padding="10" VerticalOptions="End" Spacing="0">
-                                <Label 
-                                    Text="{Binding Title}" 
-                                    TextColor="White"
-                                    FontSize="Title"
-                                    FontAttributes="Bold" />
-                                <Label 
-                                    Text="{Binding Subtitle}" 
-                                    TextColor="White"
-                                    FontSize="Subtitle" />
-                            </StackLayout>
-                        </Grid>
-                    </Frame>
-                </ViewCell>
+                <Frame 
+                    CornerRadius="10"
+                    Margin="0, 8"
+                    Padding="0">
+                    <Grid>
+                        <ff:CachedImage 
+                            HeightRequest="100"
+                            Aspect="AspectFill"
+                            Source="{Binding ImageSource}" />
+                        <Grid BackgroundColor="Black" Opacity=".6" />
+                        <StackLayout Padding="10" VerticalOptions="End" Spacing="0">
+                            <Label 
+                                Text="{Binding Title}" 
+                                TextColor="White"
+                                FontSize="Title"
+                                FontAttributes="Bold" />
+                            <Label 
+                                Text="{Binding Subtitle}" 
+                                TextColor="White"
+                                FontSize="Subtitle" />
+                        </StackLayout>
+                    </Grid>
+                </Frame>
             </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

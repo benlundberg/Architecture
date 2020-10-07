@@ -19,91 +19,87 @@
         <controls:PageTitleView Text="Article List" />
     </NavigationPage.TitleView>
 
-    <ListView
+    <CollectionView
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-        ItemsSource="{Binding NatureArticles}"
-        SeparatorVisibility="None"
-        HasUnevenRows="True">
-        <ListView.ItemTemplate>
+        ItemsSource="{Binding NatureArticles}">
+        <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="local:ArticleItemViewModel">
-                <ViewCell>
-                    <Grid>
-                        <ff:CachedImage 
-                            HeightRequest="250"
-                            Aspect="AspectFill"
-                            Source="{Binding ImageSource}" />
-                        <Grid BackgroundColor="Black" Opacity=".5" />
-                        <Grid 
-                            Margin="16, 10"
-                            RowSpacing="6"
-                            VerticalOptions="End">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                FontSize="Large"
+                <Grid>
+                    <ff:CachedImage 
+                        HeightRequest="250"
+                        Aspect="AspectFill"
+                        Source="{Binding ImageSource}" />
+                    <Grid BackgroundColor="Black" Opacity=".5" />
+                    <Grid 
+                        Margin="16, 10"
+                        RowSpacing="6"
+                        VerticalOptions="End">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            FontSize="Large"
+                            TextColor="{StaticResource SecondaryTextColor}"
+                            Text="{Binding Title}" />
+                        <Grid Grid.Row="1" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label 
+                                FontSize="Default"
                                 TextColor="{StaticResource SecondaryTextColor}"
-                                Text="{Binding Title}" />
-                            <Grid Grid.Row="1" ColumnSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label 
-                                    FontSize="Default"
-                                    TextColor="{StaticResource SecondaryTextColor}"
-                                    Text="{Binding Category}" />
-                                <Label 
-                                    Grid.Column="1"
-                                    FontSize="Small"
-                                    FontAttributes="Bold"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="{Binding Year}" />
-                                <Label 
-                                    Grid.Column="2"
-                                    VerticalOptions="Center"
-                                    FontSize="Small"
-                                    FontFamily="{StaticResource FontAwesomeSolid}"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="&#xf0c0;" />
-                                <Label 
-                                    Grid.Column="3"
-                                    VerticalOptions="Center"
-                                    FontAttributes="Bold"
-                                    FontSize="Small"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="98" />
-                                <Label 
-                                    Grid.Column="4"
-                                    VerticalOptions="Center"
-                                    FontSize="Small"
-                                    FontFamily="{StaticResource FontAwesomeSolid}"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="&#xf004;" />
-                                <Label 
-                                    Grid.Column="5"
-                                    VerticalOptions="Center"
-                                    FontAttributes="Bold"
-                                    FontSize="Small"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="65" />
-                            </Grid>
-                            <BoxView 
-                                Grid.Row="2"
-                                HeightRequest="3"
-                                WidthRequest="50"
-                                HorizontalOptions="Start"
-                                Color="{StaticResource PrimaryColor}"/>
+                                Text="{Binding Category}" />
+                            <Label 
+                                Grid.Column="1"
+                                FontSize="Small"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="{Binding Year}" />
+                            <Label 
+                                Grid.Column="2"
+                                VerticalOptions="Center"
+                                FontSize="Small"
+                                FontFamily="{StaticResource FontAwesomeSolid}"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="&#xf0c0;" />
+                            <Label 
+                                Grid.Column="3"
+                                VerticalOptions="Center"
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="98" />
+                            <Label 
+                                Grid.Column="4"
+                                VerticalOptions="Center"
+                                FontSize="Small"
+                                FontFamily="{StaticResource FontAwesomeSolid}"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="&#xf004;" />
+                            <Label 
+                                Grid.Column="5"
+                                VerticalOptions="Center"
+                                FontAttributes="Bold"
+                                FontSize="Small"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="65" />
                         </Grid>
+                        <BoxView 
+                            Grid.Row="2"
+                            HeightRequest="3"
+                            WidthRequest="50"
+                            HorizontalOptions="Start"
+                            Color="{StaticResource PrimaryColor}"/>
                     </Grid>
-                </ViewCell>
+                </Grid>
             </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

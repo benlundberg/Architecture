@@ -182,50 +182,47 @@
                 HasMonth="{Binding HasMonth}"
                 HasDay="{Binding HasDay}" />
         </Grid>
-        <ListView 
+        <CollectionView 
             Grid.Row="2"
-            HasUnevenRows="True"
             SelectionMode="None">
-            <ListView.ItemsSource>
+            <CollectionView.ItemsSource>
                 <x:String>Items</x:String>
-            </ListView.ItemsSource>
-            <ListView.ItemTemplate>
+            </CollectionView.ItemsSource>
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <Grid 
-                            Padding="10" 
-                            BackgroundColor="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Frame
-                                Padding="0"
-                                BorderColor="Transparent"
-                                CornerRadius="10">
-                                <ff:CachedImage 
-                                    HeightRequest="50"
-                                    WidthRequest="50"
-                                    Source="http://clarityapplication.com/dev/images/13.jpg"
-                                    Aspect="AspectFill" />
-                            </Frame>
-                            <StackLayout Grid.Column="1">
-                                <Label Text="Joan Doe" FontSize="Default" />
-                                <Label Text="SUPPORT" FontSize="Small" />
-                            </StackLayout>
-                            <Button 
-                                Grid.Column="2" 
-                                HorizontalOptions="End"
-                                BackgroundColor="White"
-                                Text="Info"
-                                Padding="{OnPlatform iOS=10, Android=0}"
-                                VerticalOptions="Start"
-                                Style="{StaticResource OutlineButton}" />
-                        </Grid>
-                    </ViewCell>
+                    <Grid 
+                        Padding="10" 
+                        BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Frame
+                            Padding="0"
+                            BorderColor="Transparent"
+                            CornerRadius="10">
+                            <ff:CachedImage 
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                Source="http://clarityapplication.com/dev/images/13.jpg"
+                                Aspect="AspectFill" />
+                        </Frame>
+                        <StackLayout Grid.Column="1">
+                            <Label Text="Joan Doe" FontSize="Default" />
+                            <Label Text="SUPPORT" FontSize="Small" />
+                        </StackLayout>
+                        <Button 
+                            Grid.Column="2" 
+                            HorizontalOptions="End"
+                            BackgroundColor="White"
+                            Text="Info"
+                            Padding="{OnPlatform iOS=10, Android=0}"
+                            VerticalOptions="Start"
+                            Style="{StaticResource OutlineButton}" />
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>

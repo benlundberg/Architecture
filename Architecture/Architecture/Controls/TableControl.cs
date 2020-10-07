@@ -120,11 +120,11 @@ namespace Architecture.Controls
 
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await this.FadeTo(0);
+                await this.FadeTo(0, length: 50);
                 
                 this.Content = viewRoot;
 
-                await this.FadeTo(1);
+                await this.FadeTo(1, length: 50);
             });
         }
 

@@ -19,43 +19,40 @@
         <controls:PageTitleView Text="Article Classic" />
     </NavigationPage.TitleView>
 
-    <ListView 
+    <CollectionView 
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-        ItemsSource="{Binding NatureArticles}"
-        HasUnevenRows="True">
-        <ListView.ItemTemplate>
+        ItemsSource="{Binding NatureArticles}">
+        <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="local:ArticleItemViewModel">
-                <ViewCell>
-                    <Grid 
-                        Padding="10"
-                        ColumnSpacing="10"
-                        BackgroundColor="White">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <ff:CachedImage 
-                            Aspect="AspectFill"
-                            HeightRequest="150"
-                            WidthRequest="150"
-                            Source="{Binding ImageSource}" />
-                        <StackLayout Grid.Column="1">
-                            <Label
-                                FontSize="Large"
-                                Text="{Binding Title}"
-                                TextColor="{StaticResource PrimaryColor}" />
-                            <Label
-                                FontSize="Default"
-                                Text="{Binding Year}"
-                                TextColor="{StaticResource PrimaryColor}" />
-                            <Label 
-                                FontSize="Default"
-                                MaxLines="5"
-                                Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                        </StackLayout>
-                    </Grid>
-                </ViewCell>
+                <Grid 
+                    Padding="10"
+                    ColumnSpacing="10"
+                    BackgroundColor="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <ff:CachedImage 
+                        Aspect="AspectFill"
+                        HeightRequest="150"
+                        WidthRequest="150"
+                        Source="{Binding ImageSource}" />
+                    <StackLayout Grid.Column="1">
+                        <Label
+                            FontSize="Large"
+                            Text="{Binding Title}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label
+                            FontSize="Default"
+                            Text="{Binding Year}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label 
+                            FontSize="Default"
+                            MaxLines="5"
+                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                    </StackLayout>
+                </Grid>
             </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

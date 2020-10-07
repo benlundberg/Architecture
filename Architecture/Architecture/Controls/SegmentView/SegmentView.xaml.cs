@@ -180,13 +180,9 @@ namespace Architecture.Controls
             SegmentItems.Children.RemoveAt(selectedIndex);
             SegmentItems.Children.Insert(selectedIndex, GetView(item, selectedIndex));
 
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread(() =>
             {
-                await MainContent.FadeTo(0, length: 150);
-
                 this.MainContent = item.Content;
-
-                await MainContent.FadeTo(1, length: 150);
             });
         }
 
@@ -308,8 +304,8 @@ namespace Architecture.Controls
         public Thickness SectionControlPadding { get; set; }
         public float SectionControlCornerRadius { get; set; } = 0;
 
-        public Thickness SectionPadding { get; set; } = new Thickness(10);
-        public NamedSize FontSize { get; set; } = NamedSize.Medium;
+        public Thickness SectionPadding { get; set; } = new Thickness(8);
+        public NamedSize FontSize { get; set; } = NamedSize.Default;
 
         public Color SectionBackground { get; set; } = Color.Transparent;
         public Color SectionTextColor { get; set; }

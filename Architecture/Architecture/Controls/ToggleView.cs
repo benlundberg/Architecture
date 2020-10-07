@@ -14,13 +14,9 @@ namespace Architecture.Controls
 
         private void SetView()
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread(() =>
             {
-                await this.FadeTo(0, 125);
-
                 this.Content = IsChecked ? CheckedView : UncheckedView;
-
-                await this.FadeTo(1, 125);
 
                 this.Content.GestureRecognizers.Clear();
 
