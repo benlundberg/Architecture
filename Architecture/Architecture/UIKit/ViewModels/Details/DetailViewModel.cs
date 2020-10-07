@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using Architecture.Controls;
+using Rg.Plugins.Popup.Services;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Architecture
 {
@@ -8,6 +12,12 @@ namespace Architecture
         {
 
         }
+
+        private ICommand imageCommand;
+        public ICommand ImageCommand => imageCommand ?? (imageCommand = new Command(async () =>
+        {
+            await PopupNavigation.Instance.PushAsync(new ImagePopup(ImageSource.FromUri(new System.Uri("http://clarityapplication.com/dev/images/7.jpg"))));
+        }));
 
         public ObservableCollection<object> TwoItems => new ObservableCollection<object>()
         {

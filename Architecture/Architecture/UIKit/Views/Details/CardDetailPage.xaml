@@ -29,7 +29,11 @@
                 VerticalOptions="Start"
                 HeightRequest="300"
                 Source="http://clarityapplication.com/dev/images/7.jpg" 
-                Aspect="AspectFill" />
+                Aspect="AspectFill">
+                <ff:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ImageCommand}" />
+                </ff:CachedImage.GestureRecognizers>
+            </ff:CachedImage>
             <StackLayout Grid.Row="1">
                 <Frame Margin="{StaticResource MainPadding}">
                     <StackLayout Spacing="{StaticResource MainSpacing}">

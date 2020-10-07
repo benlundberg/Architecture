@@ -24,7 +24,11 @@
                 <ff:CachedImage 
                     HeightRequest="300"
                     Source="http://clarityapplication.com/dev/images/13.jpg" 
-                    Aspect="AspectFill" />
+                    Aspect="AspectFill">
+                    <ff:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ImageCommand}" />
+                    </ff:CachedImage.GestureRecognizers>
+                </ff:CachedImage>
                 <StackLayout 
                     Spacing="6"
                     Padding="{StaticResource MainPadding}"

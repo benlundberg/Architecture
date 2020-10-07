@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Architecture.Controls.ImagePopup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    Visual="Material"
+    CloseWhenBackgroundIsClicked="False"
+    x:Name="imagePopupRoot">
+
+    <Grid>
+        <ff:CachedImage 
+            Aspect="AspectFill"
+            Source="{Binding ImageSource, Source={x:Reference imagePopupRoot}}">
+            <ff:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ImageTappedCommand, Source={x:Reference imagePopupRoot}}" />
+                <SwipeGestureRecognizer Direction="Down" Command="{Binding CloseCommand, Source={x:Reference imagePopupRoot}}" />
+                <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+            </ff:CachedImage.GestureRecognizers>
+        </ff:CachedImage>
+        <StackLayout 
+            x:Name="topToolbar"
+            VerticalOptions="Start"
+            Padding="{StaticResource LargeControlPadding}">
+            <StackLayout.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="Black" Offset="0.1" />
+                    <GradientStop Color="Transparent" Offset="1.0" />
+                </LinearGradientBrush>
+            </StackLayout.Background>
+            <Label 
+                TextColor="White"
+                HorizontalOptions="End"
+                FontSize="{StaticResource ToolbarItemSize}"
+                Text="{StaticResource CloseIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CloseCommand, Source={x:Reference imagePopupRoot}}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </Grid>
+    
+</pages:PopupPage>
