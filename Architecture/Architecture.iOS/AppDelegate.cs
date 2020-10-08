@@ -1,5 +1,7 @@
-﻿using Foundation;
+﻿using Architecture.Core;
+using Foundation;
 using UIKit;
+using UserNotifications;
 
 namespace Architecture.iOS
 {
@@ -35,6 +37,12 @@ namespace Architecture.iOS
             Xamarin.Forms.Forms.Init();
 
             Bootstrapper_iOS.Initialize();
+
+            // Notification receiver
+            UNUserNotificationCenter.Current.Delegate = new iOSNotificationReceiver();
+
+            // Init notifications
+            ComponentContainer.Current.Resolve<INotificationService>().Initialize();
 
             LoadApplication(new App());
 

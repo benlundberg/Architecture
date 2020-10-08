@@ -61,6 +61,7 @@
                 Style="{StaticResource FloatingButtonMini}">
                 <ImageButton.Source>
                     <FontImageSource
+                        Color="White"
                         FontFamily="{StaticResource FontAwesomeSolid}"
                         Glyph="{StaticResource EditPenIcon}" />
                 </ImageButton.Source>

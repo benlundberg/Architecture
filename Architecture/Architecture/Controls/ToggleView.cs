@@ -14,16 +14,13 @@ namespace Architecture.Controls
 
         private void SetView()
         {
-            Device.BeginInvokeOnMainThread(() =>
+            this.Content = IsChecked ? CheckedView : UncheckedView;
+
+            this.Content.GestureRecognizers.Clear();
+
+            this.Content.GestureRecognizers.Add(new TapGestureRecognizer()
             {
-                this.Content = IsChecked ? CheckedView : UncheckedView;
-
-                this.Content.GestureRecognizers.Clear();
-
-                this.Content.GestureRecognizers.Add(new TapGestureRecognizer()
-                {
-                    Command = ViewTappedCommand
-                });
+                Command = ViewTappedCommand
             });
         }
 
@@ -39,9 +36,9 @@ namespace Architecture.Controls
                 return;
             }
 
-            view.SetView();
-
             view.CheckedChangedCommand?.Execute(isChecked);
+
+            view.SetView();
         }
 
         public static readonly BindableProperty IsCheckedProperty =

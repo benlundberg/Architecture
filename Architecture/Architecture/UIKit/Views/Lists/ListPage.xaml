@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:properties="clr-namespace:Architecture.Resources"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:local="clr-namespace:Architecture"
@@ -79,59 +80,71 @@
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem Text="Text Cell" IsSelected="True" Tag="1">
                     <controls:SegmentControlItem.Content>
-                        <ListView 
-			                CachingStrategy="RecycleElement"
-			                ItemsSource="{Binding Items}"
-			                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-			                RefreshCommand="{Binding RefreshListCommand}"
-			                IsPullToRefreshEnabled="True"
-			                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-			                RefreshControlColor="{StaticResource PrimaryColor}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="local:ListItemViewModel">
-                                    <TextCell
-						                Text="{Binding Title}"
-						                Detail="{Binding SubTitle}">    
-                                        <TextCell.ContextActions>
-                                            <MenuItem 
-                                                Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference listPageRoot}}"
-                                                CommandParameter="{Binding .}"
-                                                Text="{x:Static properties:Strings.Gen_Delete}"
-                                                IsDestructive="True" />
-                                        </TextCell.ContextActions>
-                                    </TextCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>    
-                        </ListView>
+                        <RefreshView 
+                            Padding="{StaticResource MainPadding}"
+                            RefreshColor="{StaticResource PrimaryColor}"
+                            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                            Command="{Binding RefreshListCommand}">
+                            <CollectionView 
+			                    ItemsSource="{Binding Items}"
+                                SelectionMode="Single"
+			                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:ListItemViewModel">
+                                        <StackLayout Spacing="0">
+                                            <Label 
+                                                FontFamily="{StaticResource OpenSansSemiBold}"
+                                                FontSize="16"
+                                                Text="{Binding Title}" />
+                                            <Label 
+                                                FontSize="14"
+                                                Text="{Binding SubTitle}" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>    
+                            </CollectionView>
+                        </RefreshView>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
                 <controls:SegmentControlItem Text="Image Cell" Tag="2">
                     <controls:SegmentControlItem.Content>
-                        <ListView 
-			                CachingStrategy="RecycleElement"
-			                IsPullToRefreshEnabled="True"
-			                ItemsSource="{Binding Items}"
-			                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-			                RefreshCommand="{Binding RefreshListCommand}"
-			                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-			                RefreshControlColor="{StaticResource PrimaryColor}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="local:ListItemViewModel">
-                                    <ImageCell
-						                Text="{Binding Title}"
-						                Detail="{Binding SubTitle}"
-                                        ImageSource="{Binding ImageSource}">
-                                        <ImageCell.ContextActions>
-                                            <MenuItem 
-                                                Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference listPageRoot}}"
-                                                CommandParameter="{Binding .}"
-                                                Text="{x:Static properties:Strings.Gen_Delete}"
-                                                IsDestructive="True" />
-                                        </ImageCell.ContextActions>
-                                    </ImageCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                        <RefreshView 
+                            Padding="{StaticResource MainPadding}"
+                            RefreshColor="{StaticResource PrimaryColor}"
+                            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                            Command="{Binding RefreshListCommand}">
+                            <CollectionView 
+			                    ItemsSource="{Binding Items}"
+                                SelectionMode="Single"
+			                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="local:ListItemViewModel">
+                                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                                            <ff:CachedImage 
+                                                HeightRequest="50"
+                                                WidthRequest="50"
+                                                Aspect="AspectFill"
+                                                Source="{Binding ImageSource}"/>
+                                            <StackLayout Spacing="0" Grid.Column="1">
+                                                <Label 
+                                                    FontFamily="{StaticResource OpenSansSemiBold}"
+                                                    FontSize="16"
+                                                    Text="{Binding Title}" />
+                                                <Label 
+                                                    FontSize="14"
+                                                    Text="{Binding SubTitle}" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </RefreshView>
                     </controls:SegmentControlItem.Content>
                 </controls:SegmentControlItem>
             </controls:SegmentView.ItemsSource>
@@ -144,6 +157,7 @@
             Style="{StaticResource FloatingButton}">
             <ImageButton.Source>
                 <FontImageSource
+                    Color="White"
                     Glyph="{StaticResource AddIcon}"
                     FontFamily="{StaticResource FontAwesomeSolid}"/>
             </ImageButton.Source>

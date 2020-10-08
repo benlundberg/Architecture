@@ -74,6 +74,7 @@
                         HorizontalOptions="End">
                         <ImageButton.Source>
                             <FontImageSource 
+                                Color="White"
                                 FontFamily="{StaticResource FontAwesomeBrands}"
                                 Glyph="{StaticResource GeneralIcon}" />
                         </ImageButton.Source>

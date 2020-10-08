@@ -119,6 +119,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\BorderlessEntryRenderer_iOS.cs" />
     <Compile Include="Renderers\ExtendedWebViewRenderer_iOS.cs" />
+    <Compile Include="Services\NotificationService_iOS.cs" />
     <Compile Include="Services\OpenFileService_iOS.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist">
