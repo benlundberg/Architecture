@@ -32,8 +32,10 @@ namespace Architecture.UWP
                 "Shapes_Experimental");
 
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
-            
-            Xamarin.Forms.Forms.Init(e);
+
+            Rg.Plugins.Popup.Popup.Init();
+
+            Xamarin.Forms.Forms.Init(e, Rg.Plugins.Popup.Popup.GetExtraAssemblies());
 
             if (!(Window.Current.Content is Frame rootFrame))
             {

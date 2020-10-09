@@ -92,10 +92,10 @@
     <Compile Update="Controls\RoundedFrameEntry\RoundedFrameEntry.xaml.cs">
       <DependentUpon>RoundedFrameEntry.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Articles\ArticleBrowserVariantPage.xaml.cs">
+    <Compile Update="UIKit\Views\Articles\Phone\ArticleBrowserVariantPage.xaml.cs">
       <DependentUpon>ArticleBrowserVariantPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Articles\ArticleListVariantPage.xaml.cs">
+    <Compile Update="UIKit\Views\Articles\Phone\ArticleListVariantPage.xaml.cs">
       <DependentUpon>ArticleListVariantPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="UIKit\Views\Components\ComponentsPage.xaml.cs">
@@ -107,16 +107,16 @@
     <Compile Update="UIKit\Views\Dashboard\DashboardCardPage.xaml.cs">
       <DependentUpon>DashboardCardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Details\CardDetailPage.xaml.cs">
+    <Compile Update="UIKit\Views\Details\Phone\CardDetailPage.xaml.cs">
       <DependentUpon>CardDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Lists\ListCardPage.xaml.cs">
+    <Compile Update="UIKit\Views\Lists\Phone\ListCardPage.xaml.cs">
       <DependentUpon>ListCardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Lists\ListPage.xaml.cs">
+    <Compile Update="UIKit\Views\Lists\Phone\ListPage.xaml.cs">
       <DependentUpon>ListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Forms\RecoverPasswordPage.xaml.cs">
+    <Compile Update="UIKit\Views\Forms\Phone\RecoverPasswordPage.xaml.cs">
       <DependentUpon>RecoverPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="UIKit\Views\Home\UIKitHomePage.xaml.cs">
@@ -168,13 +168,16 @@
     <EmbeddedResource Update="Controls\ValidationEntry\ValidationEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Articles\ArticleBrowserPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Articles\Desktop\ArticlesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Articles\ArticleClassicPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Articles\Phone\ArticleBrowserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Articles\ArticleListPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Articles\Phone\ArticleClassicPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Articles\Phone\ArticleListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Components\ComponentsPage.xaml">
@@ -189,58 +192,70 @@
     <EmbeddedResource Update="UIKit\Views\Dashboard\FlatListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Data\DataTablePage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Data\Desktop\DataPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Data\TaskBrowserPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Data\Phone\DataTablePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Data\TaskOverviewPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Data\Phone\TaskBrowserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Details\DetailPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Data\Phone\TaskOverviewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Details\InfoDetailPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Details\Phone\DetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Details\SecondDetailPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Details\Phone\InfoDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Details\ThirdDetailPagexaml.xaml">
+    <EmbeddedResource Update="UIKit\Views\Details\Phone\SecondDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Details\VariantDetailPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Details\Phone\ThirdDetailPagexaml.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Details\Phone\VariantDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Files\FilesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Forms\FullLoginPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Forms\Desktop\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Forms\FullSignUpPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Forms\Desktop\RecoverPasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Forms\ImageLoginPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Forms\Desktop\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Forms\TabbedLoginPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Forms\Phone\FullLoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Forms\Phone\FullSignUpPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Forms\Phone\ImageLoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Forms\Phone\TabbedLoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Home\UIKitHomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\ListPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Lists\Phone\ListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\ListVariantPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Lists\Phone\ListVariantPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\SearchPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Lists\Phone\SearchPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\TimelinePage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Lists\Phone\TimelinePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Media\MediaPage.xaml">
@@ -252,16 +267,16 @@
     <EmbeddedResource Update="UIKit\Views\Settings\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Social\ContactDetailCardPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Social\Phone\ContactDetailCardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Social\ContactPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Social\Phone\ContactPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Social\EditContactPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Social\Phone\EditContactPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Social\SocialCardPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Social\Phone\SocialCardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home\Master\HomeMasterPage.xaml">
@@ -277,11 +292,11 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Strings.sv.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.sv.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

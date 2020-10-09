@@ -1,9 +1,9 @@
-﻿using Architecture.Core;
+﻿using Architecture.UIKit.Views.Phone;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture
+namespace Architecture.UIKit.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UIKitHomePage : ContentPage
@@ -19,6 +19,12 @@ namespace Architecture
         {
             if (!int.TryParse(param?.ToString(), out int page))
             {
+                return;
+            }
+
+            if (Device.Idiom == TargetIdiom.Desktop)
+            {
+                await Navigation.PushAsync(new Desktop.ArticlesView());
                 return;
             }
 
@@ -54,10 +60,24 @@ namespace Architecture
             switch (page)
             {
                 case 1:
-                    await Navigation.PushModalAsync(new FullLoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
+                    if (Device.Idiom == TargetIdiom.Desktop)
+                    {
+                        await Navigation.PushModalAsync(new Desktop.LoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
+                    }
+                    else
+                    {
+                        await Navigation.PushModalAsync(new FullLoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
+                    }
                     break;
                 case 2:
-                    await Navigation.PushModalAsync(new FullSignUpPage() { BindingContext = new SignUpViewModel { Navigation = this.Navigation } });
+                    if (Device.Idiom == TargetIdiom.Desktop)
+                    {
+                        await Navigation.PushModalAsync(new Desktop.SignUpPage() { BindingContext = new SignUpViewModel { Navigation = this.Navigation } });
+                    }
+                    else
+                    {
+                        await Navigation.PushModalAsync(new FullSignUpPage() { BindingContext = new SignUpViewModel { Navigation = this.Navigation } });
+                    }
                     break;
                 case 3:
                     await Navigation.PushModalAsync(new TabbedLoginPage() { BindingContext = new TabbedLoginViewModel { Navigation = this.Navigation } });
@@ -135,6 +155,12 @@ namespace Architecture
         {
             if (!int.TryParse(param?.ToString(), out int page))
             {
+                return;
+            }
+
+            if (Device.Idiom == TargetIdiom.Desktop)
+            {
+                await Navigation.PushAsync(new Desktop.DataPage());
                 return;
             }
 

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.UIKit.Views.Phone.SocialCardPage"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:DataType="local:DetailViewModel">
+
+    <ContentPage.BindingContext>
+        <local:DetailViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Social Card" />
+    </NavigationPage.TitleView>
+
+    <ScrollView>
+        <Grid>
+            <BoxView VerticalOptions="Start" HeightRequest="150">
+                <BoxView.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="{StaticResource PrimaryColor}" Offset="0.1" />
+                        <GradientStop Color="{StaticResource DarkPrimaryColor}" Offset="1.0" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+            <StackLayout>
+                <Grid>
+                    <Frame
+                        Margin="20, 50, 20, 10"
+                        IsClippedToBounds="False">
+                        <StackLayout Margin="0, 40, 0, 0">
+                            <Label 
+                                FontSize="Large" 
+                                Text="John Doe" 
+                                HorizontalTextAlignment="Center" />
+                            <Label 
+                                Text="San Francisco" 
+                                FontSize="Medium"
+                                HorizontalTextAlignment="Center" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout>
+                                    <Label FontSize="Small" Style="{StaticResource BoldLabel}" HorizontalTextAlignment="Center" Text="125" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Photos" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label FontSize="Small" Style="{StaticResource BoldLabel}" HorizontalTextAlignment="Center" Text="225" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Followers" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="2">
+                                    <Label FontSize="Small" Style="{StaticResource BoldLabel}" HorizontalTextAlignment="Center" Text="325" TextColor="{StaticResource PrimaryColor}" />
+                                    <Label FontSize="Small" HorizontalTextAlignment="Center" Text="Following" />
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+                    <ff:CachedImage
+                        HeightRequest="100"
+                        WidthRequest="100"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        Source="http://clarityapplication.com/dev/images/13.jpg">
+                        <ff:CachedImage.Transformations>
+                            <transformation:CircleTransformation />
+                        </ff:CachedImage.Transformations>
+                    </ff:CachedImage>
+                </Grid>
+                <Label 
+                    Text="Biography"
+                    Padding="{StaticResource HorizontalPadding}"
+                    FontSize="Default"
+                    Style="{StaticResource BoldLabel}" />
+                <Label 
+                    FontSize="Body"
+                    Padding="{StaticResource MainPadding}"
+                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                <Label 
+                    FontSize="Body"
+                    Padding="{StaticResource MainPadding}"
+                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                <controls:ItemsControl
+                    Margin="20, 0"
+                    ItemsOrientation="Horizontal"
+                    Spacing="8"
+                    ItemsSource="{Binding Items}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <ff:CachedImage HeightRequest="75" WidthRequest="75" Source="http://clarityapplication.com/dev/images/13.jpg">
+                                    <ff:CachedImage.Transformations>
+                                        <transformation:CircleTransformation />
+                                    </ff:CachedImage.Transformations>
+                                </ff:CachedImage>
+                                <Label FontSize="Small" Text="Joan Doe" HorizontalTextAlignment="Center" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+                <controls:ItemsControl 
+                    Margin="20"
+                    NumberOfColumns="3"
+                    ColumnSpacing="10"
+                    RowSpacing="10"
+                    ItemsSource="{Binding Items}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ff:CachedImage 
+                                Aspect="AspectFill"
+                                Source="http://clarityapplication.com/dev/images/5.jpg" />
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>

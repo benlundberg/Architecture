@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
     public class MediaViewModel: BaseViewModel
     {

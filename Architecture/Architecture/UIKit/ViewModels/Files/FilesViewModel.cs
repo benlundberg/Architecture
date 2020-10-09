@@ -6,7 +6,7 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
     public class FilesViewModel : BaseService
     {
@@ -117,10 +117,23 @@ namespace Architecture
 
                 return localFileSystemService.SaveFile(data, "AppDocs", filename + fileExtension);
             }
+            catch (PermissionException pe)
+            {
+                pe.Print();
+
+                bool res = await Application.Current.MainPage.DisplayAlert("Need permissions", "The app needs permission to use this feature. You can grant them in app settings", "Goto settings", "Ok");
+
+                if (res)
+                {
+                    AppInfo.ShowSettingsUI();
+                }
+            }
             catch (Exception ex)
             {
                 throw ex;
             }
+
+            return null;
         }
 
         private readonly ILocalFileSystemService localFileSystemService;

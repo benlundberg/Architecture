@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Architecture
+namespace Architecture.UIKit.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ComponentsPage : ContentPage

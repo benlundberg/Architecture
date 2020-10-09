@@ -87,7 +87,9 @@ namespace Architecture
             ok = ok ?? Resources.Strings.Gen_Yes;
             cancel = cancel ?? Resources.Strings.Gen_No;
 
-            return Application.Current.MainPage.DisplayAlert(title, message, ok, cancel);
+            var res = Application.Current.MainPage.DisplayAlert(title, message, ok, cancel);
+
+            return res;
         }
 
         protected Task<string> ShowActionSheetAsync(string title, string cancel, string destruction, params string[] buttons)

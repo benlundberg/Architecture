@@ -38,27 +38,15 @@ namespace Architecture.Controls.Charts
             {
                 isTouching = false;
 
-                var closest = float.MaxValue;
-
-                if (ChartEntries == null)
-                {
-                    return;
-                }
-
-                foreach (var item in ChartEntries.SelectMany(x => x.Items))
-                {
-                    var distance = SKPoint.Distance(new SKPoint(e.Location.X, 0), new SKPoint(item.Point.X, 0));
-
-                    if (distance < closest)
-                    {
-                        closest = distance;
-                        TouchedPoint = item.Point;
-                    }
-                }
+                FindClosestItem(e.Location.X);
+            }
+            else if (e.InContact)
+            {
+                TouchedPoint = e.Location;
             }
             else
             {
-                TouchedPoint = e.Location;
+                return;
             }
 
             e.Handled = true;
@@ -80,6 +68,12 @@ namespace Architecture.Controls.Charts
 
             var frame = CreateFrame(info);
             var chart = CreateChart(frame);
+
+            if (!IsInitialized)
+            {
+                // Makes slider first init in middle of frame
+                TouchedPoint = new SKPoint(frame.MidX, 0);
+            }
 
             DrawVerticalLabels(canvas, frame, chart);
 
@@ -126,6 +120,29 @@ namespace Architecture.Controls.Charts
             {
                 DrawInnerFrame(canvas, frame);
                 DrawFrame(canvas, frame);
+            }
+
+            IsInitialized = true;
+        }
+
+        private void FindClosestItem(float x)
+        {
+            var closest = float.MaxValue;
+
+            if (ChartEntries == null)
+            {
+                return;
+            }
+
+            foreach (var xVal in ChartValueItemsXPoints.Select(x => x.Item2))
+            {
+                var distance = SKPoint.Distance(new SKPoint(x, 0), new SKPoint(xVal, 0));
+
+                if (distance < closest)
+                {
+                    closest = distance;
+                    TouchedPoint = new SKPoint(xVal, 0);
+                }
             }
         }
 
@@ -237,6 +254,11 @@ namespace Architecture.Controls.Charts
             if (!IsSliderVisible)
             {
                 return;
+            }
+
+            if (!IsInitialized)
+            {
+                FindClosestItem(TouchedPoint.X);
             }
 
             float x = chart.GetInsideXValue(TouchedPoint.X);

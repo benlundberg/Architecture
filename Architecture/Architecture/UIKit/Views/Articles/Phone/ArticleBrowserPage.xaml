@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.UIKit.Views.Phone.ArticleBrowserPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:DataType="local:ArticlesViewModel"
+             x:Name="articleBrowserRoot">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="arcticleItem" x:DataType="local:ArticleItemViewModel">
+                <Grid>
+                    <ff:CachedImage
+                        Source="{Binding ImageSource}" 
+                        WidthRequest="150"
+                        HeightRequest="200"
+                        Aspect="AspectFill" />
+                    <Grid VerticalOptions="End">
+                        <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
+                        <StackLayout Margin="{StaticResource ControlPadding}" Spacing="0">
+                            <Label
+                                FontSize="Small"
+                                TextColor="{StaticResource SecondaryTextColor}"
+                                Style="{StaticResource BoldLabel}"
+                                Text="{Binding Title}" />
+                            <Label 
+                                TextColor="{StaticResource SecondaryTextColor}"
+                                FontSize="Micro">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <FormattedString.Spans>
+                                            <Span Text="{Binding Category}" />
+                                            <Span Text=" | " />
+                                            <Span Text="{Binding Year}" />
+                                        </FormattedString.Spans>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <local:ArticlesViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Articles Browser" />
+    </NavigationPage.TitleView>
+
+    <ScrollView>
+        <StackLayout Spacing="{StaticResource MainSpacing}">
+            <CarouselView
+                ItemsSource="{Binding NatureArticles}" 
+                IndicatorView="indicatorView"
+                HeightRequest="250">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout 
+                        SnapPointsType="MandatorySingle"
+                        SnapPointsAlignment="Center"
+                        Orientation="Horizontal" />
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ArticleItemViewModel">
+                        <Grid>
+                            <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
+                            <Grid VerticalOptions="Center" HorizontalOptions="Start">
+                                <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
+                                <StackLayout Margin="{StaticResource ExtraLargePadding}" Spacing="0">
+                                    <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Title}" FontSize="Medium" />
+                                    <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Category}" FontSize="Default" />
+                                </StackLayout>
+                            </Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference articleBrowserRoot}}" CommandParameter="{Binding}" />
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+                x:Name="indicatorView"
+                IndicatorsShape="Circle"
+                IndicatorColor="{StaticResource Gray}"
+                SelectedIndicatorColor="{StaticResource DarkPrimaryColor}"
+                HorizontalOptions="Center"
+                IndicatorSize="8" />
+            <CollectionView
+                Margin="{StaticResource MainPadding}"
+                ItemsSource="{Binding SportArticles}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                ItemTemplate="{StaticResource arcticleItem}"
+                SelectionMode="Single"
+                HeightRequest="200">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        SnapPointsAlignment="Start" 
+                        SnapPointsType="None" 
+                        HorizontalItemSpacing="10" 
+                        Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+            <CollectionView
+                Margin="{StaticResource MainPadding}"
+                ItemsSource="{Binding AnimalArticles}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                ItemTemplate="{StaticResource arcticleItem}"
+                SelectionMode="Single"
+                HeightRequest="200">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        SnapPointsAlignment="Start" 
+                        SnapPointsType="None" 
+                        HorizontalItemSpacing="10" 
+                        Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

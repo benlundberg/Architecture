@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
     public class ArticlesViewModel : BaseViewModel
     {
@@ -101,6 +101,27 @@ namespace Architecture
 
             AnimalArticles = new ObservableCollection<ArticleItemViewModel>
             {
+                new ArticleItemViewModel
+                {
+                    Category = "Animal".ToUpper(),
+                    Year = DateTime.Today.Year.ToString(),
+                    Title = "This is animals",
+                    ImageSource = ImageService.GetRandomImage()
+                },
+                new ArticleItemViewModel
+                {
+                    Category = "Animal".ToUpper(),
+                    Year = DateTime.Today.Year.ToString(),
+                    Title = "This is animals",
+                    ImageSource = ImageService.GetRandomImage()
+                },
+                new ArticleItemViewModel
+                {
+                    Category = "Animal".ToUpper(),
+                    Year = DateTime.Today.Year.ToString(),
+                    Title = "This is animals",
+                    ImageSource = ImageService.GetRandomImage()
+                },
                 new ArticleItemViewModel
                 {
                     Category = "Animal".ToUpper(),

@@ -577,6 +577,18 @@ namespace Architecture.Controls.Charts
             set { SetValue(SelectedTagProperty, value); }
         }
 
+        public static readonly BindableProperty IsInitializedProperty = 
+            BindableProperty.Create(
+                "IsInitialized",
+                typeof(bool),
+                typeof(BaseChart),
+                default(bool));
+
+        public bool IsInitialized
+        {
+            get { return (bool)GetValue(IsInitializedProperty); }
+            set { SetValue(IsInitializedProperty, value); }
+        }
 
         protected ChartType ChartType { get; set; }
 

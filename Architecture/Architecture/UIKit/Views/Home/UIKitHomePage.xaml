@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Architecture.UIKitHomePage"
+             x:Class="Architecture.UIKit.Views.UIKitHomePage"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
              x:Name="root">
@@ -13,8 +13,10 @@
         <controls:PageTitleView Text="Welcome to XF UIKit" />
     </NavigationPage.TitleView>
 
-    <ScrollView Padding="{StaticResource MainPadding}">
-        <StackLayout Spacing="{StaticResource MainSpacing}">
+    <ScrollView>
+        <StackLayout 
+            Margin="{OnIdiom Phone={StaticResource MainPadding}, Desktop=40 140 40 140}"
+            Spacing="{StaticResource MainSpacing}">
             <!-- Article -->
             <Label Text="Article" FontSize="Large" />
             <Button Text="Article Browser" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="1" />

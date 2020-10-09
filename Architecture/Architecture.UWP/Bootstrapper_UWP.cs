@@ -18,6 +18,7 @@ namespace Architecture.UWP
         {
             // Services
             ComponentContainer.Current.Register<ILocalFileSystemService, LocalFileSystemService_UWP>(singelton: true);
+            ComponentContainer.Current.Register<IDialogService, DialogService_UWP>(singelton: true);
         }
     }
 }

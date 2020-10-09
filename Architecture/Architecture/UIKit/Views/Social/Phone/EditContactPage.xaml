@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.UIKit.Views.Phone.EditContactPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Edit Contact" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="{StaticResource MainSpacing}" Padding="{StaticResource LargePadding}">
+                <Grid>
+                    <Entry
+                        Grid.Column="0"
+                        Placeholder="Firstname" />
+                    <Entry
+                        Grid.Column="1"
+                        Placeholder="Lastname" />
+                </Grid>
+                <Entry
+                    Placeholder="Email" />
+                <Entry
+                    Placeholder="Country" />
+                <Entry
+                    Placeholder="Address" />
+                <Grid>
+                    <Entry
+                        Grid.Column="0"
+                        Placeholder="City" />
+                    <Entry
+                        Grid.Column="1"
+                        Placeholder="Zipcode" />
+                </Grid>
+                <Grid ColumnDefinitions="*, Auto">
+                    <Label
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        FontSize="Default"
+                        Text="Subscribe for newsletter" />
+                    <Switch
+                        Grid.Column="1"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Editor
+                    Visual="Default"
+                    BackgroundColor="White"
+                    HeightRequest="150"
+                    Placeholder="Notes" />
+                <Button Text="Save" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

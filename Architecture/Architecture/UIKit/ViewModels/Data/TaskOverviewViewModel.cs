@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
     public class TaskOverviewViewModel : BaseViewModel
     {

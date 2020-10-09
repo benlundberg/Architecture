@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.Desktop.SignUpPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             Visual="Material"
+             x:DataType="local:SignUpViewModel">
+
+    <ContentPage.BindingContext>
+        <local:SignUpViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+
+        <Grid ColumnDefinitions="*, *, *">
+            <StackLayout 
+                Grid.Column="1"
+                Spacing="{StaticResource MainSpacing}"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                <Label
+                    TextColor="{StaticResource PrimaryColor}"
+                    Margin="0, 40"
+                    VerticalOptions="Center"
+                    FontSize="42"
+                    Text="Sign up" />
+                <controls:ValidationEntry 
+                    Visual="Material"
+                    Placeholder="Email"
+                    Keyboard="Email"
+                    Text="{Binding Email, Mode=TwoWay}"
+                    HasValidation="True" />
+                <controls:ValidationEntry 
+                    Visual="Material"
+                    Text="{Binding Password, Mode=TwoWay}"
+                    Placeholder="Password" 
+                    IsPassword="True" 
+                    HasValidation="True" />
+                <controls:ValidationEntry 
+                    Visual="Material"
+                    Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                    Placeholder="Confirm password" 
+                    IsPassword="True" 
+                    HasValidation="True" />
+                <Button 
+                    Text="{StaticResource CheckIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+            </StackLayout>
+            <Label
+                Grid.ColumnSpan="3"
+                Margin="0, 40, 40, 0"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                FontSize="Large"
+                Text="{StaticResource CloseIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                TextColor="Black">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopModalCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

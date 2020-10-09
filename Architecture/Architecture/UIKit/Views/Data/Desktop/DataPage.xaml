@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.Desktop.DataPage"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:properties="clr-namespace:Architecture.Resources"
+             xmlns:chart="clr-namespace:Architecture.Controls.Charts"
+             Visual="Material"
+             x:DataType="local:TaskOverviewViewModel"
+             x:Name="dataTableRoot">
+
+    <ContentPage.BindingContext>
+        <local:TaskOverviewViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Data" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+
+        <Grid 
+            RowDefinitions="*, *" 
+            ColumnDefinitions="*, *, *">
+
+            <Grid RowSpacing="0" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Padding="{StaticResource MainPadding}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <controls:ToggleView 
+                        Grid.ColumnSpan="2"
+                        IsChecked="{Binding HasYear, Mode=TwoWay}">
+                        <controls:ToggleView.CheckedView>
+                            <Frame BackgroundColor="{StaticResource PrimaryColor}">
+                                <StackLayout>
+                                    <Label
+                                        Text="Year progress"
+                                        TextColor="White"
+                                        FontSize="Medium" />
+                                    <Label
+                                        Text="32"
+                                        TextColor="White"
+                                        FontSize="Medium" />
+                                    <ProgressBar 
+                                        Progress=".3"
+                                        ProgressColor="White" />
+                                </StackLayout>
+                            </Frame>
+                        </controls:ToggleView.CheckedView>
+                        <controls:ToggleView.UncheckedView>
+                            <Frame>
+                                <StackLayout>
+                                    <Label
+                                        Text="Year progress"
+                                        TextColor="Black"
+                                        FontSize="Medium" />
+                                    <Label
+                                        Text="32"
+                                        TextColor="Black"
+                                        FontSize="Medium" />
+                                    <ProgressBar 
+                                        Progress=".3"
+                                        ProgressColor="Gray" />
+                                </StackLayout>
+                            </Frame>
+                        </controls:ToggleView.UncheckedView>
+                    </controls:ToggleView>
+                    <controls:ToggleView 
+                        Grid.Row="1"
+                        IsChecked="{Binding HasMonth, Mode=TwoWay}">
+                        <controls:ToggleView.CheckedView>
+                            <Frame BackgroundColor="{StaticResource PrimaryColor}">
+                                <StackLayout>
+                                    <Label
+                                        Text="Month progress"
+                                        TextColor="White"
+                                        FontSize="Default" />
+                                    <Label
+                                        Text="32"
+                                        TextColor="White"
+                                        FontSize="Default" />
+                                    <ProgressBar 
+                                        Progress=".3"
+                                        ProgressColor="White" />
+                                </StackLayout>
+                            </Frame>
+                        </controls:ToggleView.CheckedView>
+                        <controls:ToggleView.UncheckedView>
+                            <Frame>
+                                <StackLayout>
+                                    <Label
+                                        Text="Month progress"
+                                        TextColor="Black"
+                                        FontSize="Default" />
+                                    <Label
+                                        Text="32"
+                                        TextColor="Black"
+                                        FontSize="Default" />
+                                    <ProgressBar 
+                                        Progress=".3"
+                                        ProgressColor="Gray" />
+                                </StackLayout>
+                            </Frame>
+                        </controls:ToggleView.UncheckedView>
+                    </controls:ToggleView>
+                    <controls:ToggleView 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        IsChecked="{Binding HasDay, Mode=TwoWay}">
+                        <controls:ToggleView.CheckedView>
+                            <Frame BackgroundColor="{StaticResource PrimaryColor}">
+                                <StackLayout>
+                                    <Label
+                                        Text="Day progress"
+                                        TextColor="White"
+                                        FontSize="Default" />
+                                    <Label
+                                        Text="32"
+                                        TextColor="White"
+                                        FontSize="Default" />
+                                    <ProgressBar 
+                                        Progress=".3"
+                                        ProgressColor="White" />
+                                </StackLayout>
+                            </Frame>
+                        </controls:ToggleView.CheckedView>
+                        <controls:ToggleView.UncheckedView>
+                            <Frame>
+                                <StackLayout>
+                                    <Label
+                                        Text="Day progress"
+                                        TextColor="Black"
+                                        FontSize="Default" />
+                                    <Label
+                                        Text="32"
+                                        TextColor="Black"
+                                        FontSize="Default" />
+                                    <ProgressBar 
+                                        Progress=".3"
+                                        ProgressColor="Gray" />
+                                </StackLayout>
+                            </Frame>
+                        </controls:ToggleView.UncheckedView>
+                    </controls:ToggleView>
+                </Grid>
+                <Grid Grid.Row="1" ColumnSpacing="{StaticResource LargeSpacing}" Padding="{StaticResource MainPadding}" BackgroundColor="{StaticResource Gray}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label 
+                        FontSize="Large"
+                        Text="&#xf073;"
+                        VerticalOptions="Center"
+                        FontFamily="{StaticResource FontAwesomeSolid}" />
+                    <Label 
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        FontSize="Medium"
+                        Text="Date" />
+                    <Label 
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource PrimaryColor}"
+                        Text="{Binding SelectedDate.Date, StringFormat='{0:yyyy-MM-dd}'}" />
+                    <controls:ExtendedDatePicker
+                        Grid.ColumnSpan="3"
+                        Title="Select date"
+                        ShowLabel="False"
+                        BackgroundColor="Transparent"
+                        SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                        HasYear="{Binding HasYear}"
+                        HasMonth="{Binding HasMonth}"
+                        HasDay="{Binding HasDay}" />
+                </Grid>
+                <CollectionView 
+                    Grid.Row="2"
+                    SelectionMode="None">
+                    <CollectionView.ItemsSource>
+                        <x:String>Items</x:String>
+                    </CollectionView.ItemsSource>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid 
+                                Padding="10" 
+                                BackgroundColor="White">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Frame
+                                    Padding="0"
+                                    BorderColor="Transparent"
+                                    CornerRadius="10">
+                                    <ff:CachedImage 
+                                        HeightRequest="50"
+                                        WidthRequest="50"
+                                        Source="http://clarityapplication.com/dev/images/13.jpg"
+                                        Aspect="AspectFill" />
+                                </Frame>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="Joan Doe" FontSize="Default" />
+                                    <Label Text="SUPPORT" FontSize="Small" />
+                                </StackLayout>
+                                <Button 
+                                    Grid.Column="2" 
+                                    HorizontalOptions="End"
+                                    BackgroundColor="White"
+                                    Text="Info"
+                                    Padding="{OnPlatform iOS=10, Android=0}"
+                                    VerticalOptions="Start"
+                                    Style="{StaticResource OutlineButton}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <StackLayout Grid.Column="1">
+                <controls:PickerView
+                    Padding="20"
+                    BackgroundColor="{StaticResource GrayLight}"
+                    ItemsSource="{Binding PickerValues}"
+                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                    IconFontFamily="{StaticResource FontAwesomeSolid}"
+                    Title="Task status"
+                    Placeholder="Select status"
+                    CancelText="{x:Static properties:Strings.Gen_Cancel}"
+                    IconTextSource="&#xf0eb;" />
+                <controls:ItemsControl 
+                    HorizontalOptions="Center"
+                    Margin="0, 5"
+                    HorizontalScrollBarVisibility="Never"
+                    ItemsOrientation="Horizontal"
+                    Spacing="5"
+                    ItemsSource="{Binding TableFilters}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="local:TableFilterViewModel">
+                            <controls:ToggleView 
+                                CheckedChangedCommand="{Binding BindingContext.TableFilterChangedCommand, Source={x:Reference dataTableRoot}}"
+                                IsChecked="{Binding IsVisible, Mode=TwoWay}">
+                                <controls:ToggleView.UncheckedView>
+                                    <Frame
+                                        Padding="0" 
+                                        CornerRadius="15"
+                                        BorderColor="Transparent"
+                                        HasShadow="False"
+                                        BackgroundColor="{StaticResource Accent}">
+                                        <Label
+                                            FontSize="14" 
+                                            Margin="10, 7, 10, 7" 
+                                            VerticalOptions="Center"
+                                            Text="{Binding Text}" 
+                                            TextColor="White" />
+                                    </Frame>
+                                </controls:ToggleView.UncheckedView>
+                                <controls:ToggleView.CheckedView>
+                                    <Frame 
+                                        Padding="0" 
+                                        CornerRadius="15"
+                                        BorderColor="Transparent"
+                                        HasShadow="False"
+                                        BackgroundColor="White">
+                                        <StackLayout 
+                                            Spacing="2"
+                                            Orientation="Horizontal">
+                                            <Grid 
+                                                Padding="9, 7, 4, 7"
+                                                BackgroundColor="{StaticResource PrimaryColor}">
+                                                <Label
+                                                    FontSize="14"
+                                                    VerticalOptions="Center"
+                                                    Text="{StaticResource CheckIcon}"
+                                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                                    TextColor="White" />
+                                            </Grid>
+                                            <Grid
+                                                Padding="8, 7, 10, 7" 
+                                                BackgroundColor="{StaticResource DarkPrimaryColor}">
+                                                <Label 
+                                                    FontSize="14" 
+                                                    VerticalOptions="Center"
+                                                    Text="{Binding Text}" 
+                                                    TextColor="White" />
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </controls:ToggleView.CheckedView>
+                            </controls:ToggleView>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+
+                <Frame 
+                    BorderColor="Transparent"
+                    Margin="8"
+                    Padding="0">
+                    <controls:TableControl
+                        StripedBackground="True"
+                        FilterItemsSource="{Binding TableFilters}"
+                        ItemsSource="{Binding TableItems}">
+                        <controls:TableControl.Resources>
+                            <ResourceDictionary>
+
+                                <Style x:Key="HeaderGrid" TargetType="Grid">
+                                    <Setter Property="Padding" Value="8" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource DarkPrimaryColor}" />
+                                </Style>
+
+                                <Style x:Key="HeaderLabel" TargetType="Label">
+                                    <Setter Property="TextColor" Value="White" />
+                                    <Setter Property="FontFamily" Value="{StaticResource OpenSansSemiBold}" />
+                                </Style>
+
+                                <Style x:Key="ItemGrid" TargetType="StackLayout">
+                                    <Setter Property="Padding" Value="8" />
+                                </Style>
+
+                                <Style x:Key="ItemLabel" TargetType="Label">
+                                    <Setter Property="TextColor" Value="Black" />
+                                </Style>
+
+                            </ResourceDictionary>
+                        </controls:TableControl.Resources>
+
+                        <controls:TableControl.ItemTemplates>
+
+                            <controls:TableViewItem Id="OrderID">
+                                <controls:TableViewItem.HeaderTemplateSource>
+                                    <DataTemplate>
+                                        <Grid Style="{StaticResource HeaderGrid}">
+                                            <Label
+                                                    Style="{StaticResource HeaderLabel}"
+                                                    Text="Order ID" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </controls:TableViewItem.HeaderTemplateSource>
+                                <controls:TableViewItem.ItemTemplateSource>
+                                    <DataTemplate x:DataType="local:TableItemViewModel">
+                                        <StackLayout Style="{StaticResource ItemGrid}">
+                                            <Label 
+                                                    Style="{StaticResource ItemLabel}"
+                                                    Text="{Binding OrderID}" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </controls:TableViewItem.ItemTemplateSource>
+                            </controls:TableViewItem>
+
+                            <controls:TableViewItem Id="City">
+                                <controls:TableViewItem.HeaderTemplateSource>
+                                    <DataTemplate>
+                                        <Grid Style="{StaticResource HeaderGrid}">
+                                            <Label
+                                                    Style="{StaticResource HeaderLabel}"
+                                                    Text="City" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </controls:TableViewItem.HeaderTemplateSource>
+                                <controls:TableViewItem.ItemTemplateSource>
+                                    <DataTemplate x:DataType="local:TableItemViewModel">
+                                        <StackLayout Style="{StaticResource ItemGrid}">
+                                            <Label
+                                                    LineBreakMode="TailTruncation"
+                                                    Style="{StaticResource ItemLabel}"
+                                                    Text="{Binding City}" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </controls:TableViewItem.ItemTemplateSource>
+                            </controls:TableViewItem>
+
+                            <controls:TableViewItem Id="Time">
+                                <controls:TableViewItem.HeaderTemplateSource>
+                                    <DataTemplate>
+                                        <Grid Style="{StaticResource HeaderGrid}">
+                                            <Label
+                                                    HorizontalTextAlignment="Center"
+                                                    Style="{StaticResource HeaderLabel}"
+                                                    Text="Time" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </controls:TableViewItem.HeaderTemplateSource>
+                                <controls:TableViewItem.ItemTemplateSource>
+                                    <DataTemplate x:DataType="local:TableItemViewModel">
+                                        <StackLayout Style="{StaticResource ItemGrid}">
+                                            <Label 
+                                                    HorizontalTextAlignment="End"
+                                                    Style="{StaticResource ItemLabel}"
+                                                    Text="{Binding Time}" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </controls:TableViewItem.ItemTemplateSource>
+                            </controls:TableViewItem>
+
+                            <controls:TableViewItem Id="Weight">
+                                <controls:TableViewItem.HeaderTemplateSource>
+                                    <DataTemplate>
+                                        <Grid Style="{StaticResource HeaderGrid}">
+                                            <Label
+                                                    HorizontalOptions="Center"
+                                                    Style="{StaticResource HeaderLabel}"
+                                                    Text="Weight" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </controls:TableViewItem.HeaderTemplateSource>
+                                <controls:TableViewItem.ItemTemplateSource>
+                                    <DataTemplate x:DataType="local:TableItemViewModel">
+                                        <StackLayout Style="{StaticResource ItemGrid}">
+                                            <Label 
+                                                    HorizontalTextAlignment="End"
+                                                    Style="{StaticResource ItemLabel}"
+                                                    Text="{Binding Weight}" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </controls:TableViewItem.ItemTemplateSource>
+                            </controls:TableViewItem>
+
+                            <controls:TableViewItem Id="Price">
+                                <controls:TableViewItem.HeaderTemplateSource>
+                                    <DataTemplate>
+                                        <Grid Style="{StaticResource HeaderGrid}">
+                                            <Label
+                                                    HorizontalOptions="Center"
+                                                    Style="{StaticResource HeaderLabel}"
+                                                    Text="Price" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </controls:TableViewItem.HeaderTemplateSource>
+                                <controls:TableViewItem.ItemTemplateSource>
+                                    <DataTemplate x:DataType="local:TableItemViewModel">
+                                        <StackLayout Style="{StaticResource ItemGrid}">
+                                            <Label 
+                                                    HorizontalTextAlignment="End"
+                                                    Style="{StaticResource ItemLabel}"
+                                                    Text="{Binding Price}" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </controls:TableViewItem.ItemTemplateSource>
+                            </controls:TableViewItem>
+
+                        </controls:TableControl.ItemTemplates>
+                    </controls:TableControl>
+                </Frame>
+
+            </StackLayout>
+
+            <Grid
+                Grid.Column="2"
+                RowDefinitions="Auto, *">
+                <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
+                    <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
+                        <controls:ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:ChartEntryViewModel">
+                                <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
+                                    <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
+                                </Frame>
+                            </DataTemplate>
+                        </controls:ItemsControl.ItemTemplate>
+                    </controls:ItemsControl>
+                </Frame>
+                <chart:LineChart
+                    Grid.Row="1"
+                    VerticalUnit="tasks"
+                    HorizontalUnit="years"
+                    SliderDetailPadding="-4, -2"
+                    ChartEntries="{Binding ChartEntries}"
+                    SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}" />
+            </Grid>
+
+            <Grid
+                Grid.Column="2"
+                Grid.Row="1"
+                RowDefinitions="Auto, *">
+                <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
+                    <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
+                        <controls:ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="local:ChartEntryViewModel">
+                                <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
+                                    <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
+                                </Frame>
+                            </DataTemplate>
+                        </controls:ItemsControl.ItemTemplate>
+                    </controls:ItemsControl>
+                </Frame>
+                <chart:BarChart
+                    Grid.Row="1"
+                    VerticalUnit="tasks"
+                    HorizontalUnit="years"
+                    SliderDetailPadding="-4, -2"
+                    ChartPadding="10, 0"
+                    ChartEntries="{Binding ChartEntries}"
+                    SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}" />
+            </Grid>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

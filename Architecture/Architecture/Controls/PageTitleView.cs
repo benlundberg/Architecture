@@ -72,6 +72,7 @@ namespace Architecture.Controls
                 TextColor = Application.Current.ToolbarTextColor(),
                 VerticalOptions = LayoutOptions.Center,
                 FontSize = 20,
+                Margin = Device.Idiom == TargetIdiom.Desktop ? new Thickness(40, 0, 0, 0) : new Thickness(0),
                 FontFamily = "OpenSansSemiBold"
             });
         }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
     public class DialogsViewModel : BaseViewModel
     {
         private ICommand checkDialogCommand;
         public ICommand CheckDialogCommand => checkDialogCommand ?? (checkDialogCommand = new Command(async () =>
         {
-            var isChecked = await ComponentContainer.Current.Resolve<IDialogService>().ShowCheckboxDialogAsync("Checkbox dialog", "This is a dialog with a checkbox", "Show again");
+            var isChecked = await ComponentContainer.Current.Resolve<IDialogService>().ShowCheckboxDialogAsync("Checkbox dialog", "This is a dialog with a checkbox", "Don't show again");
         
             IsChecked = isChecked ? Resources.Strings.Gen_Yes : Resources.Strings.Gen_No;
         }));
@@ -140,7 +140,6 @@ namespace Architecture
 
             ComponentContainer.Current.Resolve<INotificationService>().ScheduleNotification(title, message);
         }));
-
 
         public string IsChecked { get; set; }
         public string ConfirmAnswer { get; set; }

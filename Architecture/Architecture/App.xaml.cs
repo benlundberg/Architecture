@@ -19,6 +19,7 @@ using Xamarin.Forms;
 [assembly: ExportFont("OpenSans-Regular.ttf", Alias = "OpenSansRegular")]
 [assembly: ExportFont("OpenSans-SemiBold.ttf", Alias = "OpenSansSemiBold")]
 [assembly: ExportFont("OpenSans-SemiBoldItalic.ttf", Alias = "OpenSansSemiBoldItalic")]
+[assembly: System.Resources.NeutralResourcesLanguage("en-US")]
 
 namespace Architecture
 {
@@ -36,7 +37,7 @@ namespace Architecture
         public static void SetMainPage()
         {
             // TODO: UI Kit home page
-            Current.MainPage = new NavigationPage(new UIKitHomePage());
+            Current.MainPage = new NavigationPage(new UIKit.Views.UIKitHomePage());
 
             // Master
             //Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();

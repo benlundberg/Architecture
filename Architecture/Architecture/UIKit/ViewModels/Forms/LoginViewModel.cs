@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
     public class LoginViewModel : BaseViewModel
     {
@@ -25,7 +25,14 @@ namespace Architecture
         private ICommand forgotPasswordCommand;
         public ICommand ForgotPasswordCommand => forgotPasswordCommand ?? (forgotPasswordCommand = new Command(async () =>
         {
-            await Navigation.PushModalAsync(new RecoverPasswordPage { BindingContext = new RecoverPasswordViewModel { Navigation = this.Navigation } });
+            if (Device.Idiom == TargetIdiom.Desktop)
+            {
+                await Navigation.PushModalAsync(new Views.Desktop.RecoverPasswordPage { BindingContext = new RecoverPasswordViewModel { Navigation = this.Navigation } });
+            }
+            else
+            {
+                await Navigation.PushModalAsync(new Views.Phone.RecoverPasswordPage { BindingContext = new RecoverPasswordViewModel { Navigation = this.Navigation } });
+            }
         }));
 
         private ICommand loginCommand;

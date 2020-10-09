@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Architecture.UIKit.Views.Phone.ArticleClassicPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             Visual="Material"
+             x:DataType="local:ArticlesViewModel">
+
+    <ContentPage.BindingContext>
+        <local:ArticlesViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Article Classic" />
+    </NavigationPage.TitleView>
+
+    <CollectionView 
+        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+        ItemsSource="{Binding NatureArticles}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="local:ArticleItemViewModel">
+                <Grid 
+                    Padding="10"
+                    ColumnSpacing="10"
+                    BackgroundColor="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <ff:CachedImage 
+                        Aspect="AspectFill"
+                        HeightRequest="150"
+                        WidthRequest="150"
+                        Source="{Binding ImageSource}" />
+                    <StackLayout Grid.Column="1">
+                        <Label
+                            FontSize="Large"
+                            Text="{Binding Title}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label
+                            FontSize="Default"
+                            Text="{Binding Year}"
+                            TextColor="{StaticResource PrimaryColor}" />
+                        <Label 
+                            FontSize="Default"
+                            MaxLines="5"
+                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                    </StackLayout>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

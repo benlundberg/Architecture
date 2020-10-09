@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
 	public class RecoverPasswordViewModel : BaseViewModel
 	{

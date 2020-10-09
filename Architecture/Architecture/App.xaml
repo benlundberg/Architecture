@@ -98,7 +98,8 @@
             <Thickness x:Key="ExtraLargePadding">40, 20, 40, 20</Thickness>
             <Thickness x:Key="LargePadding">30, 20, 30, 20</Thickness>
             <Thickness x:Key="MainPadding">16, 10, 16, 10</Thickness>
-
+            <Thickness x:Key="DesktopMargin">80, 40, 80, 40</Thickness>
+            
             <Thickness x:Key="HorizontalPadding">16, 0, 16, 0</Thickness>
             <Thickness x:Key="VerticalPadding">0, 10, 0, 10</Thickness>
 

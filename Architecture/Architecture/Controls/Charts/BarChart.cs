@@ -1,4 +1,5 @@
-﻿using FFImageLoading;
+﻿using Architecture.Core;
+using FFImageLoading;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using System;
@@ -34,6 +35,11 @@ namespace Architecture.Controls.Charts
         private void BarChart_Touch(object sender, SKTouchEventArgs e)
         {
             if (!(sender is SKCanvasView view))
+            {
+                return;
+            }
+
+            if (!e.InContact)
             {
                 return;
             }
@@ -276,6 +282,11 @@ namespace Architecture.Controls.Charts
                     {
                         this.WidthRequest = requestedWidth;
                     }
+                    else
+                    {
+                        SetStartPosition(groupCenters);
+                        IsInitialized = true;
+                    }
 
                     if (ScrollComponent != null)
                     {
@@ -323,28 +334,62 @@ namespace Architecture.Controls.Charts
             DrawHorizontalLabel(selectedValueItems?.FirstOrDefault()?.ChartValueItem, canvas, frame, chart);
         }
 
-        private void ScrollComponent_Scrolled(object sender, ScrolledEventArgs e)
+        private void ShowSwipeNotifications(double currentPosition)
         {
-            if (e.ScrollX <= ScrollComponent.Margin.Right)
+            if (!SwipeNotificationIsDisabled)
             {
-                if (SwipeNotificationLeft.Opacity == 0)
+                if (currentPosition <= ScrollComponent.Margin.Right)
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    if (SwipeNotificationRight.Opacity > 0)
                     {
-                        await SwipeNotificationLeft.FadeTo(1);
-                        SwipeNotificationLeft.InputTransparent = false;
-                    });
+                        SwipeNotificationRight.Opacity = 0;
+                        SwipeNotificationRight.InputTransparent = true;
+                    }
+
+                    if (SwipeNotificationLeft.Opacity > 0 && SwipePreviousIsDisabled)
+                    {
+                        SwipeNotificationLeft.Opacity = 0;
+                        SwipeNotificationLeft.InputTransparent = true;
+                    }
+
+                    if (SwipeNotificationLeft.Opacity == 0 && !SwipePreviousIsDisabled)
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await SwipeNotificationLeft.FadeTo(1);
+                            SwipeNotificationLeft.InputTransparent = false;
+                        });
+                    }
                 }
-            }
-            else if (e.ScrollX >= (groupCenters.OrderByDescending(x => x.Position).FirstOrDefault().Position - ScrollComponent.Margin.Left))
-            {
-                if (SwipeNotificationRight.Opacity == 0)
+                else if (currentPosition >= (groupCenters.OrderByDescending(x => x.Position).FirstOrDefault().Position - ScrollComponent.Margin.Left))
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    if (SwipeNotificationLeft.Opacity > 0)
                     {
-                        await SwipeNotificationRight.FadeTo(1);
-                        SwipeNotificationRight.InputTransparent = false;
-                    });
+                        SwipeNotificationLeft.Opacity = 0;
+                        SwipeNotificationLeft.InputTransparent = true;
+                    }
+
+                    if (SwipeNotificationRight.Opacity > 0 && SwipeNextIsDisabled)
+                    {
+                        SwipeNotificationRight.Opacity = 0;
+                        SwipeNotificationRight.InputTransparent = true;
+                    }
+
+                    if (SwipeNotificationRight.Opacity == 0 && !SwipeNextIsDisabled)
+                    {
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await SwipeNotificationRight.FadeTo(1);
+                            SwipeNotificationRight.InputTransparent = false;
+                        });
+                    }
+                }
+                else
+                {
+                    SwipeNotificationLeft.Opacity = 0;
+                    SwipeNotificationRight.Opacity = 0;
+                    SwipeNotificationLeft.InputTransparent = true;
+                    SwipeNotificationRight.InputTransparent = true;
                 }
             }
             else
@@ -354,6 +399,11 @@ namespace Architecture.Controls.Charts
                 SwipeNotificationLeft.InputTransparent = true;
                 SwipeNotificationRight.InputTransparent = true;
             }
+        }
+
+        private void ScrollComponent_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            ShowSwipeNotifications(e.ScrollX);
 
             if (isSnapping)
             {
@@ -366,6 +416,8 @@ namespace Architecture.Controls.Charts
             }
 
             lastScrollPosition = e.ScrollX;
+
+            SwitchSelectedLabel();
 
             Device.StartTimer(TimeSpan.FromMilliseconds(300), () =>
             {
@@ -387,26 +439,107 @@ namespace Architecture.Controls.Charts
                         return false;
                     }
 
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        isSnapping = true;
-
-                        ScrollComponent.Scrolled -= ScrollComponent_Scrolled;
-
-                        SelectedLabel = item.Label;
-
-                        lastScrollPosition = item.Position - firstItemsPosition;
-
-                        await ScrollComponent.ScrollToAsync(lastScrollPosition, 0, false);
-
-                        ScrollComponent.Scrolled += ScrollComponent_Scrolled;
-
-                        isSnapping = false;
-                    });
+                    SnapToClosestBar(item.Position - firstItemsPosition, item);
                 }
 
                 return false;
             });
+        }
+
+        private void SnapToClosestBar(double position, GroupChartItem selectedItem)
+        {
+            var selectedValues = new SelectedChartValueItemArgs
+            {
+                ChartValueItems = new List<ChartValueItemParam>(),
+                TouchedPoint = TouchedPoint
+            };
+
+            foreach (var chartEntry in ChartEntries.Where(x => x.IsVisible))
+            {
+                var chartEntryItem = chartEntry.Items.FirstOrDefault(i => i.Tag.ToString() == selectedItem.Tag.ToString());
+
+                if (chartEntryItem == null)
+                {
+                    continue;
+                }
+
+                selectedValues.ChartValueItems.Add(new ChartValueItemParam(chartEntryItem, null, chartEntry));
+            }
+
+            // Invoke command with selected items
+            SelectedValuesCommand?.Execute(selectedValues);
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                isSnapping = true;
+
+                ScrollComponent.Scrolled -= ScrollComponent_Scrolled;
+
+                SelectedLabel = selectedItem.Label;
+
+                lastScrollPosition = position;
+
+                await ScrollComponent.ScrollToAsync(lastScrollPosition, 0, false);
+
+                ShowSwipeNotifications(lastScrollPosition);
+
+                ScrollComponent.Scrolled += ScrollComponent_Scrolled;
+
+                isSnapping = false;
+            });
+        }
+
+        private void SetStartPosition(List<GroupChartItem> groupCenters)
+        {
+            GroupChartItem item = null;
+            var entries = groupCenters.OrderByDescending(x => x.Position);
+
+            if (StartPositionEnd == false)
+            {
+                item = entries.LastOrDefault();
+                StartPositionEnd = null;
+            }
+            else if (StartPositionEnd == true)
+            {
+                item = entries.FirstOrDefault();
+                StartPositionEnd = null;
+            }
+            else if (!string.IsNullOrEmpty(SelectedTag) && entries.Any(x => x.Label == SelectedLabel))
+            {
+                item = entries.FirstOrDefault(x => x.Tag == SelectedTag);
+            }
+
+            if (item == null)
+            {
+                item = entries.ElementAtOrDefault(entries.Count() / 2);
+            }
+
+            var firstItemsPosition = entries.LastOrDefault().Position;
+
+            var position = item.Position - firstItemsPosition;
+
+            ShowSwipeNotifications(position);
+
+            SnapToClosestBar(position, item);
+        }
+
+        private void SwitchSelectedLabel()
+        {
+            try
+            {
+                // When user scrolling we switch selected label
+                var entries = groupCenters.OrderByDescending(x => x.Position);
+
+                var firstItemsPosition = entries.LastOrDefault().Position;
+
+                var item = entries.FirstOrDefault(x => Math.Round((decimal)x.Position - (decimal)(firstItemsPosition / 2), 0) <= Math.Round((decimal)(lastScrollPosition + firstItemsPosition)));
+
+                SelectedLabel = item?.Label;
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
         }
 
         private ICommand swipeRightCommand;
@@ -459,6 +592,7 @@ namespace Architecture.Controls.Charts
         }
 
         public string SelectedLabel { get; set; }
+        public bool? StartPositionEnd { get; set; }
 
         public bool AllowScroll { get; set; }
 
@@ -472,6 +606,42 @@ namespace Architecture.Controls.Charts
         public BoxView Selector { get; set; }
         public Grid SwipeNotificationLeft { get; set; }
         public Grid SwipeNotificationRight { get; set; }
+
+        public static readonly BindableProperty SwipeNotificationIsDisabledProperty = BindableProperty.Create(
+            "SwipeNotificationIsDisabled",
+            typeof(bool),
+            typeof(BarChart),
+            false);
+
+        public bool SwipeNotificationIsDisabled
+        {
+            get { return (bool)GetValue(SwipeNotificationIsDisabledProperty); }
+            set { SetValue(SwipeNotificationIsDisabledProperty, value); }
+        }
+
+        public static readonly BindableProperty SwipeNextIsDisabledProperty = BindableProperty.Create(
+            "SwipeNextIsDisabled",
+            typeof(bool),
+            typeof(BarChart),
+            false);
+
+        public bool SwipeNextIsDisabled
+        {
+            get { return (bool)GetValue(SwipeNextIsDisabledProperty); }
+            set { SetValue(SwipeNextIsDisabledProperty, value); }
+        }
+
+        public static readonly BindableProperty SwipePreviousIsDisabledProperty = BindableProperty.Create(
+            "SwipePreviousIsDisabled",
+            typeof(bool),
+            typeof(BarChart),
+            false);
+
+        public bool SwipePreviousIsDisabled
+        {
+            get { return (bool)GetValue(SwipePreviousIsDisabledProperty); }
+            set { SetValue(SwipePreviousIsDisabledProperty, value); }
+        }
     }
 
     public class GroupChartItem

@@ -7,7 +7,7 @@ using System.Windows.Input;
 using Architecture.Core;
 using Xamarin.Forms;
 
-namespace Architecture
+namespace Architecture.UIKit
 {
     public class ListViewModel : BaseViewModel
     {

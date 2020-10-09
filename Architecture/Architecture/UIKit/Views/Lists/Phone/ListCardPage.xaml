@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+	x:Class="Architecture.UIKit.Views.Phone.ListCardPage"
+    xmlns:properties="clr-namespace:Architecture.Resources"
+	xmlns:controls="clr-namespace:Architecture.Controls"
+	xmlns:local="clr-namespace:Architecture.UIKit"
+    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    x:DataType="local:ListViewModel"
+    Visual="Material">
+
+    <ContentPage.BindingContext>
+        <local:ListViewModel />
+    </ContentPage.BindingContext>
+    
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Card List" />
+    </NavigationPage.TitleView>
+    
+    <Grid x:Name="ListCardRoot" Padding="{StaticResource MainPadding}">
+		<ListView 
+			CachingStrategy="RecycleElement"
+			ItemsSource="{Binding Items}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			RefreshCommand="{Binding RefreshListCommand}"
+			IsPullToRefreshEnabled="True"
+			IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+			RefreshControlColor="{StaticResource PrimaryColor}"
+			HasUnevenRows="True"
+			SeparatorVisibility="None">
+			<ListView.ItemTemplate>
+				<DataTemplate x:DataType="local:ListItemViewModel">
+                    <ViewCell>
+                        <SwipeView Margin="0, 8">
+                            <SwipeView.LeftItems>
+                                <SwipeItem
+                                    Text="{x:Static properties:Strings.Gen_Delete}"
+                                    BackgroundColor="IndianRed"
+                                    Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference ListCardRoot}}"
+                                    CommandParameter="{Binding .}">
+                                    <SwipeItem.IconImageSource>
+                                        <FontImageSource 
+                                            Glyph="{StaticResource RemoveIcon}"
+                                            FontFamily="{StaticResource FontAwesomeSolid}"/>
+                                    </SwipeItem.IconImageSource>
+                                </SwipeItem>
+                            </SwipeView.LeftItems>
+                            <Frame Padding="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ff:CachedImage
+                                        WidthRequest="100"
+                                        HeightRequest="125"
+                                        Source="{Binding ImageSource}" 
+                                        Aspect="AspectFill" />
+                                    <StackLayout
+                                        Grid.Column="1"
+                                        VerticalOptions="Center"
+                                        Padding="10">
+                                        <Label 
+                                            FontSize="Medium"
+                                            Text="{Binding Title}" />
+                                        <Label 
+                                            FontSize="Default"
+                                            MaxLines="3"
+                                            LineBreakMode="TailTruncation"
+                                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span 
+                                                        FontSize="Default"
+                                                        TextColor="{StaticResource PrimaryColor}" 
+                                                        Text="&#xf005;" 
+                                                        FontFamily="{StaticResource FontAwesomeSolid}" />
+                                                    <Span Text=" " />
+                                                    <Span Text="4.5" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </SwipeView>
+                    </ViewCell>
+                </DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<controls:LoadingView IsRunning="{Binding IsBusy}" />
+	</Grid>
+	
+</ContentPage>

@@ -1,4 +1,4 @@
-﻿namespace Architecture
+﻿namespace Architecture.UIKit
 {
     public class TabbedLoginViewModel : BaseViewModel
     {

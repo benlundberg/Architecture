@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.Desktop.LoginPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             Visual="Material"
+             x:DataType="local:LoginViewModel">
+
+    <ContentPage.BindingContext>
+        <local:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Login" />
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+
+        <Grid ColumnDefinitions="*, *, *">
+            <StackLayout
+                Grid.Column="1"
+                Spacing="{StaticResource MainSpacing}"
+                Padding="{StaticResource ExtraLargePadding}"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+                <Label
+                    TextColor="{StaticResource PrimaryColor}"
+                    Margin="0, 40"
+                    VerticalOptions="Center"
+                    FontSize="42"
+                    Text="Login" />
+                <Entry 
+                    Placeholder="Username"
+                    Text="{Binding Username.Value, Mode=TwoWay}" />
+                <Entry 
+                    Placeholder="Password"
+                    IsPassword="True"
+                    Text="{Binding Password.Value, Mode=TwoWay}" />
+                <StackLayout 
+                    HorizontalOptions="Start"
+                    Orientation="Horizontal">
+                    <CheckBox 
+                        Color="{StaticResource PrimaryColor}"
+                        IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                        WidthRequest="32" />
+                    <Label 
+                        FontSize="Default"
+                        VerticalOptions="Center"
+                        Text="Remember me" />
+                </StackLayout>
+                <Button 
+                    Command="{Binding LoginCommand}" 
+                    Text="{StaticResource CheckIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                <Label
+                    Style="{StaticResource BoldLabel}"
+                    TextColor="{StaticResource PrimaryColor}"
+                    FontSize="Default"
+                    HorizontalOptions="End"
+                    Text="Forgot password?">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            
+            <controls:LoadingView
+                Grid.ColumnSpan="3"
+                IsRunning="{Binding IsBusy}" />
+            
+            <Label
+                Grid.ColumnSpan="3"
+                Margin="0, 40, 40, 0"
+                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+                VerticalOptions="Start"
+                HorizontalOptions="End"
+                FontSize="Large"
+                Text="{StaticResource CloseIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                TextColor="Black">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PopModalCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>
