@@ -25,7 +25,7 @@
                     <ff:CachedImage
                         Source="{Binding ImageSource}" 
                         WidthRequest="150"
-                        HeightRequest="185"
+                        HeightRequest="150"
                         Aspect="AspectFill" />
                     <Grid VerticalOptions="End">
                         <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
@@ -59,51 +59,13 @@
     <ContentPage.Content>
 
         <Grid 
-            ColumnDefinitions="*, *, *"
+            ColumnDefinitions="2*, *"
+            RowDefinitions="*, *"
             ColumnSpacing="40"
             Margin="{StaticResource DesktopMargin}">
 
-            <CollectionView 
-                VerticalScrollBarVisibility="Never"
-                SelectionMode="Single"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                ItemsSource="{Binding NatureArticles}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Grid 
-                            Padding="10"
-                            ColumnSpacing="10"
-                            BackgroundColor="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="2*" />
-                            </Grid.ColumnDefinitions>
-                            <ff:CachedImage 
-                                Aspect="AspectFill"
-                                HeightRequest="150"
-                                WidthRequest="150"
-                                Source="{Binding ImageSource}" />
-                            <StackLayout Grid.Column="1">
-                                <Label
-                                    FontSize="Large"
-                                    Text="{Binding Title}"
-                                    TextColor="{StaticResource PrimaryColor}" />
-                                <Label
-                                    FontSize="Default"
-                                    Text="{Binding Year}"
-                                    TextColor="{StaticResource PrimaryColor}" />
-                                <Label 
-                                    FontSize="Default"
-                                    MaxLines="5"
-                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                            </StackLayout>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <StackLayout 
-                Grid.Column="1">
+            <StackLayout
+                Grid.RowSpan="2">
                 <CarouselView
                     ItemsSource="{Binding NatureArticles}" 
                     IndicatorView="indicatorView"
@@ -144,7 +106,7 @@
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                     ItemTemplate="{StaticResource arcticleItem}"
                     SelectionMode="Single"
-                    HeightRequest="250">
+                    HeightRequest="200">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                             SnapPointsAlignment="Start" 
@@ -158,7 +120,7 @@
                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                     ItemTemplate="{StaticResource arcticleItem}"
                     SelectionMode="Single"
-                    HeightRequest="250">
+                    HeightRequest="200">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                             SnapPointsAlignment="Start" 
@@ -169,8 +131,49 @@
                 </CollectionView>
             </StackLayout>
 
+            <CollectionView 
+                Grid.Column="1"
+                VerticalScrollBarVisibility="Never"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                ItemsSource="{Binding NatureArticles}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:ArticleItemViewModel">
+                        <Grid 
+                            Padding="10"
+                            ColumnSpacing="10"
+                            BackgroundColor="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <ff:CachedImage 
+                                Aspect="AspectFill"
+                                HeightRequest="100"
+                                WidthRequest="100"
+                                Source="{Binding ImageSource}" />
+                            <StackLayout Grid.Column="1">
+                                <Label
+                                    FontSize="Medium"
+                                    Text="{Binding Title}"
+                                    TextColor="{StaticResource PrimaryColor}" />
+                                <Label
+                                    FontSize="Default"
+                                    Text="{Binding Year}"
+                                    TextColor="{StaticResource PrimaryColor}" />
+                                <Label 
+                                    FontSize="Body"
+                                    MaxLines="5"
+                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
             <CollectionView
-                Grid.Column="2"
+                Grid.Row="1"
+                Grid.Column="1"
                 VerticalScrollBarVisibility="Never"
                 SelectionMode="Single"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
