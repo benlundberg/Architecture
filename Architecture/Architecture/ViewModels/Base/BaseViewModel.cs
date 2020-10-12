@@ -14,7 +14,6 @@ namespace Architecture
         /// </summary>
         public virtual void OnPageCreated(Page page)
         {
-
         }
 
         /// <summary>
