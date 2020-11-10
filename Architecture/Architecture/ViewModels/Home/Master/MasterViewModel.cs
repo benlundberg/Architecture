@@ -58,7 +58,14 @@ namespace Architecture
                 {
                     masterDetailPage.IsPresented = false;
 
-                    ItemSelected(selectedMasterItem.Page);
+                    if (selectedMasterItem.Page == null)
+                    {
+                        selectedMasterItem.Action?.Invoke();
+                    }
+                    else
+                    {
+                        ItemSelected(selectedMasterItem.Page);
+                    }
 
                     SelectedMasterItem = null;
                 }

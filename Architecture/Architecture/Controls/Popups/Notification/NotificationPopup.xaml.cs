@@ -94,10 +94,15 @@ namespace Architecture.Controls
                 await Task.Delay(TimeSpan.FromSeconds(5));
             }
 
-            await CloseAsync();
+            await HideAsync();
         }
 
-        private async Task CloseAsync()
+        public async Task ShowAsync()
+        {
+            await PopupNavigation.Instance.PushAsync(this);
+        }
+
+        public async Task HideAsync()
         {
             if (PopupNavigation.Instance.PopupStack.Contains(this))
             {
@@ -108,7 +113,7 @@ namespace Architecture.Controls
         private async void Button_Clicked(object sender, EventArgs e)
         {
             Option.Command?.Execute(null);
-            await CloseAsync();
+            await HideAsync();
         }
 
         public NotificationOption Option { get; set; }

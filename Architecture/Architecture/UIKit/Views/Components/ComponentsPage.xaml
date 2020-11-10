@@ -135,13 +135,10 @@
                 <Label Text="Floating action button" FontSize="Micro" />
                 <ImageButton 
                     HorizontalOptions="Start"
-                    HeightRequest="56"
-                    WidthRequest="56"
-                    CornerRadius="28"
-                    Padding="16"
-                    BackgroundColor="{StaticResource Accent}">
+                    Style="{StaticResource FloatingButton}">
                     <ImageButton.Source>
                         <FontImageSource
+                            Color="White"
                             Glyph="{StaticResource AddIcon}"
                             FontFamily="{StaticResource FontAwesomeSolid}"/>
                     </ImageButton.Source>
@@ -150,13 +147,10 @@
                 <Label Text="Floating action button mini" FontSize="Micro" />
                 <ImageButton 
                     HorizontalOptions="Start"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    CornerRadius="20"
-                    Padding="8"
-                    BackgroundColor="{StaticResource Accent}">
+                    Style="{StaticResource FloatingButtonMini}">
                     <ImageButton.Source>
                         <FontImageSource
+                            Color="White"
                             Glyph="{StaticResource AddIcon}"
                             FontFamily="{StaticResource FontAwesomeSolid}"/>
                     </ImageButton.Source>
@@ -167,6 +161,14 @@
 
                 <Label Text="Rounded primary outline button" FontSize="Micro" />
                 <Button Style="{StaticResource OutlineButton}" CornerRadius="22" Text="Click me" />
+                
+                <Label Text="Picker" FontSize="Micro" />
+                <controls:PickerView 
+                    Title="Item"
+                    IconTextSource="{StaticResource ChevronDownIcon}"
+                    IconFontFamily="{StaticResource FontAwesomeSolid}"
+                    Placeholder="Select item"
+                    CancelText="Cancel" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

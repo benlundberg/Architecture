@@ -173,7 +173,7 @@ namespace Architecture.Droid
 
 		public Stream GetStreamFromAssets(string path)
 		{
-			var assets = Android.App.Application.Context.Assets;
+			var assets = global::Android.App.Application.Context.Assets;
 
 			return assets.Open(path);
 		}

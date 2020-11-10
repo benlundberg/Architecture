@@ -44,11 +44,11 @@ namespace Architecture.Core
             {
                 if (expiration == default)
                 {
-                    await BlobCache.Secure.InsertObject(id + model.GetType().ToString(), model, expiration);
+                    await BlobCache.Secure.InsertObject(id + model.GetType().ToString(), model);
                 }
                 else
                 {
-                    await BlobCache.Secure.InsertObject(id + model.GetType().ToString(), model);
+                    await BlobCache.Secure.InsertObject(id + model.GetType().ToString(), model, expiration);
                 }
             }
             catch (Exception ex)

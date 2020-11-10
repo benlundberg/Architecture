@@ -7,38 +7,36 @@
              x:Class="Architecture.Controls.PickerView"
              x:Name="root">
 
-    <StackLayout>
-        <Grid ColumnSpacing="20">
+    <Frame
+        Padding="{OnPlatform Android=0, iOS=10}"
+        Margin="0, 10, 0, 0"
+        HasShadow="False"
+        BorderColor="{Binding InternalBorderColor, Source={x:Reference root}}"
+        BackgroundColor="{Binding EntryBackground, Source={x:Reference root}}">
+        <Grid ColumnSpacing="20" Margin="20, 14">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Label 
+                Grid.Column="1"
                 FontSize="Large"
                 IsVisible="{Binding HasIcon, Source={x:Reference root}}"
                 VerticalOptions="Center"
                 Text="{Binding IconTextSource, Source={x:Reference root}}"
                 TextColor="{Binding IconColor, Source={x:Reference root}}"
                 FontFamily="{Binding IconFontFamily, Source={x:Reference root}}" />
-            <Label
-                Grid.Column="1"
-                FontSize="Medium"
-                Text="{Binding Title, Source={x:Reference root}}"
-                TextColor="{Binding TitleTextColor, Source={x:Reference root}}" />
             <Label 
-                Grid.Column="2"
                 FontSize="Medium"
                 FontAttributes="Bold"
-                TextColor="{StaticResource PrimaryColor}"
-                HorizontalOptions="End"
                 VerticalOptions="Center"
+                TextColor="{Binding IconColor, Source={x:Reference root}}"
                 Text="{Binding PickerText, Source={x:Reference root}}">
             </Label>
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SelectCommand, Source={x:Reference root}}" />
             </Grid.GestureRecognizers>
         </Grid>
-    </StackLayout>
+    </Frame>
 
 </ContentView>

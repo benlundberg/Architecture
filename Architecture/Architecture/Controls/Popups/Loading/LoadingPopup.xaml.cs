@@ -17,6 +17,11 @@ namespace Architecture.Controls
             this.Text = text;
         }
 
+        public async Task ShowAsync()
+        {
+            await PopupNavigation.Instance.PushAsync(this);
+        }
+
         public async Task HideAsync()
         {
             if (PopupNavigation.Instance.PopupStack.Contains(this))

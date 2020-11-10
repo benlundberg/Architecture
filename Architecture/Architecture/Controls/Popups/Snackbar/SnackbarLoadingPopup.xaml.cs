@@ -11,11 +11,16 @@ namespace Architecture.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SnackbarLoadingPopup : PopupPage
     {
-        public SnackbarLoadingPopup(string message)
+        public SnackbarLoadingPopup(string message = "")
         {
             InitializeComponent();
 
-            this.Text = message;
+            this.Text = string.IsNullOrEmpty(message) ? Architecture.Resources.Strings.Gen_Loading : message;
+        }
+
+        public async Task ShowAsync()
+        {
+            await PopupNavigation.Instance.PushAsync(this);
         }
 
         public async Task HideAsync()

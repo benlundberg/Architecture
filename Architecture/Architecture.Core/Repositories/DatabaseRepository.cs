@@ -273,6 +273,13 @@ namespace Architecture.Core
             return item;
         }
 
+        public async Task<bool> InsertAsync<T>(List<T> entities)
+        {
+            int rows = await connection.InsertAllAsync(entities);
+
+            return rows != 0;
+        }
+
         public async Task<bool> InsertAsync<T>(T entity)
         {
             int rows = await connection.InsertAsync(entity);
@@ -330,6 +337,7 @@ namespace Architecture.Core
             return row != 0;
         }
 
+
         public async Task<bool> UpdateAsync<T>(T entity)
         {
             int rows = await connection.UpdateAsync(entity);
@@ -345,13 +353,6 @@ namespace Architecture.Core
             }
 
             return true;
-        }
-
-        public async Task<bool> InsertAsync<T>(List<T> entities)
-        {
-            int rows = await connection.InsertAllAsync(entities);
-
-            return rows != 0;
         }
 
         public async Task ExecuteQueryAsync(string query)

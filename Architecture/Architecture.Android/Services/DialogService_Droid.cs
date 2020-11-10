@@ -28,7 +28,7 @@ namespace Architecture.Droid
                 view.SetPadding(padding, 0, padding, 0);
             }
 
-            TextView textView = view.FindViewById<TextView>(Android.Resource.Id.Text1);
+            TextView textView = view.FindViewById<TextView>(global::Android.Resource.Id.Text1);
             textView.SetTextSize(ComplexUnitType.Sp, 16);
 
             textView.SetCompoundDrawablesWithIntrinsicBounds(Resource.Drawable.abc_ic_star_black_16dp, 0, 0, 0);
@@ -85,7 +85,7 @@ namespace Architecture.Droid
         {
             var activity = Xamarin.Essentials.Platform.CurrentActivity;
 
-            var listAdapter = new DialogAdapter(activity, Android.Resource.Layout.SelectDialogItem, Android.Resource.Id.Text1, items);
+            var listAdapter = new DialogAdapter(activity, global::Android.Resource.Layout.SelectDialogItem, global::Android.Resource.Id.Text1, items);
 
             TaskCompletionSource<string> taskCompletionSource = new TaskCompletionSource<string>();
 

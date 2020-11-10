@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Architecture.Controls.InputPopup"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:local="clr-namespace:Architecture.Controls"
+    BackgroundColor="Transparent"
+    BackgroundInputTransparent="False"
+    HasSystemPadding="True"
+    CloseWhenBackgroundIsClicked="False"
+    x:Name="InputPopupRoot"
+    x:DataType="InputView">
+
+    <Frame
+        Margin="20, 0"
+        Padding="8"
+        VerticalOptions="{Binding Option.VerticalPosition, Source={x:Reference InputPopupRoot}}">
+
+        <StackLayout
+            Margin="10">
+
+            <Label 
+                FontSize="14"
+                TextColor="Black"
+                IsVisible="{Binding Title, Source={x:Reference InputPopupRoot}, Converter={StaticResource NullOrEmptyToBoolConv}}"
+                Text="{Binding Title, Source={x:Reference InputPopupRoot}}" />
+
+            <Entry
+                MaxLength="{Binding Option.MaxLength, Source={x:Reference InputPopupRoot}}"
+                Placeholder="{Binding Option.Placeholder, Source={x:Reference InputPopupRoot}}"
+                PlaceholderColor="{Binding Option.PlaceholderColor, Source={x:Reference InputPopupRoot}}"
+                Text="{Binding Text.Value, Source={x:Reference InputPopupRoot}, Mode=TwoWay}"
+                TextColor="{Binding Option.TextColor, Source={x:Reference InputPopupRoot}}"
+                IsPassword="{Binding Option.IsPassword, Source={x:Reference InputPopupRoot}}"
+                Keyboard="{Binding Option.Keyboard, Source={x:Reference InputPopupRoot}}" />
+
+            <Button 
+                Command="{Binding PrimaryCommand, Source={x:Reference InputPopupRoot}}"
+                Text="{Binding Option.PrimaryCommandText, Source={x:Reference InputPopupRoot}}" />
+
+        </StackLayout>
+    </Frame>
+    
+</pages:PopupPage>

@@ -48,6 +48,8 @@
                 <Button Text="Show notification warning" Command="{Binding ShowNotificationCommand}" CommandParameter="3" />
                 <Button Text="Show notification error" Command="{Binding ShowNotificationCommand}" CommandParameter="4" />
                 <Button Text="Send push notification" Command="{Binding ShowPushNotificationCommand}" />
+                <Button Text="Input" Command="{Binding ShowInputPopupCommand}" />
+                <Button Text="Input validation" Command="{Binding ShowInputValidationPopupCommand}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

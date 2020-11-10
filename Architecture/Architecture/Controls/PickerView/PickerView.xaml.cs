@@ -38,9 +38,27 @@ namespace Architecture.Controls
             set { SetValue(SelectedItemProperty, value); }
         }
 
+
+        public static readonly BindableProperty IconColorProperty = BindableProperty.Create(
+           propertyName: "IconColor",
+           returnType: typeof(Color),
+           declaringType: typeof(PickerView),
+           defaultValue: Color.Black);
+
+        public Color IconColor
+        {
+            get { return (Color)GetValue(IconColorProperty); }
+            set { SetValue(IconColorProperty, value); }
+        }
+
         private ICommand selectCommand;
         public ICommand SelectCommand => selectCommand ?? (selectCommand = new Command(async () =>
         {
+            if (ItemsSource?.Any() != true)
+            {
+                return;
+            }
+
             var item = await Application.Current.MainPage.DisplayActionSheet(Title, CancelText, null, ItemsSource?.ToArray());
 
             if (item != null && item != CancelText)
@@ -56,9 +74,10 @@ namespace Architecture.Controls
         public string Placeholder { get; set; }
         public Color PlaceholderColor { get; set; } = App.Current.PrimaryColor();
         public Color TextColor { get; set; } = App.Current.PrimaryColor();
+        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public Color EntryBackground { get; set; } = Color.White;
         public string IconFontFamily { get; set; }
         public string IconTextSource { get; set; }
-        public Color IconColor { get; set; } = Color.Black;
         public bool HasIcon => !string.IsNullOrEmpty(IconTextSource);
     }
 }
