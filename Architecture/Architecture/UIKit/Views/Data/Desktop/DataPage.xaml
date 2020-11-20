@@ -212,7 +212,7 @@
                                     <ff:CachedImage 
                                         HeightRequest="50"
                                         WidthRequest="50"
-                                        Source="http://clarityapplication.com/dev/images/13.jpg"
+                                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg"
                                         Aspect="AspectFill" />
                                 </Frame>
                                 <StackLayout Grid.Column="1">
@@ -244,14 +244,13 @@
                     Placeholder="Select status"
                     CancelText="{x:Static properties:Strings.Gen_Cancel}"
                     IconTextSource="&#xf0eb;" />
-                <controls:ItemsControl 
+                <StackLayout 
                     HorizontalOptions="Center"
                     Margin="0, 5"
-                    HorizontalScrollBarVisibility="Never"
-                    ItemsOrientation="Horizontal"
+                    Orientation="Horizontal"
                     Spacing="5"
-                    ItemsSource="{Binding TableFilters}">
-                    <controls:ItemsControl.ItemTemplate>
+                    BindableLayout.ItemsSource="{Binding TableFilters}">
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="local:TableFilterViewModel">
                             <controls:ToggleView 
                                 CheckedChangedCommand="{Binding BindingContext.TableFilterChangedCommand, Source={x:Reference dataTableRoot}}"
@@ -305,8 +304,8 @@
                                 </controls:ToggleView.CheckedView>
                             </controls:ToggleView>
                         </DataTemplate>
-                    </controls:ItemsControl.ItemTemplate>
-                </controls:ItemsControl>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
 
                 <Frame 
                     BorderColor="Transparent"
@@ -464,15 +463,17 @@
                 Grid.Column="2"
                 RowDefinitions="Auto, *">
                 <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
-                    <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
-                        <controls:ItemsControl.ItemTemplate>
+                    <StackLayout
+                        Orientation="Horizontal" 
+                        BindableLayout.ItemsSource="{Binding SelectedChartEntries}">
+                        <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="local:ChartEntryViewModel">
                                 <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
                                     <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
                                 </Frame>
                             </DataTemplate>
-                        </controls:ItemsControl.ItemTemplate>
-                    </controls:ItemsControl>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
                 </Frame>
                 <chart:LineChart
                     Grid.Row="1"
@@ -488,15 +489,17 @@
                 Grid.Row="1"
                 RowDefinitions="Auto, *">
                 <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
-                    <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
-                        <controls:ItemsControl.ItemTemplate>
+                    <StackLayout
+                        Orientation="Horizontal" 
+                        BindableLayout.ItemsSource="{Binding SelectedChartEntries}">
+                        <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="local:ChartEntryViewModel">
                                 <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
                                     <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
                                 </Frame>
                             </DataTemplate>
-                        </controls:ItemsControl.ItemTemplate>
-                    </controls:ItemsControl>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
                 </Frame>
                 <chart:BarChart
                     Grid.Row="1"

@@ -64,10 +64,6 @@
                 </Label>
             </StackLayout>
             
-            <controls:LoadingView
-                Grid.ColumnSpan="3"
-                IsRunning="{Binding IsBusy}" />
-            
             <Label
                 Grid.ColumnSpan="3"
                 Margin="0, 40, 40, 0"

@@ -6,7 +6,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,6 +19,11 @@ namespace Architecture.Controls
             this.ImageSource = imageSource;
 
             InitializeComponent();
+        }
+
+        public async Task ShowAsync()
+        {
+            await PopupNavigation.Instance.PushAsync(this);
         }
 
         private void OnPinchUpdated(object sender, PinchGestureUpdatedEventArgs e)

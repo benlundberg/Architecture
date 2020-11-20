@@ -58,7 +58,7 @@
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-            <controls:LoadingView IsRunning="{Binding IsBusy}" />
+            
             <Label
                 Margin="0, 40, 40, 0"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"

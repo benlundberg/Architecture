@@ -44,7 +44,7 @@
                                 <ff:CachedImage 
                                     HeightRequest="60"
                                     WidthRequest="60"
-                                    Source="http://clarityapplication.com/dev/images/13.jpg"
+                                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg"
                                     Aspect="AspectFill" />
                             </Frame>
                             <StackLayout Grid.Column="1" Margin="10">

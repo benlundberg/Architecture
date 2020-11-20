@@ -85,7 +85,7 @@
                     VerticalOptions="Start"
                     HeightRequest="80"
                     WidthRequest="80"
-                    Source="http://clarityapplication.com/dev/images/13.jpg">
+                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg">
                 <ff:CachedImage.Transformations>
                     <transformation:CircleTransformation />
                 </ff:CachedImage.Transformations>

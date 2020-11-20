@@ -51,7 +51,7 @@
                     CornerRadius="10">
                     <ff:CachedImage
                         Aspect="AspectFill"
-                        Source="http://clarityapplication.com/dev/images/13.jpg" />
+                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg" />
                 </Frame>
             </Grid>
             <ImageButton 
@@ -190,10 +190,10 @@
                             Text="Savings"
                             FontSize="Small" 
                             TextColor="{StaticResource GrayDark}" />
-                        <controls:ItemsControl
-                            ItemsSource="{Binding TwoItems}"
+                        <StackLayout
+                            BindableLayout.ItemsSource="{Binding TwoItems}"
                             Spacing="10">
-                            <controls:ItemsControl.ItemTemplate>
+                            <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <Grid ColumnSpacing="10">
                                         <Grid.ColumnDefinitions>
@@ -225,8 +225,8 @@
                                             TextColor="{StaticResource PrimaryColor}" />
                                     </Grid>
                                 </DataTemplate>
-                            </controls:ItemsControl.ItemTemplate>
-                        </controls:ItemsControl>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
                     </StackLayout>
                 </Frame>
             </StackLayout>

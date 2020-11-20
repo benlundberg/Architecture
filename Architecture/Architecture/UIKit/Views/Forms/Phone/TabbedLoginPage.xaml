@@ -116,6 +116,5 @@
                 <TapGestureRecognizer Command="{Binding PopModalCommand}" />
             </Label.GestureRecognizers>
         </Label>
-        <controls:LoadingView IsVisible="{Binding LoginModel.IsBusy}" />
     </Grid>
 </ContentPage>

@@ -20,12 +20,15 @@
     </NavigationPage.TitleView>
 
     <ScrollView Padding="{StaticResource MainPadding}">
-        <controls:ItemsControl 
-            NumberOfColumns="2"
-            ColumnSpacing="20"
-            RowSpacing="20"
-            ItemsSource="{Binding DashboardItems}">
-            <controls:ItemsControl.ItemTemplate>
+        <CollectionView ItemsSource="{Binding DashboardItems}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout 
+                    HorizontalItemSpacing="10"
+                    VerticalItemSpacing="10"
+                    Orientation="Vertical" 
+                    Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="local:DashboardItemViewModel">
                     <StackLayout>
                         <ff:CachedImage 
@@ -34,12 +37,12 @@
                             Source="{Binding ImageSource}" />
                         <Label 
                             Text="{Binding Title}" 
-                            FontAttributes="Bold" 
+                            Style="{StaticResource BoldLabel}"
                             HorizontalOptions="Center" />
                     </StackLayout>
                 </DataTemplate>
-            </controls:ItemsControl.ItemTemplate>
-        </controls:ItemsControl>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </ScrollView>
 
 </ContentPage>

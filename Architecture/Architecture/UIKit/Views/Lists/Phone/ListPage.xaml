@@ -72,6 +72,7 @@
             SelectedSectionBackground="{StaticResource PrimaryColor}"
             SelectedSectionTextColor="White"
             SectionBackground="White"
+            SectionPadding="0"
             SectionTextColor="{StaticResource PrimaryColor}"
             SectionControlPadding="1"
             SectionControlMargin="10, 2"
@@ -162,6 +163,5 @@
                     FontFamily="{StaticResource FontAwesomeSolid}"/>
             </ImageButton.Source>
         </ImageButton>
-        <controls:LoadingView IsRunning="{Binding IsBusy}" />
     </Grid>
 </ContentPage>

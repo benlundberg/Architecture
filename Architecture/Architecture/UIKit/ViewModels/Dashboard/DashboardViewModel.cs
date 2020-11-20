@@ -33,7 +33,7 @@ namespace Architecture.UIKit
                 {
                     Tag = 1,
                     Title = "Social",
-                    ImageBackground = "http://clarityapplication.com/dev/images/9.jpg",
+                    ImageBackground = "https://architectureappimages.blob.core.windows.net/imagecontainer/9.jpg",
                 },
                 new TileItem
                 {
@@ -68,7 +68,7 @@ namespace Architecture.UIKit
                 new TileItem
                 {
                     Tag = 6,
-                    ImageBackground = "http://clarityapplication.com/dev/images/12.jpg",
+                    ImageBackground = "https://architectureappimages.blob.core.windows.net/imagecontainer/12.jpg",
                     Title = "Food",
                     InfoText = new List<string>
                     {
@@ -79,7 +79,7 @@ namespace Architecture.UIKit
                 new TileItem
                 {
                     Tag = 7,
-                    ImageBackground = "http://clarityapplication.com/dev/images/10.jpg",
+                    ImageBackground = "https://architectureappimages.blob.core.windows.net/imagecontainer/10.jpg",
                     Title = "Travels",
                     InfoText = new List<string>
                     {

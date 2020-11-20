@@ -18,7 +18,7 @@
             VerticalOptions="Fill"
             HorizontalOptions="Fill"
             Aspect="Fill"
-            Source="http://clarityapplication.com/dev/images/11.jpg" />
+            Source="https://architectureappimages.blob.core.windows.net/imagecontainer/11.jpg" />
         <Grid 
             BackgroundColor="Black"
             Opacity=".4" />

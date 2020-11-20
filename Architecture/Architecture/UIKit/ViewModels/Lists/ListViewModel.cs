@@ -14,9 +14,9 @@ namespace Architecture.UIKit
         public ListViewModel()
         {
             // We load items on appearing
-            ExecuteIfConnected(() =>
+            ExecuteIfConnected(async () =>
             {
-                LoadItems();
+                await LoadItemsAsync();
 
             }, showAlert: true);
         }
@@ -49,7 +49,7 @@ namespace Architecture.UIKit
                 IsRefreshing = false;
             }
         }));
-        
+
         private ICommand addItemCommand;
         public ICommand AddItemCommand => addItemCommand ?? (addItemCommand = new Command(async () =>
         {
@@ -135,7 +135,7 @@ namespace Architecture.UIKit
             });
         }
 
-        private void LoadItems()
+        private async Task LoadItemsAsync()
         {
             if (IsBusy)
             {
@@ -144,46 +144,42 @@ namespace Architecture.UIKit
 
             IsBusy = true;
 
-            Task.Run(async () =>
+
+            Controls.LoadingPopup loadingPopup = new Controls.LoadingPopup(Resources.Strings.Gen_Loading);
+            await loadingPopup.ShowAsync();
+
+            try
             {
-                try
+                // THIS WOULD BE WHERE WE GET ITEMS FROM SERVICE
+
+                var items = new ObservableCollection<ListItemViewModel>();
+
+                // We load items in a list first, this because we want to avoid heavy load on UI properties
+                for (int i = 0; i <= 20; i++)
                 {
-                    // THIS WOULD BE WHERE WE GET ITEMS FROM SERVICE
-
-                    var items = new ObservableCollection<ListItemViewModel>();
-
-                    // We load items in a list first, this because we want to avoid heavy load on UI properties
-                    for (int i = 0; i <= 20; i++)
+                    items.Add(new ListItemViewModel
                     {
-                        items.Add(new ListItemViewModel
-                        {
-                            Id = i,
-                            Title = $"Title for item {i}",
-                            SubTitle = $"Subtitle for item {i}",
-                            ImageSource = ImageService.GetRandomImage()
-                        });
-                    }
-
-                    await Task.Delay(TimeSpan.FromSeconds(1));
-
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        Items = new ObservableCollection<ListItemViewModel>(items);
-                        UnfilteredItems = Items;
+                        Id = i,
+                        Title = $"Title for item {i}",
+                        SubTitle = $"Subtitle for item {i}",
+                        ImageSource = ImageService.GetRandomImage()
                     });
                 }
-                catch (Exception ex)
-                {
-                    ex.Print();
-                }
-                finally
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        IsBusy = false;
-                    });
-                }
-            });
+
+                await Task.Delay(TimeSpan.FromSeconds(1));
+
+                Items = new ObservableCollection<ListItemViewModel>(items);
+                UnfilteredItems = Items;
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
+            finally
+            {
+                await loadingPopup.HideAsync();
+                IsBusy = false;
+            }
         }
 
         private ListItemViewModel selectedItem;

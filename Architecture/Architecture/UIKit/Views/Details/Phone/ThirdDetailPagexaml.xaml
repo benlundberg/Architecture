@@ -33,7 +33,7 @@
                 <ff:CachedImage 
                     HeightRequest="100"
                     WidthRequest="100"
-                    Source="http://clarityapplication.com/dev/images/9.jpg" 
+                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/9.jpg" 
                     Aspect="AspectFill" />
             </Frame>
             <StackLayout

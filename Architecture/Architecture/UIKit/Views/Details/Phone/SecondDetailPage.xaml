@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
             <ff:CachedImage 
                 HeightRequest="300"
-                Source="http://clarityapplication.com/dev/images/9.jpg" 
+                Source="https://architectureappimages.blob.core.windows.net/imagecontainer/9.jpg" 
                 Aspect="AspectFill" />
             <Frame
                 Padding="12"

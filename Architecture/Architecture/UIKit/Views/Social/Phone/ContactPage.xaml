@@ -20,7 +20,7 @@
             <ff:CachedImage 
                 HeightRequest="100"
                 Aspect="AspectFill"
-                Source="http://clarityapplication.com/dev/images/13.jpg">
+                Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg">
                 <ff:CachedImage.Transformations>
                     <transformation:BlurredTransformation Radius="8" />
                 </ff:CachedImage.Transformations>
@@ -36,7 +36,7 @@
                     HeightRequest="35"
                     WidthRequest="100"
                     Aspect="AspectFill"
-                    Source="http://clarityapplication.com/dev/images/13.jpg" />
+                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg" />
             </Frame>
             <Button
                 Text="Edit"

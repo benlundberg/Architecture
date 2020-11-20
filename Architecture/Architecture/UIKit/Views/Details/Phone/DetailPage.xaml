@@ -23,7 +23,7 @@
             <Grid>
                 <ff:CachedImage 
                     HeightRequest="300"
-                    Source="http://clarityapplication.com/dev/images/13.jpg" 
+                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg" 
                     Aspect="AspectFill">
                     <ff:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ImageCommand}" />
@@ -118,8 +118,8 @@
                     FontAttributes="Bold"
                     Padding="{StaticResource ControlPadding}"
                     BackgroundColor="{StaticResource Gray}" />
-                <controls:ItemsControl ItemsSource="{Binding Items}">
-                    <controls:ItemsControl.ItemTemplate>
+                <StackLayout BindableLayout.ItemsSource="{Binding Items}">
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="{StaticResource ControlPadding}">
                                 <Grid.ColumnDefinitions>
@@ -145,8 +145,8 @@
                                 </StackLayout>
                             </Grid>
                         </DataTemplate>
-                    </controls:ItemsControl.ItemTemplate>
-                </controls:ItemsControl>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
                 <Button
                     Margin="{StaticResource MainPadding}"
                     Text="Add comment" />

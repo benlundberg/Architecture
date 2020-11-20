@@ -29,15 +29,17 @@
                     <controls:SegmentControlItem.Content>
                         <Grid RowDefinitions="Auto, *">
                             <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
-                                <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
-                                    <controls:ItemsControl.ItemTemplate>
+                                <StackLayout
+                                    Orientation="Horizontal" 
+                                    BindableLayout.ItemsSource="{Binding SelectedChartEntries}">
+                                    <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
                                                 <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
                                             </Frame>
                                         </DataTemplate>
-                                    </controls:ItemsControl.ItemTemplate>
-                                </controls:ItemsControl>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
                             </Frame>
                             <chart:LineChart
                                 Grid.Row="1"
@@ -52,15 +54,17 @@
                     <controls:SegmentControlItem.Content>
                         <Grid RowDefinitions="Auto, *">
                             <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
-                                <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
-                                    <controls:ItemsControl.ItemTemplate>
+                                <StackLayout
+                                    Orientation="Horizontal" 
+                                    BindableLayout.ItemsSource="{Binding SelectedChartEntries}">
+                                    <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
                                                 <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
                                             </Frame>
                                         </DataTemplate>
-                                    </controls:ItemsControl.ItemTemplate>
-                                </controls:ItemsControl>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
                             </Frame>
                             <chart:BarChart
                                 Grid.Row="1"
@@ -75,15 +79,17 @@
                     <controls:SegmentControlItem.Content>
                         <Grid  RowDefinitions="Auto, *">
                             <Frame Padding="8" BackgroundColor="{StaticResource GrayLight}" HorizontalOptions="Center" CornerRadius="10">
-                                <controls:ItemsControl ItemsOrientation="Horizontal" ItemsSource="{Binding SelectedChartEntries}">
-                                    <controls:ItemsControl.ItemTemplate>
+                                <StackLayout
+                                    Orientation="Horizontal" 
+                                    BindableLayout.ItemsSource="{Binding SelectedChartEntries}">
+                                    <BindableLayout.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Padding="4" BackgroundColor="{Binding BackgroundColor}">
                                                 <Label FontSize="Small" TextColor="{Binding TextColor}" Text="{Binding Value}" />
                                             </Frame>
                                         </DataTemplate>
-                                    </controls:ItemsControl.ItemTemplate>
-                                </controls:ItemsControl>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
                             </Frame>
                             <Grid Grid.Row="1">
                                 <chart:BarChart

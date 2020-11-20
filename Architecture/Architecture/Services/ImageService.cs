@@ -7,9 +7,11 @@ namespace Architecture
         public static string GetRandomImage()
         {
             Random random = new Random();
+            
+            //string baseUrl = "https://architectureappimages.blob.core.windows.net/imagecontainer/";
 
-            string baseUrl = "http://clarityapplication.com/dev/images/";
-
+            string baseUrl = "https://architectureappimages.blob.core.windows.net/imagecontainer/";
+            
             int picture = random.Next(1, 13);
 
             return baseUrl + picture.ToString() + ".jpg";

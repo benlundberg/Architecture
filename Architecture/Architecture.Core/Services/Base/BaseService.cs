@@ -56,7 +56,11 @@ namespace Architecture.Core
                         ResultStatusCode = response.StatusCode
                     };
 
-                    if (parseType == ParseType.JSON || parseType == ParseType.XML)
+                    if (response.StatusCode != HttpStatusCode.OK)
+                    {
+                        responseData.Data = await response.Content.ReadAsStringAsync();
+                    }
+                    else if (parseType == ParseType.JSON || parseType == ParseType.XML)
                     {
                         responseData.Data = await response.Content.ReadAsStringAsync();
                     }
@@ -112,7 +116,7 @@ namespace Architecture.Core
                 }
                 else
                 {
-                    throw new Exception($"Something went wrong with the request: {resultData.ResultStatusCode}");
+                    throw new Exception($"Something went wrong with the request: {resultData.ResultStatusCode} - {resultData.Data}");
                 }
             }
             catch (Exception ex)

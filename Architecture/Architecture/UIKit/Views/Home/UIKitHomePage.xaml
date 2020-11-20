@@ -13,10 +13,8 @@
         <controls:PageTitleView Text="Welcome to XF UIKit" />
     </NavigationPage.TitleView>
 
-    <ScrollView>
-        <StackLayout 
-            Margin="{OnIdiom Phone={StaticResource MainPadding}, Desktop=40 140 40 140}"
-            Spacing="{StaticResource MainSpacing}">
+    <ScrollView Padding="{OnIdiom Phone={StaticResource MainPadding}, Desktop=0}">
+        <StackLayout Spacing="{StaticResource MainSpacing}">
             <!-- Article -->
             <Label Text="Article" FontSize="Large" />
             <Button Text="Article Browser" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="1" />

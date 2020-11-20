@@ -337,7 +337,6 @@ namespace Architecture.Core
             return row != 0;
         }
 
-
         public async Task<bool> UpdateAsync<T>(T entity)
         {
             int rows = await connection.UpdateAsync(entity);

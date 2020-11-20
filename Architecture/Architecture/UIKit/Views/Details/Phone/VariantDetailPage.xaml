@@ -32,7 +32,7 @@
                     HeightRequest="100"
                     WidthRequest="100"
                     VerticalOptions="Start"
-                    Source="http://clarityapplication.com/dev/images/5.jpg" 
+                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/5.jpg" 
                     Aspect="AspectFill" />
                 <StackLayout 
                     Grid.Column="1"
@@ -65,7 +65,7 @@
                         HeightRequest="100"
                         WidthRequest="100"
                         VerticalOptions="Start"
-                        Source="http://clarityapplication.com/dev/images/5.jpg" 
+                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/5.jpg" 
                         Aspect="AspectFill" />
                     <StackLayout 
                         Grid.Column="1"
@@ -143,8 +143,9 @@
                     Text="COMMENTS"
                     Padding="{StaticResource ControlPadding}"
                     BackgroundColor="{StaticResource Gray}" />
-                <controls:ItemsControl ItemsSource="{Binding Items}">
-                    <controls:ItemsControl.ItemTemplate>
+                <StackLayout
+                    BindableLayout.ItemsSource="{Binding Items}">
+                    <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="{StaticResource ControlPadding}">
                                 <Grid.ColumnDefinitions>
@@ -170,8 +171,8 @@
                                 </StackLayout>
                             </Grid>
                         </DataTemplate>
-                    </controls:ItemsControl.ItemTemplate>
-                </controls:ItemsControl>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
                 <Button
                     Margin="{StaticResource MainPadding}"
                     Text="Add comment" />
