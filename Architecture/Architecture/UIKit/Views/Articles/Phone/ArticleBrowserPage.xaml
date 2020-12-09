@@ -19,31 +19,23 @@
                 <Grid>
                     <ff:CachedImage
                         Source="{Binding ImageSource}" 
-                        WidthRequest="150"
-                        HeightRequest="200"
+                        WidthRequest="156"
+                        HeightRequest="208"
                         Aspect="AspectFill" />
-                    <Grid VerticalOptions="End">
-                        <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
-                        <StackLayout Margin="{StaticResource ControlPadding}" Spacing="0">
-                            <Label
-                                FontSize="Small"
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                Style="{StaticResource BoldLabel}"
-                                Text="{Binding Title}" />
-                            <Label 
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                FontSize="Micro">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <FormattedString.Spans>
-                                            <Span Text="{Binding Category}" />
-                                            <Span Text=" | " />
-                                            <Span Text="{Binding Year}" />
-                                        </FormattedString.Spans>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
+                    <Grid RowSpacing="0" RowDefinitions="Auto, Auto" VerticalOptions="End">
+                        <Grid Grid.RowSpan="2" BackgroundColor="Black" Opacity=".38" />
+                        <Label
+                            Margin="10, 8, 10, 0"
+                            FontSize="Default"
+                            TextColor="#FFF"
+                            Style="{StaticResource SemiBoldLabel}"
+                            Text="{Binding Title}" />
+                        <Label
+                            Grid.Row="1"
+                            Margin="10, 0, 10, 8"
+                            FontSize="12"
+                            TextColor="#FFF"
+                            Text="{Binding Category}" />
                     </Grid>
                 </Grid>
             </DataTemplate>
@@ -56,15 +48,15 @@
     </ContentPage.BindingContext>
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Articles Browser" />
+        <controls:PageTitleView Text="Article Browser" />
     </NavigationPage.TitleView>
 
     <ScrollView>
-        <StackLayout Spacing="{StaticResource MainSpacing}">
+        <StackLayout Spacing="0">
             <CarouselView
                 ItemsSource="{Binding NatureArticles}" 
                 IndicatorView="indicatorView"
-                HeightRequest="250">
+                HeightRequest="192">
                 <CarouselView.ItemsLayout>
                     <LinearItemsLayout 
                         SnapPointsType="MandatorySingle"
@@ -75,13 +67,19 @@
                     <DataTemplate x:DataType="local:ArticleItemViewModel">
                         <Grid>
                             <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
-                            <Grid VerticalOptions="Center" HorizontalOptions="Start">
-                                <Grid BackgroundColor="{StaticResource PrimaryColor}" Opacity=".7" />
-                                <StackLayout Margin="{StaticResource ExtraLargePadding}" Spacing="0">
-                                    <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Title}" FontSize="Medium" />
-                                    <Label TextColor="{StaticResource SecondaryTextColor}" Text="{Binding Category}" FontSize="Default" />
-                                </StackLayout>
+                            <Grid>
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="0,1">
+                                        <GradientStop Color="Transparent" Offset="0.32" />
+                                        <GradientStop Color="Black" Offset="1.0" />
+                                    </LinearGradientBrush>
+                                </Grid.Background>
                             </Grid>
+                            <StackLayout Margin="16, 0, 16, 24" VerticalOptions="End" Spacing="4">
+                                <Label TextColor="{StaticResource GrayLight}" Text="{Binding Title}" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}"/>
+                                <Label TextColor="{StaticResource GrayLight}" Text="{Binding Category}" FontSize="Default" />
+                                <BoxView Margin="0, 4, 0, 0" BackgroundColor="{StaticResource Accent}" HorizontalOptions="Start" WidthRequest="100" HeightRequest="2" />
+                            </StackLayout>
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference articleBrowserRoot}}" CommandParameter="{Binding}" />
                             </Grid.GestureRecognizers>
@@ -92,39 +90,51 @@
             <IndicatorView
                 x:Name="indicatorView"
                 IndicatorsShape="Circle"
-                IndicatorColor="{StaticResource Gray}"
-                SelectedIndicatorColor="{StaticResource DarkPrimaryColor}"
+                IndicatorColor="{StaticResource GrayMedium}"
+                SelectedIndicatorColor="{StaticResource PrimaryColor}"
                 HorizontalOptions="Center"
-                IndicatorSize="8" />
+                IndicatorSize="10"
+                Margin="16, 16, 16, 24" />
             <CollectionView
-                Margin="{StaticResource MainPadding}"
                 ItemsSource="{Binding SportArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"
-                HeightRequest="200">
+                HeightRequest="208">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         SnapPointsAlignment="Start" 
                         SnapPointsType="None" 
-                        HorizontalItemSpacing="10" 
+                        HorizontalItemSpacing="12" 
                         Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
+                <CollectionView.Footer>
+                    <Grid WidthRequest="4" />
+                </CollectionView.Footer>
+                <CollectionView.Header>
+                    <Grid WidthRequest="16" />
+                </CollectionView.Header>
             </CollectionView>
             <CollectionView
-                Margin="{StaticResource MainPadding}"
+                Margin="0, 16"
                 ItemsSource="{Binding AnimalArticles}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"
-                HeightRequest="200">
+                HeightRequest="208">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         SnapPointsAlignment="Start" 
                         SnapPointsType="None" 
-                        HorizontalItemSpacing="10" 
+                        HorizontalItemSpacing="12" 
                         Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
+                <CollectionView.Footer>
+                    <Grid WidthRequest="4" />
+                </CollectionView.Footer>
+                <CollectionView.Header>
+                    <Grid WidthRequest="16" />
+                </CollectionView.Header>
             </CollectionView>
         </StackLayout>
     </ScrollView>

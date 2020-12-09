@@ -7,6 +7,13 @@ using Xamarin.Forms.Xaml;
 
 namespace Architecture.Controls
 {
+    public enum SegmentedControlMode
+    {
+        Text,
+        Rectangle,
+        Round
+    }
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SegmentView : ContentView
     {
@@ -19,11 +26,24 @@ namespace Architecture.Controls
 
         private void Init()
         {
-            SegmentItems.Children.Clear();
-            SegmentItems.RowDefinitions.Clear();
-            SegmentItems.ColumnDefinitions.Clear();
-            SegmentItems.ColumnSpacing = this.SectionSpacing;
-            SegmentItems.RowSpacing = this.SectionSpacing;
+            SegmentItemsGrid.Children.Clear();
+            SegmentItemsGrid.ColumnDefinitions.Clear();
+            SegmentItemsGrid.ColumnSpacing = 0;
+
+            if (SegmentedControlMode == SegmentedControlMode.Round)
+            {
+                RootFrame.CornerRadius = 16f;
+                RootFrame.BackgroundColor = Color.White;
+            }
+            else if (SegmentedControlMode == SegmentedControlMode.Text)
+            {
+                RootFrame.BackgroundColor = Color.Transparent;
+            }
+            else if (SegmentedControlMode == SegmentedControlMode.Rectangle)
+            {
+                RootFrame.CornerRadius = 0f;
+                RootFrame.BackgroundColor = Color.White;
+            }
 
             if (ItemsSource?.Any() != true)
             {
@@ -45,16 +65,9 @@ namespace Architecture.Controls
                     this.MainContent = item.Content;
                 }
 
-                if (SectionOrientation == StackOrientation.Horizontal)
-                {
-                    SegmentItems.ColumnDefinitions.Add(new ColumnDefinition() { Width = SectionHorizontalayout.Alignment == LayoutAlignment.Fill ? GridLength.Star : GridLength.Auto });
-                }
-                else
-                {
-                    SegmentItems.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-                }
+                SegmentItemsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = SegmentRowWidth });
 
-                SegmentItems.Children.Add(view);
+                SegmentItemsGrid.Children.Add(view);
             }
         }
 
@@ -69,72 +82,89 @@ namespace Architecture.Controls
             }
             else
             {
-                if (SelectedSectionBackground == Color.Transparent)
+                if (SegmentedControlMode == SegmentedControlMode.Text)
                 {
                     view = new StackLayout
                     {
-                        Padding = SectionPadding,
                         Children =
                         {
                             new Label
                             {
-                                FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
-                                FontFamily = App.Current.Get<string>("OpenSansSemiBold"),
-                                Opacity = item.IsSelected ? 1 : 0.8,
+                                FontSize = 14,
+                                FontFamily = App.Current.Get<string>("SegmentControlFont"),
+                                Opacity = item.IsSelected ? 1 : 0.6,
                                 Text = item.Text,
-                                HorizontalOptions = SectionTextHorizontalLayout,
-                                TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor
+                                Padding = new Thickness(14, 14, 14, 0),
+                                VerticalOptions = LayoutOptions.Center,
+                                HorizontalOptions = LayoutOptions.Center,
+                                TextColor = item.IsSelected ? App.Current.PrimaryColor() : Color.Black,
+                                MaxLines = 1,
+                                LineBreakMode = LineBreakMode.TailTruncation
                             },
                             new BoxView
                             {
-                                Color = item.IsSelected ? SelectedSectionTextColor : Color.Transparent,
-                                HeightRequest = 3,
+                                Color = item.IsSelected ? App.Current.PrimaryColor() : Color.Black,
+                                HeightRequest = item.IsSelected ? 1.33 : 1,
+                                Opacity = item.IsSelected ? 1 : 0.12,
                                 HorizontalOptions = LayoutOptions.FillAndExpand,
+                            }
+                        }
+                    };
+                }
+                else if (SegmentedControlMode == SegmentedControlMode.Rectangle)
+                {
+                    view = new Grid
+                    {
+                        Children =
+                        {
+                            new BoxView
+                            {
+                                Color = item.IsSelected ? App.Current.PrimaryColor() : Color.White,
+                                VerticalOptions = LayoutOptions.FillAndExpand,
+                                HorizontalOptions = LayoutOptions.FillAndExpand,
+                            },
+                            new Label
+                            {
+                                FontSize = 14,
+                                Padding = new Thickness(14),
+                                FontFamily = App.Current.Get<string>("SegmentControlFont"),
+                                Text = item.Text,
+                                VerticalOptions = LayoutOptions.Center,
+                                HorizontalOptions = LayoutOptions.Center,
+                                TextColor = item.IsSelected ? Color.White : Color.Black,
+                                MaxLines = 1,
+                                LineBreakMode = LineBreakMode.TailTruncation
                             }
                         }
                     };
                 }
                 else
                 {
-                    var stackLayout = new StackLayout
+                    view = new Grid
                     {
-                        Orientation = item.ItemOrientation,
-                        Padding = SectionPadding,
-                        HorizontalOptions = LayoutOptions.FillAndExpand,
-                        Spacing = item.Spacing,
-                        BackgroundColor = item.IsSelected ? SelectedSectionBackground : SectionBackground
+                        Children =
+                        {
+                            new BoxView
+                            {
+                                CornerRadius = new CornerRadius(16),
+                                Color = item.IsSelected ? App.Current.PrimaryColor() : Color.White,
+                                VerticalOptions = LayoutOptions.FillAndExpand,
+                                HorizontalOptions = LayoutOptions.FillAndExpand,
+                            },
+                            new Label
+                            {
+                                FontSize = 14,
+                                FontFamily = App.Current.Get<string>("SegmentControlFont"),
+                                Text = item.Text,
+                                Padding = new Thickness(14),
+                                VerticalOptions = LayoutOptions.Center,
+                                HorizontalOptions = LayoutOptions.Center,
+                                TextColor = item.IsSelected ? Color.White : Color.Black,
+                                MaxLines = 1,
+                                LineBreakMode = LineBreakMode.TailTruncation
+                            }
+                        }
                     };
-
-                    if (!string.IsNullOrEmpty(item.IconSource))
-                    {
-                        stackLayout.Children.Add(new Label
-                        {
-                            Text = item.IconSource,
-                            VerticalOptions = LayoutOptions.Center,
-                            FontFamily = item.IconFontFamily,
-                            TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor,
-                            FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
-                            InputTransparent = true
-                        });
-                    }
-
-                    if (!string.IsNullOrEmpty(item.Text))
-                    {
-                        stackLayout.Children.Add(new Label
-                        {
-                            VerticalOptions = LayoutOptions.Center,
-                            HorizontalOptions = SectionTextHorizontalLayout,
-                            HorizontalTextAlignment = TextAlignment.Center,
-                            FontSize = Device.GetNamedSize(FontSize, typeof(Label)),
-                            FontFamily = App.Current.Get<string>("OpenSansSemiBold"),
-                            Text = item.Text,
-                            Margin = SectionControlMargin,
-                            InputTransparent = true,
-                            TextColor = item.IsSelected ? SelectedSectionTextColor : SectionTextColor
-                        });
-                    }
-
-                    view = stackLayout;
                 }
             }
 
@@ -147,14 +177,7 @@ namespace Architecture.Controls
                 CommandParameter = item
             });
 
-            if (SectionOrientation == StackOrientation.Horizontal)
-            {
-                Grid.SetColumn(view, index);
-            }
-            else
-            {
-                Grid.SetRow(view, index);
-            }
+            Grid.SetColumn(view, index);
 
             return view;
         }
@@ -171,14 +194,14 @@ namespace Architecture.Controls
             {
                 oldItem.IsSelected = false;
 
-                SegmentItems.Children.RemoveAt(unselectIndex);
-                SegmentItems.Children.Insert(unselectIndex, GetView(oldItem, unselectIndex));
+                SegmentItemsGrid.Children.RemoveAt(unselectIndex);
+                SegmentItemsGrid.Children.Insert(unselectIndex, GetView(oldItem, unselectIndex));
             }
 
             item.IsSelected = true;
 
-            SegmentItems.Children.RemoveAt(selectedIndex);
-            SegmentItems.Children.Insert(selectedIndex, GetView(item, selectedIndex));
+            SegmentItemsGrid.Children.RemoveAt(selectedIndex);
+            SegmentItemsGrid.Children.Insert(selectedIndex, GetView(item, selectedIndex));
 
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -295,34 +318,15 @@ namespace Architecture.Controls
         public DataTemplate SelectedSectionTemplate { get; set; }
         public DataTemplate SectionTemplate { get; set; }
 
-        public StackOrientation SectionOrientation { get; set; } = StackOrientation.Horizontal;
-        public LayoutOptions SectionHorizontalayout { get; set; } = LayoutOptions.Center;
-        public double SectionSpacing { get; set; }
-
-        public Color SectionControlColor { get; set; } = Color.Transparent;
-        public Thickness SectionControlMargin { get; set; }
-        public Thickness SectionControlPadding { get; set; }
-        public float SectionControlCornerRadius { get; set; } = 0;
-
-        public Thickness SectionPadding { get; set; } = new Thickness(8);
-        public NamedSize FontSize { get; set; } = NamedSize.Default;
-
-        public Color SectionBackground { get; set; } = Color.Transparent;
-        public Color SectionTextColor { get; set; }
-
-        public Color SelectedSectionBackground { get; set; } = Color.Transparent;
-        public Color SelectedSectionTextColor { get; set; }
-
-        public LayoutOptions SectionTextHorizontalLayout { get; set; } = LayoutOptions.Center;
+        public SegmentedControlMode SegmentedControlMode { get; set; }
+        public Thickness SegmentMargin { get; set; } = new Thickness(24, 16);
+        public GridLength SegmentRowWidth { get; set; } = GridLength.Star;
+        public LayoutOptions SegmentHorizontalOptions { get; set; } = LayoutOptions.Fill;
     }
 
     public class SegmentControlItem
     {
         public string Text { get; set; }
-        public string IconSource { get; set; }
-        public string IconFontFamily { get; set; }
-        public StackOrientation ItemOrientation { get; set; } = StackOrientation.Horizontal;
-        public double Spacing { get; set; } = 7d;
         public bool IsSelected { get; set; }
         public object Tag { get; set; }
         public View Content { get; set; }

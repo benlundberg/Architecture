@@ -19,11 +19,7 @@
     </NavigationPage.TitleView>
 
     <Grid>
-        <controls:SegmentView
-            SectionHorizontalayout="Start"
-            SectionControlPadding="{StaticResource MainPadding}"
-            SelectedSectionTextColor="{StaticResource PrimaryColor}"
-            SectionTextColor="{StaticResource PrimaryColor}">
+        <controls:SegmentView SegmentedControlMode="Rectangle">
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem Text="Progress" Tag="1" IsSelected="True">
                     <controls:SegmentControlItem.Content>

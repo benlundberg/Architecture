@@ -7,7 +7,7 @@ namespace Architecture.Controls
     {
         public PageTitleView()
         {
-            IsCentered = Device.RuntimePlatform == Device.iOS;
+            IsCentered = true; // Device.RuntimePlatform == Device.iOS;
             PropertyChanged += PageTitleView_PropertyChanged;
         }
 
@@ -71,9 +71,9 @@ namespace Architecture.Controls
                 Text = view.Text,
                 TextColor = Application.Current.ToolbarTextColor(),
                 VerticalOptions = LayoutOptions.Center,
-                FontSize = 20,
+                FontSize = 14,
                 Margin = Device.Idiom == TargetIdiom.Desktop ? new Thickness(40, 0, 0, 0) : new Thickness(0),
-                FontFamily = "OpenSansSemiBold"
+                FontFamily = "MontserratSemiBold"
             });
         }
 

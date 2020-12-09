@@ -7,6 +7,7 @@
              x:Class="Architecture.UIKit.Views.Phone.ListVariantPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
 	         xmlns:local="clr-namespace:Architecture.UIKit"
              x:DataType="local:ListViewModel"
              Visual="Material">
@@ -19,52 +20,63 @@
         <controls:PageTitleView Text="Variant List" />
     </NavigationPage.TitleView>
 
-    <ListView 
-		CachingStrategy="RecycleElement"
-		ItemsSource="{Binding Items}"
-        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-		RefreshCommand="{Binding RefreshListCommand}"
-		IsPullToRefreshEnabled="True"
-		IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
-		RefreshControlColor="{StaticResource PrimaryColor}"
-        HasUnevenRows="True"
-		SeparatorVisibility="None">
-        <ListView.ItemTemplate>
-            <DataTemplate x:DataType="local:ListItemViewModel">
-                <ViewCell>
-                    <Grid ColumnSpacing="0" Margin="0, 6">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <Frame
-                            Grid.Column="1"
-                            Margin="-4, 20, 10, 20"
-                            Padding="16, 8"
-                            VerticalOptions="Center">
-                            <StackLayout>
-                                <Label 
-                                    FontSize="Medium"
-                                    Text="{Binding Title}" />
-                                <Label 
-                                    FontSize="Default"
-                                    MaxLines="3"
-                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                            </StackLayout>
-                        </Frame>
-                        <Frame
-                            HasShadow="False"
-                            BorderColor="Transparent"
-                            CornerRadius="10" 
-                            Padding="0">
-                            <ff:CachedImage
-                                HeightRequest="100"
-                                Source="{Binding ImageSource}" 
-                                Aspect="AspectFill" />
-                        </Frame>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <ScrollView>
+        <StackLayout Padding="16, 24" Spacing="16">
+            <Frame Padding="1">
+                <StackLayout Spacing="0">
+                    <ff:CachedImage
+                        HeightRequest="194"
+                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg"
+                        Aspect="AspectFill" />
+                    <Label 
+                        Text="Travels"
+                        FontSize="12"
+                        Padding="16, 16, 16, 4"
+                        TextColor="{StaticResource BlackLight}" />
+                    <Label 
+                        FontSize="Title"
+                        Text="This is travels"
+                        Padding="16, 0, 16, 16" />
+                    <Label 
+                        FontSize="Default"
+                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+                        Margin="16, 0" />
+                    <Frame BackgroundColor="White" BorderColor="White" HorizontalOptions="End" Margin="16" HasShadow="False" Padding="0">
+                        <Button 
+                            Text="Let's go"
+                            BackgroundColor="White"
+                            BorderColor="White"
+                            Style="{StaticResource TextButton}" />
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            <Frame Padding="16">
+                <Grid ColumnDefinitions="*, Auto">
+                    <ff:CachedImage
+                        Grid.Column="1"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        VerticalOptions="Start"
+                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/11.jpg"
+                        Aspect="AspectFill">
+                        <ff:CachedImage.Transformations>
+                            <transformation:CircleTransformation />
+                        </ff:CachedImage.Transformations>
+                    </ff:CachedImage>
+                    <StackLayout Spacing="4">
+                        <Label 
+                            Text="Travels"
+                            FontSize="12"
+                            TextColor="{StaticResource BlackLight}" />
+                        <Label 
+                            FontSize="Title"
+                            Text="This is travels" />
+                        <Label 
+                            FontSize="Default"
+                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

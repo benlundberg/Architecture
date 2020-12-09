@@ -13,65 +13,72 @@
              x:DataType="local:LoginViewModel">
 
     <ScrollView>
-        <Grid>
-            <StackLayout
-                Spacing="{StaticResource MainSpacing}"
-                Padding="{StaticResource ExtraLargePadding}"
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <Label
-                    TextColor="{StaticResource PrimaryColor}"
-                    Margin="0, 40"
-                    VerticalOptions="Center"
-                    FontSize="42"
-                    Text="Login" />
-                <Entry 
-                    Placeholder="Username"
-                    Text="{Binding Username.Value, Mode=TwoWay}" />
-                <Entry 
-                    Placeholder="Password"
-                    IsPassword="True"
-                    Text="{Binding Password.Value, Mode=TwoWay}" />
-                <StackLayout 
-                    HorizontalOptions="Start"
-                    Orientation="Horizontal">
-                    <CheckBox 
-                        Color="{StaticResource PrimaryColor}"
-                        IsChecked="{Binding RememberMe, Mode=TwoWay}"
-                        WidthRequest="32" />
-                    <Label 
-                        FontSize="Default"
-                        VerticalOptions="Center"
-                        Text="Remember me" />
-                </StackLayout>
-                <Button 
-                    Command="{Binding LoginCommand}" 
-                    Text="{StaticResource CheckIcon}"
-                    FontFamily="{StaticResource FontAwesomeSolid}" />
-                <Label
-                    Style="{StaticResource BoldLabel}"
-                    TextColor="{StaticResource PrimaryColor}"
-                    FontSize="Default"
-                    HorizontalOptions="End"
-                    Text="Forgot password?">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </StackLayout>
-            
+        <StackLayout
+            Margin="24"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+
+            <!-- Close Button -->
             <Label
-                Margin="0, 40, 40, 0"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
                 FontSize="Large"
                 Text="{StaticResource CloseIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="Black">
+                TextColor="{StaticResource BlackLight}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PopModalCommand}" />
                 </Label.GestureRecognizers>
             </Label>
-        </Grid>
+            
+            <!-- Title and Subtitle -->
+            <Label
+                Style="{StaticResource SemiBoldLabel}"
+                FontSize="Large"
+                Text="Welcome back" />
+            <Label
+                FontSize="Default"
+                Text="Sign in to explore what's going on"
+                Margin="0, 0, 0, 48" />
+            
+            <controls:RoundedFrameEntry  
+                Placeholder="Email"
+                Keyboard="Email"
+                Text="{Binding Username, Mode=TwoWay}" />
+            <controls:RoundedFrameEntry 
+                Placeholder="Password"
+                IsPassword="True"
+                Text="{Binding Password, Mode=TwoWay}" />
+            
+            <StackLayout 
+                HorizontalOptions="Start"
+                Orientation="Horizontal">
+                <CheckBox 
+                    Color="{StaticResource PrimaryColor}"
+                    IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                    WidthRequest="32" />
+                <Label 
+                    FontSize="Default"
+                    VerticalOptions="Center"
+                    Text="Remember me" />
+            </StackLayout>
+            
+            <Button 
+                Command="{Binding LoginCommand}" 
+                Text="{StaticResource CheckIcon}"
+                Style="{StaticResource RoundedButton}"
+                FontFamily="{StaticResource FontAwesomeSolid}" />
+            
+            <Label
+                Margin="0, 8, 0, 0"
+                TextColor="{StaticResource PrimaryColor}"
+                FontSize="Default"
+                HorizontalOptions="End"
+                Text="Forgot password?">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -8,7 +8,7 @@
              x:Name="root">
 
     <Frame
-        Padding="{OnPlatform Android=0, iOS=10}"
+        Padding="{OnPlatform Android=4, iOS=10}"
         Margin="0, 10, 0, 0"
         HasShadow="False"
         BorderColor="{Binding InternalBorderColor, Source={x:Reference root}}"
@@ -27,8 +27,7 @@
                 TextColor="{Binding IconColor, Source={x:Reference root}}"
                 FontFamily="{Binding IconFontFamily, Source={x:Reference root}}" />
             <Label 
-                FontSize="Medium"
-                FontAttributes="Bold"
+                FontSize="Default"
                 VerticalOptions="Center"
                 TextColor="{Binding IconColor, Source={x:Reference root}}"
                 Text="{Binding PickerText, Source={x:Reference root}}">

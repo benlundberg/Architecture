@@ -18,72 +18,68 @@
         <controls:PageTitleView Text="Card Details" />
     </NavigationPage.TitleView>
 
-    <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ff:CachedImage 
-                Grid.RowSpan="2"
-                VerticalOptions="Start"
-                HeightRequest="300"
-                Source="https://architectureappimages.blob.core.windows.net/imagecontainer/7.jpg" 
-                Aspect="AspectFill">
-                <ff:CachedImage.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ImageCommand}" />
-                </ff:CachedImage.GestureRecognizers>
-            </ff:CachedImage>
-            <StackLayout Grid.Row="1">
-                <Frame Margin="{StaticResource MainPadding}">
-                    <StackLayout Spacing="{StaticResource MainSpacing}">
+    <Grid>
+        <ff:CachedImage 
+            VerticalOptions="Start"
+            HeightRequest="200"
+            Source="https://architectureappimages.blob.core.windows.net/imagecontainer/7.jpg" 
+            Aspect="AspectFill">
+            <ff:CachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ImageCommand}" />
+            </ff:CachedImage.GestureRecognizers>
+        </ff:CachedImage>
+        <ScrollView>
+            <Frame Margin="24, 125, 24, 24">
+                <StackLayout>
+                    <Label 
+                        FontSize="Small"
+                        TextColor="{StaticResource BlackLight}"
+                        Text="Mar 3, 2019" />
+                    <Label 
+                        FontSize="Medium"
+                        Text="Awesome times in the sun" />
+                    <Grid 
+                        Margin="0, 6"
+                        ColumnDefinitions="*, Auto">
                         <Label 
                             FontSize="Small"
-                            Text="Mar 3, 2019" />
-                        <Label 
-                            FontSize="Large"
-                            Text="Awesome times in the sun" />
-                        <Grid>
-                            <Label
-                                Grid.Column="0"
-                                Text="TRAVELS"
-                                FontSize="Default"
-                                FontAttributes="Bold"
-                                TextColor="{StaticResource PrimaryColor}" />
-                            <Label
-                                Grid.Column="1"
-                                HorizontalTextAlignment="End"
+                            Style="{StaticResource SemiBoldLabel}"
+                            TextColor="{StaticResource DarkPrimaryColor}"
+                            Text="Nature" />
+                        <StackLayout 
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            Spacing="8">
+                            <Label 
+                                VerticalOptions="Center"
                                 FontSize="Small"
-                                TextColor="{StaticResource PrimaryColor}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="2K" />
-                                        <Span Text=" " />
-                                        <Span Text="{StaticResource GeneralIcon}" FontFamily="{StaticResource FontAwesomeBrands}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label
-                                Grid.Column="2"
-                                HorizontalTextAlignment="End"
+                                FontFamily="{StaticResource FontAwesomeSolid}"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="&#xf0c0;" />
+                            <Label 
+                                VerticalOptions="Center"
                                 FontSize="Small"
-                                TextColor="{StaticResource PrimaryColor}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="15" />
-                                        <Span Text=" " />
-                                        <Span Text="&#xf27a;" FontFamily="{StaticResource FontAwesomeRegular}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </Grid>
-                        <BoxView HeightRequest="1" Color="{StaticResource Gray}" />
-                        <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                        <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                        <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
-        </Grid>
-    </ScrollView>
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="98" />
+                            <Label 
+                                VerticalOptions="Center"
+                                FontSize="Small"
+                                FontFamily="{StaticResource FontAwesomeSolid}"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="&#xf004;" />
+                            <Label 
+                                VerticalOptions="Center"
+                                FontSize="Small"
+                                TextColor="{StaticResource PrimaryColor}"
+                                Text="65" />
+                        </StackLayout>
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{StaticResource PrimaryColor}" />
+                    <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                    <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                    <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                </StackLayout>
+            </Frame>
+        </ScrollView>
+    </Grid>
 </ContentPage>

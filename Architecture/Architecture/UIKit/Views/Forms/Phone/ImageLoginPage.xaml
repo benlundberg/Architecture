@@ -21,14 +21,14 @@
             Source="https://architectureappimages.blob.core.windows.net/imagecontainer/11.jpg" />
         <Grid 
             BackgroundColor="Black"
-            Opacity=".4" />
+            Opacity=".6" />
 
         <StackLayout
-            VerticalOptions="Center"
-            Spacing="10"
-            Padding="{StaticResource LargePadding}"
-            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+            Spacing="16"
+            Margin="24"
+            VerticalOptions="Center">
             <Entry 
+                FontSize="14"
                 Placeholder="Username"
                 Text="{Binding Username.Value, Mode=TwoWay}">
                 <Entry.PlaceholderColor>
@@ -43,7 +43,7 @@
                 </Entry.TextColor>
             </Entry>
             <Entry 
-                Placeholder="Password" 
+                Placeholder="Password"
                 IsPassword="True" 
                 Text="{Binding Password.Value, Mode=TwoWay}">
                 <Entry.PlaceholderColor>
@@ -57,41 +57,37 @@
                     </OnPlatform>
                 </Entry.TextColor>
             </Entry>
-            <StackLayout 
-                    HorizontalOptions="Start"
-                    Orientation="Horizontal">
-                <CheckBox 
-                    IsChecked="{Binding RememberMe, Mode=TwoWay}"
-                    WidthRequest="32"
-                    Color="{StaticResource PrimaryColor}" />
-                <Label 
-                    TextColor="White"
-                    VerticalOptions="Center"
-                    Text="Remember me?" />
-            </StackLayout>
             <Button 
+                Margin="0, 8"
                 Command="{Binding LoginCommand}" 
                 Text="{StaticResource CheckIcon}"
+                TextColor="{StaticResource Accent}"
+                BorderColor="{StaticResource Accent}"
+                Style="{StaticResource OutlineButton}"
                 FontFamily="{StaticResource FontAwesomeSolid}" />
-            <Label
-                TextColor="{StaticResource PrimaryColor}"
-                Style="{StaticResource BoldLabel}"
-                HorizontalOptions="End"
-                Text="Forgot password?">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
+            
         </StackLayout>
+
         <Label
-            Margin="0, 40, 40, 0"
-            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
+            Margin="24"
+            TextColor="{StaticResource GrayMedium}"
+            Style="{StaticResource SemiBoldLabel}"
+            VerticalOptions="End"
+            HorizontalOptions="Center"
+            Text="Forgot password?">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <Label
+            Margin="24"
             VerticalOptions="Start"
             HorizontalOptions="End"
             FontSize="Large"
             Text="{StaticResource CloseIcon}"
             FontFamily="{StaticResource FontAwesomeSolid}"
-            TextColor="{StaticResource SecondaryTextColor}">
+            TextColor="White">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding PopModalCommand}" />
             </Label.GestureRecognizers>

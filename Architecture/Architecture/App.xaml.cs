@@ -1,7 +1,4 @@
 ﻿using Architecture.Core;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 
 [assembly: ExportFont("FontAwesome5Brands.otf", Alias = "FontAwesomeBrands")]
@@ -9,16 +6,10 @@ using Xamarin.Forms;
 [assembly: ExportFont("FontAwesome5Solid.otf", Alias = "FontAwesomeSolid")]
 [assembly: ExportFont("Montserrat-Bold.ttf", Alias = "MontserratBold")]
 [assembly: ExportFont("Montserrat-Regular.ttf", Alias = "MontserratRegular")]
+[assembly: ExportFont("Montserrat-SemiBold.ttf", Alias = "MontserratSemiBold")]
 [assembly: ExportFont("OpenSans-Bold.ttf", Alias = "OpenSansBold")]
-[assembly: ExportFont("OpenSans-BoldItalic.ttf", Alias = "OpenSansBoldItalic")]
-[assembly: ExportFont("OpenSans-ExtraBold.ttf", Alias = "OpenSansExtraBold")]
-[assembly: ExportFont("OpenSans-ExtraBoldItalic.ttf", Alias = "OpenSansExtraBoldItalic")]
-[assembly: ExportFont("OpenSans-Italic.ttf", Alias = "OpenSansItalic")]
-[assembly: ExportFont("OpenSans-Light.ttf", Alias = "OpenSansLight")]
-[assembly: ExportFont("OpenSans-LightItalic.ttf", Alias = "OpenSansLightItalic")]
 [assembly: ExportFont("OpenSans-Regular.ttf", Alias = "OpenSansRegular")]
 [assembly: ExportFont("OpenSans-SemiBold.ttf", Alias = "OpenSansSemiBold")]
-[assembly: ExportFont("OpenSans-SemiBoldItalic.ttf", Alias = "OpenSansSemiBoldItalic")]
 [assembly: System.Resources.NeutralResourcesLanguage("en-US")]
 
 namespace Architecture
@@ -60,8 +51,7 @@ namespace Architecture
         {
             // Handle when your app starts
 
-            // Init AppCenter
-            AppCenter.Start($"android={AppConfig.AndroidAppCenterSecret};", typeof(Analytics), typeof(Crashes));
+            // TODO: Init analytics
         }
 
         protected override void OnSleep()

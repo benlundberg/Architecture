@@ -14,30 +14,31 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Spacing="{StaticResource MainSpacing}" Padding="{StaticResource LargePadding}">
+            <StackLayout Spacing="8" Padding="16">
                 <Grid>
-                    <Entry
+                    <controls:FrameEntry
                         Grid.Column="0"
                         Placeholder="Firstname" />
-                    <Entry
+                    <controls:FrameEntry
                         Grid.Column="1"
                         Placeholder="Lastname" />
                 </Grid>
-                <Entry
+                <controls:FrameEntry
+                    Keyboard="Email"
                     Placeholder="Email" />
-                <Entry
+                <controls:FrameEntry
                     Placeholder="Country" />
-                <Entry
+                <controls:FrameEntry
                     Placeholder="Address" />
                 <Grid>
-                    <Entry
+                    <controls:FrameEntry
                         Grid.Column="0"
                         Placeholder="City" />
-                    <Entry
+                    <controls:FrameEntry
                         Grid.Column="1"
                         Placeholder="Zipcode" />
                 </Grid>
-                <Grid ColumnDefinitions="*, Auto">
+                <Grid ColumnDefinitions="*, Auto" Margin="0, 8, 0, 0">
                     <Label
                         Grid.Column="0"
                         VerticalOptions="Center"
@@ -47,12 +48,12 @@
                         Grid.Column="1"
                         VerticalOptions="Center" />
                 </Grid>
-                <Editor
-                    Visual="Default"
-                    BackgroundColor="White"
-                    HeightRequest="150"
+                <controls:FrameEntry
                     Placeholder="Notes" />
-                <Button Text="Save" />
+                <Button 
+                    Style="{StaticResource RoundedButton}"
+                    Margin="0, 16"
+                    Text="Save" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

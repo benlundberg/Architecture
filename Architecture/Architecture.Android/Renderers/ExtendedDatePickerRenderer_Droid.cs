@@ -62,7 +62,7 @@ namespace Architecture.Droid
 
                 if (monthSpinnerId != 0)
                 {
-                    Android.Views.View monthSpinner = datePickerDialog.DatePicker.FindViewById(monthSpinnerId);
+                    global::Android.Views.View monthSpinner = datePickerDialog.DatePicker.FindViewById(monthSpinnerId);
 
                     if (monthSpinner != null)
                     {
@@ -74,7 +74,7 @@ namespace Architecture.Droid
 
                 if (yearSpinnerId != 0)
                 {
-                    Android.Views.View yearSpinner = datePickerDialog.DatePicker.FindViewById(yearSpinnerId);
+                    global::Android.Views.View yearSpinner = datePickerDialog.DatePicker.FindViewById(yearSpinnerId);
 
                     if (yearSpinner != null)
                     {

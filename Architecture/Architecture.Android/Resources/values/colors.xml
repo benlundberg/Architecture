@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <resources>
-  <color name="PrimaryColor">#0FBCF9</color>
-  <color name="DarkPrimaryColor">#008CC6</color>
-  <color name="AccentColor">#FFA801</color>
+  <color name="PrimaryColor">#49879F</color>
+  <color name="DarkPrimaryColor">#2F738D</color>
+  <color name="AccentColor">#FD876E</color>
   <color name="BaseTextColor">#000</color>
-  <color name="ListViewSelectedItemBackgroundColor">#FFA801</color>
+  <color name="ListViewSelectedItemBackgroundColor">#FD876E</color>
   <color name="SplashBackgroundColor">#FFF</color>
-  <color name="NavigationBarTextColor">#FFF</color>
+  <color name="NavigationBarTextColor">#000</color>
+  <color name="NavigationBarBackgroundColor">#FAFAFA</color>
+  <color name="StatusBarBackgroundColor">#FAFAFA</color>
 </resources>

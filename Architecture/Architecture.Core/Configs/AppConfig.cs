@@ -6,7 +6,5 @@
     public class AppConfig
     {
         public const string AppName = "Architecture";
-
-        public const string AndroidAppCenterSecret = "c21fd230-8374-4a00-b4b2-caec405ea862";
     }
 }

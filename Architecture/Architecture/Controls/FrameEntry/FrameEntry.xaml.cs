@@ -64,8 +64,13 @@ namespace Architecture.Controls
                     IsValidationVisible = !Text.IsValid;
                 }
             }
+        }
 
+        private void BorderlessEntry_TextChanged(object sender, TextChangedEventArgs e)
+        {
             TextChangedCommand?.Execute(Text);
+
+            IsValidationVisible = false;
         }
 
         private static void TextChanged(BindableObject bindable, object oldValue, object newValue)
@@ -128,9 +133,9 @@ namespace Architecture.Controls
         
         public Keyboard Keyboard { get; set; }
         public Color TextColor { get; set; } = App.Current.Get<Color>("TextColor");
-        public Color BorderColor { get; set; } = App.Current.Get<Color>("TextColor");
-        public Color SelectedBorderColor { get; set; } = App.Current.Get<Color>("TextColor");
-        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public Color BorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
+        public Color SelectedBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
+        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
         public bool IsPassword { get; set; }
         
         public string IconFontFamily { get; set; }

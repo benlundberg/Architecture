@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <controls:PageTitleView 
-                HorizontalOptions="{OnPlatform Android=Start, iOS=Center}"
+                HorizontalOptions="{OnPlatform Android=Center, iOS=Center}"
                 IsVisible="{Binding SearchIsVisible, Converter={StaticResource InvertedBoolConv}}"
                 Text="Simple List" />
             <controls:SearchEntry 
@@ -64,25 +64,11 @@
     </NavigationPage.TitleView>
 
     <Grid>
-        <controls:SegmentView 
-            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
-            Margin="{StaticResource MainPadding}"
-            SectionHorizontalayout="Fill"
-            SectionControlColor="{StaticResource PrimaryColor}"
-            SelectedSectionBackground="{StaticResource PrimaryColor}"
-            SelectedSectionTextColor="White"
-            SectionBackground="White"
-            SectionPadding="0"
-            SectionTextColor="{StaticResource PrimaryColor}"
-            SectionControlPadding="1"
-            SectionControlMargin="10, 2"
-            SectionTextHorizontalLayout="FillAndExpand"
-            SectionControlCornerRadius="{OnPlatform Android=40, iOS=20}">
+        <controls:SegmentView SegmentedControlMode="Round">
             <controls:SegmentView.ItemsSource>
                 <controls:SegmentControlItem Text="Text Cell" IsSelected="True" Tag="1">
                     <controls:SegmentControlItem.Content>
                         <RefreshView 
-                            Padding="{StaticResource MainPadding}"
                             RefreshColor="{StaticResource PrimaryColor}"
                             IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                             Command="{Binding RefreshListCommand}">
@@ -91,17 +77,17 @@
                                 SelectionMode="Single"
 			                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                                 <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="local:ListItemViewModel">
-                                        <StackLayout Spacing="0">
+                                        <StackLayout Padding="16" Spacing="0">
                                             <Label 
-                                                FontFamily="{StaticResource OpenSansSemiBold}"
-                                                FontSize="16"
+                                                FontSize="Medium"
                                                 Text="{Binding Title}" />
                                             <Label 
-                                                FontSize="14"
+                                                FontSize="Default"
+                                                TextColor="{StaticResource BlackLight}"
                                                 Text="{Binding SubTitle}" />
                                         </StackLayout>
                                     </DataTemplate>
@@ -113,7 +99,6 @@
                 <controls:SegmentControlItem Text="Image Cell" Tag="2">
                     <controls:SegmentControlItem.Content>
                         <RefreshView 
-                            Padding="{StaticResource MainPadding}"
                             RefreshColor="{StaticResource PrimaryColor}"
                             IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                             Command="{Binding RefreshListCommand}">
@@ -122,23 +107,23 @@
                                 SelectionMode="Single"
 			                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                                 <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="local:ListItemViewModel">
-                                        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                                        <Grid Padding="16, 12" ColumnDefinitions="Auto, *" ColumnSpacing="16">
                                             <ff:CachedImage 
-                                                HeightRequest="50"
-                                                WidthRequest="50"
+                                                HeightRequest="64"
+                                                WidthRequest="64"
                                                 Aspect="AspectFill"
                                                 Source="{Binding ImageSource}"/>
-                                            <StackLayout Spacing="0" Grid.Column="1">
+                                            <StackLayout Spacing="4" Grid.Column="1">
                                                 <Label 
-                                                    FontFamily="{StaticResource OpenSansSemiBold}"
                                                     FontSize="16"
                                                     Text="{Binding Title}" />
                                                 <Label 
                                                     FontSize="14"
+                                                    TextColor="{StaticResource BlackLight}"
                                                     Text="{Binding SubTitle}" />
                                             </StackLayout>
                                         </Grid>

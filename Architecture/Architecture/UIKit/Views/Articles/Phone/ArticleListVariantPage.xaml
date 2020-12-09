@@ -20,94 +20,43 @@
     </NavigationPage.TitleView>
 
     <CollectionView
-        Margin="{StaticResource MainPadding}"
+        Margin="16, 0"
+        SelectionMode="Single"
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
         ItemsSource="{Binding NatureArticles}">
         <CollectionView.ItemsLayout>
             <LinearItemsLayout 
                 Orientation="Vertical"
-                ItemSpacing="10" />
+                ItemSpacing="16" />
         </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="local:ArticleItemViewModel">
-                <Frame Margin="{StaticResource VerticalPadding}" BorderColor="Transparent" Padding="0" CornerRadius="10" HasShadow="False">
+                <Frame HeightRequest="192" BorderColor="Transparent" Padding="0" CornerRadius="8" HasShadow="False">
                     <Grid>
-                        <ff:CachedImage 
-                            HeightRequest="200"
-                            Aspect="AspectFill"
-                            Source="{Binding ImageSource}" />
-                        <Grid BackgroundColor="Black" Opacity=".5" />
-                        <Grid 
-                            Margin="16, 10"
-                            RowSpacing="6"
-                            VerticalOptions="End">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                FontSize="Large"
-                                TextColor="{StaticResource SecondaryTextColor}"
-                                Text="{Binding Title}" />
-                            <Grid Grid.Row="1" ColumnSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label 
-                                    FontSize="Default"
-                                    TextColor="{StaticResource SecondaryTextColor}"
-                                    Text="{Binding Category}" />
-                                <Label 
-                                    Grid.Column="1"
-                                    FontSize="Small"
-                                    FontAttributes="Bold"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="{Binding Year}" />
-                                <Label 
-                                    Grid.Column="2"
-                                    VerticalOptions="Center"
-                                    FontSize="Small"
-                                    FontFamily="{StaticResource FontAwesomeSolid}"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="&#xf0c0;" />
-                                <Label 
-                                    Grid.Column="3"
-                                    VerticalOptions="Center"
-                                    FontAttributes="Bold"
-                                    FontSize="Small"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="98" />
-                                <Label 
-                                    Grid.Column="4"
-                                    VerticalOptions="Center"
-                                    FontSize="Small"
-                                    FontFamily="{StaticResource FontAwesomeSolid}"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="&#xf004;" />
-                                <Label 
-                                    Grid.Column="5"
-                                    VerticalOptions="Center"
-                                    FontAttributes="Bold"
-                                    FontSize="Small"
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    Text="65" />
-                            </Grid>
-                            <BoxView 
-                                Grid.Row="2"
-                                HeightRequest="3"
-                                WidthRequest="50"
-                                HorizontalOptions="Start"
-                                Color="{StaticResource PrimaryColor}"/>
+                        <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
+                        <Grid>
+                            <Grid.Background>
+                                <LinearGradientBrush EndPoint="0,1">
+                                    <GradientStop Color="Transparent" Offset="0.32" />
+                                    <GradientStop Color="Black" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Grid.Background>
                         </Grid>
+                        <StackLayout Margin="16, 0, 16, 24" VerticalOptions="End" Spacing="4">
+                            <Label TextColor="{StaticResource GrayLight}" Text="{Binding Title}" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}"/>
+                            <Label TextColor="{StaticResource GrayLight}" Text="{Binding Category}" FontSize="Default" />
+                            <BoxView Margin="0, 4, 0, 0" BackgroundColor="{StaticResource Accent}" HorizontalOptions="Start" WidthRequest="100" HeightRequest="2" />
+                        </StackLayout>
                     </Grid>
                 </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
+        <CollectionView.Footer>
+            <Grid HeightRequest="0" />
+        </CollectionView.Footer>
+        <CollectionView.Header>
+            <Grid HeightRequest="8" />
+        </CollectionView.Header>
     </CollectionView>
+
 </ContentPage>

@@ -14,74 +14,44 @@
     </NavigationPage.TitleView>
 
     <ScrollView>
-        <Grid>
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ff:CachedImage 
-                HeightRequest="300"
+                HeightRequest="200"
                 Source="https://architectureappimages.blob.core.windows.net/imagecontainer/9.jpg" 
                 Aspect="AspectFill" />
-            <Frame
-                Padding="12"
+            <ImageButton 
+                Grid.Row="1"
+                Margin="0, -28, 16, 0"
+                BackgroundColor="{StaticResource Accent}"
+                Style="{StaticResource FloatingButton}"
                 HorizontalOptions="End"
-                VerticalOptions="End"
-                CornerRadius="30"
-                Margin="0, 0, -30, -22">
-                <StackLayout Padding="0, 0, 20, 0">
-                    <Label FontSize="Default">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span 
-                                    FontFamily="{StaticResource FontAwesomeBrands}"
-                                    Text="{StaticResource GeneralIcon}" />
-                                <Span 
-                                    Text="  32  " />
-                                <Span 
-                                    FontFamily="{StaticResource FontAwesomeBrands}"
-                                    Text="{StaticResource GeneralIcon}" />
-                                <Span 
-                                    Text="  42  " />
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                </StackLayout>
-            </Frame>
-            <StackLayout 
-                Grid.Row="1" 
-                Spacing="{StaticResource MainSpacing}"
-                Padding="{StaticResource MainPadding}">
+                VerticalOptions="Start">
+                <ImageButton.Source>
+                    <FontImageSource 
+                        Color="White"
+                        FontFamily="{StaticResource FontAwesomeSolid}"
+                        Glyph="{StaticResource HeartIcon}" />
+                </ImageButton.Source>
+            </ImageButton>
+            <StackLayout Grid.Row="1" Margin="16" Spacing="4">
                 <Label Text="Dance dance" FontSize="Large" />
-                <Label Text="All night" FontSize="Medium" TextColor="{StaticResource GrayDark}" />
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="{StaticResource MainSpacing}">
-                        <Frame CornerRadius="18" Padding="20, 10" VerticalOptions="Center">
-                            <Label Text="Travel" FontSize="Micro" />
-                        </Frame>
-                        <Frame CornerRadius="18" Padding="20, 10" VerticalOptions="Center">
-                            <Label Text="Photo" FontSize="Micro" />
-                        </Frame>
-                        <Frame CornerRadius="18" Padding="20, 10" VerticalOptions="Center">
-                            <Label Text="Pop" FontSize="Micro" />
-                        </Frame>
-                    </StackLayout>
-                    <ImageButton 
-                        Style="{StaticResource FloatingButtonMini}"
-                        HorizontalOptions="End">
-                        <ImageButton.Source>
-                            <FontImageSource 
-                                Color="White"
-                                FontFamily="{StaticResource FontAwesomeBrands}"
-                                Glyph="{StaticResource GeneralIcon}" />
-                        </ImageButton.Source>
-                    </ImageButton>
-                </Grid>
-                <Label Text="Summary" FontSize="Medium" />
+                <Label Text="All night" FontSize="Medium" TextColor="{StaticResource BlackLight}" />
+                <StackLayout Margin="0, 12" Orientation="Horizontal">
+                    <Frame Style="{StaticResource ChipFrame}">
+                        <Label VerticalOptions="Center" Text="Travel" FontSize="Default" />
+                    </Frame>
+                    <Frame Style="{StaticResource ChipFrame}">
+                        <Label Text="Photo" FontSize="Default" />
+                    </Frame>
+                    <Frame Style="{StaticResource ChipFrame}">
+                        <Label VerticalOptions="Center" Text="Pop" FontSize="Default" />
+                    </Frame>
+                </StackLayout>
+                <Label Text="Summary" FontSize="Default" Style="{StaticResource SemiBoldLabel}" />
                 <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                 <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
             </StackLayout>

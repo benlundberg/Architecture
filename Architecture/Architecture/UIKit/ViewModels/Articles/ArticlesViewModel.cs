@@ -181,7 +181,7 @@ namespace Architecture.UIKit
         private void ItemSelected(string title)
         {
             ShowAlert($"You clicked {title}", "Clicked");
-        }
+        } 
 
         private ArticleItemViewModel selectedItem;
         public ArticleItemViewModel SelectedItem
@@ -195,7 +195,7 @@ namespace Architecture.UIKit
                 {
                     ItemSelected(selectedItem.Title);
 
-                    SelectedItem = null;
+                    SelectedItem = null; 
                 }
             }
         }

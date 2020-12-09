@@ -16,17 +16,8 @@
         </Grid.RowDefinitions>
         
         <!-- Segment items -->
-        <Frame 
-            CornerRadius="{Binding SectionControlCornerRadius, Source={x:Reference rootSegmentView}}"
-            Padding="{Binding SectionControlPadding, Source={x:Reference rootSegmentView}}"
-            Margin="{Binding SectionControlMargin, Source={x:Reference rootSegmentView}}"
-            BackgroundColor="{Binding SectionControlColor, Source={x:Reference rootSegmentView}}"
-            BorderColor="{Binding SectionControlColor, Source={x:Reference rootSegmentView}}"
-            HorizontalOptions="{Binding SectionHorizontalayout, Source={x:Reference rootSegmentView}}"
-            HasShadow="False">
-            <Grid 
-                x:Name="SegmentItems"
-                HorizontalOptions="{Binding SectionHorizontalayout, Source={x:Reference rootSegmentView}}" />
+        <Frame x:Name="RootFrame" Margin="{Binding SegmentMargin, Source={x:Reference rootSegmentView}}" HasShadow="False" Padding="0" BorderColor="Transparent">
+            <Grid x:Name="SegmentItemsGrid" ColumnSpacing="0" HorizontalOptions="{Binding SegmentHorizontalOptions, Source={x:Reference rootSegmentView}}" />
         </Frame>
 
         <!-- Content view -->

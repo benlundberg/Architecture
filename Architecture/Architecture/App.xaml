@@ -12,26 +12,32 @@
 
             <!-- #region Colors -->
 
-            <Color x:Key="PrimaryColor">#0FBCF9</Color>
-            <Color x:Key="DarkPrimaryColor">#008CC6</Color>
-            <Color x:Key="Accent">#FFA801</Color>
-            
-            <Color x:Key="GrayDark">#AAB2BD</Color>
-            <Color x:Key="GrayMedium">#CCD1D9</Color>
-            <Color x:Key="Gray">#E6E9ED</Color>
-            <Color x:Key="GrayLight">#F5F7FA</Color>
+            <Color x:Key="PrimaryColor">#49879F</Color>
+            <Color x:Key="DarkPrimaryColor">#2F738D</Color>
+            <Color x:Key="Accent">#FD876E</Color>
 
-            <Color x:Key="ToolbarTextColor">#FFF</Color>
+            <Color x:Key="GrayDark">#969BAB</Color>
+            <Color x:Key="GrayMedium">#D9DBE1</Color>
+            <Color x:Key="Gray">#EEEFF4</Color>
+            <Color x:Key="GrayLight">#F4F5F7</Color>
+            
+            <Color x:Key="BlackLight">#474A57</Color>
+            
+            <Color x:Key="ToolbarTextColor">#000</Color>
             
             <Color x:Key="TextColor">#000</Color>
-            <Color x:Key="SecondaryTextColor">#FFF</Color>
+            <Color x:Key="SecondaryTextColor">#474A57</Color>
 
-            <Color x:Key="PageBackgroundColor">#FFF</Color>
-            <Color x:Key="BarBackgroundColor">#0FBCF9</Color>
-            <Color x:Key="ButtonBackgroundColor">#0FBCF9</Color>
+            <Color x:Key="PageBackgroundColor">#FAFAFA</Color>
+
+            <Color x:Key="BarBackgroundColor">#FAFAFA</Color>
+
+            <Color x:Key="ButtonBackgroundColor">#49879F</Color>
             <Color x:Key="ButtonTextColor">#FFF</Color>
-            <Color x:Key="ButtonFrameColor">#0FBCF9</Color>
 
+            <Color x:Key="FabBackgroundColor">#49879F</Color>
+            <Color x:Key="FabTextColor">#FFF</Color>
+            
             <Color x:Key="SuccessColor">#43A047</Color>
             <Color x:Key="WarningColor">#FFA801</Color>
             <Color x:Key="ErrorColor">#B00020</Color>
@@ -56,8 +62,13 @@
             <x:String x:Key="SearchIcon">&#xf002;</x:String>
             <x:String x:Key="EditPenIcon">&#xf304;</x:String>
             <x:String x:Key="ChevronDownIcon">&#xf078;</x:String>
+            <x:String x:Key="ChevronRightIcon">&#xf054;</x:String>
             <x:String x:Key="UserIcon">&#xf007;</x:String>
             <x:String x:Key="MailIcon">&#xf0e0;</x:String>
+            <x:String x:Key="HeartIcon">&#xf004;</x:String>
+            <x:String x:Key="LockIcon">&#xf023;</x:String>
+            <x:String x:Key="CameraIcon">&#xf030;</x:String>
+            <x:String x:Key="ImagesIcon">&#xf302;</x:String>
             
             <!--#endregion-->
             
@@ -69,18 +80,14 @@
 
             <x:String x:Key="MontserratBold">MontserratBold</x:String>
             <x:String x:Key="MontserratRegular">MontserratRegular</x:String>
+            <x:String x:Key="MontserratSemiBold">MontserratSemiBold</x:String>
 
             <x:String x:Key="OpenSansBold">OpenSansBold</x:String>
-            <x:String x:Key="OpenSansBoldItalic">OpenSansBoldItalic</x:String>
-            <x:String x:Key="OpenSansExtraBold">OpenSansExtraBold</x:String>
-            <x:String x:Key="OpenSansExtraBoldItalic">OpenSansExtraBoldItalic</x:String>
-            <x:String x:Key="OpenSansItalic">OpenSansItalic</x:String>
-            <x:String x:Key="OpenSansLight">OpenSansLight</x:String>
-            <x:String x:Key="OpenSansLightItalic">OpenSansLightItalic</x:String>
             <x:String x:Key="OpenSansRegular">OpenSansRegular</x:String>
             <x:String x:Key="OpenSansSemiBold">OpenSansSemiBold</x:String>
-            <x:String x:Key="OpenSansSemiBoldItalic">OpenSansSemiBoldItalic</x:String>
 
+            <x:String x:Key="SegmentControlFont">MontserratRegular</x:String>
+            
             <!--#endregion-->
             
             <!--#region Margin and Padding -->
@@ -124,30 +131,41 @@
 
             <Style TargetType="Label" ApplyToDerivedTypes="True">
                 <Setter Property="TextColor" Value="{StaticResource TextColor}" />
-                <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
             </Style>
 
             <Style x:Key="BoldLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="FontFamily" Value="{StaticResource OpenSansBold}" />
+                <Setter Property="FontFamily" Value="{StaticResource MontserratBold}" />
             </Style>
-            
+
+            <Style x:Key="SemiBoldLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource MontserratSemiBold}" />
+            </Style>
+
             <Style TargetType="Entry" ApplyToDerivedTypes="True">
-                <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
+                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
             </Style>
 
             <Style TargetType="Button" ApplyToDerivedTypes="True">
                 <Setter Property="HeightRequest" Value="46" />
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
                 <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
-                <Setter Property="FontFamily" Value="{StaticResource OpenSansSemiBold}" />
+                <Setter Property="FontFamily" Value="{StaticResource MontserratSemiBold}" />
             </Style>
 
             <Style TargetType="Button" x:Key="OutlineButton">
-                <Setter Property="BackgroundColor" Value="White" />
-                <Setter Property="TextColor" Value="{StaticResource ButtonFrameColor}" />
-                <Setter Property="BorderColor" Value="{StaticResource ButtonFrameColor}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource ButtonBackgroundColor}" />
+                <Setter Property="BorderColor" Value="{StaticResource ButtonBackgroundColor}" />
                 <Setter Property="BorderWidth" Value="1" />
+            </Style>
+
+            <Style TargetType="Button" x:Key="TextButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource ButtonBackgroundColor}" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="BorderWidth" Value="0" />
             </Style>
 
             <Style x:Key="RoundedButton" TargetType="Button">
@@ -163,7 +181,7 @@
             </Style>
 
             <Style x:Key="FloatingButton" TargetType="ImageButton">
-                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource FabBackgroundColor}" />
                 <Setter Property="CornerRadius" Value="28" />
                 <Setter Property="HeightRequest" Value="56" />
                 <Setter Property="WidthRequest" Value="56" />
@@ -171,7 +189,8 @@
             </Style>
 
             <Style x:Key="FloatingButtonMini" TargetType="ImageButton">
-                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource FabBackgroundColor}" />
+                <Setter Property="BorderColor" Value="{StaticResource FabBackgroundColor}" />
                 <Setter Property="CornerRadius" Value="20" />
                 <Setter Property="HeightRequest" Value="40" />
                 <Setter Property="WidthRequest" Value="40" />
@@ -182,6 +201,7 @@
                 <Setter Property="IsClippedToBounds" Value="True" />
                 <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="HasShadow">
                     <Setter.Value>
                         <OnPlatform x:TypeArguments="x:Boolean">
@@ -191,6 +211,14 @@
                         </OnPlatform>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <Style x:Key="ChipFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray}" />
+                <Setter Property="BorderColor" Value="{StaticResource Gray}" />
+                <Setter Property="Padding" Value="12, 7, 12, 7" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="CornerRadius" Value="16" />
             </Style>
 
             <Style TargetType="ListView" ApplyToDerivedTypes="True">

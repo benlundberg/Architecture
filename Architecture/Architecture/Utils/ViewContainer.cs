@@ -1,5 +1,4 @@
-﻿using Microsoft.AppCenter.Analytics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -80,11 +79,7 @@ namespace Architecture
             viewModel.Navigation = page.Navigation;
             page.BindingContext = viewModel;
 
-            // Track page in analytics
-            Analytics.TrackEvent("Page", new Dictionary<string, string>
-            {
-                { "Page", page.GetType().ToString() }
-            });
+            // TODO: Track page in analytics
 
             return page;
         }

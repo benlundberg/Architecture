@@ -20,14 +20,7 @@
 
     <controls:NotifyScrollView>
         <controls:NotifyScrollView.HeaderContent>
-            <Grid 
-                Padding="10"
-                ColumnSpacing="{StaticResource MainSpacing}"
-                BackgroundColor="{StaticResource PrimaryColor}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Grid BackgroundColor="{StaticResource PrimaryColor}" ColumnDefinitions="Auto, *" ColumnSpacing="16" Padding="16">
                 <ff:CachedImage 
                     HeightRequest="100"
                     WidthRequest="100"
@@ -36,31 +29,25 @@
                     Aspect="AspectFill" />
                 <StackLayout 
                     Grid.Column="1"
-                    Spacing="6"
+                    Spacing="4"
                     VerticalOptions="Start">
                     <Label 
+                        TextColor="White"
                         Text="Fresh water"
-                        TextColor="{StaticResource SecondaryTextColor}"
                         FontSize="Large" />
                     <Label 
-                        Text="Friendship in the water"
-                        TextColor="{StaticResource SecondaryTextColor}"
-                        FontSize="Medium" />
-                    <BoxView 
-                        HeightRequest="3"
-                        WidthRequest="100"
-                        HorizontalOptions="Start"
-                        Color="White" />
+                        FontSize="Default"
+                        TextColor="White"
+                        Text="Friendship in the water" />
+                    <BoxView
+                        HeightRequest="1" 
+                        Color="{StaticResource Accent}" Margin="0, 6, 24, 6" />
                 </StackLayout>
             </Grid>
         </controls:NotifyScrollView.HeaderContent>
         <controls:NotifyScrollView.MainContent>
             <StackLayout>
-                <Grid Padding="10" ColumnSpacing="{StaticResource MainSpacing}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                <Grid ColumnDefinitions="Auto, *" ColumnSpacing="16" Padding="16">
                     <ff:CachedImage 
                         HeightRequest="100"
                         WidthRequest="100"
@@ -69,112 +56,103 @@
                         Aspect="AspectFill" />
                     <StackLayout 
                         Grid.Column="1"
-                        Spacing="6"
+                        Spacing="4"
                         VerticalOptions="Start">
                         <Label 
                             Text="Fresh water"
                             FontSize="Large" />
                         <Label 
-                            FontSize="Medium"
+                            FontSize="Default"
+                            TextColor="{StaticResource BlackLight}"
                             Text="Friendship in the water" />
-                        <controls:RatingControl 
+                        <BoxView
+                            HeightRequest="1" 
+                            Color="{StaticResource PrimaryColor}" Margin="0, 6, 24, 6" />
+                        <controls:RatingControl
                             IsLocked="True"
                             Rating="3" />
                     </StackLayout>
                 </Grid>
                 <Grid 
-                    Grid.Row="1" 
-                    ColumnSpacing="{StaticResource MainSpacing}"
-                    Padding="{StaticResource ControlPadding}"
+                    Padding="16, 12"
+                    ColumnDefinitions="*, Auto"
                     BackgroundColor="{StaticResource Gray}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
                     <Label 
-                        FontSize="Default"
-                        FontAttributes="Bold"
-                        Text="NATURE" />
-                    <Label 
+                        FontSize="Small"
+                        Style="{StaticResource SemiBoldLabel}"
+                        TextColor="{StaticResource DarkPrimaryColor}"
+                        Text="Nature" />
+                    <StackLayout 
                         Grid.Column="1"
-                        FontSize="Small"
-                        VerticalOptions="Center"
-                        Text="2019" />
-                    <Label 
-                        Grid.Column="2"
-                        VerticalOptions="Center"
-                        FontFamily="{StaticResource FontAwesomeSolid}"
-                        TextColor="{StaticResource PrimaryColor}"
-                        Text="&#xf0c0;" />
-                    <Label 
-                        Grid.Column="3"
-                        VerticalOptions="Center"
-                        FontSize="Small"
-                        TextColor="{StaticResource PrimaryColor}"
-                        Text="98" />
-                    <Label 
-                        Grid.Column="4"
-                        VerticalOptions="Center"
-                        FontFamily="{StaticResource FontAwesomeSolid}"
-                        TextColor="{StaticResource PrimaryColor}"
-                        Text="&#xf004;" />
-                    <Label 
-                        Grid.Column="5"
-                        VerticalOptions="Center"
-                        FontSize="Small"
-                        TextColor="{StaticResource PrimaryColor}"
-                        Text="65" />
+                        Orientation="Horizontal"
+                        Spacing="8">
+                        <Label 
+                            VerticalOptions="Center"
+                            FontSize="Small"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            Text="&#xf0c0;" />
+                        <Label 
+                            VerticalOptions="Center"
+                            FontSize="Small"
+                            TextColor="{StaticResource PrimaryColor}"
+                            Text="98" />
+                        <Label 
+                            VerticalOptions="Center"
+                            FontSize="Small"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            TextColor="{StaticResource PrimaryColor}"
+                            Text="&#xf004;" />
+                        <Label 
+                            VerticalOptions="Center"
+                            FontSize="Small"
+                            TextColor="{StaticResource PrimaryColor}"
+                            Text="65" />
+                    </StackLayout>
                 </Grid>
                 <Label 
                     FontSize="Default"
-                    Padding="{StaticResource MainPadding}"
+                    Padding="16"
                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                 <Label 
                     FontSize="Default"
-                    Padding="{StaticResource MainPadding}"
+                    Padding="16"
                     Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                 <Label 
-                    FontSize="Default"
-                    FontAttributes="Bold"
-                    Text="COMMENTS"
-                    Padding="{StaticResource ControlPadding}"
+                    Text="Comments"
+                    FontSize="Small"
+                    Style="{StaticResource SemiBoldLabel}"
+                    TextColor="{StaticResource DarkPrimaryColor}"
+                    Padding="16, 12"
                     BackgroundColor="{StaticResource Gray}" />
-                <StackLayout
-                    BindableLayout.ItemsSource="{Binding Items}">
+                <StackLayout Spacing="0" BindableLayout.ItemsSource="{Binding Items}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="{StaticResource ControlPadding}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <ff:CachedImage 
-                                    VerticalOptions="Start"
-                                    Source="http://lorempixel.com/100/100/people/4" 
-                                    Aspect="AspectFit" />
-                                <StackLayout Grid.Column="1">
-                                    <Label 
-                                        Text="John Doe"
-                                        FontSize="Medium"
-                                        TextColor="{StaticResource PrimaryColor}"/>
-                                    <Label 
-                                        FontSize="Default"
-                                        Text="MAR 3, 2019" />
-                                    <Label 
-                                        FontSize="Default"
-                                        MaxLines="3"
-                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                                </StackLayout>
+                            <Grid 
+                                RowDefinitions="Auto, Auto"
+                                ColumnDefinitions="*, Auto"
+                                Margin="16">
+                                <Label 
+                                    Text="John Doe"
+                                    FontSize="Default"
+                                    TextColor="{StaticResource BlackLight}"/>
+                                <Label 
+                                    Grid.Column="1"
+                                    FontSize="12"
+                                    Text="MAR 3, 2019" />
+                                <Label 
+                                    Grid.Row="1"
+                                    MaxLines="2"
+                                    LineBreakMode="TailTruncation"
+                                    FontSize="16"
+                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
                             </Grid>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
                 <Button
-                    Margin="{StaticResource MainPadding}"
+                    Margin="16, 16, 16, 24"
+                    Style="{StaticResource RoundedButton}"
                     Text="Add comment" />
             </StackLayout>
         </controls:NotifyScrollView.MainContent>

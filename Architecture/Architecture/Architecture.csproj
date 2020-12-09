@@ -11,9 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="akavache" Version="7.1.1" />
-    <PackageReference Include="Microsoft.AppCenter" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.0.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.0.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="3.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -21,7 +18,7 @@
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.7" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-    <PackageReference Include="Unity" Version="5.11.7" />
+    <PackageReference Include="Unity" Version="5.11.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0-pre2" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
@@ -45,6 +42,7 @@
     <None Remove="Resources\Fonts\FontAwesome5Solid.otf" />
     <None Remove="Resources\Fonts\Montserrat-Bold.ttf" />
     <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-SemiBold.ttf" />
     <None Remove="Resources\Fonts\OpenSans-Bold.ttf" />
     <None Remove="Resources\Fonts\OpenSans-BoldItalic.ttf" />
     <None Remove="Resources\Fonts\OpenSans-ExtraBold.ttf" />
@@ -63,18 +61,12 @@
     <EmbeddedResource Include="Resources\Fonts\Montserrat-Bold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-SemiBold.ttf" />
     <EmbeddedResource Include="Resources\Fonts\OpenSans-Bold.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-BoldItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-ExtraBold.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-ExtraBoldItalic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-Italic.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-Light.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-LightItalic.ttf" />
     <EmbeddedResource Include="Resources\Fonts\OpenSans-Regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fonts\OpenSans-SemiBold.ttf" />
-    <EmbeddedResource Include="Resources\Fonts\OpenSans-SemiBoldItalic.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">

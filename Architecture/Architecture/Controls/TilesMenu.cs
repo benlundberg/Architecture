@@ -91,7 +91,7 @@ namespace Architecture.Controls
                     content.Children.Add(new Label
                     {
                         Text = item.Title,
-                        FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                        FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label)),
                         TextColor = item.TitleColor,
                         VerticalOptions = LayoutOptions.End,
                         Margin = new Thickness(10)
@@ -105,15 +105,15 @@ namespace Architecture.Controls
                         Padding = new Thickness(1),
                         HorizontalOptions = LayoutOptions.End,
                         VerticalOptions = LayoutOptions.Start,
-                        HeightRequest = 32,
-                        WidthRequest = 32,
-                        CornerRadius = 16,
-                        Margin = new Thickness(20),
+                        HeightRequest = 24,
+                        WidthRequest = 24,
+                        CornerRadius = 12,
+                        Margin = new Thickness(10),
                         BorderColor = item.NotificationBackground,
                         BackgroundColor = item.NotificationBackground,
                         Content = new Label
                         {
-                            FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)),
+                            FontSize = Device.GetNamedSize(NamedSize.Default, typeof(Label)),
                             TextColor = item.NotificationTextColor,
                             VerticalOptions = LayoutOptions.Center,
                             HorizontalOptions = LayoutOptions.Center,
@@ -134,7 +134,7 @@ namespace Architecture.Controls
                     {
                         infoStack.Children.Add(new Label
                         {
-                            FontSize = Device.GetNamedSize(NamedSize.Small, typeof(Label)),
+                            FontSize = Device.GetNamedSize(NamedSize.Micro, typeof(Label)),
                             Text = infoText,
                             TextColor = item.InfoTextColor
                         });

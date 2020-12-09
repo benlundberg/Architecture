@@ -18,81 +18,79 @@
     <StackLayout>
         <Grid>
             <ff:CachedImage 
-                HeightRequest="100"
+                HeightRequest="82"
                 Aspect="AspectFill"
                 Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg">
                 <ff:CachedImage.Transformations>
                     <transformation:BlurredTransformation Radius="8" />
                 </ff:CachedImage.Transformations>
             </ff:CachedImage>
-            <Frame
-                CornerRadius="10"
-                BorderColor="Transparent"
+            <ff:CachedImage
+                Margin="24, 0"
                 HorizontalOptions="Start"
-                VerticalOptions="Fill"
-                Margin="20, 10"
-                Padding="0">
-                <ff:CachedImage
-                    HeightRequest="35"
-                    WidthRequest="100"
-                    Aspect="AspectFill"
-                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg" />
-            </Frame>
+                VerticalOptions="Center"
+                HeightRequest="50"
+                WidthRequest="50"
+                Aspect="AspectFill"
+                Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg">
+                <ff:CachedImage.Transformations>
+                    <transformation:CircleTransformation />
+                </ff:CachedImage.Transformations>
+            </ff:CachedImage>
             <Button
-                Text="Edit"
-                BorderColor="White"
-                BorderWidth="2"
-                TextColor="White"
-                BackgroundColor="Transparent"
-                Margin="20, 10"
-                Padding="{OnPlatform iOS=10, Android=0}"
+                Margin="24, 0"
+                VerticalOptions="Center"
                 HorizontalOptions="End"
-                VerticalOptions="Center"/>
+                Text="Edit"
+                BorderColor="{StaticResource Accent}"
+                TextColor="{StaticResource Accent}"
+                Style="{StaticResource OutlineButton}" />
         </Grid>
-        <StackLayout 
-            Padding="{StaticResource MainPadding}"
-            Spacing="{StaticResource MainSpacing}">
-            <Label Text="Name" FontSize="Micro" />
-            <Label Text="John Doe" FontSize="Default" />
-            <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest=".5" />
-            <Label Text="Address" FontSize="Micro" />
-            <Label Text="21095 Highway 20" FontSize="Default" />
-            <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest=".5" />
-            <Label Text="Phone number" FontSize="Micro" />
-            <Label Text="+12 21412 1244" FontSize="Default" />
-            <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest=".5" />
-            <Label Text="Email" FontSize="Micro" />
-            <Label Text="john.doe@architecture.com" FontSize="Default" />
-            <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest=".5" />
+        <StackLayout Spacing="12" Margin="24">
+            <Label Text="Name" FontSize="12" />
+            <Label Text="John Doe" FontSize="14" />
+            <BoxView BackgroundColor="{StaticResource Gray}" HeightRequest="1" />
+            <Label Text="Address" FontSize="12" />
+            <Label Text="21095 Highway 20" FontSize="14" />
+            <BoxView BackgroundColor="{StaticResource Gray}" HeightRequest="1" />
+            <Label Text="Phone number" FontSize="12" />
+            <Label Text="+12 21412 1244" FontSize="14" />
+            <BoxView BackgroundColor="{StaticResource Gray}" HeightRequest="1" />
+            <Label Text="Email" FontSize="12" />
+            <Label Text="john.doe@architecture.com" FontSize="14" />
+            <BoxView BackgroundColor="{StaticResource Gray}" HeightRequest="1" />
             <StackLayout 
                 Orientation="Horizontal" 
                 HorizontalOptions="Center"
-                Margin="{StaticResource ControlPadding}"
-                Spacing="{StaticResource LargeSpacing}">
-                <ImageButton Style="{StaticResource FloatingButton}">
+                Spacing="16">
+                <ImageButton BackgroundColor="{StaticResource Accent}" Style="{StaticResource FloatingButtonMini}">
                     <ImageButton.Source>
                         <FontImageSource 
-                            Glyph="&#xf0e0;"
+                            Color="White"
+                            Glyph="{StaticResource MailIcon}"
                             FontFamily="{StaticResource FontAwesomeSolid}" />
                     </ImageButton.Source>
                 </ImageButton>
-                <ImageButton Style="{StaticResource FloatingButton}">
+                <ImageButton BackgroundColor="{StaticResource Accent}" Style="{StaticResource FloatingButtonMini}">
                     <ImageButton.Source>
                         <FontImageSource 
+                            Color="White"
                             Glyph="&#xf3cd;"
                             FontFamily="{StaticResource FontAwesomeSolid}" />
                     </ImageButton.Source>
                 </ImageButton>
-                <ImageButton Style="{StaticResource FloatingButton}">
+                <ImageButton BackgroundColor="{StaticResource Accent}" Style="{StaticResource FloatingButtonMini}">
                     <ImageButton.Source>
                         <FontImageSource 
+                            Color="White"
                             Glyph="&#xf5a0;"
                             FontFamily="{StaticResource FontAwesomeSolid}" />
                     </ImageButton.Source>
                 </ImageButton>
-                <ImageButton Style="{StaticResource FloatingButton}">
+                <ImageButton BackgroundColor="{StaticResource Accent}" Style="{StaticResource FloatingButtonMini}">
                     <ImageButton.Source>
                         <FontImageSource 
+                            Color="White"
                             Glyph="&#xf27a;"
                             FontFamily="{StaticResource FontAwesomeSolid}" />
                     </ImageButton.Source>

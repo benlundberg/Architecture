@@ -13,53 +13,51 @@
              x:DataType="local:SignUpViewModel">
 
     <ScrollView>
-        <Grid>
-            <StackLayout 
-                Spacing="{StaticResource MainSpacing}"
-                Padding="{StaticResource ExtraLargePadding}"
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <Label
-                    TextColor="{StaticResource PrimaryColor}"
-                    Margin="0, 40"
-                    VerticalOptions="Center"
-                    FontSize="42"
-                    Text="Sign up" />
-                <controls:ValidationEntry 
-                    Visual="Material"
-                    Placeholder="Email"
-                    Keyboard="Email"
-                    Text="{Binding Email, Mode=TwoWay}"
-                    HasValidation="True" />
-                <controls:ValidationEntry 
-                    Visual="Material"
-                    Text="{Binding Password, Mode=TwoWay}"
-                    Placeholder="Password" 
-                    IsPassword="True" 
-                    HasValidation="True" />
-                <controls:ValidationEntry 
-                    Visual="Material"
-                    Text="{Binding ConfirmPassword, Mode=TwoWay}"
-                    Placeholder="Confirm password" 
-                    IsPassword="True" 
-                    HasValidation="True" />
-                <Button 
-                    Text="{StaticResource CheckIcon}"
-                    FontFamily="{StaticResource FontAwesomeSolid}" />
-            </StackLayout>
+        <StackLayout 
+            Margin="24"
+            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
             <Label
-                Margin="0, 40, 40, 0"
                 IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
                 FontSize="Large"
                 Text="{StaticResource CloseIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="Black">
+                TextColor="{StaticResource BlackLight}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PopModalCommand}" />
                 </Label.GestureRecognizers>
             </Label>
-        </Grid>
+            
+            <!-- Title and Subtitle -->
+            <Label
+                Style="{StaticResource SemiBoldLabel}"
+                FontSize="Large"
+                Text="Join many others" />
+            <Label
+                FontSize="Default"
+                Text="Sign up to join this amazing commmunity"
+                Margin="0, 0, 0, 48" />
+            
+            <controls:RoundedFrameEntry 
+                Placeholder="Email"
+                Keyboard="Email"
+                Text="{Binding Email, Mode=TwoWay}" />
+            <controls:RoundedFrameEntry 
+                Text="{Binding Password, Mode=TwoWay}"
+                Placeholder="Password" 
+                IsPassword="True" />
+            <controls:RoundedFrameEntry 
+                Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                Placeholder="Confirm password" 
+                IsPassword="True" />
+            <Button 
+                Margin="0, 16, 0, 0"
+                Style="{StaticResource RoundedButton}"
+                Text="{StaticResource CheckIcon}"
+                FontFamily="{StaticResource FontAwesomeSolid}" />
+        </StackLayout>
+            
     </ScrollView>
 
 </ContentPage>

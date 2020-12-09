@@ -1,5 +1,6 @@
 ﻿using Architecture.Core;
 using System;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -8,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Architecture.UIKit
 {
-    public class FilesViewModel : BaseService
+    public class FilesViewModel : BaseService, INotifyPropertyChanged
     {
         public FilesViewModel()
         {
@@ -89,6 +90,24 @@ namespace Architecture.UIKit
             }
         }));
 
+        private ICommand openFileBrowserCommand;
+        public ICommand OpenFileBrowserCommand => openFileBrowserCommand ?? (openFileBrowserCommand = new Command(async () =>
+        {
+            try
+            {
+                var data = await FilePicker.PickAsync();
+
+                if (data != null)
+                {
+                    PickedFile = data.FileName;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("", ex.Message, "Ok");
+            }
+        }));
+
         /// <summary>
         /// A simple helper method to download the file for this example
         /// </summary>
@@ -136,6 +155,10 @@ namespace Architecture.UIKit
             return null;
         }
 
+        public string PickedFile { get; set; }
+
         private readonly ILocalFileSystemService localFileSystemService;
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
