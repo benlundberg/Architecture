@@ -306,8 +306,28 @@ namespace Architecture.Controls.Charts
 
                         if (Selector != null)
                         {
-                            Selector.WidthRequest = itemWidth.FromDpiAdjusted();
-                            Selector.Margin = new Thickness(halfDeviceWidth, 0, 0, this.Height - frame.Bottom.FromDpiAdjusted());
+                            Selector.WidthRequest = itemWidth.FromDpiAdjusted() + 8;
+                            Selector.Margin = new Thickness(halfDeviceWidth - 4, 0, 0, this.Height - frame.Bottom.FromDpiAdjusted());
+                        }
+
+                        if (SelectorLabel != null)
+                        {
+                            SelectorLabel.Margin = new Thickness(Selector.Margin.Left - ((SelectorLabel.Width - Selector.WidthRequest) / 2), frame.Bottom.FromDpiAdjusted(), 0, 0);
+
+                            if (SelectorLabel.Width < Selector.Width)
+                            {
+                                SelectorLabel.WidthRequest = Selector.Width;
+                            }
+                            else
+                            {
+                                SelectorLabel.WidthRequest = -1;
+                            }
+
+                            if (!isLabelSizeEventActive)
+                            {
+                                isLabelSizeEventActive = true;
+                                SelectorLabel.SizeChanged += SelectorLabel_SizeChanged;
+                            }
                         }
 
                         if (!isScrollEventActive)
@@ -332,6 +352,29 @@ namespace Architecture.Controls.Charts
             }
 
             DrawHorizontalLabel(selectedValueItems?.FirstOrDefault()?.ChartValueItem, canvas, frame, chart);
+        }
+
+        private void SelectorLabel_SizeChanged(object sender, EventArgs e)
+        {
+            double margin = Selector.Margin.Left - ((SelectorLabel.Width - Selector.WidthRequest) / 2);
+            var abs = Math.Truncate(SelectorLabel.Margin.Left);
+
+            if (abs == Math.Truncate(margin))
+            {
+                return;
+            }
+            else
+            {
+                SelectorLabel.Margin = new Thickness(margin, SelectorLabel.Margin.Top, 0, 0);
+            }
+
+            if (SelectorLabel.WidthRequest != Selector.Width)
+            {
+                if (SelectorLabel.Width < Selector.Width)
+                {
+                    SelectorLabel.WidthRequest = Selector.Width;
+                }
+            }
         }
 
         private void ShowSwipeNotifications(double currentPosition)
@@ -599,11 +642,13 @@ namespace Architecture.Controls.Charts
         private double lastScrollPosition;
         private bool isScrollEventActive;
         private bool isSnapping;
+        private bool isLabelSizeEventActive;
 
         private List<GroupChartItem> groupCenters;
 
         public ScrollView ScrollComponent { get; set; }
         public BoxView Selector { get; set; }
+        public Frame SelectorLabel { get; set; }
         public Grid SwipeNotificationLeft { get; set; }
         public Grid SwipeNotificationRight { get; set; }
 

@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Architecture.Controls
 {
-    public class TableControl : ContentView
+    public class TableControl : Grid
     {
         public TableControl()
         {
@@ -26,24 +26,19 @@ namespace Architecture.Controls
             if (!(enumerable?.Count > 0))
             {
                 // Clear items
-                if (this.Content is Grid grid)
+                if (Children.LastOrDefault() is ScrollView scroll)
                 {
-                    if (grid.Children.LastOrDefault() is ScrollView scroll)
-                    {
-                        scroll.Content = null;
-                    }
+                    scroll.Content = null;
                 }
+
                 return;
             }
 
-            var viewRoot = new Grid
-            {
-                ColumnSpacing = 0,
-                RowSpacing = 0
-            };
+            this.ColumnSpacing = 0;
+            this.RowSpacing = 0;
 
-            viewRoot.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
-            viewRoot.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Star });
+            this.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            this.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Star });
 
             var headerGrid = new Grid()
             {
@@ -60,11 +55,11 @@ namespace Architecture.Controls
 
                 var headerView = GetView(templateView.HeaderTemplateSource);
 
-                Grid.SetColumn(headerView, headerGrid.ColumnDefinitions.Count);
+                SetColumn(headerView, headerGrid.ColumnDefinitions.Count);
 
                 headerGrid.Children.Add(headerView);
 
-                headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Star });
+                headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = ScrollOrientation == ScrollOrientation.Vertical ? GridLength.Star : GridLength.Auto });
             }
 
             var itemsGrid = new Grid()
@@ -94,8 +89,8 @@ namespace Architecture.Controls
 
                     itempropertyView.BindingContext = item;
 
-                    Grid.SetRow(itempropertyView, itemsGrid.RowDefinitions.Count);
-                    Grid.SetColumn(itempropertyView, columnPosition);
+                    SetRow(itempropertyView, itemsGrid.RowDefinitions.Count);
+                    SetColumn(itempropertyView, columnPosition);
 
                     itempropertyView.BackgroundColor = StripedBackground ? (itemsGrid.RowDefinitions.Count % 2 == 0 ? SecondBackground : itempropertyView.BackgroundColor) : itempropertyView.BackgroundColor;
 
@@ -107,25 +102,17 @@ namespace Architecture.Controls
                 itemsGrid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
             }
 
-            viewRoot.Children.Add(headerGrid);
+            Children.Add(headerGrid);
 
             var scrollview = new ScrollView
             {
-                Content = itemsGrid
+                Content = itemsGrid,
+                Orientation = ScrollOrientation
             };
 
-            Grid.SetRow(scrollview, 1);
+            SetRow(scrollview, 1);
 
-            viewRoot.Children.Add(scrollview);
-
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await this.FadeTo(0, length: 50);
-                
-                this.Content = viewRoot;
-
-                await this.FadeTo(1, length: 50);
-            });
+            Children.Add(scrollview);
         }
 
         private View GetView(DataTemplate templateView, object item = null)
@@ -227,6 +214,7 @@ namespace Architecture.Controls
         public ObservableCollection<TableViewItem> ItemTemplates { get; set; }
         public bool StripedBackground { get; set; } = false;
         public Color SecondBackground { get; set; } = App.Current.LightGrayColor();
+        public ScrollOrientation ScrollOrientation { get; set; } = ScrollOrientation.Vertical;
     }
 
     public class TableViewItem

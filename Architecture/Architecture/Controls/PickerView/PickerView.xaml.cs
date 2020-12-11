@@ -43,7 +43,7 @@ namespace Architecture.Controls
            propertyName: "IconColor",
            returnType: typeof(Color),
            declaringType: typeof(PickerView),
-           defaultValue: Color.Black);
+           defaultValue: App.Current.Get<Color>("BlackLight"));
 
         public Color IconColor
         {
@@ -74,7 +74,7 @@ namespace Architecture.Controls
         public string Placeholder { get; set; }
         public Color PlaceholderColor { get; set; } = App.Current.PrimaryColor();
         public Color TextColor { get; set; } = App.Current.PrimaryColor();
-        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
         public Color EntryBackground { get; set; } = Color.White;
         public string IconFontFamily { get; set; }
         public string IconTextSource { get; set; }

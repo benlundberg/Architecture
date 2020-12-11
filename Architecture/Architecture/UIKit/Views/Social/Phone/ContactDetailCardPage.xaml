@@ -16,7 +16,7 @@
     </NavigationPage.TitleView>
 
     <Grid Padding="24, 64, 24, 24">
-        <Frame Padding="16, 48, 16, 16">
+        <Frame Padding="16, 48, 16, 16" VerticalOptions="Start">
             <StackLayout Spacing="12">
                 <Label Text="Name" FontSize="12" />
                 <Label Text="John Doe" FontSize="14" />

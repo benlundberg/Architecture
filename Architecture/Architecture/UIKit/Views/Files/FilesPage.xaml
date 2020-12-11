@@ -63,7 +63,7 @@
         <ScrollView Grid.Row="1">
             <StackLayout Margin="16, 24">
                 <controls:FrameEntry Text="{Binding PickedFile, Mode=TwoWay}" Placeholder="File name" />
-                <controls:PickerView InternalBorderColor="{StaticResource GrayMedium}" Placeholder="Select category" IconTextSource="{StaticResource ChevronDownIcon}" IconFontFamily="{StaticResource FontAwesomeSolid}" IconColor="{StaticResource BlackLight}" />
+                <controls:PickerView Placeholder="Select category" IconTextSource="{StaticResource ChevronDownIcon}" IconFontFamily="{StaticResource FontAwesomeSolid}" />
                 <Button Style="{StaticResource RoundedButton}" Text="Send file" Margin="0, 16" />
             </StackLayout>
         </ScrollView>

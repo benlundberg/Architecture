@@ -50,6 +50,7 @@
                             <ImageButton.Source>
                                 <FontImageSource 
                                     Size="18"
+                                    Color="White"
                                     Glyph="{StaticResource ImagesIcon}"
                                     FontFamily="{StaticResource FontAwesomeSolid}" />
                             </ImageButton.Source>

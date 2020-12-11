@@ -20,24 +20,20 @@
         <controls:PageTitleView Text="Data Table" />
     </NavigationPage.TitleView>
 
-    <Grid>
-        <ScrollView>
-            <StackLayout>
-                <controls:PickerView
-                    Padding="20"
-                    BackgroundColor="{StaticResource GrayLight}"
-                    ItemsSource="{Binding PickerValues}"
-                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                    IconFontFamily="{StaticResource FontAwesomeSolid}"
-                    Title="Task status"
-                    Placeholder="Select status"
-                    CancelText="{x:Static properties:Strings.Gen_Cancel}"
-                    IconTextSource="&#xf0eb;" />
+    <Grid RowDefinitions="Auto, *">
+        <StackLayout Spacing="16" Margin="16">
+            <controls:PickerView
+                ItemsSource="{Binding PickerValues}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                IconFontFamily="{StaticResource FontAwesomeSolid}"
+                Title="Task status"
+                Placeholder="Select status"
+                CancelText="{x:Static properties:Strings.Gen_Cancel}"
+                IconTextSource="&#xf0eb;" />
+
+            <ScrollView Grid.Row="1" HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
                 <StackLayout 
-                    HorizontalOptions="Center"
-                    Margin="0, 5"
                     Orientation="Horizontal"
-                    Spacing="5"
                     BindableLayout.ItemsSource="{Binding TableFilters}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="local:TableFilterViewModel">
@@ -95,163 +91,156 @@
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
+            </ScrollView>
+        </StackLayout>
 
-                <Frame 
-                    BorderColor="Transparent"
-                    Margin="8"
-                    Padding="0">
-                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                            <controls:TableControl
-                                StripedBackground="True"
-                                FilterItemsSource="{Binding TableFilters}"
-                                ItemsSource="{Binding TableItems}">
-                                <controls:TableControl.Resources>
-                                    <ResourceDictionary>
+        <controls:TableControl
+            Grid.Row="1"
+            StripedBackground="True"
+            FilterItemsSource="{Binding TableFilters}"
+            ItemsSource="{Binding TableItems}">
+            <controls:TableControl.Resources>
+                <ResourceDictionary>
 
-                                        <Style x:Key="HeaderGrid" TargetType="Grid">
-                                            <Setter Property="Padding" Value="8" />
-                                            <Setter Property="BackgroundColor" Value="{StaticResource DarkPrimaryColor}" />
-                                        </Style>
+                    <Style x:Key="HeaderGrid" TargetType="Grid">
+                        <Setter Property="Padding" Value="8" />
+                        <Setter Property="BackgroundColor" Value="{StaticResource DarkPrimaryColor}" />
+                    </Style>
 
-                                        <Style x:Key="HeaderLabel" TargetType="Label">
-                                            <Setter Property="TextColor" Value="White" />
-                                            <Setter Property="FontFamily" Value="{StaticResource OpenSansSemiBold}" />
-                                        </Style>
+                    <Style x:Key="HeaderLabel" TargetType="Label">
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="FontFamily" Value="{StaticResource OpenSansSemiBold}" />
+                    </Style>
 
-                                        <Style x:Key="ItemGrid" TargetType="StackLayout">
-                                            <Setter Property="Padding" Value="8" />
-                                        </Style>
+                    <Style x:Key="ItemGrid" TargetType="StackLayout">
+                        <Setter Property="Padding" Value="8" />
+                    </Style>
 
-                                        <Style x:Key="ItemLabel" TargetType="Label">
-                                            <Setter Property="TextColor" Value="Black" />
-                                        </Style>
+                    <Style x:Key="ItemLabel" TargetType="Label">
+                        <Setter Property="TextColor" Value="Black" />
+                    </Style>
 
-                                    </ResourceDictionary>
-                                </controls:TableControl.Resources>
+                </ResourceDictionary>
+            </controls:TableControl.Resources>
 
-                                <controls:TableControl.ItemTemplates>
+            <controls:TableControl.ItemTemplates>
 
-                                    <controls:TableViewItem Id="OrderID">
-                                        <controls:TableViewItem.HeaderTemplateSource>
-                                            <DataTemplate>
-                                                <Grid Style="{StaticResource HeaderGrid}">
-                                                    <Label
-                                                        Style="{StaticResource HeaderLabel}"
-                                                        Text="Order ID" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.HeaderTemplateSource>
-                                        <controls:TableViewItem.ItemTemplateSource>
-                                            <DataTemplate x:DataType="local:TableItemViewModel">
-                                                <StackLayout Style="{StaticResource ItemGrid}">
-                                                    <Label 
-                                                        Style="{StaticResource ItemLabel}"
-                                                        Text="{Binding OrderID}" />
-                                                </StackLayout>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.ItemTemplateSource>
-                                    </controls:TableViewItem>
+                <controls:TableViewItem Id="OrderID">
+                    <controls:TableViewItem.HeaderTemplateSource>
+                        <DataTemplate>
+                            <Grid Style="{StaticResource HeaderGrid}">
+                                <Label
+                                    Style="{StaticResource HeaderLabel}"
+                                    Text="Order ID" />
+                            </Grid>
+                        </DataTemplate>
+                    </controls:TableViewItem.HeaderTemplateSource>
+                    <controls:TableViewItem.ItemTemplateSource>
+                        <DataTemplate x:DataType="local:TableItemViewModel">
+                            <StackLayout Style="{StaticResource ItemGrid}">
+                                <Label 
+                                    Style="{StaticResource ItemLabel}"
+                                    Text="{Binding OrderID}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:TableViewItem.ItemTemplateSource>
+                </controls:TableViewItem>
 
-                                    <controls:TableViewItem Id="City">
-                                        <controls:TableViewItem.HeaderTemplateSource>
-                                            <DataTemplate>
-                                                <Grid Style="{StaticResource HeaderGrid}">
-                                                    <Label
-                                                        Style="{StaticResource HeaderLabel}"
-                                                        Text="City" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.HeaderTemplateSource>
-                                        <controls:TableViewItem.ItemTemplateSource>
-                                            <DataTemplate x:DataType="local:TableItemViewModel">
-                                                <StackLayout Style="{StaticResource ItemGrid}">
-                                                    <Label
-                                                        LineBreakMode="TailTruncation"
-                                                        Style="{StaticResource ItemLabel}"
-                                                        Text="{Binding City}" />
-                                                </StackLayout>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.ItemTemplateSource>
-                                    </controls:TableViewItem>
+                <controls:TableViewItem Id="City">
+                    <controls:TableViewItem.HeaderTemplateSource>
+                        <DataTemplate>
+                            <Grid Style="{StaticResource HeaderGrid}">
+                                <Label
+                                    Style="{StaticResource HeaderLabel}"
+                                    Text="City" />
+                            </Grid>
+                        </DataTemplate>
+                    </controls:TableViewItem.HeaderTemplateSource>
+                    <controls:TableViewItem.ItemTemplateSource>
+                        <DataTemplate x:DataType="local:TableItemViewModel">
+                            <StackLayout Style="{StaticResource ItemGrid}">
+                                <Label
+                                    LineBreakMode="TailTruncation"
+                                    Style="{StaticResource ItemLabel}"
+                                    Text="{Binding City}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:TableViewItem.ItemTemplateSource>
+                </controls:TableViewItem>
 
-                                    <controls:TableViewItem Id="Time">
-                                        <controls:TableViewItem.HeaderTemplateSource>
-                                            <DataTemplate>
-                                                <Grid Style="{StaticResource HeaderGrid}">
-                                                    <Label
-                                                        HorizontalTextAlignment="Center"
-                                                        Style="{StaticResource HeaderLabel}"
-                                                        Text="Time" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.HeaderTemplateSource>
-                                        <controls:TableViewItem.ItemTemplateSource>
-                                            <DataTemplate x:DataType="local:TableItemViewModel">
-                                                <StackLayout Style="{StaticResource ItemGrid}">
-                                                    <Label 
-                                                        HorizontalTextAlignment="End"
-                                                        Style="{StaticResource ItemLabel}"
-                                                        Text="{Binding Time}" />
-                                                </StackLayout>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.ItemTemplateSource>
-                                    </controls:TableViewItem>
+                <controls:TableViewItem Id="Time">
+                    <controls:TableViewItem.HeaderTemplateSource>
+                        <DataTemplate>
+                            <Grid Style="{StaticResource HeaderGrid}">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    Style="{StaticResource HeaderLabel}"
+                                    Text="Time" />
+                            </Grid>
+                        </DataTemplate>
+                    </controls:TableViewItem.HeaderTemplateSource>
+                    <controls:TableViewItem.ItemTemplateSource>
+                        <DataTemplate x:DataType="local:TableItemViewModel">
+                            <StackLayout Style="{StaticResource ItemGrid}">
+                                <Label 
+                                    HorizontalTextAlignment="End"
+                                    Style="{StaticResource ItemLabel}"
+                                    Text="{Binding Time}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:TableViewItem.ItemTemplateSource>
+                </controls:TableViewItem>
 
-                                    <controls:TableViewItem Id="Weight">
-                                        <controls:TableViewItem.HeaderTemplateSource>
-                                            <DataTemplate>
-                                                <Grid Style="{StaticResource HeaderGrid}">
-                                                    <Label
-                                                        HorizontalOptions="Center"
-                                                        Style="{StaticResource HeaderLabel}"
-                                                        Text="Weight" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.HeaderTemplateSource>
-                                        <controls:TableViewItem.ItemTemplateSource>
-                                            <DataTemplate x:DataType="local:TableItemViewModel">
-                                                <StackLayout Style="{StaticResource ItemGrid}">
-                                                    <Label 
-                                                        HorizontalTextAlignment="End"
-                                                        Style="{StaticResource ItemLabel}"
-                                                        Text="{Binding Weight}" />
-                                                </StackLayout>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.ItemTemplateSource>
-                                    </controls:TableViewItem>
+                <controls:TableViewItem Id="Weight">
+                    <controls:TableViewItem.HeaderTemplateSource>
+                        <DataTemplate>
+                            <Grid Style="{StaticResource HeaderGrid}">
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Style="{StaticResource HeaderLabel}"
+                                    Text="Weight" />
+                            </Grid>
+                        </DataTemplate>
+                    </controls:TableViewItem.HeaderTemplateSource>
+                    <controls:TableViewItem.ItemTemplateSource>
+                        <DataTemplate x:DataType="local:TableItemViewModel">
+                            <StackLayout Style="{StaticResource ItemGrid}">
+                                <Label 
+                                    HorizontalTextAlignment="End"
+                                    Style="{StaticResource ItemLabel}"
+                                    Text="{Binding Weight}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:TableViewItem.ItemTemplateSource>
+                </controls:TableViewItem>
 
-                                    <controls:TableViewItem Id="Price">
-                                        <controls:TableViewItem.HeaderTemplateSource>
-                                            <DataTemplate>
-                                                <Grid Style="{StaticResource HeaderGrid}">
-                                                    <Label
-                                                        HorizontalOptions="Center"
-                                                        Style="{StaticResource HeaderLabel}"
-                                                        Text="Price" />
-                                                </Grid>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.HeaderTemplateSource>
-                                        <controls:TableViewItem.ItemTemplateSource>
-                                            <DataTemplate x:DataType="local:TableItemViewModel">
-                                                <StackLayout Style="{StaticResource ItemGrid}">
-                                                    <Label 
-                                                        HorizontalTextAlignment="End"
-                                                        Style="{StaticResource ItemLabel}"
-                                                        Text="{Binding Price}" />
-                                                </StackLayout>
-                                            </DataTemplate>
-                                        </controls:TableViewItem.ItemTemplateSource>
-                                    </controls:TableViewItem>
+                <controls:TableViewItem Id="Price">
+                    <controls:TableViewItem.HeaderTemplateSource>
+                        <DataTemplate>
+                            <Grid Style="{StaticResource HeaderGrid}">
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Style="{StaticResource HeaderLabel}"
+                                    Text="Price" />
+                            </Grid>
+                        </DataTemplate>
+                    </controls:TableViewItem.HeaderTemplateSource>
+                    <controls:TableViewItem.ItemTemplateSource>
+                        <DataTemplate x:DataType="local:TableItemViewModel">
+                            <StackLayout Style="{StaticResource ItemGrid}">
+                                <Label 
+                                    HorizontalTextAlignment="End"
+                                    Style="{StaticResource ItemLabel}"
+                                    Text="{Binding Price}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:TableViewItem.ItemTemplateSource>
+                </controls:TableViewItem>
 
-                                </controls:TableControl.ItemTemplates>
-                            </controls:TableControl>
-                    </ScrollView>
-                </Frame>
-
-            </StackLayout>
-        </ScrollView>
-        
+            </controls:TableControl.ItemTemplates>
+        </controls:TableControl>
         <Expander 
+            Grid.RowSpan="2"
             Margin="24"
             VerticalOptions="End"
             HorizontalOptions="End"
@@ -320,33 +309,5 @@
                 </StackLayout>
             </StackLayout>
         </Expander>
-        <!--<controls:FloatingMenuControl
-            Margin="24"
-            VerticalOptions="End"
-            HorizontalOptions="End">
-            <controls:FloatingMenuControl.BaseItem>
-                <controls:FloatingMenuItem
-                    BackgroundColor="{StaticResource PrimaryColor}"
-                    IconSource="{StaticResource AddIcon}"
-                    FontFamily="{StaticResource FontAwesomeSolid}" />
-            </controls:FloatingMenuControl.BaseItem>
-            <controls:FloatingMenuControl.MenuItems>
-                <controls:FloatingMenuItem
-                    BackgroundColor="{StaticResource PrimaryColor}"  
-                    IconSource="{StaticResource RemoveIcon}"
-                    Text="Remove"
-                    FontFamily="{StaticResource FontAwesomeRegular}" />
-                <controls:FloatingMenuItem
-                    BackgroundColor="{StaticResource PrimaryColor}"
-                    IconSource="{StaticResource SearchIcon}"
-                    Text="Search"
-                    FontFamily="{StaticResource FontAwesomeSolid}" />
-                <controls:FloatingMenuItem
-                    BackgroundColor="{StaticResource PrimaryColor}"
-                    IconSource="{StaticResource SendIcon}"
-                    Text="Send"
-                    FontFamily="{StaticResource FontAwesomeRegular}" />
-            </controls:FloatingMenuControl.MenuItems>
-        </controls:FloatingMenuControl>-->
     </Grid>
 </ContentPage>

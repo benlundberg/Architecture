@@ -81,8 +81,8 @@ namespace Architecture.Controls.Charts
             {
                 CalculateChartValuesXPoints(chart);
 
-                DrawInnerFrame(canvas, frame);
                 DrawBackground(canvas, frame);
+                DrawInnerFrame(canvas, frame);
 
                 if (!string.IsNullOrEmpty(SelectedTag) && !isTouching)
                 {

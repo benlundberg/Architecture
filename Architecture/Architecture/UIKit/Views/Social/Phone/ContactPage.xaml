@@ -42,6 +42,7 @@
                 VerticalOptions="Center"
                 HorizontalOptions="End"
                 Text="Edit"
+                Padding="{OnPlatform iOS=10}"
                 BorderColor="{StaticResource Accent}"
                 TextColor="{StaticResource Accent}"
                 Style="{StaticResource OutlineButton}" />

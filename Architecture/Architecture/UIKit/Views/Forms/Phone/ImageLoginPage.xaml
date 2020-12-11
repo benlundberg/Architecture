@@ -43,6 +43,7 @@
                 </Entry.TextColor>
             </Entry>
             <Entry 
+                FontSize="14"
                 Placeholder="Password"
                 IsPassword="True" 
                 Text="{Binding Password.Value, Mode=TwoWay}">

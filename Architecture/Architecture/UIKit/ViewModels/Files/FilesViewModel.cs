@@ -13,6 +13,8 @@ namespace Architecture.UIKit
     {
         public FilesViewModel()
         {
+            this.PickedFile = new ValidatableObject<string>();
+
             this.localFileSystemService = ComponentContainer.Current.Resolve<ILocalFileSystemService>();
         }
 
@@ -99,7 +101,7 @@ namespace Architecture.UIKit
 
                 if (data != null)
                 {
-                    PickedFile = data.FileName;
+                    PickedFile.Value = data.FileName;
                 }
             }
             catch (Exception ex)
@@ -155,7 +157,7 @@ namespace Architecture.UIKit
             return null;
         }
 
-        public string PickedFile { get; set; }
+        public ValidatableObject<string> PickedFile { get; set; }
 
         private readonly ILocalFileSystemService localFileSystemService;
 

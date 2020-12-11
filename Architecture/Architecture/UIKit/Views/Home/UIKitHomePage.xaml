@@ -46,8 +46,8 @@
             <!-- Data -->
             <Label Text="Data" FontSize="Large" />
             <Button Text="Data Table" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Task Overview" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Task Browser" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="3" />
+            <Button Text="Data Linear" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="2" />
+            <Button Text="Data Bars" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="3" />
             <!-- Dashboard -->
             <Label Text="Dashboard" FontSize="Large" />
             <Button Text="Flat List" Command="{Binding DashboardCommand, Source={x:Reference root}}" CommandParameter="1" />

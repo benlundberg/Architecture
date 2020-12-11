@@ -16,219 +16,90 @@
     </ContentPage.BindingContext>
     
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Joan Doe" />
+        <controls:PageTitleView Text="Info Detail" />
     </NavigationPage.TitleView>
 
     <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid  
-                Padding="{StaticResource LargePadding}"
-                BackgroundColor="{StaticResource PrimaryColor}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <StackLayout>
-                    <Label Text="Phone" FontSize="Micro" TextColor="{StaticResource SecondaryTextColor}" />
-                    <Label Text="+01 234 56" FontSize="Default" TextColor="{StaticResource SecondaryTextColor}" />
-                    <Label Text="Address" FontSize="Micro" TextColor="{StaticResource SecondaryTextColor}" />
-                    <Label Text="123 The Street, Street town" FontSize="Default" TextColor="{StaticResource SecondaryTextColor}" />
-                    <Label Text="E-mail" FontSize="Micro" TextColor="{StaticResource SecondaryTextColor}" />
-                    <Label Text="joan.doe@example.com" FontSize="Default" TextColor="{StaticResource SecondaryTextColor}" />
+        <Grid RowDefinitions="Auto, *" RowSpacing="0">
+            <Grid ColumnDefinitions="Auto, *" ColumnSpacing="16" Padding="24" Background="White">
+                <Label 
+                    Text="&#xf015;"
+                    FontSize="34"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+                <StackLayout Grid.Column="1" Spacing="4">
+                    <Label Text="Joan Doe" FontSize="Medium" />
+                    <Label Text="Service Manager" FontSize="Default" />
                 </StackLayout>
-                <Frame
-                    Grid.Column="1"
-                    Padding="0"
-                    HeightRequest="100"
-                    WidthRequest="100"
-                    VerticalOptions="Start"
-                    BackgroundColor="Transparent"
-                    BorderColor="Transparent"
-                    CornerRadius="10">
-                    <ff:CachedImage
-                        Aspect="AspectFill"
-                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg" />
-                </Frame>
+                <Label Text="Internal" FontSize="12" HorizontalOptions="End" Grid.Column="1" />
             </Grid>
-            <ImageButton 
-                Margin="0, 0, 28, -20"
-                VerticalOptions="End"
-                HorizontalOptions="End"
-                Style="{StaticResource FloatingButtonMini}">
+            <ImageButton Grid.Row="1" Style="{StaticResource FloatingButton}" VerticalOptions="Start" BackgroundColor="{StaticResource Accent}" HorizontalOptions="End" Margin="24, -28, 24, 0">
                 <ImageButton.Source>
-                    <FontImageSource
-                        Color="White"
+                    <FontImageSource 
                         FontFamily="{StaticResource FontAwesomeSolid}"
-                        Glyph="{StaticResource EditPenIcon}" />
+                        Glyph="{StaticResource HeartIcon}"
+                        Color="White" />
                 </ImageButton.Source>
             </ImageButton>
-            <StackLayout 
-                Grid.Row="1"
-                Padding="{StaticResource MainPadding}">
-                <Grid Margin="{StaticResource VerticalPadding}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Frame 
-                        BackgroundColor="{StaticResource DarkPrimaryColor}"
-                        BorderColor="{StaticResource DarkPrimaryColor}"
-                        HasShadow="False"
-                        CornerRadius="14" 
-                        Padding="14">
-                        <StackLayout>
-                            <Label 
-                                TextColor="White"
-                                FontSize="Small"
-                                Text="Income" />
-                            <Label 
-                                TextColor="White"
-                                Style="{StaticResource BoldLabel}"
-                                FontSize="Medium"
-                                Text="$12,512" />
-                            <Label 
-                                TextColor="White"
-                                FontSize="Micro"
-                                Margin="0, 10, 0, 0"
-                                Text="WORK"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame 
-                        Grid.Column="1"
-                        BackgroundColor="{StaticResource DarkPrimaryColor}"
-                        BorderColor="{StaticResource DarkPrimaryColor}"
-                        HasShadow="False"
-                        CornerRadius="14" 
-                        Padding="14">
-                        <StackLayout>
-                            <Label 
-                                TextColor="White"
-                                FontSize="Small"
-                                Text="Spent" />
-                            <Label 
-                                TextColor="White"
-                                Style="{StaticResource BoldLabel}"
-                                FontSize="Medium"
-                                Text="$2,512" />
-                            <Label 
-                                TextColor="White"
-                                FontSize="Micro"
-                                Margin="0, 10, 0, 0"
-                                Text="SKIIS"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame 
-                        Grid.Column="2"
-                        BackgroundColor="{StaticResource DarkPrimaryColor}"
-                        BorderColor="{StaticResource DarkPrimaryColor}"
-                        HasShadow="False"
-                        CornerRadius="14" 
-                        Padding="14">
-                        <StackLayout>
-                            <Label 
-                                TextColor="White"
-                                FontSize="Small"
-                                Text="Savings" />
-                            <Label 
-                                TextColor="White"
-                                Style="{StaticResource BoldLabel}"
-                                FontSize="Medium"
-                                Text="$2,500" />
-                            <Label 
-                                TextColor="White"
-                                FontSize="Micro"
-                                Margin="0, 10, 0, 0"
-                                Text="VAN"/>
-                        </StackLayout>
-                    </Frame>
-                </Grid>
-                <Frame>
-                    <StackLayout>
-                        <Label
-                            Text="Payment"
-                            FontSize="Small" 
-                            TextColor="{StaticResource GrayDark}" />
-                        <Grid ColumnSpacing="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Label 
-                                VerticalOptions="Start"
-                                FontSize="Large" 
-                                Text="&#xf53d;" 
-                                FontFamily="{StaticResource FontAwesomeSolid}" />
-                            <Grid Grid.Column="1">
-                                <Label 
-                                    Grid.Row="0"
-                                    FontSize="Medium"
-                                    Text="Bank account" />
-                                <Label 
-                                    Grid.Row="1"
-                                    FontSize="Small" 
-                                    TextColor="{StaticResource GrayDark}" 
-                                    Text="DSA-123131-213" />
+            <StackLayout Grid.Row="1" Padding="16, 24" Spacing="8">
+                
+                <Label Text="Contacts" FontSize="Medium" Style="{StaticResource SemiBoldLabel}" />
+                <StackLayout Spacing="0">
+                    <BindableLayout.ItemsSource>
+                        <x:String>ab</x:String>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="4, *, Auto" Padding="16" ColumnSpacing="16">
+                                <BoxView CornerRadius="4" Color="{StaticResource Accent}" />
+                                <StackLayout Grid.Column="1" Spacing="4">
+                                    <Label Text="John Doe" FontSize="Medium" Style="{StaticResource SemiBoldLabel}" />
+                                    <Label Text="Supervisor" FontSize="12" Style="{StaticResource SemiBoldLabel}" />
+                                </StackLayout>
+                                <Label Grid.Column="2" FontSize="Medium" Text="{StaticResource ChevronRightIcon}" FontFamily="{StaticResource FontAwesomeSolid}" VerticalOptions="Center" />
                             </Grid>
-                            <Label 
-                                Grid.Column="2" 
-                                VerticalOptions="Start"
-                                Text="40,122" 
-                                FontSize="Medium" 
-                                TextColor="{StaticResource PrimaryColor}" />
-                        </Grid>
-                    </StackLayout>
-                </Frame>
-                <Frame>
-                    <StackLayout>
-                        <Label
-                            Text="Savings"
-                            FontSize="Small" 
-                            TextColor="{StaticResource GrayDark}" />
-                        <StackLayout
-                            BindableLayout.ItemsSource="{Binding TwoItems}"
-                            Spacing="10">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid ColumnSpacing="10">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label 
-                                            VerticalOptions="Start"
-                                            FontSize="Large" 
-                                            Text="&#xf53d;" 
-                                            FontFamily="{StaticResource FontAwesomeSolid}" />
-                                        <Grid Grid.Column="1">
-                                            <Label 
-                                                Grid.Row="0"
-                                                FontSize="Medium"
-                                                Text="Retirement account" />
-                                            <Label 
-                                                Grid.Row="1"
-                                                FontSize="Small" 
-                                                TextColor="{StaticResource GrayDark}" 
-                                                Text="DSA-123131-213" />
-                                        </Grid>
-                                        <Label 
-                                            Grid.Column="2" 
-                                            VerticalOptions="Start"
-                                            Text="$60,122" 
-                                            FontSize="Medium" 
-                                            TextColor="{StaticResource PrimaryColor}" />
-                                    </Grid>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                
+                <Label Text="Places" FontSize="Medium" Style="{StaticResource SemiBoldLabel}" />
+                <StackLayout Spacing="16">
+                    <BindableLayout.ItemsSource>
+                        <x:String>ab</x:String>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="16">
+                                <Grid ColumnDefinitions="4, *, Auto" Padding="0" ColumnSpacing="16">
+                                    <BoxView CornerRadius="4" Color="{StaticResource PrimaryColor}" />
+                                    <StackLayout Grid.Column="1" Spacing="4">
+                                        <Label Text="Vancouver" FontSize="Medium" Style="{StaticResource SemiBoldLabel}" />
+                                        <Label Text="Canada" FontSize="12" Style="{StaticResource SemiBoldLabel}" />
+                                    </StackLayout>
+                                    <Label Grid.Column="2" FontSize="Medium" Text="{StaticResource ChevronRightIcon}" FontFamily="{StaticResource FontAwesomeSolid}" VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <Label Text="Tasks" FontSize="Medium" Style="{StaticResource SemiBoldLabel}" />
+                <StackLayout Spacing="16">
+                    <BindableLayout.ItemsSource>
+                        <x:String>ab</x:String>
+                    </BindableLayout.ItemsSource>
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="0">
+                                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" Padding="0" ColumnSpacing="0" RowSpacing="0">
+                                    <Label Text="Inspire" FontSize="12" Padding="16, 8" BackgroundColor="{StaticResource Gray}" />
+                                    <Label Grid.Column="1" Text="Today" FontSize="12" Padding="16, 8" BackgroundColor="{StaticResource Gray}" />
+                                    <Label Grid.Row="1" Text="San Franscisco" FontSize="Medium" Padding="16" Style="{StaticResource SemiBoldLabel}" />
+                                    <Label Grid.Row="1" Grid.Column="1" FontSize="Medium" Text="{StaticResource ChevronRightIcon}" Padding="16" FontFamily="{StaticResource FontAwesomeSolid}" HorizontalOptions="End" VerticalOptions="Center" />
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ScrollView>
