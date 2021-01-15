@@ -54,7 +54,7 @@
     <ScrollView>
         <StackLayout Spacing="0">
             <CarouselView
-                ItemsSource="{Binding NatureArticles}" 
+                ItemsSource="{Binding Articles1}" 
                 IndicatorView="indicatorView"
                 HeightRequest="192">
                 <CarouselView.ItemsLayout>
@@ -96,7 +96,7 @@
                 IndicatorSize="10"
                 Margin="16, 16, 16, 24" />
             <CollectionView
-                ItemsSource="{Binding SportArticles}"
+                ItemsSource="{Binding Articles2}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"
@@ -117,7 +117,7 @@
             </CollectionView>
             <CollectionView
                 Margin="0, 16"
-                ItemsSource="{Binding AnimalArticles}"
+                ItemsSource="{Binding Articles3}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"

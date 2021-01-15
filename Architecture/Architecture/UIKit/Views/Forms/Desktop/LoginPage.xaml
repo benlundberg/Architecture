@@ -5,11 +5,7 @@
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:local="clr-namespace:Architecture.UIKit"
              Visual="Material"
-             x:DataType="local:LoginViewModel">
-
-    <ContentPage.BindingContext>
-        <local:LoginViewModel />
-    </ContentPage.BindingContext>
+             x:DataType="local:TabbedLoginViewModel">
 
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Login" />
@@ -17,63 +13,118 @@
     
     <ContentPage.Content>
 
-        <Grid ColumnDefinitions="*, *, *">
-            <StackLayout
-                Grid.Column="1"
-                Spacing="{StaticResource MainSpacing}"
-                Padding="{StaticResource ExtraLargePadding}"
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <Label
-                    TextColor="{StaticResource PrimaryColor}"
-                    Margin="0, 40"
-                    VerticalOptions="Center"
-                    FontSize="42"
-                    Text="Login" />
-                <Entry 
-                    Placeholder="Username"
-                    Text="{Binding Username.Value, Mode=TwoWay}" />
-                <Entry 
+        <Grid ColumnDefinitions="*, 2*">
+
+            <Grid>
+                <BoxView BackgroundColor="{StaticResource Gray}" CornerRadius="0, 16, 0, 16" />
+                <StackLayout Margin="40" Spacing="24">
+                    <Label TextColor="{StaticResource DarkPrimaryColor}" Text="Welcome to this app" FontSize="42" Style="{StaticResource SemiBoldLabel}" />
+                    <controls:SegmentView 
+                        x:Name="SegmentControl"
+                        SegmentRowWidth="Auto"
+                        SegmentedControlMode="Text">
+                        <controls:SegmentView.ItemsSource>
+                            <controls:SegmentControlItem Text="Log in" Tag="1" IsSelected="True" />
+                            <controls:SegmentControlItem Text="Sign up" Tag="2" />
+                        </controls:SegmentView.ItemsSource>
+                    </controls:SegmentView>
+                </StackLayout>
+                <Label Margin="0, 0, 0, 24" FontSize="Default" Style="{StaticResource SemiBoldLabel}" Text="A GOOD APP IS BUILT WITH CARE" HorizontalOptions="Center" VerticalOptions="End" />
+            </Grid>
+
+            <!-- Log in -->
+            <StackLayout Grid.Column="1" VerticalOptions="Center" Margin="120, 40">
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding SelectedTag, Source={x:Reference SegmentControl}}" Value="1">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding SelectedTag, Source={x:Reference SegmentControl}}" Value="2">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </StackLayout.Triggers>
+                <Label Text="Log in" FontSize="42" Style="{StaticResource SemiBoldLabel}" />
+                <Label Text="Welcome back! Sign in to explore what's new" FontSize="Default" Style="{StaticResource SemiBoldLabel}" />
+
+                <controls:FrameEntry 
+                    Placeholder="Email" 
+                    Keyboard="Email"
+                    Text="{Binding LoginModel.Username, Mode=TwoWay}" />
+                <controls:FrameEntry
                     Placeholder="Password"
                     IsPassword="True"
-                    Text="{Binding Password.Value, Mode=TwoWay}" />
+                    Text="{Binding LoginModel.Password, Mode=TwoWay}" />
                 <StackLayout 
                     HorizontalOptions="Start"
                     Orientation="Horizontal">
                     <CheckBox 
                         Color="{StaticResource PrimaryColor}"
-                        IsChecked="{Binding RememberMe, Mode=TwoWay}"
+                        IsChecked="{Binding LoginModel.RememberMe, Mode=TwoWay}"
                         WidthRequest="32" />
                     <Label 
                         FontSize="Default"
                         VerticalOptions="Center"
                         Text="Remember me" />
                 </StackLayout>
+
                 <Button 
-                    Command="{Binding LoginCommand}" 
+                    Command="{Binding LoginModel.LoginCommand}" 
                     Text="{StaticResource CheckIcon}"
+                    Style="{StaticResource RoundedButton}"
                     FontFamily="{StaticResource FontAwesomeSolid}" />
+
                 <Label
-                    Style="{StaticResource BoldLabel}"
+                    Margin="0, 8, 0, 0"
                     TextColor="{StaticResource PrimaryColor}"
                     FontSize="Default"
                     HorizontalOptions="End"
                     Text="Forgot password?">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                        <TapGestureRecognizer Command="{Binding LoginModel.ForgotPasswordCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
+            </StackLayout>
+            
+            <!-- Sign up -->
+            <StackLayout Grid.Column="1" VerticalOptions="Center" Margin="120, 40">
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding SelectedTag, Source={x:Reference SegmentControl}}" Value="2">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding SelectedTag, Source={x:Reference SegmentControl}}" Value="1">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                </StackLayout.Triggers>
+                <Label Text="Sign up" FontSize="42" Style="{StaticResource SemiBoldLabel}" />
+                <Label Text="Join many others! Sign up to join this amazing commmunity" FontSize="Default" Style="{StaticResource SemiBoldLabel}" />
+
+                <controls:FrameEntry
+                    Text="{Binding SignUpModel.Email, Mode=TwoWay}"
+                    Keyboard="Email"
+                    Placeholder="Email" />
+                <controls:FrameEntry 
+                    Text="{Binding SignUpModel.Password, Mode=TwoWay}"
+                    IsPassword="True"
+                    Placeholder="Password" />
+                <controls:FrameEntry 
+                    Text="{Binding SignUpModel.ConfirmPassword, Mode=TwoWay}"
+                    IsPassword="True"
+                    Placeholder="Confirm password" />
+                <Button 
+                    Command="{Binding SignUpModel.RegisterCommand}" 
+                    Text="{StaticResource CheckIcon}"
+                    Style="{StaticResource RoundedButton}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
             </StackLayout>
             
             <Label
                 Grid.ColumnSpan="3"
                 Margin="0, 40, 40, 0"
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
                 FontSize="Large"
                 Text="{StaticResource CloseIcon}"
                 FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="Black">
+                TextColor="{StaticResource BlackLight}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PopModalCommand}" />
                 </Label.GestureRecognizers>

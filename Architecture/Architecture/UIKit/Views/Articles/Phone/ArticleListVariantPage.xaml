@@ -23,7 +23,7 @@
         Margin="16, 0"
         SelectionMode="Single"
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-        ItemsSource="{Binding NatureArticles}">
+        ItemsSource="{Binding Articles2}">
         <CollectionView.ItemsLayout>
             <LinearItemsLayout 
                 Orientation="Vertical"

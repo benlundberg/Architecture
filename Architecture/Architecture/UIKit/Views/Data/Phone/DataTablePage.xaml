@@ -239,13 +239,13 @@
 
             </controls:TableControl.ItemTemplates>
         </controls:TableControl>
-        <Expander 
+        <controls:SlideView 
             Grid.RowSpan="2"
             Margin="24"
             VerticalOptions="End"
             HorizontalOptions="End"
             Rotation="180">
-            <Expander.Header>
+            <controls:SlideView.HeaderContent>
                 <StackLayout>
                     <ImageButton
                         HorizontalOptions="Start"
@@ -258,56 +258,58 @@
                         </ImageButton.Source>
                     </ImageButton>
                 </StackLayout>
-            </Expander.Header>
-            <StackLayout
-                Margin="0, 8"
-                Spacing="8"
-                Rotation="180">
-                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
-                    <Label 
-                        VerticalOptions="Center"
-                        BackgroundColor="White"
-                        TextColor="Black"
-                        Text="Remove" />
-                    <ImageButton Style="{StaticResource FloatingButton}">
-                        <ImageButton.Source>
-                            <FontImageSource 
-                                FontFamily="{StaticResource FontAwesomeSolid}"
-                                Glyph="{StaticResource RemoveIcon}"/>
-                        </ImageButton.Source>
-                    </ImageButton>
-                </StackLayout>
+            </controls:SlideView.HeaderContent>
+            <controls:SlideView.HiddenContent>
+                <StackLayout
+                    Margin="0, 8"
+                    Spacing="8"
+                    Rotation="180">
+                    <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                        <Label 
+                            VerticalOptions="Center"
+                            BackgroundColor="White"
+                            TextColor="Black"
+                            Text="Remove" />
+                        <ImageButton Style="{StaticResource FloatingButton}">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                    Glyph="{StaticResource RemoveIcon}"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </StackLayout>
 
-                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
-                    <Label 
-                        VerticalOptions="Center"
-                        BackgroundColor="White"
-                        TextColor="Black"
-                        Text="Search" />
-                    <ImageButton Style="{StaticResource FloatingButton}">
-                        <ImageButton.Source>
-                            <FontImageSource 
-                                FontFamily="{StaticResource FontAwesomeSolid}"
-                                Glyph="{StaticResource SearchIcon}"/>
-                        </ImageButton.Source>
-                    </ImageButton>
-                </StackLayout>
+                    <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                        <Label 
+                            VerticalOptions="Center"
+                            BackgroundColor="White"
+                            TextColor="Black"
+                            Text="Search" />
+                        <ImageButton Style="{StaticResource FloatingButton}">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    FontFamily="{StaticResource FontAwesomeSolid}"
+                                    Glyph="{StaticResource SearchIcon}"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </StackLayout>
 
-                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
-                    <Label 
-                        VerticalOptions="Center"
-                        BackgroundColor="White"
-                        TextColor="Black"
-                        Text="Send" />
-                    <ImageButton Style="{StaticResource FloatingButton}">
-                        <ImageButton.Source>
-                            <FontImageSource 
-                                FontFamily="{StaticResource FontAwesomeRegular}"
-                                Glyph="{StaticResource SendIcon}"/>
-                        </ImageButton.Source>
-                    </ImageButton>
+                    <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                        <Label 
+                            VerticalOptions="Center"
+                            BackgroundColor="White"
+                            TextColor="Black"
+                            Text="Send" />
+                        <ImageButton Style="{StaticResource FloatingButton}">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    FontFamily="{StaticResource FontAwesomeRegular}"
+                                    Glyph="{StaticResource SendIcon}"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </Expander>
+            </controls:SlideView.HiddenContent>
+        </controls:SlideView>
     </Grid>
 </ContentPage>

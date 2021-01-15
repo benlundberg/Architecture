@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Architecture.UIKit.Views.Desktop.ArticlesView"
              xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:xf="clr-namespace:Architecture"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
              x:DataType="local:ArticlesViewModel"
@@ -14,17 +16,118 @@
     </ContentPage.BindingContext>
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Articles" />
+        <controls:PageTitleView Text="" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
 
-        <Grid 
-            ColumnDefinitions="2*, *"
-            RowDefinitions="*, *"
-            ColumnSpacing="40"
-            Margin="{StaticResource DesktopMargin}">
+        <Grid ColumnDefinitions="*, 4*">
+            <Grid>
+                <BoxView CornerRadius="0, 16, 0, 16" BackgroundColor="White" />
+                <StackLayout>
+                    <Label Text="Articles" FontSize="Title" Style="{StaticResource SemiBoldLabel}" Margin="40" />
+                    <CollectionView
+                        ItemsSource="{Binding Menu}"
+                        SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Vertical"
+                                ItemSpacing="16" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="xf:MenuViewModel">
+                                <Label Padding="40, 0, 0 ,0" FontSize="Default" Style="{StaticResource SemiBoldLabel}" Text="{Binding Title}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
 
+            <Grid Grid.Column="1">
+                <ScrollView >
+                    <StackLayout Margin="40" IsVisible="{Binding IsList, Converter={StaticResource InvertedBoolConv}}">
+
+                        <Label Margin="0, 0, 0, 8" Text="Discover" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
+                        <FlexLayout
+                                BindableLayout.ItemsSource="{Binding Articles2}"
+                                Wrap="Wrap">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="local:ArticleItemViewModel">
+                                    <Frame Margin="12" Padding="0" CornerRadius="50" HeightRequest="100" WidthRequest="100" HasShadow="False" BorderColor="Transparent" BackgroundColor="Transparent">
+                                        <ff:CachedImage Aspect="AspectFill" Source="{Binding ImageSource}">
+                                        </ff:CachedImage>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+
+                        <Label Margin="0, 16, 0, 8" Text="Explore" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
+                        <FlexLayout
+                                BindableLayout.ItemsSource="{Binding Articles3}"
+                                Wrap="Wrap">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="local:ArticleItemViewModel">
+                                    <StackLayout Margin="16">
+                                        <Frame Padding="0" CornerRadius="16" HasShadow="False" BorderColor="Transparent" BackgroundColor="Transparent">
+                                            <ff:CachedImage HeightRequest="250" WidthRequest="225" Aspect="AspectFill" Source="{Binding ImageSource}" />
+                                        </Frame>
+                                        <Label Text="{Binding Title}" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
+                                        <Label Text="{Binding Category}" FontSize="Default" TextColor="{StaticResource BlackLight}" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </FlexLayout>
+                    </StackLayout>
+                </ScrollView>
+
+                <Grid IsVisible="{Binding IsList}" ColumnDefinitions="3*, *">
+                    <StackLayout Margin="40">
+                        <Label Text="March 3, 2020" FontSize="Default" TextColor="{StaticResource BlackLight}" />
+                        <Label Text="Today we see this!" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
+
+                        <CollectionView
+                            ItemsSource="{Binding Articles3}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="local:ArticleItemViewModel">
+                                    <Grid ColumnDefinitions="Auto, Auto" Padding="16" ColumnSpacing="16">
+                                        <ff:CachedImage HeightRequest="175" WidthRequest="280" Aspect="AspectFill" Source="{Binding ImageSource}" />
+                                        <StackLayout Grid.Column="1">
+                                            <Label FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" Text="{Binding Title}" />
+                                            <Label FontSize="Default" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporLorem ipsum dolor sit amet, consectetur " />
+                                        </StackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <StackLayout Grid.Column="1" BackgroundColor="{StaticResource PrimaryColor}" Padding="24">
+                        <Label TextColor="White" Text="Favourites" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
+
+                        <CollectionView
+                            ItemsSource="{Binding Articles3}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="local:ArticleItemViewModel">
+                                    <Grid ColumnDefinitions="Auto, Auto" Padding="16" ColumnSpacing="16">
+                                        <ff:CachedImage VerticalOptions="Start" HeightRequest="60" WidthRequest="60" Aspect="AspectFill" Source="{Binding ImageSource}" />
+                                        <StackLayout Grid.Column="1">
+                                            <Label TextColor="White" FontSize="Default" Style="{StaticResource SemiBoldLabel}" Text="{Binding Title}" />
+                                            <Label MaxLines="3" LineBreakMode="TailTruncation" TextColor="White" FontSize="Micro" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporLorem ipsum dolor sit amet, consectetur " />
+                                        </StackLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Grid>
+            </Grid>
         </Grid>
 
     </ContentPage.Content>

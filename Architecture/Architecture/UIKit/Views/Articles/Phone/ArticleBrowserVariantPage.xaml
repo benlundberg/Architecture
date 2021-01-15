@@ -56,7 +56,7 @@
             <Label Margin="16, 8" Text="Discover" FontSize="Title" Style="{StaticResource SemiBoldLabel}" />
             <CarouselView
                 Margin="8, 0"
-                ItemsSource="{Binding NatureArticles}" 
+                ItemsSource="{Binding Articles1}" 
                 IndicatorView="indicatorView"
                 HeightRequest="192">
                 <CarouselView.ItemsLayout>
@@ -103,7 +103,7 @@
             <Label Margin="16, 0" Text="Top" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
             <CollectionView
                 Margin="0, 8, 0, 16"
-                ItemsSource="{Binding SportArticles}"
+                ItemsSource="{Binding Articles2}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"
@@ -125,7 +125,7 @@
             <Label Margin="16, 0" Text="For you" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
             <CollectionView
                 Margin="0, 8, 0, 16"
-                ItemsSource="{Binding AnimalArticles}"
+                ItemsSource="{Binding Articles3}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 ItemTemplate="{StaticResource arcticleItem}"
                 SelectionMode="Single"

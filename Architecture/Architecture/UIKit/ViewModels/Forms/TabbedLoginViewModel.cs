@@ -2,7 +2,11 @@
 {
     public class TabbedLoginViewModel : BaseViewModel
     {
-        public LoginViewModel LoginModel { get; set; } = new LoginViewModel();
-        public SignUpViewModel SignUpModel { get; set; } = new SignUpViewModel();
+        public TabbedLoginViewModel()
+        {
+        }
+
+        public LoginViewModel LoginModel { get; set; } 
+        public SignUpViewModel SignUpModel { get; set; }
     }
 }

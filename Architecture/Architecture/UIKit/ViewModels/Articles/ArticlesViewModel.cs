@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -9,162 +10,56 @@ namespace Architecture.UIKit
     {
         public ArticlesViewModel()
         {
+            if (Device.Idiom == TargetIdiom.Desktop)
+            {
+                Menu = new ObservableCollection<MenuViewModel>
+                {
+                    new MenuViewModel { Id = 1, Title = "Browser" },
+                    new MenuViewModel { Id = 2, Title = "List" },
+                };
+
+                SelectedMenuItem = Menu.First();
+            }
+
             LoadData();
         }
 
         private void LoadData()
         {
-            NatureArticles = new ObservableCollection<ArticleItemViewModel>
-            {
-                new ArticleItemViewModel
-                {
-                    Category = "Nature".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is nature",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Nature".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is nature",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Nature".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is nature",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Nature".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is nature",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Nature".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is nature",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-            };
+            Articles1 = new ObservableCollection<ArticleItemViewModel>();
 
-            SportArticles = new ObservableCollection<ArticleItemViewModel>
+            for (int i = 0; i < 6; i++)
             {
-                new ArticleItemViewModel
+                Articles1.Add(new ArticleItemViewModel
                 {
-                    Category = "Sport".ToUpper(),
+                    Category = "Nature",
                     Year = DateTime.Today.Year.ToString(),
-                    Title = "This is sport",
+                    Title = "This is nature",
                     ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Sport".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is sport",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Sport".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is sport",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Sport".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is sport",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Sport".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is sport",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Sport".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is sport",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-            };
+                });
+            }
 
-            AnimalArticles = new ObservableCollection<ArticleItemViewModel>
+            Articles2 = new ObservableCollection<ArticleItemViewModel>();
+            Articles3 = new ObservableCollection<ArticleItemViewModel>();
+
+            for (int i = 0; i < 12; i++)
             {
-                new ArticleItemViewModel
+                Articles2.Add(new ArticleItemViewModel
                 {
-                    Category = "Animal".ToUpper(),
+                    Category = "Travels",
                     Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
+                    Title = "This is travels",
                     ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
+                });
+
+                Articles3.Add(new ArticleItemViewModel
                 {
-                    Category = "Animal".ToUpper(),
+                    Category = "Food",
                     Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
+                    Title = "This is foods",
                     ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Animal".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Animal".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Animal".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Animal".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Animal".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Animal".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-                new ArticleItemViewModel
-                {
-                    Category = "Animal".ToUpper(),
-                    Year = DateTime.Today.Year.ToString(),
-                    Title = "This is animals",
-                    ImageSource = ImageService.GetRandomImage()
-                },
-            };
+                });
+            }
         }
 
         private ICommand itemClickedCommand;
@@ -181,7 +76,7 @@ namespace Architecture.UIKit
         private void ItemSelected(string title)
         {
             ShowAlert($"You clicked {title}", "Clicked");
-        } 
+        }
 
         private ArticleItemViewModel selectedItem;
         public ArticleItemViewModel SelectedItem
@@ -195,14 +90,22 @@ namespace Architecture.UIKit
                 {
                     ItemSelected(selectedItem.Title);
 
-                    SelectedItem = null; 
+                    SelectedItem = null;
                 }
             }
         }
 
-        public ObservableCollection<ArticleItemViewModel> NatureArticles { get; private set; }
-        public ObservableCollection<ArticleItemViewModel> SportArticles { get; private set; }
-        public ObservableCollection<ArticleItemViewModel> AnimalArticles { get; private set; }
+        public ObservableCollection<ArticleItemViewModel> Articles1 { get; private set; }
+        public ObservableCollection<ArticleItemViewModel> Articles2 { get; private set; }
+        public ObservableCollection<ArticleItemViewModel> Articles3 { get; private set; }
+
+        #region Desktop
+
+        public bool IsList => SelectedMenuItem?.Id != 1;
+        public MenuViewModel SelectedMenuItem { get; set; }
+        public ObservableCollection<MenuViewModel> Menu { get; set; }
+
+        #endregion
     }
 
     public class ArticleItemViewModel : BaseItemViewModel

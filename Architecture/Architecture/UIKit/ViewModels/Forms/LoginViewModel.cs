@@ -1,4 +1,5 @@
-﻿using Architecture.Core;
+﻿using Architecture.Controls;
+using Architecture.Core;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -43,21 +44,18 @@ namespace Architecture.UIKit
                 return;
             }
 
-            if (!Username.Validate())
+            if (!Username.Validate() || !Password.Validate())
             {
-                ShowAlert(Username.Error, "Login");
                 return;
             }
 
-            if (!Password.Validate())
-            {
-                ShowAlert(Password.Error, "Login");
-                return;
-            }
+            var loading = new LoadingPopup("Signing you in");
 
             try
             {
                 IsBusy = true;
+
+                await loading.ShowAsync();
 
                 await Task.Delay(TimeSpan.FromSeconds(2));
             }
@@ -69,6 +67,7 @@ namespace Architecture.UIKit
             finally
             {
                 IsBusy = false;
+                await loading.HideAsync();
             }
         }));
 

@@ -57,30 +57,39 @@ namespace Architecture.UIKit.Views
                 return;
             }
 
+            if (Device.Idiom == TargetIdiom.Desktop)
+            {
+                await Navigation.PushModalAsync(new Desktop.LoginPage()
+                {
+                    BindingContext = new TabbedLoginViewModel
+                    {
+                        LoginModel = new LoginViewModel { Navigation = this.Navigation },
+                        SignUpModel = new SignUpViewModel { Navigation = this.Navigation },
+                        Navigation = this.Navigation
+                    }
+                });
+
+                return;
+            }
+
             switch (page)
             {
                 case 1:
-                    if (Device.Idiom == TargetIdiom.Desktop)
-                    {
-                        await Navigation.PushModalAsync(new Desktop.LoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
-                    }
-                    else
-                    {
-                        await Navigation.PushModalAsync(new FullLoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
-                    }
+                    await Navigation.PushModalAsync(new FullLoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
                     break;
                 case 2:
-                    if (Device.Idiom == TargetIdiom.Desktop)
-                    {
-                        await Navigation.PushModalAsync(new Desktop.SignUpPage() { BindingContext = new SignUpViewModel { Navigation = this.Navigation } });
-                    }
-                    else
-                    {
-                        await Navigation.PushModalAsync(new FullSignUpPage() { BindingContext = new SignUpViewModel { Navigation = this.Navigation } });
-                    }
+                    await Navigation.PushModalAsync(new FullSignUpPage() { BindingContext = new SignUpViewModel { Navigation = this.Navigation } });
                     break;
                 case 3:
-                    await Navigation.PushModalAsync(new TabbedLoginPage() { BindingContext = new TabbedLoginViewModel { Navigation = this.Navigation } });
+                    await Navigation.PushModalAsync(new TabbedLoginPage()
+                    {
+                        BindingContext = new TabbedLoginViewModel
+                        {
+                            LoginModel = new LoginViewModel { Navigation = this.Navigation },
+                            SignUpModel = new SignUpViewModel { Navigation = this.Navigation },
+                            Navigation = this.Navigation
+                        }
+                    });
                     break;
                 case 4:
                     await Navigation.PushModalAsync(new ImageLoginPage() { BindingContext = new LoginViewModel { Navigation = this.Navigation } });
@@ -94,6 +103,13 @@ namespace Architecture.UIKit.Views
         {
             if (!int.TryParse(param?.ToString(), out int page))
             {
+                return;
+            }
+
+            if (Device.Idiom == TargetIdiom.Desktop)
+            {
+                await Navigation.PushAsync(new Desktop.ListPage());
+
                 return;
             }
 
@@ -148,7 +164,7 @@ namespace Architecture.UIKit.Views
                     break;
             }
         }));
-        
+
         // Handles data pages
         private ICommand dataCommand;
         public ICommand DataCommand => dataCommand ?? (dataCommand = new Command(async (param) =>
@@ -176,8 +192,8 @@ namespace Architecture.UIKit.Views
                     await Navigation.PushAsync(new TaskBrowserPage());
                     break;
             }
-        })); 
-        
+        }));
+
         // Handles dashboard pages
         private ICommand dashboardCommand;
         public ICommand DashboardCommand => dashboardCommand ?? (dashboardCommand = new Command(async (param) =>
@@ -203,7 +219,7 @@ namespace Architecture.UIKit.Views
                     break;
             }
         }));
-        
+
         // Handles social pages
         private ICommand socialCommand;
         public ICommand SocialCommand => socialCommand ?? (socialCommand = new Command(async (param) =>
@@ -228,8 +244,8 @@ namespace Architecture.UIKit.Views
                     await Navigation.PushAsync(new EditContactPage());
                     break;
             }
-        }));   
-        
+        }));
+
         // Handles settings pages
         private ICommand settingsCommand;
         public ICommand SettingsCommand => settingsCommand ?? (settingsCommand = new Command(async (param) =>
@@ -286,7 +302,7 @@ namespace Architecture.UIKit.Views
                     break;
             }
         }));
-        
+
         private ICommand mediaCommand;
         public ICommand MediaCommand => mediaCommand ?? (mediaCommand = new Command(async (param) =>
         {

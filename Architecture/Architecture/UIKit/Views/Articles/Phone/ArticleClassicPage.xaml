@@ -22,7 +22,7 @@
     <CollectionView 
         SelectionMode="Single"
         SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-        ItemsSource="{Binding NatureArticles}">
+        ItemsSource="{Binding Articles2}">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="local:ArticleItemViewModel">
                 <Grid 

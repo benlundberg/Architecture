@@ -62,6 +62,9 @@ namespace Architecture.Controls
                 // If selected we display content
                 if (item.IsSelected)
                 {
+                    SelectedSegment = item;
+                    SelectedTag = item.Tag;
+
                     this.MainContent = item.Content;
                 }
 
@@ -308,6 +311,8 @@ namespace Architecture.Controls
             UpdateSelectedSegmentLayout(segmentControlItem);
 
             SelectedSegment = segmentControlItem;
+
+            SelectedTag = SelectedSegment.Tag;
 
             ValueChangedCommand?.Execute(SelectedSegment.Tag);
         }));

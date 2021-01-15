@@ -1,4 +1,5 @@
-﻿using Architecture.Core;
+﻿using Architecture.Controls;
+using Architecture.Core;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -23,15 +24,44 @@ namespace Architecture.UIKit
         {
             if (!Email.Validate())
             {
-                ShowAlert(Email.Error, "Forgot password");
                 return;
             }
 
-            IsBusy = true;
+            var loading = new LoadingPopup("Sending restore password link");
 
-            await Task.Delay(TimeSpan.FromSeconds(1));
+            try
+            {
+                IsBusy = true;
 
-            IsBusy = false;
+                await loading.ShowAsync();
+
+                await Task.Delay(TimeSpan.FromSeconds(2));
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex, GetType().ToString(), sendToService: false);
+                ShowAlert(ex.Message, "Exception");
+            }
+            finally
+            {
+                IsBusy = false;
+                await loading.HideAsync();
+            }
+
+            try
+            {
+                var notification = new NotificationPopup(new NotificationOption
+                {
+                    MessageTitle = "Check your email",
+                    Message = "A restore link have been sent to your email"
+                });
+
+                await notification.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                ex.Print();
+            }
 
             PopModalCommand.Execute(null);
         }));

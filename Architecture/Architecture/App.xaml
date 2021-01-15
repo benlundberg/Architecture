@@ -87,7 +87,8 @@
             <x:String x:Key="OpenSansSemiBold">OpenSansSemiBold</x:String>
 
             <x:String x:Key="SegmentControlFont">MontserratRegular</x:String>
-            
+            <x:String x:Key="PageTitleFont">MontserratSemiBold</x:String>
+
             <!--#endregion-->
             
             <!--#region Margin and Padding -->

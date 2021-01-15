@@ -8,7 +8,7 @@
              x:Name="root">
 
     <Frame
-        Padding="{OnPlatform Android=4, iOS=10}"
+        Padding="{OnPlatform Android=4, iOS=10, UWP=6}"
         Margin="0, 10, 0, 0"
         HasShadow="False"
         BorderColor="{Binding InternalBorderColor, Source={x:Reference root}}"

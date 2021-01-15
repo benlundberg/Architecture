@@ -72,8 +72,8 @@ namespace Architecture.Controls
                 TextColor = Application.Current.ToolbarTextColor(),
                 VerticalOptions = LayoutOptions.Center,
                 FontSize = 14,
-                Margin = Device.Idiom == TargetIdiom.Desktop ? new Thickness(40, 0, 0, 0) : new Thickness(0),
-                FontFamily = "MontserratSemiBold"
+                Margin = Device.Idiom == TargetIdiom.Desktop && !view.IsCentered ? new Thickness(40, 0, 0, 0) : new Thickness(0),
+                FontFamily = App.Current.Get<string>("PageTitleFont")
             });
         }
 

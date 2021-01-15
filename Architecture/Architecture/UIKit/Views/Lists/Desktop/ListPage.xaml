@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.Desktop.ListPage"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:properties="clr-namespace:Architecture.Resources"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             x:DataType="local:ListViewModel"
+             x:Name="listPageRoot">
+
+    <ContentPage.BindingContext>
+        <local:ListViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <Grid ColumnDefinitions="*, 2*" RowDefinitions="Auto, *">
+            <BoxView Grid.RowSpan="2" CornerRadius="0, 16, 0, 16" BackgroundColor="White" />
+            
+            <StackLayout Margin="16" Spacing="16">
+
+                <Label
+                    Text="Simple List"
+                    FontSize="Title"
+                    Style="{StaticResource SemiBoldLabel}" />
+
+                <controls:SearchEntry 
+                    Text="{Binding Query, Mode=TwoWay}"
+                    EntryBackground="#EEEFF4"
+                    BorderColor="#EEEFF4"
+                    Placeholder="{x:Static properties:Strings.Gen_Search}"
+                    PlaceholderColor="{StaticResource ToolbarTextColor}"
+                    TextColor="{StaticResource ToolbarTextColor}"
+                    TextChangedCommand="{Binding SearchTextChangedCommand}"
+                    SearchIconColor="{StaticResource ToolbarTextColor}"
+                    ClearIconColor="{StaticResource ToolbarTextColor}"/>
+            </StackLayout>
+
+            <controls:SegmentView Grid.Row="1" SegmentedControlMode="Round">
+                <controls:SegmentView.ItemsSource>
+                    <controls:SegmentControlItem Text="Text Cell" IsSelected="True" Tag="1">
+                        <controls:SegmentControlItem.Content>
+                            <RefreshView 
+                                RefreshColor="{StaticResource PrimaryColor}"
+                                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                                Command="{Binding RefreshListCommand}"> 
+                                <CollectionView 
+			                        ItemsSource="{Binding Items}"
+                                    SelectionMode="Single"
+			                        SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="local:ListItemViewModel">
+                                            <StackLayout Padding="16" Spacing="0">
+                                                <Label 
+                                                    FontSize="Medium"
+                                                    Text="{Binding Title}" />
+                                                <Label 
+                                                    FontSize="Default"
+                                                    TextColor="{StaticResource BlackLight}"
+                                                    Text="{Binding SubTitle}" />
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </RefreshView>
+                        </controls:SegmentControlItem.Content>
+                    </controls:SegmentControlItem>
+                    <controls:SegmentControlItem Text="Image Cell" Tag="2">
+                        <controls:SegmentControlItem.Content>
+                            <RefreshView 
+                                RefreshColor="{StaticResource PrimaryColor}"
+                                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+                                Command="{Binding RefreshListCommand}">
+                                <CollectionView 
+			                        ItemsSource="{Binding Items}"
+                                    SelectionMode="Single"
+			                        SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="local:ListItemViewModel">
+                                            <Grid Padding="16, 12" ColumnDefinitions="Auto, *" ColumnSpacing="16">
+                                                <ff:CachedImage 
+                                                    HeightRequest="64"
+                                                    WidthRequest="64"
+                                                    Aspect="AspectFill"
+                                                    Source="{Binding ImageSource}"/>
+                                                <StackLayout Spacing="4" Grid.Column="1">
+                                                    <Label 
+                                                        FontSize="16"
+                                                        Text="{Binding Title}" />
+                                                    <Label 
+                                                        FontSize="14"
+                                                        TextColor="{StaticResource BlackLight}"
+                                                        Text="{Binding SubTitle}" />
+                                                </StackLayout>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </RefreshView>
+                        </controls:SegmentControlItem.Content>
+                    </controls:SegmentControlItem>
+                </controls:SegmentView.ItemsSource>
+            </controls:SegmentView>
+        </Grid>
+    </ContentPage.Content>
+    
+</ContentPage>

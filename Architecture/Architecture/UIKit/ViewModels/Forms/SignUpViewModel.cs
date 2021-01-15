@@ -1,4 +1,5 @@
-﻿using Architecture.Core;
+﻿using Architecture.Controls;
+using Architecture.Core;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,29 +33,36 @@ namespace Architecture.UIKit
         private ICommand registerCommand;
         public ICommand RegisterCommand => registerCommand ?? (registerCommand = new Command(async () =>
         {
-            if (!Email.Validate())
+            if (IsBusy)
             {
-                ShowAlert(Email.Error, "Sing up");
+                return;
+            }
+            
+            if (!Email.Validate() || !Password.Validate() || !ConfirmPassword.Validate())
+            {
                 return;
             }
 
-            if (!Password.Validate())
+            var loading = new LoadingPopup("Signing you up");
+
+            try
             {
-                ShowAlert(Password.Error, "Sing up");
-                return;
-            }
+                IsBusy = true;
 
-            if (!ConfirmPassword.Validate())
+                await loading.ShowAsync();
+
+                await Task.Delay(TimeSpan.FromSeconds(2));
+            }
+            catch (Exception ex)
             {
-                ShowAlert(ConfirmPassword.Error, "Sing up");
-                return;
+                Logger.LogException(ex, GetType().ToString(), sendToService: false);
+                ShowAlert(ex.Message, "Exception");
             }
-
-            IsBusy = true;
-
-            await Task.Delay(TimeSpan.FromSeconds(1.5));
-
-            IsBusy = false;
+            finally
+            {
+                IsBusy = false;
+                await loading.HideAsync();
+            }
         }));
 
         public ValidatableObject<string> Email { get; set; }
