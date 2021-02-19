@@ -52,6 +52,11 @@ namespace Architecture.Droid
             CreateNotificationFromIntent(Intent);
         }
 
+        protected override void OnNewIntent(Intent intent)
+        {
+            CreateNotificationFromIntent(intent);
+        }
+
         private void CreateNotificationFromIntent(Intent intent)
         {
             if (intent?.Extras == null)

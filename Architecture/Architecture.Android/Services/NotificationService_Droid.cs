@@ -63,9 +63,21 @@ namespace Architecture.Droid
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
+                .SetNumber(messageId)
+                .SetBadgeIconType(NotificationCompat.BadgeIconSmall)
                 .SetLargeIcon(BitmapFactory.DecodeResource(global::Android.App.Application.Context.Resources, Resource.Drawable.ic_launcher))
-                .SetSmallIcon(Resource.Drawable.ic_launcher)
-                .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
+                .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate)
+                .SetAutoCancel(true);
+
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            {
+                builder.SetSmallIcon(Resource.Drawable.ic_launcher_transparent);
+                builder.SetColor(global::Android.Resource.Color.Black);
+            }
+            else
+            {
+                builder.SetSmallIcon(Resource.Drawable.ic_launcher);
+            }
 
             var notification = builder.Build();
             manager.Notify(messageId, notification);

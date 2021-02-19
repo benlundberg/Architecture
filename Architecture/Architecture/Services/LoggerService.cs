@@ -1,6 +1,5 @@
 ﻿using Architecture.Core;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace Architecture
@@ -29,13 +28,16 @@ namespace Architecture
 
             try
             {
-                // Build a log post for the text file
-                string logText = DateTime.Now.ToString() + " - " + className + "\n";
-                logText += "Message: " + ex.Message + "\n";
-                logText += "Stacktrace: " + ex.StackTrace + "\n";
-                logText += "Inner exception: " + ex.InnerException?.Message + "\n\n";
-
-                localFileSystem.WriteText(logText, append: true, paths: LoggerPath);
+                if (AppConfig.IsFileLogEnabled)
+                {
+                    // Build a log post for the text file
+                    string logText = DateTime.Now.ToString() + " - " + className + "\n";
+                    logText += "Message: " + ex.Message + "\n";
+                    logText += "Stacktrace: " + ex.StackTrace + "\n";
+                    logText += "Inner exception: " + ex.InnerException?.Message + "\n\n";
+                    
+                    localFileSystem.WriteText(logText, append: true, paths: LoggerPath);
+                }
 
                 if (sendToService)
                 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Architecture.Core;
+using UIKit;
 using UserNotifications;
 
 namespace Architecture.iOS
@@ -13,6 +14,9 @@ namespace Architecture.iOS
             {
                 hasNotificationsPermission = approved;
             });
+
+            UIUserNotificationSettings settings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Badge, null);
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
         }
 
         public void ReceiveNotification(string title, string message)
@@ -56,6 +60,8 @@ namespace Architecture.iOS
                     throw new Exception($"Failed to schedule notification: {error}");
                 }
             });
+
+            UIApplication.SharedApplication.ApplicationIconBadgeNumber = messageId;
 
             return messageId;
         }

@@ -48,7 +48,7 @@
     </ContentPage.BindingContext>
 
     <NavigationPage.TitleView>
-        <controls:PageTitleView Text="Article Browser" />
+        <Label VerticalOptions="Center" FontFamily="{StaticResource OpenSansBold}" Text="Article Browser" />
     </NavigationPage.TitleView>
 
     <ScrollView>
@@ -109,10 +109,10 @@
                         Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.Footer>
-                    <Grid WidthRequest="4" />
+                    <Grid WidthRequest="12" />
                 </CollectionView.Footer>
                 <CollectionView.Header>
-                    <Grid WidthRequest="16" />
+                    <Grid WidthRequest="{OnPlatform Android=0, iOS=12}" />
                 </CollectionView.Header>
             </CollectionView>
             <CollectionView
@@ -130,10 +130,10 @@
                         Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.Footer>
-                    <Grid WidthRequest="4" />
+                    <Grid WidthRequest="12" />
                 </CollectionView.Footer>
                 <CollectionView.Header>
-                    <Grid WidthRequest="16" />
+                    <Grid WidthRequest="{OnPlatform Android=0, iOS=12}" />
                 </CollectionView.Header>
             </CollectionView>
         </StackLayout>

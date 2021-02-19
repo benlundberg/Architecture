@@ -30,15 +30,16 @@
             <Entry 
                 FontSize="14"
                 Placeholder="Username"
+                Opacity=".8"
                 Text="{Binding Username.Value, Mode=TwoWay}">
                 <Entry.PlaceholderColor>
                     <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="White" />
+                        <On Platform="Android" Value="Black" />
                     </OnPlatform>
                 </Entry.PlaceholderColor>
                 <Entry.TextColor>
                     <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="White" />
+                        <On Platform="Android" Value="Black" />
                     </OnPlatform>
                 </Entry.TextColor>
             </Entry>
@@ -46,15 +47,16 @@
                 FontSize="14"
                 Placeholder="Password"
                 IsPassword="True" 
+                Opacity=".8"
                 Text="{Binding Password.Value, Mode=TwoWay}">
                 <Entry.PlaceholderColor>
                     <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="White" />
+                        <On Platform="Android" Value="Black" />
                     </OnPlatform>
                 </Entry.PlaceholderColor>
                 <Entry.TextColor>
                     <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="White" />
+                        <On Platform="Android" Value="Black" />
                     </OnPlatform>
                 </Entry.TextColor>
             </Entry>
