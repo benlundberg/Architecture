@@ -1,5 +1,6 @@
 ﻿using Architecture.Core;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Architecture
@@ -35,13 +36,21 @@ namespace Architecture
                     logText += "Message: " + ex.Message + "\n";
                     logText += "Stacktrace: " + ex.StackTrace + "\n";
                     logText += "Inner exception: " + ex.InnerException?.Message + "\n\n";
-                    
+
                     localFileSystem.WriteText(logText, append: true, paths: LoggerPath);
                 }
+            }
+            catch (Exception e)
+            {
+                e.Print();
+            }
 
+            try
+            {
                 if (sendToService)
                 {
-                    // TODO: Send to service
+                    // Send to service
+                    ComponentContainer.Current.Resolve<IAnalyticsService>()?.LogException(ex, new Dictionary<string, string> { { "Class", className } });
                 }
             }
             catch (Exception e)

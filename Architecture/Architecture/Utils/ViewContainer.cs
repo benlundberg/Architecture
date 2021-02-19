@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Architecture.Core;
+using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 
@@ -63,23 +64,32 @@ namespace Architecture
 
             void Appearing(object sender, EventArgs eventArgs)
             {
+                // Track page in analytics
+                try
+                {
+                    ComponentContainer.Current.Resolve<IAnalyticsService>()?.LogScreen(page.GetType().ToString());
+                }
+                catch (Exception ex)
+                {
+                    ex.Print();
+                }
+
                 viewModel.Appearing();
+                page.Disappearing += Disappearing;
                 page.Appearing -= Appearing;
             }
 
             void Disappearing(object sender, EventArgs eventArgs)
             {
                 viewModel.Disappearing();
+                page.Appearing += Appearing;
                 page.Disappearing -= Disappearing;
             }
 
             page.Appearing += Appearing;
-            page.Disappearing += Disappearing;
 
             viewModel.Navigation = page.Navigation;
             page.BindingContext = viewModel;
-
-            // TODO: Track page in analytics
 
             return page;
         }
