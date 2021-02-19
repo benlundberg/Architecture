@@ -7,20 +7,30 @@ namespace Architecture
 {
     public class MasterViewModel : BaseViewModel
     {
-        public MasterViewModel(MasterDetailPage masterDetailPage)
+        public MasterViewModel(FlyoutPage masterDetailPage)
         {
-			Title = Device.RuntimePlatform == Device.iOS ? "☰" : AppConfig.AppName;
+            Title = Device.RuntimePlatform == Device.iOS ? "☰" : AppConfig.AppName;
 
-			this.masterDetailPage = masterDetailPage;
+            this.masterDetailPage = masterDetailPage;
 
             if (Device.RuntimePlatform == Device.UWP)
             {
-                masterDetailPage.MasterBehavior = MasterBehavior.Popover;
+                masterDetailPage.FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
             }
 
             MasterItems = new List<MenuViewModel>()
             {
                 // TODO: Add menu pages here
+                new MenuViewModel()
+                {
+                    Title = "Article Browser",
+                    Page = new NavigationPage(new UIKit.Views.Phone.ArticleBrowserPage())
+                },
+                new MenuViewModel()
+                {
+                    Title = "Article List",
+                    Page = new NavigationPage(new UIKit.Views.Phone.ArticleListPage())
+                }
             };
 
             // TODO: If test you can add this log view
@@ -74,8 +84,8 @@ namespace Architecture
 
         public List<MenuViewModel> MasterItems { get; private set; }
 
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-        private readonly MasterDetailPage masterDetailPage;
+        private readonly FlyoutPage masterDetailPage;
     }
 }

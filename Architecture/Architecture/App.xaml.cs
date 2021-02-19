@@ -28,10 +28,10 @@ namespace Architecture
         public static void SetMainPage()
         {
             // TODO: UI Kit home page
-            Current.MainPage = new NavigationPage(new UIKit.Views.UIKitHomePage());
+            //Current.MainPage = new NavigationPage(new UIKit.Views.UIKitHomePage());
 
             // Master
-            //Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
+            Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
 
             // Tabbed
             //Current.MainPage = new NavigationPage(ViewContainer.Current.CreatePage<HomeTabbedViewModel>());
