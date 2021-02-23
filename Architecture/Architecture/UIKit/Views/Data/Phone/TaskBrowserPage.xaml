@@ -64,6 +64,26 @@
                 VerticalLabelMode="StartCenterEnd"
                 ChartEntries="{Binding ChartEntries}"
                 SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}" />
+            <!--<CarouselView 
+                Margin="33, 0, 16, 0"
+                ItemsSource="{Binding ChartEntries}" 
+                HorizontalOptions="Center"
+                PeekAreaInsets="100">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout 
+                        ItemSpacing="6"
+                        SnapPointsType="Mandatory"
+                        SnapPointsAlignment="Center"
+                        Orientation="Horizontal" />
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="chart:ChartItem">
+                        <Grid HorizontalOptions="Center" WidthRequest="33">
+                            <BoxView BackgroundColor="{Binding Color}" WidthRequest="12" />
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>-->
             <BoxView 
                 x:Name="selector"
                 CornerRadius="4, 4, 0, 0"
