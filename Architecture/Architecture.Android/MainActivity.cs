@@ -8,8 +8,8 @@ using Architecture.Core;
 namespace Architecture.Droid
 {
     [Activity(
-        Label = "Architecture", 
-        Icon = "@drawable/ic_launcher", 
+        Label = AppConfig.AppName,
+        Icon = AppConfig.AndroidAppIcon,
         Theme = "@style/SplashTheme", 
         MainLauncher = true, 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,

@@ -44,6 +44,12 @@ namespace Architecture.Droid
             NotificationReceived?.Invoke(null, args);
         }
 
+        /// <summary>
+        /// Tells Android OS to display a notification
+        /// </summary>
+        /// <param name="title">Title of the notification</param>
+        /// <param name="message">Message text of the notification</param>
+        /// <returns>Number of notification manager have shown during app session</returns>
         public int ScheduleNotification(string title, string message)
         {
             if (!channelInitialized)
@@ -96,7 +102,7 @@ namespace Architecture.Droid
         public const string MessageKey = "message";
 
         private bool channelInitialized = false;
-        private int messageId = -1;
+        private int messageId = 0;
         private NotificationManager manager;
     }
 }

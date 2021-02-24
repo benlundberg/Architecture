@@ -8,6 +8,7 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
     <LangVersion>8.0</LangVersion>
+    <Configurations>Debug;Release;Production</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="akavache" Version="7.2.1" />
