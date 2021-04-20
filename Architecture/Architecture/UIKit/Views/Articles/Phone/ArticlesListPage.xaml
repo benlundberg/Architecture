@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.Phone.ArticlesListPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:DataType="viewModels:ArticlesListViewModel">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Article List" />
+    </NavigationPage.TitleView>
+
+    <Grid>
+
+        <!-- View Loading -->
+        <StackLayout Margin="16" IsVisible="{Binding IsBusy}">
+
+            <controls:SkeletonView 
+                IsLoading="{Binding IsBusy}"
+                Repeat="3">
+                <controls:SkeletonView.DataTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="Auto, *" Padding="16, 8" ColumnSpacing="16">
+
+                            <Frame
+                                WidthRequest="100"
+                                HeightRequest="100"
+                                BackgroundColor="{StaticResource GrayDark}" />
+
+                            <StackLayout Grid.Column="1" Spacing="14">
+                                <Grid ColumnDefinitions="*, 33">
+                                    <Grid 
+                                        BackgroundColor="{StaticResource Gray}" 
+                                        HeightRequest="17" />
+                                    <Grid 
+                                        Grid.Column="1"
+                                        BackgroundColor="{StaticResource Gray}" 
+                                        HeightRequest="11" />
+                                </Grid>
+
+                                <Grid 
+                                    BackgroundColor="{StaticResource Gray}" 
+                                    HeightRequest="28" />
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </controls:SkeletonView.DataTemplate>
+            </controls:SkeletonView>
+
+        </StackLayout>
+
+        <!-- Loaded state -->
+        <CollectionView
+            Margin="0, 16"
+            IsVisible="{Binding IsNotBusy}"
+            ItemsSource="{Binding Articles}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                    
+                    <Grid ColumnDefinitions="Auto, *" Padding="16, 8" ColumnSpacing="16">
+                        <Frame
+                            IsClippedToBounds="True"
+                            Padding="0"
+                            CornerRadius="12"
+                            HasShadow="False"
+                            BorderColor="Transparent">
+                            <ff:CachedImage 
+                                WidthRequest="100"
+                                HeightRequest="100"
+                                Source="{Binding ImageSource}" 
+                                Aspect="AspectFill" />
+                        </Frame>
+
+                        <StackLayout Grid.Column="1" Spacing="0">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label 
+                                    Text="{Binding Title}" 
+                                    Style="{StaticResource SemiBoldLabel}" />
+                                <Label 
+                                    Grid.Column="1"
+                                    Text="3 hours ago"
+                                    TextColor="{StaticResource GrayDark}"
+                                    FontSize="{StaticResource Micro}" />
+                            </Grid>
+
+                            <Label 
+                                Text="{Binding Text}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="3" />
+                        </StackLayout>
+                    </Grid>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+    
+</ContentPage>

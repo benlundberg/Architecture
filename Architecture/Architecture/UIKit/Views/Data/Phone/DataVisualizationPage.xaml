@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.Data.Phone.DataVisualizationPage"
+             xmlns:properties="clr-namespace:Architecture.Resources"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:local="clr-namespace:Architecture.UIKit"
+             Visual="Material"
+             x:DataType="local:DataVisualizationViewModel">
+
+    <ContentPage.BindingContext>
+        <local:DataVisualizationViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+    </StackLayout>
+    
+</ContentPage>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture.UIKit
+namespace Architecture.UIKit.ViewModels
 {
 	public class RecoverPasswordViewModel : BaseViewModel
 	{
@@ -27,7 +27,7 @@ namespace Architecture.UIKit
                 return;
             }
 
-            var loading = new LoadingPopup("Sending restore password link");
+            var loading = new LoadingPopup("Sending you a restore link");
 
             try
             {
@@ -40,7 +40,7 @@ namespace Architecture.UIKit
             catch (Exception ex)
             {
                 Logger.LogException(ex, GetType().ToString(), sendToService: false);
-                ShowAlert(ex.Message, "Exception");
+                ShowAlert(ex.Message, "Error");
             }
             finally
             {

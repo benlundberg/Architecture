@@ -6,74 +6,44 @@
              mc:Ignorable="d"
              x:Class="Architecture.UIKit.Views.UIKitHomePage"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              Visual="Material"
-             x:Name="root">
+             x:DataType="viewModels:HomeViewModel">
 
+    <ContentPage.BindingContext>
+        <viewModels:HomeViewModel />
+    </ContentPage.BindingContext>
+    
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Welcome to XF UIKit" />
     </NavigationPage.TitleView>
 
-    <ScrollView Padding="{OnIdiom Phone={StaticResource MainPadding}, Desktop=0}">
-        <StackLayout Spacing="{StaticResource MainSpacing}">
-            <!-- Article -->
-            <Label Text="Article" FontSize="Large" />
-            <Button Text="Article Browser" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Article Classic" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Article List" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="3" />
-            <Button Text="Article List Variant" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="4" />
-            <Button Text="Article Browser Variant" Command="{Binding ArticleCommand, Source={x:Reference root}}" CommandParameter="5" />
-            <!-- Forms -->
-            <Label Text="Forms" FontSize="Large" />
-            <Button Text="Full Login" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Full Sign up" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Tabbed Login" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="3" />
-            <Button Text="Image Login" Command="{Binding FormsCommand, Source={x:Reference root}}" CommandParameter="4" />
-            <!-- Lists -->
-            <Label Text="Lists" FontSize="Large" />
-            <Button Text="Simple List" Command="{Binding ListCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Card List" Command="{Binding ListCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Variant List" Command="{Binding ListCommand, Source={x:Reference root}}" CommandParameter="3" />
-            <Button Text="Timeline" Command="{Binding ListCommand, Source={x:Reference root}}" CommandParameter="4" />
-            <Button Text="Search" Command="{Binding ListCommand, Source={x:Reference root}}" CommandParameter="5" />
-            <!-- Details -->
-            <Label Text="Details" FontSize="Large" />
-            <Button Text="Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Card Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Variant Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="3" />
-            <Button Text="Info Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="4" />
-            <Button Text="Second Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="5" />
-            <Button Text="Third Detail" Command="{Binding DetailCommand, Source={x:Reference root}}" CommandParameter="6" />
-            <!-- Data -->
-            <Label Text="Data" FontSize="Large" />
-            <Button Text="Data Table" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Data Linear" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Data Bars" Command="{Binding DataCommand, Source={x:Reference root}}" CommandParameter="3" />
-            <!-- Dashboard -->
-            <Label Text="Dashboard" FontSize="Large" />
-            <Button Text="Flat List" Command="{Binding DashboardCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Dashboard Image" Command="{Binding DashboardCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Dashboard Cards" Command="{Binding DashboardCommand, Source={x:Reference root}}" CommandParameter="3" />
-            <Button Text="Dashboard Menu" Command="{Binding DashboardCommand, Source={x:Reference root}}" CommandParameter="4" />
-            <!-- Social -->
-            <Label Text="Social" FontSize="Large" />
-            <Button Text="Social Card" Command="{Binding SocialCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Contact Detail Card" Command="{Binding SocialCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <Button Text="Contact Detail" Command="{Binding SocialCommand, Source={x:Reference root}}" CommandParameter="3" />
-            <Button Text="Edit Contact" Command="{Binding SocialCommand, Source={x:Reference root}}" CommandParameter="4" />
-            <!-- Settings -->
-            <Label Text="Settings" FontSize="Large" />
-            <Button Text="Settings" Command="{Binding SettingsCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="About" Command="{Binding SettingsCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <!-- Files -->
-            <Label Text="Files" FontSize="Large" />
-            <Button Text="Files" Command="{Binding FilesCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <!-- Components -->
-            <Label Text="Components" FontSize="Large" />
-            <Button Text="Components" Command="{Binding ComponentsCommand, Source={x:Reference root}}" CommandParameter="1" />
-            <Button Text="Dialogs" Command="{Binding ComponentsCommand, Source={x:Reference root}}" CommandParameter="2" />
-            <!-- Media -->
-            <Label Text="Media" FontSize="Large" />
-            <Button Text="Media" Command="{Binding MediaCommand, Source={x:Reference root}}" CommandParameter="1" />
-        </StackLayout>
-    </ScrollView>
+    <ListView
+        Margin="24, 16"
+        ItemsSource="{Binding ExamplePageItems}"
+        IsGroupingEnabled="True"
+        HasUnevenRows="True"
+        SeparatorVisibility="None"
+        GroupDisplayBinding="{Binding Title}"
+        SelectionMode="None">
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell x:DataType="viewModels:GroupedExamplePageItem">
+                    <Label Text="{Binding Title}" FontSize="{StaticResource Medium}" Style="{StaticResource SemiBoldLabel}" />
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate x:DataType="viewModels:ExamplePageItem">
+                <ViewCell>
+                    <Button
+                        Margin="8"
+                        Text="{Binding Title}"
+                        Command="{Binding Command}"/>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+    
 </ContentPage>

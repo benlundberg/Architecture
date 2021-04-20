@@ -12,14 +12,15 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="akavache" Version="7.2.1" />
-    <PackageReference Include="PropertyChanged.Fody" Version="3.3.1">
+    <PackageReference Include="PropertyChanged.Fody" Version="3.3.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.10" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.11" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Unity" Version="5.11.10" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.1.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
@@ -54,6 +55,9 @@
     <None Remove="Resources\Fonts\OpenSans-Regular.ttf" />
     <None Remove="Resources\Fonts\OpenSans-SemiBold.ttf" />
     <None Remove="Resources\Fonts\OpenSans-SemiBoldItalic.ttf" />
+    <None Remove="Resources\Fonts\Poppins-Bold.ttf" />
+    <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
+    <None Remove="Resources\Fonts\Poppins-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\FontAwesome5Brands.otf" />
@@ -68,6 +72,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fonts\OpenSans-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Poppins-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Poppins-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Poppins-SemiBold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
@@ -88,9 +95,6 @@
     <Compile Update="UIKit\Views\Articles\Phone\ArticleBrowserVariantPage.xaml.cs">
       <DependentUpon>ArticleBrowserVariantPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="UIKit\Views\Articles\Phone\ArticleListVariantPage.xaml.cs">
-      <DependentUpon>ArticleListVariantPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="UIKit\Views\Components\ComponentsPage.xaml.cs">
       <DependentUpon>ComponentsPage.xaml</DependentUpon>
     </Compile>
@@ -99,12 +103,6 @@
     </Compile>
     <Compile Update="UIKit\Views\Dashboard\DashboardCardPage.xaml.cs">
       <DependentUpon>DashboardCardPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UIKit\Views\Details\Phone\CardDetailPage.xaml.cs">
-      <DependentUpon>CardDetailPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="UIKit\Views\Lists\Phone\ListCardPage.xaml.cs">
-      <DependentUpon>ListCardPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="UIKit\Views\Lists\Phone\ListPage.xaml.cs">
       <DependentUpon>ListPage.xaml</DependentUpon>
@@ -164,16 +162,16 @@
     <EmbeddedResource Update="Controls\ValidationEntry\ValidationEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Articles\Desktop\ArticlesView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Articles\Phone\ArticleBrowserPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Articles\Phone\ArticleClassicPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Articles\Phone\ArticlesListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Articles\Phone\ArticleListPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Categories\CategoryGridPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Categories\CategoryListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Components\ComponentsPage.xaml">
@@ -188,10 +186,13 @@
     <EmbeddedResource Update="UIKit\Views\Dashboard\FlatListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Data\Desktop\DataPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Data\Phone\DataPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Data\Phone\DataTablePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Data\Phone\DataVisualizationPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Data\Phone\TaskBrowserPage.xaml">
@@ -201,9 +202,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Details\Phone\DetailPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Details\Phone\InfoDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Details\Phone\SecondDetailPage.xaml">
@@ -216,12 +214,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Files\FilesPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Forms\Desktop\LoginPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Forms\Desktop\RecoverPasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Forms\Phone\FullLoginPage.xaml">
@@ -239,25 +231,19 @@
     <EmbeddedResource Update="UIKit\Views\Home\UIKitHomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\Desktop\ListPage.xaml">
+    <EmbeddedResource Update="UIKit\Views\Lists\Phone\ListCardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Lists\Phone\ListPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\Phone\ListVariantPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\Phone\SearchPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="UIKit\Views\Lists\Phone\TimelinePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Media\MediaPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Settings\AboutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="UIKit\Views\Feedback\FeedbackPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="UIKit\Views\Settings\SettingsPage.xaml">

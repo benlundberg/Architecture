@@ -8,144 +8,171 @@
              ios:Page.UseSafeArea="true"
              x:Class="Architecture.UIKit.Views.Phone.ArticleBrowserVariantPage"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              xmlns:controls="clr-namespace:Architecture.Controls"
              Visual="Material"
-             x:DataType="local:ArticlesViewModel"
-             x:Name="articleBrowserRoot">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-            <DataTemplate x:Key="arcticleItem" x:DataType="local:ArticleItemViewModel">
-                <StackLayout Spacing="0">
-                    <Frame 
-                        Padding="0"
-                        BorderColor="Transparent"
-                        CornerRadius="8"
-                        HasShadow="False">
-                        <ff:CachedImage
-                            Source="{Binding ImageSource}" 
-                            WidthRequest="156"
-                            HeightRequest="160"
-                            Aspect="AspectFill" />
-                    </Frame>
-                    <Label
-                        Margin="0, 6, 0, 0"
-                        FontSize="12"
-                        Text="{Binding Category}" />
-                    <Label
-                        Margin="0, 0, 0, 6"
-                        FontSize="Default"
-                        Style="{StaticResource SemiBoldLabel}"
-                        Text="{Binding Title}" />
-                </StackLayout>
-            </DataTemplate>
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <ContentPage.BindingContext>
-        <local:ArticlesViewModel />
-    </ContentPage.BindingContext>
+             x:DataType="viewModels:ArticlesBrowserVariantViewModel">
 
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Article Browser Variant" />
     </NavigationPage.TitleView>
 
-    <ScrollView>
-        <StackLayout Spacing="0">
-            <Label Margin="16, 8" Text="Discover" FontSize="Title" Style="{StaticResource SemiBoldLabel}" />
-            <CarouselView
-                Margin="8, 0"
-                ItemsSource="{Binding Articles1}" 
-                IndicatorView="indicatorView"
-                HeightRequest="192">
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout 
-                        SnapPointsType="Mandatory"
-                        SnapPointsAlignment="Center"
-                        Orientation="Horizontal"
-                        ItemSpacing="16" />
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Frame HeightRequest="192" BorderColor="Transparent" Padding="0" CornerRadius="8" HasShadow="False">
-                            <Grid>
-                                <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
-                                <Grid>
-                                    <Grid.Background>
-                                        <LinearGradientBrush EndPoint="0,1">
-                                            <GradientStop Color="Transparent" Offset="0.32" />
-                                            <GradientStop Color="Black" Offset="1.0" />
-                                        </LinearGradientBrush>
-                                    </Grid.Background>
-                                </Grid>
-                                <StackLayout Margin="16, 0, 16, 24" VerticalOptions="End" Spacing="4">
-                                    <Label TextColor="{StaticResource GrayLight}" Text="{Binding Title}" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}"/>
-                                    <Label TextColor="{StaticResource GrayLight}" Text="{Binding Category}" FontSize="Default" />
-                                    <BoxView Margin="0, 4, 0, 0" BackgroundColor="{StaticResource Accent}" HorizontalOptions="Start" WidthRequest="100" HeightRequest="2" />
-                                </StackLayout>
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference articleBrowserRoot}}" CommandParameter="{Binding}" />
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-            <IndicatorView
-                Margin="0, 16"
-                x:Name="indicatorView"
-                IndicatorsShape="Circle"
-                IndicatorColor="{StaticResource Gray}"
-                SelectedIndicatorColor="{StaticResource DarkPrimaryColor}"
-                HorizontalOptions="Center"
-                IndicatorSize="10" />
-            <Label Margin="16, 0" Text="Top" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
-            <CollectionView
-                Margin="0, 8, 0, 16"
-                ItemsSource="{Binding Articles2}"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                ItemTemplate="{StaticResource arcticleItem}"
-                SelectionMode="Single"
-                HeightRequest="208">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        SnapPointsAlignment="Start" 
-                        SnapPointsType="None" 
-                        HorizontalItemSpacing="12" 
-                        Orientation="Horizontal" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.Footer>
-                    <Grid WidthRequest="12" />
-                </CollectionView.Footer>
-                <CollectionView.Header>
-                    <Grid WidthRequest="{OnPlatform Android=0, iOS=12}" />
-                </CollectionView.Header>
-            </CollectionView>
-            <Label Margin="16, 0" Text="For you" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}" />
-            <CollectionView
-                Margin="0, 8, 0, 16"
-                ItemsSource="{Binding Articles3}"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                ItemTemplate="{StaticResource arcticleItem}"
-                SelectionMode="Single"
-                HeightRequest="208">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        SnapPointsAlignment="Start" 
-                        SnapPointsType="None" 
-                        HorizontalItemSpacing="12" 
-                        Orientation="Horizontal" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.Footer>
-                    <Grid WidthRequest="12" />
-                </CollectionView.Footer>
-                <CollectionView.Header>
-                    <Grid WidthRequest="{OnPlatform Android=0, iOS=12}" />
-                </CollectionView.Header>
-            </CollectionView>
-        </StackLayout>
-    </ScrollView>
+    <Grid>
+        
+        <!-- Loaded state -->
+        <CollectionView
+            Header="{Binding}"
+            ItemsSource="{Binding Articles}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionMode="Single">
+            <CollectionView.HeaderTemplate>
+                <DataTemplate>
+
+                    <StackLayout>
+                        <CollectionView 
+                            HeightRequest="300"
+                            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                            SelectionMode="Single"
+                            ItemsSource="{Binding TopArticles}">
+                            <CollectionView.Header>
+                                <Grid WidthRequest="8" />
+                            </CollectionView.Header>
+                            <CollectionView.Footer>
+                                <Grid WidthRequest="8" />
+                            </CollectionView.Footer>
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout 
+                                    ItemSpacing="0"
+                                    Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                                    <Grid>
+                                        <controls:CustomFrame
+                                            IsClippedToBounds="True"
+                                            WidthRequest="200"
+                                            Padding="0" 
+                                            CornerRadius="12"
+                                            Margin="8, 16">
+                                            <StackLayout Spacing="0">
+                                                <ff:CachedImage 
+                                                    HeightRequest="175" 
+                                                    Source="{Binding ImageSource}" 
+                                                    Aspect="AspectFill" />
+                                                <Label 
+                                                    Margin="16, 12, 16, 0"
+                                                    Text="{Binding Title}" 
+                                                    Style="{StaticResource SemiBoldLabel}" />
+                                                <Label 
+                                                    Margin="16, 0, 16, 16"
+                                                    MaxLines="2"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="{Binding Text}" />    
+                                            </StackLayout>
+                                        </controls:CustomFrame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!-- Categories -->
+                        <Label
+                            Margin="16, 0"
+                            Text="Categories" 
+                            FontSize="{StaticResource Medium}"
+                            Style="{StaticResource SemiBoldLabel}" />
+
+                        <CollectionView 
+                            HeightRequest="56"
+                            Margin="0, 0, 0, 16"
+                            ItemsSource="{Binding Categories}"
+                            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                            SelectionMode="Single">
+                            <CollectionView.Header>
+                                <Grid WidthRequest="8" />
+                            </CollectionView.Header>
+                            <CollectionView.Footer>
+                                <Grid WidthRequest="8" />
+                            </CollectionView.Footer>
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout 
+                                    Orientation="Horizontal" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:CategoryItemViewModel">
+                                    <Grid>
+                                        <controls:CustomFrame
+                                            IsClippedToBounds="True"
+                                            WidthRequest="150"
+                                            Padding="0" 
+                                            CornerRadius="12"
+                                            Margin="8, 0">
+                                            <Grid>
+                                                <ff:CachedImage 
+                                                    HeightRequest="150" 
+                                                    Source="{Binding ImageSource}" 
+                                                    Aspect="AspectFill" />
+                                                <Grid BackgroundColor="Black" Opacity="0.32" />
+                                                <Label 
+                                                    VerticalOptions="Center"
+                                                    HorizontalTextAlignment="Center"
+                                                    Margin="16, 6, 16, 0"
+                                                    TextColor="White"
+                                                    Text="{Binding Title}" 
+                                                    Style="{StaticResource SemiBoldLabel}"
+                                                    FontSize="{StaticResource Default}" />
+                                            </Grid>
+                                        </controls:CustomFrame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!-- Articles Top Title -->
+                        <Label
+                            Margin="16, 0"
+                            Text="Top rated" 
+                            FontSize="{StaticResource Medium}"
+                            Style="{StaticResource SemiBoldLabel}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.HeaderTemplate>
+            
+            <!-- Articles -->
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout 
+                    Orientation="Vertical"
+                    Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                    <Grid>
+                        <controls:CustomFrame 
+                            IsClippedToBounds="True"
+                            Padding="0" 
+                            CornerRadius="12" 
+                            Margin="12" >
+                            <StackLayout Spacing="0">
+                                <ff:CachedImage 
+                                    HeightRequest="175" 
+                                    Source="{Binding ImageSource}" 
+                                    Aspect="AspectFill" />
+                                <Label 
+                                    Margin="16, 16, 16, 0"
+                                    Text="{Binding Title}" 
+                                    Style="{StaticResource SemiBoldLabel}" />
+                                <Label 
+                                    Margin="16, 0, 16, 24"
+                                    MaxLines="2"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding Text}" />
+                            </StackLayout>
+                        </controls:CustomFrame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </Grid>
+    
 </ContentPage>

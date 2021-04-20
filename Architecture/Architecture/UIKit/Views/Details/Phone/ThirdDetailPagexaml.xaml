@@ -6,79 +6,82 @@
              mc:Ignorable="d"
              x:Class="Architecture.UIKit.Views.Phone.ThirdDetailPagexaml"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:controls="clr-namespace:Architecture.Controls">
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:DetailViewModel">
 
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Third Detail" />
     </NavigationPage.TitleView>
 
-    <ScrollView>
-        <Grid 
-            Margin="16"
-            RowSpacing="16"
-            ColumnDefinitions="Auto, *, Auto"
-            RowDefinitions="Auto, *">
-            <Frame
-                VerticalOptions="Start"
-                HorizontalOptions="Start"
-                Padding="0"
-                CornerRadius="16"
-                HasShadow="False">
-                <ff:CachedImage 
-                    HeightRequest="100"
-                    WidthRequest="100"
-                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/9.jpg" 
-                    Aspect="AspectFill" />
-            </Frame>
-            <StackLayout
-                Grid.Column="1"
-                Grid.ColumnSpan="2"
-                Margin="16, 0, 0, 0"
-                Spacing="4">
-                <Label Text="Dance dance" FontSize="Large" />
-                <Label Text="All night" FontSize="Medium" TextColor="{StaticResource GrayDark}" />
-            </StackLayout>
-            <ImageButton 
-                Grid.Column="2"
-                Style="{StaticResource FloatingButton}"
-                BackgroundColor="{StaticResource Accent}"
-                VerticalOptions="End"
-                HorizontalOptions="End">
-                <ImageButton.Source>
-                    <FontImageSource 
-                        Color="White"
-                        FontFamily="{StaticResource FontAwesomeSolid}"
-                        Glyph="{StaticResource HeartIcon}" />
-                </ImageButton.Source>
-            </ImageButton>
-            <StackLayout 
-                Grid.Row="1"
-                Grid.ColumnSpan="3">
-                <controls:SegmentView SegmentedControlMode="Text" SegmentHorizontalOptions="Start" SegmentRowWidth="Auto" SegmentMargin="0, 0, 0, 16">
-                    <controls:SegmentView.ItemsSource>
-                        <controls:SegmentControlItem IsSelected="True" Text="Summary" Tag="1">
-                            <controls:SegmentControlItem.Content>
-                                <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                            </controls:SegmentControlItem.Content>
-                        </controls:SegmentControlItem>
-                        <controls:SegmentControlItem Text="Skills" Tag="2">
-                            <controls:SegmentControlItem.Content>
-                                <StackLayout Spacing="12">
-                                    <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
-                                        <Label VerticalOptions="Center" Text="Travel" FontSize="Default" />
-                                    </Frame>
-                                    <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
-                                        <Label Text="Photo" FontSize="Default" />
-                                    </Frame>
-                                    <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
-                                        <Label VerticalOptions="Center" Text="Pop" FontSize="Default" />
-                                    </Frame>
-                                </StackLayout>
-                            </controls:SegmentControlItem.Content>
-                        </controls:SegmentControlItem>
-                    </controls:SegmentView.ItemsSource>
-                </controls:SegmentView>
-            </StackLayout>
-        </Grid>
+    <ScrollView Padding="16">
+        <StackLayout Spacing="24">
+            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                <Frame
+                    Padding="0"
+                    CornerRadius="10"
+                    BorderColor="Transparent"
+                    HasShadow="False">
+                    <ff:CachedImage 
+                        HeightRequest="100"
+                        WidthRequest="100"
+                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/17.jpg" 
+                        Aspect="AspectFill" />
+                </Frame>
+                <StackLayout 
+                    Grid.Column="1"
+                    Spacing="0">
+                    <Label 
+                        Text="Lorem ipsum"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    <Label 
+                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit" />
+                </StackLayout>
+                <ImageButton 
+                    Grid.Column="2"
+                    Style="{StaticResource FloatingButton}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End">
+                    <ImageButton.Source>
+                        <FontImageSource 
+                            Color="White"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            Glyph="{StaticResource HeartIcon}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+
+            <controls:SegmentView SegmentedControlMode="Text" SegmentHorizontalOptions="Start" SegmentRowWidth="Auto" SegmentMargin="0, 0, 0, 16">
+                <controls:SegmentView.ItemsSource>
+                    <controls:SegmentControlItem IsSelected="True" Text="Summary" Tag="1">
+                        <controls:SegmentControlItem.Content>
+                            <StackLayout>
+                                <Label 
+                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                                <Label 
+                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                            </StackLayout>
+                        </controls:SegmentControlItem.Content>
+                    </controls:SegmentControlItem>
+                    <controls:SegmentControlItem Text="Skills" Tag="2">
+                        <controls:SegmentControlItem.Content>
+                            <StackLayout Spacing="12">
+                                <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
+                                    <Label Text="Travel"/>
+                                </Frame>
+                                <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
+                                    <Label Text="Photo" />
+                                </Frame>
+                                <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
+                                    <Label Text="Pop" />
+                                </Frame>
+                            </StackLayout>
+                        </controls:SegmentControlItem.Content>
+                    </controls:SegmentControlItem>
+                </controls:SegmentView.ItemsSource>
+            </controls:SegmentView>
+        </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -10,7 +10,7 @@ namespace Architecture.Controls.Charts
     public static class FontTypeService
     {
         private static SKTypeface fontFamily;
-        public static SKTypeface GetFontFamily(Assembly assembly)
+        public static SKTypeface GetFontFamily(Assembly assembly, bool isBold = false)
         {
             if (fontFamily != null)
             {
@@ -19,7 +19,7 @@ namespace Architecture.Controls.Charts
 
             try
             {
-                string resourceID = "Architecture.Resources.Fonts.OpenSans-Regular.ttf";
+                string resourceID = isBold ? "Architecture.Resources.Fonts.Poppins-SemiBold.ttf" : "Architecture.Resources.Fonts.Poppins-Regular.ttf";
 
                 using Stream stream = assembly.GetManifestResourceStream(resourceID);
 

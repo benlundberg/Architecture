@@ -7,7 +7,7 @@ namespace Architecture.Controls
     {
         public PageTitleView()
         {
-            IsCentered = true; // Device.RuntimePlatform == Device.iOS;
+            IsCentered = false;
             PropertyChanged += PageTitleView_PropertyChanged;
         }
 
@@ -70,8 +70,9 @@ namespace Architecture.Controls
                 MaxLines = 1,
                 Text = view.Text,
                 TextColor = Application.Current.ToolbarTextColor(),
-                VerticalOptions = LayoutOptions.Center,
-                FontSize = 14,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                VerticalTextAlignment = TextAlignment.Center,
+                FontSize = App.Current.Get<double>("PageTitleSize"),
                 Margin = Device.Idiom == TargetIdiom.Desktop && !view.IsCentered ? new Thickness(40, 0, 0, 0) : new Thickness(0),
                 FontFamily = App.Current.Get<string>("PageTitleFont")
             });

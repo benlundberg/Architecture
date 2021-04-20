@@ -26,7 +26,7 @@
     <item name="android:colorFocusedHighlight">@color/ListViewSelectedItemBackgroundColor</item>
     <item name="android:colorActivatedHighlight">@color/ListViewSelectedItemBackgroundColor</item>
     <item name="android:activatedBackgroundIndicator">@color/ListViewSelectedItemBackgroundColor</item>
-    
+
   </style>
 
   <!-- DatePicker style -->

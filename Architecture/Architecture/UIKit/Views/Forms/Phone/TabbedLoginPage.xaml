@@ -7,113 +7,88 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
              x:Class="Architecture.UIKit.Views.Phone.TabbedLoginPage"
-             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             Visual="Material">
+             Visual="Material"
+             x:DataType="viewModels:TabbedLoginViewModel">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Welcome" IsCentered="True" />
+    </NavigationPage.TitleView>
 
     <ScrollView>
-        <StackLayout Margin="24">
-            <Label
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
-                VerticalOptions="Start"
-                HorizontalOptions="End"
-                FontSize="Large"
-                Text="{StaticResource CloseIcon}"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="{StaticResource BlackLight}">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding PopModalCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
-            <!-- Title and Subtitle -->
-            <Label
-                Style="{StaticResource SemiBoldLabel}"
-                FontSize="Large"
-                Text="Welcome to this app"
-                Margin="0, 0, 0, 24" />
-            <controls:SegmentView 
-                SegmentedControlMode="Text"
-                IsVisible="{Binding LoginModel.IsBusy, Converter={StaticResource InvertedBoolConv}}">
-                <controls:SegmentView.ItemsSource>
-                    <controls:SegmentControlItem IsSelected="True" Text="Sign in" Tag="1">
-                        <controls:SegmentControlItem.Content>
-                            <!-- Login -->
-                            <StackLayout>
-                                <controls:FrameEntry
-                                    Placeholder="Username"
-                                    IconTextSource="{StaticResource UserIcon}"
-                                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                    IconFontFamily="{StaticResource FontAwesomeSolid}"
-                                    Text="{Binding LoginModel.Username, Mode=TwoWay}" />
-                                <controls:FrameEntry 
-                                    Placeholder="Password"
-                                    IconTextSource="{StaticResource LockIcon}"
-                                    IconFontFamily="{StaticResource FontAwesomeSolid}"
-                                    HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                    IsPassword="True" 
-                                    Text="{Binding LoginModel.Password, Mode=TwoWay}" />
-                                <StackLayout 
-                                    HorizontalOptions="Start"
-                                    Orientation="Horizontal">
-                                    <CheckBox 
-                                        IsChecked="{Binding LoginModel.RememberMe, Mode=TwoWay}"
-                                        WidthRequest="32"
-                                        HeightRequest="32"
-                                        Color="{StaticResource PrimaryColor}" />
-                                    <Label 
-                                        FontSize="Default"
-                                        VerticalOptions="Center"
-                                        Text="Remember me?" />
-                                </StackLayout>
-                                <Button 
-                                    Margin="0, 8"
-                                    Command="{Binding LoginModel.LoginCommand}" 
-                                    Text="{StaticResource CheckIcon}"
-                                    FontFamily="{StaticResource FontAwesomeSolid}" />
-                                <Label
-                                    TextColor="{StaticResource PrimaryColor}"
-                                    FontSize="Default"
+        <controls:SegmentView SegmentedControlMode="Round">
+            <controls:SegmentView.ItemsSource>
+
+                <!-- Log in -->
+                <controls:SegmentControlItem Text="Log in" IsSelected="True" Tag="1">
+                    <controls:SegmentControlItem.Content>
+
+                        <StackLayout Padding="24" BindingContext="{Binding LoginModel}">
+
+                            <controls:RoundedFrameEntry
+                                    Margin="0, 10"
+                                    Text="{Binding Username, Mode=TwoWay}"
+                                    Placeholder="Username" />
+
+                            <controls:RoundedFrameEntry
+                                    Text="{Binding Password, Mode=TwoWay}"
+                                    IsPassword="True"
+                                    Placeholder="Password" />
+
+                            <Label
+                                    Margin="12"
+                                    Text="Forgot password?"
                                     HorizontalOptions="End"
-                                    Text="Forgot password?">
-                                </Label>
-                            </StackLayout>
-                        </controls:SegmentControlItem.Content>
-                    </controls:SegmentControlItem>
-                    <controls:SegmentControlItem Text="Sign up" Tag="2">
-                        <controls:SegmentControlItem.Content>
-                            <ScrollView>
-                                <StackLayout>
-                                    <controls:FrameEntry 
-                                        Placeholder="Email"
-                                        HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                        IconTextSource="{StaticResource MailIcon}"
-                                        Keyboard="Email"
-                                        Text="{Binding SignUpModel.Email, Mode=TwoWay}"
-                                        IconFontFamily="{StaticResource FontAwesomeSolid}" />
-                                    <controls:FrameEntry
-                                        IconTextSource="{StaticResource LockIcon}"
-                                        IconFontFamily="{StaticResource FontAwesomeSolid}"
-                                        Placeholder="Password"
-                                        HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                        IsPassword="True" 
-                                        Text="{Binding SignUpModel.Password, Mode=TwoWay}" />
-                                    <controls:FrameEntry 
-                                        IconTextSource="{StaticResource LockIcon}"
-                                        IconFontFamily="{StaticResource FontAwesomeSolid}"
-                                        Placeholder="Confirm password" 
-                                        HeaderBackgroundColor="{StaticResource PageBackgroundColor}"
-                                        IsPassword="True" 
-                                        Text="{Binding SignUpModel.ConfirmPassword, Mode=TwoWay}" />
-                                    <Button 
-                                        Margin="0, 16"
-                                        Text="{StaticResource CheckIcon}"
-                                        FontFamily="{StaticResource FontAwesomeSolid}" />
-                                </StackLayout>
-                            </ScrollView>
-                        </controls:SegmentControlItem.Content>
-                    </controls:SegmentControlItem>
-                </controls:SegmentView.ItemsSource>
-            </controls:SegmentView>
-        </StackLayout>
+                                    Style="{StaticResource SemiBoldLabel}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Button 
+                                    Command="{Binding LoginCommand}"
+                                    Style="{StaticResource RoundedButton}"
+                                    Text="Log in"
+                                    Margin="8, 20" />
+
+                        </StackLayout>
+                    </controls:SegmentControlItem.Content>
+                </controls:SegmentControlItem>
+
+                <!-- Sign up -->
+                <controls:SegmentControlItem Text="Sign up" Tag="2">
+                    <controls:SegmentControlItem.Content>
+
+                        <StackLayout Padding="24" BindingContext="{Binding SignUpModel}">
+
+                            <controls:RoundedFrameEntry
+                                    Margin="0, 10"
+                                    Keyboard="Email"
+                                    Text="{Binding Email, Mode=TwoWay}"
+                                    Placeholder="E-mail" />
+
+                            <controls:RoundedFrameEntry 
+                                    Margin="0, 0, 0, 10"
+                                    Text="{Binding Password, Mode=TwoWay}"
+                                    IsPassword="True"
+                                    Placeholder="Password" />
+
+                            <controls:RoundedFrameEntry 
+                                    Text="{Binding ConfirmPassword, Mode=TwoWay}"
+                                    IsPassword="True"
+                                    Placeholder="Confirm password" />
+
+                            <Button 
+                                    Margin="0, 32, 0, 0"
+                                    Text="Sign up"
+                                    Style="{StaticResource RoundedButton}"
+                                    Command="{Binding RegisterCommand}" />
+
+                        </StackLayout>
+                    </controls:SegmentControlItem.Content>
+                </controls:SegmentControlItem>
+            </controls:SegmentView.ItemsSource>
+        </controls:SegmentView>
     </ScrollView>
 </ContentPage>

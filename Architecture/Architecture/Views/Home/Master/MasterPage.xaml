@@ -22,7 +22,7 @@
                                     VerticalOptions="Center" 
                                     Margin="{StaticResource HorizontalPadding}" 
                                     Text="{Binding Title}" 
-                                    TextColor="{StaticResource SecondaryTextColor}" 
+                                    TextColor="{StaticResource TextColor}" 
                                     FontSize="Large" />
                             </ViewCell>
                         </DataTemplate>

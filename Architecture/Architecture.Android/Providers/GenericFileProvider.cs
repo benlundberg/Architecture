@@ -1,4 +1,4 @@
-﻿using Android.Support.V4.Content;
+﻿using AndroidX.Core.Content;
 
 namespace Architecture.Droid
 {

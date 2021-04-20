@@ -9,12 +9,7 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             Visual="Material"
-             x:DataType="local:DetailViewModel">
-
-    <ContentPage.BindingContext>
-        <local:DetailViewModel />
-    </ContentPage.BindingContext>
+             Visual="Material">
 
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Social Card" />

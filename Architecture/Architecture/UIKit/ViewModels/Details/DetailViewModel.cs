@@ -1,37 +1,15 @@
-﻿using Architecture.Controls;
+﻿using Architecture.UIKit.Services;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Xamarin.Forms;
 
-namespace Architecture.UIKit
+namespace Architecture.UIKit.ViewModels
 {
     public class DetailViewModel : BaseViewModel
     {
         public DetailViewModel()
         {
-
+            Comments = new ObservableCollection<ListItemViewModel>(UIKitService.GetListItems(8));
         }
 
-        private ICommand imageCommand;
-        public ICommand ImageCommand => imageCommand ?? (imageCommand = new Command(async () =>
-        {
-            await new ImagePopup(ImageSource.FromUri(new System.Uri("https://architectureappimages.blob.core.windows.net/imagecontainer/7.jpg"))).ShowAsync();
-        }));
-
-        public ObservableCollection<object> TwoItems => new ObservableCollection<object>()
-        {
-            new object (),
-            new object (),
-        };
-
-        public ObservableCollection<object> Items => new ObservableCollection<object>()
-        {
-            new object (),
-            new object (),
-            new object (),
-            new object (),
-            new object (),
-            new object (),
-        };
+        public ObservableCollection<ListItemViewModel> Comments { get; private set; }
     }
 }

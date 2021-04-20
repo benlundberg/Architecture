@@ -7,55 +7,69 @@
              x:Class="Architecture.UIKit.Views.Phone.SecondDetailPage"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             Visual="Material">
-    
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:DetailViewModel">
+
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Second Detail" />
     </NavigationPage.TitleView>
 
-    <ScrollView>
-        <Grid RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ff:CachedImage 
-                HeightRequest="200"
-                Source="https://architectureappimages.blob.core.windows.net/imagecontainer/9.jpg" 
-                Aspect="AspectFill" />
-            <ImageButton 
-                Grid.Row="1"
-                Margin="0, -28, 16, 0"
-                BackgroundColor="{StaticResource Accent}"
-                Style="{StaticResource FloatingButton}"
-                HorizontalOptions="End"
-                VerticalOptions="Start">
-                <ImageButton.Source>
-                    <FontImageSource 
-                        Color="White"
-                        FontFamily="{StaticResource FontAwesomeSolid}"
-                        Glyph="{StaticResource HeartIcon}" />
-                </ImageButton.Source>
-            </ImageButton>
-            <StackLayout Grid.Row="1" Margin="16" Spacing="4">
-                <Label Text="Dance dance" FontSize="Large" />
-                <Label Text="All night" FontSize="Medium" TextColor="{StaticResource BlackLight}" />
-                <StackLayout Margin="0, 12" Orientation="Horizontal">
-                    <Frame Style="{StaticResource ChipFrame}">
-                        <Label VerticalOptions="Center" Text="Travel" FontSize="Default" />
+    <controls:CollapsingScrollView OnlyFadeOut="True">
+        <controls:CollapsingScrollView.HeaderContent>
+            <Grid HeightRequest="228">
+                <ff:CachedImage 
+                    VerticalOptions="Start"
+                    HeightRequest="200"
+                    Aspect="AspectFill"
+                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/21.jpg" />
+                <ImageButton 
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Margin="24, 0"
+                    Style="{StaticResource FloatingButton}">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            Color="White"
+                            Glyph="{StaticResource HeartIcon}"
+                            FontFamily="{StaticResource FontAwesomeSolid}"/>
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+        </controls:CollapsingScrollView.HeaderContent>
+        <controls:CollapsingScrollView.MainContent>
+            <StackLayout Margin="16, 0, 16, 16" Spacing="16">
+                <StackLayout Spacing="0">
+                    <Label 
+                        Text="Lorem ipsum"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    <Label 
+                        TextColor="{StaticResource GrayDark}"
+                        Text="Dolor sit amet" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Spacing="16">
+                    <Frame 
+                        HorizontalOptions="Start"
+                        Style="{StaticResource ChipFrame}">
+                        <Label Text="Lorem" />
                     </Frame>
-                    <Frame Style="{StaticResource ChipFrame}">
-                        <Label Text="Photo" FontSize="Default" />
-                    </Frame>
-                    <Frame Style="{StaticResource ChipFrame}">
-                        <Label VerticalOptions="Center" Text="Pop" FontSize="Default" />
+                    <Frame 
+                        HorizontalOptions="Start"
+                        Style="{StaticResource ChipFrame}">
+                        <Label Text="Ipsum" />
                     </Frame>
                 </StackLayout>
-                <Label Text="Summary" FontSize="Default" Style="{StaticResource SemiBoldLabel}" />
-                <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+
+                <Label 
+                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                <Label 
+                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                <Label 
+                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
             </StackLayout>
-        </Grid>
-    </ScrollView>
-    
+        </controls:CollapsingScrollView.MainContent>
+    </controls:CollapsingScrollView>
+
+
 </ContentPage>

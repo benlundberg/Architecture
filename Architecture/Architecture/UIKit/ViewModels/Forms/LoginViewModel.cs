@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace Architecture.UIKit
+namespace Architecture.UIKit.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
@@ -26,14 +26,7 @@ namespace Architecture.UIKit
         private ICommand forgotPasswordCommand;
         public ICommand ForgotPasswordCommand => forgotPasswordCommand ?? (forgotPasswordCommand = new Command(async () =>
         {
-            if (Device.Idiom == TargetIdiom.Desktop)
-            {
-                await Navigation.PushModalAsync(new Views.Desktop.RecoverPasswordPage { BindingContext = new RecoverPasswordViewModel { Navigation = this.Navigation } });
-            }
-            else
-            {
-                await Navigation.PushModalAsync(new Views.Phone.RecoverPasswordPage { BindingContext = new RecoverPasswordViewModel { Navigation = this.Navigation } });
-            }
+            await Navigation.PushModalAsync(ViewContainer.Current.CreatePage<RecoverPasswordViewModel>());
         }));
 
         private ICommand loginCommand;
@@ -62,7 +55,7 @@ namespace Architecture.UIKit
             catch (Exception ex)
             {
                 Logger.LogException(ex, GetType().ToString(), sendToService: false);
-                ShowAlert(ex.Message, "Exception");
+                ShowAlert(ex.Message, "Error");
             }
             finally
             {
@@ -71,8 +64,32 @@ namespace Architecture.UIKit
             }
         }));
 
+        private ICommand signUpCommand;
+        public ICommand SignUpCommand => signUpCommand ?? (signUpCommand = new Command(async () =>
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+
+            try
+            {
+                IsBusy = true;
+
+                await Navigation.PushModalAsync(ViewContainer.Current.CreatePage<SignUpViewModel>());
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex, GetType().ToString(), sendToService: false);
+                ShowAlert(ex.Message, "Error");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }));
+
         public ValidatableObject<string> Username { get; set; }
         public ValidatableObject<string> Password { get; set; }
-        public bool RememberMe { get; set; }
     }
 }

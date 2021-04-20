@@ -9,92 +9,83 @@
              x:Class="Architecture.UIKit.Views.Phone.ImageLoginPage"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              Visual="Material"
-             x:DataType="local:LoginViewModel">
+             x:DataType="viewModels:LoginViewModel">
 
-    <Grid>
-        <ff:CachedImage
-            VerticalOptions="Fill"
-            HorizontalOptions="Fill"
-            Aspect="Fill"
-            Source="https://architectureappimages.blob.core.windows.net/imagecontainer/11.jpg" />
-        <Grid 
-            BackgroundColor="Black"
-            Opacity=".6" />
+    <ScrollView>
+        <Grid>
+            <ff:CachedImage
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                Aspect="AspectFill"
+                Source="https://architectureappimages.blob.core.windows.net/imagecontainer/22.jpg" />
+            <Grid 
+                BackgroundColor="{StaticResource BlackLight}"
+                Opacity=".32" />
 
-        <StackLayout
-            Spacing="16"
-            Margin="24"
-            VerticalOptions="Center">
-            <Entry 
-                FontSize="14"
-                Placeholder="Username"
-                Opacity=".8"
-                Text="{Binding Username.Value, Mode=TwoWay}">
-                <Entry.PlaceholderColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="Black" />
-                    </OnPlatform>
-                </Entry.PlaceholderColor>
-                <Entry.TextColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="Black" />
-                    </OnPlatform>
-                </Entry.TextColor>
-            </Entry>
-            <Entry 
-                FontSize="14"
-                Placeholder="Password"
-                IsPassword="True" 
-                Opacity=".8"
-                Text="{Binding Password.Value, Mode=TwoWay}">
-                <Entry.PlaceholderColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="Black" />
-                    </OnPlatform>
-                </Entry.PlaceholderColor>
-                <Entry.TextColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="Android" Value="Black" />
-                    </OnPlatform>
-                </Entry.TextColor>
-            </Entry>
-            <Button 
-                Margin="0, 8"
-                Command="{Binding LoginCommand}" 
-                Text="{StaticResource CheckIcon}"
-                TextColor="{StaticResource Accent}"
-                BorderColor="{StaticResource Accent}"
-                Style="{StaticResource OutlineButton}"
-                FontFamily="{StaticResource FontAwesomeSolid}" />
-            
-        </StackLayout>
+            <StackLayout Spacing="0" Padding="24">
+                <Label
+                    VerticalOptions="Start"
+                    HorizontalOptions="End"
+                    FontSize="24"
+                    TextColor="White"
+                    Text="{StaticResource CloseIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PopModalCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
 
-        <Label
-            Margin="24"
-            TextColor="{StaticResource GrayMedium}"
-            Style="{StaticResource SemiBoldLabel}"
-            VerticalOptions="End"
-            HorizontalOptions="Center"
-            Text="Forgot password?">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
-            </Label.GestureRecognizers>
-        </Label>
+                <Label 
+                    Margin="16, 24"
+                    Text="Welcome back"
+                    FontSize="32"
+                    TextColor="White"
+                    Style="{StaticResource SemiBoldLabel}" />
 
-        <Label
-            Margin="24"
-            VerticalOptions="Start"
-            HorizontalOptions="End"
-            FontSize="Large"
-            Text="{StaticResource CloseIcon}"
-            FontFamily="{StaticResource FontAwesomeSolid}"
-            TextColor="White">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding PopModalCommand}" />
-            </Label.GestureRecognizers>
-        </Label>
-    </Grid>
-    
+                <controls:RoundedFrameEntry
+                    Margin="0, 10"
+                    HasFloatingPlaceholder="False"
+                    Text="{Binding Username, Mode=TwoWay}"
+                    Placeholder="Username" />
+
+                <controls:RoundedFrameEntry
+                    Text="{Binding Password, Mode=TwoWay}"
+                    HasFloatingPlaceholder="False"
+                    IsPassword="True"
+                    Placeholder="Password" />
+
+                <Label
+                    Margin="12"
+                    Text="Forgot password?"
+                    HorizontalOptions="End"
+                    TextColor="White"
+                    Style="{StaticResource SemiBoldLabel}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Button 
+                    Command="{Binding LoginCommand}"
+                    Style="{StaticResource RoundedButton}"
+                    Text="Log in"
+                    Margin="8, 20" />
+
+            </StackLayout>
+
+            <Label 
+                Style="{StaticResource SemiBoldLabel}"
+                BackgroundColor="{StaticResource GrayLight}"
+                Padding="24"
+                VerticalOptions="End"
+                HorizontalTextAlignment="Center"
+                Text="Don't have an account? Click here to sign up">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignUpCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -5,20 +5,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Architecture.Core;
+using Architecture.UIKit.Services;
 using Xamarin.Forms;
 
-namespace Architecture.UIKit
+namespace Architecture.UIKit.ViewModels
 {
     public class ListViewModel : BaseViewModel
     {
         public ListViewModel()
         {
-            // We load items on appearing
-            ExecuteIfConnected(async () =>
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                await LoadItemsAsync();
+                var loadingPopup = new Controls.LoadingPopup(Resources.Strings.Gen_Loading);
 
-            }, showAlert: true);
+                try
+                {
+                    await loadingPopup.ShowAsync();
+
+                    await LoadItemsAsync();
+                }
+                catch (Exception ex)
+                {
+                    ex.Print();
+                }
+                finally
+                {
+                    await loadingPopup.HideAsync();
+                }
+            });
         }
 
         private ICommand refreshListCommand;
@@ -28,17 +42,9 @@ namespace Architecture.UIKit
             {
                 await Task.Delay(TimeSpan.FromSeconds(1.5));
 
-                int listCount = Items.Count;
+                var items = UIKitService.GetListItems(5);
 
-                for (int i = 0; i < 5; i++)
-                {
-                    Items.Add(new ListItemViewModel
-                    {
-                        Id = i,
-                        Title = $"Title for item {listCount + i}",
-                        SubTitle = $"Subtitle for item {listCount + i}"
-                    });
-                }
+                items.ForEach(i => Items.Add(i));
             }
             catch (Exception ex)
             {
@@ -51,11 +57,11 @@ namespace Architecture.UIKit
         }));
 
         private ICommand addItemCommand;
-        public ICommand AddItemCommand => addItemCommand ?? (addItemCommand = new Command(async () =>
+        public ICommand AddItemCommand => addItemCommand ?? (addItemCommand = new Command(() =>
         {
             try
             {
-                //await EditItemAsync(new ListItemViewModel { Id = Items.Count });
+                
             }
             catch (Exception ex)
             {
@@ -111,7 +117,7 @@ namespace Architecture.UIKit
 
         private void ItemSelected(int id)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            Device.BeginInvokeOnMainThread(() =>
             {
                 if (IsBusy)
                 {
@@ -123,6 +129,8 @@ namespace Architecture.UIKit
                     IsBusy = true;
 
                     var item = Items.FirstOrDefault(x => x.Id == id);
+                    
+                    ShowAlert(item.SubTitle, item.Title);
                 }
                 catch (Exception ex)
                 {
@@ -137,35 +145,10 @@ namespace Architecture.UIKit
 
         private async Task LoadItemsAsync()
         {
-            if (IsBusy)
-            {
-                return;
-            }
-
-            IsBusy = true;
-
-
-            Controls.LoadingPopup loadingPopup = new Controls.LoadingPopup(Resources.Strings.Gen_Loading);
-            await loadingPopup.ShowAsync();
-
             try
             {
-                // THIS WOULD BE WHERE WE GET ITEMS FROM SERVICE
-
-                var items = new ObservableCollection<ListItemViewModel>();
-
-                // We load items in a list first, this because we want to avoid heavy load on UI properties
-                for (int i = 0; i <= 20; i++)
-                {
-                    items.Add(new ListItemViewModel
-                    {
-                        Id = i,
-                        Title = $"Title for item {i}",
-                        SubTitle = $"Subtitle for item {i}",
-                        ImageSource = ImageService.GetRandomImage()
-                    });
-                }
-
+                var items = new ObservableCollection<ListItemViewModel>(UIKitService.GetListItems(20));
+                
                 await Task.Delay(TimeSpan.FromSeconds(1));
 
                 Items = new ObservableCollection<ListItemViewModel>(items);
@@ -173,12 +156,7 @@ namespace Architecture.UIKit
             }
             catch (Exception ex)
             {
-                ex.Print();
-            }
-            finally
-            {
-                await loadingPopup.HideAsync();
-                IsBusy = false;
+                throw ex;
             }
         }
 
@@ -203,17 +181,6 @@ namespace Architecture.UIKit
         public ObservableCollection<ListItemViewModel> UnfilteredItems { get; private set; }
         public string Query { get; set; }
         public bool IsRefreshing { get; set; }
-        public bool IsImageCellVisible { get; set; }
         public bool SearchIsVisible { get; set; }
-    }
-
-    public class ListItemViewModel : INotifyPropertyChanged
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string SubTitle { get; set; }
-        public string ImageSource { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

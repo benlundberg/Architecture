@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.Phone.DataPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             xmlns:chart="clr-namespace:Architecture.Controls.Charts"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             Visual="Material"
+             x:DataType="viewModels:DataViewModel">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Data" />
+    </NavigationPage.TitleView>
+
+    <controls:SegmentView SegmentedControlMode="Round">
+        <controls:SegmentView.ItemsSource>
+
+            <controls:SegmentControlItem IsSelected="True" Text="Linear" Icon="&#xf201;" IconFontFamily="{StaticResource FontAwesomeSolid}" Tag="1">
+                <controls:SegmentControlItem.Content>
+
+                    <Grid RowDefinitions="Auto, *" Margin="16, 0">
+
+                        <CollectionView
+                            HeightRequest="100" 
+                            SelectedItem="{Binding SelectedDataSource, Mode=TwoWay}"
+                            SelectionMode="Single"
+                            ItemsSource="{Binding DataSources}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout
+                                    HorizontalItemSpacing="10"
+                                    Orientation="Vertical"
+                                    Span="2" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:DataSourceItem">
+                                    <Frame 
+                                        HorizontalOptions="Start"
+                                        HasShadow="False"
+                                        Padding="12"
+                                        BackgroundColor="{Binding BackgroundColor}">
+                                        <Grid
+                                            RowSpacing="10"
+                                            ColumnSpacing="10"
+                                            ColumnDefinitions="Auto, Auto" 
+                                            RowDefinitions="Auto, *">
+                                            <BoxView 
+                                                IsVisible="{Binding IsSelected, Converter={StaticResource InvertedBoolConv}}"
+                                                BackgroundColor="White"
+                                                VerticalOptions="Center"
+                                                CornerRadius="9"
+                                                HeightRequest="18" 
+                                                WidthRequest="18" />
+                                            <Label 
+                                                IsVisible="{Binding IsSelected}"
+                                                Text="&#xf058;"
+                                                TextColor="White"
+                                                VerticalOptions="Center"
+                                                FontSize="18"
+                                                FontFamily="{StaticResource FontAwesomeSolid}" />
+                                            <Label 
+                                                Grid.Column="1" 
+                                                TextColor="White"
+                                                VerticalOptions="Center"
+                                                Text="{Binding Title}"
+                                                FontSize="{StaticResource Medium}"
+                                                Style="{StaticResource SemiBoldLabel}" />
+                                            <Label
+                                                Grid.Row="1" 
+                                                Grid.ColumnSpan="2"
+                                                TextColor="White"
+                                                HorizontalOptions="Center"
+                                                Text="{Binding Content}"
+                                                FontSize="20"
+                                                Style="{StaticResource SemiBoldLabel}" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <chart:LineChart
+                            Grid.Row="1"
+                            VerticalUnit="$"
+                            ChartPadding="2, 0, 0, 0"
+                            HorizontalLabelMode="None"
+                            ChartEntries="{Binding ChartEntries}"
+                            VerticalLabelMode="StartCenterEnd"
+                            VerticalTextColor="{StaticResource GrayDark}"
+                            HorizontalTextColor="{StaticResource GrayDark}"
+                            VerticalLabelAlignment="Center"
+                            SliderColor="{StaticResource PrimaryColor}"
+                            ChartBackgroundColor="{StaticResource Gray}"
+                            SliderDetailTextColor="{StaticResource PrimaryColor}"
+                            SliderDetailColor="{StaticResource PageBackgroundColor}"
+                            SliderPointSize="10"
+                            SelectedValuesCommand="{Binding SelectedChartEntriesChangedCommand}"
+                            UseItemWidthSlider="True"
+                            HideFrame="True"
+                            InsideFrame="None"
+                            DashedFrame="True"
+                            LineBackground="True" />
+                    </Grid>
+
+                </controls:SegmentControlItem.Content>
+            </controls:SegmentControlItem>
+
+            <!-- Bars -->
+            <controls:SegmentControlItem Text="Bars" Icon="&#xf080;" IconFontFamily="{StaticResource FontAwesomeSolid}" Tag="2">
+                <controls:SegmentControlItem.Content>
+
+                    <Grid RowDefinitions="Auto, *" Margin="16, 0">
+
+                        <CollectionView
+                            HeightRequest="100" 
+                            SelectedItem="{Binding SelectedDataSource, Mode=TwoWay}"
+                            SelectionMode="Single"
+                            ItemsSource="{Binding DataSources}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout
+                                    HorizontalItemSpacing="10"
+                                    Orientation="Vertical"
+                                    Span="2" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:DataSourceItem">
+                                    <Frame 
+                                        HorizontalOptions="Start"
+                                        HasShadow="False"
+                                        Padding="12"
+                                        BackgroundColor="{Binding BackgroundColor}">
+                                        <Grid
+                                            RowSpacing="10"
+                                            ColumnSpacing="10"
+                                            ColumnDefinitions="Auto, Auto" 
+                                            RowDefinitions="Auto, *">
+                                            <BoxView 
+                                                IsVisible="{Binding IsSelected, Converter={StaticResource InvertedBoolConv}}"
+                                                BackgroundColor="White"
+                                                VerticalOptions="Center"
+                                                CornerRadius="9"
+                                                HeightRequest="18" 
+                                                WidthRequest="18" />
+                                            <Label 
+                                                IsVisible="{Binding IsSelected}"
+                                                Text="&#xf058;"
+                                                TextColor="White"
+                                                VerticalOptions="Center"
+                                                FontSize="18"
+                                                FontFamily="{StaticResource FontAwesomeSolid}" />
+                                            <Label 
+                                                Grid.Column="1" 
+                                                TextColor="White"
+                                                VerticalOptions="Center"
+                                                Text="{Binding Title}"
+                                                FontSize="{StaticResource Medium}"
+                                                Style="{StaticResource SemiBoldLabel}" />
+                                            <Label
+                                                Grid.Row="1" 
+                                                Grid.ColumnSpan="2"
+                                                TextColor="White"
+                                                HorizontalOptions="Center"
+                                                Text="{Binding Content}"
+                                                FontSize="20"
+                                                Style="{StaticResource SemiBoldLabel}" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Grid Grid.Row="1" Margin="0, 16">
+                            <Grid Margin="0, 14, 0, 0">
+                                <StackLayout Spacing="0">
+                                    <Label Text="$"/>
+                                    <Label Text="100" />
+                                </StackLayout>
+
+                                <BoxView 
+                                    HeightRequest="1" 
+                                    VerticalOptions="Center" 
+                                    HorizontalOptions="Fill" 
+                                    BackgroundColor="{StaticResource Gray}" />
+                                <Label VerticalOptions="Center" Text="50" />
+                            </Grid>
+
+                            <BoxView 
+                                WidthRequest="48" 
+                                VerticalOptions="FillAndExpand" 
+                                BackgroundColor="{StaticResource PrimaryColor}"
+                                Opacity=".5"
+                                Margin="0, 16, 0, 30"
+                                HorizontalOptions="Center" />
+                            <CollectionView
+                                Margin="24, 0"
+                                HeightRequest="300"
+                                ItemsSource="{Binding BarItems}">
+                                <CollectionView.Header>
+                                    <Grid WidthRequest="180" />
+                                </CollectionView.Header>
+                                <CollectionView.Footer>
+                                    <Grid WidthRequest="180" />
+                                </CollectionView.Footer>
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout 
+                                        ItemSpacing="0"
+                                        SnapPointsAlignment="Center"
+                                        SnapPointsType="Mandatory"
+                                        Orientation="Horizontal" />
+                                    </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="viewModels:BarChartItem">
+                                        <Grid RowDefinitions="*, Auto">
+                                            <StackLayout
+                                                Margin="12, 0"
+                                                Orientation="Horizontal"
+                                                HorizontalOptions="Center"
+                                                Spacing="4" 
+                                                BindableLayout.ItemsSource="{Binding Items}">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate x:DataType="viewModels:BarChartSubItem">
+                                                        <StackLayout Spacing="0" VerticalOptions="End">
+                                                            <BoxView
+                                                                VerticalOptions="End"
+                                                                Color="{Binding ItemColor}"
+                                                                HeightRequest="{Binding YValue}"
+                                                                WidthRequest="16" />
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                            <Label 
+                                                Grid.Row="1" 
+                                                HeightRequest="25"
+                                                HorizontalOptions="Center" 
+                                                Text="{Binding LabelDisplay}"
+                                                Style="{StaticResource SemiBoldLabel}"
+                                                TextColor="{StaticResource PrimaryColor}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <!--<CarouselView 
+                                Margin="24, 0"
+                                HeightRequest="300"
+                                CurrentItem="{Binding SelectedBarChartItem, Mode=TwoWay}"
+                                Loop="False"
+                                PeekAreaInsets="132"
+                                ItemsSource="{Binding BarItems}">
+                                <CarouselView.ItemsLayout>
+                                    <LinearItemsLayout
+                                        SnapPointsAlignment="Center"
+                                        SnapPointsType="Mandatory"
+                                        Orientation="Horizontal" />     
+                                </CarouselView.ItemsLayout>
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate x:DataType="viewModels:BarChartItem">
+                                        <Grid RowDefinitions="*, Auto">
+                                            <StackLayout
+                                                Margin="0"
+                                                Orientation="Horizontal"
+                                                HorizontalOptions="Center"
+                                                Spacing="2" 
+                                                BindableLayout.ItemsSource="{Binding Items}">   
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate x:DataType="viewModels:BarChartSubItem">
+                                                        <StackLayout Spacing="0" VerticalOptions="End">
+                                                            <BoxView
+                                                                VerticalOptions="End"
+                                                                Color="{Binding ItemColor}"
+                                                                HeightRequest="{Binding YValue}"
+                                                                WidthRequest="16" />
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                            <Label 
+                                                Grid.Row="1" 
+                                                HorizontalOptions="Center" 
+                                                Text="{Binding LabelDisplay}"
+                                                Style="{StaticResource SemiBoldLabel}"
+                                                TextColor="{StaticResource PrimaryColor}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>-->
+                            
+                        </Grid>
+                    </Grid>
+                </controls:SegmentControlItem.Content>
+            </controls:SegmentControlItem>
+
+            <!-- Table -->
+            <controls:SegmentControlItem Text="Table" Icon="&#xf0ce;" IconFontFamily="{StaticResource FontAwesomeSolid}" Tag="3">
+                <controls:SegmentControlItem.Content>
+
+                    <Grid>
+
+                    </Grid>
+
+                </controls:SegmentControlItem.Content>
+            </controls:SegmentControlItem>
+        </controls:SegmentView.ItemsSource>
+    </controls:SegmentView>
+</ContentPage>

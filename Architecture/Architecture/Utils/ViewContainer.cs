@@ -59,6 +59,9 @@ namespace Architecture
             var viewType = map[typeof(TViewModel)];
             var page = (Page)Activator.CreateInstance(viewType);
 
+            viewModel.Navigation = page.Navigation;
+            page.BindingContext = viewModel;
+
             viewModel.OnInitialize();
             viewModel.OnPageCreated(page);
 
@@ -87,9 +90,6 @@ namespace Architecture
             }
 
             page.Appearing += Appearing;
-
-            viewModel.Navigation = page.Navigation;
-            page.BindingContext = viewModel;
 
             return page;
         }

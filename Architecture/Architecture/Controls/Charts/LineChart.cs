@@ -113,7 +113,7 @@ namespace Architecture.Controls.Charts
                 DrawHorizontalLabel(valueItems?.FirstOrDefault()?.ChartValueItem, canvas, frame, chart);
 
                 DrawFrame(canvas, frame);
-            
+
                 DrawSliderPoints(valueItems, canvas, chart);
             }
             else
@@ -157,28 +157,53 @@ namespace Architecture.Controls.Charts
             {
                 IsAntialias = true,
                 Color = ChartBackgroundColor.ToSKColor(),
-                Style = SKPaintStyle.Fill
+                Style = LineBackground ? SKPaintStyle.Stroke : SKPaintStyle.Fill,
+                IsStroke = LineBackground,
             })
             {
+                if (DashedFrame)
+                {
+                    paint.PathEffect = SKPathEffect.CreateDash(new float[] { 12, 12 }, 0);
+                }
+
+                if (LineBackground)
+                {
+                    paint.StrokeWidth = 2f;
+                }
+
                 var items = ChartValueItemsXPoints;
 
                 var width = frame.GetItemWidth(MaxItems);
 
                 for (int i = 0; i < items.Count; i++)
                 {
-                    if (i % 2 != 0)
+                    if (LineBackground)
                     {
-                        continue;
+                        var item = items[i];
+
+                        var left = item.Item2;
+
+                        if (i != 0 && i != items.Count - 1)
+                        {
+                            canvas.DrawLine(left, frame.Bottom, left, frame.Top, paint);
+                        }
                     }
-
-                    var item = items[i];
-
-                    var left = item.Item2;
-
-                    // Don't draw outside frame
-                    if ((left + (width * 2)).ToRounded() <= (frame.Right + FrameWidth).ToRounded())
+                    else
                     {
-                        canvas.DrawRect(left + width, frame.Top, width, frame.Height - FrameWidth, paint);
+                        if (i % 2 != 0)
+                        {
+                            continue;
+                        }
+
+                        var item = items[i];
+
+                        var left = item.Item2;
+
+                        // Don't draw outside frame
+                        if ((left + (width * 2)).ToRounded() <= (frame.Right + FrameWidth).ToRounded())
+                        {
+                            canvas.DrawRect(left + width, frame.Top, width, frame.Height - FrameWidth, paint);
+                        }
                     }
                 }
             }
@@ -266,13 +291,13 @@ namespace Architecture.Controls.Charts
             using (var paint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                StrokeCap = SKStrokeCap.Round,
-                Color = this.SliderColor.ToSKColor(),
-                StrokeWidth = this.SliderWidth
+                StrokeCap = UseItemWidthSlider ? SKStrokeCap.Butt : SKStrokeCap.Round,
+                Color = this.SliderColor.ToSKColor().AsTransparency(),
+                StrokeWidth = UseItemWidthSlider ? frame.GetItemWidth(MaxItems) : this.SliderWidth
             })
             {
                 // Straight slider line
-                canvas.DrawLine(x, chart.Top, x, DisplayHorizontalValuesBySlider ? frame.Bottom + HorizontalTextSize : chart.Bottom - FrameWidth, paint);
+                canvas.DrawLine(x, chart.Top, x, DisplayHorizontalValuesBySlider && !UseItemWidthSlider ? frame.Bottom + HorizontalTextSize : chart.Bottom, paint);
 
                 DrawSliderHint(canvas, x);
             }
@@ -327,8 +352,8 @@ namespace Architecture.Controls.Charts
 
             using (var paint = new SKPaint
             {
-                Style = SKPaintStyle.StrokeAndFill,
-                StrokeWidth = SliderPointSize
+                Style = SKPaintStyle.Stroke,
+                StrokeWidth = 4
             })
             {
                 foreach (var item in valueItems)
@@ -349,17 +374,21 @@ namespace Architecture.Controls.Charts
                     {
                         var point = ChartCalculator.CalculateYPositionForSpline(item.ChartValueItem, item.NextChartValueItem, x);
 
+                        paint.Style = SKPaintStyle.Stroke;
+
                         canvas.DrawCircle(point.X, point.Y, SliderPointSize, paint);
 
-                        paint.Color = SKColors.White;
+                        //paint.Color = SKColors.White;
+                        paint.Style = SKPaintStyle.Fill;
 
-                        canvas.DrawCircle(point.X, point.Y, SliderPointSize / 4, paint);
+                        canvas.DrawCircle(point.X, point.Y, SliderPointSize / 2, paint);
                     }
                 }
             }
         }
 
         public LineMode LineMode { get; set; } = LineMode.Spline;
+        public bool UseItemWidthSlider { get; set; }
 
         public float SnapSensitivity { get; set; } = 15f;
 

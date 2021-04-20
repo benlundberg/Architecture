@@ -6,136 +6,166 @@
              mc:Ignorable="d"
              x:Class="Architecture.UIKit.Views.Phone.ArticleBrowserPage"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:local="clr-namespace:Architecture.UIKit"
              xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              Visual="Material"
-             x:DataType="local:ArticlesViewModel"
-             x:Name="articleBrowserRoot">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-
-            <DataTemplate x:Key="arcticleItem" x:DataType="local:ArticleItemViewModel">
-                <Grid>
-                    <ff:CachedImage
-                        Source="{Binding ImageSource}" 
-                        WidthRequest="156"
-                        HeightRequest="208"
-                        Aspect="AspectFill" />
-                    <Grid RowSpacing="0" RowDefinitions="Auto, Auto" VerticalOptions="End">
-                        <Grid Grid.RowSpan="2" BackgroundColor="Black" Opacity=".38" />
-                        <Label
-                            Margin="10, 8, 10, 0"
-                            FontSize="Default"
-                            TextColor="#FFF"
-                            Style="{StaticResource SemiBoldLabel}"
-                            Text="{Binding Title}" />
-                        <Label
-                            Grid.Row="1"
-                            Margin="10, 0, 10, 8"
-                            FontSize="12"
-                            TextColor="#FFF"
-                            Text="{Binding Category}" />
-                    </Grid>
-                </Grid>
-            </DataTemplate>
-
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <ContentPage.BindingContext>
-        <local:ArticlesViewModel />
-    </ContentPage.BindingContext>
+             x:DataType="viewModels:ArticlesBrowserViewModel"
+             x:Name="rootLayout">
 
     <NavigationPage.TitleView>
-        <Label VerticalOptions="Center" FontFamily="{StaticResource OpenSansBold}" Text="Article Browser" />
+        <controls:PageTitleView Text="Article Browser" />
     </NavigationPage.TitleView>
 
-    <ScrollView>
-        <StackLayout Spacing="0">
-            <CarouselView
-                ItemsSource="{Binding Articles1}" 
-                IndicatorView="indicatorView"
-                HeightRequest="192">
-                <CarouselView.ItemsLayout>
-                    <LinearItemsLayout 
-                        SnapPointsType="MandatorySingle"
-                        SnapPointsAlignment="Center"
-                        Orientation="Horizontal" />
-                </CarouselView.ItemsLayout>
-                <CarouselView.ItemTemplate>
-                    <DataTemplate x:DataType="local:ArticleItemViewModel">
-                        <Grid>
-                            <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
-                            <Grid>
-                                <Grid.Background>
-                                    <LinearGradientBrush EndPoint="0,1">
-                                        <GradientStop Color="Transparent" Offset="0.32" />
-                                        <GradientStop Color="Black" Offset="1.0" />
-                                    </LinearGradientBrush>
-                                </Grid.Background>
-                            </Grid>
-                            <StackLayout Margin="16, 0, 16, 24" VerticalOptions="End" Spacing="4">
-                                <Label TextColor="{StaticResource GrayLight}" Text="{Binding Title}" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}"/>
-                                <Label TextColor="{StaticResource GrayLight}" Text="{Binding Category}" FontSize="Default" />
-                                <BoxView Margin="0, 4, 0, 0" BackgroundColor="{StaticResource Accent}" HorizontalOptions="Start" WidthRequest="100" HeightRequest="2" />
-                            </StackLayout>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference articleBrowserRoot}}" CommandParameter="{Binding}" />
-                            </Grid.GestureRecognizers>
-                        </Grid>
+    <Grid>
+        
+        <!-- View Loading -->
+        <StackLayout Margin="24" IsVisible="{Binding IsBusy}">
+
+            <controls:SkeletonView 
+                IsLoading="{Binding IsBusy}"
+                Repeat="1">
+                <controls:SkeletonView.DataTemplate>
+                    <DataTemplate>
+                        <BoxView
+                            CornerRadius="12"
+                            BackgroundColor="{StaticResource GrayDark}"
+                            HorizontalOptions="Fill"
+                            HeightRequest="200" />
                     </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
-            <IndicatorView
-                x:Name="indicatorView"
-                IndicatorsShape="Circle"
-                IndicatorColor="{StaticResource GrayMedium}"
-                SelectedIndicatorColor="{StaticResource PrimaryColor}"
-                HorizontalOptions="Center"
-                IndicatorSize="10"
-                Margin="16, 16, 16, 24" />
-            <CollectionView
-                ItemsSource="{Binding Articles2}"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                ItemTemplate="{StaticResource arcticleItem}"
-                SelectionMode="Single"
-                HeightRequest="208">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        SnapPointsAlignment="Start" 
-                        SnapPointsType="None" 
-                        HorizontalItemSpacing="12" 
-                        Orientation="Horizontal" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.Footer>
-                    <Grid WidthRequest="12" />
-                </CollectionView.Footer>
-                <CollectionView.Header>
-                    <Grid WidthRequest="{OnPlatform Android=0, iOS=12}" />
-                </CollectionView.Header>
-            </CollectionView>
-            <CollectionView
-                Margin="0, 16"
-                ItemsSource="{Binding Articles3}"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                ItemTemplate="{StaticResource arcticleItem}"
-                SelectionMode="Single"
-                HeightRequest="208">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        SnapPointsAlignment="Start" 
-                        SnapPointsType="None" 
-                        HorizontalItemSpacing="12" 
-                        Orientation="Horizontal" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.Footer>
-                    <Grid WidthRequest="12" />
-                </CollectionView.Footer>
-                <CollectionView.Header>
-                    <Grid WidthRequest="{OnPlatform Android=0, iOS=12}" />
-                </CollectionView.Header>
-            </CollectionView>
+                </controls:SkeletonView.DataTemplate>
+            </controls:SkeletonView>
+
+            <controls:SkeletonView 
+                IsLoading="{Binding IsBusy}"
+                Repeat="1">
+                <controls:SkeletonView.DataTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                            <StackLayout>
+                                <BoxView CornerRadius="12" BackgroundColor="{StaticResource GrayDark}" HeightRequest="175" HorizontalOptions="Fill" />
+                                <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="17" HorizontalOptions="Fill" />
+                                <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="14" HorizontalOptions="Fill" />
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
+                                <BoxView CornerRadius="12" BackgroundColor="{StaticResource GrayDark}" HeightRequest="175" HorizontalOptions="Fill" />
+                                <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="17" HorizontalOptions="Fill" />
+                                <BoxView BackgroundColor="{StaticResource GrayDark}" HeightRequest="14" HorizontalOptions="Fill" />
+                            </StackLayout>
+                        </Grid>
+
+                    </DataTemplate>
+                </controls:SkeletonView.DataTemplate>
+            </controls:SkeletonView>
         </StackLayout>
-    </ScrollView>
+        
+        <!-- View Loaded -->
+        <CollectionView
+            IsVisible="{Binding IsNotBusy}"
+            Header="{Binding}"
+            ItemsSource="{Binding Articles}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionMode="Single">
+            
+            <CollectionView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout Spacing="16">
+                        
+                        <!-- Carousel Top -->
+                        <CarouselView
+                            HeightRequest="216"
+                            IndicatorView="indicator"
+                            ItemsSource="{Binding TopArticles}">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout 
+                                    SnapPointsType="Mandatory"
+                                    SnapPointsAlignment="Center"
+                                    Orientation="Horizontal"
+                                    ItemSpacing="0" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                                    <Grid Padding="8">
+                                        <Frame
+                                            IsClippedToBounds="True"
+                                            CornerRadius="12"
+                                            BorderColor="Transparent" 
+                                            Padding="0"
+                                            HasShadow="False">
+                                            <Grid>
+                                                <ff:CachedImage
+                                                    Aspect="AspectFill"
+                                                    Source="{Binding ImageSource}" />
+                                                <Grid BackgroundColor="Black" Opacity=".32" />
+                                                <StackLayout 
+                                                    VerticalOptions="End"
+                                                    Margin="16, 24"
+                                                    Spacing="0">
+                                                    <Label 
+                                                        Text="Lorem ipsum" 
+                                                        TextColor="White"
+                                                        Style="{StaticResource SemiBoldLabel}" />
+                                                    <Label 
+                                                        Text="Dolor sit amet, consectetur" 
+                                                        TextColor="White" />
+                                                </StackLayout>
+                                            </Grid>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference rootLayout}}" CommandParameter="{Binding}" />
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+                    <!-- Carousel Indicator -->
+                    <IndicatorView
+                        x:Name="indicator"
+                        Margin="0, 0, 0, 16"
+                        IndicatorsShape="Circle"
+                        IndicatorColor="{StaticResource Gray}"
+                        SelectedIndicatorColor="{StaticResource PrimaryColor}"
+                        HorizontalOptions="Center"
+                        IndicatorSize="10" />
+
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.HeaderTemplate>
+
+            <!-- Collection view articles -->
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="0"
+                    Orientation="Vertical"
+                    Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                    <StackLayout
+                        Spacing="0"
+                        VerticalOptions="Start"
+                        Padding="12">
+                        <Frame 
+                            VerticalOptions="Start"
+                            IsClippedToBounds="True"
+                            CornerRadius="12"
+                            Padding="0"
+                            HasShadow="False"
+                            Margin="0, 0, 0, 10">
+                            <ff:CachedImage 
+                                HeightRequest="175"
+                                Aspect="AspectFill"
+                                Source="{Binding ImageSource}" />
+                        </Frame>
+                        <Label 
+                            Text="{Binding Title}"
+                            Style="{StaticResource SemiBoldLabel}" />
+                        <Label 
+                            Text="{Binding Text}" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
 </ContentPage>

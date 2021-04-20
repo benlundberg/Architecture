@@ -8,56 +8,52 @@
              ios:Page.UseSafeArea="true"
              x:Class="Architecture.UIKit.Views.Phone.FullSignUpPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              Visual="Material"
-             x:DataType="local:SignUpViewModel">
+             x:DataType="viewModels:SignUpViewModel">
 
     <ScrollView>
-        <StackLayout 
-            Margin="24"
-            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}">
+        <StackLayout Spacing="0" Padding="24">
             <Label
-                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
                 VerticalOptions="Start"
                 HorizontalOptions="End"
-                FontSize="Large"
+                FontSize="24"
                 Text="{StaticResource CloseIcon}"
-                FontFamily="{StaticResource FontAwesomeSolid}"
-                TextColor="{StaticResource BlackLight}">
+                FontFamily="{StaticResource FontAwesomeSolid}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding PopModalCommand}" />
                 </Label.GestureRecognizers>
             </Label>
+
+            <Label 
+                Margin="16, 24"
+                Text="Sign up"
+                FontSize="32"
+                Style="{StaticResource SemiBoldLabel}" />
             
-            <!-- Title and Subtitle -->
-            <Label
-                Style="{StaticResource SemiBoldLabel}"
-                FontSize="Large"
-                Text="Join many others" />
-            <Label
-                FontSize="Default"
-                Text="Sign up to join this amazing commmunity"
-                Margin="0, 0, 0, 48" />
-            
-            <controls:RoundedFrameEntry 
-                Placeholder="Email"
+            <controls:RoundedFrameEntry
+                Margin="0, 10"
                 Keyboard="Email"
-                Text="{Binding Email, Mode=TwoWay}" />
+                Text="{Binding Email, Mode=TwoWay}"
+                Placeholder="E-mail" />
+            
             <controls:RoundedFrameEntry 
+                Margin="0, 0, 0, 10"
                 Text="{Binding Password, Mode=TwoWay}"
-                Placeholder="Password" 
-                IsPassword="True" />
+                IsPassword="True"
+                Placeholder="Password" />
+            
             <controls:RoundedFrameEntry 
                 Text="{Binding ConfirmPassword, Mode=TwoWay}"
-                Placeholder="Confirm password" 
-                IsPassword="True" />
-            <Button 
-                Margin="0, 16, 0, 0"
-                Style="{StaticResource RoundedButton}"
-                Text="{StaticResource CheckIcon}"
-                FontFamily="{StaticResource FontAwesomeSolid}" />
-        </StackLayout>
+                IsPassword="True"
+                Placeholder="Confirm password" />
             
+            <Button 
+                Margin="0, 32, 0, 0"
+                Text="Sign up"
+                Style="{StaticResource RoundedButton}"
+                Command="{Binding RegisterCommand}" />
+        </StackLayout>
     </ScrollView>
 
 </ContentPage>

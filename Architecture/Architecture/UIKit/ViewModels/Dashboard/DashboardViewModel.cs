@@ -1,4 +1,5 @@
 ﻿using Architecture.Controls;
+using Architecture.UIKit.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -105,63 +106,63 @@ namespace Architecture.UIKit
                 {
                     Title = "City",
                     Subtitle = "3 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#00363a")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Animals",
                     Subtitle = "6 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#006064")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Food",
                     Subtitle = "3 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#428e92")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Sports",
                     Subtitle = "1 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#005005")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Business",
                     Subtitle = "7 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#2e7d32")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Fashion",
                     Subtitle = "3 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#60ad5e")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Technics",
                     Subtitle = "5 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#6c6f00")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Transport",
                     Subtitle = "2 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#9e9d24")
                 },
                 new DashboardItemViewModel
                 {
                     Title = "Nature",
                     Subtitle = "1 news",
-                    ImageSource = ImageService.GetRandomImage(),
+                    ImageSource = UIKitService.GetRandomImage(),
                     BackgroundColor = Color.FromHex("#d2ce56")
                 }
             };

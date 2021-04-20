@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using Android.Content;
-using Android.Support.V4.Content;
 using Android.Webkit;
+using AndroidX.Core.Content;
 using Architecture.Core;
 
 namespace Architecture.Droid

@@ -48,38 +48,7 @@ namespace Architecture.UIKit
 
         private void PickPhoto()
         {
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    var photo = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
-                    {
-                        Title = AppConfig.AppName
-                    });
-
-                    if (photo == null)
-                    {
-                        return;
-                    }
-
-                    await LoadPhotoAsync(photo);
-                }
-                catch (PermissionException pe)
-                {
-                    pe.Print();
-
-                    var res = await ShowConfirmAsync("The app needs permission to use this feature. You can grant them in app settings", "Need permissions", "Goto settings");
-
-                    if (res)
-                    {
-                        AppInfo.ShowSettingsUI();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ex.Print();
-                }
-            });
+            
         }
 
         private void TakePhoto()

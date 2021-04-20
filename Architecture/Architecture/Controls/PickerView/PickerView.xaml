@@ -20,14 +20,14 @@
             </Grid.ColumnDefinitions>
             <Label 
                 Grid.Column="1"
-                FontSize="Large"
+                FontSize="{StaticResource Medium}"
                 IsVisible="{Binding HasIcon, Source={x:Reference root}}"
                 VerticalOptions="Center"
                 Text="{Binding IconTextSource, Source={x:Reference root}}"
                 TextColor="{Binding IconColor, Source={x:Reference root}}"
                 FontFamily="{Binding IconFontFamily, Source={x:Reference root}}" />
             <Label 
-                FontSize="Default"
+                FontSize="{StaticResource Default}"
                 VerticalOptions="Center"
                 TextColor="{Binding IconColor, Source={x:Reference root}}"
                 Text="{Binding PickerText, Source={x:Reference root}}">

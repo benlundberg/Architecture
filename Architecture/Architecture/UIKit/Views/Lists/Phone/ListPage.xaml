@@ -7,15 +7,11 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:properties="clr-namespace:Architecture.Resources"
              xmlns:controls="clr-namespace:Architecture.Controls"
-             xmlns:local="clr-namespace:Architecture.UIKit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              x:Class="Architecture.UIKit.Views.Phone.ListPage"
              Visual="Material"
-             x:DataType="local:ListViewModel"
+             x:DataType="viewModels:ListViewModel"
              x:Name="listPageRoot">
-
-    <ContentPage.BindingContext>
-        <local:ListViewModel />
-    </ContentPage.BindingContext>
     
     <NavigationPage.TitleView>
         <Grid>
@@ -24,9 +20,8 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <controls:PageTitleView 
-                HorizontalOptions="{OnPlatform Android=Center, iOS=Center}"
                 IsVisible="{Binding SearchIsVisible, Converter={StaticResource InvertedBoolConv}}"
-                Text="Simple List" />
+                Text="List" />
             <controls:SearchEntry 
                 Padding="0"
                 VerticalOptions="Center"
@@ -73,21 +68,19 @@
                             IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
                             Command="{Binding RefreshListCommand}">
                             <CollectionView 
-			                    ItemsSource="{Binding Items}"
                                 SelectionMode="Single"
+			                    ItemsSource="{Binding Items}"
 			                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                                 <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="local:ListItemViewModel">
-                                        <StackLayout Padding="16" Spacing="0">
+                                    <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                                        <StackLayout Padding="16, 0" Spacing="0">
                                             <Label 
-                                                FontSize="Medium"
+                                                Style="{StaticResource SemiBoldLabel}"
                                                 Text="{Binding Title}" />
                                             <Label 
-                                                FontSize="Default"
-                                                TextColor="{StaticResource BlackLight}"
                                                 Text="{Binding SubTitle}" />
                                         </StackLayout>
                                     </DataTemplate>
@@ -107,23 +100,28 @@
                                 SelectionMode="Single"
 			                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                                 <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="local:ListItemViewModel">
-                                        <Grid Padding="16, 12" ColumnDefinitions="Auto, *" ColumnSpacing="16">
-                                            <ff:CachedImage 
-                                                HeightRequest="64"
-                                                WidthRequest="64"
-                                                Aspect="AspectFill"
-                                                Source="{Binding ImageSource}"/>
-                                            <StackLayout Spacing="4" Grid.Column="1">
+                                    <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                                        <Grid Padding="16, 0" ColumnDefinitions="Auto, *" ColumnSpacing="16">
+                                            <Frame
+                                                IsClippedToBounds="True"
+                                                Padding="0"
+                                                CornerRadius="10"
+                                                HasShadow="False"
+                                                BorderColor="Transparent">
+                                                <ff:CachedImage 
+                                                    HeightRequest="72"
+                                                    WidthRequest="72"
+                                                    Aspect="AspectFill"
+                                                    Source="{Binding ImageSource}"/>
+                                            </Frame>
+                                            <StackLayout Spacing="0" Grid.Column="1">
                                                 <Label 
-                                                    FontSize="16"
+                                                    Style="{StaticResource SemiBoldLabel}"
                                                     Text="{Binding Title}" />
                                                 <Label 
-                                                    FontSize="14"
-                                                    TextColor="{StaticResource BlackLight}"
                                                     Text="{Binding SubTitle}" />
                                             </StackLayout>
                                         </Grid>
@@ -136,7 +134,6 @@
             </controls:SegmentView.ItemsSource>
         </controls:SegmentView>
         <ImageButton 
-            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConv}}"
             VerticalOptions="End"
             HorizontalOptions="End"
             Margin="24"

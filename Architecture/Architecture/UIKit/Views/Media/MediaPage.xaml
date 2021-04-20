@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Architecture.UIKit.Views.MediaPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:local="clr-namespace:Architecture.UIKit"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
@@ -17,74 +18,12 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <Grid RowDefinitions="*, Auto">
-            <ff:CachedImage 
+        <StackLayout>
+            <xct:CameraView
+                CaptureMode="Photo"
+                FlashMode="On"
                 HorizontalOptions="FillAndExpand"
-                Aspect="AspectFit"
-                ErrorPlaceholder="ic_launcher"
-                Source="{Binding ImageSource}" 
-                HeightRequest="300" />
-            
-            <Grid
-                Padding="24"    
-                VerticalOptions="End" 
-                BackgroundColor="{StaticResource Gray}">
-                <Frame
-                    HeightRequest="50"
-                    WidthRequest="50"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Start"
-                    HasShadow="False" 
-                    Padding="0" 
-                    CornerRadius="4">
-                    <Grid>
-                        <ff:CachedImage 
-                            Aspect="AspectFill"
-                            Source="https://architectureappimages.blob.core.windows.net/imagecontainer/1.jpg" />
-                        <ImageButton 
-                            VerticalOptions="Center"
-                            HorizontalOptions="Center"
-                            BackgroundColor="Transparent"
-                            Command="{Binding MediaCommand}" 
-                            CommandParameter="2">
-                            <ImageButton.Source>
-                                <FontImageSource 
-                                    Size="18"
-                                    Color="White"
-                                    Glyph="{StaticResource ImagesIcon}"
-                                    FontFamily="{StaticResource FontAwesomeSolid}" />
-                            </ImageButton.Source>
-                        </ImageButton>
-                    </Grid>
-                </Frame>
-                
-                <ImageButton
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Style="{StaticResource FloatingButton}"
-                    Command="{Binding MediaCommand}" 
-                    CommandParameter="1">
-                    <ImageButton.Source>
-                        <FontImageSource 
-                            Color="White"
-                            Glyph="{StaticResource CameraIcon}"
-                            FontFamily="{StaticResource FontAwesomeSolid}" />
-                    </ImageButton.Source>
-                </ImageButton>
-
-                <ImageButton
-                    VerticalOptions="Center"
-                    HorizontalOptions="End"
-                    BackgroundColor="White"
-                    Style="{StaticResource FloatingButtonMini}">
-                    <ImageButton.Source>
-                        <FontImageSource 
-                            Color="{StaticResource BlackLight}"
-                            Glyph="{StaticResource ChevronRightIcon}"
-                            FontFamily="{StaticResource FontAwesomeSolid}" />
-                    </ImageButton.Source>
-                </ImageButton>
-            </Grid>
-        </Grid>
+                VerticalOptions="FillAndExpand" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

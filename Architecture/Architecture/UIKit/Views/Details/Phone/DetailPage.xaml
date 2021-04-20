@@ -7,119 +7,89 @@
              x:Class="Architecture.UIKit.Views.Phone.DetailPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:local="clr-namespace:Architecture.UIKit"
-             Visual="Material">
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:DetailViewModel">
 
-    <ContentPage.BindingContext>
-        <local:DetailViewModel />
-    </ContentPage.BindingContext>
-    
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Details" />
     </NavigationPage.TitleView>
 
-    <controls:CollapsingScrollView>
-        <controls:CollapsingScrollView.HeaderContent>
-            <Grid>
-                <ff:CachedImage 
-                    HeightRequest="192"
-                    Source="https://architectureappimages.blob.core.windows.net/imagecontainer/13.jpg" 
-                    Aspect="AspectFill" />
+    <Grid>
+        <controls:CollapsingScrollView>
+            <controls:CollapsingScrollView.HeaderContent>
                 <Grid>
-                    <Grid.Background>
-                        <LinearGradientBrush EndPoint="0,1">
-                            <GradientStop Color="Transparent" Offset="0.32" />
-                            <GradientStop Color="Black" Offset="1.0" />
-                        </LinearGradientBrush>
-                    </Grid.Background>
-                </Grid>
-                <StackLayout Margin="16, 0, 16, 24" VerticalOptions="End" Spacing="4">
-                    <Label TextColor="{StaticResource GrayLight}" Text="Fresh water" FontSize="Subtitle" Style="{StaticResource SemiBoldLabel}"/>
-                    <Label TextColor="{StaticResource GrayLight}" Text="Friendship in the water" FontSize="Default" />
-                    <BoxView Margin="0, 4, 0, 0" BackgroundColor="{StaticResource Accent}" HorizontalOptions="Start" WidthRequest="100" HeightRequest="2" />
-                </StackLayout>
-            </Grid>
-        </controls:CollapsingScrollView.HeaderContent>
-        <controls:CollapsingScrollView.MainContent>
-            <StackLayout>
-                <Grid 
-                    Padding="16, 12"
-                    ColumnDefinitions="*, Auto"
-                    BackgroundColor="{StaticResource Gray}">
-                    <Label 
-                        FontSize="Small"
-                        Style="{StaticResource SemiBoldLabel}"
-                        TextColor="{StaticResource DarkPrimaryColor}"
-                        Text="Nature" />
-                    <StackLayout 
-                        Grid.Column="1"
-                        Orientation="Horizontal"
-                        Spacing="8">
+                    <ff:CachedImage 
+                        HeightRequest="200"
+                        Aspect="AspectFill"
+                        Source="https://architectureappimages.blob.core.windows.net/imagecontainer/26.jpg" />
+                    <Grid BackgroundColor="Black" Opacity=".32" />
+                    <StackLayout VerticalOptions="End" Spacing="0" Padding="24">
                         <Label 
-                            VerticalOptions="Center"
-                            FontSize="Small"
-                            FontFamily="{StaticResource FontAwesomeSolid}"
-                            TextColor="{StaticResource PrimaryColor}"
-                            Text="&#xf0c0;" />
+                            Text="Lorem ipsum"
+                            TextColor="White"
+                            FontSize="{StaticResource Medium}"
+                            Style="{StaticResource SemiBoldLabel}" />
                         <Label 
-                            VerticalOptions="Center"
-                            FontSize="Small"
-                            TextColor="{StaticResource PrimaryColor}"
-                            Text="98" />
-                        <Label 
-                            VerticalOptions="Center"
-                            FontSize="Small"
-                            FontFamily="{StaticResource FontAwesomeSolid}"
-                            TextColor="{StaticResource PrimaryColor}"
-                            Text="&#xf004;" />
-                        <Label 
-                            VerticalOptions="Center"
-                            FontSize="Small"
-                            TextColor="{StaticResource PrimaryColor}"
-                            Text="65" />
+                            TextColor="White"
+                            Text="Dolor sit amet" />
                     </StackLayout>
                 </Grid>
-                <Label 
-                    Margin="16"
-                    FontSize="Default"
-                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                <Label 
-                    Text="Comments"
-                    FontSize="Small"
-                    Style="{StaticResource SemiBoldLabel}"
-                    TextColor="{StaticResource DarkPrimaryColor}"
-                    Padding="16, 12"
-                    BackgroundColor="{StaticResource Gray}" />
-                <StackLayout Spacing="0" BindableLayout.ItemsSource="{Binding Items}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Grid 
-                                RowDefinitions="Auto, Auto"
-                                ColumnDefinitions="*, Auto"
-                                Margin="16">
-                                <Label 
-                                    Text="John Doe"
-                                    FontSize="Default"
-                                    TextColor="{StaticResource BlackLight}"/>
-                                <Label 
-                                    Grid.Column="1"
-                                    FontSize="12"
-                                    Text="MAR 3, 2019" />
-                                <Label 
-                                    Grid.Row="1"
-                                    MaxLines="2"
-                                    LineBreakMode="TailTruncation"
-                                    FontSize="16"
-                                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
-                            </Grid>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
+            </controls:CollapsingScrollView.HeaderContent>
+            <controls:CollapsingScrollView.MainContent>
+                <StackLayout Margin="16" Spacing="16">
+                    <Frame 
+                        HorizontalOptions="Start"
+                        Style="{StaticResource ChipFrame}">
+                        <Label Text="Lorem" />
+                    </Frame>
+                    <Label 
+                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+            
+                    <!-- Comments -->
+                    <StackLayout 
+                        Margin="-16, 0" 
+                        BackgroundColor="{StaticResource GrayLight}">
+                        <Label
+                            Margin="16, 12"
+                            Text="Comments" />
+                    </StackLayout>
+
+                    <StackLayout
+                        BindableLayout.ItemsSource="{Binding Comments}">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:ListItemViewModel">
+
+                                <StackLayout>
+                                    <Label 
+                                        FontSize="{StaticResource Medium}"
+                                        Style="{StaticResource SemiBoldLabel}"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        Text="{Binding SubTitle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                
                 </StackLayout>
-                <Button
-                    Margin="16, 16, 16, 24"
-                    Style="{StaticResource RoundedButton}"
-                    Text="Add comment" />
-            </StackLayout>
-        </controls:CollapsingScrollView.MainContent>
-    </controls:CollapsingScrollView>
+            </controls:CollapsingScrollView.MainContent>
+        </controls:CollapsingScrollView>
+
+        <ImageButton 
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="24"
+            Padding="18, 16, 16, 16"
+            Style="{StaticResource FloatingButton}">
+            <ImageButton.Source>
+                <FontImageSource
+                    Color="White"
+                    Glyph="{StaticResource EditPen2Icon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </ImageButton.Source>
+        </ImageButton>
+
+    </Grid>
 </ContentPage>

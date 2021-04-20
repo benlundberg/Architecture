@@ -180,7 +180,6 @@ namespace Architecture.UIKit
             ShowAlert(text, "Input");
         }));
 
-
         public string IsChecked { get; set; }
         public string ConfirmAnswer { get; set; }
 

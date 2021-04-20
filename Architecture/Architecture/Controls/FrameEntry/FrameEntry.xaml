@@ -31,7 +31,7 @@
                         Source="{Binding ImageSource, Source={x:Reference rootFrameEntry}}" />
                     <Label 
                         Margin="16, 1, 0, 1"
-                        FontSize="Medium"
+                        FontSize="{StaticResource Medium}"
                         VerticalOptions="Center"
                         IsVisible="{Binding HasIcon, Source={x:Reference rootFrameEntry}}"
                         Text="{Binding IconTextSource, Source={x:Reference rootFrameEntry}}"
@@ -40,7 +40,7 @@
                     <controls:BorderlessEntry 
                         Grid.Column="1"
                         Margin="10, 1"
-                        FontSize="Small"
+                        FontSize="{StaticResource Default}"
                         Placeholder="{Binding InternalPlaceholder, Source={x:Reference rootFrameEntry}}"
                         PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference rootFrameEntry}}"
                         Text="{Binding Text.Value, Source={x:Reference rootFrameEntry}, Mode=TwoWay}"
@@ -60,7 +60,7 @@
                         BackgroundColor="{Binding CommandIconBackgroundColor, Source={x:Reference rootFrameEntry}}">
                         <ImageButton.Source>
                             <FontImageSource
-                                Size="14"
+                                Size="{StaticResource Default}"
                                 Color="{Binding CommandIconColor, Source={x:Reference rootFrameEntry}}"
                                 Glyph="{Binding CommandIconTextSource, Source={x:Reference rootFrameEntry}}"
                                 FontFamily="{Binding CommandIconFontFamily, Source={x:Reference rootFrameEntry}}"/>
@@ -82,7 +82,7 @@
                 TextColor="{Binding HeaderColor, Source={x:Reference rootFrameEntry}}"
                 BackgroundColor="Transparent" 
                 Text="{Binding Placeholder, Source={x:Reference rootFrameEntry}}"
-                FontSize="Caption"
+                FontSize="{StaticResource Micro}"
                 Margin="16, 2, 0, 0"
                 Padding="2, 0"
                 VerticalOptions="Start" 
@@ -97,7 +97,7 @@
             IsVisible="{Binding IsValidationVisible, Source={x:Reference rootFrameEntry}}">
             <Label 
                 Text="{Binding Text.Error, Source={x:Reference rootFrameEntry}}"
-                FontSize="Micro"
+                FontSize="{StaticResource Micro}"
                 TextColor="White"
                 Padding="8"
                 IsVisible="{Binding Text.IsValid, Source={x:Reference rootFrameEntry}, Converter={StaticResource InvertedBoolConv}}" />

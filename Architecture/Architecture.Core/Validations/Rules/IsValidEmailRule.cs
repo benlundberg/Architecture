@@ -13,9 +13,15 @@ namespace Architecture.Core
         }
 
         public string ValidationMessage { get; set; }
+        public bool IsOptional { get; set; }
 
         public bool Check(T value)
         {
+            if (IsOptional && string.IsNullOrEmpty(value?.ToString()))
+            {
+                return true;
+            }
+
             if (value == null)
             {
                 return false;

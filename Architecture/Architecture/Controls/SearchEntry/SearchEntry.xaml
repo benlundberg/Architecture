@@ -14,7 +14,7 @@
         BorderColor="{Binding BorderColor, Source={x:Reference searchRoot}}"
         BackgroundColor="{Binding EntryBackground, Source={x:Reference searchRoot}}"
         Padding="{Binding EntryPadding, Source={x:Reference searchRoot}}">
-        <Grid ColumnSpacing="{StaticResource MainSpacing}">
+        <Grid ColumnSpacing="16">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />

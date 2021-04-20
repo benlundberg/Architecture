@@ -3,54 +3,126 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              mc:Ignorable="d"
              x:Class="Architecture.UIKit.Views.SettingsPage"
-             xmlns:controls="clr-namespace:Architecture.Controls">
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:SettingsViewModel">
 
     <NavigationPage.TitleView>
         <controls:PageTitleView Text="Settings" />
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <ScrollView>
-            <TableView>
-                <TableRoot>
-                    <TableSection>
-                        <ViewCell>
-                            <StackLayout Padding="20, 10" BackgroundColor="{StaticResource Gray}">
-                                <Label VerticalOptions="Center">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span FontSize="Medium" Text="&#xf013;" FontFamily="{StaticResource FontAwesomeSolid}" />
-                                            <Span Text="    " />
-                                            <Span TextColor="{StaticResource PrimaryColor}" FontSize="Medium" Text="General" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                            </StackLayout>
-                        </ViewCell>
-                        <SwitchCell Text="Keep me alive" />
-                        <SwitchCell Text="Cache images" />
-                    </TableSection>
-                    <TableSection>
-                        <ViewCell>
-                            <StackLayout Padding="20, 10" BackgroundColor="{StaticResource Gray}">
-                                <Label VerticalOptions="Center">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span FontSize="Medium" Text="&#xf0f3;" FontFamily="{StaticResource FontAwesomeSolid}" />
-                                            <Span Text="    " />
-                                            <Span TextColor="{StaticResource PrimaryColor}" FontSize="Medium" Text="Notifications" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                            </StackLayout>
-                        </ViewCell>
-                        <SwitchCell Text="Local notifications" />
-                        <SwitchCell Text="Global notifications" On="True" />
-                    </TableSection>
-                </TableRoot>
-            </TableView>
+        <ScrollView Padding="16">
+            <StackLayout Spacing="24">
+                
+                <!-- User info -->
+                <StackLayout Spacing="12">
+                    <Label 
+                        Text="Account"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    
+                    <xct:BadgeView
+                        BadgePosition="TopRight"
+                        FontFamily="{StaticResource PoppinsSemiBold}"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        TextColor="White"
+                        Text="1">
+                        <Grid
+                            ColumnDefinitions="*, Auto" 
+                            RowDefinitions="Auto, Auto"
+                            RowSpacing="0">
+
+                            <Label 
+                                Text="John Doe"
+                                Style="{StaticResource SemiBoldLabel}" />
+
+                            <Label 
+                                Grid.Row="1"
+                                TextColor="{StaticResource GrayDark}"
+                                Text="john.doe@mail.com" />
+                            <Label 
+                                Grid.RowSpan="2"
+                                Grid.Column="1"
+                                FontSize="20"
+                                VerticalOptions="Center"
+                                Text="{StaticResource ChevronRightIcon}"
+                                FontFamily="{StaticResource FontAwesomeSolid}" />
+                        </Grid>
+                    </xct:BadgeView>
+
+                </StackLayout>
+
+                <!-- Notifications -->
+                <StackLayout Spacing="12">
+                    <Label 
+                        Text="Notifications"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label 
+                            Text="Push notifications" />
+                        <Switch 
+                            Grid.Column="1" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label 
+                            Text="Email notifications" />
+                        <Switch 
+                            Grid.Column="1" />
+                    </Grid>
+                </StackLayout>
+
+                <!-- Data -->
+                <StackLayout Spacing="16">
+                    <Label 
+                        Text="Data"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    <Button
+                        Text="Sync data"
+                        Style="{StaticResource RoundedButton}"
+                        Command="{Binding SyncDataCommand}" />
+                    <Button
+                        Text="Clear cache"
+                        Style="{StaticResource RoundedButton}"
+                        Command="{Binding ClearCacheCommand}" />
+                </StackLayout>
+
+                <!-- Support-->
+                <StackLayout Spacing="16">
+                    <Label 
+                        Text="Support"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    <Button
+                        Text="Feedback"
+                        BackgroundColor="{StaticResource Accent}"
+                        Style="{StaticResource RoundedButton}"
+                        Command="{Binding FeedbackCommand}" />
+                    <Button
+                        Text="Contact us"
+                        BackgroundColor="{StaticResource Accent}"
+                        Style="{StaticResource RoundedButton}"
+                        Command="{Binding ContactUsCommand}" />
+                    <Button
+                        Text="About us"
+                        BackgroundColor="{StaticResource Accent}"
+                        Style="{StaticResource RoundedButton}"
+                        Command="{Binding AboutUsCommand}" />
+                    <Button
+                        Text="Privacy policy"
+                        BackgroundColor="{StaticResource Accent}"
+                        Style="{StaticResource RoundedButton}"
+                        Command="{Binding PrivacyPolicyCommand}" />
+                </StackLayout>
+
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

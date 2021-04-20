@@ -21,8 +21,6 @@
             Margin="10">
 
             <Label 
-                FontSize="14"
-                TextColor="Black"
                 IsVisible="{Binding Title, Source={x:Reference InputPopupRoot}, Converter={StaticResource NullOrEmptyToBoolConv}}"
                 Text="{Binding Title, Source={x:Reference InputPopupRoot}}" />
 

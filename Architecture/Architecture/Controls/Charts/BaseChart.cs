@@ -288,7 +288,7 @@ namespace Architecture.Controls.Charts
             // Draws background
             using (var boundPaint = new SKPaint
             {
-                Color = SliderColor.ToSKColor(),
+                Color = SliderDetailColor.ToSKColor(),
                 StrokeCap = SKStrokeCap.Round,
                 Style = SKPaintStyle.StrokeAndFill,
                 StrokeWidth = SliderWidth
@@ -319,7 +319,7 @@ namespace Architecture.Controls.Charts
                     IsAntialias = true,
                     TextSize = HorizontalTextSize,
                     Color = SliderDetailTextColor.ToSKColor(),
-                    Typeface = FontTypeService.GetFontFamily(GetType().Assembly),
+                    Typeface = FontTypeService.GetFontFamily(GetType().Assembly, isBold: true),
                     TextAlign = SKTextAlign.Center,
                     FakeBoldText = true
                 })
@@ -600,6 +600,7 @@ namespace Architecture.Controls.Charts
 
         public Color ChartBackgroundColor { get; set; } = Color.WhiteSmoke;
         public bool HasBackground { get; set; } = true;
+        public bool LineBackground { get; set; }
 
         private float frameWidth;
         public float FrameWidth
@@ -622,6 +623,7 @@ namespace Architecture.Controls.Charts
         /// </summary>
         public bool IsSliderVisible { get; set; } = true;
         public Color SliderColor { get; set; } = Color.Black;
+        public Color SliderDetailColor { get; set; } = Color.Black;
         public Color SliderDetailTextColor { get; set; } = Color.White;
 
         private float sliderWidth;

@@ -87,28 +87,63 @@ namespace Architecture.Controls
             {
                 if (SegmentedControlMode == SegmentedControlMode.Text)
                 {
+                    View content;
+
+                    Label label = new Label
+                    {
+                        FontSize = 14,
+                        FontFamily = App.Current.Get<string>("SegmentControlFont"),
+                        Opacity = item.IsSelected ? 1 : 0.32,
+                        Text = item.Text,
+                        Padding = new Thickness(14, 14, 14, 0),
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center,
+                        TextColor = App.Current.PrimaryColor(),
+                        MaxLines = 1,
+                        LineBreakMode = LineBreakMode.TailTruncation
+                    };
+
+                    if (!string.IsNullOrEmpty(item.Icon))
+                    {
+                        content = new StackLayout
+                        {
+                            Orientation = StackOrientation.Horizontal,
+                            Spacing = 6,
+                            HorizontalOptions = LayoutOptions.Center,
+                            Children =
+                            {
+                                new Label
+                                {
+                                    FontSize = 18,
+                                    FontFamily = item.IconFontFamily,
+                                    Opacity = item.IsSelected ? 1 : 0.32,
+                                    Text = item.Icon,
+                                    Padding = new Thickness(0, 14, 0, 0),
+                                    VerticalOptions = LayoutOptions.Center,
+                                    HorizontalOptions = LayoutOptions.Center,
+                                    TextColor = App.Current.PrimaryColor(),
+                                    MaxLines = 1,
+                                    LineBreakMode = LineBreakMode.TailTruncation
+                                },
+                                label
+                            }
+                        };
+                    }
+                    else
+                    {
+                        content = label;
+                    }
+
                     view = new StackLayout
                     {
                         Children =
                         {
-                            new Label
-                            {
-                                FontSize = 14,
-                                FontFamily = App.Current.Get<string>("SegmentControlFont"),
-                                Opacity = item.IsSelected ? 1 : 0.6,
-                                Text = item.Text,
-                                Padding = new Thickness(14, 14, 14, 0),
-                                VerticalOptions = LayoutOptions.Center,
-                                HorizontalOptions = LayoutOptions.Center,
-                                TextColor = item.IsSelected ? App.Current.PrimaryColor() : Color.Black,
-                                MaxLines = 1,
-                                LineBreakMode = LineBreakMode.TailTruncation
-                            },
+                            content,
                             new BoxView
                             {
-                                Color = item.IsSelected ? App.Current.PrimaryColor() : Color.Black,
+                                Color = App.Current.PrimaryColor(),
+                                Opacity = item.IsSelected ? 1 : .32,
                                 HeightRequest = item.IsSelected ? 1.33 : 1,
-                                Opacity = item.IsSelected ? 1 : 0.12,
                                 HorizontalOptions = LayoutOptions.FillAndExpand,
                             }
                         }
@@ -116,6 +151,51 @@ namespace Architecture.Controls
                 }
                 else if (SegmentedControlMode == SegmentedControlMode.Rectangle)
                 {
+                    View content;
+
+                    Label label = new Label
+                    {
+                        FontSize = 14,
+                        Padding = new Thickness(0, 14),
+                        FontFamily = App.Current.Get<string>("SegmentControlFont"),
+                        Text = item.Text,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center,
+                        TextColor = item.IsSelected ? App.Current.PrimaryColor() : App.Current.LightBlackColor(),
+                        MaxLines = 1,
+                        LineBreakMode = LineBreakMode.TailTruncation
+                    };
+
+                    if (!string.IsNullOrEmpty(item.Icon))
+                    {
+                        content = new StackLayout
+                        {
+                            Orientation = StackOrientation.Horizontal,
+                            Spacing = 6,
+                            HorizontalOptions = LayoutOptions.Center,
+                            Children =
+                            {
+                                new Label
+                                {
+                                    FontSize = 18,
+                                    FontFamily = item.IconFontFamily,
+                                    Text = item.Icon,
+                                    Padding = new Thickness(0, 14),
+                                    VerticalOptions = LayoutOptions.Center,
+                                    HorizontalOptions = LayoutOptions.Center,
+                                    TextColor = item.IsSelected ? App.Current.PrimaryColor() : App.Current.LightBlackColor(),
+                                    MaxLines = 1,
+                                    LineBreakMode = LineBreakMode.TailTruncation
+                                },
+                                label
+                            }
+                        };
+                    }
+                    else
+                    {
+                        content = label;
+                    }
+
                     view = new Grid
                     {
                         Children =
@@ -123,49 +203,74 @@ namespace Architecture.Controls
                             new BoxView
                             {
                                 Color = item.IsSelected ? App.Current.PrimaryColor() : Color.White,
+                                Opacity = item.IsSelected ? .32 : 1,
                                 VerticalOptions = LayoutOptions.FillAndExpand,
                                 HorizontalOptions = LayoutOptions.FillAndExpand,
                             },
-                            new Label
-                            {
-                                FontSize = 14,
-                                Padding = new Thickness(14),
-                                FontFamily = App.Current.Get<string>("SegmentControlFont"),
-                                Text = item.Text,
-                                VerticalOptions = LayoutOptions.Center,
-                                HorizontalOptions = LayoutOptions.Center,
-                                TextColor = item.IsSelected ? Color.White : Color.Black,
-                                MaxLines = 1,
-                                LineBreakMode = LineBreakMode.TailTruncation
-                            }
+                            content
                         }
                     };
                 }
                 else
                 {
+                    View content;
+
+                    Label label = new Label
+                    {
+                        FontSize = 14,
+                        FontFamily = App.Current.Get<string>("SegmentControlFont"),
+                        Text = item.Text,
+                        Padding = new Thickness(0, 14),
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center,
+                        TextColor = item.IsSelected ? App.Current.PrimaryColor() : App.Current.LightBlackColor(),
+                        MaxLines = 1,
+                        LineBreakMode = LineBreakMode.TailTruncation
+                    };
+
+                    if (!string.IsNullOrEmpty(item.Icon))
+                    {
+                        content = new StackLayout
+                        {
+                            Orientation = StackOrientation.Horizontal,
+                            Spacing = 6,
+                            HorizontalOptions = LayoutOptions.Center,
+                            Children =
+                            {
+                                new Label
+                                {
+                                    FontSize = 18,
+                                    FontFamily = item.IconFontFamily,
+                                    Text = item.Icon,
+                                    Padding = new Thickness(0, 14),
+                                    VerticalOptions = LayoutOptions.Center,
+                                    HorizontalOptions = LayoutOptions.Center,
+                                    TextColor = item.IsSelected ? App.Current.PrimaryColor() : App.Current.LightBlackColor(),
+                                    MaxLines = 1,
+                                    LineBreakMode = LineBreakMode.TailTruncation
+                                },
+                                label
+                            }
+                        };
+                    }
+                    else
+                    {
+                        content = label;
+                    }
+
                     view = new Grid
                     {
                         Children =
                         {
                             new BoxView
                             {
-                                CornerRadius = new CornerRadius(16),
+                                CornerRadius = new CornerRadius(10),
                                 Color = item.IsSelected ? App.Current.PrimaryColor() : Color.White,
+                                Opacity = item.IsSelected ? .32 : 1,
                                 VerticalOptions = LayoutOptions.FillAndExpand,
                                 HorizontalOptions = LayoutOptions.FillAndExpand,
                             },
-                            new Label
-                            {
-                                FontSize = 14,
-                                FontFamily = App.Current.Get<string>("SegmentControlFont"),
-                                Text = item.Text,
-                                Padding = new Thickness(14),
-                                VerticalOptions = LayoutOptions.Center,
-                                HorizontalOptions = LayoutOptions.Center,
-                                TextColor = item.IsSelected ? Color.White : Color.Black,
-                                MaxLines = 1,
-                                LineBreakMode = LineBreakMode.TailTruncation
-                            }
+                            content
                         }
                     };
                 }
@@ -331,6 +436,8 @@ namespace Architecture.Controls
 
     public class SegmentControlItem
     {
+        public string Icon { get; set; }
+        public string IconFontFamily { get; set; }
         public string Text { get; set; }
         public bool IsSelected { get; set; }
         public object Tag { get; set; }

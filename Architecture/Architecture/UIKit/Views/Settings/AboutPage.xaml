@@ -12,47 +12,41 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Margin="{StaticResource LargePadding}">
+        <ScrollView Padding="24">
+            <StackLayout Spacing="4">
                 <Label 
-                    FontSize="Large"
+                    FontSize="{StaticResource Medium}"
+                    Style="{StaticResource SemiBoldLabel}"
                     Text="About us" />
                 <Label 
-                    FontSize="Default"
                     Text="This is an app that shows how you and your team can create a nice looking UI togheter with Xamarin Forms" />
                 <Label 
-                    FontSize="Large"                    
+                    Margin="0, 16, 0, 0"
+                    FontSize="{StaticResource Medium}"
+                    Style="{StaticResource SemiBoldLabel}"
                     Text="Usage" />
                 <Label 
-                    FontSize="Default"
                     Text="This is FREE to use or take inspiration from" />
                 <Label 
-                    FontSize="Large"
+                    Margin="0, 16, 0, 0"
+                    FontSize="{StaticResource Medium}"
+                    Style="{StaticResource SemiBoldLabel}"
                     Text="Our team" />
                 <Label 
-                    FontSize="Default"
                     Text="Only one passionate mobile developer who wants to show that you can create nice looking apps with Xamarin Forms" />
                 <Label 
-                    FontSize="Large"
-                    Text="3rd parties" />
+                    Margin="0, 16, 0, 0"
+                    FontSize="{StaticResource Medium}"
+                    Style="{StaticResource SemiBoldLabel}"
+                    Text="3rd parties*" />
                 <Label 
-                    FontSize="Default"
-                    Text="- SkiaSharp" />
+                    Text="* SkiaSharp" />
                 <Label 
-                    FontSize="Default"
-                    Text="- Akavache" />
+                    Text="* Akavache" />
                 <Label 
-                    FontSize="Default"
-                    Text="- PropertyChanged.Fody" />
+                    Text="* PropertyChanged.Fody" />
                 <Label 
-                    FontSize="Default"
-                    Text="- FFImageLoading" />
-                <Label 
-                    HorizontalOptions="Center"
-                    Margin="{StaticResource LargePadding}"
-                    FontSize="64"
-                    Text="{StaticResource GeneralIcon}"
-                    FontFamily="{StaticResource FontAwesomeBrands}"/>
+                    Text="* FFImageLoading" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

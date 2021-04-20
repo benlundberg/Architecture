@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Architecture;assembly=Architecture"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             android:Application.WindowSoftInputModeAdjust="Resize"
+             android:Application.WindowSoftInputModeAdjust="Pan"
              xmlns:controls="clr-namespace:Architecture.Controls"
              x:Class="Architecture.App">
     <Application.Resources>
@@ -12,30 +12,29 @@
 
             <!-- #region Colors -->
 
-            <Color x:Key="PrimaryColor">#49879F</Color>
-            <Color x:Key="DarkPrimaryColor">#2F738D</Color>
-            <Color x:Key="Accent">#FD876E</Color>
+            <Color x:Key="PrimaryColor">#A251FF</Color>
+            <Color x:Key="DarkPrimaryColor">#A251FF</Color>
+            <Color x:Key="Accent">#FF42E8</Color>
 
             <Color x:Key="GrayDark">#969BAB</Color>
             <Color x:Key="GrayMedium">#D9DBE1</Color>
             <Color x:Key="Gray">#EEEFF4</Color>
             <Color x:Key="GrayLight">#F4F5F7</Color>
-            
-            <Color x:Key="BlackLight">#474A57</Color>
-            
-            <Color x:Key="ToolbarTextColor">#000</Color>
-            
-            <Color x:Key="TextColor">#000</Color>
-            <Color x:Key="SecondaryTextColor">#474A57</Color>
 
-            <Color x:Key="PageBackgroundColor">#FAFAFA</Color>
+            <Color x:Key="BlackLight">#393939</Color>
 
-            <Color x:Key="BarBackgroundColor">#FAFAFA</Color>
+            <Color x:Key="ToolbarTextColor">#393939</Color>
 
-            <Color x:Key="ButtonBackgroundColor">#49879F</Color>
+            <Color x:Key="TextColor">#393939</Color>
+
+            <Color x:Key="PageBackgroundColor">#FEFEFE</Color>
+
+            <Color x:Key="BarBackgroundColor">#FEFEFE</Color>
+
+            <Color x:Key="ButtonBackgroundColor">#A251FF</Color>
             <Color x:Key="ButtonTextColor">#FFF</Color>
 
-            <Color x:Key="FabBackgroundColor">#49879F</Color>
+            <Color x:Key="FabBackgroundColor">#A251FF</Color>
             <Color x:Key="FabTextColor">#FFF</Color>
             
             <Color x:Key="SuccessColor">#43A047</Color>
@@ -70,6 +69,9 @@
             <x:String x:Key="CameraIcon">&#xf030;</x:String>
             <x:String x:Key="ImagesIcon">&#xf302;</x:String>
             <x:String x:Key="ChevronLeftIcon">&#xf053;</x:String>
+            <x:String x:Key="FilterIcon">&#xf0b0;</x:String>
+            <x:String x:Key="SortIcon">&#xf0dc;</x:String>
+            <x:String x:Key="EditPen2Icon">&#xf044;</x:String>
             <!--#endregion-->
             
             <!-- #region Fonts -->
@@ -86,30 +88,31 @@
             <x:String x:Key="OpenSansRegular">OpenSansRegular</x:String>
             <x:String x:Key="OpenSansSemiBold">OpenSansSemiBold</x:String>
 
-            <x:String x:Key="SegmentControlFont">MontserratRegular</x:String>
-            <x:String x:Key="PageTitleFont">MontserratSemiBold</x:String>
+            <x:String x:Key="PoppinsBold">PoppinsBold</x:String>
+            <x:String x:Key="PoppinsRegular">PoppinsRegular</x:String>
+            <x:String x:Key="PoppinsSemiBold">PoppinsSemiBold</x:String>
+
+            <x:String x:Key="SegmentControlFont">PoppinsSemiBold</x:String>
+            <x:String x:Key="PageTitleFont">PoppinsSemiBold</x:String>
 
             <!--#endregion-->
+            
+            <!-- #region Font Sizes -->
+
+            <x:Double x:Key="Micro">10</x:Double>
+            <x:Double x:Key="Small">12</x:Double>
+            <x:Double x:Key="Default">14</x:Double>
+            <x:Double x:Key="Medium">17</x:Double>
+            <x:Double x:Key="Title">20</x:Double>
+            <x:Double x:Key="PageTitleSize">20</x:Double>
+
+            <!-- #endregion-->
             
             <!--#region Margin and Padding -->
             
             <x:Double x:Key="GoldenRatio">1.618</x:Double>
 
             <x:Double x:Key="ToolbarItemSize">18</x:Double>
-
-            <x:Double x:Key="ControlPadding">10</x:Double>
-            <x:Double x:Key="LargeControlPadding">24</x:Double>
-
-            <x:Double x:Key="MainSpacing">10</x:Double>
-            <x:Double x:Key="LargeSpacing">20</x:Double>
-
-            <Thickness x:Key="ExtraLargePadding">40, 20, 40, 20</Thickness>
-            <Thickness x:Key="LargePadding">30, 20, 30, 20</Thickness>
-            <Thickness x:Key="MainPadding">16, 10, 16, 10</Thickness>
-            <Thickness x:Key="DesktopMargin">80, 40, 80, 40</Thickness>
-            
-            <Thickness x:Key="HorizontalPadding">16, 0, 16, 0</Thickness>
-            <Thickness x:Key="VerticalPadding">0, 10, 0, 10</Thickness>
 
             <!--#endregion-->
 
@@ -131,28 +134,32 @@
             </Style>
 
             <Style TargetType="Label" ApplyToDerivedTypes="True">
+                <Setter Property="FontSize" Value="{StaticResource Default}" />
                 <Setter Property="TextColor" Value="{StaticResource TextColor}" />
-                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
             </Style>
 
             <Style x:Key="BoldLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="FontFamily" Value="{StaticResource MontserratBold}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsBold}" />
             </Style>
 
             <Style x:Key="SemiBoldLabel" TargetType="Label">
-                <Setter Property="FontFamily" Value="{StaticResource MontserratSemiBold}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsSemiBold}" />
             </Style>
 
             <Style TargetType="Entry" ApplyToDerivedTypes="True">
-                <Setter Property="FontFamily" Value="{StaticResource MontserratRegular}" />
+                <Setter Property="FontSize" Value="{StaticResource Default}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
             </Style>
 
             <Style TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="TextTransform" Value="None" />
                 <Setter Property="HeightRequest" Value="46" />
+                <Setter Property="FontSize" Value="{StaticResource Medium}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
                 <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
-                <Setter Property="FontFamily" Value="{StaticResource MontserratSemiBold}" />
+                <Setter Property="FontFamily" Value="{StaticResource PoppinsSemiBold}" />
             </Style>
 
             <Style TargetType="Button" x:Key="OutlineButton">
@@ -205,31 +212,27 @@
                 <Setter Property="Padding" Value="8" />
             </Style>
             
-            <Style TargetType="Frame">
-                <Setter Property="IsClippedToBounds" Value="True" />
-                <Setter Property="BackgroundColor" Value="White" />
-                <Setter Property="BorderColor" Value="LightGray" />
-                <Setter Property="CornerRadius" Value="4" />
-                <Setter Property="HasShadow">
-                    <Setter.Value>
-                        <OnPlatform x:TypeArguments="x:Boolean">
-                            <On Platform="Android" Value="True" />
-                            <On Platform="UWP" Value="False" />
-                            <On Platform="iOS" Value="False" />
-                        </OnPlatform>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
             <Style x:Key="ChipFrame" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="{StaticResource Gray}" />
-                <Setter Property="BorderColor" Value="{StaticResource Gray}" />
-                <Setter Property="Padding" Value="12, 7, 12, 7" />
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayLight}" />
+                <Setter Property="BorderColor" Value="{StaticResource GrayLight}" />
+                <Setter Property="Padding" Value="12, 6, 12, 4" />
                 <Setter Property="HasShadow" Value="False" />
                 <Setter Property="CornerRadius" Value="16" />
             </Style>
 
+            <Style TargetType="Frame" ApplyToDerivedTypes="True">
+                <Setter Property="HasShadow" Value="{OnPlatform Android=True, iOS=False}" />
+            </Style>
+            
             <Style TargetType="ListView" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="CollectionView" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+
+            <Style TargetType="CarouselPage" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
 

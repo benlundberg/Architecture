@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.CategoryGridPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:CategoriesViewModel">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Category Grid" />
+    </NavigationPage.TitleView>
+
+    <CollectionView
+        Margin="16, 0"
+        ItemsSource="{Binding Categories}"
+        SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+        SelectionMode="Single">
+        <CollectionView.Header>
+            <Grid HeightRequest="16" />
+        </CollectionView.Header>
+        <CollectionView.Footer>
+            <Grid HeightRequest="16" />
+        </CollectionView.Footer>
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout 
+                Span="2"
+                Orientation="Vertical" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="viewModels:CategoryItemViewModel">
+                <StackLayout Padding="10">
+                    <Frame
+                        IsClippedToBounds="True"
+                        HasShadow="False"
+                        BorderColor="Transparent"
+                        CornerRadius="10"
+                        Padding="0">
+                        <ff:CachedImage 
+                            HeightRequest="156"
+                            Source="{Binding ImageSource}" 
+                            Aspect="AspectFill" />
+                    </Frame>
+                    
+                    <Label
+                        Text="{Binding Title}"
+                        Style="{StaticResource SemiBoldLabel}"
+                        FontSize="{StaticResource Default}"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+</ContentPage>

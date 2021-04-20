@@ -10,6 +10,9 @@ using Xamarin.Forms;
 [assembly: ExportFont("OpenSans-Bold.ttf", Alias = "OpenSansBold")]
 [assembly: ExportFont("OpenSans-Regular.ttf", Alias = "OpenSansRegular")]
 [assembly: ExportFont("OpenSans-SemiBold.ttf", Alias = "OpenSansSemiBold")]
+[assembly: ExportFont("Poppins-Bold.ttf", Alias = "PoppinsBold")]
+[assembly: ExportFont("Poppins-Regular.ttf", Alias = "PoppinsRegular")]
+[assembly: ExportFont("Poppins-SemiBold.ttf", Alias = "PoppinsSemiBold")]
 [assembly: System.Resources.NeutralResourcesLanguage("en-US")]
 
 namespace Architecture
@@ -28,7 +31,7 @@ namespace Architecture
         public static void SetMainPage()
         {
             // TODO: UI Kit home page
-            Current.MainPage = new NavigationPage(new UIKit.Views.UIKitHomePage());
+            Current.MainPage = new NavigationPage(ViewContainer.Current.CreatePage<UIKit.ViewModels.HomeViewModel>());
 
             // Master
             //Current.MainPage = ViewContainer.Current.CreatePage<HomeMasterViewModel>();
@@ -45,6 +48,9 @@ namespace Architecture
 
             Bootstrapper.CreateTables();
             Bootstrapper.RegisterViews();
+
+            // TODO: Remove UI Kit
+            UIKit.UIBootrapper.Init();
         }
 
         protected override void OnStart()

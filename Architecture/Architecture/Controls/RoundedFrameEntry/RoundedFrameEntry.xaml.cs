@@ -19,14 +19,14 @@ namespace Architecture.Controls
         {
             base.OnParentSet();
 
-            IsHeaderVisible = !string.IsNullOrEmpty(Text?.Value);
+            IsHeaderVisible = !string.IsNullOrEmpty(Text?.Value) && HasFloatingPlaceholder;
             InternalPlaceholder = IsHeaderVisible ? string.Empty : Placeholder;
             InternalBorderColor = BorderColor;
         }
 
         private void BorderlessEntry_Focused(object sender, FocusEventArgs e)
         {
-            if (!IsHeaderVisible)
+            if (!IsHeaderVisible && HasFloatingPlaceholder)
             {
                 IsHeaderVisible = true;
 
@@ -42,7 +42,7 @@ namespace Architecture.Controls
 
         private void BorderlessEntry_Unfocused(object sender, FocusEventArgs e)
         {
-            IsHeaderVisible = !string.IsNullOrEmpty((sender as Entry)?.Text);
+            IsHeaderVisible = !string.IsNullOrEmpty((sender as Entry)?.Text) && HasFloatingPlaceholder;
             InternalPlaceholder = IsHeaderVisible ? string.Empty : Placeholder;
             InternalBorderColor = BorderColor;
 
@@ -54,13 +54,11 @@ namespace Architecture.Controls
                 });
             }
 
-            if (Text != null)
+            if (Text != null && ValidateOnTextUnfocus)
             {
                 if (Text.Validations?.Any() == true)
                 {
                     Text.Validate();
-
-                    IsValidationVisible = !Text.IsValid;
                 }
             }
         }
@@ -68,8 +66,7 @@ namespace Architecture.Controls
         private void BorderlessEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextChangedCommand?.Execute(Text);
-
-            IsValidationVisible = false;
+            Text.IsValid = true;
         }
 
         private static void TextChanged(BindableObject bindable, object oldValue, object newValue)
@@ -84,7 +81,7 @@ namespace Architecture.Controls
                 return;
             }
             
-            view.IsHeaderVisible = !string.IsNullOrEmpty(value?.Value?.ToString());
+            view.IsHeaderVisible = !string.IsNullOrEmpty(value?.Value?.ToString()) && view.HasFloatingPlaceholder;
             view.InternalPlaceholder = view.IsHeaderVisible ? string.Empty : view.Placeholder;
             view.InternalBorderColor = view.BorderColor;
 
@@ -124,7 +121,7 @@ namespace Architecture.Controls
 
         public string InternalPlaceholder { get; set; }
         public string Placeholder { get; set; }
-        public Color PlaceholderColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public Color PlaceholderColor { get; set; } = App.Current.Get<Color>("GrayDark");
         
         public bool IsHeaderVisible { get; set; }
         public Color HeaderBackgroundColor { get; set; } = Color.White;
@@ -132,9 +129,9 @@ namespace Architecture.Controls
         
         public Keyboard Keyboard { get; set; }
         public Color TextColor { get; set; } = App.Current.Get<Color>("TextColor");
-        public Color BorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
-        public Color SelectedBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
-        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
+        public Color BorderColor { get; set; } = App.Current.Get<Color>("GrayLight");
+        public Color SelectedBorderColor { get; set; } = App.Current.Get<Color>("PrimaryColor");
+        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("GrayLight");
         public bool IsPassword { get; set; }
         
         public string IconFontFamily { get; set; }
@@ -145,10 +142,9 @@ namespace Architecture.Controls
         public string ImageSource { get; set; }
         public bool HasImage => !string.IsNullOrEmpty(ImageSource);
 
-        public Color EntryBackground { get; set; } = Color.White;
-
-        public bool IsValidationVisible { get; private set; }
-
+        public bool ValidateOnTextUnfocus { get; set; }
+        public Color EntryBackground { get; set; } = App.Current.Get<Color>("GrayLight");
         public int MaxLength { get; set; } = 255;
+        public bool HasFloatingPlaceholder { get; set; } = true;
     }
 }

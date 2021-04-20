@@ -120,6 +120,7 @@ namespace Architecture
         public INavigation Navigation { get; set; }
         public bool IsBusy { get; set; }
         public bool IsNotBusy => !IsBusy;
+        public bool IsNavigating { get; set; }
         public bool IsConnected => Connectivity.IsConnected;
 
         public event PropertyChangedEventHandler PropertyChanged;

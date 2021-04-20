@@ -17,6 +17,16 @@ namespace Architecture
             return Color.Default;
         }
 
+        public static Color LightBlackColor(this Application application)
+        {
+            if (application.Resources["BlackLight"] is Color color)
+            {
+                return color;
+            }
+
+            return Color.Default;
+        }
+
         public static Color DarkPrimaryColor(this Application application)
         {
             if (application.Resources["DarkPrimaryColor"] is Color darkPrimaryColor)
