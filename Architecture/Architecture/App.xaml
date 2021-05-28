@@ -72,6 +72,7 @@
             <x:String x:Key="FilterIcon">&#xf0b0;</x:String>
             <x:String x:Key="SortIcon">&#xf0dc;</x:String>
             <x:String x:Key="EditPen2Icon">&#xf044;</x:String>
+            <x:String x:Key="InfoIcon">&#xf05a;</x:String>
             <!--#endregion-->
             
             <!-- #region Fonts -->
@@ -155,7 +156,6 @@
 
             <Style TargetType="Button" ApplyToDerivedTypes="True">
                 <Setter Property="TextTransform" Value="None" />
-                <Setter Property="HeightRequest" Value="46" />
                 <Setter Property="FontSize" Value="{StaticResource Medium}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackgroundColor}" />
                 <Setter Property="TextColor" Value="{StaticResource ButtonTextColor}" />
@@ -235,6 +235,7 @@
             <Style TargetType="CarouselPage" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="Transparent" />
             </Style>
+
 
             <!--#endregion-->
             

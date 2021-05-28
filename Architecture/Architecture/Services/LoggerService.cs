@@ -50,7 +50,8 @@ namespace Architecture
                 if (sendToService)
                 {
                     // Send to service
-                    ComponentContainer.Current.Resolve<IAnalyticsService>()?.LogException(ex, new Dictionary<string, string> { { "Class", className } });
+                    ComponentContainer.Current.Resolve<IAnalyticsService>()?
+                        .LogException(ex, new Dictionary<string, string> { { "Class", className } });
                 }
             }
             catch (Exception e)

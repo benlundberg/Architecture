@@ -62,6 +62,9 @@
                     Command="{Binding LoginCommand}"
                     Style="{StaticResource RoundedButton}"
                     Text="Log in"
+                    Padding="0"
+                    HeightRequest="36"
+                    FontSize="11"
                     Margin="8, 20" />
 
             </StackLayout>

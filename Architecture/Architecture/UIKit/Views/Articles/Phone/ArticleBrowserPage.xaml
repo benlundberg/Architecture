@@ -68,7 +68,7 @@
             
             <CollectionView.HeaderTemplate>
                 <DataTemplate>
-                    <StackLayout Spacing="16">
+                    <StackLayout>
                         
                         <!-- Carousel Top -->
                         <CarouselView
@@ -80,14 +80,14 @@
                                     SnapPointsType="Mandatory"
                                     SnapPointsAlignment="Center"
                                     Orientation="Horizontal"
-                                    ItemSpacing="0" />
+                                    ItemSpacing="8" />
                             </CarouselView.ItemsLayout>
                             <CarouselView.ItemTemplate>
                                 <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
                                     <Grid Padding="8">
                                         <Frame
                                             IsClippedToBounds="True"
-                                            CornerRadius="12"
+                                            CornerRadius="8"
                                             BorderColor="Transparent" 
                                             Padding="0"
                                             HasShadow="False">
@@ -95,7 +95,7 @@
                                                 <ff:CachedImage
                                                     Aspect="AspectFill"
                                                     Source="{Binding ImageSource}" />
-                                                <Grid BackgroundColor="Black" Opacity=".32" />
+                                                <Grid BackgroundColor="Black" Opacity=".42" />
                                                 <StackLayout 
                                                     VerticalOptions="End"
                                                     Margin="16, 24"
@@ -103,7 +103,7 @@
                                                     <Label 
                                                         Text="Lorem ipsum" 
                                                         TextColor="White"
-                                                        Style="{StaticResource SemiBoldLabel}" />
+                                                        FontSize="{StaticResource Medium}" />
                                                     <Label 
                                                         Text="Dolor sit amet, consectetur" 
                                                         TextColor="White" />
@@ -148,7 +148,7 @@
                         <Frame 
                             VerticalOptions="Start"
                             IsClippedToBounds="True"
-                            CornerRadius="12"
+                            CornerRadius="8"
                             Padding="0"
                             HasShadow="False"
                             Margin="0, 0, 0, 10">
@@ -159,7 +159,7 @@
                         </Frame>
                         <Label 
                             Text="{Binding Title}"
-                            Style="{StaticResource SemiBoldLabel}" />
+                            FontSize="Medium" />
                         <Label 
                             Text="{Binding Text}" />
                     </StackLayout>

@@ -4,6 +4,7 @@
              x:Class="Architecture.UIKit.Views.Phone.DataPage"
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:chart="clr-namespace:Architecture.Controls.Charts"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true"
@@ -14,7 +15,39 @@
         <controls:PageTitleView Text="Data" />
     </NavigationPage.TitleView>
 
-    <controls:SegmentView SegmentedControlMode="Round">
+    <xct:TabView
+        TabStripPlacement="Top"
+        IsTabTransitionEnabled="False"
+        IsSwipeEnabled="False">
+
+        <xct:TabViewItem
+            Text="Tab 1"
+            TextColor="Black"
+            TextColorSelected="Blue"
+            FontSize="12"
+            FontSizeSelected="12">
+            <Grid 
+                BackgroundColor="Gray">
+                <Label
+                    Text="TabContent1" />
+            </Grid>
+        </xct:TabViewItem>
+
+        <xct:TabViewItem
+            Text="Tab 2"
+            TextColor="Black"
+            TextColorSelected="Blue"
+            FontSize="12"
+            FontSizeSelected="12">
+            <Grid>
+                <Label    
+                    Text="TabContent2" />
+            </Grid>
+        </xct:TabViewItem>
+    </xct:TabView>
+
+
+    <!--<controls:SegmentView SegmentedControlMode="Round">
         <controls:SegmentView.ItemsSource>
 
             <controls:SegmentControlItem IsSelected="True" Text="Linear" Icon="&#xf201;" IconFontFamily="{StaticResource FontAwesomeSolid}" Tag="1">
@@ -106,7 +139,7 @@
                 </controls:SegmentControlItem.Content>
             </controls:SegmentControlItem>
 
-            <!-- Bars -->
+            --><!-- Bars --><!--
             <controls:SegmentControlItem Text="Bars" Icon="&#xf080;" IconFontFamily="{StaticResource FontAwesomeSolid}" Tag="2">
                 <controls:SegmentControlItem.Content>
 
@@ -241,7 +274,7 @@
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
-                            <!--<CarouselView 
+                            --><!--<CarouselView 
                                 Margin="24, 0"
                                 HeightRequest="300"
                                 CurrentItem="{Binding SelectedBarChartItem, Mode=TwoWay}"
@@ -284,14 +317,14 @@
                                         </Grid>
                                     </DataTemplate>
                                 </CarouselView.ItemTemplate>
-                            </CarouselView>-->
+                            </CarouselView>--><!--
                             
                         </Grid>
                     </Grid>
                 </controls:SegmentControlItem.Content>
             </controls:SegmentControlItem>
 
-            <!-- Table -->
+            --><!-- Table --><!--
             <controls:SegmentControlItem Text="Table" Icon="&#xf0ce;" IconFontFamily="{StaticResource FontAwesomeSolid}" Tag="3">
                 <controls:SegmentControlItem.Content>
 
@@ -302,5 +335,5 @@
                 </controls:SegmentControlItem.Content>
             </controls:SegmentControlItem>
         </controls:SegmentView.ItemsSource>
-    </controls:SegmentView>
+    </controls:SegmentView>-->
 </ContentPage>

@@ -30,7 +30,7 @@
 
                     <StackLayout>
                         <CollectionView 
-                            HeightRequest="300"
+                            HeightRequest="360"
                             SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                             SelectionMode="Single"
                             ItemsSource="{Binding TopArticles}">
@@ -50,24 +50,39 @@
                                     <Grid>
                                         <controls:CustomFrame
                                             IsClippedToBounds="True"
-                                            WidthRequest="200"
+                                            WidthRequest="198"
+                                            HeightRequest="360"
                                             Padding="0" 
                                             CornerRadius="12"
                                             Margin="8, 16">
                                             <StackLayout Spacing="0">
-                                                <ff:CachedImage 
-                                                    HeightRequest="175" 
-                                                    Source="{Binding ImageSource}" 
-                                                    Aspect="AspectFill" />
-                                                <Label 
-                                                    Margin="16, 12, 16, 0"
+                                                <Frame
+                                                    HasShadow="False"
+                                                    BorderColor="Transparent"
+                                                    Margin="8, 8, 8, 0"
+                                                    Padding="0"
+                                                    CornerRadius="8"
+                                                    IsClippedToBounds="True">
+                                                    <ff:CachedImage 
+                                                        HeightRequest="176" 
+                                                        WidthRequest="160"
+                                                        Source="{Binding ImageSource}" 
+                                                        Aspect="AspectFill" />
+                                                </Frame>
+                                                <Label
+                                                    Margin="16, 10, 16, 8"
                                                     Text="{Binding Title}" 
-                                                    Style="{StaticResource SemiBoldLabel}" />
+                                                    FontSize="Medium" />
                                                 <Label 
-                                                    Margin="16, 0, 16, 16"
+                                                    Margin="16, 0"
                                                     MaxLines="2"
                                                     LineBreakMode="TailTruncation"
-                                                    Text="{Binding Text}" />    
+                                                    Text="{Binding Text}" />
+                                                <Label 
+                                                    Margin="16, 6, 16, 16"
+                                                    FontSize="{StaticResource Micro}"
+                                                    TextColor="{StaticResource GrayDark}"
+                                                    Text="2 days ago" />
                                             </StackLayout>
                                         </controls:CustomFrame>
                                     </Grid>
@@ -105,14 +120,14 @@
                                             IsClippedToBounds="True"
                                             WidthRequest="150"
                                             Padding="0" 
-                                            CornerRadius="12"
+                                            CornerRadius="8"
                                             Margin="8, 0">
                                             <Grid>
                                                 <ff:CachedImage 
                                                     HeightRequest="150" 
                                                     Source="{Binding ImageSource}" 
                                                     Aspect="AspectFill" />
-                                                <Grid BackgroundColor="Black" Opacity="0.32" />
+                                                <Grid BackgroundColor="Black" Opacity="0.42" />
                                                 <Label 
                                                     VerticalOptions="Center"
                                                     HorizontalTextAlignment="Center"
@@ -146,33 +161,40 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
-                    <Grid>
-                        <controls:CustomFrame 
+                    <StackLayout
+                        Spacing="0"
+                        VerticalOptions="Start"
+                        Padding="12">
+                        <Frame 
+                            VerticalOptions="Start"
                             IsClippedToBounds="True"
-                            Padding="0" 
-                            CornerRadius="12" 
-                            Margin="12" >
-                            <StackLayout Spacing="0">
-                                <ff:CachedImage 
-                                    HeightRequest="175" 
-                                    Source="{Binding ImageSource}" 
-                                    Aspect="AspectFill" />
-                                <Label 
-                                    Margin="16, 16, 16, 0"
-                                    Text="{Binding Title}" 
-                                    Style="{StaticResource SemiBoldLabel}" />
-                                <Label 
-                                    Margin="16, 0, 16, 24"
-                                    MaxLines="2"
-                                    LineBreakMode="TailTruncation"
-                                    Text="{Binding Text}" />
-                            </StackLayout>
-                        </controls:CustomFrame>
-                    </Grid>
+                            CornerRadius="8"
+                            Padding="0"
+                            HasShadow="False"
+                            Margin="0, 0, 0, 10">
+                            <ff:CachedImage 
+                                HeightRequest="175"
+                                Aspect="AspectFill"
+                                Source="{Binding ImageSource}" />
+                        </Frame>
+                        <Label 
+                            Text="{Binding Title}"
+                            FontSize="Medium" />
+                        <Label 
+                            Text="{Binding Text}" />
+                    </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
         
+        <!-- Loading state -->
+        <ActivityIndicator 
+            Color="{StaticResource PrimaryColor}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}" />
+
     </Grid>
     
 </ContentPage>

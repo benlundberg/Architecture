@@ -12,10 +12,6 @@ $package = $xdoc.manifest.package
 
 Write-Host "Origin package name $package"
 
-$fileprovider = $xdoc.manifest.application.provider.authorities
-
-Write-Host "Fileprovider: $fileprovider"
-
 $appname = $xdoc.manifest.application.label
 
 Write-Host "Origin app name: $appname"
@@ -61,9 +57,6 @@ If ($package -ne $xdoc.manifest.package -or $appname -ne $xdoc.manifest.applicat
 
     # Set app name    
     $xdoc.manifest.application.label = $appname
-
-    # Change authorities to correct package name
-    $xdoc.manifest.application.provider.authorities = $package + ".fileprovider"
 
     $xdoc.Save($ManifestPath)
     Write-Host "AndroidManifest.xml package name updated to $package"

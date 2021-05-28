@@ -25,57 +25,53 @@
                         Text="Account"
                         FontSize="{StaticResource Medium}"
                         Style="{StaticResource SemiBoldLabel}" />
-                    
-                    <xct:BadgeView
-                        BadgePosition="TopRight"
-                        FontFamily="{StaticResource PoppinsSemiBold}"
-                        BackgroundColor="{StaticResource PrimaryColor}"
-                        TextColor="White"
-                        Text="1">
-                        <Grid
-                            ColumnDefinitions="*, Auto" 
-                            RowDefinitions="Auto, Auto"
-                            RowSpacing="0">
-
-                            <Label 
-                                Text="John Doe"
-                                Style="{StaticResource SemiBoldLabel}" />
-
-                            <Label 
-                                Grid.Row="1"
-                                TextColor="{StaticResource GrayDark}"
-                                Text="john.doe@mail.com" />
-                            <Label 
-                                Grid.RowSpan="2"
-                                Grid.Column="1"
-                                FontSize="20"
-                                VerticalOptions="Center"
-                                Text="{StaticResource ChevronRightIcon}"
-                                FontFamily="{StaticResource FontAwesomeSolid}" />
+                    <Frame 
+                        CornerRadius="8"
+                        HasShadow="False"
+                        Padding="16"
+                        BackgroundColor="{StaticResource GrayLight}">
+                        <Grid RowSpacing="0" RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto">
+                            <Label Text="John Doe" FontSize="{StaticResource Medium}" />
+                            <Label Grid.Row="1" Text="john.doe@mail.com" TextColor="{StaticResource GrayDark}" />
+                            <Label Grid.Column="1" Grid.RowSpan="2" TextColor="{StaticResource GrayDark}" FontSize="20" VerticalOptions="Center" Text="{StaticResource InfoIcon}" FontFamily="{StaticResource FontAwesomeSolid}" />
                         </Grid>
-                    </xct:BadgeView>
-
+                    </Frame>
                 </StackLayout>
 
                 <!-- Notifications -->
-                <StackLayout Spacing="12">
+                <StackLayout Spacing="8">
                     <Label 
                         Text="Notifications"
                         FontSize="{StaticResource Medium}"
                         Style="{StaticResource SemiBoldLabel}" />
-                    
-                    <Grid ColumnDefinitions="*, Auto">
-                        <Label 
-                            Text="Push notifications" />
-                        <Switch 
-                            Grid.Column="1" />
-                    </Grid>
-                    <Grid ColumnDefinitions="*, Auto">
-                        <Label 
+
+                    <Frame
+                        CornerRadius="8"
+                        HasShadow="False"
+                        Padding="16, 4"
+                        BackgroundColor="{StaticResource GrayLight}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label 
+                                VerticalOptions="Center"
+                                Text="Push notifications" />
+                            <Switch 
+                                Grid.Column="1" />
+                        </Grid>
+                    </Frame>
+
+                    <Frame
+                        CornerRadius="8"
+                        HasShadow="False"
+                        Padding="16, 4"
+                        BackgroundColor="{StaticResource GrayLight}">
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Label 
+                                VerticalOptions="Center"
                             Text="Email notifications" />
-                        <Switch 
+                            <Switch 
                             Grid.Column="1" />
-                    </Grid>
+                        </Grid>
+                    </Frame>
                 </StackLayout>
 
                 <!-- Data -->
