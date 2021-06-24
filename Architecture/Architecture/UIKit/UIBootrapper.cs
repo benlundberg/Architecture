@@ -7,17 +7,17 @@ namespace Architecture.UIKit
     {
         public static void Init()
         {
-            ViewContainer.Current.Register<HomeViewModel, UIKitHomePage>();
-            ViewContainer.Current.Register<ArticlesBrowserViewModel, Views.Phone.ArticleBrowserPage>();
-            ViewContainer.Current.Register<ArticlesBrowserVariantViewModel, Views.Phone.ArticleBrowserVariantPage>();
-            ViewContainer.Current.Register<ArticlesListViewModel, Views.Phone.ArticlesListPage>();
-            ViewContainer.Current.Register<LoginViewModel, Views.Phone.FullLoginPage>();
-            ViewContainer.Current.Register<SignUpViewModel, Views.Phone.FullSignUpPage>();
-            ViewContainer.Current.Register<RecoverPasswordViewModel, Views.Phone.RecoverPasswordPage>();
-            ViewContainer.Current.Register<TabbedLoginViewModel, Views.Phone.TabbedLoginPage>();
-            ViewContainer.Current.Register<SettingsViewModel, SettingsPage>();
-            ViewContainer.Current.Register<FeedbackViewModel, FeedbackPage>();
-            ViewContainer.Current.Register<DataViewModel, Views.Phone.DataPage>();
+            ViewContainer.Current.Register<UIKitHomeViewModel, UIKitHomePage>();
+
+            ViewContainer.Current.Register<ArticleBrowserViewModel, ArticleBrowserPage>();
+            ViewContainer.Current.Register<ArticleBrowserVariantViewModel, ArticleBrowserVariantPage>();
+            ViewContainer.Current.Register<ArticleListViewModel, ArticleListPage>();
+
+            ViewContainer.Current.Register<ListViewModel, ListPage>();
+            ViewContainer.Current.Register<CardsListViewModel, CardsListPage>();
+
+            ViewContainer.Current.Register<MessagesViewModel, MessagesPage>();
+            ViewContainer.Current.Register<ChatViewModel, ChatPage>();
         }
     }
 }

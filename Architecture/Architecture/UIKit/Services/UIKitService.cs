@@ -10,11 +10,71 @@ namespace Architecture.UIKit.Services
         {
             Random random = new Random();
 
-            string baseUrl = "https://architectureappimages.blob.core.windows.net/imagecontainer/";
+            string baseUrl = "https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/";
 
-            int picture = random.Next(1, 27);
+            int picture = random.Next(1, 37);
 
             return baseUrl + picture.ToString() + ".jpg";
+        }
+
+        public static List<ChatItemViewModel> GetChats()
+        {
+            return new List<ChatItemViewModel>
+            {
+                new ChatItemViewModel { IsMe = false, Message = "Lorem ipsum dolor sit" },
+                new ChatItemViewModel { IsMe = true, Message = "Lorem ipsum dolor sit" },
+                new ChatItemViewModel { IsMe = true, Message = "Lorem ipsum" },
+                new ChatItemViewModel { IsMe = false, Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" },
+                new ChatItemViewModel { IsMe = false, Message = "Lorem ipsum dolor sit" },
+                new ChatItemViewModel { IsMe = true, Message = "Lorem ipsum dolor sit" },
+                new ChatItemViewModel { IsMe = true, Message = "Lorem ipsum" },
+                new ChatItemViewModel { IsMe = false, Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor" },
+                new ChatItemViewModel { IsMe = false, Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor", Status = "30 min ago" },
+                new ChatItemViewModel { IsMe = true, Message = "Lorem ipsum dolor sit", Status = "Seen" },
+            };
+        }
+
+        public static List<MessageItemViewModel> GetMessages()
+        {
+            return new List<MessageItemViewModel>
+            {
+                new MessageItemViewModel
+                {
+                    From = "John Doe",
+                    Message = "Lorem ipsum dolor sit amet, consectetur",
+                    Online = true,
+                    ProfilePicture = "https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/5.jpg",
+                    Time = "10 min ago",
+                    UnseenMessages = 2
+                },
+                new MessageItemViewModel
+                {
+                    From = "Joan Doe",
+                    Message = "Lorem ipsum dolor sit amet, consectetur",
+                    Online = false,
+                    ProfilePicture = "https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/9.jpg",
+                    Time = "15 min ago",
+                    UnseenMessages = 1
+                },
+                new MessageItemViewModel
+                {
+                    From = "John Doe",
+                    Message = "Lorem ipsum dolor sit amet",
+                    Online = true,
+                    ProfilePicture = "https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/13.jpg",
+                    Time = "2 days ago",
+                    UnseenMessages = 0
+                },
+                new MessageItemViewModel
+                {
+                    From = "Joan Doe",
+                    Message = "Lorem ipsum dolor sit amet, consectetur",
+                    Online = true,
+                    ProfilePicture = "https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/22.jpg",
+                    Time = "2021-05-24",
+                    UnseenMessages = 0
+                },
+            };
         }
 
         public static List<ArticleItemViewModel> GetArticles(int max)
@@ -73,7 +133,7 @@ namespace Architecture.UIKit.Services
             Random random = new Random();
 
             var list = new List<ListItemViewModel>();
-            
+
             for (int i = 0; i < max; i++)
             {
                 var rand = random.Next(1, 20);

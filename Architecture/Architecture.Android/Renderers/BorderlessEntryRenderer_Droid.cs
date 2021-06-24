@@ -3,6 +3,9 @@ using Architecture.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Android.Content;
+using Android.Graphics.Drawables;
+using Android.Text;
+using Android.Content.Res;
 
 [assembly: ExportRenderer(typeof(BorderlessEntry), typeof(BorderlessEntryRenderer_Droid))]
 namespace Architecture.Droid

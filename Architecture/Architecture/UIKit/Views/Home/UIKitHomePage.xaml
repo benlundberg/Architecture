@@ -8,10 +8,10 @@
              xmlns:controls="clr-namespace:Architecture.Controls"
              xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
              Visual="Material"
-             x:DataType="viewModels:HomeViewModel">
+             x:DataType="viewModels:UIKitHomeViewModel">
 
     <ContentPage.BindingContext>
-        <viewModels:HomeViewModel />
+        <viewModels:UIKitHomeViewModel />
     </ContentPage.BindingContext>
     
     <NavigationPage.TitleView>

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.ArticleBrowserVariantPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:ArticleBrowserVariantViewModel"
+             x:Name="RootLayout">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding SearchClickedCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    Size="{StaticResource ToolbarItemSize}"
+                    Color="{StaticResource ToolbarTextColor}"
+                    Glyph="{StaticResource SearchIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+
+        <!-- View Loading -->
+        <StackLayout 
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsBusy}"
+            Spacing="6">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
+            <Label Text="Loading articles" Style="{StaticResource BoldLabel}" FontSize="{StaticResource Medium}" />
+        </StackLayout>
+
+        <!-- View Loaded -->
+        <CollectionView
+            IsVisible="{Binding IsNotBusy}"
+            Header="{Binding}"
+            ItemsSource="{Binding Articles}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionMode="Single">
+
+            <CollectionView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout>
+
+                        <xct:Expander IsExpanded="{Binding IsSearchVisible}">
+                            <Grid Margin="16, 0">
+                                <controls:FrameEntry
+                                    ClearButtonVisibility="WhileEditing"
+                                    HasRoundedCorners="True"
+                                    Placeholder="What are you looking for?"
+                                    HeaderShouldBeDisplayed="False"
+                                    Icon="{StaticResource SearchIcon}"
+                                    IconFontFamily="{StaticResource FontAwesomeSolid}" />
+                            </Grid>
+                        </xct:Expander>
+
+                        <!-- Carousel Top -->
+                        <CarouselView
+                            HeightRequest="216"
+                            IndicatorView="indicator"
+                            ItemsSource="{Binding TopArticles}">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout 
+                                    SnapPointsType="Mandatory"
+                                    SnapPointsAlignment="Center"
+                                    Orientation="Horizontal"
+                                    ItemSpacing="8" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                                    <Grid Padding="8">
+                                        <Frame
+                                            IsClippedToBounds="True"
+                                            CornerRadius="12"
+                                            BackgroundColor="{StaticResource DarkBackground}"
+                                            BorderColor="{StaticResource DarkBackground}" 
+                                            Padding="0"
+                                            HasShadow="False">
+                                            <Grid 
+                                                Padding="16"
+                                                ColumnSpacing="4"
+                                                ColumnDefinitions="*, Auto">
+
+                                                <StackLayout Spacing="8">
+                                                    <Label 
+                                                        Text="{Binding Title}"
+                                                        TextColor="White"
+                                                        Style="{StaticResource SemiBoldLabel}"
+                                                        FontSize="{StaticResource Large}" />
+                                                    <Label 
+                                                        TextColor="White"
+                                                        Text="{Binding Text}" />
+                                                    <Button 
+                                                        Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference RootLayout}}"
+                                                        CommandParameter="{Binding}"
+                                                        Margin="0, 2, 0, 0"
+                                                        FontSize="{StaticResource Default}"
+                                                        HorizontalOptions="Start"
+                                                        Text="More info"
+                                                        BackgroundColor="{StaticResource DarkBackground}"
+                                                        BorderColor="White"
+                                                        BorderWidth="1" />
+                                                </StackLayout>
+
+                                                <Frame 
+                                                    Grid.Column="1"
+                                                    VerticalOptions="Center"
+                                                    Padding="0"
+                                                    CornerRadius="8">
+                                                    <ff:CachedImage
+                                                        WidthRequest="96"
+                                                        HeightRequest="136"
+                                                        Aspect="AspectFill"
+                                                        Source="{Binding ImageSource}" />
+                                                </Frame>
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+                        <!-- Carousel Indicator -->
+                        <IndicatorView
+                            x:Name="indicator"
+                            Margin="0, 0, 0, 16"
+                            IndicatorsShape="Circle"
+                            IndicatorColor="{StaticResource Gray}"
+                            SelectedIndicatorColor="{StaticResource PrimaryColor}"
+                            HorizontalOptions="Center"
+                            IndicatorSize="10" />
+
+                        <Label Margin="16, 0" Text="Categories" FontSize="{StaticResource Medium}" Style="{StaticResource SemiBoldLabel}" />
+
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                            <StackLayout Spacing="12" Margin="16, 0" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding Categories}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="viewModels:CategoryItemViewModel">
+                                        <StackLayout Spacing="4">
+                                            <Frame HorizontalOptions="Center" WidthRequest="56" HeightRequest="56" CornerRadius="28" Padding="0">
+                                                <ff:CachedImage Source="{Binding ImageSource}" Aspect="AspectFill" />
+                                            </Frame>
+                                            <Label HorizontalTextAlignment="Center" Text="{Binding Title}" FontSize="{StaticResource Small}" />
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+
+                        <Grid Margin="16, 16, 16, 0">
+                            <Label Text="Recently" FontSize="{StaticResource Medium}" Style="{StaticResource SemiBoldLabel}" />
+                            <Label Text="Show all" TextColor="{StaticResource PrimaryColor}" Style="{StaticResource SemiBoldLabel}" HorizontalOptions="End" />
+                        </Grid>
+
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.HeaderTemplate>
+
+            <!-- Collection view articles -->
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="0"
+                    Orientation="Vertical"
+                    Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                    <Grid Padding="12">
+                        <StackLayout
+                            Spacing="0"
+                            VerticalOptions="Start">
+                            <Frame 
+                                VerticalOptions="Start"
+                                IsClippedToBounds="True"
+                                CornerRadius="8"
+                                Padding="0"
+                                HasShadow="False"
+                                Margin="0, 0, 0, 10">
+                                <ff:CachedImage 
+                                    HeightRequest="160"
+                                    Aspect="AspectFill"
+                                    Source="{Binding ImageSource}" />
+                            </Frame>
+                            <StackLayout Padding="8, 0">
+                                <Label 
+                                    Text="{Binding Title}"
+                                    FontSize="Medium" />
+                                <Label 
+                                    Text="{Binding Text}"
+                                    MaxLines="2"
+                                    LineBreakMode="TailTruncation" />
+                                <Label 
+                                    Margin="0, 6"
+                                    FontSize="{StaticResource Micro}"
+                                    TextColor="{StaticResource GrayDark}"
+                                    Text="2 min ago" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

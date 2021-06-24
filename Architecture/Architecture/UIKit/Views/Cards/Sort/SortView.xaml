@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.SortView"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:local="clr-namespace:Architecture.UIKit.Views"
+             HasSystemPadding="True"
+             CloseWhenBackgroundIsClicked="False"
+             x:Name="SortViewRoot"
+             x:DataType="local:SortView">
+    
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </pages:PopupPage.Animation>
+
+    <Grid VerticalOptions="End">
+        <BoxView Color="White" VerticalOptions="Fill" HorizontalOptions="Fill" CornerRadius="12, 12, 0, 0" />
+        <StackLayout Spacing="0">
+
+            <Label
+                Text="Sort"
+                FontSize="{StaticResource Medium}"
+                Style="{StaticResource SemiBoldLabel}"
+                TextColor="{StaticResource GrayDark}" />
+
+            <StackLayout Spacing="8" Margin="0, 16">
+                <RadioButton Content="Latest" IsChecked="{Binding SortOptions.Date, Mode=TwoWay, Source={x:Reference SortViewRoot}}" />
+                <RadioButton Content="Alphabetic" IsChecked="{Binding SortOptions.Alphabetic, Mode=TwoWay, Source={x:Reference SortViewRoot}}" />
+                <RadioButton Content="Favorite" IsChecked="{Binding SortOptions.Favorite, Mode=TwoWay, Source={x:Reference SortViewRoot}}" />
+                <RadioButton Content="Rating" IsChecked="{Binding SortOptions.Rating, Mode=TwoWay, Source={x:Reference SortViewRoot}}" />
+            </StackLayout>
+
+            <Button
+                CornerRadius="4"
+                Command="{Binding DoneCommand, Source={x:Reference SortViewRoot}}"
+                Text="Done" />
+        </StackLayout>
+    </Grid>
+</pages:PopupPage>

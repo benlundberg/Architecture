@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.DetailsVariantPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:DetailsViewModel">
+
+    <ContentPage.BindingContext>
+        <viewModels:DetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Details Variant" />
+    </NavigationPage.TitleView>
+
+    <controls:NotifyScrollView>
+        <controls:NotifyScrollView.HeaderContent>
+            <Grid BackgroundColor="{StaticResource PrimaryColor}" ColumnDefinitions="Auto, *" ColumnSpacing="16" Padding="16">
+                <Frame
+                    Padding="0"
+                    CornerRadius="10"
+                    BorderColor="Transparent"
+                    HasShadow="False">
+                    <ff:CachedImage 
+                        HeightRequest="100"
+                        WidthRequest="100"
+                        Source="https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/34.jpg" 
+                        Aspect="AspectFill" />
+                </Frame>
+                <StackLayout 
+                        Grid.Column="1"
+                        Spacing="0">
+                    <Label 
+                        Text="Lorem ipsum"
+                        TextColor="White"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    <Label 
+                        TextColor="White"
+                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit" />
+                    <controls:RatingControl
+                        FontSize="Default"
+                        SolidColor="{StaticResource TextColor}"
+                        Margin="0, 4, 0, 0"
+                        IsLocked="True"
+                        Rating="3" />
+                </StackLayout>
+            </Grid>
+        </controls:NotifyScrollView.HeaderContent>
+        <controls:NotifyScrollView.MainContent>
+            <StackLayout Margin="16, 0">
+                <Grid ColumnDefinitions="Auto, *" ColumnSpacing="16" Padding="0, 16">
+                    <Frame
+                        Padding="0"
+                        CornerRadius="10"
+                        BorderColor="Transparent"
+                        HasShadow="False">
+                        <ff:CachedImage 
+                            HeightRequest="100"
+                            WidthRequest="100"
+                            Source="https://architectureappimages.blob.core.windows.net/imagecontainer/24.jpg" 
+                            Aspect="AspectFill" />
+                    </Frame>
+                    <StackLayout 
+                        Grid.Column="1"
+                        Spacing="0">
+                        <Label 
+                            Text="Lorem ipsum"
+                            FontSize="{StaticResource Medium}"
+                            Style="{StaticResource SemiBoldLabel}" />
+                        <Label 
+                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit" />
+                        <controls:RatingControl
+                            Margin="0, 4, 0, 0"
+                            IsLocked="True"
+                            Rating="3" />
+                    </StackLayout>
+                </Grid>
+
+                <Frame 
+                    HorizontalOptions="Start"
+                    Style="{StaticResource ChipFrame}">
+                    <Label Text="Lorem" />
+                </Frame>
+
+                <Label 
+                    Margin="0, 16"
+                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                <Label 
+                    Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+
+                <xct:UniformGrid BindableLayout.ItemsSource="{Binding Comments}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                            <Grid>
+                                <Frame 
+                                    Margin="8"
+                                    HeightRequest="200"
+                                    WidthRequest="160"
+                                    Padding="0" 
+                                    CornerRadius="10">
+                                    <ff:CachedImage 
+                                        Source="{Binding ImageSource}"
+                                        Aspect="AspectFill" />
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </xct:UniformGrid>
+            
+            </StackLayout>
+        </controls:NotifyScrollView.MainContent>
+    </controls:NotifyScrollView>
+    
+</ContentPage>

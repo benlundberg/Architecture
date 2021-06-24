@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.FilterView"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:local="clr-namespace:Architecture.UIKit.Views"
+             HasSystemPadding="True"
+             CloseWhenBackgroundIsClicked="False"
+             x:Name="FilterRootLayout"
+             x:DataType="local:FilterView">
+
+    <pages:PopupPage.Animation>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </pages:PopupPage.Animation>
+    
+    <Grid VerticalOptions="End">
+        <BoxView Color="White" VerticalOptions="Fill" HorizontalOptions="Fill" CornerRadius="12, 12, 0, 0" />
+        <StackLayout Padding="24" Spacing="0">
+
+            <Label
+                Text="Filter"
+                FontSize="{StaticResource Medium}"
+                Style="{StaticResource SemiBoldLabel}"
+                TextColor="{StaticResource GrayDark}" />
+
+            <StackLayout Margin="0, 20" Orientation="Horizontal">
+                <CheckBox Color="{StaticResource PrimaryColor}" IsChecked="{Binding FilterOptions.OnlyShowFavorites, Mode=TwoWay, Source={x:Reference FilterRootLayout}}" VerticalOptions="Center" />
+                <Label VerticalTextAlignment="Center" Style="{StaticResource SemiBoldLabel}" Text="Only show favorites" />
+            </StackLayout>
+
+            <Label 
+                Margin="0, 0, 0, 16"
+                Text="Stars" />
+            <xct:RangeSlider
+                TrackHighlightBorderColor="{StaticResource PrimaryColor}"
+                UpperValue="{Binding FilterOptions.RangeUpperValue, Mode=TwoWay, Source={x:Reference FilterRootLayout}}"
+                LowerValue="{Binding FilterOptions.RangeLowerValue, Mode=TwoWay, Source={x:Reference FilterRootLayout}}"
+                MaximumValue="5" 
+                MinimumValue="1" 
+                StepValue="1" />
+            
+            <Button
+                CornerRadius="4"
+                Margin="0, 32, 0, 16"
+                Command="{Binding ResetCommand, Source={x:Reference FilterRootLayout}}"
+                Style="{StaticResource OutlineButton}"
+                BackgroundColor="{StaticResource PageBackgroundColor}"
+                Text="Reset" />
+
+            <Button
+                CornerRadius="4"
+                Command="{Binding DoneCommand, Source={x:Reference FilterRootLayout}}"
+                Text="Done" />
+        </StackLayout>
+    </Grid>
+    
+</pages:PopupPage>

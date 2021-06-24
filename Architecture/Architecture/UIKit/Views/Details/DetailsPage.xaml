@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.DetailsPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:DetailsViewModel">
+
+    <ContentPage.BindingContext>
+        <viewModels:DetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Details" />
+    </NavigationPage.TitleView>
+
+    <Grid>
+
+        <controls:CollapsingScrollView>
+            <controls:CollapsingScrollView.HeaderContent>
+
+                <!-- Header -->
+                <Grid>
+                    <ff:CachedImage 
+                        HeightRequest="200"
+                        Aspect="AspectFill"
+                        Source="https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/26.jpg" />
+                    <Grid BackgroundColor="Black" Opacity=".12" />
+                    <StackLayout VerticalOptions="End" Spacing="0" Padding="16, 24">
+                        <Label 
+                            Text="Lorem ipsum"
+                            TextColor="White"
+                            FontSize="{StaticResource Medium}" />
+                        <Label 
+                            TextColor="White"
+                            Text="Dolor sit amet" />
+                    </StackLayout>
+                </Grid>
+            </controls:CollapsingScrollView.HeaderContent>
+            <controls:CollapsingScrollView.MainContent>
+                
+                <!-- Main Content -->
+                <StackLayout Margin="16" Spacing="16">
+
+                    <Frame 
+                        HorizontalOptions="Start"
+                        Style="{StaticResource ChipFrame}">
+                        <Label Text="Lorem" />
+                    </Frame>
+
+                    <Label 
+                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+
+                    <!-- Comments -->
+                    <StackLayout 
+                        Margin="-16, 0" 
+                        BackgroundColor="{StaticResource GrayLight}">
+                        <Label
+                            Margin="16, 12"
+                            Text="Comments" />
+                    </StackLayout>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding Comments}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                                <StackLayout>
+                                    <Label 
+                                        FontSize="{StaticResource Medium}"
+                                        Style="{StaticResource SemiBoldLabel}"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        Text="{Binding SubTitle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </controls:CollapsingScrollView.MainContent>
+        </controls:CollapsingScrollView>
+
+        <ImageButton 
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="24"
+            Padding="18, 16, 16, 16"
+            Style="{StaticResource FloatingButton}">
+            <ImageButton.Source>
+                <FontImageSource
+                    Color="White"
+                    Glyph="{StaticResource EditPen2Icon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </ImageButton.Source>
+        </ImageButton>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.ChatPage"
+             xmlns:views="clr-namespace:Architecture.UIKit.Views"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             x:DataType="viewModels:ChatViewModel">
+
+    <NavigationPage.TitleView>
+        <Grid>
+            
+        </Grid>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="MeTemplate" x:DataType="viewModels:ChatItemViewModel">
+                <StackLayout>
+                    <Frame HorizontalOptions="End" BackgroundColor="{StaticResource PrimaryColor}">
+                        <Label TextColor="White" Text="{Binding Message}" />
+                    </Frame>
+                    <Label Text="{Binding Status}" FontSize="{StaticResource Micro}" TextColor="{StaticResource GrayDark}" HorizontalOptions="End" />
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="OtherTemplate" x:DataType="viewModels:ChatItemViewModel">
+                <StackLayout>
+                    <Frame HorizontalOptions="Start" BackgroundColor="{StaticResource Gray}">
+                        <Label Text="{Binding Message}" />
+                    </Frame>
+                    <Label Text="{Binding Status}" FontSize="{StaticResource Micro}" TextColor="{StaticResource GrayDark}" HorizontalOptions="Start" />
+                </StackLayout>                
+            </DataTemplate>
+            
+            <views:ChatDataTemplateSelector 
+                x:Key="ChatDataTemplateSel"
+                MeTemplate="{StaticResource MeTemplate}"
+                OtherTemplate="{StaticResource OtherTemplate}" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid RowSpacing="0" RowDefinitions="*, Auto">
+        
+        <!-- Chat -->
+        <CollectionView
+            Margin="24, 0"
+            ItemsUpdatingScrollMode="KeepScrollOffset"
+            ItemsSource="{Binding Chats}"
+            ItemTemplate="{StaticResource ChatDataTemplateSel}" />
+
+        <!-- Write -->
+        <StackLayout Grid.Row="1" BackgroundColor="{StaticResource GrayLight}" Padding="24">
+
+            <Frame Padding="8" HasShadow="False" CornerRadius="8">
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    
+                    <!-- Camera -->
+                    <Frame VerticalOptions="Center" HasShadow="False" Padding="0" HeightRequest="40" WidthRequest="40" BackgroundColor="{StaticResource PrimaryColor}" Opacity="0.12" />
+                    <ImageButton VerticalOptions="Center" Padding="8" BackgroundColor="Transparent">
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Size="20"
+                                Color="{StaticResource PrimaryColor}"
+                                Glyph="{StaticResource CameraIcon}"
+                                FontFamily="{StaticResource FontAwesomeSolid}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    
+                    <!-- Entry -->
+                    <controls:BorderlessEntry
+                        Grid.Column="1"
+                        ClearButtonVisibility="WhileEditing"
+                        Placeholder="Type message here..." />
+
+                    <!-- Send -->
+                    <Frame Grid.Column="2" VerticalOptions="Center" HasShadow="False" Padding="0" HeightRequest="40" WidthRequest="40" BackgroundColor="{StaticResource PrimaryColor}" Opacity="0.12" />
+                    <ImageButton Grid.Column="2" VerticalOptions="Center" Padding="8" BackgroundColor="Transparent">
+                        <ImageButton.Source>
+                            <FontImageSource
+                                Size="20"
+                                Color="{StaticResource PrimaryColor}"
+                                Glyph="{StaticResource SendIcon}"
+                                FontFamily="{StaticResource FontAwesomeSolid}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                </Grid>
+            </Frame>
+            
+        </StackLayout>
+        
+    </Grid>
+</ContentPage>

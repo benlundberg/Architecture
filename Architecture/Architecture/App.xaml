@@ -12,34 +12,35 @@
 
             <!-- #region Colors -->
 
-            <Color x:Key="PrimaryColor">#A251FF</Color>
-            <Color x:Key="DarkPrimaryColor">#A251FF</Color>
-            <Color x:Key="Accent">#FF42E8</Color>
-
+            <Color x:Key="PrimaryColor">#A560F3</Color>
+            <Color x:Key="DarkPrimaryColor">#8829F3</Color>
+            <Color x:Key="Accent">#F454E0</Color>
+            <Color x:Key="DarkBackground">#281241</Color>
+            
             <Color x:Key="GrayDark">#969BAB</Color>
             <Color x:Key="GrayMedium">#D9DBE1</Color>
             <Color x:Key="Gray">#EEEFF4</Color>
             <Color x:Key="GrayLight">#F4F5F7</Color>
 
-            <Color x:Key="BlackLight">#393939</Color>
+            <Color x:Key="BlackLight">#2A1428</Color>
 
-            <Color x:Key="ToolbarTextColor">#393939</Color>
+            <Color x:Key="ToolbarTextColor">#2A1428</Color>
 
-            <Color x:Key="TextColor">#393939</Color>
+            <Color x:Key="TextColor">#2A1428</Color>
 
             <Color x:Key="PageBackgroundColor">#FEFEFE</Color>
 
             <Color x:Key="BarBackgroundColor">#FEFEFE</Color>
 
-            <Color x:Key="ButtonBackgroundColor">#A251FF</Color>
+            <Color x:Key="ButtonBackgroundColor">#A560F3</Color>
             <Color x:Key="ButtonTextColor">#FFF</Color>
 
-            <Color x:Key="FabBackgroundColor">#A251FF</Color>
+            <Color x:Key="FabBackgroundColor">#A560F3</Color>
             <Color x:Key="FabTextColor">#FFF</Color>
-            
-            <Color x:Key="SuccessColor">#43A047</Color>
-            <Color x:Key="WarningColor">#FFA801</Color>
-            <Color x:Key="ErrorColor">#B00020</Color>
+
+            <Color x:Key="SuccessColor">#23D07D</Color>
+            <Color x:Key="WarningColor">#FFB43B</Color>
+            <Color x:Key="ErrorColor">#EF3758</Color>
 
             <!--#endregion-->
             
@@ -47,6 +48,7 @@
             
             <local:InvertedBoolConverter x:Key="InvertedBoolConv" />
             <local:NullOrEmptyToBoolConverter x:Key="NullOrEmptyToBoolConv" />
+            <local:BoolToPrimaryColorConverter x:Key="BoolToPrimaryColorConv" />
             
             <!--#endregion-->
             
@@ -73,6 +75,8 @@
             <x:String x:Key="SortIcon">&#xf0dc;</x:String>
             <x:String x:Key="EditPen2Icon">&#xf044;</x:String>
             <x:String x:Key="InfoIcon">&#xf05a;</x:String>
+            <x:String x:Key="BackIcon">&#xf060;</x:String>
+            <x:String x:Key="FileIcon">&#xf15c;</x:String>
             <!--#endregion-->
             
             <!-- #region Fonts -->
@@ -103,9 +107,11 @@
             <x:Double x:Key="Micro">10</x:Double>
             <x:Double x:Key="Small">12</x:Double>
             <x:Double x:Key="Default">14</x:Double>
+            <x:Double x:Key="EntryFontSize">16</x:Double>
             <x:Double x:Key="Medium">17</x:Double>
             <x:Double x:Key="Title">20</x:Double>
-            <x:Double x:Key="PageTitleSize">20</x:Double>
+            <x:Double x:Key="Large">24</x:Double>
+            <x:Double x:Key="PageTitleSize">18</x:Double>
 
             <!-- #endregion-->
             
@@ -150,7 +156,7 @@
             </Style>
 
             <Style TargetType="Entry" ApplyToDerivedTypes="True">
-                <Setter Property="FontSize" Value="{StaticResource Default}" />
+                <Setter Property="FontSize" Value="{StaticResource EntryFontSize}" />
                 <Setter Property="FontFamily" Value="{StaticResource PoppinsRegular}" />
             </Style>
 

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.DetailsThirdPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:DetailsViewModel">
+    
+    <ContentPage.BindingContext>
+        <viewModels:DetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Details Third" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="SelectedTabItemTemplate">
+                <Grid>
+                    <Frame
+                        Padding="0"
+                        CornerRadius="8"
+                        HasShadow="False"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        BorderColor="{StaticResource PrimaryColor}"
+                        Opacity=".12"/>
+                    <Label
+                        Padding="16, 0"
+                        HorizontalTextAlignment="Center"
+				        VerticalOptions="Center"
+                        Style="{StaticResource SemiBoldLabel}"
+				        FontSize="{StaticResource Medium}"
+                        TextColor="{StaticResource PrimaryColor}"
+				        Text="{TemplateBinding Text}" />
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="UnselectedTabItemTemplate">
+                <Frame
+                    Opacity=".5"
+                    Padding="0"
+                    CornerRadius="8"
+                    HasShadow="False"
+                    BackgroundColor="White"
+                    BorderColor="White">
+                    <Label
+                        Padding="16, 0"
+                        HorizontalTextAlignment="Center"
+				        VerticalOptions="Center"
+                        Style="{StaticResource SemiBoldLabel}"
+				        FontSize="{StaticResource Medium}"
+                        TextColor="{StaticResource BlackLight}"
+				        Text="{TemplateBinding Text}" />
+                </Frame>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ScrollView Padding="16">
+        <StackLayout Spacing="24">
+            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                <Frame
+                    Padding="0"
+                    CornerRadius="10"
+                    BorderColor="Transparent"
+                    HasShadow="False">
+                    <ff:CachedImage 
+                        HeightRequest="100"
+                        WidthRequest="100"
+                        Source="https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/17.jpg" 
+                        Aspect="AspectFill" />
+                </Frame>
+                <StackLayout 
+                    Grid.Column="1"
+                    Spacing="0">
+                    <Label 
+                        Text="Lorem ipsum"
+                        FontSize="{StaticResource Medium}"
+                        Style="{StaticResource SemiBoldLabel}" />
+                    <Label 
+                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit" />
+                </StackLayout>
+                
+                <ImageButton 
+                    Grid.Column="2"
+                    Style="{StaticResource FloatingButtonMini}"
+                    VerticalOptions="End"
+                    HorizontalOptions="End">
+                    <ImageButton.Source>
+                        <FontImageSource 
+                            Color="White"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            Glyph="{StaticResource HeartIcon}" />
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+
+            <xct:TabView
+                Margin="0, 24"
+                TabStripPlacement="Top"
+                IsTabTransitionEnabled="False"
+                IsSwipeEnabled="False"
+                HorizontalOptions="Start">
+
+                <xct:TabViewItem
+                    HorizontalOptions="Start"
+                    Text="Summary">
+                    <xct:TabViewItem.Triggers>
+                        <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="True">
+                            <Setter Property="ControlTemplate" Value="{StaticResource SelectedTabItemTemplate}" />
+                        </Trigger>
+                        <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="False">
+                            <Setter Property="ControlTemplate" Value="{StaticResource UnselectedTabItemTemplate}" />
+                        </Trigger>
+                    </xct:TabViewItem.Triggers>
+                    <StackLayout Margin="0, 24">
+                        <Label 
+                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                        <Label 
+                            Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec porttitor metus, sed ultrices ipsum. Ut sit amet massa tincidunt, blandit lectus in, laoreet purus. Nunc finibus urna mattis hendrerit fringilla. Donec molestie diam eu erat volutpat tincidunt. Phasellus congue suscipit augue eget lobortis. Sed sed dui velit. Cras placerat, lectus ac egestas pharetra, nisi massa condimentum sem, id lacinia er" />
+                    </StackLayout>
+                </xct:TabViewItem>
+
+                <xct:TabViewItem
+                    Text="Skills"
+                    HorizontalOptions="Start">
+                    <xct:TabViewItem.Triggers>
+                        <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="True">
+                            <Setter Property="ControlTemplate" Value="{StaticResource SelectedTabItemTemplate}" />
+                        </Trigger>
+                        <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="False">
+                            <Setter Property="ControlTemplate" Value="{StaticResource UnselectedTabItemTemplate}" />
+                        </Trigger>
+                    </xct:TabViewItem.Triggers>
+                    <StackLayout Margin="0, 24" Spacing="12">
+                        <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
+                            <Label Text="Travel"/>
+                        </Frame>
+                        <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
+                            <Label Text="Photo" />
+                        </Frame>
+                        <Frame HorizontalOptions="Start" Style="{StaticResource ChipFrame}">
+                            <Label Text="Pop" />
+                        </Frame>
+                    </StackLayout>
+                </xct:TabViewItem>
+            </xct:TabView>
+            
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

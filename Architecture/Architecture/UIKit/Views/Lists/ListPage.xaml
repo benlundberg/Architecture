@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.ListPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:ListViewModel"
+             x:Name="RootLayout">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="SelectedTabItemTemplate">
+                <Grid>
+                    <Frame
+                        Padding="0"
+                        CornerRadius="8"
+                        HasShadow="False"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        BorderColor="{StaticResource PrimaryColor}"
+                        Opacity=".12"/>
+                    <Label
+                        HorizontalTextAlignment="Center"
+				        VerticalOptions="Center"
+                        Style="{StaticResource SemiBoldLabel}"
+				        FontSize="{StaticResource Medium}"
+                        TextColor="{StaticResource PrimaryColor}"
+				        Text="{TemplateBinding Text}" />
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="UnselectedTabItemTemplate">
+                <Frame
+                    Opacity=".5"
+                    Padding="0"
+                    CornerRadius="8"
+                    HasShadow="False"
+                    BackgroundColor="White"
+                    BorderColor="White">
+                    <Label
+                        HorizontalTextAlignment="Center"
+				        VerticalOptions="Center"
+                        Style="{StaticResource SemiBoldLabel}"
+				        FontSize="{StaticResource Medium}"
+                        TextColor="{StaticResource BlackLight}"
+				        Text="{TemplateBinding Text}" />
+                </Frame>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="List" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding ShowSearchCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    Size="{StaticResource ToolbarItemSize}"
+                    Color="{StaticResource ToolbarTextColor}"
+                    Glyph="{StaticResource SearchIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <Grid RowDefinitions="Auto, *" RowSpacing="16">
+
+        <xct:Expander ExpandAnimationLength="80" CollapseAnimationLength="90" IsExpanded="{Binding SearchIsVisible}">
+            <controls:FrameEntry
+                Margin="16, 0"
+                ClearButtonVisibility="WhileEditing"
+                HasRoundedCorners="True"
+                Placeholder="What are you looking for?"
+                HeaderShouldBeDisplayed="False"
+                Text="{Binding Query, Mode=TwoWay}"
+                TextChangedCommand="{Binding SearchTextChangedCommand}"
+                Icon="{StaticResource SearchIcon}"
+                IconFontFamily="{StaticResource FontAwesomeSolid}" />
+        </xct:Expander>
+
+        <xct:TabView
+            Grid.Row="1"
+            TabStripPlacement="Top"
+            IsTabTransitionEnabled="False"
+            IsSwipeEnabled="False">
+
+            <xct:TabViewItem
+                Text="Text Cell"
+                Margin="24, 0, 0, 0">
+                <xct:TabViewItem.Triggers>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="True">
+                        <Setter Property="ControlTemplate" Value="{StaticResource SelectedTabItemTemplate}" />
+                    </Trigger>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="False">
+                        <Setter Property="ControlTemplate" Value="{StaticResource UnselectedTabItemTemplate}" />
+                    </Trigger>
+                </xct:TabViewItem.Triggers>
+
+                <RefreshView 
+                    IsRefreshing="{Binding IsRefreshing}" 
+                    Command="{Binding RefreshListCommand}"
+                    Margin="0, 24, 0, 0">
+                    <CollectionView
+                        ItemsSource="{Binding Items}"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                                <StackLayout Padding="16, 0" Spacing="0">
+                                    <Label 
+                                        Style="{StaticResource SemiBoldLabel}"
+                                        Text="{Binding Title}" />
+                                    <Label 
+                                        Text="{Binding SubTitle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </xct:TabViewItem>
+
+            <xct:TabViewItem
+                Text="Image Cell"
+                Margin="0, 0, 24, 0">
+                <xct:TabViewItem.Triggers>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="True">
+                        <Setter Property="ControlTemplate" Value="{StaticResource SelectedTabItemTemplate}" />
+                    </Trigger>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="False">
+                        <Setter Property="ControlTemplate" Value="{StaticResource UnselectedTabItemTemplate}" />
+                    </Trigger>
+                </xct:TabViewItem.Triggers>
+
+                <RefreshView 
+                    IsRefreshing="{Binding IsRefreshing}" 
+                    Command="{Binding RefreshListCommand}"
+                    Margin="0, 24, 0, 0">
+                    <CollectionView
+                        ItemsSource="{Binding Items}"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                        SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                                <Grid Padding="16, 0" ColumnDefinitions="Auto, *" ColumnSpacing="16">
+                                    <Frame
+                                        IsClippedToBounds="True"
+                                        Padding="0"
+                                        CornerRadius="10"
+                                        HasShadow="False"
+                                        BorderColor="Transparent">
+                                        <ff:CachedImage 
+                                            HeightRequest="72"
+                                            WidthRequest="72"
+                                            Aspect="AspectFill"
+                                            Source="{Binding ImageSource}"/>
+                                    </Frame>
+                                    <StackLayout Spacing="0" Grid.Column="1">
+                                        <Label 
+                                            Style="{StaticResource SemiBoldLabel}"
+                                            Text="{Binding Title}" />
+                                        <Label 
+                                                Text="{Binding SubTitle}" />
+                                    </StackLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </xct:TabViewItem>
+        </xct:TabView>
+
+        <ImageButton 
+            Grid.RowSpan="2"
+            VerticalOptions="End"
+            HorizontalOptions="End"
+            Margin="24"
+            Command="{Binding AddItemCommand}"
+            Style="{StaticResource FloatingButton}">
+            <ImageButton.Source>
+                <FontImageSource
+                    Color="White"
+                    Glyph="{StaticResource AddIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}"/>
+            </ImageButton.Source>
+        </ImageButton>
+    </Grid>
+</ContentPage>

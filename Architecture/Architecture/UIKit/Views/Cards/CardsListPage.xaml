@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.CardsListPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:CardsListViewModel"
+             x:Name="RootLayout">
+
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Cards List" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding ShowSearchCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    Size="{StaticResource ToolbarItemSize}"
+                    Color="{StaticResource ToolbarTextColor}"
+                    Glyph="{StaticResource SearchIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, Auto, *" RowSpacing="16">
+
+        <xct:Expander ExpandAnimationLength="80" CollapseAnimationLength="90" IsExpanded="{Binding SearchIsVisible}">
+            <controls:FrameEntry
+                Margin="16, 0"
+                ClearButtonVisibility="WhileEditing"
+                HasRoundedCorners="True"
+                Placeholder="What are you looking for?"
+                HeaderShouldBeDisplayed="False"
+                Text="{Binding Query, Mode=TwoWay}"
+                TextChangedCommand="{Binding SearchTextChangedCommand}"
+                Icon="{StaticResource SearchIcon}"
+                IconFontFamily="{StaticResource FontAwesomeSolid}" />
+        </xct:Expander>
+
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*, *">
+
+            <Button 
+                Text="Filter"
+                Command="{Binding FilterClickedCommand}"
+                HorizontalOptions="Center"
+                Style="{StaticResource TextButton}"
+                BackgroundColor="{StaticResource PageBackgroundColor}"
+                Visual="Default"
+                ContentLayout="Left, 10">
+                <Button.ImageSource>
+                    <FontImageSource 
+                        Color="{StaticResource PrimaryColor}"
+                        Size="{StaticResource Medium}"
+                        Glyph="{StaticResource FilterIcon}"
+                        FontFamily="{StaticResource FontAwesomeSolid}" />
+                </Button.ImageSource>
+            </Button>
+
+            <Button
+                Grid.Column="1"
+                Text="Sorting"
+                Command="{Binding SortClickedCommand}"
+                HorizontalOptions="Center"
+                BackgroundColor="{StaticResource PageBackgroundColor}"
+                Style="{StaticResource TextButton}"
+                Visual="Default"
+                ContentLayout="Left, 10">
+                <Button.ImageSource>
+                    <FontImageSource 
+                        Color="{StaticResource PrimaryColor}"
+                        Size="{StaticResource Medium}"
+                        Glyph="{StaticResource SortIcon}"
+                        FontFamily="{StaticResource FontAwesomeSolid}" />
+                </Button.ImageSource>
+            </Button>
+        </Grid>
+
+        <CollectionView
+            Grid.Row="2"
+            ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ListItemViewModel">
+                    <Grid Padding="16, 8">
+                        <controls:CustomFrame
+                            Padding="8"
+                            CornerRadius="12">
+                            <Grid ColumnSpacing="8" ColumnDefinitions="Auto, *">
+                                <Frame
+                                    Padding="0"
+                                    CornerRadius="8">
+                                    <ff:CachedImage 
+                                        Source="{Binding ImageSource}"
+                                        Aspect="AspectFill"
+                                        HeightRequest="114"
+                                        WidthRequest="95" />
+                                </Frame>
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Padding="8"
+                                    Spacing="4">
+                                    <Label 
+                                        FontSize="{StaticResource Medium}"
+                                        Text="{Binding SubTitle}"
+                                        MaxLines="2"
+                                        LineBreakMode="TailTruncation" />
+                                    <Label 
+                                        Text="{Binding Title}"
+                                        TextColor="{StaticResource GrayDark}"
+                                        FontSize="{StaticResource Small}" />
+                                    <controls:RatingControl 
+                                        RateMaximum="5"
+                                        FontSize="Default"
+                                        SolidColor="{StaticResource TextColor}"
+                                        Rating="{Binding Rating}"
+                                        IsLocked="True" />
+                                </StackLayout>
+
+                                <ImageButton
+                                    Grid.ColumnSpan="2"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="End"
+                                    BackgroundColor="White"
+                                    Command="{Binding BindingContext.FavoriteClickedCommand, Source={x:Reference RootLayout}}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource FloatingButtonMini}">
+                                    <ImageButton.Source>
+                                        <FontImageSource
+                                            Color="{Binding IsFavorite, Converter={StaticResource BoolToPrimaryColorConv}}"
+                                            Glyph="{StaticResource HeartIcon}"
+                                            FontFamily="{StaticResource FontAwesomeSolid}">
+                                        </FontImageSource>
+                                    </ImageButton.Source>
+                                </ImageButton>
+                            </Grid>
+                        </controls:CustomFrame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

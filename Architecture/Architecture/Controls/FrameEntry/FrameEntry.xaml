@@ -11,58 +11,72 @@
     <StackLayout>
         <Grid>
             <Frame
-                Padding="{OnPlatform Android=8, iOS=16 8 16 8, UWP=6}"
-                Margin="0, 10, 0, 0"
+                Padding="0"
                 HasShadow="False"
+                CornerRadius="{Binding BorderCornerRadius, Source={x:Reference rootFrameEntry}}"
                 BorderColor="{Binding InternalBorderColor, Source={x:Reference rootFrameEntry}}"
-                BackgroundColor="{Binding EntryBackground, Source={x:Reference rootFrameEntry}}">
-                <Grid ColumnSpacing="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                BackgroundColor="{Binding EntryBackgroundColor, Source={x:Reference rootFrameEntry}}">
+                <Grid 
+                    ColumnDefinitions="Auto, *, Auto"
+                    ColumnSpacing="0"
+                    Margin="4">
+                    <Grid.Triggers>
+                        <DataTrigger TargetType="Grid" Binding="{Binding HasRoundedCorners, Source={x:Reference rootFrameEntry}}" Value="True">
+                            <Setter Property="Margin" Value="10, 4, 4, 4" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Grid" Binding="{Binding HasRoundedCorners, Source={x:Reference rootFrameEntry}}" Value="False">
+                            <Setter Property="Margin" Value="4" />
+                        </DataTrigger>
+                    </Grid.Triggers>
                     <Image
-                        Margin="16, 1, 0, 1"
+                        Margin="16, 16, 0, 16"
                         WidthRequest="24"
                         HeightRequest="24"
                         VerticalOptions="Center"
                         IsVisible="{Binding HasImage, Source={x:Reference rootFrameEntry}}"
                         Source="{Binding ImageSource, Source={x:Reference rootFrameEntry}}" />
                     <Label 
-                        Margin="16, 1, 0, 1"
-                        FontSize="{StaticResource Medium}"
-                        VerticalOptions="Center"
+                        Margin="16, 16, 0, 16"
+                        FontSize="20"
+                        VerticalTextAlignment="Center"
                         IsVisible="{Binding HasIcon, Source={x:Reference rootFrameEntry}}"
-                        Text="{Binding IconTextSource, Source={x:Reference rootFrameEntry}}"
+                        Text="{Binding Icon, Source={x:Reference rootFrameEntry}}"
                         TextColor="{Binding IconColor, Source={x:Reference rootFrameEntry}}"
                         FontFamily="{Binding IconFontFamily, Source={x:Reference rootFrameEntry}}" />
                     <controls:BorderlessEntry 
                         Grid.Column="1"
-                        Margin="10, 1"
-                        FontSize="{StaticResource Default}"
+                        Margin="12, 4, 0, 0"
+                        FontSize="16"
                         Placeholder="{Binding InternalPlaceholder, Source={x:Reference rootFrameEntry}}"
                         PlaceholderColor="{Binding PlaceholderColor, Source={x:Reference rootFrameEntry}}"
                         Text="{Binding Text.Value, Source={x:Reference rootFrameEntry}, Mode=TwoWay}"
                         TextColor="{Binding TextColor, Source={x:Reference rootFrameEntry}}"
                         IsPassword="{Binding IsPassword, Source={x:Reference rootFrameEntry}}"
                         Keyboard="{Binding Keyboard, Source={x:Reference rootFrameEntry}}"
+                        ClearButtonVisibility="{Binding ClearButtonVisibility}"
                         Focused="BorderlessEntry_Focused"
                         Unfocused="BorderlessEntry_Unfocused"
                         TextChanged="BorderlessEntry_TextChanged"
                         Visual="Default" />
                     <ImageButton
                         Grid.Column="2"
-                        Padding="14, 1, 16, 1"
+                        Padding="19, 0, 20, 0"
                         VerticalOptions="Fill"
                         Clicked="ImageButton_Clicked"
                         IsVisible="{Binding IsCommandVisible, Source={x:Reference rootFrameEntry}}"
-                        BackgroundColor="{Binding CommandIconBackgroundColor, Source={x:Reference rootFrameEntry}}">
+                        BackgroundColor="{Binding CommandIconBackgroundColor, Source={x:Reference rootFrameEntry}}"
+                        BorderColor="{Binding CommandIconBackgroundColor, Source={x:Reference rootFrameEntry}}"
+                        BorderWidth="1">
+                        <ImageButton.Triggers>
+                            <DataTrigger TargetType="ImageButton" Binding="{Binding HasRoundedCorners, Source={x:Reference rootFrameEntry}}" Value="True">
+                                <Setter Property="CornerRadius" Value="28" />
+                            </DataTrigger>
+                        </ImageButton.Triggers>
                         <ImageButton.Source>
                             <FontImageSource
                                 Size="{StaticResource Default}"
                                 Color="{Binding CommandIconColor, Source={x:Reference rootFrameEntry}}"
-                                Glyph="{Binding CommandIconTextSource, Source={x:Reference rootFrameEntry}}"
+                                Glyph="{Binding CommandIcon, Source={x:Reference rootFrameEntry}}"
                                 FontFamily="{Binding CommandIconFontFamily, Source={x:Reference rootFrameEntry}}"/>
                         </ImageButton.Source>
                     </ImageButton>
@@ -70,31 +84,49 @@
             </Frame>
             <Grid 
                 IsVisible="{Binding IsHeaderVisible, Source={x:Reference rootFrameEntry}}"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"
-                HeightRequest="10"
                 WidthRequest="{Binding Width, Source={x:Reference FrameHeader}}"
-                Margin="16, 10, 0, 0"
-                BackgroundColor="{Binding EntryBackground, Source={x:Reference rootFrameEntry}}" />
+                HeightRequest="10"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Margin="12, 0, 0, 0"
+                BackgroundColor="{Binding EntryBackgroundColor, Source={x:Reference rootFrameEntry}}">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding HasRoundedCorners, Source={x:Reference rootFrameEntry}}" Value="True">
+                        <Setter Property="Margin" Value="18, 0, 0, 0" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Grid" Binding="{Binding HasRoundedCorners, Source={x:Reference rootFrameEntry}}" Value="False">
+                        <Setter Property="Margin" Value="12, 0, 0, 0" />
+                    </DataTrigger>
+                </Grid.Triggers>
+            </Grid>
             <Label
                 x:Name="FrameHeader"
                 IsVisible="{Binding IsHeaderVisible, Source={x:Reference rootFrameEntry}}"
-                TextColor="{Binding HeaderColor, Source={x:Reference rootFrameEntry}}"
-                BackgroundColor="Transparent" 
+                TextColor="{Binding HeaderTextColor, Source={x:Reference rootFrameEntry}}"
                 Text="{Binding Placeholder, Source={x:Reference rootFrameEntry}}"
-                FontSize="{StaticResource Micro}"
-                Margin="16, 2, 0, 0"
-                Padding="2, 0"
+                FontSize="14"
+                Padding="4, 0"
+                Margin="12, -10, 0, 0"
                 VerticalOptions="Start" 
-                HorizontalOptions="Start" />
+                HorizontalOptions="Start">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding HasRoundedCorners, Source={x:Reference rootFrameEntry}}" Value="True">
+                        <Setter Property="Margin" Value="18, -10, 0, 0" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Label" Binding="{Binding HasRoundedCorners, Source={x:Reference rootFrameEntry}}" Value="False">
+                        <Setter Property="Margin" Value="12, -10, 0, 0" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
         </Grid>
         <Frame 
+            Margin="16, 0, 0, 0"
             Padding="4, 0"
             HasShadow="False"
-            BackgroundColor="#B00020"
-            BorderColor="#B00020"
+            BackgroundColor="{StaticResource ErrorColor}"
+            BorderColor="{StaticResource ErrorColor}"
             HorizontalOptions="Start"
-            IsVisible="{Binding IsValidationVisible, Source={x:Reference rootFrameEntry}}">
+            IsVisible="{Binding Text.IsValid, Source={x:Reference rootFrameEntry}, Converter={StaticResource InvertedBoolConv}, FallbackValue=False}">
             <Label 
                 Text="{Binding Text.Error, Source={x:Reference rootFrameEntry}}"
                 FontSize="{StaticResource Micro}"

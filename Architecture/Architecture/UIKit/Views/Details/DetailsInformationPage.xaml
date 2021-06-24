@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.DetailsInformationPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:DetailsViewModel">
+
+    <ContentPage.BindingContext>
+        <viewModels:DetailsViewModel />
+    </ContentPage.BindingContext>
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Details Information" />
+    </NavigationPage.TitleView>
+    
+    <ScrollView>
+        <StackLayout Padding="16" Spacing="16">
+
+            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                <ImageButton
+                    VerticalOptions="Center"
+                    Padding="10"
+                    BackgroundColor="{StaticResource GrayMedium}"
+                    Style="{StaticResource FloatingButtonMini}">
+                    <ImageButton.Source>
+                        <FontImageSource 
+                            Color="{StaticResource PrimaryColor}"
+                            Glyph="{StaticResource FileIcon}"
+                            FontFamily="{StaticResource FontAwesomeSolid}" />
+                    </ImageButton.Source>
+                </ImageButton>
+                <StackLayout Grid.Column="1" Spacing="0">
+                    <Label Text="Double line item" FontSize="{StaticResource Medium}" />
+                    <Label Text="Secondart text" TextColor="{StaticResource GrayDark}" />
+                </StackLayout>
+                <Label 
+                    Grid.Column="2"
+                    FontSize="22"
+                    VerticalTextAlignment="Center"
+                    Text="{StaticResource InfoIcon}"
+                    TextColor="{StaticResource GrayDark}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+            </Grid>
+
+            <Label Text="Contacts" FontSize="{StaticResource Medium}" />
+
+            <Frame HasShadow="False" BackgroundColor="{StaticResource GrayLight}" BorderColor="{StaticResource GrayLight}" CornerRadius="8">
+                <Grid ColumnDefinitions="*, Auto">
+                    <StackLayout Spacing="0">
+                        <Label Text="Double line item" FontSize="{StaticResource Medium}" />
+                        <Label Text="Secondart text" TextColor="{StaticResource GrayDark}" />
+                    </StackLayout>
+                    <Label 
+                        Grid.Column="1"
+                        FontSize="22"
+                        VerticalTextAlignment="Center"
+                        Text="{StaticResource InfoIcon}"
+                        TextColor="{StaticResource GrayDark}"
+                        FontFamily="{StaticResource FontAwesomeSolid}" />
+                </Grid>
+            </Frame>
+
+            <Frame HasShadow="False" BackgroundColor="{StaticResource GrayLight}" BorderColor="{StaticResource GrayLight}" CornerRadius="8">
+                <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                    <ImageButton
+                        VerticalOptions="Center"
+                        Padding="10"
+                        BackgroundColor="{StaticResource GrayMedium}"
+                        Style="{StaticResource FloatingButtonMini}">
+                        <ImageButton.Source>
+                            <FontImageSource 
+                            Color="{StaticResource PrimaryColor}"
+                            Glyph="{StaticResource FileIcon}"
+                            FontFamily="{StaticResource FontAwesomeSolid}" />
+                        </ImageButton.Source>
+                    </ImageButton>
+                    <StackLayout Grid.Column="1" Spacing="0">
+                        <Label Text="Double line item" FontSize="{StaticResource Medium}" />
+                        <Label Text="Secondart text" TextColor="{StaticResource GrayDark}" />
+                    </StackLayout>
+                    <Label 
+                        Grid.Column="2"
+                        FontSize="22"
+                        VerticalTextAlignment="Center"
+                        Text="{StaticResource InfoIcon}"
+                        TextColor="{StaticResource GrayDark}"
+                        FontFamily="{StaticResource FontAwesomeSolid}" />
+                </Grid>
+            </Frame>
+            
+            <Frame HasShadow="False" BackgroundColor="{StaticResource GrayLight}" BorderColor="{StaticResource GrayLight}" CornerRadius="8">
+                <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="16">
+                    <ImageButton
+                        VerticalOptions="Center"
+                        Padding="0"
+                        CornerRadius="4"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        Aspect="AspectFill"
+                        Source="https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/32.jpg"
+                        BackgroundColor="{StaticResource GrayMedium}" />
+                    <StackLayout Grid.Column="1" Spacing="0" VerticalOptions="Center">
+                        <Label Text="Single line item" FontSize="{StaticResource Medium}" />
+                    </StackLayout>
+                    <Label 
+                        Grid.Column="2"
+                        FontSize="22"
+                        VerticalTextAlignment="Center"
+                        Text="{StaticResource InfoIcon}"
+                        TextColor="{StaticResource GrayDark}"
+                        FontFamily="{StaticResource FontAwesomeSolid}" />
+                </Grid>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

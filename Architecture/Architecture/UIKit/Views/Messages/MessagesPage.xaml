@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.MessagesPage"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             x:DataType="viewModels:MessagesViewModel">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Messages" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    Color="{StaticResource ToolbarTextColor}"
+                    Glyph="{StaticResource SearchIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}"
+                    Size="{StaticResource ToolbarItemSize}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Order="Secondary" Text="Profile" />
+        <ToolbarItem Order="Secondary" Text="Settings" />
+        <ToolbarItem Order="Secondary" Text="About" />
+    </ContentPage.ToolbarItems>
+
+    <CollectionView 
+        ItemsSource="{Binding Messages}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="viewModels:MessageItemViewModel">
+                <Grid 
+                    Padding="16"
+                    ColumnDefinitions="Auto, *, Auto" 
+                    ColumnSpacing="12"
+                    RowSpacing="0">
+                    <Frame
+                        Padding="0"
+                        CornerRadius="10"
+                        VerticalOptions="Start"
+                        HasShadow="False">
+                        <Grid>
+                            <ff:CachedImage
+                                HeightRequest="67"
+                                WidthRequest="67"
+                                Source="{Binding ProfilePicture}"
+                                Aspect="AspectFill" />
+                            <Grid>
+                                <BoxView
+                                    Color="White"
+                                    HeightRequest="19"
+                                    WidthRequest="19"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="End"
+                                    CornerRadius="10, 0, 0, 10" />
+                                <BoxView
+                                    Margin="3"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="End"
+                                    HeightRequest="12"
+                                    WidthRequest="12"
+                                    CornerRadius="6">
+                                    <BoxView.Triggers>
+                                        <DataTrigger TargetType="BoxView" Binding="{Binding Online}" Value="True">
+                                            <Setter Property="BackgroundColor" Value="{StaticResource SuccessColor}" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="BoxView" Binding="{Binding Online}" Value="False">
+                                            <Setter Property="BackgroundColor" Value="{StaticResource ErrorColor}" />
+                                        </DataTrigger>
+                                    </BoxView.Triggers>
+                                </BoxView>
+                            </Grid>
+                        </Grid>
+                    </Frame>
+                    <StackLayout Grid.Column="1" Spacing="0">
+                        <Label 
+                            Text="{Binding From}"
+                            Style="{StaticResource SemiBoldLabel}" />
+                        <Label 
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Text="{Binding Message}" />
+                    </StackLayout>
+                    <Label 
+                        Grid.Column="2"
+                        Text="{Binding Time}"
+                        FontSize="{StaticResource Small}"
+                        TextColor="{StaticResource GrayDark}" />
+                    <Frame
+                        Grid.Column="2"
+                        Padding="0"
+                        WidthRequest="28"
+                        HeightRequest="28"
+                        CornerRadius="14"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        BackgroundColor="{StaticResource PrimaryColor}">
+                        <Frame.Triggers>
+                            <DataTrigger TargetType="Frame" Binding="{Binding UnseenMessages}" Value="0">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Frame.Triggers>
+                        <Label
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center"
+                            TextColor="White"
+                            Margin="0, 2, 0, 0"
+                            Text="{Binding UnseenMessages}" />
+                    </Frame>
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+    
+</ContentPage>

@@ -20,14 +20,14 @@ namespace Architecture.Controls
         {
             base.OnParentSet();
 
-            IsHeaderVisible = !string.IsNullOrEmpty(Text?.Value);
+            IsHeaderVisible = HeaderShouldBeDisplayed && !string.IsNullOrEmpty(Text?.Value);
             InternalPlaceholder = IsHeaderVisible ? string.Empty : Placeholder;
             InternalBorderColor = BorderColor;
         }
 
         private void BorderlessEntry_Focused(object sender, FocusEventArgs e)
         {
-            if (!IsHeaderVisible)
+            if (!IsHeaderVisible && HeaderShouldBeDisplayed)
             {
                 IsHeaderVisible = true;
 
@@ -38,12 +38,12 @@ namespace Architecture.Controls
             }
 
             InternalBorderColor = SelectedBorderColor;
-            InternalPlaceholder = string.Empty;
+            InternalPlaceholder = IsHeaderVisible ? string.Empty : Placeholder;
         }
 
         private void BorderlessEntry_Unfocused(object sender, FocusEventArgs e)
         {
-            IsHeaderVisible = !string.IsNullOrEmpty((sender as Entry)?.Text);
+            IsHeaderVisible = HeaderShouldBeDisplayed && !string.IsNullOrEmpty((sender as Entry)?.Text);
             InternalPlaceholder = IsHeaderVisible ? string.Empty : Placeholder;
             InternalBorderColor = BorderColor;
 
@@ -55,13 +55,11 @@ namespace Architecture.Controls
                 });
             }
 
-            if (Text != null)
+            if (Text != null && UnfocusValidation)
             {
                 if (Text.Validations?.Any() == true)
                 {
                     Text.Validate();
-
-                    IsValidationVisible = !Text.IsValid;
                 }
             }
         }
@@ -70,7 +68,10 @@ namespace Architecture.Controls
         {
             TextChangedCommand?.Execute(Text);
 
-            IsValidationVisible = false;
+            if (Text != null)
+            {
+                Text.IsValid = true;
+            }
         }
 
         private static void TextChanged(BindableObject bindable, object oldValue, object newValue)
@@ -85,7 +86,7 @@ namespace Architecture.Controls
                 return;
             }
 
-            view.IsHeaderVisible = !string.IsNullOrEmpty(value?.Value?.ToString());
+            view.IsHeaderVisible = view.HeaderShouldBeDisplayed && !string.IsNullOrEmpty(value?.Value?.ToString());
             view.InternalPlaceholder = view.IsHeaderVisible ? string.Empty : view.Placeholder;
             view.InternalBorderColor = view.BorderColor;
 
@@ -123,34 +124,46 @@ namespace Architecture.Controls
             set { SetValue(TextChangedCommandProperty, value); }
         }
 
+        // Placeholder
         public string InternalPlaceholder { get; set; }
         public string Placeholder { get; set; }
-        public Color PlaceholderColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public Color PlaceholderColor { get; set; } = App.Current.Get<Color>("GrayDark");
         
+        // Floating header label
         public bool IsHeaderVisible { get; set; }
-        public Color HeaderBackgroundColor { get; set; } = Color.White;
-        public Color HeaderColor { get; set; } = App.Current.Get<Color>("TextColor");
-        
-        public Keyboard Keyboard { get; set; }
-        public Color TextColor { get; set; } = App.Current.Get<Color>("TextColor");
-        public Color BorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
-        public Color SelectedBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
-        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
-        public bool IsPassword { get; set; }
-        
-        public string IconFontFamily { get; set; }
-        public string IconTextSource { get; set; }
-        public Color IconColor { get; set; } = App.Current.Get<Color>("TextColor");
-        public bool HasIcon => !string.IsNullOrEmpty(IconTextSource);
+        public Color HeaderBackgroundColor { get; set; } = App.Current.Get<Color>("PageBackgroundColor");
+        public Color HeaderTextColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public bool HeaderShouldBeDisplayed { get; set; } = true;
 
+        // Border
+        public Color InternalBorderColor { get; set; } = App.Current.Get<Color>("GrayMedium");
+        public double BorderCornerRadius => HasRoundedCorners ? 28 : 4;
+        public Color BorderColor { get; set; } = App.Current.Get<Color>("GrayDark");
+        public Color SelectedBorderColor { get; set; } = App.Current.PrimaryColor();
+        public bool HasRoundedCorners { get; set; } 
+
+        // Icon
+        public string IconFontFamily { get; set; }
+        public string Icon { get; set; }
+        public Color IconColor { get; set; } = App.Current.Get<Color>("TextColor");
+        public bool HasIcon => !string.IsNullOrEmpty(Icon);
+
+        // Image
         public string ImageSource { get; set; }
         public bool HasImage => !string.IsNullOrEmpty(ImageSource);
 
-        public Color EntryBackground { get; set; } = Color.White;
+        // Validation
+        public bool UnfocusValidation { get; set; } = true;
 
-        public bool IsValidationVisible { get; private set; }
-
+        // Common entry properties
+        public Color EntryBackgroundColor { get; set; } = App.Current.Get<Color>("PageBackgroundColor");
+        public Color TextColor { get; set; } = App.Current.Get<Color>("TextColor");
         public int MaxLength { get; set; } = 255;
+        public bool IsPassword { get; set; }
+        public Keyboard Keyboard { get; set; }
+        public ClearButtonVisibility ClearButtonVisibility { get; set; }
+
+        #region Command
 
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(
             propertyName: "Command",
@@ -177,13 +190,15 @@ namespace Architecture.Controls
 
         public bool IsCommandVisible { get; set; }
         public string CommandIconFontFamily { get; set; }
-        public string CommandIconTextSource { get; set; }
+        public string CommandIcon { get; set; }
         public Color CommandIconColor { get; set; } = Color.White;
-        public Color CommandIconBackgroundColor { get; set; } = App.Current.Get<Color>("PrimaryColor");
+        public Color CommandIconBackgroundColor { get; set; } = App.Current.PrimaryColor();
 
         private void ImageButton_Clicked(object sender, EventArgs e)
         {
             Command?.Execute(null);
         }
+
+        #endregion
     }
 }

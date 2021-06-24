@@ -24,7 +24,7 @@ namespace Architecture
                 new MenuViewModel()
                 {
                     Title = "Article Browser",
-                    Page = new NavigationPage(new UIKit.Views.Phone.ArticleBrowserPage())
+                    Page = new NavigationPage(new UIKit.Views.ArticleBrowserPage())
                 }
             };
 

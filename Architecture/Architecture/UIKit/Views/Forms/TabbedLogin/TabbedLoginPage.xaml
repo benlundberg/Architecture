@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.TabbedLoginPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:views="clr-namespace:Architecture.UIKit.Views"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:DataType="viewModels:TabbedLoginViewModel">
+
+    <ContentPage.BindingContext>
+        <viewModels:TabbedLoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="SelectedTabItemTemplate">
+                <Grid>
+                    <Frame
+                        Padding="0"
+                        CornerRadius="8"
+                        HasShadow="False"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        BorderColor="{StaticResource PrimaryColor}"
+                        Opacity=".12"/>
+                    <Label
+                        HorizontalTextAlignment="Center"
+				        VerticalOptions="Center"
+                        Style="{StaticResource SemiBoldLabel}"
+				        FontSize="{StaticResource Medium}"
+                        TextColor="{StaticResource PrimaryColor}"
+				        Text="{TemplateBinding Text}" />
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="UnselectedTabItemTemplate">
+                <Frame
+                    Opacity=".5"
+                    Padding="0"
+                    CornerRadius="8"
+                    HasShadow="False"
+                    BackgroundColor="White"
+                    BorderColor="White">
+                    <Label
+                        HorizontalTextAlignment="Center"
+				        VerticalOptions="Center"
+                        Style="{StaticResource SemiBoldLabel}"
+				        FontSize="{StaticResource Medium}"
+                        TextColor="{StaticResource BlackLight}"
+				        Text="{TemplateBinding Text}" />
+                </Frame>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid Margin="24, 24, 24, 0">
+        <xct:TabView
+            TabStripPlacement="Top"
+            IsTabTransitionEnabled="False"
+            IsSwipeEnabled="False">
+
+            <xct:TabViewItem
+                Text="Log in"
+                Margin="24, 0, 0, 0">
+                <xct:TabViewItem.Triggers>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="True">
+                        <Setter Property="ControlTemplate" Value="{StaticResource SelectedTabItemTemplate}" />
+                    </Trigger>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="False">
+                        <Setter Property="ControlTemplate" Value="{StaticResource UnselectedTabItemTemplate}" />
+                    </Trigger>
+                </xct:TabViewItem.Triggers>
+                <StackLayout
+                    Margin="0, 40, 0, 0"
+                    Spacing="0">
+                    
+                    <controls:FrameEntry
+                        Text="{Binding LoginViewModel.Username, Mode=TwoWay}"
+                        Placeholder="Username"
+                        Icon="{StaticResource UserIcon}"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}"
+                        Margin="0, 0, 0, 24"/>
+
+                    <controls:FrameEntry
+                        Text="{Binding LoginViewModel.Password, Mode=TwoWay}"
+                        Placeholder="Password"
+                        IsPassword="True"
+                        Icon="{StaticResource LockIcon}"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}" />
+
+                    <Button 
+                        Command="{Binding LoginViewModel.ForgotPasswordCommand}"
+                        Visual="Default"
+                        FontSize="{StaticResource Default}"
+                        BackgroundColor="{StaticResource PageBackgroundColor}"
+                        HorizontalOptions="End"
+                        Style="{StaticResource TextButton}"  
+                        Text="Forgot password?" />
+
+                    <Button 
+                        Margin="0, 20, 0, 0"
+                        Text="Log in"
+                        CornerRadius="4"
+                        Command="{Binding LoginViewModel.LoginCommand}" />
+
+                </StackLayout>
+            </xct:TabViewItem>
+
+            <xct:TabViewItem
+                Text="Sign up"
+                Margin="0, 0, 24, 0">
+                <xct:TabViewItem.Triggers>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="True">
+                        <Setter Property="ControlTemplate" Value="{StaticResource SelectedTabItemTemplate}" />
+                    </Trigger>
+                    <Trigger TargetType="xct:TabViewItem" Property="IsSelected" Value="False">
+                        <Setter Property="ControlTemplate" Value="{StaticResource UnselectedTabItemTemplate}" />
+                    </Trigger>
+                </xct:TabViewItem.Triggers>
+                <StackLayout
+                    Margin="0, 40, 0, 0"
+                    Spacing="24">
+
+                    <controls:FrameEntry
+                        Text="{Binding RegisterViewModel.Email, Mode=TwoWay}"
+                        Placeholder="Email"
+                        Keyboard="Email"
+                        Icon="{StaticResource UserIcon}"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}" />
+
+                    <controls:FrameEntry
+                        Text="{Binding RegisterViewModel.Password, Mode=TwoWay}"
+                        Placeholder="Password"
+                        IsPassword="True"
+                        Icon="{StaticResource LockIcon}"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}" />
+                
+                    <controls:FrameEntry
+                        Text="{Binding RegisterViewModel.ConfirmPassword, Mode=TwoWay}"
+                        Placeholder="Confirm password"
+                        IsPassword="True"
+                        Icon="{StaticResource LockIcon}"
+                        IconFontFamily="{StaticResource FontAwesomeSolid}" />
+
+                    <Button 
+                        Margin="0, 8, 0, 0"
+                        Text="Sign up"
+                        CornerRadius="4"
+                        Command="{Binding RegisterViewModel.RegisterCommand}" />
+                    
+                </StackLayout>
+            </xct:TabViewItem>
+        </xct:TabView>
+    </Grid>
+</ContentPage>

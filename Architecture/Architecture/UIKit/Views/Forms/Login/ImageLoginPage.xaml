@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.ImageLoginPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             Visual="Material"
+             x:DataType="viewModels:LoginViewModel">
+
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid 
+            RowDefinitions="Auto, Auto, *, Auto" 
+            RowSpacing="0">
+            <ff:CachedImage
+                Grid.RowSpan="4"
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                Aspect="AspectFill"
+                Source="https://raw.githubusercontent.com/benlundberg/clarityapps.io/gh-pages/images/1.jpg" />
+
+            <Grid
+                Grid.RowSpan="4"
+                BackgroundColor="Black"
+                Opacity=".12" />
+
+            <!-- Close button -->
+            <ImageButton
+                Margin="16, 24, 16, 0"
+                HorizontalOptions="End"
+                Style="{StaticResource FloatingButton}"
+                BackgroundColor="Transparent"
+                Command="{Binding PopModalCommand}">
+                <ImageButton.Source>
+                    <FontImageSource 
+                        Color="White"
+                        Glyph="{StaticResource CloseIcon}"
+                        FontFamily="{StaticResource FontAwesomeSolid}"/>
+                </ImageButton.Source>
+            </ImageButton>
+            
+            <!-- Icon and text -->
+            <StackLayout Grid.Row="1" Spacing="0" Margin="32, 24">
+                <Label Text="Welcome back" TextColor="White" Style="{StaticResource BoldLabel}" FontSize="{StaticResource Medium}" />
+                <Label Text="Sign in" TextColor="White" Style="{StaticResource BoldLabel}" FontSize="{StaticResource Large}" />
+            </StackLayout>
+
+            <!-- Input form -->
+            <StackLayout
+                Grid.Row="2"
+                Spacing="0"
+                Margin="24, 0">
+                <controls:FrameEntry 
+                    BorderColor="White"
+                    EntryBackgroundColor="White"
+                    SelectedBorderColor="White"
+                    HasRoundedCorners="True"
+                    Placeholder="Username"
+                    UnfocusValidation="False"
+                    HeaderShouldBeDisplayed="False"
+                    Text="{Binding Username, Mode=TwoWay}"
+                    Margin="0, 0, 0, 24" />
+
+                <controls:FrameEntry 
+                    BorderColor="White"
+                    EntryBackgroundColor="White"
+                    SelectedBorderColor="White"
+                    HasRoundedCorners="True"
+                    Placeholder="Password"
+                    HeaderShouldBeDisplayed="False"
+                    UnfocusValidation="False"
+                    IsPassword="True"
+                    Text="{Binding Password, Mode=TwoWay}" />
+
+                <Button 
+                    Command="{Binding ForgotPasswordCommand}"
+                    Visual="Default"
+                    FontSize="{StaticResource Default}"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End"
+                    TextColor="White"
+                    Style="{StaticResource TextButton}"  
+                    Text="Forgot password?" />
+
+                <Button 
+                    Margin="0, 20, 0, 0"
+                    Text="Log in"
+                    Style="{StaticResource RoundedButton}"
+                    Command="{Binding LoginCommand}" />
+            </StackLayout>
+
+            <!-- Register new account -->
+            <Button
+                Grid.Row="3"
+                Visual="Default"
+                BackgroundColor="{StaticResource Gray}"
+                FontSize="{StaticResource Default}"
+                TextColor="{StaticResource BlackLight}"
+                Style="{StaticResource TextButton}"
+                Command="{Binding SignUpCommand}"
+                Padding="16"
+                Text="Don't have an account?&#x0a; Click here to sign up" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

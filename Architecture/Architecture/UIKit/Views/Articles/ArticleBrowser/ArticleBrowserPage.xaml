@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Architecture.UIKit.Views.ArticleBrowserPage"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:Architecture.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:viewModels="clr-namespace:Architecture.UIKit.ViewModels"
+             Visual="Material"
+             x:DataType="viewModels:ArticleBrowserViewModel"
+             x:Name="RootLayout">
+
+    <NavigationPage.TitleView>
+        <controls:PageTitleView Text="Article Browser" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding SearchClickedCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource 
+                    Size="{StaticResource ToolbarItemSize}"
+                    Color="{StaticResource ToolbarTextColor}"
+                    Glyph="{StaticResource SearchIcon}"
+                    FontFamily="{StaticResource FontAwesomeSolid}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <Grid>
+
+        <!-- View Loading -->
+        <ScrollView IsVisible="{Binding IsBusy}">
+            <StackLayout Margin="12" Spacing="24">
+
+                <controls:SkeletonView 
+                    IsLoading="{Binding IsBusy}"
+                    Repeat="1">
+                    <controls:SkeletonView.DataTemplate>
+                        <DataTemplate>
+                            <BoxView
+                                CornerRadius="12"
+                                BackgroundColor="{StaticResource GrayDark}"
+                                HorizontalOptions="Fill"
+                                HeightRequest="200" />
+                        </DataTemplate>
+                    </controls:SkeletonView.DataTemplate>
+                </controls:SkeletonView>
+
+                <controls:SkeletonView 
+                    IsLoading="{Binding IsBusy}"
+                    Repeat="3">
+                    <controls:SkeletonView.DataTemplate>
+                        <DataTemplate>
+                            <Grid Margin="16" ColumnDefinitions="*, *" ColumnSpacing="24">
+                                <StackLayout>
+                                    <BoxView CornerRadius="12" BackgroundColor="{StaticResource GrayDark}" HeightRequest="257" HorizontalOptions="Fill" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <BoxView CornerRadius="12" BackgroundColor="{StaticResource GrayDark}" HeightRequest="257" HorizontalOptions="Fill" />
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:SkeletonView.DataTemplate>
+                </controls:SkeletonView>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- View Loaded -->
+        <CollectionView
+            IsVisible="{Binding IsNotBusy}"
+            Header="{Binding}"
+            ItemsSource="{Binding Articles}"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            SelectionMode="Single">
+
+            <CollectionView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout>
+
+                        <xct:Expander IsExpanded="{Binding IsSearchVisible}">
+                            <Grid Margin="16, 0">
+                                <controls:FrameEntry
+                                    ClearButtonVisibility="WhileEditing"
+                                    HasRoundedCorners="True"
+                                    Placeholder="What are you looking for?"
+                                    HeaderShouldBeDisplayed="False"
+                                    Icon="{StaticResource SearchIcon}"
+                                    IconFontFamily="{StaticResource FontAwesomeSolid}" />
+                            </Grid>
+                        </xct:Expander>
+                        
+                        <!-- Carousel Top -->
+                        <CarouselView
+                            HeightRequest="216"
+                            IndicatorView="indicator"
+                            ItemsSource="{Binding TopArticles}">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout 
+                                    SnapPointsType="Mandatory"
+                                    SnapPointsAlignment="Center"
+                                    Orientation="Horizontal"
+                                    ItemSpacing="8" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                                    <Grid Padding="8">
+                                        <Frame
+                                            IsClippedToBounds="True"
+                                            CornerRadius="12"
+                                            BorderColor="Transparent" 
+                                            Padding="0"
+                                            HasShadow="False">
+                                            <Grid>
+                                                <ff:CachedImage
+                                                    Aspect="AspectFill"
+                                                    Source="{Binding ImageSource}" />
+                                                <Grid BackgroundColor="Black" Opacity=".42" />
+                                                <StackLayout 
+                                                    VerticalOptions="End"
+                                                    Margin="16, 24"
+                                                    Spacing="0">
+                                                    <Label 
+                                                        Text="Lorem ipsum" 
+                                                        TextColor="White"
+                                                        FontSize="{StaticResource Medium}" />
+                                                    <Label 
+                                                        Text="Dolor sit amet, consectetur" 
+                                                        TextColor="White" />
+                                                </StackLayout>
+                                            </Grid>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding BindingContext.ItemClickedCommand, Source={x:Reference RootLayout}}"
+                                                    CommandParameter="{Binding}" />
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                        <ImageButton
+                                            Command="{Binding BindingContext.FavoriteClickedCommand, Source={x:Reference RootLayout}}"
+                                            CommandParameter="{Binding}"
+                                            Margin="16"
+                                            Style="{StaticResource FloatingButtonMini}"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="End"
+                                            BackgroundColor="White">
+                                            <ImageButton.Source>
+                                                <FontImageSource 
+                                                    Color="{Binding IsFavorite, Converter={StaticResource BoolToPrimaryColorConv}}"
+                                                    Glyph="{StaticResource HeartIcon}"
+                                                    FontFamily="{StaticResource FontAwesomeSolid}">
+                                                </FontImageSource>
+                                            </ImageButton.Source>
+                                        </ImageButton>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+                        <!-- Carousel Indicator -->
+                        <IndicatorView
+                            x:Name="indicator"
+                            Margin="0, 0, 0, 16"
+                            IndicatorsShape="Circle"
+                            IndicatorColor="{StaticResource Gray}"
+                            SelectedIndicatorColor="{StaticResource PrimaryColor}"
+                            HorizontalOptions="Center"
+                            IndicatorSize="10" />
+
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.HeaderTemplate>
+
+            <!-- Collection view articles -->
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    HorizontalItemSpacing="0"
+                    Orientation="Vertical"
+                    Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:ArticleItemViewModel">
+                    <Grid Padding="12">
+                        <controls:CustomFrame
+                            CornerRadius="12"
+                            Padding="8">
+                            <StackLayout
+                                Spacing="0"
+                                VerticalOptions="Start">
+                                <Frame 
+                                    VerticalOptions="Start"
+                                    IsClippedToBounds="True"
+                                    CornerRadius="8"
+                                    Padding="0"
+                                    HasShadow="False"
+                                    Margin="0, 0, 0, 10">
+                                    <ff:CachedImage 
+                                        HeightRequest="140"
+                                        Aspect="AspectFill"
+                                        Source="{Binding ImageSource}" />
+                                </Frame>
+                                <StackLayout Padding="8, 0">
+                                    <Label 
+                                        Text="{Binding Title}"
+                                        FontSize="Medium" />
+                                    <Label 
+                                        Text="{Binding Text}"
+                                        MaxLines="2"
+                                        LineBreakMode="TailTruncation" />
+                                    <Label 
+                                        Margin="0, 6"
+                                        FontSize="{StaticResource Micro}"
+                                        TextColor="{StaticResource GrayDark}"
+                                        Text="2 min ago" />
+                                </StackLayout>
+                            </StackLayout>
+                        </controls:CustomFrame>
+                        <ImageButton
+                            Command="{Binding BindingContext.FavoriteClickedCommand, Source={x:Reference RootLayout}}"
+                            CommandParameter="{Binding}"
+                            Margin="8"
+                            Style="{StaticResource FloatingButtonMini}"
+                            HorizontalOptions="End"
+                            VerticalOptions="End"
+                            BackgroundColor="White">
+                            <ImageButton.Source>
+                                <FontImageSource 
+                                    Color="{Binding IsFavorite, Converter={StaticResource BoolToPrimaryColorConv}}"
+                                    Glyph="{StaticResource HeartIcon}"
+                                    FontFamily="{StaticResource FontAwesomeSolid}">
+                                </FontImageSource>
+                            </ImageButton.Source>
+                        </ImageButton>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
