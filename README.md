@@ -1,4 +1,4 @@
-# Architecture
+# Architecture [Deprecated]
 Xamarin Forms Architecture
 
 See wiki: https://github.com/benlundberg/Architecture/wiki
